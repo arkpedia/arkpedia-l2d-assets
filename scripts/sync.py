@@ -158,6 +158,8 @@ def build_model(planned: l2d.Planned, dat: bytes, res_version: str, staging: Pat
         'source': {'server': SERVER, 'bundle': planned.bundle, 'md5': planned.md5, 'resVersion': res_version},
     }
     write_json(staging / 'model.json', model)
+    if decoded.resized_pages:
+        log(f'  note: pages resized to their atlas size: {decoded.resized_pages}')
     if decoded.masked_pages:
         log(f'  note: pages with a separate [alpha] mask: {decoded.masked_pages}')
     log(f'  skeleton {decoded.skeleton_name}, atlas {decoded.atlas_name}, pages {decoded.page_names}')
@@ -256,8 +258,11 @@ def main(argv: list[str] | None = None) -> int:
         finally:
             shutil.rmtree(staging, ignore_errors=True)
 
-    manifest['resVersion'] = res_version
-    write_manifest(manifest)
+    if report['added'] or report['repointed']:
+        # resVersion names the client list the newest entries came from; a run that changes
+        # nothing leaves manifest.json untouched, so it produces no commit.
+        manifest['resVersion'] = res_version
+        write_manifest(manifest)
     report_path = Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2) + '\n', 'utf-8')

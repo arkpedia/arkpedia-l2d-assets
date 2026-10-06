@@ -386,6 +386,7 @@ class Decoded:
     page_names: list[str]
     masked_pages: list[dict] = field(default_factory=list)
     mixes: list[dict] = field(default_factory=list)
+    resized_pages: list[dict] = field(default_factory=list)
 
 
 def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
@@ -469,7 +470,9 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
             raise SyncError(f'Several textures are named {name}')
         return found[0] if found else None
 
-    pages, masked = [], []
+    from PIL import Image
+
+    pages, masked, resized = [], [], []
     for page, size in zip(page_names, sizes):
         texture_name = texture_name_for_page(page)
         texture = find_texture(texture_name, size)
@@ -482,5 +485,11 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
             # Untested on Global so far: record how many pixels already look premultiplied
             # (colour above alpha would mean a straight texture) so the first one can be checked.
             masked.append({'page': page, 'colourAboveAlpha': count_colour_above_alpha(image)})
-        pages.append(premultiply(image))
-    return Decoded(skeleton_bytes, skeleton_name, atlas_text, atlas_name, pages, page_names, masked, mixes)
+        image = premultiply(image)
+        if size and image.size != size:
+            # Spine 3.8 web runtimes compute UVs from the loaded image's size, not the atlas
+            # size line, so a page must have exactly the size the atlas was packed at.
+            resized.append({'page': page, 'from': list(image.size), 'to': list(size)})
+            image = image.resize(size, Image.LANCZOS)
+        pages.append(image)
+    return Decoded(skeleton_bytes, skeleton_name, atlas_text, atlas_name, pages, page_names, masked, mixes, resized)

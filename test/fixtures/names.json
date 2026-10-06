@@ -1,0 +1,11 @@
+[
+  { "skinId": "char_1044_hsgma2#2", "dynIllustId": "dyn_illust_char_1044_hsgma2_2", "md5": "b1259edb8fff5a0a56f0b01fe29dc6d9",
+    "slug": "char_1044_hsgma2_2", "folder": "models/char_1044_hsgma2_2/b1259edb8fff",
+    "bundle": "arts/dynchars/char_1044_hsgma2_2.ab", "download": "arts_dynchars_char_1044_hsgma2_2.dat" },
+  { "skinId": "char_113_cqbw@epoque#7", "dynIllustId": "dyn_illust_char_113_cqbw_epoque#7", "md5": "0123456789abcdef0123456789abcdef",
+    "slug": "char_113_cqbw_epoque_7", "folder": "models/char_113_cqbw_epoque_7/0123456789ab",
+    "bundle": "arts/dynchars/char_113_cqbw_epoque#7.ab", "download": "arts_dynchars_char_113_cqbw_epoque__7.dat" },
+  { "skinId": "char_1046_sbell2@ambienceSynesthesia#8", "dynIllustId": "dyn_illust_char_1046_sbell2_ambienceSynesthesia#8", "md5": "ffffffffffffffffffffffffffffffff",
+    "slug": "char_1046_sbell2_ambienceSynesthesia_8", "folder": "models/char_1046_sbell2_ambienceSynesthesia_8/ffffffffffff",
+    "bundle": "arts/dynchars/char_1046_sbell2_ambiencesynesthesia#8.ab", "download": "arts_dynchars_char_1046_sbell2_ambiencesynesthesia__8.dat" }
+]

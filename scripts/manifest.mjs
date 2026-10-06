@@ -76,6 +76,31 @@ export function webpSize(bytes) {
   throw new Error('WebP has no VP8L image');
 }
 
+const ATLAS_HEADER = /^\s*(size|format|filter|repeat|pma)\s*:/;
+
+/**
+ * The size: line of each atlas page, in order (null when a page has none). The 3.8 runtime
+ * takes UVs from the loaded image's size, so each page image must have exactly this size.
+ */
+export function atlasPageSizes(text) {
+  const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/);
+  const sizes = [];
+  let expect = true;
+  lines.forEach((line, i) => {
+    if (!line.trim()) { expect = true; return; }
+    if (!expect) return;
+    expect = false;
+    if (!ATLAS_HEADER.test(lines[i + 1] ?? '')) return;
+    let size = null;
+    for (let j = i + 1; j < lines.length && ATLAS_HEADER.test(lines[j]); j++) {
+      const match = /^\s*size\s*:\s*(\d+)\s*,\s*(\d+)/.exec(lines[j]);
+      if (match) { size = { width: Number(match[1]), height: Number(match[2]) }; break; }
+    }
+    sizes.push(size);
+  });
+  return sizes;
+}
+
 const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 const positiveInt = (value) => Number.isSafeInteger(value) && value > 0;
 
@@ -151,6 +176,12 @@ export async function validateModel(root, folder, { deep = true } = {}) {
   const pages = readAtlas(atlasText).pages.map((page) => page.name);
   const expectedPages = model.textures.map((texture) => texture.file);
   if (JSON.stringify(pages) !== JSON.stringify(expectedPages)) throw new Error(`${label}: atlas pages ${pages.join(', ')} do not match textures ${expectedPages.join(', ')}`);
+  atlasPageSizes(atlasText).forEach((size, index) => {
+    const texture = model.textures[index];
+    if (size && (size.width !== texture.width || size.height !== texture.height)) {
+      throw new Error(`${label}: ${texture.file} is ${texture.width}x${texture.height} but the atlas was packed at ${size.width}x${size.height}`);
+    }
+  });
   if (deep) {
     const found = inspectSkeleton(skeletonBytes, atlasText);
     if (found.spineVersion !== model.spineVersion) throw new Error(`${label}: runtime reads version ${found.spineVersion}`);

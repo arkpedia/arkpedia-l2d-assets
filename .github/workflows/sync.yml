@@ -1,0 +1,72 @@
+name: Sync
+on:
+  schedule:
+    - cron: '23 3 * * *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: Download at most this many new bundles (0 = all)
+        default: '0'
+      only:
+        description: Comma-separated skinIds to sync (empty = every skin with dynamic art)
+        default: ''
+permissions:
+  contents: write
+concurrency:
+  group: sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Sync new dynamic art from the Global client
+        env:
+          LIMIT: ${{ inputs.limit || '0' }}
+          ONLY: ${{ inputs.only || '' }}
+        run: |
+          args=(--limit "$LIMIT")
+          if [ -n "$ONLY" ]; then args+=(--only "$ONLY"); fi
+          python scripts/sync.py "${args[@]}"
+      # Pushes made with GITHUB_TOKEN do not start the Check workflow, so check here,
+      # before anything reaches main.
+      - name: Validate before committing
+        run: |
+          npm run validate
+          npm test
+      - name: Commit and push new models
+        run: |
+          git add manifest.json models
+          if git diff --cached --quiet; then
+            echo "Nothing new."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          summary=$(python -c "import json; r = json.load(open('.cache/sync-report.json')); print(f\"{len(r['added'])} new, client {r['resVersion']}\")")
+          git commit -q -m "Sync dynamic art ($summary)"
+          git pull -q --rebase origin main
+          npm run validate
+          git push origin HEAD:main
+      - name: Report models that failed
+        if: always()
+        run: |
+          test -f .cache/sync-report.json || exit 0
+          python - <<'PY'
+          import json, sys
+          report = json.load(open('.cache/sync-report.json'))
+          for failure in report['failed']:
+              print(f"::warning title=Model skipped::{failure['skinId']}: {failure['error']}")
+          sys.exit(1 if report['failed'] else 0)
+          PY

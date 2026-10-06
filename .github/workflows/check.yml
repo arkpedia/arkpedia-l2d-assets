@@ -1,0 +1,26 @@
+name: Check
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      # The same packages the daily sync uses, so a PR proves they install and import.
+      - run: pip install -r requirements.txt
+      - name: Sync dependencies import, Pillow has WebP
+        run: python -c "import UnityPy, lz4, PIL; from PIL import features; assert features.check('webp'), 'Pillow has no WebP support'; print('UnityPy', UnityPy.__version__, 'lz4', lz4.__version__, 'Pillow', PIL.__version__)"
+      - name: Node tests
+        run: npm test
+      - name: Python tests
+        run: python -m unittest discover -s test -p 'test_*.py' -v
+      - name: Validate the manifest and every model folder
+        run: npm run validate

@@ -1,0 +1,33 @@
+
+dyn_illust_char_2014_nian.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A/H_Ahoge
+  rotate: false
+  xy: 2, 2
+  size: 10, 12
+  orig: 10, 12
+  offset: 0, 0
+  index: -1
+A/H_Hair.png
+  rotate: true
+  xy: 20, 2
+  size: 8, 6
+  orig: 8, 6
+  offset: 0, 0
+  index: -1
+
+dyn_illust_char_2014_nian2.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+B/D_Body
+  rotate: false
+  xy: 2, 437
+  size: 30, 40
+  orig: 30, 40
+  offset: 0, 0
+  index: -1
