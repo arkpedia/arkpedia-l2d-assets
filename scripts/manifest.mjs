@@ -118,23 +118,27 @@ export function isMp3(bytes) {
 }
 
 /** An entrance's camera: null (its prefab names none) or frames [t, centre x, centre y, visible
- *  height] in skeleton units from t = 0, in time order, and full-screen fades
- *  [{color: [r, g, b], keys: [[t, alpha]]}], all within the entrance animation. */
+ *  height, roll] in skeleton units and degrees from t = 0, in time order, full-screen fades
+ *  [{color: [r, g, b], keys: [[t, alpha]]}] within the entrance animation, and the hand-over
+ *  colour ([r, g, b] or null). */
 function cameraShape(camera, label, duration) {
   if (camera === null) return;
-  if (!isObject(camera) || !Array.isArray(camera.frames) || !camera.frames.length || !Array.isArray(camera.fades)) {
-    throw new Error(`${label}: camera must be null or { frames, fades }`);
+  if (!isObject(camera) || !Array.isArray(camera.frames) || !camera.frames.length || !Array.isArray(camera.fades) || !Object.hasOwn(camera, 'handover')) {
+    throw new Error(`${label}: camera must be null or { frames, fades, handover }`);
   }
   const end = duration + 0.01;
   let last = -Infinity;
   camera.frames.forEach((frame, index) => {
-    if (!Array.isArray(frame) || frame.length !== 4 || !frame.every(Number.isFinite) || !(frame[3] > 0)) {
-      throw new Error(`${label}: camera.frames[${index}] must be [t, x, y, height > 0]`);
+    if (!Array.isArray(frame) || frame.length !== 5 || !frame.every(Number.isFinite) || !(frame[3] > 0) || Math.abs(frame[4]) > 180) {
+      throw new Error(`${label}: camera.frames[${index}] must be [t, x, y, height > 0, roll in degrees]`);
     }
     if (!(frame[0] > last) || frame[0] > end) throw new Error(`${label}: camera.frames[${index}] is out of order or past the entrance (${frame[0]}s)`);
     last = frame[0];
   });
   if (camera.frames[0][0] !== 0) throw new Error(`${label}: camera.frames must start at 0`);
+  if (camera.handover !== null && !(Array.isArray(camera.handover) && camera.handover.length === 3 && camera.handover.every((v) => Number.isFinite(v) && v >= 0 && v <= 1))) {
+    throw new Error(`${label}: camera.handover must be null or [r, g, b] in 0-1`);
+  }
   camera.fades.forEach((fade, index) => {
     if (!isObject(fade) || !Array.isArray(fade.color) || fade.color.length !== 3 || !fade.color.every((v) => Number.isFinite(v) && v >= 0 && v <= 1)) {
       throw new Error(`${label}: camera.fades[${index}].color must be [r, g, b] in 0-1`);

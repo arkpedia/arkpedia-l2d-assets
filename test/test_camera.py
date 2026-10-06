@@ -83,7 +83,7 @@ INF = float('inf')
 START = -3.4028234663852886e38
 
 
-def entrance(roll=False, small_quad=False, perspective=False, no_camera=False):
+def entrance(roll=False, small_quad=False, perspective=False, no_camera=False, zero_scale=False, yaw=False, second_clip=None):
     """Root (plays the skeleton) > rig (animated: x 0 -> 2, up to the camera) > camera (orthographic
     size 3 -> 4), and a black _TintColor quad over the whole view that fades in and out."""
     s = Scene()
@@ -91,13 +91,14 @@ def entrance(roll=False, small_quad=False, perspective=False, no_camera=False):
     skeleton_data = s.add('MonoBehaviour', {'scale': 0.01, 'skeletonJSON': ref(1), 'atlasAssets': []})
     s.attach(root_go, s.add('MonoBehaviour', {'skeletonDataAsset': ref(skeleton_data), '_animationName': 'Start'}))
     rig_go, rig = s.game_object('03', root, position=(0, 0, 0))
-    camera_rotation = (0, 0, math.sin(math.radians(10)), math.cos(math.radians(10))) if roll else (0, 0, 0, 1)
-    camera_go, camera_tr = s.game_object('Dummy002', rig, position=(0, 8.0, -6.0))
-    cam_go, cam_tr = s.game_object('Main Camera', camera_tr, rotation=camera_rotation)
+    camera_rotation = (0, 0, math.sin(math.radians(10)), math.cos(math.radians(10))) if roll else \
+        (0, math.sin(math.radians(10)), 0, math.cos(math.radians(10))) if yaw else (0, 0, 0, 1)
+    camera_go, camera_tr = s.game_object('Dummy002', rig, position=(0, 8.0, -6.0), scale=(1, 0, 1) if zero_scale else (1, 1, 1))
+    cam_go, cam_tr = s.game_object('Main Camera', camera_tr, rotation=camera_rotation, scale=(1, 0, 1) if zero_scale else (1, 1, 1))
     camera = s.add('Camera', {'m_GameObject': ref(cam_go), 'orthographic': 0 if perspective else 1,
                               'orthographic size': 3.0, 'field of view': 60.0})
     s.attach(cam_go, camera)
-    s.attach(root_go, s.add('MonoBehaviour', {'_params': {'duration': 10.0},
+    s.attach(root_go, s.add('MonoBehaviour', {'_params': {'duration': 10.0, 'fadeColor': {'r': 1.0, 'g': 1.0, 'b': 1.0, 'a': 1.0}},
                                                '_mainCamera': {'camera': ref(0 if no_camera else camera)}}))
     scale = (0.5, 0.5, 1) if small_quad else (300, 300, 1)
     quad_go, quad_tr = s.game_object('heip_01', rig, position=(0, 8.0, 0.0), scale=scale)
@@ -123,7 +124,21 @@ def entrance(roll=False, small_quad=False, perspective=False, no_camera=False):
         (6.0, [(4, (0, 0, 0, 0.0))]),
         (INF, []),
     ]
-    s.animate(rig_go, s.clip('camera', bindings, frames, constants=(0.0, 0.0, 0.0)))
+    clips = [s.clip('camera', bindings, frames, constants=(0.0, 0.0, 0.0))]
+    if second_clip:
+        # A second clip on the same Animator moving the camera rig, or two clips moving an effect
+        # object the camera does not hang from.
+        target = 'Dummy002' if second_clip == 'camera' else 'effect'
+        if second_clip == 'effect':
+            s.game_object('effect', rig)
+        extra = [{'path': ec.crc(target), 'attribute': ec.POSITION, 'typeID': ec.TRANSFORM}]
+        still = [(START, [(0, (0, 0, 0, 1.0)), (1, (0, 0, 0, 2.0)), (2, (0, 0, 0, 3.0))]), (INF, [])]
+        clips.append(s.clip('other', extra, still))
+        if second_clip == 'effect':
+            clips.append(s.clip('another', extra, still))
+    controller = s.add('AnimatorController', {'m_AnimationClips': [ref(c) for c in clips]})
+
+    s.attach(rig_go, s.add('Animator', {'m_Controller': ref(controller)}))
     return s, root_go, skeleton_data
 
 
@@ -175,7 +190,8 @@ class Entrance(unittest.TestCase):
         camera = ec.entrance_camera(root, skeleton, scene.read, 10.0)
         frames = camera['frames']
         # A straight pan and zoom decimate to their two ends.
-        self.assertEqual(frames, [[0.0, 0.0, 800.0, 600.0], [10.0, 200.0, 800.0, 800.0]])
+        self.assertEqual(frames, [[0.0, 0.0, 800.0, 600.0, 0.0], [10.0, 200.0, 800.0, 800.0, 0.0]])
+        self.assertEqual(ec.entrance_camera(root, skeleton, scene.read, 10.0)['handover'], [1.0, 1.0, 1.0])
 
     def test_a_full_screen_quad_is_a_fade_with_its_tint_doubled(self):
         scene, root, skeleton = entrance()
@@ -191,10 +207,49 @@ class Entrance(unittest.TestCase):
         scene, root, skeleton = entrance(small_quad=True)
         self.assertEqual(ec.entrance_camera(root, skeleton, scene.read, 10.0)['fades'], [])
 
-    def test_a_rolled_camera_fails_instead_of_being_drawn_wrong(self):
+    def test_a_rolled_camera_keeps_its_roll(self):
+        # Wis'adel's sale#14 rolls -11 to -30 degrees about the view axis.
         scene, root, skeleton = entrance(roll=True)
-        with self.assertRaisesRegex(ec.CameraError, 'tilts or rolls'):
+        frames = ec.entrance_camera(root, skeleton, scene.read, 10.0)['frames']
+        self.assertEqual({frame[4] for frame in frames}, {20.0})
+
+    def test_a_zero_scale_rig_still_points_the_camera(self):
+        # Exported rigs carry a zero y scale (Wis'adel's Dummy002 and Main Camera): Unity's camera
+        # looks along its rotation regardless, and so does this.
+        scene, root, skeleton = entrance(zero_scale=True)
+        frames = ec.entrance_camera(root, skeleton, scene.read, 10.0)['frames']
+        self.assertEqual(frames[0][1:4], [0.0, 800.0, 600.0])
+
+    def test_a_camera_turned_away_fails_instead_of_being_drawn_wrong(self):
+        scene, root, skeleton = entrance(yaw=True)
+        with self.assertRaisesRegex(ec.CameraError, 'turns away'):
             ec.entrance_camera(root, skeleton, scene.read, 10.0)
+
+    def test_a_controller_plays_its_default_state(self):
+        # Executor's sale#12: the Idle effects' controllers hold idle, interact and special clips that
+        # move the same objects; only the default state (idle) plays during the entrance.
+        controller = {'m_Controller': {
+            'm_LayerArray': [{'data': {'m_StateMachineIndex': 0}}],
+            'm_StateMachineArray': [{'data': {'m_DefaultState': 1, 'm_StateConstantArray': [
+                {'data': {'m_BlendTreeConstantArray': [{'data': {'m_NodeArray': [{'data': {'m_ClipID': 0}}]}}]}},
+                {'data': {'m_BlendTreeConstantArray': [{'data': {'m_NodeArray': [{'data': {'m_ClipID': 2}}]}}]}},
+            ]}}]}}
+        self.assertEqual(ec.default_state_clips(controller, 3), [2])
+        self.assertIsNone(ec.default_state_clips({'m_Controller': {}}, 3))
+        scene, root, skeleton = entrance(second_clip='camera')
+        controller_id = next(k for k, (kind, _) in scene.objects.items() if kind == 'AnimatorController')
+        scene.objects[controller_id][1]['m_Controller'] = {
+            'm_LayerArray': [{'data': {'m_StateMachineIndex': 0}}],
+            'm_StateMachineArray': [{'data': {'m_DefaultState': 0, 'm_StateConstantArray': [
+                {'data': {'m_BlendTreeConstantArray': [{'data': {'m_NodeArray': [{'data': {'m_ClipID': 0}}]}}]}}]}}]}
+        self.assertEqual(len(ec.entrance_camera(root, skeleton, scene.read, 10.0)['frames']), 2)
+
+    def test_two_clips_moving_the_camera_fail_but_two_on_an_effect_do_not(self):
+        scene, root, skeleton = entrance(second_clip='camera')
+        with self.assertRaisesRegex(ec.CameraError, 'Several clips'):
+            ec.entrance_camera(root, skeleton, scene.read, 10.0)
+        scene, root, skeleton = entrance(second_clip='effect')
+        self.assertEqual(len(ec.entrance_camera(root, skeleton, scene.read, 10.0)['frames']), 2)
 
     def test_a_perspective_camera_shows_the_height_its_field_of_view_covers_at_the_skeleton(self):
         scene, root, skeleton = entrance(perspective=True)

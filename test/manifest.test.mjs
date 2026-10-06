@@ -213,8 +213,9 @@ async function entranceRepo() {
     animations: found.animations,
     bounds: found.bounds,
     camera: {
-      frames: [[0, 11, 1170.1, 708.5], [found.animations.Start, -36.4, 803.8, 818.7]],
+      frames: [[0, 11, 1170.1, 708.5, 0], [found.animations.Start, -36.4, 803.8, 818.7, -29.6]],
       fades: [{ color: [0, 0, 0], keys: [[0, 0], [0.5, 1], [found.animations.Start, 0]] }],
+      handover: [1, 1, 1],
     },
     audio: record('entrance.mp3', mp3, { duration: 22.772 }),
   };
@@ -257,10 +258,14 @@ test('a skin with a dynEntranceId must carry its entrance, and nothing else may'
     [(m) => { m.entrance.audio.sha256 = '0'.repeat(64); }, /entrance\.mp3 sha256 does not match/],
     // The camera: always written (null when the prefab names none), well formed, within the entrance.
     [(m) => { delete m.entrance.camera; }, /entrance\.camera must be present/],
-    [(m) => { m.entrance.camera = { frames: [] , fades: [] }; }, /camera must be null or/],
+    [(m) => { m.entrance.camera = { frames: [], fades: [], handover: null }; }, /camera must be null or/],
+    [(m) => { delete m.entrance.camera.handover; }, /camera must be null or/],
+    [(m) => { m.entrance.camera.handover = [1, 1]; }, /handover must be/],
+    [(m) => { m.entrance.camera.frames[1] = m.entrance.camera.frames[1].slice(0, 4); }, /roll in degrees/],
+    [(m) => { m.entrance.camera.frames[1][4] = 200; }, /roll in degrees/],
     [(m) => { m.entrance.camera.frames[0][0] = 0.1; }, /camera\.frames must start at 0/],
     [(m) => { m.entrance.camera.frames[1][3] = 0; }, /height > 0/],
-    [(m) => { m.entrance.camera.frames.push([0.5, 0, 0, 1]); }, /out of order or past the entrance/],
+    [(m) => { m.entrance.camera.frames.push([0.5, 0, 0, 1, 0]); }, /out of order or past the entrance/],
     [(m) => { m.entrance.camera.frames[1][0] = 99; }, /out of order or past the entrance/],
     [(m) => { m.entrance.camera.fades[0].color = [0, 0, 2]; }, /color must be/],
     [(m) => { m.entrance.camera.fades[0].keys[1][1] = 1.5; }, /alpha 0-1/],

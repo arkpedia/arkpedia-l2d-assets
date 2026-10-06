@@ -810,7 +810,7 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None) 
         def camera(duration: float, root_go=root_go, skeleton_data=entrance_id) -> dict | None:
             try:
                 return entrance_camera.entrance_camera(root_go, skeleton_data, read_any, duration)
-            except (entrance_camera.CameraError, KeyError, TypeError, ValueError) as error:
+            except (entrance_camera.CameraError, KeyError, TypeError, ValueError, ArithmeticError) as error:
                 raise SyncError(f'Entrance camera of {dyn_entrance_id}: {error}') from error
 
         entrance = DecodedEntrance(entrance_skeleton[1], entrance_skeleton[0], e_atlas_text, entrance_atlas[0],

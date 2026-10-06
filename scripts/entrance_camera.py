@@ -25,6 +25,7 @@ FPS = 30
 # Decimation: a sample is dropped when the straight line between its kept neighbours stays this
 # close to it (skeleton units for the camera, alpha for fades).
 CAMERA_TOLERANCE = 0.5
+ROLL_TOLERANCE = 0.1
 ALPHA_TOLERANCE = 0.005
 # A quad counts as full screen when it covers a view this many times as wide as it is high (wider
 # than any screen the site draws on), at every moment it is visible.
@@ -285,8 +286,11 @@ class _Scene:
         if root_transform is None:
             raise CameraError('The entrance prefab has no root transform')
         self._walk(root_transform, '', None)
-        self.transform_curves: dict[tuple[int, int], tuple[Clip, list]] = {}
-        self.float_curves: dict[tuple[int, int, int], tuple[Clip, list]] = {}
+        # Every clip's curves for each animated property. Several clips of one Animator may animate
+        # the same property (its states); which plays is not decided here, so using such a property
+        # for the camera or a fade fails (curves()), and anything else is left alone.
+        self.transform_curves: dict[tuple[int, int], list[tuple[Clip, list]]] = {}
+        self.float_curves: dict[tuple[int, int, int], list[tuple[Clip, list]]] = {}
         self._bind_animators()
 
     def tree(self, path_id: int, *kinds: str) -> dict:
@@ -329,8 +333,14 @@ class _Scene:
             if not controller_ref.get('m_PathID') or controller_ref.get('m_FileID', 0) != 0:
                 continue
             controller = self.tree(controller_ref['m_PathID'])
+            refs = controller.get('m_AnimationClips') or []
+            # A controller with several clips (states) starts in its default state: only that
+            # state's clips play while the entrance does. Unreadable: all, so a conflict fails.
+            playing = default_state_clips(controller, len(refs)) if len(refs) > 1 else None
             clips = []
-            for ref in controller.get('m_AnimationClips') or []:
+            for index, ref in enumerate(refs):
+                if playing is not None and index not in playing:
+                    continue
                 if ref.get('m_FileID', 0) == 0 and ref.get('m_PathID') and ref['m_PathID'] not in [c[0] for c in clips]:
                     clips.append((ref['m_PathID'], Clip(self.tree(ref['m_PathID'], 'AnimationClip'))))
             under = {crc(''): transform}
@@ -345,19 +355,21 @@ class _Scene:
                     if target is None:
                         continue
                     if binding['typeID'] == TRANSFORM:
-                        key = (target, binding['attribute'])
-                        if key in self.transform_curves and len(clips) > 1:
-                            raise CameraError(f'Several clips of one Animator move {self.path[target] or "the root"}; '
-                                              'which plays is not decided here')
-                        self.transform_curves[key] = (clip, curves)
+                        self.transform_curves.setdefault((target, binding['attribute']), []).append((clip, curves))
                     else:
-                        key = (target, binding['typeID'], binding['attribute'])
-                        if key in self.float_curves and len(clips) > 1:
-                            raise CameraError(f'Several clips of one Animator animate {self.path[target] or "the root"}')
-                        self.float_curves[key] = (clip, curves)
+                        self.float_curves.setdefault((target, binding['typeID'], binding['attribute']), []).append((clip, curves))
+
+    def curves(self, table: dict, key) -> tuple[Clip, list] | None:
+        found = table.get(key)
+        if not found:
+            return None
+        if len(found) > 1:
+            raise CameraError(f'Several clips ({", ".join(clip.name for clip, _ in found)}) animate '
+                              f'{self.path[key[0]] or "the root"}, which the camera or a fade uses')
+        return found[0]
 
     def float_value(self, transform: int, type_id: int, attribute: int, t: float, default: float) -> float:
-        found = self.float_curves.get((transform, type_id, attribute))
+        found = self.curves(self.float_curves, (transform, type_id, attribute))
         if not found:
             return default
         clip, curves = found
@@ -369,7 +381,7 @@ class _Scene:
         rotation = tuple(tree['m_LocalRotation'][k] for k in 'xyzw')
         scale = tuple(tree['m_LocalScale'][k] for k in 'xyz')
         for attribute in (POSITION, ROTATION, EULER, SCALE):
-            found = self.transform_curves.get((transform, attribute))
+            found = self.curves(self.transform_curves, (transform, attribute))
             if not found:
                 continue
             clip, curves = found
@@ -384,15 +396,50 @@ class _Scene:
                 scale = values
         return trs(position, rotation, scale)
 
-    def world(self, transform: int, t: float):
-        chain = []
+    def chain(self, transform: int) -> list[int]:
+        links = []
         while transform is not None:
-            chain.append(transform)
+            links.append(transform)
             transform = self.parent[transform]
+        return links[::-1]
+
+    def world(self, transform: int, t: float):
+        """The full matrix: where an object and its children are (parent scales included)."""
         m = IDENTITY
-        for link in reversed(chain):
+        for link in self.chain(transform):
             m = multiply(m, self.local(link, t))
         return m
+
+    def rotation(self, transform: int, t: float):
+        """The world rotation alone, as Unity's transform.rotation (scale left out): a camera
+        looks along it whatever its scale, and exported rigs often carry a zero scale."""
+        q = (0.0, 0.0, 0.0, 1.0)
+        for link in self.chain(transform):
+            tree = self.tree(link, 'Transform', 'RectTransform')
+            local = tuple(tree['m_LocalRotation'][k] for k in 'xyzw')
+            for attribute in (ROTATION, EULER):
+                found = self.curves(self.transform_curves, (link, attribute))
+                if found:
+                    clip, curves = found
+                    values = tuple(curve.value(clip.time(t)) for curve in curves)
+                    local = normalized(values) if attribute == ROTATION else euler_degrees(values)
+            q = quaternion_multiply(q, local)
+        return q
+
+
+def default_state_clips(controller: dict, clip_count: int) -> list[int] | None:
+    """Indexes into m_AnimationClips of the clips the controller's first layer starts in (its
+    state machine's default state), or None when the controller's structure cannot be read."""
+    try:
+        constant = controller['m_Controller']
+        layer = constant['m_LayerArray'][0]['data']
+        machine = constant['m_StateMachineArray'][layer['m_StateMachineIndex']]['data']
+        state = machine['m_StateConstantArray'][machine['m_DefaultState']]['data']
+        ids = [node['data']['m_ClipID'] for tree in state['m_BlendTreeConstantArray'] for node in tree['data']['m_NodeArray']]
+    except (KeyError, IndexError, TypeError):
+        return None
+    ids = [i for i in ids if isinstance(i, int) and 0 <= i < clip_count]
+    return ids or None
 
 
 def _material_colour(scene: _Scene, renderer: int, property_hash: int) -> tuple[str, tuple[float, float, float, float]]:
@@ -409,7 +456,8 @@ def _material_colour(scene: _Scene, renderer: int, property_hash: int) -> tuple[
 
 
 def entrance_camera(root_go: int, skeleton_data: int, read, duration: float) -> dict | None:
-    """The camera (frames [t, centre x, centre y, visible height] in skeleton units) and full-screen
+    """The camera (frames [t, centre x, centre y, visible height, roll] in skeleton units and
+    degrees) and full-screen
     fades ([{color, keys: [[t, alpha]]}]) of an entrance, sampled at FPS over [0, duration].
 
     `root_go` is the entrance prefab's root GameObject, `skeleton_data` the SkeletonDataAsset its
@@ -451,21 +499,28 @@ def entrance_camera(root_go: int, skeleton_data: int, read, duration: float) -> 
         times.append(round(duration, 4))
 
     def view(t: float):
-        """The camera in the skeleton object's space at t: its position, the visible height (both in
-        that object's units) and the camera-to-skeleton matrix."""
+        """The camera in the skeleton object's space at t: its position and visible height (that
+        object's units) and its roll (degrees: the screen's up turned from the skeleton's +y)."""
         skeleton_world = scene.world(skeleton_transform, t)
-        relative = multiply(inverse(skeleton_world), scene.world(camera_transform, t))
-        position = transform_point(relative, (0.0, 0.0, 0.0))
-        forward = transform_direction(relative, (0.0, 0.0, 1.0))
-        up = transform_direction(relative, (0.0, 1.0, 0.0))
-        if forward[2] / length(forward) < 0.9999 or up[1] / length(up) < 0.9999:
-            raise CameraError(f'The entrance camera tilts or rolls at {t:.2f}s (forward {forward}, up {up}); '
+        position = transform_point(inverse(skeleton_world), transform_point(scene.world(camera_transform, t), (0.0, 0.0, 0.0)))
+        skeleton_rotation = scene.rotation(skeleton_transform, t)
+        conjugate = (-skeleton_rotation[0], -skeleton_rotation[1], -skeleton_rotation[2], skeleton_rotation[3])
+        relative = quaternion_multiply(conjugate, scene.rotation(camera_transform, t))
+        axes = trs((0.0, 0.0, 0.0), relative, (1.0, 1.0, 1.0))
+        forward = transform_direction(axes, (0.0, 0.0, 1.0))
+        up = transform_direction(axes, (0.0, 1.0, 0.0))
+        if forward[2] < 0.9999:
+            raise CameraError(f'The entrance camera turns away from the skeleton at {t:.2f}s (forward {forward}); '
                               'only straight-on cameras are drawn')
+        roll = math.degrees(math.atan2(-up[0], up[1]))
         if orthographic:
             # orthographic size is half the visible height in world units; the skeleton object's
             # own scale turns that into its units.
             size = scene.float_value(camera_transform, CAMERA, ORTHOGRAPHIC_SIZE, t, camera['orthographic size'])
-            height = 2 * size / length(transform_direction(skeleton_world, (0.0, 1.0, 0.0)))
+            object_scale = length(transform_direction(skeleton_world, (0.0, 1.0, 0.0)))
+            if not object_scale:
+                raise CameraError('The entrance skeleton has zero scale')
+            height = 2 * size / object_scale
         else:
             fov = scene.float_value(camera_transform, CAMERA, FIELD_OF_VIEW, t, camera['field of view'])
             distance = -position[2]
@@ -474,18 +529,18 @@ def entrance_camera(root_go: int, skeleton_data: int, read, duration: float) -> 
             height = 2 * distance * math.tan(math.radians(fov) / 2)
         if not height > 0:
             raise CameraError(f'The entrance camera shows nothing at {t:.2f}s')
-        return position, height
+        return position, height, roll
 
     frames, views = [], {}
     for t in times:
-        position, height = view(t)
+        position, height, roll = view(t)
         views[t] = (position, height)
-        frames.append([t, position[0] / unit, position[1] / unit, height / unit])
-    frames = [[round(t, 3), round(cx, 1), round(cy, 1), round(h, 1)]
-              for t, cx, cy, h in decimate(frames, [CAMERA_TOLERANCE, CAMERA_TOLERANCE, CAMERA_TOLERANCE])]
+        frames.append([t, position[0] / unit, position[1] / unit, height / unit, roll])
+    frames = [[round(t, 3), round(cx, 1), round(cy, 1), round(h, 1), round(roll, 1)]
+              for t, cx, cy, h, roll in decimate(frames, [CAMERA_TOLERANCE, CAMERA_TOLERANCE, CAMERA_TOLERANCE, ROLL_TOLERANCE])]
 
     fades = []
-    for (transform, type_id, attribute), (clip, curves) in sorted(scene.float_curves.items()):
+    for (transform, type_id, attribute), entries in sorted(scene.float_curves.items()):
         if type_id != RENDERER:
             continue
         property_hash, channel = material_binding(attribute)
@@ -508,22 +563,27 @@ def entrance_camera(root_go: int, skeleton_data: int, read, duration: float) -> 
         # _Color is not. A black quad at _TintColor alpha 0.5 is fully black.
         gain = 2.0 if name == '_TintColor' else 1.0
         static_active = 1.0 if scene.tree(go, 'GameObject').get('m_IsActive', 1) else 0.0
+        clip, curves = entries[0]
+
+        def covers_view(t: float) -> bool:
+            """In front of the camera, not behind the skeleton (a background), and over the whole
+            view, turned or not: a full-screen fade. Anything else is an effect, not drawn."""
+            position, height = views[t]
+            to_skeleton = multiply(inverse(scene.world(skeleton_transform, t)), scene.world(transform, t))
+            points = [transform_point(to_skeleton, corner) for corner in corners]
+            xs, ys, zs = [p[0] for p in points], [p[1] for p in points], [p[2] for p in points]
+            reach = math.hypot(height * COVER_ASPECT, height) / 2
+            return (min(xs) <= position[0] - reach and max(xs) >= position[0] + reach
+                    and min(ys) <= position[1] - reach and max(ys) >= position[1] + reach
+                    and min(zs) > position[2] and max(zs) <= 1e-3)
+
         keys, covers, strongest = [], True, (0.0, times[0])
         for t in times:
             active = scene.float_value(transform, GAMEOBJECT, IS_ACTIVE, t, static_active) >= 0.5
             enabled = scene.float_value(transform, RENDERER, ENABLED, t, 1.0) >= 0.5
             alpha = min(1.0, max(0.0, gain * curves[0].value(clip.time(t)))) if active and enabled else 0.0
             if alpha > 0.01:
-                position, height = views[t]
-                to_skeleton = multiply(inverse(scene.world(skeleton_transform, t)), scene.world(transform, t))
-                points = [transform_point(to_skeleton, corner) for corner in corners]
-                xs, ys, zs = [p[0] for p in points], [p[1] for p in points], [p[2] for p in points]
-                half_h, half_w = height / 2, height * COVER_ASPECT / 2
-                # In front of the camera, not behind the skeleton (a background), and over the
-                # whole view: a full-screen fade. Anything else is an effect, not drawn.
-                if not (min(xs) <= position[0] - half_w and max(xs) >= position[0] + half_w
-                        and min(ys) <= position[1] - half_h and max(ys) >= position[1] + half_h
-                        and min(zs) > position[2] and max(zs) <= 1e-3):
+                if not covers_view(t):
                     covers = False
                     break
                 if alpha > strongest[0]:
@@ -531,9 +591,15 @@ def entrance_camera(root_go: int, skeleton_data: int, read, duration: float) -> 
             keys.append([t, alpha])
         if not covers or strongest[0] <= 0.01:
             continue
+        if len(entries) > 1:
+            raise CameraError(f'Several clips fade {scene.path[transform]}; which plays is not decided here')
         t_colour = strongest[1]
         rgb = [min(1.0, max(0.0, gain * scene.float_value(transform, RENDERER, property_hash | ((4 + c) << 28), t_colour, saved[c])))
                for c in range(3)]
         fades.append({'color': [round(v, 3) for v in rgb],
                       'keys': [[round(t, 3), round(a, 3)] for t, a in decimate(keys, [ALPHA_TOLERANCE])]})
-    return {'frames': frames, 'fades': fades}
+    # The colour the entrance's controller hands over to the illustration through (_params.fadeColor:
+    # white for most, black for some); the quads above already reach it on screen where they exist.
+    colour = ((controller or {}).get('_params') or {}).get('fadeColor')
+    handover = [round(min(1.0, max(0.0, float(colour[k]))), 3) for k in 'rgb'] if isinstance(colour, dict) else None
+    return {'frames': frames, 'fades': fades, 'handover': handover}
