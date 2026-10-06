@@ -121,11 +121,6 @@ class Textures(unittest.TestCase):
         mask.putpixel((1, 0), (0, 0, 0, 90))
         self.assertEqual(row(l2d.mask_channel(mask)), [0, 90])
 
-    def test_colour_above_alpha_count(self):
-        image = Image.new('RGBA', (3, 1))
-        image.putdata([(10, 10, 10, 5), (5, 5, 5, 5), (0, 0, 0, 0)])
-        self.assertEqual(l2d.count_colour_above_alpha(image), 1)
-        self.assertEqual(l2d.count_colour_above_alpha(l2d.premultiply(image)), 0)
 
     def test_webp_is_lossless(self):
         image = l2d.premultiply(Image.effect_noise((64, 48), 80).convert('RGBA'))
@@ -133,6 +128,91 @@ class Textures(unittest.TestCase):
         self.assertEqual(data[12:16], b'VP8L')
         with Image.open(io.BytesIO(data)) as back:
             self.assertEqual(back.convert('RGBA').tobytes(), image.tobytes())
+
+
+PAGES = FIXTURES / 'pages'
+
+
+def fixture_image(name):
+    with Image.open(PAGES / name) as image:
+        return image.convert('RGBA') if image.mode == 'RGBA' else image.convert('RGB')
+
+
+def semi_colour(image):
+    """Mean max(r, g, b) of the texels with alpha 16-63."""
+    data = image.convert('RGBA').tobytes()
+    values = [max(data[i:i + 3]) for i in range(0, len(data), 4) if 16 <= data[i + 3] < 64]
+    return sum(values) / len(values)
+
+
+class PageAlpha(unittest.TestCase):
+    """64x64 crops of real Global page textures (test/fixtures/pages, see README there):
+    masked-rgb.png + masked-alpha.png from chen2#2 (ETC RGB plus a separate [alpha] mask, RGB already
+    premultiplied by the game) and straight-rgba.png from hsgma2#2 (one ASTC RGBA texture, straight
+    alpha with colour bleed). Each crop holds alpha-0 texels and texels with alpha 16-63."""
+
+    def setUp(self):
+        self.masked_rgb = fixture_image('masked-rgb.png')
+        self.masked_alpha = fixture_image('masked-alpha.png')
+        self.straight = fixture_image('straight-rgba.png')
+        self.joined = l2d.join_alpha(self.masked_rgb, self.masked_alpha)
+
+    def test_fixtures_hold_both_alpha_bands(self):
+        for image in (self.joined, self.straight):
+            histogram = image.getchannel('A').histogram()
+            self.assertGreaterEqual(histogram[0], 1000)
+            self.assertGreaterEqual(sum(histogram[16:64]), 500)
+
+    def test_classifies_the_real_crops(self):
+        masked = l2d.classify_alpha(self.joined)
+        self.assertEqual(masked['alpha'], 'premultiplied', masked)
+        self.assertLess(masked['transparentColour'], 1)
+        straight = l2d.classify_alpha(self.straight)
+        self.assertEqual(straight['alpha'], 'straight', straight)
+        self.assertGreater(straight['transparentColour'], 50)
+        self.assertEqual(l2d.classify_alpha(l2d.premultiply(self.straight))['alpha'], 'premultiplied')
+
+    def test_masked_page_keeps_the_shipped_colour(self):
+        page, info = l2d.prepare_page(self.masked_rgb, self.masked_alpha)
+        self.assertEqual(page.tobytes(), self.joined.tobytes())
+        self.assertTrue(info['mask'])
+        self.assertEqual(info['alpha'], 'premultiplied')
+        # The bug this guards against: premultiplying the already premultiplied RGB again
+        # darkens the semi-transparent texels (glows, soft edges) to a fraction of their colour.
+        self.assertNotEqual(page.tobytes(), l2d.premultiply(self.joined).tobytes())
+        self.assertGreater(semi_colour(page), 10)
+        self.assertLess(semi_colour(l2d.premultiply(self.joined)), semi_colour(page) / 4)
+
+    def test_straight_page_is_premultiplied(self):
+        page, info = l2d.prepare_page(self.straight)
+        self.assertEqual(page.tobytes(), l2d.premultiply(self.straight).tobytes())
+        self.assertFalse(info['mask'])
+        self.assertEqual(info['alpha'], 'straight')
+
+    def test_a_page_that_does_not_match_its_path_fails(self):
+        # An already premultiplied texture without a mask, and a straight one with a mask.
+        with self.assertRaisesRegex(l2d.SyncError, 'should be straight alpha but looks premultiplied'):
+            l2d.prepare_page(self.joined)
+        with self.assertRaisesRegex(l2d.SyncError, 'should be premultiplied alpha but looks straight'):
+            l2d.prepare_page(self.straight, self.straight.getchannel('A').convert('RGB'))
+        # Nothing to measure (fully opaque, as an ETC RGB page is before its mask joins): unclear.
+        with self.assertRaisesRegex(l2d.SyncError, 'looks unclear'):
+            l2d.prepare_page(self.masked_rgb)
+
+    def test_measurements_that_disagree_are_unclear(self):
+        # Black under alpha 0 (reads premultiplied) but bright colour at alpha 16-63 (reads straight).
+        image = Image.new('RGBA', (32, 8), (0, 0, 0, 0))
+        for x in range(32):
+            for y in range(4, 8):
+                image.putpixel((x, y), (200, 200, 200, 30))
+        self.assertEqual(l2d.classify_alpha(image)['alpha'], 'unclear')
+
+    def test_page_is_resized_to_the_atlas_size(self):
+        page, info = l2d.prepare_page(self.straight, None, (32, 32))
+        self.assertEqual(page.size, (32, 32))
+        self.assertEqual(info['resizedFrom'], [64, 64])
+        _, same = l2d.prepare_page(self.straight, None, (64, 64))
+        self.assertNotIn('resizedFrom', same)
 
 
 class Skeletons(unittest.TestCase):

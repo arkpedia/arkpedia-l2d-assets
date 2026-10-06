@@ -118,8 +118,9 @@ def inspect(folder: Path) -> dict:
     return json.loads(result.stdout)
 
 
-def build_model(planned: l2d.Planned, dat: bytes, res_version: str, staging: Path) -> dict:
-    """Decodes one bundle into `staging` and returns its model.json content."""
+def build_model(planned: l2d.Planned, dat: bytes, res_version: str, staging: Path) -> tuple[dict, list[dict]]:
+    """Decodes one bundle into `staging`. Returns its model.json content and, per atlas page,
+    how the texture was shipped (separate [alpha] mask or not) and how its alpha measured."""
     bundle = l2d.unpack_dat(dat, planned)
     decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id)
     json_skeleton = l2d.is_json_skeleton(decoded.skeleton)
@@ -158,12 +159,20 @@ def build_model(planned: l2d.Planned, dat: bytes, res_version: str, staging: Pat
         'source': {'server': SERVER, 'bundle': planned.bundle, 'md5': planned.md5, 'resVersion': res_version},
     }
     write_json(staging / 'model.json', model)
-    if decoded.resized_pages:
-        log(f'  note: pages resized to their atlas size: {decoded.resized_pages}')
-    if decoded.masked_pages:
-        log(f'  note: pages with a separate [alpha] mask: {decoded.masked_pages}')
-    log(f'  skeleton {decoded.skeleton_name}, atlas {decoded.atlas_name}, pages {decoded.page_names}')
-    return model
+    log(f'  skeleton {decoded.skeleton_name}, atlas {decoded.atlas_name}')
+    for info in decoded.page_info:
+        log(f'  page {describe_page(info)}')
+    return model, decoded.page_info
+
+
+def describe_page(info: dict) -> str:
+    """One line per atlas page for the log and the run summary."""
+    how = 'RGB + [alpha] mask, kept as shipped (already premultiplied)' if info['mask'] else 'RGBA, straight, premultiplied here'
+    text = (f'{info["page"]}: {how}; transparentColour {info["transparentColour"]}, '
+            f'semiColourAboveAlpha {info["semiColourAboveAlpha"]}')
+    if info.get('resizedFrom'):
+        text += f'; resized from {info["resizedFrom"][0]}x{info["resizedFrom"][1]}'
+    return text
 
 
 def existing_model(planned: l2d.Planned) -> dict | None:
@@ -201,7 +210,7 @@ def main(argv: list[str] | None = None) -> int:
         models = [m for m in models if m.skin_id in only]
 
     report = {'resVersion': res_version, 'added': [], 'repointed': [], 'current': 0, 'failed': [],
-              'unlisted': plan.unlisted, 'deferred': [], 'downloadedBytes': 0}
+              'unlisted': plan.unlisted, 'deferred': [], 'downloadedBytes': 0, 'pages': {}}
     pending = []
     for planned in models:
         try:
@@ -241,7 +250,7 @@ def main(argv: list[str] | None = None) -> int:
         try:
             dat = get(url)
             report['downloadedBytes'] += len(dat)
-            build_model(planned, dat, res_version, staging)
+            _, page_info = build_model(planned, dat, res_version, staging)
             final = ROOT / planned.folder
             final.parent.mkdir(parents=True, exist_ok=True)
             if final.exists():
@@ -251,6 +260,7 @@ def main(argv: list[str] | None = None) -> int:
             manifest['resVersion'] = res_version
             write_manifest(manifest)
             report['added'].append(planned.skin_id)
+            report['pages'][planned.skin_id] = page_info
             log(f'  wrote {planned.folder}')
         except Exception as error:  # noqa: BLE001 - one model never stops the run
             report['failed'].append({'skinId': planned.skin_id, 'error': f'{type(error).__name__}: {error}'})
@@ -281,6 +291,11 @@ def main(argv: list[str] | None = None) -> int:
             out.write(f'- Downloaded: {report["downloadedBytes"] / 1e6:.1f} MB\n')
             for failure in report['failed']:
                 out.write(f'- **Failed** `{failure["skinId"]}`: {failure["error"]}\n')
+            if report['pages']:
+                out.write('\n#### Page textures\n\n')
+                for skin_id, pages in report['pages'].items():
+                    for info in pages:
+                        out.write(f'- `{skin_id}` {describe_page(info)}\n')
     return 0
 
 

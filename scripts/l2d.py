@@ -289,14 +289,91 @@ def join_alpha(image, mask):
     return rgba
 
 
-def count_colour_above_alpha(image) -> int:
-    """Pixels whose colour exceeds their alpha: zero for an already premultiplied texture."""
-    from PIL import ImageChops
+# How a page texture stores its colour, told apart by two measurements:
+# - transparentColour: mean max(r, g, b) of the texels with alpha 0;
+# - semiColourAboveAlpha: share of the texels with alpha 16-63 whose max(r, g, b) exceeds alpha.
+# Measured on Global bundles (client 26-09-23-17-49-43_b9cc4a):
+# - one RGBA texture (ASTC; hsgma2#2, skadi2@iteration#2, agoat2@epoque#34, ines@ambienceSynesthesia#5,
+#   ling@nian#12) is straight alpha with colour bleed: 118-156 and 80-97%;
+# - RGB plus a separate [alpha] mask (ETC; chen2#2, chen2@boc#6 both pages, nian#2 both pages) is
+#   already premultiplied: 0.02-0.07 and 5-14%.
+# The limits below sit far from both groups; anything between them is 'unclear' and fails the model.
+ALPHA_MIN_PIXELS = 64
+TRANSPARENT_PREMULTIPLIED_MAX = 8.0
+TRANSPARENT_STRAIGHT_MIN = 32.0
+SEMI_PREMULTIPLIED_MAX = 0.35
+SEMI_STRAIGHT_MIN = 0.5
+
+
+def classify_alpha(image) -> dict:
+    """Whether an RGBA texture's colour is 'straight' or 'premultiplied' ('unclear' when the two
+    measurements disagree, land between the limits, or there are too few texels to measure)."""
+    from PIL import ImageChops, ImageStat
 
     r, g, b, a = image.convert('RGBA').split()
-    over = ImageChops.subtract(ImageChops.lighter(ImageChops.lighter(r, g), b), a)
-    histogram = over.histogram()
-    return sum(histogram[1:])
+    brightest = ImageChops.lighter(ImageChops.lighter(r, g), b)
+    histogram = a.histogram()
+
+    transparent_count = histogram[0]
+    transparent = None
+    if transparent_count >= ALPHA_MIN_PIXELS:
+        zero = a.point(lambda v: 255 if v == 0 else 0)
+        transparent = ImageStat.Stat(brightest, mask=zero).mean[0]
+
+    semi_count = sum(histogram[16:64])
+    semi = None
+    if semi_count >= ALPHA_MIN_PIXELS:
+        in_band = a.point(lambda v: 255 if 16 <= v < 64 else 0)
+        above = ImageChops.subtract(brightest, a).point(lambda v: 255 if v else 0)
+        semi = ImageStat.Stat(above, mask=in_band).mean[0] / 255
+
+    def vote(value, premultiplied_max, straight_min):
+        if value is None:
+            return None
+        if value <= premultiplied_max:
+            return 'premultiplied'
+        if value >= straight_min:
+            return 'straight'
+        return 'unclear'
+
+    votes = {vote(transparent, TRANSPARENT_PREMULTIPLIED_MAX, TRANSPARENT_STRAIGHT_MIN),
+             vote(semi, SEMI_PREMULTIPLIED_MAX, SEMI_STRAIGHT_MIN)} - {None}
+    alpha = votes.pop() if len(votes) == 1 else 'unclear'
+    return {
+        'alpha': alpha,
+        'transparentColour': None if transparent is None else round(transparent, 2),
+        'semiColourAboveAlpha': None if semi is None else round(semi, 4),
+    }
+
+
+def prepare_page(image, mask=None, size: tuple[int, int] | None = None):
+    """One atlas page as the site renders it: premultiplied RGBA at the size the atlas was packed at.
+
+    - A page with a separate '[alpha]' mask: the game's RGB is already premultiplied, so the mask
+      becomes the alpha channel and the colour is kept exactly as shipped (never premultiplied again).
+    - A page without one: one straight-alpha RGBA texture with colour bleed, premultiplied here.
+
+    The texture is classified first, and a page that does not look like what its path expects fails
+    the model rather than being written wrong. Returns (image, info) for the run report.
+    """
+    from PIL import Image
+
+    rgba = image.convert('RGBA')
+    if mask is not None:
+        rgba = join_alpha(rgba, mask)
+    expected = 'premultiplied' if mask is not None else 'straight'
+    info = {'mask': mask is not None, **classify_alpha(rgba)}
+    if info['alpha'] != expected:
+        how = 'RGB with a separate [alpha] mask' if mask is not None else 'one RGBA texture'
+        raise SyncError(f'Page shipped as {how} should be {expected} alpha but looks {info["alpha"]} '
+                        f'(transparentColour {info["transparentColour"]}, semiColourAboveAlpha {info["semiColourAboveAlpha"]})')
+    page = rgba if mask is not None else premultiply(rgba)
+    if size and page.size != tuple(size):
+        # Spine 3.8 web runtimes compute UVs from the loaded image's size, not the atlas
+        # size line, so a page must have exactly the size the atlas was packed at.
+        info['resizedFrom'] = list(page.size)
+        page = page.resize(tuple(size), Image.LANCZOS)
+    return page, info
 
 
 def encode_webp(image) -> bytes:
@@ -384,9 +461,8 @@ class Decoded:
     atlas_name: str
     pages: list  # PIL images, premultiplied, in atlas page order
     page_names: list[str]
-    masked_pages: list[dict] = field(default_factory=list)
+    page_info: list[dict] = field(default_factory=list)  # per page: mask, alpha class and measurements
     mixes: list[dict] = field(default_factory=list)
-    resized_pages: list[dict] = field(default_factory=list)
 
 
 def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
@@ -470,26 +546,17 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
             raise SyncError(f'Several textures are named {name}')
         return found[0] if found else None
 
-    from PIL import Image
-
-    pages, masked, resized = [], [], []
+    pages, page_info = [], []
     for page, size in zip(page_names, sizes):
         texture_name = texture_name_for_page(page)
         texture = find_texture(texture_name, size)
         if texture is None:
             raise SyncError(f'{atlas_name}: no texture for page {page}')
-        image = texture.image.convert('RGBA')
-        mask = find_texture(f'{texture_name}[alpha]', None)
-        if mask is not None:
-            image = join_alpha(image, mask.image)
-            # Untested on Global so far: record how many pixels already look premultiplied
-            # (colour above alpha would mean a straight texture) so the first one can be checked.
-            masked.append({'page': page, 'colourAboveAlpha': count_colour_above_alpha(image)})
-        image = premultiply(image)
-        if size and image.size != size:
-            # Spine 3.8 web runtimes compute UVs from the loaded image's size, not the atlas
-            # size line, so a page must have exactly the size the atlas was packed at.
-            resized.append({'page': page, 'from': list(image.size), 'to': list(size)})
-            image = image.resize(size, Image.LANCZOS)
+        mask = find_texture(f'{texture_name}[alpha]', size)
+        try:
+            image, info = prepare_page(texture.image, mask.image if mask is not None else None, size)
+        except SyncError as error:
+            raise SyncError(f'{atlas_name}: page {page}: {error}') from error
         pages.append(image)
-    return Decoded(skeleton_bytes, skeleton_name, atlas_text, atlas_name, pages, page_names, masked, mixes, resized)
+        page_info.append({'page': page, **info})
+    return Decoded(skeleton_bytes, skeleton_name, atlas_text, atlas_name, pages, page_names, page_info, mixes)
