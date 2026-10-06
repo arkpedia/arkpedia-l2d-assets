@@ -117,6 +117,39 @@ export function isMp3(bytes) {
   return bytes.length > 4 && (bytes.toString('ascii', 0, 3) === 'ID3' || (bytes[0] === 0xff && (bytes[1] & 0xe0) === 0xe0));
 }
 
+/** An entrance's camera: null (its prefab names none) or frames [t, centre x, centre y, visible
+ *  height] in skeleton units from t = 0, in time order, and full-screen fades
+ *  [{color: [r, g, b], keys: [[t, alpha]]}], all within the entrance animation. */
+function cameraShape(camera, label, duration) {
+  if (camera === null) return;
+  if (!isObject(camera) || !Array.isArray(camera.frames) || !camera.frames.length || !Array.isArray(camera.fades)) {
+    throw new Error(`${label}: camera must be null or { frames, fades }`);
+  }
+  const end = duration + 0.01;
+  let last = -Infinity;
+  camera.frames.forEach((frame, index) => {
+    if (!Array.isArray(frame) || frame.length !== 4 || !frame.every(Number.isFinite) || !(frame[3] > 0)) {
+      throw new Error(`${label}: camera.frames[${index}] must be [t, x, y, height > 0]`);
+    }
+    if (!(frame[0] > last) || frame[0] > end) throw new Error(`${label}: camera.frames[${index}] is out of order or past the entrance (${frame[0]}s)`);
+    last = frame[0];
+  });
+  if (camera.frames[0][0] !== 0) throw new Error(`${label}: camera.frames must start at 0`);
+  camera.fades.forEach((fade, index) => {
+    if (!isObject(fade) || !Array.isArray(fade.color) || fade.color.length !== 3 || !fade.color.every((v) => Number.isFinite(v) && v >= 0 && v <= 1)) {
+      throw new Error(`${label}: camera.fades[${index}].color must be [r, g, b] in 0-1`);
+    }
+    if (!Array.isArray(fade.keys) || !fade.keys.length) throw new Error(`${label}: camera.fades[${index}].keys missing`);
+    let previous = -Infinity;
+    fade.keys.forEach((key, k) => {
+      if (!Array.isArray(key) || key.length !== 2 || !key.every(Number.isFinite) || key[1] < 0 || key[1] > 1 || !(key[0] > previous) || key[0] > end) {
+        throw new Error(`${label}: camera.fades[${index}].keys[${k}] must be [t, alpha 0-1], in order, within the entrance`);
+      }
+      previous = key[0];
+    });
+  });
+}
+
 /** The shape of a skeleton + atlas + pages group: the illustration (name 'skeleton', pages
  *  'page') or its entrance ('entrance', 'entrance-page'). Returns its files. */
 function skeletonShape(part, label, name, pagePrefix) {
@@ -208,6 +241,10 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     if (!isObject(entrance)) throw new Error(`${label}: entrance must be an object`);
     files.push(...skeletonShape(entrance, `${label}: entrance`, 'entrance', 'entrance-page'));
     if (!Object.hasOwn(entrance.animations, 'Start')) throw new Error(`${label}: entrance animations must include Start (has ${Object.keys(entrance.animations).join(', ')})`);
+    // The sync writes the camera the game plays the entrance through, or null when the prefab
+    // names none; a camera it cannot decode fails the model, so the field is always there.
+    if (!Object.hasOwn(entrance, 'camera')) throw new Error(`${label}: entrance.camera must be present (null when the prefab names no camera)`);
+    cameraShape(entrance.camera, `${label}: entrance`, entrance.animations.Start);
     if (entrance.audio !== null) {
       fileShape(entrance.audio, `${label}: entrance.audio`, 'entrance.mp3');
       if (!(Number.isFinite(entrance.audio.duration) && entrance.audio.duration > 0)) throw new Error(`${label}: entrance.audio duration missing`);

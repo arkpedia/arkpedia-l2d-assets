@@ -212,6 +212,10 @@ async function entranceRepo() {
     textures: [record('entrance-page0.webp', page, { width: 4, height: 4 })],
     animations: found.animations,
     bounds: found.bounds,
+    camera: {
+      frames: [[0, 11, 1170.1, 708.5], [found.animations.Start, -36.4, 803.8, 818.7]],
+      fades: [{ color: [0, 0, 0], keys: [[0, 0], [0.5, 1], [found.animations.Start, 0]] }],
+    },
     audio: record('entrance.mp3', mp3, { duration: 22.772 }),
   };
   await repo.save(model);
@@ -223,6 +227,10 @@ test('an entrance validates with its own skeleton, page and soundtrack', async (
   try {
     assert.deepEqual(Object.keys(repo.model.entrance.animations), ['Start']);
     assert.deepEqual(await validateRepository(repo.root), { listed: 1, folders: 1, failures: 0 });
+    const still = structuredClone(repo.model);
+    still.entrance.camera = null;
+    await repo.save(still);
+    await validateRepository(repo.root);
     const silent = structuredClone(repo.model);
     silent.entrance.audio = null;
     await unlink(path.join(repo.dir, 'entrance.mp3'));
@@ -247,6 +255,16 @@ test('a skin with a dynEntranceId must carry its entrance, and nothing else may'
     [(m) => { m.entrance.skeleton.format = 'binary'; }, /entrance\.skel/],
     [(m) => { m.entrance.audio.duration = 0; }, /duration missing/],
     [(m) => { m.entrance.audio.sha256 = '0'.repeat(64); }, /entrance\.mp3 sha256 does not match/],
+    // The camera: always written (null when the prefab names none), well formed, within the entrance.
+    [(m) => { delete m.entrance.camera; }, /entrance\.camera must be present/],
+    [(m) => { m.entrance.camera = { frames: [] , fades: [] }; }, /camera must be null or/],
+    [(m) => { m.entrance.camera.frames[0][0] = 0.1; }, /camera\.frames must start at 0/],
+    [(m) => { m.entrance.camera.frames[1][3] = 0; }, /height > 0/],
+    [(m) => { m.entrance.camera.frames.push([0.5, 0, 0, 1]); }, /out of order or past the entrance/],
+    [(m) => { m.entrance.camera.frames[1][0] = 99; }, /out of order or past the entrance/],
+    [(m) => { m.entrance.camera.fades[0].color = [0, 0, 2]; }, /color must be/],
+    [(m) => { m.entrance.camera.fades[0].keys[1][1] = 1.5; }, /alpha 0-1/],
+    [(m) => { m.entrance.camera.fades[0].keys = []; }, /keys missing/],
   ];
   try {
     for (const [mutate, message] of variants) {

@@ -50,7 +50,7 @@ SERVER = 'en'
 USER_AGENT = 'arkpedia-l2d-assets-sync (+https://github.com/arkpedia/arkpedia-l2d-assets)'
 FAILURES_FILE = 'sync-failures.json'
 # A change to any of these retries every recorded failure once: the fix may be in them.
-CODE_FILES = ['scripts/l2d.py', 'scripts/sync.py', 'scripts/spine.mjs', 'scripts/inspect-skeleton.mjs',
+CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/sync.py', 'scripts/spine.mjs', 'scripts/inspect-skeleton.mjs',
               'vendor/spine-core-3.8/spine-core.js', 'requirements.txt']
 
 
@@ -189,6 +189,9 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         log(f'  entrance {decoded.entrance.skeleton_name}, atlas {decoded.entrance.atlas_name}, '
             f'Start {entrance["animations"]["Start"]}s, soundtrack '
             + (f'{decoded.entrance.audio_name} {audio["duration"]}s ({audio["bytes"] / 1e3:.0f} KB MP3)' if audio else 'none'))
+        camera = entrance['camera']
+        log('  entrance camera ' + (f'{len(camera["frames"])} keys, view height {min(f[3] for f in camera["frames"])}-'
+                                    f'{max(f[3] for f in camera["frames"])}, {len(camera["fades"])} full-screen fade(s)' if camera else 'none named'))
         for info in decoded.entrance.page_info:
             log(f'  entrance page {describe_page(info)}')
         page_info += [{**info, 'entrance': True} for info in decoded.entrance.page_info]
@@ -234,6 +237,8 @@ def build_entrance(staging: Path, entrance: l2d.DecodedEntrance | None, version:
         raise l2d.SyncError(f'Entrance skeleton is Spine {declared}, the illustration {version}')
     if 'Start' not in found['animations']:
         raise l2d.SyncError(f'{entrance.skeleton_name} has no Start animation (it has {sorted(found["animations"])})')
+    # The camera the game plays the entrance through, over the entrance animation's own length.
+    camera = entrance.camera(found['animations']['Start'])
     audio = None
     if entrance.audio_wav is not None:
         mp3, duration = l2d.wav_to_mp3(entrance.audio_wav)
@@ -245,6 +250,7 @@ def build_entrance(staging: Path, entrance: l2d.DecodedEntrance | None, version:
         'textures': textures,
         'animations': found['animations'],
         'bounds': found['bounds'],
+        'camera': camera,
         'audio': audio,
     }
 

@@ -10,6 +10,9 @@ import io
 import re
 import zipfile
 from dataclasses import dataclass, field
+from typing import Callable
+
+import entrance_camera
 
 DYN_PREFIX = 'dyn_illust_'
 BUNDLE_DIR = 'arts/dynchars/'
@@ -619,6 +622,9 @@ class DecodedEntrance:
     page_info: list[dict]
     audio_wav: bytes | None  # the soundtrack as UnityPy exports it, None when the bundle has none
     audio_name: str | None
+    # The entrance's camera moves and full-screen fades, sampled over a given duration (the entrance
+    # animation's own length): entrance_camera.entrance_camera on this bundle's objects.
+    camera: Callable[[float], dict | None]
 
 
 @dataclass
@@ -688,6 +694,20 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None) 
             return obj.type.name, obj.read_typetree()
         except Exception:  # noqa: BLE001 - an unreadable object is simply not followed
             return None
+
+    trees: dict[int, tuple[str, dict] | None] = {}
+
+    def read_any(path_id):
+        """Any object in this bundle as (type name, typetree), or None (cached)."""
+        if path_id in behaviours:
+            return 'MonoBehaviour', behaviours[path_id]
+        if path_id not in trees:
+            obj = objects.get(path_id)
+            try:
+                trees[path_id] = (obj.type.name, obj.read_typetree()) if obj is not None else None
+            except Exception:  # noqa: BLE001 - an unreadable object reads as missing
+                trees[path_id] = None
+        return trees[path_id]
 
     container = {}
     for path, ref in env.container.items():
@@ -785,7 +805,15 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None) 
             if len(samples) != 1:
                 raise SyncError(f'{audio_path}: expected one sample, found {len(samples)}')
             audio_name, audio_wav = next(iter(samples.items()))
+        root_go = roots[0]
+
+        def camera(duration: float, root_go=root_go, skeleton_data=entrance_id) -> dict | None:
+            try:
+                return entrance_camera.entrance_camera(root_go, skeleton_data, read_any, duration)
+            except (entrance_camera.CameraError, KeyError, TypeError, ValueError) as error:
+                raise SyncError(f'Entrance camera of {dyn_entrance_id}: {error}') from error
+
         entrance = DecodedEntrance(entrance_skeleton[1], entrance_skeleton[0], e_atlas_text, entrance_atlas[0],
-                                   e_pages, e_page_names, e_page_info, audio_wav, audio_name)
+                                   e_pages, e_page_names, e_page_info, audio_wav, audio_name, camera)
 
     return Decoded(skeleton[1], skeleton[0], skeleton_choice, atlas_text, atlas[0], pages, page_names, page_info, mixes, entrance)
