@@ -57,11 +57,11 @@ The illustration prefab draws more than its skeleton: MeshRenderers next to it (
 | Field | Meaning |
 | --- | --- |
 | `schemaVersion` | `1`. |
-| `textures` | `layer<N>.webp` in order: `width`, `height`, `bytes`, `sha256`, `wrap` (`[u, v]`, each `repeat`, `clamp` or `mirror`). Lossless WebP of the texture as shipped, straight alpha: every shader a layer can have samples it straight (texture x 2 x vertex colour x colour, alpha clamped, blended `SrcAlpha`). The sync measures each one as it measures atlas pages and prints the result; it changes nothing. |
-| `bounds` | The frame the site opens on: the skeleton's bounds joined with every layer drawn at Idle's first frame, in skeleton units. Computed with the Spine runtime (bone followers placed from the posed skeleton) and re-checked by the validator. |
+| `textures` | `layer<N>.webp` in order: `width`, `height`, `bytes`, `sha256`, `wrap` (`[u, v]`, each `repeat`, `clamp` or `mirror`), `opaque` (`[u0, v0, u1, v1]`, image-space UV of the part with alpha 8/255 or more, which `bounds` is fitted to). Lossless WebP of the texture as shipped, straight alpha: every shader a layer can have samples it straight (texture x 2 x vertex colour x colour, alpha clamped, blended `SrcAlpha`). The sync measures each one as it measures atlas pages and prints the result; it changes nothing. |
+| `bounds` | The frame the site opens on: the skeleton's bounds joined with the visible part (`opaque`) of every layer drawn at Idle's first frame, in skeleton units. Computed with the Spine runtime (bone followers placed from the posed skeleton) and re-checked by the validator. |
 | `separators` | The skeleton's separator slots (SkeletonRenderSeparator) that exist in the skeleton. |
 | `draw` | Back to front, sorted as Unity sorts them: sorting layer, sorting order, render queue, distance (farther first), hierarchy order. Each entry is `{"part": k}`, the skeleton's slots from the k-th separator met in the current draw order to the next (a separator starts its part; one part `0` when the skeleton has no parts renderers), or `{"layer": {...}}`. |
-| `omitted` | Counts of `particles`, `trails`, `skinned` meshes, `hidden` renderers (off and never switched on) and `holders` (effects loaded from the shared `arts/dynchars/effect.ab`, not fetched), and lists of `{name, reason}`: `custom` (a shader whose effect changes pixels: flow distortion with its UV displacement, dissolve, ramp, vertex disturbance, UV rotation, an unknown shader...), `externalTexture` (a texture in another shared bundle) and `other` (unknown scripts or animated properties, meshes the export cannot read...). |
+| `omitted` | Counts of `particles`, `trails`, `skinned` meshes, `hidden` renderers (off and never switched on) and `holders` (effects loaded from the shared `arts/dynchars/effect.ab`, not fetched), and lists of `{name, reason}`: `custom` (a shader whose effect changes pixels: flow distortion with its UV displacement, dissolve, ramp, vertex disturbance, UV rotation, an unknown shader...), `externalTexture` (a texture in another shared bundle) and `other` (unknown scripts or animated properties, meshes the export cannot read, layers an Erase mask drawn after them paints over...). |
 
 A layer:
 
@@ -123,6 +123,6 @@ Load `manifest.json` and the files through URLs pinned to a commit of this repos
 
 ## Size
 
-The first full sync downloads 88 bundles, 434 MB (by the client list's `totalSize`). The repository will hold about 125 MB of skeletons and atlases plus 290 to 440 MB of lossless WebP pages, about 0.4 to 0.6 GB in all. Later runs only fetch bundles the game changes.
+The first full sync downloads 88 bundles, 434 MB (by the client list's `totalSize`), plus the 734 KB shared shader bundle. The repository will hold about 125 MB of skeletons and atlases plus 290 to 440 MB of lossless WebP pages, about 0.4 to 0.6 GB in all. The layers add about 61 MB (built from client `26-09-23-17-49-43_b9cc4a`: 297 layers with 189 textures in 74 of the 88 models, 0 to 3.6 MB per model, 0.7 MB on average). Later runs only fetch bundles the game changes.
 
 See [NOTICE.md](NOTICE.md) for ownership and provenance, and [vendor/spine-core-3.8/README.md](vendor/spine-core-3.8/README.md) for the Spine runtime's licence.

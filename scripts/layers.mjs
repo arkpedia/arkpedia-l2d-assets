@@ -42,6 +42,10 @@ export function layersShape(doc, label) {
     if (!Number.isSafeInteger(texture.width) || texture.width <= 0 || !Number.isSafeInteger(texture.height) || texture.height <= 0) throw new Error(`${label}: layers textures[${i}] width/height missing`);
     if (!Number.isSafeInteger(texture.bytes) || texture.bytes <= 0 || typeof texture.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(texture.sha256)) throw new Error(`${label}: layers textures[${i}] bytes/sha256 missing`);
     if (!Array.isArray(texture.wrap) || texture.wrap.length !== 2 || !texture.wrap.every((w) => WRAPS.has(w))) throw new Error(`${label}: layers textures[${i}] wrap must be two of ${[...WRAPS].join(', ')}`);
+    const o = texture.opaque;
+    if (!Array.isArray(o) || o.length !== 4 || !o.every((v) => finite(v) && v >= 0 && v <= 1) || !(o[0] < o[2] && o[1] < o[3])) {
+      throw new Error(`${label}: layers textures[${i}] opaque must be [u0, v0, u1, v1] in 0-1, the part of the texture that shows`);
+    }
   });
   const bounds = doc.bounds;
   if (!isObject(bounds) || !['x', 'y', 'width', 'height'].every((key) => finite(bounds[key])) || bounds.width <= 0 || bounds.height <= 0) throw new Error(`${label}: layers bounds missing`);
@@ -146,9 +150,10 @@ export function followMatrix(follow, bone) {
     follow.xy ? bone.worldX : follow.position[0], follow.xy ? bone.worldY : follow.position[1]];
 }
 
-/** A layer's vertices in skeleton units for a frame (null for a static layer) and the bone it follows. */
-export function layerVertices(layer, frame, bone) {
-  const v = layer.vertices;
+/** Points (x, y pairs in the layer's own units) in skeleton units for a frame (null for a static
+ *  layer) and the bone it follows. */
+export function layerVertices(layer, frame, bone, points = layer.vertices) {
+  const v = points;
   let m = frame ? frame.slice(0, 6) : [1, 0, 0, 1, 0, 0];
   if (layer.follow) {
     const f = followMatrix(layer.follow, bone);
@@ -163,10 +168,56 @@ export function layerVertices(layer, frame, bone) {
   return out;
 }
 
+/** A polygon ([[u, v], ...]) clipped to the rectangle [u0, v0, u1, v1] (Sutherland-Hodgman). */
+function clipToRect(polygon, [u0, v0, u1, v1]) {
+  let points = polygon;
+  const edges = [[(p) => p[0] >= u0, (a, b) => (u0 - a[0]) / (b[0] - a[0])], [(p) => p[0] <= u1, (a, b) => (u1 - a[0]) / (b[0] - a[0])],
+    [(p) => p[1] >= v0, (a, b) => (v0 - a[1]) / (b[1] - a[1])], [(p) => p[1] <= v1, (a, b) => (v1 - a[1]) / (b[1] - a[1])]];
+  for (const [inside, at] of edges) {
+    const next = [];
+    for (let i = 0; i < points.length; i++) {
+      const a = points[i], b = points[(i + 1) % points.length];
+      if (inside(a)) next.push(a);
+      if (inside(a) !== inside(b)) { const k = at(a, b); next.push([a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]); }
+    }
+    points = next;
+    if (!points.length) break;
+  }
+  return points;
+}
+
+/**
+ * The parts of a layer's mesh that show: each triangle cut to the texture's opaque box in UV space
+ * and mapped back to the layer's own units, so a quad with a wide transparent margin frames by what
+ * it draws. A triangle whose UVs leave 0-1 (a tiled texture) counts whole. `uvMap` is the frame's
+ * [su, ou, sv, ov].
+ */
+export function visiblePoints(layer, opaque, uvMap = [1, 0, 1, 0]) {
+  const { vertices: p, uvs, triangles } = layer;
+  const out = [];
+  const uvAt = (i) => [uvs[i * 2] * uvMap[0] + uvMap[1], uvs[i * 2 + 1] * uvMap[2] + uvMap[3]];
+  for (let t = 0; t < triangles.length; t += 3) {
+    const ids = [triangles[t], triangles[t + 1], triangles[t + 2]];
+    const uv = ids.map(uvAt);
+    const whole = () => { for (const i of ids) out.push(p[i * 2], p[i * 2 + 1]); };
+    if (uv.some(([u, v]) => u < -1e-6 || u > 1 + 1e-6 || v < -1e-6 || v > 1 + 1e-6)) { whole(); continue; }
+    const [a, b, c] = uv;
+    const det = (b[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (b[1] - a[1]);
+    if (Math.abs(det) < 1e-12) { whole(); continue; }
+    for (const q of clipToRect(uv, opaque)) {
+      const w1 = ((q[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (q[1] - a[1])) / det;
+      const w2 = ((b[0] - a[0]) * (q[1] - a[1]) - (q[0] - a[0]) * (b[1] - a[1])) / det;
+      const w0 = 1 - w1 - w2;
+      out.push(w0 * p[ids[0] * 2] + w1 * p[ids[1] * 2] + w2 * p[ids[2] * 2], w0 * p[ids[0] * 2 + 1] + w1 * p[ids[1] * 2 + 1] + w2 * p[ids[2] * 2 + 1]);
+    }
+  }
+  return out;
+}
+
 /**
  * The frame the site opens on: the skeleton's bounds (Idle at its first frame) joined with every
  * layer drawn then (not an Interact/Special/Start effect, no delay, switched on and not fully
- * transparent at t = 0), bone followers placed from the posed skeleton. Also checks every separator
+ * transparent at t = 0) where its texture shows, bone followers placed from the posed skeleton. Also checks every separator
  * slot and every follower's bone exist in the skeleton.
  */
 export function layerBounds(doc, skeleton, skeletonBounds, label = 'layers') {
@@ -182,7 +233,7 @@ export function layerBounds(doc, skeleton, skeletonBounds, label = 'layers') {
     const frame = layer.animation ? frameAt(layer.animation, 0) : null;
     if (frame && frame[10] < 0.5) continue;
     if ((frame ? frame[9] : layer.color[3]) <= 0.001) continue;
-    const points = layerVertices(layer, frame, bone);
+    const points = layerVertices(layer, frame, bone, visiblePoints(layer, doc.textures[layer.texture].opaque, frame ? frame.slice(11, 15) : undefined));
     for (let i = 0; i < points.length; i += 2) {
       x0 = Math.min(x0, points[i]); x1 = Math.max(x1, points[i]);
       y0 = Math.min(y0, points[i + 1]); y1 = Math.max(y1, points[i + 1]);

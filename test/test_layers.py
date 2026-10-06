@@ -16,7 +16,7 @@ from test_camera import Scene, linear, ref  # noqa: E402
 SHADERS_CAB = 'CAB-shaders'
 OTHER_CAB = 'CAB-other'
 EXTERNALS = {1: layers.BUILTIN_RESOURCES, 2: OTHER_CAB, 3: SHADERS_CAB}
-ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD = 1, 2, 3, 4
+ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD, ERASE = 1, 2, 3, 4, 5
 SHADERS = {
     (SHADERS_CAB, ALPHA_BLEND): layers.Shader('Torappu/Particles-L2D/AlphaBlend', 5.0, 10.0, 0.0, 3000, {'_TintColor': 0.5}),
     (SHADERS_CAB, ADDITIVE): layers.Shader('Torappu/Particles-L2D/Additive', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5}),
@@ -24,6 +24,7 @@ SHADERS = {
     (SHADERS_CAB, DISTURB): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb(CustomData)', 5.0, '_DstBlend', '_CullMode', 3000,
                                           {'_MainColor': 0.5, '_Opacity': 1.0, '_DstBlend': 10.0, '_CullMode': 0.0, '_Amount': 0.0}),
     (SHADERS_CAB, DISSOLVE_ADD): layers.Shader('Torappu/Particles-L2D/Dissolve/Dissolve Add', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5, '_Amount': 0.5}),
+    (SHADERS_CAB, ERASE): layers.Shader('Torappu/Particles-L2D/Mask/Erase', 5.0, 10.0, 0.0, 3000, {'_Strength': 1.0}),
 }
 
 
@@ -190,7 +191,9 @@ class Export(unittest.TestCase):
         self.assertEqual(bg['uvs'][:4], [0.0, 1.0, 1.0, 1.0], 'v is flipped to image space')
         self.assertEqual(bg['color'], [1.0, 1.0, 1.0, 0.5], 'the tint counts double')
         self.assertEqual((bg['follow'], bg['animation'], bg['only'], bg['delay']), (None, None, None, 0.0))
-        self.assertEqual(result.document['textures'], [{'file': 'layer0.webp', 'width': 4, 'height': 4, 'wrap': ['clamp', 'repeat']}])
+        # One texel of the 4 x 4 texture shows: the frame fits it.
+        self.assertEqual(result.document['textures'], [{'file': 'layer0.webp', 'width': 4, 'height': 4, 'wrap': ['clamp', 'repeat'],
+                                                        'opaque': [0.25, 0.25, 0.5, 0.5]}])
         self.assertIsNone(result.document['bounds'])
         self.assertEqual(result.document['omitted']['holders'], 1)
 
@@ -280,6 +283,21 @@ class Export(unittest.TestCase):
         tri = layer_named(result, 'tri')
         self.assertEqual((tri['triangles'], tri['colors'][:4]), ([0, 1, 2], [1.0, 1.0, 1.0, 0.5]))
         self.assertEqual(result.counts['layers'], 1)
+
+    def test_layers_under_an_erase_mask_are_left_out(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        # The mask paints over what was drawn before it, where it reaches: the sky under it, not the
+        # far-away moon, not the glow drawn after it.
+        p.quad('sky', effects, material_tree(ALPHA_BLEND, p.texture), -1, scale=(4, 4, 1))
+        p.quad('moon', effects, material_tree(ALPHA_BLEND, p.texture), -1, position=(20, 0, 0))
+        p.quad('cut', effects, material_tree(ERASE, p.texture), 50, position=(1, 1, 0))
+        p.quad('glow', effects, material_tree(ADDITIVE, p.texture), 60)
+        result = p.export()
+        self.assertEqual([e['name'] for e in entries(result) if isinstance(e, dict)], ['moon', 'glow'])
+        self.assertIn({'name': 'sky', 'reason': 'under the mask cut (Erase), which is not drawn'}, result.document['omitted']['other'])
+        self.assertIn({'name': 'cut', 'reason': 'shader Torappu/Particles-L2D/Mask/Erase'}, result.document['omitted']['custom'])
+        self.assertEqual(result.counts['layers'], 2)
 
     def test_constant_clips_make_a_static_layer_and_clips_that_never_show_it_hide_it(self):
         p = Prefab()

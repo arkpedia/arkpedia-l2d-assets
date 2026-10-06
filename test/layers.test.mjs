@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { followMatrix, frameAt, layerVertices } from '../scripts/layers.mjs';
+import { followMatrix, frameAt, layerVertices, visiblePoints } from '../scripts/layers.mjs';
 
 const frame = (t, values = {}) => {
   const f = [t, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0];
@@ -36,4 +36,21 @@ test('a bone follower takes the bone position, rotation (mirrored, flipped) and 
   const layer = { vertices: [1, 0, 0, 1], follow: { ...base, rotation: false } };
   close(layerVertices(layer, frame(0, { 5: 1 }).slice(1), bone), [210, 20, 110, 120]);
   close(layerVertices({ vertices: [1, 2], follow: null }, null, null), [1, 2]);
+});
+
+test('a layer frames by the part of its texture that shows', () => {
+  // A 10 x 10 quad whose texture shows only its middle half; v runs down in image space.
+  const quad = { vertices: [0, 0, 10, 0, 0, 10, 10, 10], uvs: [0, 1, 1, 1, 0, 0, 1, 0], triangles: [0, 3, 1, 3, 0, 2] };
+  const points = visiblePoints(quad, [0.25, 0.25, 0.75, 0.75]);
+  const xs = points.filter((_, i) => i % 2 === 0), ys = points.filter((_, i) => i % 2 === 1);
+  const close = (a, b) => assert.ok(Math.abs(a - b) < 1e-9, `${a} vs ${b}`);
+  close(Math.min(...xs), 2.5); close(Math.max(...xs), 7.5); close(Math.min(...ys), 2.5); close(Math.max(...ys), 7.5);
+  // Only the top-left quarter shows (image space: small u, small v = top).
+  const corner = visiblePoints(quad, [0, 0, 0.5, 0.5]);
+  close(Math.max(...corner.filter((_, i) => i % 2 === 0)), 5);
+  close(Math.min(...corner.filter((_, i) => i % 2 === 1)), 5);
+  // A tiled texture (UVs past 1) counts whole; an animated UV map moves the window.
+  assert.equal(visiblePoints({ ...quad, uvs: [0, 2, 2, 2, 0, 0, 2, 0] }, [0.25, 0.25, 0.75, 0.75]).length, 12);
+  const shifted = visiblePoints(quad, [0.25, 0.25, 0.75, 0.75], [0.5, 0, 0.5, 0]);
+  close(Math.max(...shifted.filter((_, i) => i % 2 === 0)), 10);
 });

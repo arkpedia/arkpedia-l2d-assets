@@ -316,7 +316,7 @@ async function layersRepo() {
   const quad = { uvs: [0, 1, 1, 1, 0, 0, 1, 0], colors: null, triangles: [0, 3, 1, 3, 0, 2], scroll: null, only: null, delay: 0 };
   const doc = {
     schemaVersion: 1,
-    textures: [{ ...record('layer0.webp', texture, { width: 4, height: 4 }), wrap: ['clamp', 'clamp'] }],
+    textures: [{ ...record('layer0.webp', texture, { width: 4, height: 4 }), wrap: ['clamp', 'clamp'], opaque: [0, 0, 1, 1] }],
     bounds: null,
     separators: [],
     draw: [
@@ -362,6 +362,10 @@ test('broken layers fail validation', async () => {
     [(d) => { d.textures[0].sha256 = '0'.repeat(64); }, /layer0\.webp sha256 does not match/],
     [(d) => { d.textures[0].width = 8; }, /layer0\.webp is 4x4/],
     [(d) => { d.textures[0].wrap = ['clamp', 'mirror-once']; }, /wrap/],
+    [(d) => { d.textures[0].opaque = [0.5, 0, 0.5, 1]; }, /opaque must be/],
+    [(d) => { d.textures[0].opaque = [0, 0, 1, 1.5]; }, /opaque must be/],
+    // The frame is fitted to what shows: a smaller opaque box changes the bounds.
+    [(d) => { d.textures[0].opaque = [0.25, 0.25, 0.75, 0.75]; }, /layers bounds differ/],
     [(d) => { layer(d, 0).texture = 1; }, /texture 1 is not in textures/],
     [(d) => { layer(d, 0).blend = 'multiply'; }, /blend must be alpha or add/],
     [(d) => { layer(d, 0).uvs.pop(); }, /uvs must pair/],

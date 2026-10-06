@@ -41,6 +41,8 @@ ACTIONS = {0: 'Idle', 1: 'Special', 2: 'Start', 3: 'Interact'}
 # The Spine animations the controller's _animators are triggered with (OnIdle, OnInteract, OnSpecial).
 TRIGGERS = ('Idle', 'Interact', 'Special', 'Start')
 MAX_VERTICES = 65535  # 16-bit indices on the site
+# Texels at or above this alpha count as showing, for the frame the site opens on (layers.json bounds).
+OPAQUE_ALPHA = 8
 # Decimation tolerances: positions in skeleton units, colours in 0-1 (x2 tint scale), UV.
 POSITION_TOLERANCE = 0.25
 COLOUR_TOLERANCE = 0.004
@@ -532,6 +534,7 @@ class _Exporter:
         self.omitted = {'particles': 0, 'trails': 0, 'skinned': 0, 'hidden': 0, 'holders': len(self.controller.get('_holders') or []),
                         'custom': [], 'externalTexture': [], 'other': []}
         self.counts = {'static': 0, 'animated': 0, 'follow': 0, 'only': 0, 'states': 0, 'scroll': 0}
+        self.masks = []
 
     # --- what each Animator plays
 
@@ -835,11 +838,17 @@ class _Exporter:
         wrap = [modes[w] if isinstance(w, int) and 0 <= w < 4 else 'repeat' for w in (wrap_u, wrap_v)]
         if 'mirror-once' in wrap:
             raise LayerError('texture wraps mirror-once')
+        box = image.getchannel('A').point(lambda a: 255 if a >= OPAQUE_ALPHA else 0).getbbox()
+        if box is None:
+            raise LayerError('nothing visible (its texture is transparent)')
+        # The part of the texture that shows, in image-space UV: the frame is fitted to it, not to the
+        # transparent margin around it.
+        opaque = [round(box[0] / image.width, 5), round(box[1] / image.height, 5), round(box[2] / image.width, 5), round(box[3] / image.height, 5)]
         index = len(self.texture_images)
         self.textures[tid] = index
         self.texture_images.append(image)
         self.texture_info.append({'name': tree.get('m_Name', ''), 'width': image.width, 'height': image.height, 'wrap': wrap,
-                                  'measured': alpha})
+                                  'opaque': opaque, 'measured': alpha})
         return index
 
     def mesh(self, tr) -> dict:
@@ -1052,6 +1061,7 @@ class _Exporter:
                 elif kind in ('SpriteRenderer', 'BillboardRenderer', 'CanvasRenderer'):
                     self.omit('other', name, kind)
                 elif kind == 'MeshRenderer':
+                    self.note_mask(tr, tree)
                     if any(k == 'MonoBehaviour' and t and 'skeletonDataAsset' in t for k, _, t in components):
                         self.omit('other', name, 'nested skeleton')
                     elif not self.static_active(tr) and not self.toggled(tr):
@@ -1067,16 +1077,99 @@ class _Exporter:
                         except ec.CameraError as error:
                             self.omit('other', name, str(error))
         entries.sort(key=lambda e: e['sort'])
+        entries = self.unmasked(entries)
         draw = [{'part': e['part']} if 'part' in e else {'layer': e['layer']} for e in entries]
-        textures = [{'file': f'layer{i}.webp', 'width': info['width'], 'height': info['height'], 'wrap': info['wrap']}
+        # Textures only layers still draw, renumbered in order.
+        used = sorted({d['layer']['texture'] for d in draw if 'layer' in d})
+        renumber = {old: new for new, old in enumerate(used)}
+        for d in draw:
+            if 'layer' in d:
+                d['layer']['texture'] = renumber[d['layer']['texture']]
+        self.texture_images = [self.texture_images[i] for i in used]
+        self.texture_info = [self.texture_info[i] for i in used]
+        textures = [{'file': f'layer{i}.webp', 'width': info['width'], 'height': info['height'], 'wrap': info['wrap'], 'opaque': info['opaque']}
                     for i, info in enumerate(self.texture_info)]
         for bucket in ('custom', 'externalTexture', 'other'):
             self.omitted[bucket].sort(key=lambda item: (item['name'], item['reason']))
         document = {'schemaVersion': SCHEMA_VERSION, 'textures': textures, 'bounds': None, 'separators': self.separators, 'draw': draw,
                     'omitted': self.omitted}
-        self.counts['layers'] = sum(1 for d in draw if 'layer' in d)
-        self.counts['parts'] = sum(1 for d in draw if 'part' in d)
+        layers = [d['layer'] for d in draw if 'layer' in d]
+        self.counts = {'layers': len(layers), 'parts': sum(1 for d in draw if 'part' in d),
+                       'static': sum(1 for l in layers if not l['animation'] and not l['follow']),
+                       'animated': sum(1 for l in layers if l['animation']), 'follow': sum(1 for l in layers if l['follow']),
+                       'only': sum(1 for l in layers if l['only']), 'states': sum(1 for l in layers if l['animation'] and l['animation'].get('states')),
+                       'scroll': sum(1 for l in layers if l['scroll'])}
         return LayerExport(document, self.texture_images, self.texture_info, self.counts)
+
+    # --- masks
+
+    def note_mask(self, tr, renderer: dict):
+        """Remembers a visible renderer drawn with the Erase mask shader: it paints over what was drawn
+        before it (alpha from its texture), so those layers do not look as the site would draw them."""
+        names = []
+        for ref in renderer.get('m_Materials') or []:
+            if isinstance(ref, dict) and ref.get('m_FileID', 0) == 0 and ref.get('m_PathID'):
+                entry = self.read(ref['m_PathID'])
+                if entry and entry[0] == 'Material':
+                    shader = read_material(entry[1], read=self.read, external_of=self.external_of, shaders=self.shaders).shader
+                    names.append(shader.name if shader else '')
+        if not any('/Mask/Erase' in n for n in names) or not (self.static_active(tr) or self.toggled(tr)):
+            return
+        bounds = None  # everywhere, unless its mesh's box says otherwise
+        mesh_filter = next((tree for kind, _, tree in _component_trees(self.scene, self.scene.go_of[tr]) if kind == 'MeshFilter'), None)
+        ref = (mesh_filter or {}).get('m_Mesh') or {}
+        corners = None
+        if ref.get('m_PathID') and ref.get('m_FileID', 0) == 0:
+            box = ((self.read(ref['m_PathID']) or (None, {}))[1] or {}).get('m_LocalAABB')
+            if box:
+                c, e = box['m_Center'], box['m_Extent']
+                corners = [(c['x'] + sx * e['x'], c['y'] + sy * e['y'], c['z'] + sz * e['z']) for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
+        elif ref.get('m_PathID') == BUILTIN_QUAD and self.external_of(ref) == BUILTIN_RESOURCES:
+            corners = [(x, y, 0.0) for x in (-0.5, 0.5) for y in (-0.5, 0.5)]
+        if corners is not None and not self.moves(tr):
+            m = self.relative(self.scene, tr, 0.0)
+            points = [ec.transform_point(m, p) for p in corners]
+            bounds = (min(p[0] for p in points) / self.unit, min(p[1] for p in points) / self.unit,
+                      max(p[0] for p in points) / self.unit, max(p[1] for p in points) / self.unit)
+        renderer_sort = (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0))
+        self.masks.append({'name': self.name(tr), 'sort': renderer_sort, 'walk': self.walk[tr], 'bounds': bounds})
+
+    def layer_bounds(self, layer: dict):
+        """A layer's box in skeleton units over its timeline, or None when a bone places it (unknown here)."""
+        if layer['follow']:
+            return None
+        v = layer['vertices']
+        frames = [f[1:7] for f in layer['animation']['frames']] if layer['animation'] else [[1, 0, 0, 1, 0, 0]]
+        for state in (layer['animation'] or {}).get('states', {}).values():
+            frames += [f[1:7] for f in state['frames']]
+        xs, ys = [], []
+        for a, b, c, d, tx, ty in frames:
+            for i in range(0, len(v), 2):
+                xs.append(a * v[i] + b * v[i + 1] + tx)
+                ys.append(c * v[i] + d * v[i + 1] + ty)
+        return min(xs), min(ys), max(xs), max(ys)
+
+    def unmasked(self, entries: list) -> list:
+        """Leaves out the layers an Erase mask drawn after them overlaps: drawn without it they would
+        show what the game paints over."""
+        if not self.masks:
+            return entries
+        kept = []
+        for entry in entries:
+            if 'layer' in entry:
+                box = self.layer_bounds(entry['layer'])
+                for mask in self.masks:
+                    if (mask['sort'], mask['walk']) <= (entry['sort'][:2], entry['sort'][4]):
+                        continue  # drawn before the layer: it paints over nothing of it
+                    m = mask['bounds']
+                    if m is None or box is None or (box[0] < m[2] and m[0] < box[2] and box[1] < m[3] and m[1] < box[3]):
+                        self.omit('other', entry['layer']['name'], f'under the mask {mask["name"]} (Erase), which is not drawn')
+                        break
+                else:
+                    kept.append(entry)
+                continue
+            kept.append(entry)
+        return kept
 
 
 def export_layers(root_go: int, read, *, mesh_of: Callable, texture_of: Callable, classify_texture: Callable,
@@ -1117,8 +1210,10 @@ def bundle_readers(env, objects: dict):
         mesh = objects[path_id].read()
         handler = MeshHandler(mesh)
         handler.process()
-        if not handler.m_Vertices or not handler.m_UV0:
-            raise LayerError('mesh without vertices or UVs')
+        if not handler.m_Vertices:
+            raise LayerError('mesh without vertices')
+        if not handler.m_UV0:
+            raise LayerError('mesh without UVs')
         submeshes = []
         for submesh, triangles in zip(mesh.m_SubMeshes, handler.get_triangles()):
             base = getattr(submesh, 'baseVertex', 0) or 0
