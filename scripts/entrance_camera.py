@@ -539,9 +539,17 @@ def entrance_camera(root_go: int, skeleton_data: int, read, duration: float) -> 
     frames = [[round(t, 3), round(cx, 1), round(cy, 1), round(h, 1), round(roll, 1)]
               for t, cx, cy, h, roll in decimate(frames, [CAMERA_TOLERANCE, CAMERA_TOLERANCE, CAMERA_TOLERANCE, ROLL_TOLERANCE])]
 
+    # Fades are taken only from the clips that drive the camera: their time is the entrance's
+    # (the camera shows the entrance from its first frame). Other effect objects are switched on by
+    # the controller's script at moments the data does not record (Lappland's Fugue turns its
+    # ending white-out on near the end; read from the start, it would whiten the whole entrance).
+    camera_clips = {id(clip) for link in scene.chain(camera_transform) for attribute in (POSITION, ROTATION, EULER, SCALE)
+                    for clip, _ in scene.transform_curves.get((link, attribute), [])}
+    camera_clips |= {id(clip) for (target, type_id, _), entries in scene.float_curves.items()
+                     if target == camera_transform and type_id == CAMERA for clip, _ in entries}
     fades = []
     for (transform, type_id, attribute), entries in sorted(scene.float_curves.items()):
-        if type_id != RENDERER:
+        if type_id != RENDERER or not any(id(clip) in camera_clips for clip, _ in entries):
             continue
         property_hash, channel = material_binding(attribute)
         if channel != 3:

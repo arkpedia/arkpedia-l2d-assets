@@ -83,7 +83,8 @@ INF = float('inf')
 START = -3.4028234663852886e38
 
 
-def entrance(roll=False, small_quad=False, perspective=False, no_camera=False, zero_scale=False, yaw=False, second_clip=None):
+def entrance(roll=False, small_quad=False, perspective=False, no_camera=False, zero_scale=False, yaw=False, second_clip=None,
+             fade_on_own_animator=False):
     """Root (plays the skeleton) > rig (animated: x 0 -> 2, up to the camera) > camera (orthographic
     size 3 -> 4), and a black _TintColor quad over the whole view that fades in and out."""
     s = Scene()
@@ -124,7 +125,16 @@ def entrance(roll=False, small_quad=False, perspective=False, no_camera=False, z
         (6.0, [(4, (0, 0, 0, 0.0))]),
         (INF, []),
     ]
-    clips = [s.clip('camera', bindings, frames, constants=(0.0, 0.0, 0.0))]
+    if fade_on_own_animator:
+        # The quad's colour on an Animator of its own (on the quad); the camera's on the rig's.
+        quad_bindings = [dict(b, path=ec.crc('')) for b in bindings[2:]]
+        s.animate(quad_go, s.clip('own', quad_bindings, [(START, [(0, (0, 0, 0, 0.5))]), (INF, [])], constants=(0.0, 0.0, 0.0)))
+        bindings = bindings[:2]
+        frames = [(t, [k for k in keys if k[0] < 4]) for t, keys in frames]
+        frames = [(t, keys) for t, keys in frames if keys or t == INF]
+        clips = [s.clip('camera', bindings, frames)]
+    else:
+        clips = [s.clip('camera', bindings, frames, constants=(0.0, 0.0, 0.0))]
     if second_clip:
         # A second clip on the same Animator moving the camera rig, or two clips moving an effect
         # object the camera does not hang from.
@@ -202,6 +212,12 @@ class Entrance(unittest.TestCase):
         self.assertEqual(max(alphas.values()), 1.0)  # _TintColor alpha 0.5 draws fully black
         self.assertEqual(alphas[5.0], 1.0)
         self.assertEqual(alphas[0.0], 0.0)
+
+    def test_a_quad_another_timeline_fades_is_not_a_fade(self):
+        # Fugue's ending white-out runs on its own Animator, switched on by the controller's script
+        # near the end: its clip time is not the entrance's, so it is left out.
+        scene, root, skeleton = entrance(fade_on_own_animator=True)
+        self.assertEqual(ec.entrance_camera(root, skeleton, scene.read, 10.0)['fades'], [])
 
     def test_a_small_quad_is_an_effect_not_a_fade(self):
         scene, root, skeleton = entrance(small_quad=True)
