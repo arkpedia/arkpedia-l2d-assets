@@ -11,13 +11,16 @@
    for its animations and bounds, then points manifest.json at the new folder.
 
 A model that fails is skipped and reported; the manifest only ever names complete folders.
-Folders are never deleted or rewritten.
+Folders are never deleted or rewritten. A bundle that downloaded and verified but could not be
+turned into a model is recorded in sync-failures.json and not fetched again until its md5 or
+this code changes (--retry-failed, or naming it with --only, tries it anyway).
 
 Usage:
   python scripts/sync.py                     # everything new
   python scripts/sync.py --limit 10          # at most 10 downloads this run
   python scripts/sync.py --only 'char_1044_hsgma2#2' --only 'char_1012_skadi2@iteration#2'
   python scripts/sync.py --dry-run           # plan only, no downloads or writes
+  python scripts/sync.py --retry-failed      # also retry bundles recorded in sync-failures.json
 """
 from __future__ import annotations
 
@@ -43,6 +46,10 @@ NETWORK_CONFIG_URL = 'https://ak-conf.arknights.global/config/prod/official/netw
 PLATFORM = 'Android'
 SERVER = 'en'
 USER_AGENT = 'arkpedia-l2d-assets-sync (+https://github.com/arkpedia/arkpedia-l2d-assets)'
+FAILURES_FILE = 'sync-failures.json'
+# A change to any of these retries every recorded failure once: the fix may be in them.
+CODE_FILES = ['scripts/l2d.py', 'scripts/sync.py', 'scripts/spine.mjs', 'scripts/inspect-skeleton.mjs',
+              'vendor/spine-core-3.8/spine-core.js', 'requirements.txt']
 
 
 def log(message: str) -> None:
@@ -99,6 +106,28 @@ def write_json(path: Path, value) -> None:
     os.replace(tmp, path)
 
 
+def code_version() -> str:
+    """First 12 hex of a sha256 over the files that turn a bundle into a model."""
+    digest = hashlib.sha256()
+    for name in CODE_FILES:
+        digest.update(name.encode() + b'\0' + (ROOT / name).read_bytes() + b'\0')
+    return digest.hexdigest()[:12]
+
+
+def read_failures() -> dict:
+    path = ROOT / FAILURES_FILE
+    if not path.exists():
+        return {}
+    document = json.loads(path.read_text('utf-8'))
+    if document.get('schemaVersion') != 1 or not isinstance(document.get('failures'), dict):
+        raise SystemExit(f'{FAILURES_FILE} is not schemaVersion 1')
+    return document['failures']
+
+
+def write_failures(failures: dict) -> None:
+    write_json(ROOT / FAILURES_FILE, {'schemaVersion': 1, 'failures': dict(sorted(failures.items()))})
+
+
 def write_manifest(manifest: dict) -> None:
     manifest['models'] = dict(sorted(manifest['models'].items()))
     write_json(ROOT / 'manifest.json', manifest)
@@ -118,10 +147,10 @@ def inspect(folder: Path) -> dict:
     return json.loads(result.stdout)
 
 
-def build_model(planned: l2d.Planned, dat: bytes, res_version: str, staging: Path) -> tuple[dict, list[dict]]:
-    """Decodes one bundle into `staging`. Returns its model.json content and, per atlas page,
-    how the texture was shipped (separate [alpha] mask or not) and how its alpha measured."""
-    bundle = l2d.unpack_dat(dat, planned)
+def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: Path) -> tuple[dict, list[dict]]:
+    """Decodes one verified bundle (l2d.unpack_dat) into `staging`. Returns its model.json content
+    and, per atlas page, how the texture was shipped (separate [alpha] mask or not) and how its
+    alpha measured."""
     decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id)
     json_skeleton = l2d.is_json_skeleton(decoded.skeleton)
     skeleton_file = 'skeleton.json' if json_skeleton else 'skeleton.skel'
@@ -143,6 +172,10 @@ def build_model(planned: l2d.Planned, dat: bytes, res_version: str, staging: Pat
     declared = l2d.spine_version(decoded.skeleton)
     if found['spineVersion'] != declared:
         raise l2d.SyncError(f'Runtime read version {found["spineVersion"]}, file declares {declared}')
+    if 'Idle' not in found['animations']:
+        # The site loops Idle and the bounds are framed from it; an entrance skeleton has only Start.
+        raise l2d.SyncError(f'{decoded.skeleton_name} has no Idle animation (it has {sorted(found["animations"])}); '
+                            'is it the entrance skeleton?')
 
     model = {
         'schemaVersion': 1,
@@ -159,7 +192,7 @@ def build_model(planned: l2d.Planned, dat: bytes, res_version: str, staging: Pat
         'source': {'server': SERVER, 'bundle': planned.bundle, 'md5': planned.md5, 'resVersion': res_version},
     }
     write_json(staging / 'model.json', model)
-    log(f'  skeleton {decoded.skeleton_name}, atlas {decoded.atlas_name}')
+    log(f'  skeleton {decoded.skeleton_name} (chosen by {decoded.skeleton_choice}), atlas {decoded.atlas_name}')
     for info in decoded.page_info:
         log(f'  page {describe_page(info)}')
     return model, decoded.page_info
@@ -191,11 +224,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--limit', type=int, default=0, help='download at most this many bundles (0 = no limit)')
     parser.add_argument('--pause', type=float, default=3.0, help='seconds between downloads')
     parser.add_argument('--dry-run', action='store_true', help='plan only: no downloads, no writes')
+    parser.add_argument('--retry-failed', action='store_true', help=f'also retry bundles recorded in {FAILURES_FILE}')
     parser.add_argument('--report', default=str(ROOT / '.cache' / 'sync-report.json'), help='where to write the run report')
     args = parser.parse_args(argv)
     only = {s.strip() for value in args.only for s in value.split(',') if s.strip()}
 
     manifest = read_manifest()
+    failures = read_failures()
+    recorded = json.dumps(failures, sort_keys=True)
+    code = code_version()
     log('Reading the EN skin table and the Global client list')
     skin_table = get_json(SKIN_TABLE_URL)
     asset_base, res_version, hot_update_list = client_list()
@@ -209,8 +246,12 @@ def main(argv: list[str] | None = None) -> int:
             log(f'Not found or not listed: {sorted(unknown)}')
         models = [m for m in models if m.skin_id in only]
 
-    report = {'resVersion': res_version, 'added': [], 'repointed': [], 'current': 0, 'failed': [],
-              'unlisted': plan.unlisted, 'deferred': [], 'downloadedBytes': 0, 'pages': {}}
+    report = {'resVersion': res_version, 'code': code, 'added': [], 'repointed': [], 'current': 0, 'failed': [],
+              'knownFailures': [], 'unlisted': plan.unlisted, 'deferred': [], 'downloadedBytes': 0, 'pages': {}}
+    # Drop records of skins that no longer have dynamic art in the client list.
+    listed = {m.skin_id for m in plan.models}
+    for skin_id in [s for s in failures if s not in listed]:
+        del failures[skin_id]
     pending = []
     for planned in models:
         try:
@@ -218,10 +259,16 @@ def main(argv: list[str] | None = None) -> int:
         except l2d.SyncError as error:
             report['failed'].append({'skinId': planned.skin_id, 'error': str(error)})
             continue
-        target = f'{planned.folder}/model.json'
         if model is None:
-            pending.append(planned)
-        elif manifest['models'].get(planned.skin_id) != target:
+            known = l2d.known_failure(failures, planned, code)
+            if known and not (args.retry_failed or planned.skin_id in only):
+                report['knownFailures'].append({'skinId': planned.skin_id, 'md5': planned.md5, 'error': known.get('error', '')})
+            else:
+                pending.append(planned)
+            continue
+        failures.pop(planned.skin_id, None)  # its folder exists, so any old record is stale
+        target = f'{planned.folder}/model.json'
+        if manifest['models'].get(planned.skin_id) != target:
             report['repointed'].append(planned.skin_id)
             if not args.dry_run:
                 manifest['models'][planned.skin_id] = target
@@ -231,7 +278,8 @@ def main(argv: list[str] | None = None) -> int:
         report['deferred'] = [p.skin_id for p in pending[args.limit:]]
         pending = pending[:args.limit]
     need = sum(p.total_size for p in pending)
-    log(f'{report["current"]} current, {len(pending)} to download ({need / 1e6:.1f} MB), {len(report["deferred"])} deferred by --limit')
+    log(f'{report["current"]} current, {len(pending)} to download ({need / 1e6:.1f} MB), {len(report["deferred"])} deferred by --limit, '
+        f'{len(report["knownFailures"])} skipped as failed before (same bundle, same code)')
 
     if args.dry_run:
         for planned in pending:
@@ -248,9 +296,17 @@ def main(argv: list[str] | None = None) -> int:
         log(f'[{index + 1}/{len(pending)}] {planned.skin_id} <- {url}')
         staging = Path(tempfile.mkdtemp(prefix=f'{l2d.slug_for(planned.skin_id)}-', dir=staging_root))
         try:
+            # A failed or unverified download is not recorded: it may work tomorrow.
             dat = get(url)
             report['downloadedBytes'] += len(dat)
-            _, page_info = build_model(planned, dat, res_version, staging)
+            bundle = l2d.unpack_dat(dat, planned)
+        except Exception as error:  # noqa: BLE001 - one model never stops the run
+            report['failed'].append({'skinId': planned.skin_id, 'error': f'{type(error).__name__}: {error}'})
+            log(f'  FAILED {planned.skin_id}: {error}')
+            shutil.rmtree(staging, ignore_errors=True)
+            continue
+        try:
+            _, page_info = build_model(planned, bundle, res_version, staging)
             final = ROOT / planned.folder
             final.parent.mkdir(parents=True, exist_ok=True)
             if final.exists():
@@ -261,9 +317,12 @@ def main(argv: list[str] | None = None) -> int:
             write_manifest(manifest)
             report['added'].append(planned.skin_id)
             report['pages'][planned.skin_id] = page_info
+            failures.pop(planned.skin_id, None)
             log(f'  wrote {planned.folder}')
         except Exception as error:  # noqa: BLE001 - one model never stops the run
-            report['failed'].append({'skinId': planned.skin_id, 'error': f'{type(error).__name__}: {error}'})
+            message = f'{type(error).__name__}: {error}'
+            report['failed'].append({'skinId': planned.skin_id, 'error': message})
+            failures[planned.skin_id] = l2d.failure_record(planned, code, res_version, message)
             log(f'  FAILED {planned.skin_id}: {error}')
         finally:
             shutil.rmtree(staging, ignore_errors=True)
@@ -273,13 +332,18 @@ def main(argv: list[str] | None = None) -> int:
         # nothing leaves manifest.json untouched, so it produces no commit.
         manifest['resVersion'] = res_version
         write_manifest(manifest)
+    if json.dumps(failures, sort_keys=True) != recorded:
+        write_failures(failures)
     report_path = Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2) + '\n', 'utf-8')
     log(f'Added {len(report["added"])}, re-pointed {len(report["repointed"])}, current {report["current"]}, '
-        f'failed {len(report["failed"])}, downloaded {report["downloadedBytes"] / 1e6:.1f} MB')
+        f'failed {len(report["failed"])}, skipped as failed before {len(report["knownFailures"])}, '
+        f'downloaded {report["downloadedBytes"] / 1e6:.1f} MB')
     for failure in report['failed']:
         log(f'  failed: {failure["skinId"]}: {failure["error"]}')
+    for failure in report['knownFailures']:
+        log(f'  failed before, not retried: {failure["skinId"]}: {failure["error"]}')
     summary = os.environ.get('GITHUB_STEP_SUMMARY')
     if summary:
         with open(summary, 'a', encoding='utf-8') as out:
@@ -291,6 +355,8 @@ def main(argv: list[str] | None = None) -> int:
             out.write(f'- Downloaded: {report["downloadedBytes"] / 1e6:.1f} MB\n')
             for failure in report['failed']:
                 out.write(f'- **Failed** `{failure["skinId"]}`: {failure["error"]}\n')
+            for failure in report['knownFailures']:
+                out.write(f'- Failed before, not retried until its bundle or the code changes: `{failure["skinId"]}`: {failure["error"]}\n')
             if report['pages']:
                 out.write('\n#### Page textures\n\n')
                 for skin_id, pages in report['pages'].items():

@@ -2,4 +2,5 @@
 *.atlas -text
 *.skel binary
 *.webp binary
+*.png binary
 *.json -text

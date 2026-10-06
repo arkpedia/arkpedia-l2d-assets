@@ -237,12 +237,109 @@ class Skeletons(unittest.TestCase):
                  'dyn_portrait_char_1012_skadi2_iteration#2.skel']
         kept = [n for n in names if l2d.is_main_illust_name(n)]
         self.assertEqual(kept, ['dyn_illust_char_1012_skadi2_iteration#2.skel'])
+        # Ling's entrance carries the skin number after _Start.
+        self.assertFalse(l2d.is_main_illust_name('dyn_illust_char_2023_ling_nian_Start#12.skel'))
+        self.assertTrue(l2d.is_main_illust_name('dyn_illust_char_2023_ling_nian#12.skel'))
+        self.assertTrue(l2d.is_main_illust_name('dyn_illust_char_9999_restart#3.skel'))
         # Nian's Elite 2 files are not named after the id; a single candidate is taken as is.
         self.assertEqual(l2d.pick_one(['dyn_illust_char_2014_nian2.skel'], str, 'dyn_illust_char_2014_nian_2', 'skeleton'), 'dyn_illust_char_2014_nian2.skel')
         two = ['dyn_illust_char_4087_ines_ambienceSynesthesia#5', 'dyn_illust_char_4087_ines_other']
         self.assertEqual(l2d.pick_one(two, str, 'dyn_illust_char_4087_ines_ambiencesynesthesia#5', 'skeleton'), two[0])
         with self.assertRaises(l2d.SyncError):
             l2d.pick_one(['dyn_illust_a.skel', 'dyn_illust_b.skel'], str, 'dyn_illust_c', 'skeleton')
+
+
+def ref(path_id):
+    return {'m_FileID': 0, 'm_PathID': path_id}
+
+
+def kalts_boc6_objects():
+    """The shape of char_003_kalts@boc#6's bundle (client 26-09-23-17-49-43_b9cc4a), with its real
+    path ids: the illustration and the entrance prefab each play a SkeletonDataAsset, and both
+    assets and both skeleton TextAssets carry the same name, dyn_illust_char_003_kalts_boc#6."""
+    MAIN, ENTRANCE, PORTRAIT = -2096080466811986913, 4579426428020546609, -7379411200760748063
+    objects = {
+        # dyn/arts/dynchars/...: root GameObject -> Transform -> child GameObject -> SkeletonAnimation
+        10: ('GameObject', {'m_Name': 'dyn_illust_char_003_kalts_boc#6', 'm_Component': [{'component': ref(11)}]}),
+        11: ('Transform', {'m_GameObject': ref(10), 'm_Father': ref(0), 'm_Children': [ref(13)]}),
+        12: ('GameObject', {'m_Name': 'spine', 'm_Component': [{'component': ref(13)}, {'component': ref(14)}, {'component': ref(15)}]}),
+        13: ('Transform', {'m_GameObject': ref(12), 'm_Father': ref(11), 'm_Children': []}),
+        14: ('MonoBehaviour', {'skeletonDataAsset': ref(MAIN), '_animationName': 'Idle', 'loop': 1}),
+        15: ('MonoBehaviour', {'skeletonRenderer': ref(14), 'boneName': 'B_Root'}),  # a BoneFollower: no skeleton
+        # dyn/arts/dyncharstart/...
+        20: ('GameObject', {'m_Name': 'dyn_entrance_char_003_kalts_boc#6', 'm_Component': [{'component': ref(21)}, {'component': ref(22)}]}),
+        21: ('Transform', {'m_GameObject': ref(20), 'm_Father': ref(0), 'm_Children': []}),
+        22: ('MonoBehaviour', {'skeletonDataAsset': ref(ENTRANCE), '_animationName': 'Start', 'loop': 0}),
+        # dyn/arts/dynportraits/...
+        30: ('GameObject', {'m_Name': 'dyn_portrait_char_003_kalts_boc#6', 'm_Component': [{'component': ref(31)}]}),
+        31: ('MonoBehaviour', {'skeletonDataAsset': ref(PORTRAIT)}),
+        # A SkeletonDataAsset in another file is never followed.
+        40: ('MonoBehaviour', {'skeletonDataAsset': {'m_FileID': 1, 'm_PathID': 99}}),
+    }
+    container = {
+        'dyn/arts/dynchars/char_003_kalts/dyn_illust_char_003_kalts_boc#6.prefab': 10,
+        'dyn/arts/dyncharstart/char_003_kalts/dyn_entrance_char_003_kalts_boc#6.prefab': 20,
+        'dyn/arts/dynportraits/char_003_kalts/dyn_portrait_char_003_kalts_boc#6.prefab': 30,
+        'dyn/audio/sound_beta_2/dynentrance/dyn_entrance_char_003_kalts_boc#6/dyn_entrance_char_003_kalts_boc#6.ogg': 50,
+    }
+    linked = [(MAIN, 'dyn_illust_char_003_kalts_boc#6.skel'), (ENTRANCE, 'dyn_illust_char_003_kalts_boc#6.skel'),
+              (PORTRAIT, 'dyn_portrait_char_003_kalts_boc#6.skel')]
+    return objects, container, linked, MAIN
+
+
+class SkeletonChoice(unittest.TestCase):
+    def test_kalts_boc6_takes_the_skeleton_its_illustration_prefab_plays(self):
+        objects, container, linked, main = kalts_boc6_objects()
+        dyn = 'dyn_illust_char_003_kalts_boc#6'
+        roots = l2d.illust_prefab_roots(container, dyn)
+        self.assertEqual(roots, [10])
+        in_prefab = l2d.skeleton_data_in_prefabs(roots, objects.get)
+        self.assertEqual(in_prefab, {main})
+        self.assertEqual(l2d.choose_illust_skeleton(linked, in_prefab, dyn), (main, 'prefab'))
+        # By name alone the two identically named skeletons cannot be told apart.
+        with self.assertRaisesRegex(l2d.SyncError, 'found 2'):
+            l2d.choose_illust_skeleton(linked, set(), dyn)
+
+    def test_prefab_is_matched_case_insensitively_and_entrance_prefabs_never_count(self):
+        objects, container, linked, main = kalts_boc6_objects()
+        upper = {path.replace('kalts_boc', 'KALTS_boc'): root for path, root in container.items()}
+        self.assertEqual(l2d.illust_prefab_roots(upper, 'dyn_illust_char_003_kalts_boc#6'), [10])
+        only_entrance = {path: root for path, root in container.items() if '/dynchars/' not in path}
+        self.assertEqual(l2d.illust_prefab_roots(only_entrance, 'dyn_illust_char_003_kalts_boc#6'), [])
+
+    def test_without_a_prefab_names_decide(self):
+        # Skadi: illustration, _Start entrance and portrait, all differently named.
+        linked = [(1, 'dyn_illust_char_1012_skadi2_iteration#2.skel'), (2, 'dyn_illust_char_1012_skadi2_iteration#2_Start.skel'),
+                  (3, 'dyn_portrait_char_1012_skadi2_iteration#2.skel')]
+        self.assertEqual(l2d.choose_illust_skeleton(linked, set(), 'dyn_illust_char_1012_skadi2_iteration#2'), (1, 'name'))
+        # Ling: the entrance name carries #12 after _Start.
+        linked = [(1, 'dyn_illust_char_2023_ling_nian#12.skel'), (2, 'dyn_illust_char_2023_ling_nian_Start#12.skel')]
+        self.assertEqual(l2d.choose_illust_skeleton(linked, set(), 'dyn_illust_char_9999_unrelated#1'), (1, 'name'))
+        self.assertIsNone(l2d.choose_illust_skeleton([(3, 'dyn_portrait_x.skel')], set(), 'dyn_illust_x'))
+
+    def test_walk_stops_at_missing_objects_and_cycles(self):
+        objects = {1: ('GameObject', {'m_Component': [{'component': ref(2)}, {'component': ref(404)}]}),
+                   2: ('Transform', {'m_GameObject': ref(1), 'm_Children': [ref(2), ref(3)]}),
+                   3: ('Transform', {'m_GameObject': ref(4), 'm_Children': []}),
+                   4: ('GameObject', {'m_Component': [{'first': {'m_ClassID': 114}, 'second': ref(5)}]}),
+                   5: ('MonoBehaviour', {'skeletonDataAsset': ref(77)})}
+        self.assertEqual(l2d.skeleton_data_in_prefabs([1], objects.get), {77})
+
+
+class FailureMemory(unittest.TestCase):
+    planned = l2d.Planned('char_003_kalts@boc#6', 'dyn_illust_char_003_kalts_boc#6', 'arts/dynchars/char_003_kalts_boc#6.ab',
+                          'c' * 32, 7306466, 7306000)
+
+    def test_a_failed_bundle_is_skipped_until_its_md5_or_the_code_changes(self):
+        failures = {self.planned.skin_id: l2d.failure_record(self.planned, 'abcdef012345', 'res-1', 'SyncError: ' + 'x' * 900)}
+        entry = failures[self.planned.skin_id]
+        self.assertEqual(entry['md5'], 'c' * 32)
+        self.assertEqual(len(entry['error']), 500)
+        self.assertIs(l2d.known_failure(failures, self.planned, 'abcdef012345'), entry)
+        self.assertIsNone(l2d.known_failure(failures, self.planned, '000000000000'))
+        changed = l2d.Planned(self.planned.skin_id, self.planned.dyn_illust_id, self.planned.bundle, 'd' * 32, 1, 1)
+        self.assertIsNone(l2d.known_failure(failures, changed, 'abcdef012345'))
+        self.assertIsNone(l2d.known_failure({}, self.planned, 'abcdef012345'))
 
 
 class Bundles(unittest.TestCase):

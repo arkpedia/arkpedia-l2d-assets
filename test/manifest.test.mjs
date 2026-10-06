@@ -71,7 +71,7 @@ async function fixtureRepo() {
 test('a complete model validates, including the Spine re-read', async () => {
   const repo = await fixtureRepo();
   try {
-    assert.deepEqual(await validateRepository(repo.root), { listed: 1, folders: 1 });
+    assert.deepEqual(await validateRepository(repo.root), { listed: 1, folders: 1, failures: 0 });
   } finally { await rm(repo.root, { recursive: true, force: true }); }
 });
 
@@ -105,6 +105,9 @@ test('missing or wrong fields fail validation', async () => {
     [(m) => { m.textures[0].width = 8; }, /4x4/],
     [(m) => { m.textures[0].file = 'atlas.png'; }, /page0\.webp/],
     [(m) => { m.animations = { Idle: 9 }; }, /animations differ/],
+    // An entrance skeleton picked by mistake has only Start: refused before any re-read.
+    [(m) => { m.animations = { Start: 14.667 }; }, /animations must include Idle \(has Start\)/],
+    [(m) => { m.animations = { Interact: 0.5, idle: 1.235 }; }, /must include Idle/],
     [(m) => { m.bounds = { x: 0, y: 0, width: 100, height: 200 }; }, /bounds differ/],
     [(m) => { m.mixes = [{ from: 'Idle' }]; }, /mixes/],
     [(m) => { m.source.md5 = '0'.repeat(32); }, /folder must be/],
@@ -157,5 +160,27 @@ test('atlas pages must match the texture list, and folders hold nothing else', a
     resized.atlas = record('skeleton.atlas', Buffer.from(packed));
     await repo.save(resized);
     await assert.rejects(validateRepository(repo.root), /packed at 8x8/);
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+test('sync-failures.json, when present, must record md5, code, resVersion and error per skin', async () => {
+  const repo = await fixtureRepo();
+  const file = path.join(repo.root, 'sync-failures.json');
+  const entry = { md5: 'a'.repeat(32), code: 'abcdef012345', resVersion: 'test', error: 'SyncError: x' };
+  try {
+    await writeFile(file, JSON.stringify({ schemaVersion: 1, failures: {} }));
+    assert.equal((await validateRepository(repo.root)).failures, 0);
+    await writeFile(file, JSON.stringify({ schemaVersion: 1, failures: { 'char_003_kalts@boc#6': entry } }));
+    assert.equal((await validateRepository(repo.root)).failures, 1);
+    const broken = [
+      [{ schemaVersion: 2, failures: {} }, /schemaVersion: 1/],
+      [{ schemaVersion: 1, failures: { 'char_003_kalts@boc#6': { ...entry, md5: 'x' } } }, /must give md5/],
+      [{ schemaVersion: 1, failures: { 'char_003_kalts@boc#6': { ...entry, code: 'short' } } }, /must give md5/],
+      [{ schemaVersion: 1, failures: { '../escape#1': entry } }, /Unexpected skinId/],
+    ];
+    for (const [document, message] of broken) {
+      await writeFile(file, JSON.stringify(document));
+      await assert.rejects(validateRepository(repo.root), message, `expected ${message}`);
+    }
   } finally { await rm(repo.root, { recursive: true, force: true }); }
 });

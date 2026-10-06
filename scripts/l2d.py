@@ -111,6 +111,22 @@ def plan_models(skin_table: dict, hot_update_list: dict) -> Plan:
     return plan
 
 
+def failure_record(planned: Planned, code: str, res_version: str, error: str) -> dict:
+    """What sync-failures.json keeps about a bundle that downloaded and verified but failed to build."""
+    return {'md5': planned.md5, 'code': code, 'resVersion': res_version, 'error': error[:500]}
+
+
+def known_failure(failures: dict, planned: Planned, code: str) -> dict | None:
+    """The recorded failure of this exact bundle with this exact code, if there is one.
+
+    A new bundle (md5) or a change to the sync code means it is worth trying again.
+    """
+    entry = failures.get(planned.skin_id)
+    if isinstance(entry, dict) and entry.get('md5') == planned.md5 and entry.get('code') == code:
+        return entry
+    return None
+
+
 # ---------------------------------------------------------------------------
 # Atlas
 
@@ -238,10 +254,14 @@ def strip_skeleton_ext(name: str) -> str:
     return re.sub(r'\.(skel|json|prefab|bytes|txt|atlas)$', '', name.lower())
 
 
+ENTRANCE_SUFFIX_RE = re.compile(r'_start(?:#\d+)?$')
+
+
 def is_main_illust_name(name: str) -> bool:
-    """dyn_illust_* but not the _Start (entrance) skeleton; dyn_portrait_* is never the illustration."""
+    """dyn_illust_* but not an entrance skeleton (..._Start, or ..._Start#12 as in
+    dyn_illust_char_2023_ling_nian_Start#12); dyn_portrait_* is never the illustration."""
     base = strip_skeleton_ext(name)
-    return base.startswith(DYN_PREFIX) and not base.endswith('_start')
+    return base.startswith(DYN_PREFIX) and not ENTRANCE_SUFFIX_RE.search(base)
 
 
 def pick_one(candidates: list, name_of, dyn_illust_id: str, what: str):
@@ -253,6 +273,75 @@ def pick_one(candidates: list, name_of, dyn_illust_id: str, what: str):
         return exact[0]
     names = sorted(name_of(c) for c in candidates)
     raise SyncError(f'Expected one {what} for {dyn_illust_id}, found {len(candidates)}: {names}')
+
+
+DYNCHARS_PREFAB_DIR = 'dyn/arts/dynchars/'
+
+
+def local_id(ref) -> int | None:
+    """The path id of a reference to an object in the same bundle file (None otherwise)."""
+    if isinstance(ref, dict) and ref.get('m_FileID', 0) == 0 and ref.get('m_PathID'):
+        return ref['m_PathID']
+    return None
+
+
+def illust_prefab_roots(container: dict, dyn_illust_id: str) -> list:
+    """Path ids of the illustration prefab the bundle's container lists under dyn/arts/dynchars/.
+
+    Entrance prefabs are listed under dyn/arts/dyncharstart/ and portraits under
+    dyn/arts/dynportraits/, so they never match, whatever their skeletons are called.
+    """
+    prefabs = {path.lower(): root for path, root in container.items()
+               if path.lower().startswith(DYNCHARS_PREFAB_DIR) and path.lower().endswith('.prefab')}
+    named = [root for path, root in prefabs.items() if path.rsplit('/', 1)[-1] == f'{dyn_illust_id.lower()}.prefab']
+    return named or [prefabs[path] for path in sorted(prefabs)]
+
+
+def skeleton_data_in_prefabs(roots: list, read) -> set:
+    """Path ids of the SkeletonDataAssets the Spine components in these prefabs' object trees use.
+
+    `read(path_id)` returns (type name, typetree) or None. The walk goes from each root
+    GameObject to its components, and from each Transform down to its children.
+    """
+    found, seen, stack = set(), set(), list(roots)
+    while stack:
+        path_id = stack.pop()
+        if path_id is None or path_id in seen:
+            continue
+        seen.add(path_id)
+        entry = read(path_id)
+        if not entry:
+            continue
+        kind, tree = entry
+        if kind == 'GameObject':
+            for component in tree.get('m_Component') or []:
+                if isinstance(component, dict):
+                    stack.append(local_id(component.get('component') or component.get('second')))
+        elif kind in ('Transform', 'RectTransform'):
+            stack.extend(local_id(child) for child in tree.get('m_Children') or [])
+            stack.append(local_id(tree.get('m_GameObject')))
+        elif kind == 'MonoBehaviour':
+            data = local_id(tree.get('skeletonDataAsset'))
+            if data is not None:
+                found.add(data)
+    return found
+
+
+def choose_illust_skeleton(linked: list, in_prefab: set, dyn_illust_id: str):
+    """The illustration's SkeletonDataAsset among `linked` [(path id, skeleton TextAsset name)].
+
+    The game's own answer comes first: the one the dynchars prefab plays. Kal'tsit's boc#6 bundle
+    holds the illustration and its entrance under identical names, so names alone cannot tell
+    them apart. Only when the prefab does not settle it are entrance and portrait names left out
+    and the rest picked by name. Returns (path id, 'prefab' | 'name'), or None when nothing is linked.
+    """
+    used = [c for c in linked if c[0] in in_prefab]
+    if len(used) == 1:
+        return used[0][0], 'prefab'
+    pool = used or [c for c in linked if is_main_illust_name(c[1])]
+    if not pool:
+        return None
+    return pick_one(pool, lambda c: c[1], dyn_illust_id, 'illustration skeleton')[0], 'name'
 
 
 # ---------------------------------------------------------------------------
@@ -457,6 +546,7 @@ def _patch_unitypy():
 class Decoded:
     skeleton: bytes
     skeleton_name: str
+    skeleton_choice: str  # 'prefab' (the dynchars prefab uses it) or 'name'
     atlas_text: str
     atlas_name: str
     pages: list  # PIL images, premultiplied, in atlas page order
@@ -468,17 +558,21 @@ class Decoded:
 def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
     """Finds the illustration's skeleton, atlas and atlas page textures in a bundle.
 
-    Names come from the bundle: the game's SkeletonDataAsset links a skeleton to its atlas;
-    without one, TextAssets are matched by name. Entrance (_Start) and portrait skeletons,
-    particle textures and Unity effect masks are left out.
+    Names come from the bundle. The skeleton is the one the illustration prefab
+    (dyn/arts/dynchars/<id>.prefab) plays, and its SkeletonDataAsset links it to its atlas;
+    without a prefab, SkeletonDataAssets and then TextAssets are matched by name. Entrance and
+    portrait skeletons, particle textures and Unity effect masks are left out.
     """
     UnityPy = _patch_unitypy()
     env = UnityPy.load(data)
     texts: dict[int, tuple[str, bytes]] = {}
     textures: list = []
-    skeleton_assets: list[dict] = []
+    skeleton_assets: dict[int, dict] = {}
     atlas_assets: dict[int, dict] = {}
+    behaviours: dict[int, dict] = {}
+    objects = {}
     for obj in env.objects:
+        objects[obj.path_id] = obj
         kind = obj.type.name
         if kind == 'TextAsset':
             asset = obj.read()
@@ -490,8 +584,9 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
                 tree = obj.read_typetree()
             except Exception:  # noqa: BLE001 - unreadable scripts are not Spine assets
                 continue
+            behaviours[obj.path_id] = tree
             if 'skeletonJSON' in tree and 'atlasAssets' in tree:
-                skeleton_assets.append(tree)
+                skeleton_assets[obj.path_id] = tree
             elif 'atlasFile' in tree and 'materials' in tree:
                 atlas_assets[obj.path_id] = tree
 
@@ -500,14 +595,32 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
             return None
         return texts.get(ref.get('m_PathID'))
 
+    def read(path_id):
+        if path_id in behaviours:
+            return 'MonoBehaviour', behaviours[path_id]
+        obj = objects.get(path_id)
+        if obj is None or obj.type.name not in ('GameObject', 'Transform', 'RectTransform'):
+            return None
+        try:
+            return obj.type.name, obj.read_typetree()
+        except Exception:  # noqa: BLE001 - an unreadable object is simply not followed
+            return None
+
+    container = {}
+    for path, ref in env.container.items():
+        path_id = getattr(ref, 'path_id', None) or getattr(ref, 'm_PathID', None)
+        if path_id:
+            container[path] = path_id
+    in_prefab = skeleton_data_in_prefabs(illust_prefab_roots(container, dyn_illust_id), read)
+
     mixes: list[dict] = []
-    linked = []
-    for tree in skeleton_assets:
-        skeleton = text_of(tree.get('skeletonJSON'))
-        if skeleton and is_main_illust_name(skeleton[0]):
-            linked.append((tree, skeleton))
-    if linked:
-        tree, skeleton = pick_one(linked, lambda c: c[1][0], dyn_illust_id, 'illustration skeleton')
+    linked = [(path_id, text_of(tree.get('skeletonJSON'))) for path_id, tree in skeleton_assets.items()]
+    linked = [(path_id, skeleton) for path_id, skeleton in linked if skeleton]
+    choice = choose_illust_skeleton([(path_id, skeleton[0]) for path_id, skeleton in linked], in_prefab, dyn_illust_id)
+    if choice:
+        chosen_id, skeleton_choice = choice
+        tree = skeleton_assets[chosen_id]
+        skeleton = dict(linked)[chosen_id]
         atlas_refs = [atlas_assets.get(ref.get('m_PathID')) for ref in tree.get('atlasAssets', []) if isinstance(ref, dict)]
         atlas_texts = [text_of(a.get('atlasFile')) for a in atlas_refs if a]
         atlas_texts = [a for a in atlas_texts if a]
@@ -520,6 +633,7 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
         skeletons = [t for t in texts.values() if is_main_illust_name(t[0]) and not t[0].lower().endswith('.atlas')
                      and (t[0].lower().endswith('.skel') or is_json_skeleton(t[1]))]
         skeleton = pick_one(skeletons, lambda c: c[0], dyn_illust_id, 'illustration skeleton')
+        skeleton_choice = 'name'
         atlases = [t for t in texts.values() if t[0].lower().endswith('.atlas') and is_main_illust_name(t[0])]
         same = [a for a in atlases if strip_skeleton_ext(a[0]) == strip_skeleton_ext(skeleton[0])]
         atlas = same[0] if len(same) == 1 else pick_one(atlases, lambda c: c[0], dyn_illust_id, 'atlas')
@@ -559,4 +673,4 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
             raise SyncError(f'{atlas_name}: page {page}: {error}') from error
         pages.append(image)
         page_info.append({'page': page, **info})
-    return Decoded(skeleton_bytes, skeleton_name, atlas_text, atlas_name, pages, page_names, page_info, mixes)
+    return Decoded(skeleton_bytes, skeleton_name, skeleton_choice, atlas_text, atlas_name, pages, page_names, page_info, mixes)

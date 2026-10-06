@@ -8,6 +8,7 @@ Scope: every skin in the EN `skin_table.json` that has a `dynIllustId` (88 as of
 
 ```
 manifest.json
+sync-failures.json                          (bundles that could not be built, see below)
 models/<slug>/<md5_12>/model.json
 models/<slug>/<md5_12>/skeleton.skel        (or skeleton.json)
 models/<slug>/<md5_12>/skeleton.atlas
@@ -34,7 +35,7 @@ models/<slug>/<md5_12>/page0.webp           (page1.webp, ... for multi-page atla
 | `atlas` | `skeleton.atlas`, with `bytes` and `sha256`. |
 | `textures` | One entry per atlas page, in order: `page<N>.webp`, `width`, `height`, `bytes`, `sha256`. |
 | `premultipliedAlpha` | Always `true`: render with premultiplied alpha. |
-| `animations` | Animation name to duration in seconds (3 decimals). Names differ per model: `Idle`, `Interact` and `Special` are common, `Start` exists on a few. |
+| `animations` | Animation name to duration in seconds (3 decimals). Every model has `Idle`, which the validator requires. The other names differ per model: `Interact` and `Special` are common, and a few have `Start`. |
 | `bounds` | `x`, `y`, `width`, `height` of the setup pose with `Idle` applied at time 0, in skeleton units. Frame the camera from this; the skeletons' own width and height are 0. |
 | `mixes` | The game's own crossfade table (`from`, `to`, `duration` in seconds), when the bundle has one. |
 | `source` | `server` (`en`), the client `bundle` path, its full `md5` and the `resVersion` it was downloaded from. |
@@ -45,15 +46,17 @@ models/<slug>/<md5_12>/page0.webp           (page1.webp, ... for multi-page atla
 
 1. It reads the EN `skin_table.json` from ArknightsAssets/ArknightsGamedata and the Global client's network config, version file and `hot_update_list.json`.
 2. For each skin with a `dynIllustId` whose bundle (`arts/dynchars/<id>.ab`) the list carries, it skips the bundle if a folder for that md5 already exists. Otherwise it downloads the `.dat` from the client's asset CDN (GET only, one at a time, a 3 second pause between downloads) and checks its size and md5 against the list.
-3. It decodes the bundle with UnityPy (plus the LZ4AK patch Arknights bundles need). File names come from the bundle, never from the id: the game's SkeletonDataAsset links the skeleton to its atlas. Entrance and portrait skeletons, particle textures and effect masks are ignored.
+3. It decodes the bundle with UnityPy (plus the LZ4AK patch Arknights bundles need). File names come from the bundle, never from the id. The skeleton is the one the illustration prefab (`dyn/arts/dynchars/.../<id>.prefab` in the bundle's container) plays, and its SkeletonDataAsset links it to its atlas. Names alone are not enough: Kal'tsit's boc#6 bundle has an entrance skeleton with exactly the same name as the illustration. Names are used only for a bundle without that prefab, and then entrance (`_Start`, `_Start#N`) and portrait skeletons are left out. Particle textures and effect masks are always ignored.
 4. Skeleton bytes are written unchanged. In the atlas only the page name lines change, to `page0.webp`, `page1.webp`, ... (the originals contain `#`, which breaks URLs). Each page is saved as premultiplied, lossless WebP at exactly the size the atlas was packed at. The client ships a page in one of two ways, and each needs different handling:
    - **One RGBA texture** (ASTC, e.g. Hoshiguma's Elite 2): straight alpha with colour under transparent texels. It is premultiplied here.
    - **An RGB texture plus a separate `[alpha]` mask** (ETC, e.g. Ch'en's Elite 2, Nian's Elite 2): the game's RGB is already premultiplied. The mask becomes the alpha channel and the colour is kept as shipped. Premultiplying again would darken every soft edge and glow.
 
    Before writing a page, the sync measures it: the colour under fully transparent texels, and how often colour exceeds alpha at alpha 16-63. Straight pages measure about 120-156 and 80-97%; masked pages measure under 0.1 and 5-14%. A page that doesn't match how it was shipped, or measures in between, fails the model instead of being written wrong. The result for each page is printed in the log, in `.cache/sync-report.json` (`pages`) and in the run summary.
-5. `scripts/inspect-skeleton.mjs` reads the skeleton with the vendored Spine 3.8 runtime (`vendor/spine-core-3.8/`) to record the animations and bounds. Then the folder is moved into place and `manifest.json` is updated.
+5. `scripts/inspect-skeleton.mjs` reads the skeleton with the vendored Spine 3.8 runtime (`vendor/spine-core-3.8/`) to record the animations and bounds. A skeleton without an `Idle` animation fails the model, because an entrance skeleton has only `Start`. Then the folder is moved into place and `manifest.json` is updated.
 
 A model that fails at any step is skipped and reported. The run still commits the models that worked, then shows as failed so someone looks. The manifest only ever names complete folders. Before anything is pushed the workflow runs the validator and the tests, because a push made with the workflow token does not start the Check workflow.
+
+When a bundle downloads and verifies but can't be turned into a model, the sync records it in `sync-failures.json` (skinId, bundle md5, a fingerprint of the sync code, and the error) and commits the file. Later runs skip that bundle until the game ships a new one (a new md5) or the sync code changes, so a broken bundle isn't downloaded again every day. Skipped bundles show as warnings, and only a new failure marks the run as failed. To retry one by hand, run Sync with it in `only`, or with `retry_failed` for all of them. A download that fails or doesn't match the client list is never recorded, since it may work the next day.
 
 `.github/workflows/check.yml` runs on every push and pull request. It installs the same Python packages as the sync, runs the Node and Python tests, and runs `npm run validate`, which checks every folder on disk (including old ones the manifest no longer names). It checks that each file exists with the recorded bytes and sha256, that the required fields are present, that the folder name matches the skinId and md5, that the atlas pages match the texture list and sizes, and that the Spine runtime re-reads each skeleton to the recorded animations and bounds.
 
@@ -66,6 +69,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python scripts/sync.py --dry-run                      # what would be fetched, and how much
 .venv/bin/python scripts/sync.py --only 'char_1044_hsgma2#2'    # quote ids: they contain # and @
 .venv/bin/python scripts/sync.py --limit 10
+.venv/bin/python scripts/sync.py --retry-failed                 # also retry bundles in sync-failures.json
 npm run validate
 npm test
 .venv/bin/python -m unittest discover -s test -p 'test_*.py'

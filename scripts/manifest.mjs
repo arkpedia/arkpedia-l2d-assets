@@ -142,6 +142,9 @@ export async function validateModel(root, folder, { deep = true } = {}) {
       !Object.values(model.animations).every((value) => typeof value === 'number' && Number.isFinite(value) && value >= 0)) {
     throw new Error(`${label}: animations must map names to durations`);
   }
+  // The site loops Idle and the bounds are framed from it. An entrance skeleton has only Start,
+  // so this also catches the wrong skeleton picked from a bundle.
+  if (!Object.hasOwn(model.animations, 'Idle')) throw new Error(`${label}: animations must include Idle (has ${Object.keys(model.animations).join(', ')})`);
   const bounds = model.bounds;
   if (!isObject(bounds) || !['x', 'y', 'width', 'height'].every((key) => Number.isFinite(bounds[key])) || bounds.width <= 0 || bounds.height <= 0) {
     throw new Error(`${label}: bounds missing`);
@@ -208,6 +211,27 @@ export async function modelFolders(root) {
 }
 
 /**
+ * Checks sync-failures.json, when present: bundles that downloaded but could not be turned into a
+ * model, which the sync skips until their md5 or its code changes.
+ */
+export async function validateFailures(root) {
+  const file = path.join(root, 'sync-failures.json');
+  if (!existsSync(file)) return 0;
+  const document = JSON.parse(await readFile(file, 'utf8'));
+  if (!isObject(document) || document.schemaVersion !== 1 || !isObject(document.failures)) {
+    throw new Error('sync-failures.json must be { schemaVersion: 1, failures: {} }');
+  }
+  for (const [skinId, entry] of Object.entries(document.failures)) {
+    slugFor(skinId);
+    if (!isObject(entry) || typeof entry.md5 !== 'string' || !MD5.test(entry.md5) || typeof entry.code !== 'string' ||
+        !/^[a-f0-9]{12}$/.test(entry.code) || typeof entry.resVersion !== 'string' || typeof entry.error !== 'string') {
+      throw new Error(`sync-failures.json: ${skinId} must give md5, code, resVersion and error`);
+    }
+  }
+  return Object.keys(document.failures).length;
+}
+
+/**
  * Validates manifest.json and every model folder (folders the manifest no longer names stay
  * published, so they are checked too). Returns counts.
  */
@@ -233,5 +257,6 @@ export async function validateRepository(root, { deep = true } = {}) {
     if (!model) throw new Error(`${skinId}: ${target} does not exist`);
     if (model.skinId !== skinId) throw new Error(`${skinId}: ${target} belongs to ${model.skinId}`);
   }
-  return { listed: Object.keys(manifest.models).length, folders: models.size };
+  const failures = await validateFailures(root);
+  return { listed: Object.keys(manifest.models).length, folders: models.size, failures };
 }
