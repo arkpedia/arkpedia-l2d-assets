@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 from typing import Callable
 
 import entrance_camera
+import layers
 
 DYN_PREFIX = 'dyn_illust_'
 BUNDLE_DIR = 'arts/dynchars/'
@@ -59,7 +60,10 @@ def download_name(bundle_name: str) -> str:
 
 
 def download_url(asset_base: str, platform: str, res_version: str, bundle_name: str) -> str:
-    return f'{asset_base.rstrip("/")}/{platform}/assets/{res_version}/{download_name(bundle_name)}'
+    """The CDN URL of a bundle; brackets in shared bundle names ('[uc]shaders.ab') are percent-encoded."""
+    from urllib.parse import quote
+
+    return f'{asset_base.rstrip("/")}/{platform}/assets/{res_version}/{quote(download_name(bundle_name))}'
 
 
 # ---------------------------------------------------------------------------
@@ -121,6 +125,30 @@ def plan_models(skin_table: dict, hot_update_list: dict) -> Plan:
         plan.models.append(Planned(skin_id, dyn, entrance, info['name'], md5,
                                    int(info.get('totalSize') or 0), int(info.get('abSize') or 0)))
     return plan
+
+
+# The client's shared shader bundle: the shaders the illustration prefabs' layer materials name by
+# reference into it (their blend, cull and queue), fetched once per run when anything is built.
+SHADER_BUNDLE = '[uc]shaders.ab'
+
+
+@dataclass
+class SharedBundle:
+    bundle: str
+    md5: str
+    total_size: int
+    ab_size: int
+
+
+def shared_bundle(hot_update_list: dict, name: str) -> SharedBundle | None:
+    """A shared bundle the client list carries (by name, case-insensitive), or None."""
+    for info in hot_update_list.get('abInfos', []):
+        if isinstance(info.get('name'), str) and info['name'].lower() == name.lower():
+            md5 = str(info.get('md5', '')).lower()
+            if not MD5_RE.match(md5):
+                raise SyncError(f'{name}: hot_update_list has no md5')
+            return SharedBundle(info['name'], md5, int(info.get('totalSize') or 0), int(info.get('abSize') or 0))
+    return None
 
 
 def failure_record(planned: Planned, code: str, res_version: str, error: str) -> dict:
@@ -572,6 +600,17 @@ def unpack_dat(dat: bytes, planned: Planned) -> bytes:
     return data
 
 
+def verify_bundle(data: bytes, planned) -> bytes:
+    """An unpacked bundle read from disk (a local copy): checks its size and md5 against the client list."""
+    import hashlib
+
+    if planned.ab_size and len(data) != planned.ab_size:
+        raise SyncError(f'{planned.bundle}: local bundle is {len(data)} bytes, list says {planned.ab_size}')
+    if hashlib.md5(data).hexdigest() != planned.md5:
+        raise SyncError(f'{planned.bundle}: local bundle md5 does not match the client list')
+    return data
+
+
 def _patch_unitypy():
     """Arknights bundles use LZ4AK (an LZ4 variant) under the LZHAM compression flag."""
     import lz4.block
@@ -639,9 +678,12 @@ class Decoded:
     page_info: list[dict] = field(default_factory=list)  # per page: mask, alpha class and measurements
     mixes: list[dict] = field(default_factory=list)
     entrance: DecodedEntrance | None = None
+    # The illustration prefab's own mesh layers for the skeleton's slot names (layers.export_layers), None
+    # for a bundle without the prefab.
+    layers: Callable[[list], object] | None = None
 
 
-def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None) -> Decoded:
+def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, shaders: dict) -> Decoded:
     """Finds the illustration's skeleton, atlas and atlas page textures in a bundle, and its
     entrance's when the skin has one (`dyn_entrance_id`, the skin_table's dynEntranceId).
 
@@ -651,6 +693,8 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None) 
     skeletons, particle textures and Unity effect masks are left out. The entrance is the
     skeleton its own prefab (dyn/arts/dyncharstart/<dynEntranceId>.prefab) plays, with its
     soundtrack (an AudioClip under .../dynentrance/<dynEntranceId>/); it is never picked by name.
+    The illustration prefab's own mesh layers come out through layers.export_layers, with `shaders`
+    (layers.shader_table of the client's shared shader bundle) naming the shaders their materials use.
     """
     UnityPy = _patch_unitypy()
     env = UnityPy.load(data)
@@ -768,7 +812,8 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None) 
             page_info.append({'page': page, **info})
         return atlas_text, pages, page_names, page_info
 
-    in_prefab = skeleton_data_in_prefabs(illust_prefab_roots(container, dyn_illust_id), read)
+    illust_roots = illust_prefab_roots(container, dyn_illust_id)
+    in_prefab = skeleton_data_in_prefabs(illust_roots, read)
     mixes: list[dict] = []
     choice = choose_illust_skeleton([(path_id, skeleton[0]) for path_id, skeleton in linked], in_prefab, dyn_illust_id)
     if choice:
@@ -816,4 +861,15 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None) 
         entrance = DecodedEntrance(entrance_skeleton[1], entrance_skeleton[0], e_atlas_text, entrance_atlas[0],
                                    e_pages, e_page_names, e_page_info, audio_wav, audio_name, camera)
 
-    return Decoded(skeleton[1], skeleton[0], skeleton_choice, atlas_text, atlas[0], pages, page_names, page_info, mixes, entrance)
+    export = None
+    if illust_roots and skeleton_choice == 'prefab':
+        mesh_of, texture_of, external_of = layers.bundle_readers(env, objects)
+
+        def export(slots: list, root_go=illust_roots[0]):
+            try:
+                return layers.export_layers(root_go, read_any, mesh_of=mesh_of, texture_of=texture_of, classify_texture=classify_alpha,
+                                            external_of=external_of, shaders=shaders, slots=slots)
+            except (layers.LayerError, entrance_camera.CameraError, KeyError, TypeError, ValueError, ArithmeticError) as error:
+                raise SyncError(f'Layers of {dyn_illust_id}: {error}') from error
+
+    return Decoded(skeleton[1], skeleton[0], skeleton_choice, atlas_text, atlas[0], pages, page_names, page_info, mixes, entrance, export)

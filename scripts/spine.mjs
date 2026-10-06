@@ -3,6 +3,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
+import { layerBounds } from './layers.mjs';
 
 export const RUNTIME_PATH = fileURLToPath(new URL('../vendor/spine-core-3.8/spine-core.js', import.meta.url));
 
@@ -35,24 +36,17 @@ export function readAtlas(atlasText) {
   return new spine.TextureAtlas(atlasText, () => new spine.FakeTexture({ width: 1, height: 1 }));
 }
 
-/**
- * Reads a skeleton with the 3.8 runtime and reports what the site needs:
- * the version, every animation's duration (seconds, 3 decimals) and the bounds of
- * the setup pose with Idle applied at time 0 (setup pose alone when there is no Idle).
- * Throws when the skeleton references a region the atlas does not have.
- */
-export function inspectSkeleton(skeletonBytes, atlasText) {
+/** The skeleton read with the 3.8 runtime, in the setup pose with Idle applied at time 0 (setup
+ *  pose alone when there is no Idle), and the bounds of that pose (rounded, skeleton units). */
+function poseSkeleton(skeletonBytes, atlasText) {
   const spine = loadSpine();
   const atlas = readAtlas(atlasText);
   const loader = new spine.AtlasAttachmentLoader(atlas);
   const json = isJsonSkeleton(skeletonBytes);
   const data = json
-    ? new spine.SkeletonJson(loader).readSkeletonData(Buffer.from(skeletonBytes).toString('utf8').replace(/^﻿/, ''))
+    ? new spine.SkeletonJson(loader).readSkeletonData(Buffer.from(skeletonBytes).toString('utf8').replace(/^\uFEFF/, ''))
     : new spine.SkeletonBinary(loader).readSkeletonData(new Uint8Array(skeletonBytes));
   if (!data.animations.length) throw new Error('Skeleton has no animations');
-  const animations = {};
-  for (const animation of data.animations) animations[animation.name] = round3(animation.duration);
-
   const skeleton = new spine.Skeleton(data);
   skeleton.setToSetupPose();
   skeleton.updateWorldTransform();
@@ -70,6 +64,19 @@ export function inspectSkeleton(skeletonBytes, atlasText) {
   if (!Object.values(bounds).every(Number.isFinite) || bounds.width <= 0 || bounds.height <= 0) {
     throw new Error(`Skeleton has no visible attachments in its first pose: ${JSON.stringify(bounds)}`);
   }
+  return { data, skeleton, bounds, atlas, json };
+}
+
+/**
+ * Reads a skeleton with the 3.8 runtime and reports what the site needs:
+ * the version, every animation's duration (seconds, 3 decimals) and the bounds of
+ * the setup pose with Idle applied at time 0 (setup pose alone when there is no Idle).
+ * Throws when the skeleton references a region the atlas does not have.
+ */
+export function inspectSkeleton(skeletonBytes, atlasText) {
+  const { data, bounds, atlas, json } = poseSkeleton(skeletonBytes, atlasText);
+  const animations = {};
+  for (const animation of data.animations) animations[animation.name] = round3(animation.duration);
   return {
     spineVersion: data.version,
     format: json ? 'json' : 'binary',
@@ -77,5 +84,16 @@ export function inspectSkeleton(skeletonBytes, atlasText) {
     bounds,
     pages: atlas.pages.map((page) => page.name),
     regions: atlas.regions.length,
+    slots: data.slots.map((slot) => slot.name),
   };
+}
+
+/**
+ * The bounds the site frames an illustration with its layers (layers.json): the posed skeleton's
+ * joined with the layers drawn at Idle's first frame (scripts/layers.mjs layerBounds), which also
+ * checks every slot and bone the layers name exists in the skeleton.
+ */
+export function inspectLayers(skeletonBytes, atlasText, layersDoc, label) {
+  const { skeleton, bounds } = poseSkeleton(skeletonBytes, atlasText);
+  return layerBounds(layersDoc, skeleton, bounds, label);
 }

@@ -8,9 +8,13 @@
    their size and md5 against the list, decodes the skeleton, atlas and atlas pages, and writes
    models/<slug>/<md5_12>/ (skeleton.skel|json, skeleton.atlas, page<N>.webp, model.json). A skin
    with a dynEntranceId also gets its entrance sequence from the same bundle: entrance.skel|json,
-   entrance.atlas, entrance-page<N>.webp and its soundtrack, entrance.mp3.
+   entrance.atlas, entrance-page<N>.webp and its soundtrack, entrance.mp3. The illustration prefab's
+   own mesh layers (backdrops and effects drawn with the skeleton, scripts/layers.py) go into
+   layers.json and layer<N>.webp; the client's shared shader bundle ([uc]shaders.ab, fetched once
+   per run and md5-checked like the rest) names the shaders their materials use.
 4. Reads each new skeleton with the vendored Spine 3.8 runtime (scripts/inspect-skeleton.mjs)
-   for its animations and bounds, then points manifest.json at the new folder.
+   for its animations and bounds (and the layers' bounds), then points manifest.json at the new
+   folder.
 
 A model that fails is skipped and reported; the manifest only ever names complete folders.
 Folders are never deleted or rewritten. A bundle that downloaded and verified but could not be
@@ -23,6 +27,7 @@ Usage:
   python scripts/sync.py --only 'char_1044_hsgma2#2' --only 'char_1012_skadi2@iteration#2'
   python scripts/sync.py --dry-run           # plan only, no downloads or writes
   python scripts/sync.py --retry-failed      # also retry bundles recorded in sync-failures.json
+  python scripts/sync.py --bundles DIR       # build from local unpacked bundles (DIR/<slug>.ab), md5-checked
 """
 from __future__ import annotations
 
@@ -41,6 +46,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import l2d  # noqa: E402
+import layers  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SKIN_TABLE_URL = 'https://raw.githubusercontent.com/ArknightsAssets/ArknightsGamedata/master/en/gamedata/excel/skin_table.json'
@@ -50,8 +56,8 @@ SERVER = 'en'
 USER_AGENT = 'arkpedia-l2d-assets-sync (+https://github.com/arkpedia/arkpedia-l2d-assets)'
 FAILURES_FILE = 'sync-failures.json'
 # A change to any of these retries every recorded failure once: the fix may be in them.
-CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/sync.py', 'scripts/spine.mjs', 'scripts/inspect-skeleton.mjs',
-              'vendor/spine-core-3.8/spine-core.js', 'requirements.txt']
+CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/layers.py', 'scripts/sync.py', 'scripts/spine.mjs',
+              'scripts/layers.mjs', 'scripts/inspect-skeleton.mjs', 'vendor/spine-core-3.8/spine-core.js', 'requirements.txt']
 
 
 def log(message: str) -> None:
@@ -101,10 +107,12 @@ def read_manifest() -> dict:
     return manifest
 
 
-def write_json(path: Path, value) -> None:
-    """Writes JSON through a temporary file so a crash never leaves half a file."""
+def write_json(path: Path, value, *, compact: bool = False) -> None:
+    """Writes JSON through a temporary file so a crash never leaves half a file. `compact` (layers.json,
+    mostly vertex and frame numbers the site downloads) leaves out the indentation."""
     tmp = path.with_name(f'.{path.name}.tmp')
-    tmp.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', 'utf-8')
+    text = json.dumps(value, separators=(',', ':'), ensure_ascii=False) if compact else json.dumps(value, indent=2, ensure_ascii=False)
+    tmp.write_text(text + '\n', 'utf-8')
     os.replace(tmp, path)
 
 
@@ -141,20 +149,47 @@ def file_record(folder: Path, name: str, **extra) -> dict:
 
 
 def inspect(folder: Path, name: str) -> dict:
-    """The vendored Spine 3.8 runtime's reading of <name>.skel|json + <name>.atlas in `folder`."""
+    """The vendored Spine 3.8 runtime's reading of <name>.skel|json + <name>.atlas in `folder`
+    ('layers': of layers.json against the illustration skeleton, for its bounds)."""
     result = subprocess.run(['node', str(ROOT / 'scripts' / 'inspect-skeleton.mjs'), str(folder), name],
                             capture_output=True, text=True, check=False)
     if result.returncode != 0:
-        tail = (result.stderr or result.stdout).strip().splitlines()[-3:]
-        raise l2d.SyncError('Spine 3.8 runtime could not read the skeleton: ' + ' | '.join(tail))
+        lines = (result.stderr or result.stdout).strip().splitlines()
+        # The error's own message, not the stack under it.
+        message = next((line for line in lines if not line.lstrip().startswith('at ')), '') or ' | '.join(lines[-3:])
+        raise l2d.SyncError(f'Spine 3.8 runtime could not read the {"layers" if name == "layers" else "skeleton"}: {message.strip()}')
     return json.loads(result.stdout)
 
 
-def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: Path) -> tuple[dict, list[dict]]:
-    """Decodes one verified bundle (l2d.unpack_dat) into `staging`. Returns its model.json content
-    and, per atlas page, how the texture was shipped (separate [alpha] mask or not) and how its
-    alpha measured."""
-    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id)
+def write_layers(staging: Path, exported) -> dict:
+    """layers.json and layer<N>.webp (lossless, straight alpha as shipped: every layer shader samples its
+    texture straight), framed by the Spine runtime. Returns model.json's `layers` record."""
+    document = exported.document
+    for record, image in zip(document['textures'], exported.textures):
+        (staging / record['file']).write_bytes(l2d.encode_webp(image))
+        record.update({k: v for k, v in file_record(staging, record['file']).items() if k in ('bytes', 'sha256')})
+    write_json(staging / 'layers.json', document, compact=True)
+    document['bounds'] = inspect(staging, 'layers')['bounds']
+    write_json(staging / 'layers.json', document, compact=True)
+    return file_record(staging, 'layers.json')
+
+
+def describe_layers(exported) -> str:
+    """One line for the log: what is drawn and what was left out."""
+    c, o = exported.counts, exported.document['omitted']
+    drawn = f'{c["layers"]} layers ({c["static"]} static, {c["animated"]} animated, {c["follow"]} on bones, {c["only"]} per animation, ' \
+            f'{c["states"]} with triggered states), {len(exported.textures)} textures, {c["parts"]} skeleton part(s)'
+    left = f'left out: {o["particles"]} particle systems, {o["trails"]} trails, {o["skinned"]} skinned, {o["hidden"]} hidden, ' \
+           f'{len(o["custom"])} custom shaders, {len(o["externalTexture"])} textures in other bundles, {len(o["other"])} other, ' \
+           f'{o["holders"]} shared-bundle effects'
+    return f'{drawn}; {left}'
+
+
+def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: Path, shaders: dict) -> tuple[dict, list[dict], dict | None]:
+    """Decodes one verified bundle (l2d.unpack_dat) into `staging`. Returns its model.json content,
+    per atlas page how the texture was shipped (separate [alpha] mask or not) and how its alpha
+    measured, and the layers' counts."""
+    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id, shaders)
     skeleton, textures, found, declared = write_skeleton(staging, 'skeleton', 'page', decoded.skeleton,
                                                          decoded.atlas_text, decoded.page_names, decoded.pages)
     if 'Idle' not in found['animations']:
@@ -162,6 +197,7 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         raise l2d.SyncError(f'{decoded.skeleton_name} has no Idle animation (it has {sorted(found["animations"])}); '
                             'is it the entrance skeleton?')
 
+    exported = decoded.layers(found['slots']) if decoded.layers is not None else None
     model = {
         'schemaVersion': 1,
         'skinId': planned.skin_id,
@@ -176,6 +212,7 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         'mixes': decoded.mixes,
         'dynEntranceId': planned.dyn_entrance_id,
         'entrance': build_entrance(staging, decoded.entrance, declared) if planned.dyn_entrance_id else None,
+        'layers': write_layers(staging, exported) if exported is not None else None,
         'source': {'server': SERVER, 'bundle': planned.bundle, 'md5': planned.md5, 'resVersion': res_version},
     }
     write_json(staging / 'model.json', model)
@@ -195,7 +232,16 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         for info in decoded.entrance.page_info:
             log(f'  entrance page {describe_page(info)}')
         page_info += [{**info, 'entrance': True} for info in decoded.entrance.page_info]
-    return model, page_info
+    layer_report = None
+    if exported is not None:
+        log(f'  layers: {describe_layers(exported)}')
+        for info in exported.texture_info:
+            log(f'  layer texture {info["name"]} {info["width"]}x{info["height"]} wrap {"/".join(info["wrap"])}: measured {info["measured"]["alpha"]}, drawn straight')
+        o = exported.document['omitted']
+        layer_report = {**exported.counts, 'omitted': {k: (v if isinstance(v, int) else len(v)) for k, v in o.items()}}
+    else:
+        log('  layers: none (the bundle has no illustration prefab)')
+    return model, page_info, layer_report
 
 
 def write_skeleton(staging: Path, name: str, page_prefix: str, skeleton_bytes: bytes, atlas_text: str,
@@ -267,6 +313,34 @@ def describe_page(info: dict) -> str:
     return text
 
 
+def load_shaders(asset_base: str, res_version: str, hot_update_list: dict, bundles: Path | None) -> dict:
+    """layers.shader_table of the client's shared shader bundle: from .cache/shared/<md5>.ab, a local
+    copy in --bundles, or one GET; always checked against the list's size and md5."""
+    info = l2d.shared_bundle(hot_update_list, l2d.SHADER_BUNDLE)
+    if info is None:
+        raise l2d.SyncError(f'The client list has no {l2d.SHADER_BUNDLE}; layers cannot name their shaders')
+    cache = ROOT / '.cache' / 'shared' / f'{info.md5}.ab'
+    data = None
+    if cache.exists():
+        data = l2d.verify_bundle(cache.read_bytes(), info)
+    elif bundles is not None and (bundles / l2d.SHADER_BUNDLE).exists():
+        data = l2d.verify_bundle((bundles / l2d.SHADER_BUNDLE).read_bytes(), info)
+    elif bundles is not None and (bundles / l2d.download_name(l2d.SHADER_BUNDLE)).exists():
+        data = l2d.unpack_dat((bundles / l2d.download_name(l2d.SHADER_BUNDLE)).read_bytes(), info)
+    else:
+        url = l2d.download_url(asset_base, PLATFORM, res_version, info.bundle)
+        log(f'Shared shaders <- {url}')
+        data = l2d.unpack_dat(get(url), info)
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    if not cache.exists():
+        cache.write_bytes(data)
+    table = layers.shader_table_of_bundle(data, l2d._patch_unitypy())
+    if not table:
+        raise l2d.SyncError(f'{l2d.SHADER_BUNDLE} holds no readable shader')
+    log(f'Shared shaders: {len(table)} from {info.bundle} ({info.md5[:12]})')
+    return table
+
+
 def existing_model(planned: l2d.Planned) -> dict | None:
     path = ROOT / planned.folder / 'model.json'
     if not path.exists():
@@ -285,6 +359,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--dry-run', action='store_true', help='plan only: no downloads, no writes')
     parser.add_argument('--retry-failed', action='store_true', help=f'also retry bundles recorded in {FAILURES_FILE}')
     parser.add_argument('--report', default=str(ROOT / '.cache' / 'sync-report.json'), help='where to write the run report')
+    parser.add_argument('--bundles', type=Path, default=None,
+                        help='build from local unpacked bundles (<dir>/<slug>.ab, md5-checked against the list) instead of downloading')
     args = parser.parse_args(argv)
     only = {s.strip() for value in args.only for s in value.split(',') if s.strip()}
 
@@ -306,7 +382,7 @@ def main(argv: list[str] | None = None) -> int:
         models = [m for m in models if m.skin_id in only]
 
     report = {'resVersion': res_version, 'code': code, 'added': [], 'repointed': [], 'current': 0, 'failed': [],
-              'knownFailures': [], 'unlisted': plan.unlisted, 'deferred': [], 'downloadedBytes': 0, 'pages': {}}
+              'knownFailures': [], 'unlisted': plan.unlisted, 'deferred': [], 'downloadedBytes': 0, 'pages': {}, 'layers': {}}
     # Drop records of skins that no longer have dynamic art in the client list.
     listed = {m.skin_id for m in plan.models}
     for skin_id in [s for s in failures if s not in listed]:
@@ -346,26 +422,44 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(report, indent=2))
         return 0
 
+    shaders = None
+    if pending:
+        try:
+            shaders = load_shaders(asset_base, res_version, hot_update_list, args.bundles)
+        except Exception as error:  # noqa: BLE001 - reported below; nothing is built without it
+            # Not recorded as a failure of any model: the bundle may download tomorrow. A folder is
+            # never rewritten, so nothing is built without the shaders its layers need.
+            log(f'Shared shaders unavailable, building nothing: {error}')
+            for planned in pending:
+                report['failed'].append({'skinId': planned.skin_id, 'error': f'shared shaders unavailable: {error}'})
+            pending = []
+
     staging_root = ROOT / '.cache' / 'staging'
     staging_root.mkdir(parents=True, exist_ok=True)
     for index, planned in enumerate(pending):
-        if index:
+        local = args.bundles / f'{l2d.slug_for(planned.skin_id)}.ab' if args.bundles else None
+        if index and local is None:
             time.sleep(args.pause)
         url = l2d.download_url(asset_base, PLATFORM, res_version, planned.bundle)
-        log(f'[{index + 1}/{len(pending)}] {planned.skin_id} <- {url}')
+        log(f'[{index + 1}/{len(pending)}] {planned.skin_id} <- {local or url}')
         staging = Path(tempfile.mkdtemp(prefix=f'{l2d.slug_for(planned.skin_id)}-', dir=staging_root))
         try:
-            # A failed or unverified download is not recorded: it may work tomorrow.
-            dat = get(url)
-            report['downloadedBytes'] += len(dat)
-            bundle = l2d.unpack_dat(dat, planned)
+            # A failed or unverified download (or local copy) is not recorded: it may work tomorrow.
+            if local is not None:
+                if not local.exists():
+                    raise l2d.SyncError(f'{local} not found (--bundles)')
+                bundle = l2d.verify_bundle(local.read_bytes(), planned)
+            else:
+                dat = get(url)
+                report['downloadedBytes'] += len(dat)
+                bundle = l2d.unpack_dat(dat, planned)
         except Exception as error:  # noqa: BLE001 - one model never stops the run
             report['failed'].append({'skinId': planned.skin_id, 'error': f'{type(error).__name__}: {error}'})
             log(f'  FAILED {planned.skin_id}: {error}')
             shutil.rmtree(staging, ignore_errors=True)
             continue
         try:
-            _, page_info = build_model(planned, bundle, res_version, staging)
+            _, page_info, layer_report = build_model(planned, bundle, res_version, staging, shaders)
             final = ROOT / planned.folder
             final.parent.mkdir(parents=True, exist_ok=True)
             if final.exists():
@@ -376,6 +470,8 @@ def main(argv: list[str] | None = None) -> int:
             write_manifest(manifest)
             report['added'].append(planned.skin_id)
             report['pages'][planned.skin_id] = page_info
+            if layer_report is not None:
+                report['layers'][planned.skin_id] = layer_report
             failures.pop(planned.skin_id, None)
             log(f'  wrote {planned.folder}')
         except Exception as error:  # noqa: BLE001 - one model never stops the run
@@ -416,6 +512,13 @@ def main(argv: list[str] | None = None) -> int:
                 out.write(f'- **Failed** `{failure["skinId"]}`: {failure["error"]}\n')
             for failure in report['knownFailures']:
                 out.write(f'- Failed before, not retried until its bundle or the code changes: `{failure["skinId"]}`: {failure["error"]}\n')
+            if report['layers']:
+                out.write('\n#### Layers\n\n')
+                for skin_id, counts in report['layers'].items():
+                    o = counts['omitted']
+                    out.write(f'- `{skin_id}`: {counts["layers"]} drawn ({counts["static"]} static, {counts["animated"]} animated); left out '
+                              f'{o["custom"]} custom shaders, {o["externalTexture"]} external textures, {o["other"]} other, '
+                              f'{o["particles"]} particle systems\n')
             if report['pages']:
                 out.write('\n#### Page textures\n\n')
                 for skin_id, pages in report['pages'].items():

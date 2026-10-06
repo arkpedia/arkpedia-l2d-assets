@@ -59,6 +59,11 @@
   ],
   "dynEntranceId": null,
   "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 15817,
+    "sha256": "d53b24e7b43b9f0d30260cfb815ece0b7a12f5c3d7838707991b25237665a722"
+  },
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1044_hsgma2_2.ab",

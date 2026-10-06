@@ -972,6 +972,11 @@
       "sha256": "ca5b8d1c7b1da928f026ce976d9b512f126d8f1583b7bc7b681045abcd421299"
     }
   },
+  "layers": {
+    "file": "layers.json",
+    "bytes": 4768,
+    "sha256": "d9804eeeaf6878e88df714bfbb302d3ae5f698229abd14a3c85574f3a4d3b3e6"
+  },
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1012_skadi2_iteration#2.ab",

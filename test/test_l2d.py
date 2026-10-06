@@ -44,6 +44,17 @@ class Naming(unittest.TestCase):
         self.assertEqual(
             l2d.download_url('https://cdn.example/assetbundle/official/', 'Android', '26-09-23', 'arts/dynchars/char_113_cqbw_epoque#7.ab'),
             'https://cdn.example/assetbundle/official/Android/assets/26-09-23/arts_dynchars_char_113_cqbw_epoque__7.dat')
+        # The shared shader bundle's brackets are percent-encoded, as the CDN expects.
+        self.assertEqual(l2d.download_url('https://cdn.example/a', 'Android', 'r', l2d.SHADER_BUNDLE),
+                         'https://cdn.example/a/Android/assets/r/%5Buc%5Dshaders.dat')
+
+    def test_shared_bundle_comes_from_the_list(self):
+        listing = {'abInfos': [{'name': '[uc]shaders.ab', 'md5': 'BB6EF923F727530ACBCE13830F54500A', 'totalSize': 734409, 'abSize': 927045}]}
+        self.assertEqual(l2d.shared_bundle(listing, '[UC]shaders.ab'),
+                         l2d.SharedBundle('[uc]shaders.ab', 'bb6ef923f727530acbce13830f54500a', 734409, 927045))
+        self.assertIsNone(l2d.shared_bundle(listing, 'shaders/other.ab'))
+        with self.assertRaises(l2d.SyncError):
+            l2d.shared_bundle({'abInfos': [{'name': '[uc]shaders.ab', 'md5': 'x'}]}, '[uc]shaders.ab')
 
 
 class Planning(unittest.TestCase):
@@ -428,6 +439,17 @@ class Bundles(unittest.TestCase):
             l2d.unpack_dat(b'not a zip', l2d.Planned('a#1', 'dyn_illust_a_1', None, 'arts/dynchars/a.ab', 'a' * 32, 0, 0))
 
     @unittest.skipUnless(importlib.util.find_spec('UnityPy') and importlib.util.find_spec('lz4'), 'UnityPy/lz4 not installed')
+    def test_a_local_bundle_is_checked_like_a_download(self):
+        import hashlib
+
+        payload = b'local bundle'
+        planned = l2d.Planned('a#1', 'dyn_illust_a_1', None, 'arts/dynchars/a.ab', hashlib.md5(payload).hexdigest(), 0, len(payload))
+        self.assertEqual(l2d.verify_bundle(payload, planned), payload)
+        with self.assertRaisesRegex(l2d.SyncError, 'bytes'):
+            l2d.verify_bundle(payload + b'!', planned)
+        with self.assertRaisesRegex(l2d.SyncError, 'md5'):
+            l2d.verify_bundle(b'local bundlf', planned)
+
     def test_unitypy_lz4ak_patch_installs(self):
         from UnityPy.enums.BundleFile import CompressionFlags
         from UnityPy.helpers import CompressionHelper

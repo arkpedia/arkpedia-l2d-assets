@@ -165,10 +165,13 @@ class Clip:
         self.start = muscle.get('m_StartTime', 0.0)
         self.stop = muscle.get('m_StopTime', 0.0)
         self.loop = bool(muscle.get('m_LoopTime'))
+        # The playback speed of the Animator state that plays the clip (1 unless a scene says).
+        self.speed = 1.0
 
     def time(self, t: float) -> float:
         """Entrance time -> clip time: held at the end, or wrapped for a looping clip."""
         length = self.stop - self.start
+        t = t * self.speed
         if self.loop and length > 0:
             return self.start + (t % length)
         return self.start + min(max(t, 0.0), max(length, 0.0))
@@ -276,8 +279,14 @@ def decimate(samples: list[list[float]], tolerances: list[float]) -> list[list[f
 class _Scene:
     """The entrance prefab's hierarchy and every Animator's clip bindings, evaluated over time."""
 
-    def __init__(self, root_go: int, read):
+    def __init__(self, root_go: int, read, choose=None):
+        """`choose(animator path id, animator, controller, clip count)` picks what each Animator plays:
+        False (nothing), or (clip indexes or None for all, state speed[, switched]). Without it, the
+        default state's clips play at speed 1, as the entrance camera reads them. `switched` is set
+        when `choose` reported a state other than the default for any Animator."""
         self.read = read
+        self.choose = choose
+        self.switched = False
         self.parent: dict[int, int | None] = {}
         self.path: dict[int, str] = {}
         self.go_of: dict[int, int] = {}
@@ -329,20 +338,32 @@ class _Scene:
             animator = self.component(self.go_of[transform], ('Animator',))
             if animator is None:
                 continue
-            controller_ref = self.tree(animator).get('m_Controller') or {}
+            animator_tree = self.tree(animator)
+            controller_ref = animator_tree.get('m_Controller') or {}
             if not controller_ref.get('m_PathID') or controller_ref.get('m_FileID', 0) != 0:
                 continue
             controller = self.tree(controller_ref['m_PathID'])
             refs = controller.get('m_AnimationClips') or []
-            # A controller with several clips (states) starts in its default state: only that
-            # state's clips play while the entrance does. Unreadable: all, so a conflict fails.
-            playing = default_state_clips(controller, len(refs)) if len(refs) > 1 else None
+            speed = 1.0
+            if self.choose is not None:
+                chosen = self.choose(animator, animator_tree, controller, len(refs))
+                if chosen is False:
+                    continue
+                playing, speed = chosen[0], chosen[1]
+                if len(chosen) > 2 and chosen[2]:
+                    self.switched = True
+            else:
+                # A controller with several clips (states) starts in its default state: only that
+                # state's clips play while the entrance does. Unreadable: all, so a conflict fails.
+                playing = default_state_clips(controller, len(refs)) if len(refs) > 1 else None
             clips = []
             for index, ref in enumerate(refs):
                 if playing is not None and index not in playing:
                     continue
                 if ref.get('m_FileID', 0) == 0 and ref.get('m_PathID') and ref['m_PathID'] not in [c[0] for c in clips]:
-                    clips.append((ref['m_PathID'], Clip(self.tree(ref['m_PathID'], 'AnimationClip'))))
+                    clip = Clip(self.tree(ref['m_PathID'], 'AnimationClip'))
+                    clip.speed = speed
+                    clips.append((ref['m_PathID'], clip))
             under = {crc(''): transform}
             for other, path in self.path.items():
                 if prefix == '' and other != transform:

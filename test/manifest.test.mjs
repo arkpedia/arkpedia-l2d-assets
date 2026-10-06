@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { folderFor, isMp3, sha256, skeletonVersion, slugFor, validateRepository, webpSize } from '../scripts/manifest.mjs';
-import { inspectSkeleton } from '../scripts/spine.mjs';
+import { inspectLayers, inspectSkeleton } from '../scripts/spine.mjs';
 
 const fixtures = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures');
 const names = JSON.parse(await readFile(path.join(fixtures, 'names.json'), 'utf8'));
@@ -60,6 +60,7 @@ async function fixtureRepo() {
     mixes: [{ from: 'Idle', to: 'Interact', duration: 0.5 }],
     dynEntranceId: null,
     entrance: null,
+    layers: null,
     source: { server: 'en', bundle: 'arts/dynchars/char_9999_test_unit#1.ab', md5, resVersion: 'test' },
   };
   const manifest = { schemaVersion: 1, server: 'en', resVersion: 'test', models: { [skinId]: `${folder}/model.json` } };
@@ -115,6 +116,9 @@ test('missing or wrong fields fail validation', async () => {
     [(m) => { m.mixes = [{ from: 'Idle' }]; }, /mixes/],
     [(m) => { m.source.md5 = '0'.repeat(32); }, /folder must be/],
     [(m) => { m.skinId = 'char_9999_test@other#1'; }, /folder must be/],
+    // layers is always written (null only for a bundle without an illustration prefab).
+    [(m) => { delete m.layers; }, /layers must be present/],
+    [(m) => { m.layers = { file: 'layers.json', bytes: 1, sha256: '0'.repeat(64) }; }, /missing file layers\.json/],
   ];
   try {
     for (const [mutate, message] of variants) {
@@ -299,5 +303,105 @@ test('the soundtrack must really be an MP3', async () => {
     model.entrance.audio = record('entrance.mp3', wav, { duration: 22.772 });
     await repo.save(model);
     await assert.rejects(validateRepository(repo.root), /entrance\.mp3 is not an MP3/);
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+/** The fixture model with layers: a backdrop behind the skeleton and a glow on its bone in front,
+ *  both on the tiny page texture (4x4) as layer0.webp. */
+async function layersRepo() {
+  const repo = await fixtureRepo();
+  const dir = path.join(repo.root, repo.folder);
+  const texture = await readFile(path.join(fixtures, 'tiny', 'page0.webp'));
+  await writeFile(path.join(dir, 'layer0.webp'), texture);
+  const quad = { uvs: [0, 1, 1, 1, 0, 0, 1, 0], colors: null, triangles: [0, 3, 1, 3, 0, 2], scroll: null, only: null, delay: 0 };
+  const doc = {
+    schemaVersion: 1,
+    textures: [{ ...record('layer0.webp', texture, { width: 4, height: 4 }), wrap: ['clamp', 'clamp'] }],
+    bounds: null,
+    separators: [],
+    draw: [
+      { layer: { ...quad, name: 'sky', blend: 'alpha', texture: 0, color: [1, 1, 1, 1], vertices: [-300, -10, 300, -10, -300, 400, 300, 400], follow: null, animation: null } },
+      { part: 0 },
+      { layer: { ...quad, name: 'glow', blend: 'add', texture: 0, color: null, vertices: [-1, -1, 1, -1, -1, 1, 1, 1],
+        follow: { bone: 'body', xy: true, rotation: true, localScale: false, mirrored: false, parent: [100, 0, 0, 100], position: [0, 0], angle: 0 },
+        animation: { length: 1, loop: true, loopFrom: 0, frames: [[0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0], [1, 2, 0, 0, 2, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0]] } } },
+    ],
+    omitted: { particles: 3, trails: 0, skinned: 0, hidden: 1, holders: 0, custom: [{ name: 'cloud', reason: 'flow distortion (up to 0.01 UV, 5 texels)' }], externalTexture: [], other: [] },
+  };
+  const skeleton = await readFile(path.join(dir, 'skeleton.json'));
+  const atlas = await readFile(path.join(dir, 'skeleton.atlas'), 'utf8');
+  doc.bounds = inspectLayers(skeleton, atlas, doc, 'test');
+  const save = async (d = doc, m = null) => {
+    const bytes = Buffer.from(JSON.stringify(d));
+    await writeFile(path.join(dir, 'layers.json'), bytes);
+    const model = m ?? structuredClone(repo.model);
+    if (!m) model.layers = record('layers.json', bytes);
+    await repo.save(model);
+  };
+  await save();
+  return { ...repo, dir, doc, saveLayers: save };
+}
+
+test('layers validate with their texture, and frame the skeleton with the layers drawn at rest', async () => {
+  const repo = await layersRepo();
+  try {
+    // The sky reaches past the skeleton (x -50..50, y 0..200); the glow on the body bone (at y 100)
+    // spans 100 units each way at its first frame.
+    assert.deepEqual(repo.doc.bounds, { x: -300, y: -10, width: 600, height: 410 });
+    assert.deepEqual(await validateRepository(repo.root), { listed: 1, folders: 1, failures: 0 });
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+test('broken layers fail validation', async () => {
+  const repo = await layersRepo();
+  const layer = (d, i) => d.draw[i].layer;
+  const variants = [
+    [(d) => { d.bounds = { x: 0, y: 0, width: 1, height: 1 }; }, /layers bounds differ/],
+    [(d) => { d.schemaVersion = 2; }, /schemaVersion must be 1/],
+    [(d) => { d.textures[0].file = '../layer0.webp'; }, /layer0\.webp/],
+    [(d) => { d.textures[0].sha256 = '0'.repeat(64); }, /layer0\.webp sha256 does not match/],
+    [(d) => { d.textures[0].width = 8; }, /layer0\.webp is 4x4/],
+    [(d) => { d.textures[0].wrap = ['clamp', 'mirror-once']; }, /wrap/],
+    [(d) => { layer(d, 0).texture = 1; }, /texture 1 is not in textures/],
+    [(d) => { layer(d, 0).blend = 'multiply'; }, /blend must be alpha or add/],
+    [(d) => { layer(d, 0).uvs.pop(); }, /uvs must pair/],
+    [(d) => { layer(d, 0).triangles[2] = 4; }, /triangles must index/],
+    [(d) => { layer(d, 0).colors = [1, 1, 1]; }, /colors must be null/],
+    [(d) => { layer(d, 0).vertices[0] = 1e7; }, /out of reach/],
+    [(d) => { layer(d, 0).color = null; }, /color must be/],
+    [(d) => { layer(d, 2).color = [1, 1, 1, 1]; }, /takes its colour from its frames/],
+    [(d) => { layer(d, 2).animation.frames[0][0] = 0.1; }, /frames must start at 0/],
+    [(d) => { layer(d, 2).animation.frames[1][0] = 2; }, /past the timeline/],
+    [(d) => { layer(d, 2).animation.frames[1][11] = 0.5; }, /active must be 0 or 1/],
+    [(d) => { layer(d, 2).animation.frames[1].pop(); }, /16 numbers/],
+    [(d) => { layer(d, 2).animation.states = { Idle: structuredClone(layer(d, 2).animation) }; }, /not a triggered animation/],
+    [(d) => { layer(d, 2).follow.bone = 'tail'; }, /follows bone tail/],
+    [(d) => { delete layer(d, 2).follow.parent; }, /follow must be/],
+    [(d) => { layer(d, 0).only = 'Touch'; }, /only must be/],
+    [(d) => { layer(d, 0).delay = -1; }, /delay must be/],
+    [(d) => { d.separators = ['tail']; }, /separator slot tail is not in the skeleton/],
+    [(d) => { d.separators = ['body', 'body']; }, /separators must be distinct/],
+    [(d) => { d.draw[1].part = 1; }, /part must be a distinct index 0-0/],
+    [(d) => { d.draw.push({ part: 0 }); }, /part must be a distinct index/],
+    [(d) => { d.draw.splice(1, 1); }, /no skeleton part/],
+    [(d) => { d.draw = [d.draw[1]]; }, /layer0\.webp is not drawn by any layer/],
+    [(d) => { delete d.omitted.holders; }, /omitted must give/],
+    [(d) => { d.omitted.custom.push({ name: 'x', reason: '' }); }, /omitted must give/],
+  ];
+  try {
+    for (const [mutate, message] of variants) {
+      const doc = structuredClone(repo.doc);
+      mutate(doc);
+      await repo.saveLayers(doc);
+      await assert.rejects(validateRepository(repo.root), message, `expected ${message}`);
+    }
+    await repo.saveLayers();
+    await validateRepository(repo.root);
+    // A layer texture model.json's layers.json does not list is a stray file.
+    const bare = structuredClone(repo.model);
+    bare.layers = null;
+    await unlink(path.join(repo.dir, 'layers.json'));
+    await repo.save(bare);
+    await assert.rejects(validateRepository(repo.root), /unexpected files layer0\.webp/);
   } finally { await rm(repo.root, { recursive: true, force: true }); }
 });

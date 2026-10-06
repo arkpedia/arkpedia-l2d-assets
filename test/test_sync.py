@@ -58,7 +58,9 @@ class RunLoop(unittest.TestCase):
             'client_list': lambda: ('https://cdn.example/assetbundle/official', 'res-1', self.hot_update_list),
             'get': self.fake_get,
             'build_model': self.fake_build,
+            'load_shaders': self.fake_shaders,
         }
+        self.shaders_error = None
         for name, value in patches.items():
             original = getattr(sync, name)
             setattr(sync, name, value)
@@ -84,13 +86,19 @@ class RunLoop(unittest.TestCase):
         self.downloads.append(skin)
         return self.dats[skin]
 
-    def fake_build(self, planned, bundle, res_version, staging):
+    def fake_shaders(self, asset_base, res_version, hot_update_list, bundles):
+        if self.shaders_error:
+            raise self.shaders_error
+        return {('CAB-shaders', 1): 'a shader'}
+
+    def fake_build(self, planned, bundle, res_version, staging, shaders):
         self.assertEqual(bundle, self.payloads[planned.skin_id])  # verified and unpacked first
+        self.assertEqual(shaders, {('CAB-shaders', 1): 'a shader'})
         if planned.skin_id == BROKEN:
             raise l2d.SyncError('Expected one illustration skeleton, found 2')
         write_model(planned, staging)
         return {}, [{'page': 'p.png', 'mask': False, 'alpha': 'straight', 'transparentColour': 150.0,
-                     'semiColourAboveAlpha': 0.9}]
+                     'semiColourAboveAlpha': 0.9}], None
 
     def run_sync(self, *args):
         with contextlib.redirect_stdout(io.StringIO()):
@@ -142,10 +150,31 @@ class RunLoop(unittest.TestCase):
         self.payloads[BROKEN] = b'a bundle that builds'
         self.set_bundles()
         self.download_error = None
-        sync.build_model = lambda planned, bundle, res, staging: (write_model(planned, staging), ({}, []))[1]
+        sync.build_model = lambda planned, bundle, res, staging, shaders: (write_model(planned, staging), ({}, [], None))[1]
         report = self.run_sync()
         self.assertEqual(report['added'], [BROKEN])
         self.assertEqual(self.failures(), {})
+
+    def test_without_the_shared_shaders_nothing_is_built_or_recorded(self):
+        self.shaders_error = l2d.SyncError('The client list has no [uc]shaders.ab')
+        report = self.run_sync()
+        self.assertEqual(self.downloads, [])
+        self.assertEqual(report['added'], [])
+        self.assertEqual(sorted(f['skinId'] for f in report['failed']), sorted([GOOD, BROKEN]))
+        self.assertTrue(all('shared shaders unavailable' in f['error'] for f in report['failed']))
+        self.assertFalse((self.root / 'sync-failures.json').exists(), 'it may work tomorrow')
+
+    def test_local_bundles_are_checked_against_the_list_and_never_downloaded(self):
+        local = self.root / 'bundles'
+        local.mkdir()
+        (local / 'char_1044_hsgma2_2.ab').write_bytes(self.payloads[GOOD])
+        (local / 'char_003_kalts_boc_6.ab').write_bytes(b'broken bundlf')  # same size, other bytes
+        report = self.run_sync('--bundles', str(local))
+        self.assertEqual(self.downloads, [])
+        self.assertEqual(report['added'], [GOOD])
+        self.assertEqual([f['skinId'] for f in report['failed']], [BROKEN])
+        self.assertIn('md5 does not match', report['failed'][0]['error'])
+        self.assertFalse((self.root / 'sync-failures.json').exists(), 'a bad local copy is not the bundle failing')
 
     def test_a_dry_run_writes_nothing(self):
         out = io.StringIO()

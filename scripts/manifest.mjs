@@ -4,7 +4,8 @@ import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
-import { inspectSkeleton, isJsonSkeleton, readAtlas } from './spine.mjs';
+import { layersShape } from './layers.mjs';
+import { inspectLayers, inspectSkeleton, isJsonSkeleton, readAtlas } from './spine.mjs';
 
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
@@ -256,6 +257,19 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     }
   }
 
+  // The illustration prefab's own mesh layers: layers.json (null only for a bundle without the
+  // prefab), every texture it lists, its shape and, with `deep`, its bounds re-framed by the runtime.
+  if (!Object.hasOwn(model, 'layers')) throw new Error(`${label}: layers must be present (null when the bundle has no illustration prefab)`);
+  let layersDoc = null;
+  if (model.layers !== null) {
+    fileShape(model.layers, `${label}: layers`, 'layers.json');
+    const layersPath = path.join(root, folder, 'layers.json');
+    if (!existsSync(layersPath)) throw new Error(`${label}: missing file layers.json`);
+    layersDoc = JSON.parse(await readFile(layersPath, 'utf8'));
+    const textures = layersShape(layersDoc, label);
+    files.push(model.layers, ...textures);
+  }
+
   const expectedNames = new Set(['model.json', ...files.map((file) => file.file)]);
   const present = await readdir(path.join(root, folder));
   const stray = present.filter((name) => !expectedNames.has(name));
@@ -270,6 +284,16 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     contents[file.file] = bytes;
   }
   checkSkeleton(model, label, contents, model.spineVersion, deep);
+  if (layersDoc !== null) {
+    for (const texture of layersDoc.textures) {
+      const size = webpSize(contents[texture.file]);
+      if (size.width !== texture.width || size.height !== texture.height) throw new Error(`${label}: ${texture.file} is ${size.width}x${size.height}, layers.json says ${texture.width}x${texture.height}`);
+    }
+    if (deep) {
+      const found = inspectLayers(contents[model.skeleton.file], contents[model.atlas.file].toString('utf8'), layersDoc, `${label}: layers`);
+      if (JSON.stringify(found) !== JSON.stringify(layersDoc.bounds)) throw new Error(`${label}: layers bounds differ from the skeleton and layers: ${JSON.stringify(found)}`);
+    }
+  }
   if (entrance !== null) {
     checkSkeleton(entrance, `${label}: entrance`, contents, model.spineVersion, deep);
     if (entrance.audio !== null && !isMp3(contents['entrance.mp3'])) throw new Error(`${label}: entrance.mp3 is not an MP3`);
