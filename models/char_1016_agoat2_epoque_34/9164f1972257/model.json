@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1016_agoat2@epoque#34",
+  "dynIllustId": "dyn_illust_char_1016_agoat2_epoque#34",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.json",
+    "format": "json",
+    "bytes": 5038254,
+    "sha256": "8e591fd63e5b09a84800a9b45a5b0238abc6181c330b44ad1b1c8395f819ff92"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 45143,
+    "sha256": "0a6c8ad74214499c45a81e01e1ead3af963e428c607ae23cb9fdc4b9e966ff28"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2252,
+      "height": 2252,
+      "bytes": 3266446,
+      "sha256": "bcd8841aade2458e75c5f81f569188b68484debb2a556b1c71c5f3fd279b0874"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 10,
+    "Interact": 18.667,
+    "Special": 9.533,
+    "Start": 8.5
+  },
+  "bounds": {
+    "x": -1028,
+    "y": -7,
+    "width": 2060,
+    "height": 1260
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1016_agoat2_epoque#34.ab",
+    "md5": "9164f1972257c1a0d199a1eb36d2ab64",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

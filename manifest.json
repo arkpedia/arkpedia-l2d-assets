@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "server": "en",
+  "resVersion": "26-09-23-17-49-43_b9cc4a",
+  "models": {
+    "char_1012_skadi2@iteration#2": "models/char_1012_skadi2_iteration_2/621be5da3832/model.json",
+    "char_1016_agoat2@epoque#34": "models/char_1016_agoat2_epoque_34/9164f1972257/model.json",
+    "char_1044_hsgma2#2": "models/char_1044_hsgma2_2/b1259edb8fff/model.json"
+  }
+}
