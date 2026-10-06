@@ -12,7 +12,7 @@ Every model folder comes from the Arknights Global (EN) Android client:
 - The atlas (`skeleton.atlas`) is the bundle's bytes with only the page name lines renamed to `page0.webp`, `page1.webp`, ...
 - Each `page<N>.webp` is the bundle's Android page texture, decoded, joined with its separate alpha mask when there is one, converted to premultiplied alpha and stored as lossless WebP. The Android textures are compressed (ASTC), so these pages are the client's compressed art, not the original source files.
 
-Nothing is downloaded from fan sites or other mirrors.
+No model files come from fan sites or mirrors.
 
 ## Software
 
