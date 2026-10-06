@@ -76,14 +76,14 @@ class Planning(unittest.TestCase):
 class Atlas(unittest.TestCase):
     def test_two_page_atlas_is_rewritten_byte_for_byte(self):
         original = (FIXTURES / 'two-page.atlas').read_text('utf-8')
-        rewritten, names = l2d.rewrite_atlas(original)
+        rewritten, names = l2d.rewrite_atlas(original, 'page')
         self.assertEqual(rewritten, (FIXTURES / 'two-page.rewritten.atlas').read_text('utf-8'))
         self.assertEqual(names, ['dyn_illust_char_2014_nian.png', 'dyn_illust_char_2014_nian2.png'])
         self.assertEqual(l2d.atlas_page_sizes(original), [(2048, 2048), (2048, 1024)])
 
     def test_hash_in_page_names_crlf_and_bom_survive(self):
         text = '﻿dyn_illust_char_1012_skadi2_iteration#2.png\r\nsize: 4,4\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\nregion#1\r\n  rotate: false\r\n'
-        rewritten, names = l2d.rewrite_atlas(text)
+        rewritten, names = l2d.rewrite_atlas(text, 'page')
         self.assertEqual(names, ['dyn_illust_char_1012_skadi2_iteration#2.png'])
         self.assertEqual(rewritten, '﻿page0.webp\r\nsize: 4,4\r\nformat: RGBA8888\r\nfilter: Linear,Linear\r\nrepeat: none\r\nregion#1\r\n  rotate: false\r\n')
 
@@ -94,9 +94,9 @@ class Atlas(unittest.TestCase):
     def test_repeated_or_missing_pages_are_refused(self):
         page = 'p.png\nsize: 1,1\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\n'
         with self.assertRaises(l2d.SyncError):
-            l2d.rewrite_atlas(page + '\n' + page)
+            l2d.rewrite_atlas(page + '\n' + page, 'page')
         with self.assertRaises(l2d.SyncError):
-            l2d.rewrite_atlas('just text\nno header\n')
+            l2d.rewrite_atlas('just text\nno header\n', 'page')
 
     def test_texture_name_for_page(self):
         self.assertEqual(l2d.texture_name_for_page('dyn_illust_char_2014_nian2.png'), 'dyn_illust_char_2014_nian2')
@@ -189,10 +189,16 @@ class PageAlpha(unittest.TestCase):
         self.assertFalse(info['mask'])
         self.assertEqual(info['alpha'], 'straight')
 
+    def test_an_rgba_page_that_ships_premultiplied_is_kept_as_shipped(self):
+        # Goldenglow's summer#12 page: one RGBA texture, already premultiplied (0.01 and 0.7%).
+        # Premultiplying it again would darken every soft edge, as with a masked page.
+        page, info = l2d.prepare_page(self.joined)
+        self.assertEqual(page.tobytes(), self.joined.tobytes())
+        self.assertFalse(info['mask'])
+        self.assertEqual(info['alpha'], 'premultiplied')
+
     def test_a_page_that_does_not_match_its_path_fails(self):
-        # An already premultiplied texture without a mask, and a straight one with a mask.
-        with self.assertRaisesRegex(l2d.SyncError, 'should be straight alpha but looks premultiplied'):
-            l2d.prepare_page(self.joined)
+        # A straight texture with a mask.
         with self.assertRaisesRegex(l2d.SyncError, 'should be premultiplied alpha but looks straight'):
             l2d.prepare_page(self.straight, self.straight.getchannel('A').convert('RGB'))
         # Nothing to measure (fully opaque, as an ETC RGB page is before its mask joins): unclear.
@@ -213,6 +219,63 @@ class PageAlpha(unittest.TestCase):
         self.assertEqual(info['resizedFrom'], [64, 64])
         _, same = l2d.prepare_page(self.straight, None, (64, 64))
         self.assertNotIn('resizedFrom', same)
+
+
+class Entrance(unittest.TestCase):
+    """The entrance sequence a skin with a dynEntranceId plays before its illustration."""
+
+    def test_planning_carries_the_entrance_id(self):
+        table = {'charSkins': {
+            'char_1012_skadi2@iteration#2': {'dynIllustId': 'dyn_illust_char_1012_skadi2_iteration#2',
+                                             'dynEntranceId': 'dyn_entrance_char_1012_skadi2_iteration#2'},
+            'char_1044_hsgma2#2': {'dynIllustId': 'dyn_illust_char_1044_hsgma2_2', 'dynEntranceId': None},
+        }}
+        hot = {'abInfos': [{'name': 'arts/dynchars/char_1012_skadi2_iteration#2.ab', 'md5': 'a' * 32},
+                           {'name': 'arts/dynchars/char_1044_hsgma2_2.ab', 'md5': 'b' * 32}]}
+        plan = {p.skin_id: p for p in l2d.plan_models(table, hot).models}
+        self.assertEqual(plan['char_1012_skadi2@iteration#2'].dyn_entrance_id, 'dyn_entrance_char_1012_skadi2_iteration#2')
+        self.assertIsNone(plan['char_1044_hsgma2#2'].dyn_entrance_id)
+        table['charSkins']['char_1044_hsgma2#2']['dynEntranceId'] = '../x'
+        with self.assertRaisesRegex(l2d.SyncError, 'unexpected dynEntranceId'):
+            l2d.plan_models(table, hot)
+
+    def test_only_the_skins_own_entrance_prefab_counts(self):
+        container = {
+            'dyn/arts/dynchars/char_1012_skadi2/dyn_illust_char_1012_skadi2_iteration#2.prefab': 1,
+            'dyn/arts/dyncharstart/char_1012_skadi2/Dyn_Entrance_char_1012_skadi2_iteration#2.prefab': 2,
+            'dyn/arts/dyncharstart/char_1012_skadi2/dyn_entrance_char_1012_skadi2_other#3.prefab': 3,
+            'dyn/arts/dynportraits/char_1012_skadi2/dyn_portrait_char_1012_skadi2_iteration#2.prefab': 4,
+        }
+        self.assertEqual(l2d.entrance_prefab_roots(container, 'dyn_entrance_char_1012_skadi2_iteration#2'), [2])
+        self.assertEqual(l2d.entrance_prefab_roots(container, 'dyn_entrance_char_9_none#1'), [])
+
+    def test_the_soundtrack_is_found_by_the_entrance_id(self):
+        path = ('dyn/audio/sound_beta_2/dynentrance/dyn_entrance_char_1012_skadi2_iteration#2/'
+                'dyn_entrance_char_1012_skadi2_iteration#2.ogg')
+        container = {path: 9, 'dyn/audio/sound_beta_2/dynentrance/dyn_entrance_char_2/dyn_entrance_char_2.ogg': 8}
+        self.assertEqual(l2d.entrance_audio_path(container, 'dyn_entrance_char_1012_skadi2_iteration#2'), path)
+        self.assertIsNone(l2d.entrance_audio_path(container, 'dyn_entrance_char_3#1'))
+
+    def test_wav_becomes_an_mp3_of_the_same_length(self):
+        import math
+        import struct
+        import wave
+        rate, seconds = 44100, 1.5
+        frames = int(rate * seconds)
+        buffer = io.BytesIO()
+        with wave.open(buffer, 'wb') as out:
+            out.setnchannels(2)
+            out.setsampwidth(2)
+            out.setframerate(rate)
+            out.writeframes(b''.join(struct.pack('<hh', v, v) for v in (int(8000 * math.sin(i / 20)) for i in range(frames))))
+        mp3, duration = l2d.wav_to_mp3(buffer.getvalue())
+        self.assertEqual(duration, 1.5)
+        self.assertTrue(mp3[:3] == b'ID3' or (mp3[0] == 0xFF and mp3[1] & 0xE0 == 0xE0), mp3[:4])
+        # 160 kbit/s: about 30 KB for 1.5 s, far smaller than the 265 KB of PCM.
+        self.assertLess(len(mp3), 60_000)
+        self.assertGreater(len(mp3), 15_000)
+        with self.assertRaisesRegex(l2d.SyncError, 'not a readable WAV'):
+            l2d.wav_to_mp3(b'RIFF nonsense')
 
 
 class Skeletons(unittest.TestCase):
@@ -327,7 +390,7 @@ class SkeletonChoice(unittest.TestCase):
 
 
 class FailureMemory(unittest.TestCase):
-    planned = l2d.Planned('char_003_kalts@boc#6', 'dyn_illust_char_003_kalts_boc#6', 'arts/dynchars/char_003_kalts_boc#6.ab',
+    planned = l2d.Planned('char_003_kalts@boc#6', 'dyn_illust_char_003_kalts_boc#6', 'dyn_entrance_char_003_kalts_boc#6', 'arts/dynchars/char_003_kalts_boc#6.ab',
                           'c' * 32, 7306466, 7306000)
 
     def test_a_failed_bundle_is_skipped_until_its_md5_or_the_code_changes(self):
@@ -337,7 +400,7 @@ class FailureMemory(unittest.TestCase):
         self.assertEqual(len(entry['error']), 500)
         self.assertIs(l2d.known_failure(failures, self.planned, 'abcdef012345'), entry)
         self.assertIsNone(l2d.known_failure(failures, self.planned, '000000000000'))
-        changed = l2d.Planned(self.planned.skin_id, self.planned.dyn_illust_id, self.planned.bundle, 'd' * 32, 1, 1)
+        changed = l2d.Planned(self.planned.skin_id, self.planned.dyn_illust_id, None, self.planned.bundle, 'd' * 32, 1, 1)
         self.assertIsNone(l2d.known_failure(failures, changed, 'abcdef012345'))
         self.assertIsNone(l2d.known_failure({}, self.planned, 'abcdef012345'))
 
@@ -352,17 +415,17 @@ class Bundles(unittest.TestCase):
     def test_sizes_and_md5_are_checked(self):
         payload = b'UnityFS bundle bytes'
         dat = self.dat(payload)
-        planned = l2d.Planned('char_1_x#1', 'dyn_illust_char_1_x_1', 'arts/dynchars/x.ab', hashlib.md5(payload).hexdigest(), len(dat), len(payload))
+        planned = l2d.Planned('char_1_x#1', 'dyn_illust_char_1_x_1', None, 'arts/dynchars/x.ab', hashlib.md5(payload).hexdigest(), len(dat), len(payload))
         self.assertEqual(l2d.unpack_dat(dat, planned), payload)
         for broken in [
-            l2d.Planned(planned.skin_id, planned.dyn_illust_id, planned.bundle, '0' * 32, len(dat), len(payload)),
-            l2d.Planned(planned.skin_id, planned.dyn_illust_id, planned.bundle, planned.md5, len(dat) + 1, len(payload)),
-            l2d.Planned(planned.skin_id, planned.dyn_illust_id, planned.bundle, planned.md5, len(dat), len(payload) + 1),
+            l2d.Planned(planned.skin_id, planned.dyn_illust_id, None, planned.bundle, '0' * 32, len(dat), len(payload)),
+            l2d.Planned(planned.skin_id, planned.dyn_illust_id, None, planned.bundle, planned.md5, len(dat) + 1, len(payload)),
+            l2d.Planned(planned.skin_id, planned.dyn_illust_id, None, planned.bundle, planned.md5, len(dat), len(payload) + 1),
         ]:
             with self.assertRaises(l2d.SyncError):
                 l2d.unpack_dat(dat, broken)
         with self.assertRaises(l2d.SyncError):
-            l2d.unpack_dat(b'not a zip', l2d.Planned('a#1', 'dyn_illust_a_1', 'arts/dynchars/a.ab', 'a' * 32, 0, 0))
+            l2d.unpack_dat(b'not a zip', l2d.Planned('a#1', 'dyn_illust_a_1', None, 'arts/dynchars/a.ab', 'a' * 32, 0, 0))
 
     @unittest.skipUnless(importlib.util.find_spec('UnityPy') and importlib.util.find_spec('lz4'), 'UnityPy/lz4 not installed')
     def test_unitypy_lz4ak_patch_installs(self):

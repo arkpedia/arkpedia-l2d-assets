@@ -17,7 +17,7 @@ jobs:
       # The same packages the daily sync uses, so a PR proves they install and import.
       - run: pip install -r requirements.txt
       - name: Sync dependencies import, Pillow has WebP
-        run: python -c "import UnityPy, lz4, PIL; from PIL import features; assert features.check('webp'), 'Pillow has no WebP support'; print('UnityPy', UnityPy.__version__, 'lz4', lz4.__version__, 'Pillow', PIL.__version__)"
+        run: python -c "import UnityPy, lz4, PIL, lameenc; from PIL import features; assert features.check('webp'), 'Pillow has no WebP support'; print('UnityPy', UnityPy.__version__, 'lz4', lz4.__version__, 'Pillow', PIL.__version__, 'lameenc ok')"
       - name: Node tests
         run: npm test
       - name: Python tests

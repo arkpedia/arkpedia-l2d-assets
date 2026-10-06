@@ -2,7 +2,7 @@
 
 Animated outfit art for Arkpedia: the dynamic illustrations ("dynamic art") of the Arknights Global client, as Spine 3.8 models the site's focused artwork view can play. Stats, skin records and everything else stay in `arkpedia-data`; this repository holds only the animation files and where each came from.
 
-Scope: every skin in the EN `skin_table.json` that has a `dynIllustId` (88 as of client `26-09-23-17-49-43_b9cc4a`: 64 outfits and 24 default Elite 2 artworks). CN-only skins, the separate entrance (`_Start`) skeletons, `sp_` variants and the client's Unity particle effects are not included.
+Scope: every skin in the EN `skin_table.json` that has a `dynIllustId` (88 as of client `26-09-23-17-49-43_b9cc4a`: 64 outfits and 24 default Elite 2 artworks). The 14 outfits with a `dynEntranceId` also carry their entrance: the sequence the game plays before the illustration, with its soundtrack. CN-only skins, `sp_` variants and the client's Unity particle effects and camera moves are not included.
 
 ## Layout
 
@@ -13,6 +13,10 @@ models/<slug>/<md5_12>/model.json
 models/<slug>/<md5_12>/skeleton.skel        (or skeleton.json)
 models/<slug>/<md5_12>/skeleton.atlas
 models/<slug>/<md5_12>/page0.webp           (page1.webp, ... for multi-page atlases)
+models/<slug>/<md5_12>/entrance.skel        (or entrance.json; only for a skin with a dynEntranceId)
+models/<slug>/<md5_12>/entrance.atlas
+models/<slug>/<md5_12>/entrance-page0.webp
+models/<slug>/<md5_12>/entrance.mp3         (its soundtrack, 160 kbit/s)
 ```
 
 - `slug` is the skinId with `@` and `#` replaced by `_` (`char_113_cqbw@epoque#7` becomes `char_113_cqbw_epoque_7`).
@@ -38,6 +42,8 @@ models/<slug>/<md5_12>/page0.webp           (page1.webp, ... for multi-page atla
 | `animations` | Animation name to duration in seconds (3 decimals). Every model has `Idle`, which the validator requires. The other names differ per model: `Interact` and `Special` are common, and a few have `Start`. |
 | `bounds` | `x`, `y`, `width`, `height` of the setup pose with `Idle` applied at time 0, in skeleton units. Frame the camera from this; the skeletons' own width and height are 0. |
 | `mixes` | The game's own crossfade table (`from`, `to`, `duration` in seconds), when the bundle has one. |
+| `dynEntranceId` | The skin_table's `dynEntranceId`, or `null`. The validator requires `entrance` exactly when this is set, so an entrance cannot go missing quietly. |
+| `entrance` | `null`, or the entrance: `skeleton`, `atlas`, `textures` (`entrance-page<N>.webp`), `animations` (one, `Start`, 10-23 s), `bounds` and `audio` (`entrance.mp3` with `duration`, or `null`). It is drawn in the illustration's own coordinates, so the illustration's `bounds` frame both. The game then plays the illustration's short `Start` and loops `Idle`. |
 | `source` | `server` (`en`), the client `bundle` path, its full `md5` and the `resVersion` it was downloaded from. |
 
 ## How the files are made
@@ -46,9 +52,9 @@ models/<slug>/<md5_12>/page0.webp           (page1.webp, ... for multi-page atla
 
 1. It reads the EN `skin_table.json` from ArknightsAssets/ArknightsGamedata and the Global client's network config, version file and `hot_update_list.json`.
 2. For each skin with a `dynIllustId` whose bundle (`arts/dynchars/<id>.ab`) the list carries, it skips the bundle if a folder for that md5 already exists. Otherwise it downloads the `.dat` from the client's asset CDN (GET only, one at a time, a 3 second pause between downloads) and checks its size and md5 against the list.
-3. It decodes the bundle with UnityPy (plus the LZ4AK patch Arknights bundles need). File names come from the bundle, never from the id. The skeleton is the one the illustration prefab (`dyn/arts/dynchars/.../<id>.prefab` in the bundle's container) plays, and its SkeletonDataAsset links it to its atlas. Names alone are not enough: Kal'tsit's boc#6 bundle has an entrance skeleton with exactly the same name as the illustration. Names are used only for a bundle without that prefab, and then entrance (`_Start`, `_Start#N`) and portrait skeletons are left out. Particle textures and effect masks are always ignored.
+3. It decodes the bundle with UnityPy (plus the LZ4AK patch Arknights bundles need). File names come from the bundle, never from the id. The skeleton is the one the illustration prefab (`dyn/arts/dynchars/.../<id>.prefab` in the bundle's container) plays, and its SkeletonDataAsset links it to its atlas. Names alone are not enough: Kal'tsit's boc#6 bundle has an entrance skeleton with exactly the same name as the illustration. Names are used only for a bundle without that prefab, and then entrance (`_Start`, `_Start#N`) and portrait skeletons are left out. Particle textures and effect masks are always ignored. A skin with a `dynEntranceId` also takes the skeleton its entrance prefab (`dyn/arts/dyncharstart/.../<dynEntranceId>.prefab`) plays, never one picked by name, and the soundtrack under `.../dynentrance/<dynEntranceId>/`, exported by UnityPy and encoded as MP3 (lameenc). A missing entrance prefab fails the model.
 4. Skeleton bytes are written unchanged. In the atlas only the page name lines change, to `page0.webp`, `page1.webp`, ... (the originals contain `#`, which breaks URLs). Each page is saved as premultiplied, lossless WebP at exactly the size the atlas was packed at. The client ships a page in one of two ways, and each needs different handling:
-   - **One RGBA texture** (ASTC, e.g. Hoshiguma's Elite 2): straight alpha with colour under transparent texels. It is premultiplied here.
+   - **One RGBA texture** (ASTC, e.g. Hoshiguma's Elite 2): straight alpha with colour under transparent texels. It is premultiplied here. A few ship already premultiplied (Goldenglow's summer#12); both measurements say so, and they are kept as shipped.
    - **An RGB texture plus a separate `[alpha]` mask** (ETC, e.g. Ch'en's Elite 2, Nian's Elite 2): the game's RGB is already premultiplied. The mask becomes the alpha channel and the colour is kept as shipped. Premultiplying again would darken every soft edge and glow.
 
    Before writing a page, the sync measures it: the colour under fully transparent texels, and how often colour exceeds alpha at alpha 16-63. Straight pages measure about 120-156 and 80-97%; masked pages measure under 0.1 and 5-14%. A page that doesn't match how it was shipped, or measures in between, fails the model instead of being written wrong. The result for each page is printed in the log, in `.cache/sync-report.json` (`pages`) and in the run summary.

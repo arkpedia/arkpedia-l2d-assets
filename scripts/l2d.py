@@ -15,6 +15,7 @@ DYN_PREFIX = 'dyn_illust_'
 BUNDLE_DIR = 'arts/dynchars/'
 SKIN_ID_RE = re.compile(r'^[A-Za-z0-9_]+(?:@[A-Za-z0-9_]+)?#[0-9]+$')
 MD5_RE = re.compile(r'^[0-9a-f]{32}$')
+ENTRANCE_ID_RE = re.compile(r'^dyn_entrance_[A-Za-z0-9_#]+$')
 ATLAS_HEADER_RE = re.compile(r'^\s*(size|format|filter|repeat|pma)\s*:')
 
 
@@ -66,6 +67,10 @@ def download_url(asset_base: str, platform: str, res_version: str, bundle_name: 
 class Planned:
     skin_id: str
     dyn_illust_id: str
+    # The skin's dynEntranceId: its entrance sequence, played before the illustration, which
+    # ships in the same bundle (None when the skin has none). Required, never defaulted, so
+    # every place that plans a model has to say.
+    dyn_entrance_id: str | None
     bundle: str
     md5: str
     total_size: int
@@ -107,7 +112,11 @@ def plan_models(skin_table: dict, hot_update_list: dict) -> Plan:
         md5 = str(info.get('md5', '')).lower()
         if not MD5_RE.match(md5):
             raise SyncError(f'{bundle}: hot_update_list has no md5')
-        plan.models.append(Planned(skin_id, dyn, info['name'], md5, int(info.get('totalSize') or 0), int(info.get('abSize') or 0)))
+        entrance = skin.get('dynEntranceId') or None
+        if entrance is not None and not ENTRANCE_ID_RE.match(str(entrance)):
+            raise SyncError(f'{skin_id}: unexpected dynEntranceId {entrance!r}')
+        plan.models.append(Planned(skin_id, dyn, entrance, info['name'], md5,
+                                   int(info.get('totalSize') or 0), int(info.get('abSize') or 0)))
     return plan
 
 
@@ -157,8 +166,9 @@ def atlas_page_names(text: str) -> list[str]:
     return [lines[i].lstrip('﻿').strip() for i in atlas_page_lines(text)]
 
 
-def rewrite_atlas(text: str) -> tuple[str, list[str]]:
-    """Renames the pages to page0.webp, page1.webp, ... and leaves every other byte alone.
+def rewrite_atlas(text: str, prefix: str) -> tuple[str, list[str]]:
+    """Renames the pages to <prefix>0.webp, <prefix>1.webp, ... ('page' for the illustration,
+    'entrance-page' for its entrance) and leaves every other byte alone.
 
     Returns the new text and the original page names, in order.
     """
@@ -173,7 +183,7 @@ def rewrite_atlas(text: str) -> tuple[str, list[str]]:
         ending = raw[len(body):]
         bom = '﻿' if body.startswith('﻿') else ''
         names.append(body.lstrip('﻿').strip())
-        lines[i] = f'{bom}page{n}.webp{ending}'
+        lines[i] = f'{bom}{prefix}{n}.webp{ending}'
     if len(set(names)) != len(names):
         raise SyncError(f'Atlas repeats a page name: {names}')
     return ''.join(lines), names
@@ -297,6 +307,29 @@ def illust_prefab_roots(container: dict, dyn_illust_id: str) -> list:
     return named or [prefabs[path] for path in sorted(prefabs)]
 
 
+DYNCHARSTART_PREFAB_DIR = 'dyn/arts/dyncharstart/'
+
+
+def entrance_prefab_roots(container: dict, dyn_entrance_id: str) -> list:
+    """Path ids of the entrance prefab (dyn/arts/dyncharstart/<char>/<dynEntranceId>.prefab).
+
+    Only the prefab named after the skin's own dynEntranceId counts: the entrance has no
+    fallback by name, because an illustration and its entrance can share skeleton names.
+    """
+    wanted = f'{dyn_entrance_id.lower()}.prefab'
+    return [root for path, root in sorted(container.items())
+            if path.lower().startswith(DYNCHARSTART_PREFAB_DIR) and path.lower().rsplit('/', 1)[-1] == wanted]
+
+
+def entrance_audio_path(container: dict, dyn_entrance_id: str) -> str | None:
+    """The container path of the entrance's soundtrack (dyn/audio/.../dynentrance/<id>/<id>.ogg)."""
+    found = [path for path in container
+             if '/dynentrance/' in path.lower() and path.lower().rsplit('/', 1)[-1].rsplit('.', 1)[0] == dyn_entrance_id.lower()]
+    if len(found) > 1:
+        raise SyncError(f'Several soundtracks for {dyn_entrance_id}: {sorted(found)}')
+    return found[0] if found else None
+
+
 def skeleton_data_in_prefabs(roots: list, read) -> set:
     """Path ids of the SkeletonDataAssets the Spine components in these prefabs' object trees use.
 
@@ -386,6 +419,7 @@ def join_alpha(image, mask):
 #   ling@nian#12) is straight alpha with colour bleed: 118-156 and 80-97%;
 # - RGB plus a separate [alpha] mask (ETC; chen2#2, chen2@boc#6 both pages, nian#2 both pages) is
 #   already premultiplied: 0.02-0.07 and 5-14%.
+# - a few single RGBA textures ship already premultiplied (gdglow@summer#12: 0.01 and 0.7%).
 # The limits below sit far from both groups; anything between them is 'unclear' and fails the model.
 ALPHA_MIN_PIXELS = 64
 TRANSPARENT_PREMULTIPLIED_MAX = 8.0
@@ -440,9 +474,10 @@ def prepare_page(image, mask=None, size: tuple[int, int] | None = None):
 
     - A page with a separate '[alpha]' mask: the game's RGB is already premultiplied, so the mask
       becomes the alpha channel and the colour is kept exactly as shipped (never premultiplied again).
-    - A page without one: one straight-alpha RGBA texture with colour bleed, premultiplied here.
+    - A page without one: usually one straight-alpha RGBA texture with colour bleed, premultiplied
+      here; when both measurements say it is already premultiplied, it is kept as shipped.
 
-    The texture is classified first, and a page that does not look like what its path expects fails
+    The texture is classified first, and a page that does not look like what its path allows fails
     the model rather than being written wrong. Returns (image, info) for the run report.
     """
     from PIL import Image
@@ -450,13 +485,13 @@ def prepare_page(image, mask=None, size: tuple[int, int] | None = None):
     rgba = image.convert('RGBA')
     if mask is not None:
         rgba = join_alpha(rgba, mask)
-    expected = 'premultiplied' if mask is not None else 'straight'
+    allowed = ('premultiplied',) if mask is not None else ('straight', 'premultiplied')
     info = {'mask': mask is not None, **classify_alpha(rgba)}
-    if info['alpha'] != expected:
+    if info['alpha'] not in allowed:
         how = 'RGB with a separate [alpha] mask' if mask is not None else 'one RGBA texture'
-        raise SyncError(f'Page shipped as {how} should be {expected} alpha but looks {info["alpha"]} '
+        raise SyncError(f'Page shipped as {how} should be {" or ".join(allowed)} alpha but looks {info["alpha"]} '
                         f'(transparentColour {info["transparentColour"]}, semiColourAboveAlpha {info["semiColourAboveAlpha"]})')
-    page = rgba if mask is not None else premultiply(rgba)
+    page = premultiply(rgba) if info['alpha'] == 'straight' else rgba
     if size and page.size != tuple(size):
         # Spine 3.8 web runtimes compute UVs from the loaded image's size, not the atlas
         # size line, so a page must have exactly the size the atlas was packed at.
@@ -476,6 +511,37 @@ def encode_webp(image) -> bytes:
         if back.convert('RGBA').tobytes() != image.convert('RGBA').tobytes():
             raise SyncError('WebP encode was not lossless')
     return data
+
+
+# ---------------------------------------------------------------------------
+# Audio
+
+MP3_KBPS = 160
+
+
+def wav_to_mp3(wav: bytes) -> tuple[bytes, float]:
+    """A 16-bit PCM WAV (what UnityPy exports for an AudioClip) as a constant-bitrate MP3, and its
+    duration in seconds (3 decimals). MP3 because every browser plays it."""
+    import lameenc
+    import wave
+
+    try:
+        with wave.open(io.BytesIO(wav)) as source:
+            channels, width, rate, frames = source.getnchannels(), source.getsampwidth(), source.getframerate(), source.getnframes()
+            pcm = source.readframes(frames)
+    except (wave.Error, EOFError) as error:
+        raise SyncError(f'Soundtrack is not a readable WAV ({error})') from error
+    if width != 2 or channels not in (1, 2) or not frames:
+        raise SyncError(f'Soundtrack is {width * 8}-bit, {channels} channel(s), {frames} frames; expected 16-bit mono or stereo')
+    encoder = lameenc.Encoder()
+    encoder.set_bit_rate(MP3_KBPS)
+    encoder.set_in_sample_rate(rate)
+    encoder.set_channels(channels)
+    encoder.set_quality(2)
+    mp3 = bytes(encoder.encode(pcm)) + bytes(encoder.flush())
+    if not mp3:
+        raise SyncError('MP3 encoder returned nothing')
+    return mp3, round(frames / rate, 3)
 
 
 # ---------------------------------------------------------------------------
@@ -543,6 +609,19 @@ def _patch_unitypy():
 
 
 @dataclass
+class DecodedEntrance:
+    skeleton: bytes
+    skeleton_name: str
+    atlas_text: str
+    atlas_name: str
+    pages: list  # PIL images, premultiplied, in atlas page order
+    page_names: list[str]
+    page_info: list[dict]
+    audio_wav: bytes | None  # the soundtrack as UnityPy exports it, None when the bundle has none
+    audio_name: str | None
+
+
+@dataclass
 class Decoded:
     skeleton: bytes
     skeleton_name: str
@@ -553,15 +632,19 @@ class Decoded:
     page_names: list[str]
     page_info: list[dict] = field(default_factory=list)  # per page: mask, alpha class and measurements
     mixes: list[dict] = field(default_factory=list)
+    entrance: DecodedEntrance | None = None
 
 
-def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
-    """Finds the illustration's skeleton, atlas and atlas page textures in a bundle.
+def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None) -> Decoded:
+    """Finds the illustration's skeleton, atlas and atlas page textures in a bundle, and its
+    entrance's when the skin has one (`dyn_entrance_id`, the skin_table's dynEntranceId).
 
     Names come from the bundle. The skeleton is the one the illustration prefab
     (dyn/arts/dynchars/<id>.prefab) plays, and its SkeletonDataAsset links it to its atlas;
-    without a prefab, SkeletonDataAssets and then TextAssets are matched by name. Entrance and
-    portrait skeletons, particle textures and Unity effect masks are left out.
+    without a prefab, SkeletonDataAssets and then TextAssets are matched by name. Portrait
+    skeletons, particle textures and Unity effect masks are left out. The entrance is the
+    skeleton its own prefab (dyn/arts/dyncharstart/<dynEntranceId>.prefab) plays, with its
+    soundtrack (an AudioClip under .../dynentrance/<dynEntranceId>/); it is never picked by name.
     """
     UnityPy = _patch_unitypy()
     env = UnityPy.load(data)
@@ -611,46 +694,22 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
         path_id = getattr(ref, 'path_id', None) or getattr(ref, 'm_PathID', None)
         if path_id:
             container[path] = path_id
-    in_prefab = skeleton_data_in_prefabs(illust_prefab_roots(container, dyn_illust_id), read)
 
-    mixes: list[dict] = []
     linked = [(path_id, text_of(tree.get('skeletonJSON'))) for path_id, tree in skeleton_assets.items()]
     linked = [(path_id, skeleton) for path_id, skeleton in linked if skeleton]
-    choice = choose_illust_skeleton([(path_id, skeleton[0]) for path_id, skeleton in linked], in_prefab, dyn_illust_id)
-    if choice:
-        chosen_id, skeleton_choice = choice
-        tree = skeleton_assets[chosen_id]
-        skeleton = dict(linked)[chosen_id]
+
+    def linked_parts(skeleton_id: int) -> tuple[tuple[str, bytes], tuple[str, bytes], list[dict]]:
+        """The skeleton TextAsset, the one atlas and the crossfade table a SkeletonDataAsset links."""
+        tree = skeleton_assets[skeleton_id]
+        skeleton = dict(linked)[skeleton_id]
         atlas_refs = [atlas_assets.get(ref.get('m_PathID')) for ref in tree.get('atlasAssets', []) if isinstance(ref, dict)]
         atlas_texts = [text_of(a.get('atlasFile')) for a in atlas_refs if a]
         atlas_texts = [a for a in atlas_texts if a]
         if len(atlas_texts) != 1:
             raise SyncError(f'{skeleton[0]}: expected one atlas, found {len(atlas_texts)}')
-        atlas = atlas_texts[0]
-        for source, target, seconds in zip(tree.get('fromAnimation') or [], tree.get('toAnimation') or [], tree.get('duration') or []):
-            mixes.append({'from': str(source), 'to': str(target), 'duration': round(float(seconds), 3)})
-    else:
-        skeletons = [t for t in texts.values() if is_main_illust_name(t[0]) and not t[0].lower().endswith('.atlas')
-                     and (t[0].lower().endswith('.skel') or is_json_skeleton(t[1]))]
-        skeleton = pick_one(skeletons, lambda c: c[0], dyn_illust_id, 'illustration skeleton')
-        skeleton_choice = 'name'
-        atlases = [t for t in texts.values() if t[0].lower().endswith('.atlas') and is_main_illust_name(t[0])]
-        same = [a for a in atlases if strip_skeleton_ext(a[0]) == strip_skeleton_ext(skeleton[0])]
-        atlas = same[0] if len(same) == 1 else pick_one(atlases, lambda c: c[0], dyn_illust_id, 'atlas')
-
-    skeleton_name, skeleton_bytes = skeleton
-    atlas_name, atlas_bytes = atlas
-    try:
-        atlas_text = atlas_bytes.decode('utf-8')
-    except UnicodeDecodeError as error:
-        raise SyncError(f'{atlas_name}: atlas is not UTF-8') from error
-    if not skeleton_bytes:
-        raise SyncError(f'{skeleton_name}: empty skeleton')
-
-    page_names = atlas_page_names(atlas_text)
-    sizes = atlas_page_sizes(atlas_text)
-    if not page_names:
-        raise SyncError(f'{atlas_name}: no pages')
+        mixes = [{'from': str(source), 'to': str(target), 'duration': round(float(seconds), 3)}
+                 for source, target, seconds in zip(tree.get('fromAnimation') or [], tree.get('toAnimation') or [], tree.get('duration') or [])]
+        return skeleton, atlas_texts[0], mixes
 
     def find_texture(name: str, size) -> object | None:
         found = [t for t in textures if t.m_Name == name] or [t for t in textures if t.m_Name.lower() == name.lower()]
@@ -660,17 +719,73 @@ def decode_bundle(data: bytes, dyn_illust_id: str) -> Decoded:
             raise SyncError(f'Several textures are named {name}')
         return found[0] if found else None
 
-    pages, page_info = [], []
-    for page, size in zip(page_names, sizes):
-        texture_name = texture_name_for_page(page)
-        texture = find_texture(texture_name, size)
-        if texture is None:
-            raise SyncError(f'{atlas_name}: no texture for page {page}')
-        mask = find_texture(f'{texture_name}[alpha]', size)
+    def atlas_and_pages(skeleton: tuple[str, bytes], atlas: tuple[str, bytes]):
+        """The atlas as text and its page images, prepared (prepare_page), in page order."""
+        skeleton_name, skeleton_bytes = skeleton
+        atlas_name, atlas_bytes = atlas
         try:
-            image, info = prepare_page(texture.image, mask.image if mask is not None else None, size)
-        except SyncError as error:
-            raise SyncError(f'{atlas_name}: page {page}: {error}') from error
-        pages.append(image)
-        page_info.append({'page': page, **info})
-    return Decoded(skeleton_bytes, skeleton_name, skeleton_choice, atlas_text, atlas_name, pages, page_names, page_info, mixes)
+            atlas_text = atlas_bytes.decode('utf-8')
+        except UnicodeDecodeError as error:
+            raise SyncError(f'{atlas_name}: atlas is not UTF-8') from error
+        if not skeleton_bytes:
+            raise SyncError(f'{skeleton_name}: empty skeleton')
+        page_names = atlas_page_names(atlas_text)
+        sizes = atlas_page_sizes(atlas_text)
+        if not page_names:
+            raise SyncError(f'{atlas_name}: no pages')
+        pages, page_info = [], []
+        for page, size in zip(page_names, sizes):
+            texture_name = texture_name_for_page(page)
+            texture = find_texture(texture_name, size)
+            if texture is None:
+                raise SyncError(f'{atlas_name}: no texture for page {page}')
+            mask = find_texture(f'{texture_name}[alpha]', size)
+            try:
+                image, info = prepare_page(texture.image, mask.image if mask is not None else None, size)
+            except SyncError as error:
+                raise SyncError(f'{atlas_name}: page {page}: {error}') from error
+            pages.append(image)
+            page_info.append({'page': page, **info})
+        return atlas_text, pages, page_names, page_info
+
+    in_prefab = skeleton_data_in_prefabs(illust_prefab_roots(container, dyn_illust_id), read)
+    mixes: list[dict] = []
+    choice = choose_illust_skeleton([(path_id, skeleton[0]) for path_id, skeleton in linked], in_prefab, dyn_illust_id)
+    if choice:
+        chosen_id, skeleton_choice = choice
+        skeleton, atlas, mixes = linked_parts(chosen_id)
+    else:
+        skeletons = [t for t in texts.values() if is_main_illust_name(t[0]) and not t[0].lower().endswith('.atlas')
+                     and (t[0].lower().endswith('.skel') or is_json_skeleton(t[1]))]
+        skeleton = pick_one(skeletons, lambda c: c[0], dyn_illust_id, 'illustration skeleton')
+        skeleton_choice = 'name'
+        atlases = [t for t in texts.values() if t[0].lower().endswith('.atlas') and is_main_illust_name(t[0])]
+        same = [a for a in atlases if strip_skeleton_ext(a[0]) == strip_skeleton_ext(skeleton[0])]
+        atlas = same[0] if len(same) == 1 else pick_one(atlases, lambda c: c[0], dyn_illust_id, 'atlas')
+    atlas_text, pages, page_names, page_info = atlas_and_pages(skeleton, atlas)
+
+    entrance = None
+    if dyn_entrance_id is not None:
+        roots = entrance_prefab_roots(container, dyn_entrance_id)
+        if not roots:
+            raise SyncError(f'The skin has the entrance {dyn_entrance_id}, but the bundle has no prefab for it')
+        played = skeleton_data_in_prefabs(roots, read) & set(dict(linked))
+        if len(played) != 1:
+            raise SyncError(f'Entrance prefab {dyn_entrance_id} plays {len(played)} skeletons, expected one')
+        entrance_id = played.pop()
+        if choice and entrance_id == choice[0]:
+            raise SyncError(f'Entrance prefab {dyn_entrance_id} plays the illustration skeleton')
+        entrance_skeleton, entrance_atlas, _ = linked_parts(entrance_id)
+        e_atlas_text, e_pages, e_page_names, e_page_info = atlas_and_pages(entrance_skeleton, entrance_atlas)
+        audio_wav, audio_name = None, None
+        audio_path = entrance_audio_path(container, dyn_entrance_id)
+        if audio_path is not None:
+            clip = env.container[audio_path].read()
+            samples = clip.samples
+            if len(samples) != 1:
+                raise SyncError(f'{audio_path}: expected one sample, found {len(samples)}')
+            audio_name, audio_wav = next(iter(samples.items()))
+        entrance = DecodedEntrance(entrance_skeleton[1], entrance_skeleton[0], e_atlas_text, entrance_atlas[0],
+                                   e_pages, e_page_names, e_page_info, audio_wav, audio_name)
+
+    return Decoded(skeleton[1], skeleton[0], skeleton_choice, atlas_text, atlas[0], pages, page_names, page_info, mixes, entrance)

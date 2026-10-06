@@ -12,6 +12,7 @@ const SKIN_ID = /^[A-Za-z0-9_]+(?:@[A-Za-z0-9_]+)?#[0-9]+$/;
 const HEX64 = /^[a-f0-9]{64}$/;
 const MD5 = /^[a-f0-9]{32}$/;
 const VERSION = /^\d+\.\d+\.\d+$/;
+const ENTRANCE_ID = /^dyn_entrance_[A-Za-z0-9_#]+$/;
 
 /** skinId with '@' and '#' replaced by '_'. Mirrors slug_for in scripts/l2d.py. */
 export function slugFor(skinId) {
@@ -111,6 +112,61 @@ function fileShape(record, label, file) {
   if (typeof record.sha256 !== 'string' || !HEX64.test(record.sha256)) throw new Error(`${label}: sha256 missing`);
 }
 
+/** An MP3 starts with an ID3 tag or an MPEG audio frame sync. */
+export function isMp3(bytes) {
+  return bytes.length > 4 && (bytes.toString('ascii', 0, 3) === 'ID3' || (bytes[0] === 0xff && (bytes[1] & 0xe0) === 0xe0));
+}
+
+/** The shape of a skeleton + atlas + pages group: the illustration (name 'skeleton', pages
+ *  'page') or its entrance ('entrance', 'entrance-page'). Returns its files. */
+function skeletonShape(part, label, name, pagePrefix) {
+  if (!isObject(part.skeleton) || !['binary', 'json'].includes(part.skeleton.format)) throw new Error(`${label}: skeleton.format must be binary or json`);
+  fileShape(part.skeleton, `${label}: skeleton`, part.skeleton.format === 'json' ? `${name}.json` : `${name}.skel`);
+  fileShape(part.atlas, `${label}: atlas`, `${name}.atlas`);
+  if (!Array.isArray(part.textures) || !part.textures.length) throw new Error(`${label}: textures missing`);
+  part.textures.forEach((texture, index) => {
+    fileShape(texture, `${label}: textures[${index}]`, `${pagePrefix}${index}.webp`);
+    if (!positiveInt(texture.width) || !positiveInt(texture.height)) throw new Error(`${label}: textures[${index}] width/height missing`);
+  });
+  if (!isObject(part.animations) || !Object.keys(part.animations).length ||
+      !Object.values(part.animations).every((value) => typeof value === 'number' && Number.isFinite(value) && value >= 0)) {
+    throw new Error(`${label}: animations must map names to durations`);
+  }
+  const bounds = part.bounds;
+  if (!isObject(bounds) || !['x', 'y', 'width', 'height'].every((key) => Number.isFinite(bounds[key])) || bounds.width <= 0 || bounds.height <= 0) {
+    throw new Error(`${label}: bounds missing`);
+  }
+  return [part.skeleton, part.atlas, ...part.textures];
+}
+
+/** A skeleton group's contents against its record: WebP sizes, format, version, atlas pages and
+ *  (with `deep`) the runtime's reading of its animations and bounds. */
+function checkSkeleton(part, label, contents, spineVersion, deep) {
+  for (const texture of part.textures) {
+    const size = webpSize(contents[texture.file]);
+    if (size.width !== texture.width || size.height !== texture.height) throw new Error(`${label}: ${texture.file} is ${size.width}x${size.height}, model.json says ${texture.width}x${texture.height}`);
+  }
+  const skeletonBytes = contents[part.skeleton.file];
+  if ((part.skeleton.format === 'json') !== isJsonSkeleton(skeletonBytes)) throw new Error(`${label}: skeleton format does not match its content`);
+  if (skeletonVersion(skeletonBytes) !== spineVersion) throw new Error(`${label}: skeleton declares a different Spine version`);
+  const atlasText = contents[part.atlas.file].toString('utf8');
+  const pages = readAtlas(atlasText).pages.map((page) => page.name);
+  const expectedPages = part.textures.map((texture) => texture.file);
+  if (JSON.stringify(pages) !== JSON.stringify(expectedPages)) throw new Error(`${label}: atlas pages ${pages.join(', ')} do not match textures ${expectedPages.join(', ')}`);
+  atlasPageSizes(atlasText).forEach((size, index) => {
+    const texture = part.textures[index];
+    if (size && (size.width !== texture.width || size.height !== texture.height)) {
+      throw new Error(`${label}: ${texture.file} is ${texture.width}x${texture.height} but the atlas was packed at ${size.width}x${size.height}`);
+    }
+  });
+  if (deep) {
+    const found = inspectSkeleton(skeletonBytes, atlasText);
+    if (found.spineVersion !== spineVersion) throw new Error(`${label}: runtime reads version ${found.spineVersion}`);
+    if (JSON.stringify(found.animations) !== JSON.stringify(part.animations)) throw new Error(`${label}: animations differ from the skeleton: ${JSON.stringify(found.animations)}`);
+    if (JSON.stringify(found.bounds) !== JSON.stringify(part.bounds)) throw new Error(`${label}: bounds differ from the skeleton: ${JSON.stringify(found.bounds)}`);
+  }
+}
+
 /**
  * Checks one model folder: required fields, the folder name, every file's bytes and sha256,
  * the atlas pages, the WebP sizes, the declared Spine version and (with `deep`) that the
@@ -129,32 +185,36 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     throw new Error(`${label}: source must give server, bundle, md5 and resVersion`);
   }
   if (folder !== folderFor(model.skinId, source.md5)) throw new Error(`${label}: folder must be ${folderFor(model.skinId, source.md5)} (slug ${slug})`);
-  if (!isObject(model.skeleton) || !['binary', 'json'].includes(model.skeleton.format)) throw new Error(`${label}: skeleton.format must be binary or json`);
-  fileShape(model.skeleton, `${label}: skeleton`, model.skeleton.format === 'json' ? 'skeleton.json' : 'skeleton.skel');
-  fileShape(model.atlas, `${label}: atlas`, 'skeleton.atlas');
-  if (!Array.isArray(model.textures) || !model.textures.length) throw new Error(`${label}: textures missing`);
-  model.textures.forEach((texture, index) => {
-    fileShape(texture, `${label}: textures[${index}]`, `page${index}.webp`);
-    if (!positiveInt(texture.width) || !positiveInt(texture.height)) throw new Error(`${label}: textures[${index}] width/height missing`);
-  });
+  const files = skeletonShape(model, label, 'skeleton', 'page');
   if (model.premultipliedAlpha !== true) throw new Error(`${label}: premultipliedAlpha must be true`);
-  if (!isObject(model.animations) || !Object.keys(model.animations).length ||
-      !Object.values(model.animations).every((value) => typeof value === 'number' && Number.isFinite(value) && value >= 0)) {
-    throw new Error(`${label}: animations must map names to durations`);
-  }
   // The site loops Idle and the bounds are framed from it. An entrance skeleton has only Start,
   // so this also catches the wrong skeleton picked from a bundle.
   if (!Object.hasOwn(model.animations, 'Idle')) throw new Error(`${label}: animations must include Idle (has ${Object.keys(model.animations).join(', ')})`);
-  const bounds = model.bounds;
-  if (!isObject(bounds) || !['x', 'y', 'width', 'height'].every((key) => Number.isFinite(bounds[key])) || bounds.width <= 0 || bounds.height <= 0) {
-    throw new Error(`${label}: bounds missing`);
-  }
   if (model.mixes !== undefined && (!Array.isArray(model.mixes) || !model.mixes.every((mix) =>
     isObject(mix) && typeof mix.from === 'string' && typeof mix.to === 'string' && Number.isFinite(mix.duration)))) {
     throw new Error(`${label}: mixes must be a list of {from, to, duration}`);
   }
+  // The skin's dynEntranceId, recorded by the sync from skin_table: a skin that has one must
+  // carry its entrance, and one without must not, so an entrance can never go missing quietly.
+  if (!Object.hasOwn(model, 'dynEntranceId') || !(model.dynEntranceId === null || (typeof model.dynEntranceId === 'string' && ENTRANCE_ID.test(model.dynEntranceId)))) {
+    throw new Error(`${label}: dynEntranceId must be the skin's dyn_entrance_ id or null`);
+  }
+  if (!Object.hasOwn(model, 'entrance')) throw new Error(`${label}: entrance must be present (null when the skin has none)`);
+  const entrance = model.entrance;
+  if ((entrance === null) !== (model.dynEntranceId === null)) {
+    throw new Error(model.dynEntranceId ? `${label}: the skin has the entrance ${model.dynEntranceId} but model.json has none` : `${label}: entrance given for a skin without a dynEntranceId`);
+  }
+  if (entrance !== null) {
+    if (!isObject(entrance)) throw new Error(`${label}: entrance must be an object`);
+    files.push(...skeletonShape(entrance, `${label}: entrance`, 'entrance', 'entrance-page'));
+    if (!Object.hasOwn(entrance.animations, 'Start')) throw new Error(`${label}: entrance animations must include Start (has ${Object.keys(entrance.animations).join(', ')})`);
+    if (entrance.audio !== null) {
+      fileShape(entrance.audio, `${label}: entrance.audio`, 'entrance.mp3');
+      if (!(Number.isFinite(entrance.audio.duration) && entrance.audio.duration > 0)) throw new Error(`${label}: entrance.audio duration missing`);
+      files.push(entrance.audio);
+    }
+  }
 
-  const files = [model.skeleton, model.atlas, ...model.textures];
   const expectedNames = new Set(['model.json', ...files.map((file) => file.file)]);
   const present = await readdir(path.join(root, folder));
   const stray = present.filter((name) => !expectedNames.has(name));
@@ -168,28 +228,10 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     if (sha256(bytes) !== file.sha256) throw new Error(`${label}: ${file.file} sha256 does not match`);
     contents[file.file] = bytes;
   }
-  for (const texture of model.textures) {
-    const size = webpSize(contents[texture.file]);
-    if (size.width !== texture.width || size.height !== texture.height) throw new Error(`${label}: ${texture.file} is ${size.width}x${size.height}, model.json says ${texture.width}x${texture.height}`);
-  }
-  const skeletonBytes = contents[model.skeleton.file];
-  if ((model.skeleton.format === 'json') !== isJsonSkeleton(skeletonBytes)) throw new Error(`${label}: skeleton format does not match its content`);
-  if (skeletonVersion(skeletonBytes) !== model.spineVersion) throw new Error(`${label}: skeleton declares a different Spine version`);
-  const atlasText = contents[model.atlas.file].toString('utf8');
-  const pages = readAtlas(atlasText).pages.map((page) => page.name);
-  const expectedPages = model.textures.map((texture) => texture.file);
-  if (JSON.stringify(pages) !== JSON.stringify(expectedPages)) throw new Error(`${label}: atlas pages ${pages.join(', ')} do not match textures ${expectedPages.join(', ')}`);
-  atlasPageSizes(atlasText).forEach((size, index) => {
-    const texture = model.textures[index];
-    if (size && (size.width !== texture.width || size.height !== texture.height)) {
-      throw new Error(`${label}: ${texture.file} is ${texture.width}x${texture.height} but the atlas was packed at ${size.width}x${size.height}`);
-    }
-  });
-  if (deep) {
-    const found = inspectSkeleton(skeletonBytes, atlasText);
-    if (found.spineVersion !== model.spineVersion) throw new Error(`${label}: runtime reads version ${found.spineVersion}`);
-    if (JSON.stringify(found.animations) !== JSON.stringify(model.animations)) throw new Error(`${label}: animations differ from the skeleton: ${JSON.stringify(found.animations)}`);
-    if (JSON.stringify(found.bounds) !== JSON.stringify(model.bounds)) throw new Error(`${label}: bounds differ from the skeleton: ${JSON.stringify(found.bounds)}`);
+  checkSkeleton(model, label, contents, model.spineVersion, deep);
+  if (entrance !== null) {
+    checkSkeleton(entrance, `${label}: entrance`, contents, model.spineVersion, deep);
+    if (entrance.audio !== null && !isMp3(contents['entrance.mp3'])) throw new Error(`${label}: entrance.mp3 is not an MP3`);
   }
   return model;
 }

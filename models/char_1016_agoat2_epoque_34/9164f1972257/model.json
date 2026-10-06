@@ -53,6 +53,44 @@
       "duration": 0.5
     }
   ],
+  "dynEntranceId": "dyn_entrance_char_1016_agoat2_epoque#34",
+  "entrance": {
+    "skeleton": {
+      "file": "entrance.skel",
+      "format": "binary",
+      "bytes": 790896,
+      "sha256": "0b936a0f7d69e46554d96be9f57e088efa76edbf7e4ff3afa1201cd28072e10e"
+    },
+    "atlas": {
+      "file": "entrance.atlas",
+      "bytes": 45129,
+      "sha256": "84f25eeb6215d92e30843ad5963278d9b685fd891e3a80822d11bd592991381e"
+    },
+    "textures": [
+      {
+        "file": "entrance-page0.webp",
+        "width": 2252,
+        "height": 2252,
+        "bytes": 3158712,
+        "sha256": "a261eab5debb20b5187ae29b9c572277b659b8b0ddce9a9773e47c4145b14fce"
+      }
+    ],
+    "animations": {
+      "Start": 10
+    },
+    "bounds": {
+      "x": -1028,
+      "y": -7,
+      "width": 2048,
+      "height": 1257
+    },
+    "audio": {
+      "file": "entrance.mp3",
+      "duration": 10.854,
+      "bytes": 217861,
+      "sha256": "cf26cba2b9feb05ecbe2a13ee64a14d3e0a720defd37ccbb23d85e9a05186a2a"
+    }
+  },
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1016_agoat2_epoque#34.ab",

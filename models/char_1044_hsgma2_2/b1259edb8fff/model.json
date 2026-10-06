@@ -57,6 +57,8 @@
       "duration": 0.5
     }
   ],
+  "dynEntranceId": null,
+  "entrance": null,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1044_hsgma2_2.ab",

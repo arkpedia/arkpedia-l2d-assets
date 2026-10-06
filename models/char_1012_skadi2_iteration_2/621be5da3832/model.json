@@ -53,6 +53,44 @@
       "duration": 0.5
     }
   ],
+  "dynEntranceId": "dyn_entrance_char_1012_skadi2_iteration#2",
+  "entrance": {
+    "skeleton": {
+      "file": "entrance.skel",
+      "format": "binary",
+      "bytes": 809093,
+      "sha256": "3b4eae248f61979b1c99944afff2263a67e56faae7ddb650e2d1d78ff98dfe81"
+    },
+    "atlas": {
+      "file": "entrance.atlas",
+      "bytes": 27085,
+      "sha256": "e85a80c3a3b6e9f96f7c024526986a23a046bc809e325282c4d175a757d5a24b"
+    },
+    "textures": [
+      {
+        "file": "entrance-page0.webp",
+        "width": 2168,
+        "height": 2168,
+        "bytes": 3040458,
+        "sha256": "73adaf6d54182981299774045e69a8d5d463ef04dc34f04d2084ffed61228d5d"
+      }
+    ],
+    "animations": {
+      "Start": 22.333
+    },
+    "bounds": {
+      "x": -1044,
+      "y": -36,
+      "width": 2049,
+      "height": 1672
+    },
+    "audio": {
+      "file": "entrance.mp3",
+      "duration": 22.772,
+      "bytes": 456098,
+      "sha256": "ca5b8d1c7b1da928f026ce976d9b512f126d8f1583b7bc7b681045abcd421299"
+    }
+  },
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1012_skadi2_iteration#2.ab",

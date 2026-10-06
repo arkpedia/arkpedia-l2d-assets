@@ -4,7 +4,8 @@ import { cp, mkdtemp, readFile, rm, writeFile, unlink } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { folderFor, sha256, skeletonVersion, slugFor, validateRepository, webpSize } from '../scripts/manifest.mjs';
+import { folderFor, isMp3, sha256, skeletonVersion, slugFor, validateRepository, webpSize } from '../scripts/manifest.mjs';
+import { inspectSkeleton } from '../scripts/spine.mjs';
 
 const fixtures = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures');
 const names = JSON.parse(await readFile(path.join(fixtures, 'names.json'), 'utf8'));
@@ -57,6 +58,8 @@ async function fixtureRepo() {
     animations: { Idle: 1.235, Interact: 0.5 },
     bounds: { x: -50, y: 0, width: 100, height: 200 },
     mixes: [{ from: 'Idle', to: 'Interact', duration: 0.5 }],
+    dynEntranceId: null,
+    entrance: null,
     source: { server: 'en', bundle: 'arts/dynchars/char_9999_test_unit#1.ab', md5, resVersion: 'test' },
   };
   const manifest = { schemaVersion: 1, server: 'en', resVersion: 'test', models: { [skinId]: `${folder}/model.json` } };
@@ -182,5 +185,96 @@ test('sync-failures.json, when present, must record md5, code, resVersion and er
       await writeFile(file, JSON.stringify(document));
       await assert.rejects(validateRepository(repo.root), message, `expected ${message}`);
     }
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+/** The fixture model with an entrance: the tiny skeleton again, its one animation named Start
+ *  as an entrance's is, its own atlas page, and a soundtrack. */
+async function entranceRepo() {
+  const repo = await fixtureRepo();
+  const dir = path.join(repo.root, repo.folder);
+  const skeleton = JSON.parse(await readFile(path.join(fixtures, 'tiny', 'skeleton.json'), 'utf8'));
+  skeleton.animations = { Start: skeleton.animations.Idle };
+  const skeletonBytes = Buffer.from(JSON.stringify(skeleton));
+  const atlasText = (await readFile(path.join(fixtures, 'tiny', 'skeleton.atlas'), 'utf8')).replace('page0.webp', 'entrance-page0.webp');
+  const page = await readFile(path.join(fixtures, 'tiny', 'page0.webp'));
+  const mp3 = Buffer.concat([Buffer.from([0xff, 0xfb, 0x90, 0x64]), Buffer.alloc(413)]);
+  await writeFile(path.join(dir, 'entrance.json'), skeletonBytes);
+  await writeFile(path.join(dir, 'entrance.atlas'), atlasText);
+  await writeFile(path.join(dir, 'entrance-page0.webp'), page);
+  await writeFile(path.join(dir, 'entrance.mp3'), mp3);
+  const found = inspectSkeleton(skeletonBytes, atlasText);
+  const model = structuredClone(repo.model);
+  model.dynEntranceId = 'dyn_entrance_char_9999_test_unit#1';
+  model.entrance = {
+    skeleton: record('entrance.json', skeletonBytes, { format: 'json' }),
+    atlas: record('entrance.atlas', Buffer.from(atlasText)),
+    textures: [record('entrance-page0.webp', page, { width: 4, height: 4 })],
+    animations: found.animations,
+    bounds: found.bounds,
+    audio: record('entrance.mp3', mp3, { duration: 22.772 }),
+  };
+  await repo.save(model);
+  return { ...repo, model, dir };
+}
+
+test('an entrance validates with its own skeleton, page and soundtrack', async () => {
+  const repo = await entranceRepo();
+  try {
+    assert.deepEqual(Object.keys(repo.model.entrance.animations), ['Start']);
+    assert.deepEqual(await validateRepository(repo.root), { listed: 1, folders: 1, failures: 0 });
+    const silent = structuredClone(repo.model);
+    silent.entrance.audio = null;
+    await unlink(path.join(repo.dir, 'entrance.mp3'));
+    await repo.save(silent);
+    await validateRepository(repo.root);
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+test('a skin with a dynEntranceId must carry its entrance, and nothing else may', async () => {
+  const repo = await entranceRepo();
+  const variants = [
+    // The guard this exists for: the skin_table names an entrance, the model left it out.
+    [(m) => { m.entrance = null; }, /has the entrance dyn_entrance_char_9999_test_unit#1 but model\.json has none/],
+    [(m) => { m.dynEntranceId = null; }, /entrance given for a skin without a dynEntranceId/],
+    [(m) => { delete m.dynEntranceId; }, /dynEntranceId must be/],
+    [(m) => { delete m.entrance; }, /entrance must be present/],
+    [(m) => { m.dynEntranceId = 'dyn_illust_char_9999_test_unit#1'; }, /dynEntranceId must be/],
+    [(m) => { m.entrance.animations = { Idle: 1.235 }; }, /entrance animations must include Start/],
+    [(m) => { m.entrance.animations = { Start: 9 }; }, /entrance: animations differ/],
+    [(m) => { m.entrance.bounds = { x: 0, y: 0, width: 1, height: 1 }; }, /entrance: bounds differ/],
+    [(m) => { m.entrance.textures[0].file = 'page0.webp'; }, /entrance-page0\.webp/],
+    [(m) => { m.entrance.skeleton.format = 'binary'; }, /entrance\.skel/],
+    [(m) => { m.entrance.audio.duration = 0; }, /duration missing/],
+    [(m) => { m.entrance.audio.sha256 = '0'.repeat(64); }, /entrance\.mp3 sha256 does not match/],
+  ];
+  try {
+    for (const [mutate, message] of variants) {
+      const model = structuredClone(repo.model);
+      mutate(model);
+      await repo.save(model);
+      await assert.rejects(validateRepository(repo.root), message, `expected ${message}`);
+    }
+    // A leftover entrance file in a folder without an entrance is a stray file.
+    const plain = structuredClone(repo.model);
+    plain.dynEntranceId = null;
+    plain.entrance = null;
+    await repo.save(plain);
+    await assert.rejects(validateRepository(repo.root), /unexpected files/);
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+test('the soundtrack must really be an MP3', async () => {
+  assert.equal(isMp3(Buffer.from('ID3\x04\x00\x00\x00')), true);
+  assert.equal(isMp3(Buffer.from([0xff, 0xfb, 0x90, 0x64, 0])), true);
+  assert.equal(isMp3(Buffer.from('OggS\x00\x02')), false);
+  const repo = await entranceRepo();
+  try {
+    const wav = Buffer.from('RIFF....WAVEfmt ');
+    await writeFile(path.join(repo.dir, 'entrance.mp3'), wav);
+    const model = structuredClone(repo.model);
+    model.entrance.audio = record('entrance.mp3', wav, { duration: 22.772 });
+    await repo.save(model);
+    await assert.rejects(validateRepository(repo.root), /entrance\.mp3 is not an MP3/);
   } finally { await rm(repo.root, { recursive: true, force: true }); }
 });

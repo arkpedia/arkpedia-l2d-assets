@@ -6,7 +6,9 @@
 2. Picks every skin with a dynIllustId whose bundle the list carries.
 3. Downloads only bundles that have no folder yet (GET, one at a time, with a pause), checks
    their size and md5 against the list, decodes the skeleton, atlas and atlas pages, and writes
-   models/<slug>/<md5_12>/ (skeleton.skel|json, skeleton.atlas, page<N>.webp, model.json).
+   models/<slug>/<md5_12>/ (skeleton.skel|json, skeleton.atlas, page<N>.webp, model.json). A skin
+   with a dynEntranceId also gets its entrance sequence from the same bundle: entrance.skel|json,
+   entrance.atlas, entrance-page<N>.webp and its soundtrack, entrance.mp3.
 4. Reads each new skeleton with the vendored Spine 3.8 runtime (scripts/inspect-skeleton.mjs)
    for its animations and bounds, then points manifest.json at the new folder.
 
@@ -138,8 +140,9 @@ def file_record(folder: Path, name: str, **extra) -> dict:
     return {'file': name, **extra, 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
 
 
-def inspect(folder: Path) -> dict:
-    result = subprocess.run(['node', str(ROOT / 'scripts' / 'inspect-skeleton.mjs'), str(folder)],
+def inspect(folder: Path, name: str) -> dict:
+    """The vendored Spine 3.8 runtime's reading of <name>.skel|json + <name>.atlas in `folder`."""
+    result = subprocess.run(['node', str(ROOT / 'scripts' / 'inspect-skeleton.mjs'), str(folder), name],
                             capture_output=True, text=True, check=False)
     if result.returncode != 0:
         tail = (result.stderr or result.stdout).strip().splitlines()[-3:]
@@ -151,27 +154,9 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
     """Decodes one verified bundle (l2d.unpack_dat) into `staging`. Returns its model.json content
     and, per atlas page, how the texture was shipped (separate [alpha] mask or not) and how its
     alpha measured."""
-    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id)
-    json_skeleton = l2d.is_json_skeleton(decoded.skeleton)
-    skeleton_file = 'skeleton.json' if json_skeleton else 'skeleton.skel'
-    (staging / skeleton_file).write_bytes(decoded.skeleton)
-    atlas_text, original_pages = l2d.rewrite_atlas(decoded.atlas_text)
-    if original_pages != decoded.page_names:
-        raise l2d.SyncError(f'Atlas pages changed while rewriting: {original_pages} vs {decoded.page_names}')
-    (staging / 'skeleton.atlas').write_bytes(atlas_text.encode('utf-8'))
-    textures = []
-    for index, image in enumerate(decoded.pages):
-        name = f'page{index}.webp'
-        (staging / name).write_bytes(l2d.encode_webp(image))
-        textures.append(file_record(staging, name, width=image.width, height=image.height))
-
-    found = inspect(staging)
-    expected_pages = [f'page{i}.webp' for i in range(len(decoded.pages))]
-    if found['pages'] != expected_pages:
-        raise l2d.SyncError(f'Runtime sees atlas pages {found["pages"]}, expected {expected_pages}')
-    declared = l2d.spine_version(decoded.skeleton)
-    if found['spineVersion'] != declared:
-        raise l2d.SyncError(f'Runtime read version {found["spineVersion"]}, file declares {declared}')
+    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id)
+    skeleton, textures, found, declared = write_skeleton(staging, 'skeleton', 'page', decoded.skeleton,
+                                                         decoded.atlas_text, decoded.page_names, decoded.pages)
     if 'Idle' not in found['animations']:
         # The site loops Idle and the bounds are framed from it; an entrance skeleton has only Start.
         raise l2d.SyncError(f'{decoded.skeleton_name} has no Idle animation (it has {sorted(found["animations"])}); '
@@ -182,25 +167,93 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         'skinId': planned.skin_id,
         'dynIllustId': planned.dyn_illust_id,
         'spineVersion': declared,
-        'skeleton': file_record(staging, skeleton_file, format='json' if json_skeleton else 'binary'),
+        'skeleton': skeleton,
         'atlas': file_record(staging, 'skeleton.atlas'),
         'textures': textures,
         'premultipliedAlpha': True,
         'animations': found['animations'],
         'bounds': found['bounds'],
         'mixes': decoded.mixes,
+        'dynEntranceId': planned.dyn_entrance_id,
+        'entrance': build_entrance(staging, decoded.entrance, declared) if planned.dyn_entrance_id else None,
         'source': {'server': SERVER, 'bundle': planned.bundle, 'md5': planned.md5, 'resVersion': res_version},
     }
     write_json(staging / 'model.json', model)
     log(f'  skeleton {decoded.skeleton_name} (chosen by {decoded.skeleton_choice}), atlas {decoded.atlas_name}')
     for info in decoded.page_info:
         log(f'  page {describe_page(info)}')
-    return model, decoded.page_info
+    page_info = list(decoded.page_info)
+    if decoded.entrance:
+        entrance = model['entrance']
+        audio = entrance['audio']
+        log(f'  entrance {decoded.entrance.skeleton_name}, atlas {decoded.entrance.atlas_name}, '
+            f'Start {entrance["animations"]["Start"]}s, soundtrack '
+            + (f'{decoded.entrance.audio_name} {audio["duration"]}s ({audio["bytes"] / 1e3:.0f} KB MP3)' if audio else 'none'))
+        for info in decoded.entrance.page_info:
+            log(f'  entrance page {describe_page(info)}')
+        page_info += [{**info, 'entrance': True} for info in decoded.entrance.page_info]
+    return model, page_info
+
+
+def write_skeleton(staging: Path, name: str, page_prefix: str, skeleton_bytes: bytes, atlas_text: str,
+                   page_names: list[str], pages: list) -> tuple[dict, list[dict], dict, str]:
+    """Writes <name>.skel|json, <name>.atlas (pages renamed <page_prefix>N.webp) and the pages, then
+    reads them back with the Spine 3.8 runtime. Returns the skeleton record, the texture records,
+    what the runtime found and the version the file declares."""
+    json_skeleton = l2d.is_json_skeleton(skeleton_bytes)
+    skeleton_file = f'{name}.json' if json_skeleton else f'{name}.skel'
+    (staging / skeleton_file).write_bytes(skeleton_bytes)
+    rewritten, original_pages = l2d.rewrite_atlas(atlas_text, page_prefix)
+    if original_pages != page_names:
+        raise l2d.SyncError(f'Atlas pages changed while rewriting: {original_pages} vs {page_names}')
+    (staging / f'{name}.atlas').write_bytes(rewritten.encode('utf-8'))
+    textures = []
+    for index, image in enumerate(pages):
+        page = f'{page_prefix}{index}.webp'
+        (staging / page).write_bytes(l2d.encode_webp(image))
+        textures.append(file_record(staging, page, width=image.width, height=image.height))
+    found = inspect(staging, name)
+    expected_pages = [f'{page_prefix}{i}.webp' for i in range(len(pages))]
+    if found['pages'] != expected_pages:
+        raise l2d.SyncError(f'Runtime sees atlas pages {found["pages"]}, expected {expected_pages}')
+    declared = l2d.spine_version(skeleton_bytes)
+    if found['spineVersion'] != declared:
+        raise l2d.SyncError(f'Runtime read version {found["spineVersion"]}, file declares {declared}')
+    record = file_record(staging, skeleton_file, format='json' if json_skeleton else 'binary')
+    return record, textures, found, declared
+
+
+def build_entrance(staging: Path, entrance: l2d.DecodedEntrance | None, version: str) -> dict:
+    """model.json's `entrance`: the sequence the game plays before the illustration (its one
+    animation, Start), framed in the illustration's own coordinates, and its soundtrack."""
+    if entrance is None:
+        raise l2d.SyncError('The skin has an entrance but none was decoded')
+    skeleton, textures, found, declared = write_skeleton(staging, 'entrance', 'entrance-page', entrance.skeleton,
+                                                         entrance.atlas_text, entrance.page_names, entrance.pages)
+    if declared != version:
+        raise l2d.SyncError(f'Entrance skeleton is Spine {declared}, the illustration {version}')
+    if 'Start' not in found['animations']:
+        raise l2d.SyncError(f'{entrance.skeleton_name} has no Start animation (it has {sorted(found["animations"])})')
+    audio = None
+    if entrance.audio_wav is not None:
+        mp3, duration = l2d.wav_to_mp3(entrance.audio_wav)
+        (staging / 'entrance.mp3').write_bytes(mp3)
+        audio = file_record(staging, 'entrance.mp3', duration=duration)
+    return {
+        'skeleton': skeleton,
+        'atlas': file_record(staging, 'entrance.atlas'),
+        'textures': textures,
+        'animations': found['animations'],
+        'bounds': found['bounds'],
+        'audio': audio,
+    }
 
 
 def describe_page(info: dict) -> str:
     """One line per atlas page for the log and the run summary."""
-    how = 'RGB + [alpha] mask, kept as shipped (already premultiplied)' if info['mask'] else 'RGBA, straight, premultiplied here'
+    how = ('RGB + [alpha] mask, kept as shipped (already premultiplied)' if info['mask']
+           else 'RGBA, already premultiplied, kept as shipped' if info['alpha'] == 'premultiplied'
+           else 'RGBA, straight, premultiplied here')
     text = (f'{info["page"]}: {how}; transparentColour {info["transparentColour"]}, '
             f'semiColourAboveAlpha {info["semiColourAboveAlpha"]}')
     if info.get('resizedFrom'):
