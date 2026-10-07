@@ -102,6 +102,8 @@ export function layersShape(doc, label) {
     if (layer.scroll !== null && (!Array.isArray(layer.scroll) || layer.scroll.length !== 2 || !layer.scroll.every(finite))) throw new Error(`${at}: scroll must be null or [u, v] per second`);
     if (layer.only !== null && !ONLY.has(layer.only)) throw new Error(`${at}: only must be null or ${[...ONLY].join(', ')}`);
     if (!finite(layer.delay) || layer.delay < 0) throw new Error(`${at}: delay must be seconds >= 0`);
+    // What the site draws differently from the game (scripts/layers.py FLOW_UNDISTORTED), or null.
+    if (layer.approximated !== null && (typeof layer.approximated !== 'string' || !layer.approximated.trim())) throw new Error(`${at}: approximated must be null or a note`);
     if (layer.follow === null && layer.animation === null && !vertices.every((v) => Math.abs(v) < REACH)) throw new Error(`${at}: vertices out of reach (${REACH} skeleton units)`);
   });
   if (!parts.size) throw new Error(`${label}: layers draw has no skeleton part`);

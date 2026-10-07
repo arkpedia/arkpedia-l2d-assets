@@ -141,9 +141,16 @@ class Looks(unittest.TestCase):
         plain = layers.look(read_material(material_tree(DISTURB, 1, floats=[('_DstBlend', 1.0), ('_Opacity', 0.5), ('_MainUSpeed', 0.1)],
                                                         colours=[('_MainColor', (1, 1, 1, 1))])))
         self.assertEqual((plain.blend, plain.alpha_scale, plain.scroll), ('add', 0.5, [0.1, 0.0]))
-        flowing = material_tree(DISTURB, 1, floats=[('_IntensityU', 0.01)], extra_textures=[('_DisturbTex', 2)])
-        with self.assertRaisesRegex(layers.LayerError, r'flow distortion \(up to 0.01 UV, 5.1 texels\)'):
-            layers.look(read_material(flowing))
+        # A slight flow (a few texels) is drawn without it, and says so; a strong one is left out.
+        slight = layers.look(read_material(material_tree(DISTURB, 1, floats=[('_IntensityU', 0.01)], extra_textures=[('_DisturbTex', 2)])))
+        self.assertEqual(slight.approximated, 'flow distortion (up to 0.01 UV, 5.1 texels) drawn without it')
+        self.assertIsNone(plain.approximated)
+        strong = material_tree(DISTURB, 1, floats=[('_IntensityU', 0.2)], extra_textures=[('_DisturbTex', 2)])
+        with self.assertRaisesRegex(layers.LayerError, r'flow distortion \(up to 0.2 UV, 102.4 texels\)'):
+            layers.look(read_material(strong))
+        self.assertTrue(layers.slight_flow({'uv': 0.06, 'texels': 40.0}))
+        for flow in ({'uv': 0.07, 'texels': 10.0}, {'uv': 0.01, 'texels': 41.0}, {'uv': 0.01, 'texels': 0.0}):
+            self.assertFalse(layers.slight_flow(flow), flow)
         with self.assertRaisesRegex(layers.LayerError, 'dissolve'):
             layers.look(read_material(material_tree(DISTURB, 1, floats=[('_Amount', 0.3)], extra_textures=[('_DissolveTex', 2)])))
         # Dissolve without a texture is a constant factor; amount 0 is none.
@@ -258,7 +265,8 @@ class Export(unittest.TestCase):
         p = Prefab()
         _, effects = p.game_object('General Effects', p.root)
         noise = p.add('Texture2D', {'m_Name': 'noise', 'm_Width': 64, 'm_Height': 64})
-        p.quad('cloud', effects, material_tree(DISTURB, p.texture, floats=[('_IntensityV', 0.02)], extra_textures=[('_DisturbTex', noise)]))
+        p.quad('cloud', effects, material_tree(DISTURB, p.texture, floats=[('_IntensityV', 0.3)], extra_textures=[('_DisturbTex', noise)]))
+        p.quad('mist', effects, material_tree(DISTURB, p.texture, floats=[('_IntensityV', 0.02)], extra_textures=[('_DisturbTex', noise)]))
         p.quad('shared', effects, material_tree(ALPHA_BLEND, p.texture, external_texture=True))
         p.quad('off', effects, material_tree(ALPHA_BLEND, p.texture), active=0)
         p.quad('times', effects, {**material_tree(ALPHA_BLEND, p.texture), 'm_Shader': {'m_FileID': 3, 'm_PathID': 98}})
@@ -276,13 +284,15 @@ class Export(unittest.TestCase):
         result = p.export()
         omitted = result.document['omitted']
         self.assertEqual((omitted['particles'], omitted['trails'], omitted['hidden']), (1, 1, 1))
-        self.assertEqual(omitted['custom'], [{'name': 'cloud', 'reason': 'flow distortion (up to 0.02 UV, 0.1 texels)'},
+        self.assertEqual(omitted['custom'], [{'name': 'cloud', 'reason': 'flow distortion (up to 0.3 UV, 1.2 texels)'},
                                              {'name': 'times', 'reason': f'shader not found ({SHADERS_CAB}:98)'}])
         self.assertEqual(omitted['externalTexture'], [{'name': 'shared', 'reason': f'texture in {OTHER_CAB}'}])
         self.assertEqual(omitted['other'], [{'name': 'rotating', 'reason': 'UV rotation script'}])
         tri = layer_named(result, 'tri')
         self.assertEqual((tri['triangles'], tri['colors'][:4]), ([0, 1, 2], [1.0, 1.0, 1.0, 0.5]))
-        self.assertEqual(result.counts['layers'], 1)
+        self.assertEqual(layer_named(result, 'mist')['approximated'], 'flow distortion (up to 0.02 UV, 0.1 texels) drawn without it')
+        self.assertIsNone(tri['approximated'])
+        self.assertEqual(result.counts['layers'], 2)
 
     def test_layers_under_an_erase_mask_are_left_out(self):
         p = Prefab()

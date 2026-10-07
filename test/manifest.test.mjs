@@ -313,7 +313,7 @@ async function layersRepo() {
   const dir = path.join(repo.root, repo.folder);
   const texture = await readFile(path.join(fixtures, 'tiny', 'page0.webp'));
   await writeFile(path.join(dir, 'layer0.webp'), texture);
-  const quad = { uvs: [0, 1, 1, 1, 0, 0, 1, 0], colors: null, triangles: [0, 3, 1, 3, 0, 2], scroll: null, only: null, delay: 0 };
+  const quad = { uvs: [0, 1, 1, 1, 0, 0, 1, 0], colors: null, triangles: [0, 3, 1, 3, 0, 2], scroll: null, only: null, delay: 0, approximated: null };
   const doc = {
     schemaVersion: 1,
     textures: [{ ...record('layer0.webp', texture, { width: 4, height: 4 }), wrap: ['clamp', 'clamp'], opaque: [0, 0, 1, 1] }],
@@ -383,6 +383,8 @@ test('broken layers fail validation', async () => {
     [(d) => { delete layer(d, 2).follow.parent; }, /follow must be/],
     [(d) => { layer(d, 0).only = 'Touch'; }, /only must be/],
     [(d) => { layer(d, 0).delay = -1; }, /delay must be/],
+    [(d) => { delete layer(d, 0).approximated; }, /approximated must be null or a note/],
+    [(d) => { layer(d, 0).approximated = ' '; }, /approximated must be null or a note/],
     [(d) => { d.separators = ['tail']; }, /separator slot tail is not in the skeleton/],
     [(d) => { d.separators = ['body', 'body']; }, /separators must be distinct/],
     [(d) => { d.draw[1].part = 1; }, /part must be a distinct index 0-0/],

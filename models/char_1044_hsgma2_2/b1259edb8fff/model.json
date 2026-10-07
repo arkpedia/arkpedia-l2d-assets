@@ -61,8 +61,8 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 15961,
-    "sha256": "dfd4e76632633eae1632590d701f5f8ac776ae7aed15f6938254d986d2dccef1"
+    "bytes": 19211,
+    "sha256": "6d3a3d73d79cfed3c741c97e864de3689b275e4c31b50150492c42fe3c8bdc48"
   },
   "source": {
     "server": "en",

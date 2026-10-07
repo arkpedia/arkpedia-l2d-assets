@@ -78,6 +78,7 @@ A layer:
 | `scroll` | `null`, or `[u, v]` image-space UV units per second (the shader's `_MainUSpeed`/`_MainVSpeed` or `_UVTween`, or a UV scroll script's speeds; the script's semantics are inferred from its field names). |
 | `only` | `null`, or the animation whose controller group the layer is in (`Idle`, `Interact`, `Special`, `Start`): drawn only while it plays, its timeline from that animation's start. |
 | `delay` | Seconds after its clock starts before the layer appears (a `_delayTime` script on its chain), its timeline shifted by as much. |
+| `approximated` | `null`, or what the site draws differently from the game. Today only one case: a slight flow distortion (at most 0.06 UV and 40 texels: `FLOW_UNDISTORTED` in `scripts/layers.py`) is drawn without its wobble, because leaving the layer out loses a backdrop (Ines's in Under the Flaming Dome, Rosmontis's sky). Stronger flows are left out under `omitted.custom` until the shader is ported. |
 
 ## How the files are made
 

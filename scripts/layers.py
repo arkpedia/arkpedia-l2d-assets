@@ -272,6 +272,21 @@ class Look:
     scroll: list
     cull: int
     queue: int
+    # What the site draws differently from the game, or None: a slight flow distortion drawn without
+    # its wobble (FLOW_UNDISTORTED).
+    approximated: str | None = None
+
+
+# A flow-distortion layer whose texture moves at most this far is drawn without the distortion: the
+# wobble is a few texels (Ines's backdrop in Under the Flaming Dome: 6 and 16 texels, Rosmontis's sky:
+# 40; Eyjafjalla's window clouds: 0.06 UV), and leaving the layer out loses the backdrop itself.
+# Stronger flows (0.1-0.3 UV, real motion) stay out until the shader is ported.
+FLOW_UNDISTORTED = {'uv': 0.06, 'texels': 40.0}
+
+
+def slight_flow(flow: dict) -> bool:
+    """Whether a flow distortion (flow_distortion) is slight enough to draw the layer without it."""
+    return flow['uv'] <= FLOW_UNDISTORTED['uv'] and 0 < flow['texels'] <= FLOW_UNDISTORTED['texels']
 
 
 def flow_distortion(m: Material, name: str) -> dict | None:
@@ -308,10 +323,23 @@ def look(m: Material) -> Look:
     blend = BLENDS.get((int(m.factor(m.shader.src)), int(m.factor(m.shader.dst))), f'{m.factor(m.shader.src):g},{m.factor(m.shader.dst):g}')
     cull = int(m.factor(m.shader.cull))
 
+    approximated = None
+
     def plain(color_property, rgb_scale=1.0, alpha_scale=1.0, scroll=(0.0, 0.0), st_=None):
         color = list(m.colors.get(color_property) or [m.shader.defaults.get(color_property, 0.5)] * 4)
         return Look(blend=blend, texture=main['tex'], st=list(st_ or st), color=color, color_property=color_property,
-                    rgb_scale=rgb_scale, alpha_scale=alpha_scale, scroll=list(scroll), cull=cull, queue=m.queue)
+                    rgb_scale=rgb_scale, alpha_scale=alpha_scale, scroll=list(scroll), cull=cull, queue=m.queue,
+                    approximated=approximated)
+
+    def check_flow():
+        """Refuse a flow distortion the site cannot leave out without changing the picture."""
+        nonlocal approximated
+        flow = flow_distortion(m, name)
+        if not flow:
+            return
+        if not slight_flow(flow):
+            raise LayerError(f'flow distortion (up to {flow["uv"]:g} UV, {flow["texels"]:g} texels)')
+        approximated = f'flow distortion (up to {flow["uv"]:g} UV, {flow["texels"]:g} texels) drawn without it'
 
     if name in PLAIN_TINT:
         if 'HG_SPRITE_SHEET' in keywords:
@@ -322,9 +350,7 @@ def look(m: Material) -> Look:
             raise LayerError('UV rotation (_HG_UV_ROTATION)')
         if '_HGCUSTOMVERTEXSTREAM_ON' in keywords:
             raise LayerError('custom vertex stream (_HGCUSTOMVERTEXSTREAM_ON)')
-        flow = flow_distortion(m, name)
-        if flow:
-            raise LayerError(f'flow distortion (up to {flow["uv"]:g} UV, {flow["texels"]:g} texels)')
+        check_flow()
         dissolve = dissolve_factor(m)
         if dissolve is None:
             raise LayerError(f'dissolve (amount {m.float("_Amount", 0.5):g})')
@@ -332,9 +358,7 @@ def look(m: Material) -> Look:
             raise LayerError('ramp texture')
         return plain('_MainColor', alpha_scale=m.float('_Opacity', 1.0) * dissolve, scroll=(m.float('_MainUSpeed'), m.float('_MainVSpeed')))
     if name in ANCHOR:
-        flow = flow_distortion(m, name)
-        if flow:
-            raise LayerError(f'flow distortion (up to {flow["uv"]:g} UV, {flow["texels"]:g} texels)')
+        check_flow()
         # Without a distortion texture the anchor only shifts the UVs by a constant.
         offset = [0.0, 0.0]
         for iu, iv, au, av, toggle in (('_IntensityU', '_IntensityV', '_AnchorU', '_AnchorV', None),
@@ -1037,7 +1061,10 @@ class _Exporter:
             self.counts['only'] += 1
         renderer = self.renderer_tree(tr)
         layer = {'name': label, 'blend': look_.blend, 'texture': texture, 'color': colour, 'vertices': vertices, 'uvs': uvs, 'colors': colors,
-                 'triangles': tris, 'follow': follow, 'animation': animation, 'scroll': scroll, 'only': only, 'delay': round(delay, 4)}
+                 'triangles': tris, 'follow': follow, 'animation': animation, 'scroll': scroll, 'only': only, 'delay': round(delay, 4),
+                 'approximated': look_.approximated}
+        if look_.approximated:
+            self.counts['approximated'] = self.counts.get('approximated', 0) + 1
         return {'layer': layer, 'sort': (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0), look_.queue, -z, self.walk[tr])}
 
     def run(self) -> LayerExport:
