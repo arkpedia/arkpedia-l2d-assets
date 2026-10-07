@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_4116_blkkgt@witch#5",
+  "dynIllustId": "dyn_illust_char_4116_blkkgt_witch#5",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1361925,
+    "sha256": "ef01e8efe956f40ac4420b8179314687b1f130f4ea19e36b6068cece4b2d7990"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 34597,
+    "sha256": "de04766982f47b21aac2ca796f371dd1e5c39856e495521ef47b7a1bfd79a22b"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2528,
+      "height": 2528,
+      "bytes": 5118170,
+      "sha256": "6696db27d51acadd225ba7e715b8696469a7d30077359b8ef7f6ab429ca1c4c2"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 4.333,
+    "Interact": 10.667,
+    "Special": 10
+  },
+  "bounds": {
+    "x": -1028,
+    "y": -168,
+    "width": 2010,
+    "height": 1925
+  },
+  "mixes": [],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 11024,
+    "sha256": "7556476d01c43506c1be1ac1ec884be6fc1d8fc4d9b43d249829c42d5912e1a7"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_4116_blkkgt_witch#5.ab",
+    "md5": "baa8a2a6ef519e3a87b95a760d8eb852",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

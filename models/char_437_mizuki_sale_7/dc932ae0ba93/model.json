@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_437_mizuki@sale#7",
+  "dynIllustId": "dyn_illust_char_437_mizuki_sale#7",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1056448,
+    "sha256": "bba32530ea6391ac22922c8bf7d08e6f42d5b57d7607de63b5d62c3bed4f3cd8"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 33985,
+    "sha256": "7ccfbc08f1592bac2efd9811afd532eb278e3fb567e8e2fb3ce1702626cbe51e"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2252,
+      "height": 2252,
+      "bytes": 4357956,
+      "sha256": "f5fc18f0ecfe0d11dfd32a2b70a82ec8ac39fb75c850165df671735a2920cadf"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 4,
+    "Interact": 7.433,
+    "Special": 9.767
+  },
+  "bounds": {
+    "x": -997,
+    "y": -111,
+    "width": 1997,
+    "height": 1867
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 1337,
+    "sha256": "89d9da465483f1f7d31131fabe50f41af209202687f15d4fea8e61a6ec841dbf"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_437_mizuki_sale#7.ab",
+    "md5": "dc932ae0ba931b8204dcab29fff65d45",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1035_wisdel#2",
+  "dynIllustId": "dyn_illust_char_1035_wisdel_2",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 697866,
+    "sha256": "8d756d37e803d5edb9b5a111e5b74f2b08787cac4617c344fd61a4cfa5373c44"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 19975,
+    "sha256": "014820efaf77d4595fe971f3064357e1ed0fa92a972c662f050f8ec5f6e4416d"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2212,
+      "height": 2212,
+      "bytes": 3077516,
+      "sha256": "23c71b64f83ed8cc8de87ae2f13ff4337f305a95bdde8999257942ea4bee5f73"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 8,
+    "Interact": 11.833,
+    "Special": 8
+  },
+  "bounds": {
+    "x": -869,
+    "y": -136,
+    "width": 1648,
+    "height": 1714
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.4
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.4
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 1518,
+    "sha256": "1d9a74f7b495396495f95c1138d991d4cae8df8f67aa1ef5bc4a26ed5aedcd99"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1035_wisdel_2.ab",
+    "md5": "239f8883b7238a512162164198eea620",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

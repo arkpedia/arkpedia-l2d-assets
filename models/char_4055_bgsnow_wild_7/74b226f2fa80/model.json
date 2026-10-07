@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_4055_bgsnow@wild#7",
+  "dynIllustId": "dyn_illust_char_4055_bgsnow_wild#7",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 744702,
+    "sha256": "482e5cec23ce3f760adfd027a15de4b426c1244d934a9bb523ede83a4d2054e8"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 30150,
+    "sha256": "aeafeb5382693759eb3a1dc46b260e4c66c854576ab003b0cfcff6a30e02b487"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2300,
+      "height": 2300,
+      "bytes": 3342530,
+      "sha256": "a00f26565b42c180276c9a871cead169c9c9dfc116d579d1e31135229db381d2"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 4,
+    "Interact": 8.667,
+    "Special": 10
+  },
+  "bounds": {
+    "x": -993,
+    "y": -501,
+    "width": 1956,
+    "height": 1827
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 11187,
+    "sha256": "f30f279fbcf7a73a01635b6455dd7ac413dd2068ae66f2f9d8dd88db82ba1659"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_4055_bgsnow_wild#7.ab",
+    "md5": "74b226f2fa80895cb1b0b8cd198dbd24",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

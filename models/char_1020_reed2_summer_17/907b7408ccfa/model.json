@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1020_reed2@summer#17",
+  "dynIllustId": "dyn_illust_char_1020_reed2_summer#17",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.json",
+    "format": "json",
+    "bytes": 1539980,
+    "sha256": "3193165d3d8053e7c851060a52862aea13ba656fc58b1f7c4e3af4864732b870"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 21669,
+    "sha256": "f1debedbccec9f11adb2808da6de2c32aaa2346bf53a0eddb3c73f9a29a32027"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2064,
+      "height": 2064,
+      "bytes": 2948268,
+      "sha256": "967596024e261e13b1fdc79110418c54518abd54392bd40dd843c313a418ddec"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 6.667,
+    "Interact": 11.333,
+    "Special": 8
+  },
+  "bounds": {
+    "x": -828,
+    "y": -100,
+    "width": 1826,
+    "height": 1311
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 4765,
+    "sha256": "1cb1fa3e62ac76150400810f1c93e0b4e8347e1bca0c32e0ec5f41e543f3ea05"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1020_reed2_summer#17.ab",
+    "md5": "907b7408ccfab4f5f43b10fc57c6d957",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

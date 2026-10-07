@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_172_svrash@ambienceSynesthesia#4",
+  "dynIllustId": "dyn_illust_char_172_svrash_ambienceSynesthesia#4",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1055505,
+    "sha256": "67e0067d2c5ed351a50b2f8e2242e7e26f8321ca455312691299d01c43b44420"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 33653,
+    "sha256": "afa7d998a0e57d7fa02f70c6e1fe3f9468504d8f1da5d969f7a3e87900b9f544"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2360,
+      "height": 2360,
+      "bytes": 4085650,
+      "sha256": "a4334180dbd9f400996a26abfc974a5db15c57bd1950cb2bba33441aae1bfb5a"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 14,
+    "Interact": 16.5,
+    "Special": 16.433
+  },
+  "bounds": {
+    "x": -1020,
+    "y": 1,
+    "width": 2028,
+    "height": 1888
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 20031,
+    "sha256": "0f3ae1c281cee7d9cb1114fe33770d852bb5f5b31fd6f094ec1a71d03ff4e505"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_172_svrash_ambiencesynesthesia#4.ab",
+    "md5": "1a12853ce999a0d3f641cf1acd55ecc1",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

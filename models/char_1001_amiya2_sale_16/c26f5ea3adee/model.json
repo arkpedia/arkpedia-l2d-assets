@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1001_amiya2@sale#16",
+  "dynIllustId": "dyn_illust_char_1001_amiya2_sale#16",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 497731,
+    "sha256": "6e67f4d743929029c63df648bcf3508f784aaa874d33c51a977e2d119ecfa6fc"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 41209,
+    "sha256": "de3c09dbbee9abea41386674b9358a892d1ab96d853d287e7e2cfc850a4a2cf7"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2328,
+      "height": 2328,
+      "bytes": 3799482,
+      "sha256": "9db4d4f67ffe2cd10c0c5d156533834d9abd6bab7bff422a9fdfcc7d22d842e6"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Default": 0,
+    "Idle": 8.267
+  },
+  "bounds": {
+    "x": -1097,
+    "y": 15,
+    "width": 2061,
+    "height": 1683
+  },
+  "mixes": [],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 2268,
+    "sha256": "df485be793d88e9aea316f807d7f0530dd9135d8dfc725ba27b19d296e0bb4a3"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1001_amiya2_sale#16.ab",
+    "md5": "c26f5ea3adee609a11c94edf97dbb4ab",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

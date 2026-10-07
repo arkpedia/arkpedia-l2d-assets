@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_322_lmlee@witch#3",
+  "dynIllustId": "dyn_illust_char_322_lmlee_witch#3",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 693475,
+    "sha256": "94bf04388cb0289d0a487ca8dfbd877be038c56504a64ee16de3e5cdd7e22ff4"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 18850,
+    "sha256": "a91b6c93bde9e6483796e7c7bf098a53ccdd5f63e7874e46814657e41cfabcc5"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 1669204,
+      "sha256": "e3f89efbd4edd01fc731cf86474f75ca67664c1e4d592bacbbcbc923d7029986"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Default": 0,
+    "Idle": 8,
+    "Interact": 15.333,
+    "Special": 7.167
+  },
+  "bounds": {
+    "x": -1093,
+    "y": -392,
+    "width": 2027,
+    "height": 1742
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 1968,
+    "sha256": "86aa5f235e50cf57168af0a2224d68563858023c8c07ee227052993fb36c7cd7"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_322_lmlee_witch#3.ab",
+    "md5": "80da209dfcd3dc33244faeef12969195",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

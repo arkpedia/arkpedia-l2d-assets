@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_4134_cetsyr@epoque#50",
+  "dynIllustId": "dyn_illust_char_4134_cetsyr_epoque#50",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1516955,
+    "sha256": "ce9557cca281ec035b268674bdaa2d319f9b6b20f0194673ab17201d1c4a5c23"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 44725,
+    "sha256": "c07adb4aa7c66c96565e5334497c6cfb347660e261fa986114a2f66b456fff21"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2328,
+      "height": 2328,
+      "bytes": 3851906,
+      "sha256": "9c1b3674d3533b9029713f00828ea88dff98f13efeb653a52ffb8a88d5a49d79"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 5.333,
+    "Interact": 24.3,
+    "Special": 23,
+    "Start": 5
+  },
+  "bounds": {
+    "x": -779,
+    "y": -227,
+    "width": 1638,
+    "height": 1949
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": "dyn_entrance_char_4134_cetsyr_epoque#50",
+  "entrance": {
+    "skeleton": {
+      "file": "entrance.skel",
+      "format": "binary",
+      "bytes": 208127,
+      "sha256": "4101e4c7de5e03bfb4450b0f6d2e10bc986fed0a5bb1284e7ee8e9d741d78f9d"
+    },
+    "atlas": {
+      "file": "entrance.atlas",
+      "bytes": 7077,
+      "sha256": "617e6bd6a3724b3ad21952a76212112b32bce0c45f0698a00e3ecdca625f1a17"
+    },
+    "textures": [
+      {
+        "file": "entrance-page0.webp",
+        "width": 2344,
+        "height": 2344,
+        "bytes": 3798974,
+        "sha256": "a2ba3fc052a52cba7a7a5a4f5d9539941dba20d4c53af5534c39eb5552d0591e"
+      }
+    ],
+    "animations": {
+      "Start": 19
+    },
+    "bounds": {
+      "x": -4522,
+      "y": -1381,
+      "width": 6511,
+      "height": 4739
+    },
+    "camera": {
+      "frames": [
+        [
+          0.0,
+          -71.3,
+          -21.0,
+          1580.0,
+          -0.0
+        ],
+        [
+          19.0,
+          -71.3,
+          -21.0,
+          1580.0,
+          -0.0
+        ]
+      ],
+      "fades": [],
+      "handover": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "audio": {
+      "file": "entrance.mp3",
+      "duration": 21.151,
+      "bytes": 423840,
+      "sha256": "1242ea66dad3a278f7079bc1feb4287e026b01404d5596a07c7125087e8d3661"
+    }
+  },
+  "layers": {
+    "file": "layers.json",
+    "bytes": 16726,
+    "sha256": "39c64a84440837804c45be04354789f945aeecc64c3df53b136745ca7c83b735"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_4134_cetsyr_epoque#50.ab",
+    "md5": "e6a05bf32e4032c717c67af730d027bc",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

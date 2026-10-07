@@ -1,0 +1,1 @@
+{"schemaVersion":1,"textures":[],"bounds":{"x":-1041,"y":-103,"width":2038,"height":1699},"separators":["Lin_Tail","Fish_14_U_Fins_Fault"],"draw":[{"part":0},{"part":1},{"part":2}],"omitted":{"particles":309,"trails":5,"skinned":0,"hidden":0,"holders":0,"custom":[{"name":"bg_ci","reason":"flow distortion (up to 0.2 UV, 0 texels)"}],"externalTexture":[],"other":[]}}

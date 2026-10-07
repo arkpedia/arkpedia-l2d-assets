@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1014_nearl2@epoque#17",
+  "dynIllustId": "dyn_illust_char_1014_nearl2_epoque#17",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 938953,
+    "sha256": "84288ae8f375bc520a2dcbef0f4e2bb7b8e68dd7b79476d37fc7239e626afd53"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 23286,
+    "sha256": "63bab903e337e675bbe80e2f74dd686a81f7edd8fbde45883c28fbee429f121b"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2145,
+      "height": 2145,
+      "bytes": 3447750,
+      "sha256": "1f21d2391c8fe4571466efc95dedb0135110927035376e17a73abafcbdc7111b"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 18,
+    "Interact": 5,
+    "Special": 10
+  },
+  "bounds": {
+    "x": -836,
+    "y": -3,
+    "width": 1909,
+    "height": 1795
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.8
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Idle",
+      "duration": 1.0
+    },
+    {
+      "from": "Interact",
+      "to": "Idle",
+      "duration": 0.8
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 42377,
+    "sha256": "782496a007e79c04e02b855e4ab227ed409913780897b9c236fd188038e91486"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1014_nearl2_epoque#17.ab",
+    "md5": "ddfea6819c8cafb635637d15b37a5466",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1020_reed2@epoque#30",
+  "dynIllustId": "dyn_illust_char_1020_reed2_epoque#30",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1061405,
+    "sha256": "972388460c7f7c75b9f2eff0bc9b3bebd4729469f844c55ef957173a0e8ad0cc"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 28021,
+    "sha256": "00515227247c99c894345eb15e93f214973dbf9f2559a511402080e8d27c2d36"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 2259882,
+      "sha256": "c4c0dec46485c9efa857fea1a1326e5a51d1ea85c3027460edc74b10783f00ec"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 10.667,
+    "Interact": 12,
+    "Special": 19
+  },
+  "bounds": {
+    "x": -606,
+    "y": 34,
+    "width": 1285,
+    "height": 1306
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.75
+    },
+    {
+      "from": "Interact",
+      "to": "Idle",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 12336,
+    "sha256": "67bad6d6bb18daf626be8a53ae3294e4b0a1b2b8298cdfd5ace2b1ab62b0bd17"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1020_reed2_epoque#30.ab",
+    "md5": "4b0a1e791c69d4e0275b4e7060f1f913",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

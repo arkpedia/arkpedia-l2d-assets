@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_003_kalts@sale#14",
+  "dynIllustId": "dyn_illust_char_003_kalts_sale#14",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 325929,
+    "sha256": "1c23786c13cbeaab4f5875338eaaa9a3f189ceb313034ddddae133b762884765"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 29336,
+    "sha256": "1f667668190c9c98c7f40070c26e0b5938080fe434f0f085205701681e59aa66"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2212,
+      "height": 2212,
+      "bytes": 2416210,
+      "sha256": "fcd22ea78102fab9b61cc01f251b7e5d22722b9f7cce754fcc6859fa47164392"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 10
+  },
+  "bounds": {
+    "x": -1019,
+    "y": -119,
+    "width": 2052,
+    "height": 1483
+  },
+  "mixes": [],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 417,
+    "sha256": "776d3aee3a317e2ef80d54e207b46c39ee037a1a1fa5e1e5ede3c2f9db5699ee"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_003_kalts_sale#14.ab",
+    "md5": "ad673b10f4d4de4bffcc0edacf1cffb1",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

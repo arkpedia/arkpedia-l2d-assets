@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_124_kroos@sale#14",
+  "dynIllustId": "dyn_illust_char_124_kroos_sale#14",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 420211,
+    "sha256": "331b0a05717f0082fbda053adbfaed5ee869158f5674b7e1a557a8c489c4b0bc"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 34434,
+    "sha256": "863d8d0ca8de8b80b38f7b1c6c2e50b6083536104564be7de8c3c3bd13c80564"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 1900,
+      "height": 1900,
+      "bytes": 2806326,
+      "sha256": "02641b8a5c1684fd8573b695b9bd7eab733d0b433b7ac4544dd87af352fe6000"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 6.667
+  },
+  "bounds": {
+    "x": -905,
+    "y": -296,
+    "width": 1577,
+    "height": 1572
+  },
+  "mixes": [],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 8721,
+    "sha256": "4f307f39210a8e0c8ce6ea6eb49fb75b31f39d5526f52c587448f7add5fd92f1"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_124_kroos_sale#14.ab",
+    "md5": "db8e3e3248fa455260e5d5200bef1722",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

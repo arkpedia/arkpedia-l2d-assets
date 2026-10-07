@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1028_texas2@epoque#36",
+  "dynIllustId": "dyn_illust_char_1028_texas2_epoque#36",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1166626,
+    "sha256": "025df74221087ba9d8ae872b9035fe103a8704aeb25f9afc6acd07b2edb53182"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 24128,
+    "sha256": "a7d577a6e17bb12106d13dc7e7d46004f2c7eb0fe8a3786f4ae345689960e248"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2144,
+      "height": 2144,
+      "bytes": 3085818,
+      "sha256": "e5e140e2a9842c598f6990d5d372d6509f62bdbb8d378d364ca07ca9c703de61"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 3,
+    "Interact": 10.6,
+    "Special": 9.167
+  },
+  "bounds": {
+    "x": -755,
+    "y": 0,
+    "width": 1610,
+    "height": 1600
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 3128,
+    "sha256": "96eeab3a522e79755eba9c6ed650535b09441b45f2d13934530745099096f8ec"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1028_texas2_epoque#36.ab",
+    "md5": "146dce21e1ecb7019c2a224943b53dac",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

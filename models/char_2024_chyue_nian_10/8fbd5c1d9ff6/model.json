@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_2024_chyue@nian#10",
+  "dynIllustId": "dyn_illust_char_2024_chyue_nian#10",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1485400,
+    "sha256": "fd164fec9010c6f8ec8f69dba1c544753dd0262029912cffe55147f9f912b371"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 40855,
+    "sha256": "0aaea5dba7841f23a4f0f88f5b6ed2cde78f956c1dd769048a06f05a31253c72"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2248,
+      "height": 2248,
+      "bytes": 4164392,
+      "sha256": "29dd9f86220f838d28a695e4dab33110365df66fe47e7a682eb3ca99254fd014"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 12.667,
+    "Interact": 16.7,
+    "Special": 16.667
+  },
+  "bounds": {
+    "x": -927,
+    "y": 3,
+    "width": 1862,
+    "height": 1899
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Interact",
+      "to": "Idle",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 2616,
+    "sha256": "cacb0415df5a8da9277d40b3f1d9853c25c470c80e303705f69d85703a281aed"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_2024_chyue_nian#10.ab",
+    "md5": "8fbd5c1d9ff6d52b010f8114012488a5",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

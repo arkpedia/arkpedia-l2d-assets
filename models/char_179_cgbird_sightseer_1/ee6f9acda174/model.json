@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_179_cgbird@sightseer#1",
+  "dynIllustId": "dyn_illust_char_179_cgbird_sightseer#1",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 606033,
+    "sha256": "fbde9cdc2ac0178f6874138f01f4b8d8a3de76fc53e2af7854f01aac10fba474"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 20779,
+    "sha256": "7ce33cc238fb23dfdc4afe42b7e95cb70a60796d4be10ad26300781c1e85d069"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2196,
+      "height": 2196,
+      "bytes": 3651320,
+      "sha256": "dfc13539b6f5c99037e009c3ad00779e21b96175e240721883380e093a164b8b"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 6.667,
+    "Interact": 19.333,
+    "Special": 8
+  },
+  "bounds": {
+    "x": -1011,
+    "y": -161,
+    "width": 1989,
+    "height": 1607
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 7648,
+    "sha256": "e7bb4863f10d6b06e020945dc3249cb80a61d038b658a5cd79c7cbdfdb9a1d77"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_179_cgbird_sightseer#1.ab",
+    "md5": "ee6f9acda1742e6223442a5504bf8a75",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

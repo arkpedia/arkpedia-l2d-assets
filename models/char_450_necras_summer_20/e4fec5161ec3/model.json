@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_450_necras@summer#20",
+  "dynIllustId": "dyn_illust_char_450_necras_summer#20",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1279829,
+    "sha256": "e7f516a5fdf43a2ef055eca02d763c5c9f5a36413ec1773297d4a9312ebbc29c"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 44272,
+    "sha256": "d385a97bcb33dac5655095e3092eeba0792cb9af93308c123ded3b8471c2cc5d"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2108,
+      "height": 2108,
+      "bytes": 3005846,
+      "sha256": "5347093fa93e7f9c8f386215162fca40e24d7875bc5eb7d63ca16d0399c23beb"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 10,
+    "Interact": 16.6,
+    "Special": 11.333
+  },
+  "bounds": {
+    "x": -996,
+    "y": 54,
+    "width": 2019,
+    "height": 1513
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 8131,
+    "sha256": "b21be1264ba9745e9d390ce4d79895f1c900a7b5567ee2b74cae0e8d3935b0a1"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_450_necras_summer#20.ab",
+    "md5": "e4fec5161ec32b52fd69927a14462a4d",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

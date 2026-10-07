@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_4010_etlchi@winter#5",
+  "dynIllustId": "dyn_illust_char_4010_etlchi_winter#5",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1084320,
+    "sha256": "14a4d39b800092e99fd5aa91cd4cf9db146e9ec46611765d02ab5dba1a754fd9"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 27257,
+    "sha256": "994db89659892350b626172394b46d433160a21f38e8cbe412a5aff2adc7e65b"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2260,
+      "height": 2260,
+      "bytes": 3117876,
+      "sha256": "28585a9c2bee1cef2f9945ac30361ba10ab9f2e97c648567080b88b603082e4b"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 3.333,
+    "Interact": 13.333,
+    "Special": 13.333
+  },
+  "bounds": {
+    "x": -1027,
+    "y": -109,
+    "width": 2053,
+    "height": 1857
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.4
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Interact",
+      "to": "Idle",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 1063,
+    "sha256": "cdcfedba55861681a88ae6058930b32a5587c425d1537e03e21861e9bf77a8c7"
+  },
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_4010_etlchi_winter#5.ab",
+    "md5": "1861cfbc3e34ac4a778ceb1646c82190",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}
