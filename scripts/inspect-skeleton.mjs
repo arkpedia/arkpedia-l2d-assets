@@ -26,10 +26,12 @@ try {
   let result;
   if (mode === 'layers') {
     const doc = JSON.parse(readFileSync(path.join(folder, 'layers.json'), 'utf8'));
-    if (doc.bounds !== null) throw new Error('layers.json already has its bounds');
+    const version = Object.hasOwn(doc, 'effectTextures') ? 2 : 1;
+    if (doc.bounds !== null || (version >= 2 && doc.effectBounds !== null)) throw new Error('layers.json already has its bounds');
     // Everything but the bounds this computes must already be right.
-    layersShape({ ...doc, bounds: { x: 0, y: 0, width: 1, height: 1 } }, 'layers.json');
-    result = { bounds: inspectLayers(skeleton, atlas, doc, 'layers.json') };
+    const unit = { x: 0, y: 0, width: 1, height: 1 };
+    layersShape({ ...doc, bounds: unit, ...(version >= 2 ? { effectBounds: unit } : {}) }, 'layers.json', version);
+    result = inspectLayers(skeleton, atlas, doc, 'layers.json');
   } else {
     result = inspectSkeleton(skeleton, atlas);
   }

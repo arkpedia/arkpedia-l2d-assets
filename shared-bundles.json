@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "bundles": {
+    "CAB-1512fc0efbde6852b5d5a28ec9cec589": "refs/fx/texture/ray.ab",
+    "CAB-218479e261e84de653d0a19de29f60f2": "refs/fx/texture/pattern.ab",
+    "CAB-24585c6bdc5a7af80bd929dc17f77f2b": "refs/fx/texture/blood.ab",
+    "CAB-38dfd52763d3e93a929240c854b1fb51": "refs/fx/texture/object.ab",
+    "CAB-3fcda8e432a735264d43b49ecbf8fbee": "refs/fx/texture/star.ab",
+    "CAB-44d0abb60db2170b734217b0b04fcf36": "refs/fx/texture/flipbook.ab",
+    "CAB-5edea5af85bbd22eb07df1eb29c4f175": "refs/fx/sharedbattle.ab",
+    "CAB-6ec13136892538d87ef43388b363426f": "refs/fx/texture/overseas/char_010_chen_sale#10.ab",
+    "CAB-791a60846fea6608503ff80252eda80e": "refs/fx/texture/overseas/char_103_angel_sale#8.ab",
+    "CAB-895a9c6afcb47c5c7f43c8589b1fe2fc": "refs/fx/texture/smoke.ab",
+    "CAB-92fdf60cd1676328e17f73f0bf852e97": "refs/fx/texture/mask.ab",
+    "CAB-9c014f2571c0bb7c4a6874058f2771fe": "refs/fx/texture/overseas/char_003_kalts_sale#14.ab",
+    "CAB-9e18acd2831f8cef6fdd0163df5a3104": "refs/fx/texture/lighting.ab",
+    "CAB-a1620becb3839aebe0c9da8f7cca77f8": "refs/fx/texture/vein.ab",
+    "CAB-ad626b9314f74af30534e0891151d821": "refs/fx/texture/ui.ab",
+    "CAB-b2739f24071ea30492cad3b1c540173a": "refs/fx/texture/water.ab",
+    "CAB-c2c688f710a565b7cce0cc93f7bd219f": "refs/fx/texture/flow.ab",
+    "CAB-cd01a62ef0ad12a3c8c66eb912ff7cd1": "refs/fx/texture/overseas/live2d/dyn_char_1037_amiya3_sale#13.ab",
+    "CAB-d78082c54cca29d82a1f4895c6b873e6": "refs/fx/texture/fire.ab",
+    "CAB-f3fc56defbd98dc38ed79050873172a0": "refs/fx/texture/color.ab",
+    "CAB-f5eb28c82a6a6d5575e46bee4ec886a4": "refs/fx/texture/overseas/char_1037_amiya3_sale#13.ab",
+    "CAB-fe644cd0cf84f312dc9d6de3bfc17d34": "refs/fx/texture/trail.ab"
+  }
+}

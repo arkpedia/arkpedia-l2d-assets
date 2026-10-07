@@ -18,15 +18,16 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / 'scripts'))
 import l2d  # noqa: E402
+import layers  # noqa: E402
 import sync  # noqa: E402
 
 GOOD = 'char_1044_hsgma2#2'
 BROKEN = 'char_003_kalts@boc#6'
 
 
-def write_model(planned, staging):
-    """The two fields the run loop reads back from an existing folder."""
-    (staging / 'model.json').write_text(json.dumps({'skinId': planned.skin_id, 'source': {'md5': planned.md5}}))
+def write_model(planned, staging, layers_version=layers.LAYERS_VERSION):
+    """The fields the run loop reads back from an existing folder."""
+    (staging / 'model.json').write_text(json.dumps({'skinId': planned.skin_id, 'source': {'md5': planned.md5}, 'layersVersion': layers_version}))
 
 
 def dat_for(payload: bytes) -> bytes:
@@ -91,7 +92,7 @@ class RunLoop(unittest.TestCase):
             raise self.shaders_error
         return {('CAB-shaders', 1): 'a shader'}
 
-    def fake_build(self, planned, bundle, res_version, staging, shaders):
+    def fake_build(self, planned, bundle, res_version, staging, shaders, shared=None):
         self.assertEqual(bundle, self.payloads[planned.skin_id])  # verified and unpacked first
         self.assertEqual(shaders, {('CAB-shaders', 1): 'a shader'})
         if planned.skin_id == BROKEN:
@@ -150,7 +151,7 @@ class RunLoop(unittest.TestCase):
         self.payloads[BROKEN] = b'a bundle that builds'
         self.set_bundles()
         self.download_error = None
-        sync.build_model = lambda planned, bundle, res, staging, shaders: (write_model(planned, staging), ({}, [], None))[1]
+        sync.build_model = lambda planned, bundle, res, staging, shaders, shared=None: (write_model(planned, staging), ({}, [], None))[1]
         report = self.run_sync()
         self.assertEqual(report['added'], [BROKEN])
         self.assertEqual(self.failures(), {})
@@ -175,6 +176,59 @@ class RunLoop(unittest.TestCase):
         self.assertEqual([f['skinId'] for f in report['failed']], [BROKEN])
         self.assertIn('md5 does not match', report['failed'][0]['error'])
         self.assertFalse((self.root / 'sync-failures.json').exists(), 'a bad local copy is not the bundle failing')
+
+    def test_an_older_folder_gets_only_its_layers_exported_again(self):
+        from PIL import Image
+        self.payloads.pop(BROKEN)
+        self.set_bundles()
+        self.run_sync()
+        folder = next((self.root / 'models' / 'char_1044_hsgma2_2').iterdir())
+        # As layersVersion 1 wrote it: a skeleton, a page and two layer textures.
+        model = {'schemaVersion': 1, 'skinId': GOOD, 'skeleton': {'file': 'skeleton.skel'}, 'layers': {'file': 'layers.json', 'bytes': 2, 'sha256': 'x'},
+                 'source': {'md5': hashlib.md5(self.payloads[GOOD]).hexdigest()}}
+        (folder / 'model.json').write_text(json.dumps(model))
+        for name, data in (('skeleton.skel', b'SKEL'), ('page0.webp', b'PAGE'), ('layers.json', b'{}'), ('layer0.webp', b'old'), ('layer1.webp', b'old')):
+            (folder / name).write_bytes(data)
+        before = (self.root / 'manifest.json').read_bytes()
+        export = layers.LayerExport(
+            document={'schemaVersion': 1, 'textures': [{'file': 'layer0.webp', 'width': 2, 'height': 2, 'wrap': ['clamp', 'clamp'], 'opaque': [0, 0, 1, 1]}],
+                      'effectTextures': [], 'bounds': None, 'effectBounds': None, 'separators': [], 'draw': [{'part': 0}],
+                      'omitted': {'particles': 0, 'trails': 0, 'skinned': 0, 'hidden': 0, 'holders': 0, 'custom': [], 'externalTexture': [], 'other': []}},
+            textures=[Image.new('RGBA', (2, 2), (255, 0, 0, 255))], texture_info=[],
+            counts={k: 0 for k in ('layers', 'effects', 'exact', 'static', 'animated', 'follow', 'only', 'states', 'parts')})
+        decoded = []
+
+        def fake_decode(bundle, dyn_illust_id, dyn_entrance_id, shaders, shared=None):
+            decoded.append(bundle)
+            self.assertIsNotNone(shared, 'effects may need the shared textures')
+            return type('Decoded', (), {'layers': staticmethod(lambda slots: export)})()
+
+        def fake_inspect(folder_, name):
+            self.assertEqual((folder_ / 'skeleton.skel').read_bytes(), b'SKEL', 'read from the copy')
+            return {'slots': ['a']} if name == 'skeleton' else {'bounds': {'x': 0, 'y': 0, 'width': 1, 'height': 1}, 'effectBounds': {'x': 0, 'y': 0, 'width': 2, 'height': 1}}
+        for name, value in (('inspect', fake_inspect),):
+            original = getattr(sync, name)
+            setattr(sync, name, value)
+            self.addCleanup(setattr, sync, name, original)
+        original = l2d.decode_bundle
+        l2d.decode_bundle = fake_decode
+        self.addCleanup(setattr, l2d, 'decode_bundle', original)
+        self.downloads.clear()
+        report = self.run_sync()
+        self.assertEqual((self.downloads, decoded, report['relayered'], report['added']), ([GOOD], [self.payloads[GOOD]], [GOOD], []))
+        # Only the layers changed: the skeleton and page byte for byte, the old second texture gone.
+        self.assertEqual(sorted(p.name for p in folder.iterdir()), ['layer0.webp', 'layers.json', 'model.json', 'page0.webp', 'skeleton.skel'])
+        self.assertEqual(((folder / 'skeleton.skel').read_bytes(), (folder / 'page0.webp').read_bytes()), (b'SKEL', b'PAGE'))
+        written = json.loads((folder / 'model.json').read_text())
+        self.assertEqual(list(written), ['schemaVersion', 'skinId', 'skeleton', 'layers', 'layersVersion', 'source'])
+        self.assertEqual(written['layersVersion'], layers.LAYERS_VERSION)
+        doc = json.loads((folder / 'layers.json').read_text())
+        self.assertEqual((doc['bounds']['width'], doc['effectBounds']['width'], doc['textures'][0]['bytes']), (1, 2, (folder / 'layer0.webp').stat().st_size))
+        self.assertEqual((self.root / 'manifest.json').read_bytes(), before, 'the folder and the manifest entry stay')
+        # Current now: nothing more to fetch.
+        self.downloads.clear()
+        self.run_sync()
+        self.assertEqual(self.downloads, [])
 
     def test_a_dry_run_writes_nothing(self):
         out = io.StringIO()

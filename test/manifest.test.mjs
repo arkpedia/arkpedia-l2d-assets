@@ -330,7 +330,7 @@ async function layersRepo() {
   };
   const skeleton = await readFile(path.join(dir, 'skeleton.json'));
   const atlas = await readFile(path.join(dir, 'skeleton.atlas'), 'utf8');
-  doc.bounds = inspectLayers(skeleton, atlas, doc, 'test');
+  doc.bounds = inspectLayers(skeleton, atlas, doc, 'test').bounds;
   const save = async (d = doc, m = null) => {
     const bytes = Buffer.from(JSON.stringify(d));
     await writeFile(path.join(dir, 'layers.json'), bytes);
@@ -390,7 +390,7 @@ test('broken layers fail validation', async () => {
     [(d) => { d.draw[1].part = 1; }, /part must be a distinct index 0-0/],
     [(d) => { d.draw.push({ part: 0 }); }, /part must be a distinct index/],
     [(d) => { d.draw.splice(1, 1); }, /no skeleton part/],
-    [(d) => { d.draw = [d.draw[1]]; }, /layer0\.webp is not drawn by any layer/],
+    [(d) => { d.draw = [d.draw[1]]; }, /layer0\.webp is not drawn by any plain layer/],
     [(d) => { delete d.omitted.holders; }, /omitted must give/],
     [(d) => { d.omitted.custom.push({ name: 'x', reason: '' }); }, /omitted must give/],
   ];
@@ -409,5 +409,114 @@ test('broken layers fail validation', async () => {
     await unlink(path.join(repo.dir, 'layers.json'));
     await repo.save(bare);
     await assert.rejects(validateRepository(repo.root), /unexpected files layer0\.webp/);
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+/** layersVersion 2: the sky is approximated (a slight flow drawn without it) and carries its exact
+ *  effect; a flame drawn only with its effect (a dissolve) sits in front, past the skeleton's right.
+ *  layer1.webp is the noise and dissolve texture only effects sample. */
+async function effectsRepo() {
+  const repo = await layersRepo();
+  const texture = await readFile(path.join(fixtures, 'tiny', 'page0.webp'));
+  await writeFile(path.join(repo.dir, 'layer1.webp'), texture);
+  const map = (extra = {}) => ({ texture: 1, st: [1, 1, 0, 0], speed: [0, 0.1], scroll: [0, 0], ...extra });
+  const shader = (extra = {}) => ({ family: 'particle', main: { st: [1, 1, 0, 0], speed: [0, 0], scroll: [0, 0], fract: false },
+    distort: null, dissolve: [], edge: null, ramp: null, vertex: null, animated: [], ...extra });
+  const doc = structuredClone(repo.doc);
+  doc.effectTextures = [{ ...record('layer1.webp', texture, { width: 4, height: 4 }), wrap: ['repeat', 'repeat'], opaque: [0, 0, 1, 1] }];
+  doc.effectBounds = null;
+  doc.draw[0].layer.approximated = 'flow distortion (up to 0.01 UV, 5 texels) drawn without it';
+  doc.draw[0].layer.exact = { uvs: [0, 0, 1, 0, 0, 1, 1, 1], shader: shader({
+    distort: { space: 'main', main: 1, dissolve: 0, constant: [0, 0], maps: [map({ anchor: [0, 0], intensity: [0.01, 0] })], weight: null } }) };
+  doc.draw.push({ effect: { name: 'flame', blend: 'add', texture: 0, color: [1, 1, 1, 1], vertices: [100, 0, 500, 0, 100, 100, 500, 100], uvs: [0, 0, 1, 0, 0, 1, 1, 1],
+    colors: null, triangles: [0, 3, 1, 3, 0, 2], follow: null, animation: null, only: null, delay: 0, cull: 0, visible: [0, 0, 1, 1],
+    shader: shader({ dissolve: [map({ fract: false, amount: 0.3, border: 0.1 })] }) } });
+  const skeleton = await readFile(path.join(repo.dir, 'skeleton.json'));
+  const atlas = await readFile(path.join(repo.dir, 'skeleton.atlas'), 'utf8');
+  doc.bounds = null;
+  Object.assign(doc, inspectLayers(skeleton, atlas, doc, 'test'));
+  const model = structuredClone(repo.model);
+  const save = async (d = doc, version = 2) => {
+    const bytes = Buffer.from(JSON.stringify(d));
+    await writeFile(path.join(repo.dir, 'layers.json'), bytes);
+    await repo.save({ ...model, layers: record('layers.json', bytes), layersVersion: version });
+  };
+  await save();
+  return { ...repo, doc, saveEffects: save, shader, map };
+}
+
+test('layersVersion 2: effects validate, and only the effect frame includes them', async () => {
+  const repo = await effectsRepo();
+  try {
+    assert.deepEqual(repo.doc.bounds, { x: -300, y: -10, width: 600, height: 410 }, 'what every reader draws');
+    assert.deepEqual(repo.doc.effectBounds, { x: -300, y: -10, width: 800, height: 410 }, 'with the flame, out to x 500');
+    assert.deepEqual(await validateRepository(repo.root), { listed: 1, folders: 1, failures: 0 });
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+test('broken effects fail validation', async () => {
+  const repo = await effectsRepo();
+  const sky = (d) => d.draw[0].layer;
+  const flame = (d) => d.draw[3].effect;
+  const variants = [
+    [(d) => { d.effectBounds = d.bounds; }, /effectBounds differ/],
+    [(d) => { delete d.effectBounds; }, /must have effectTextures and effectBounds/],
+    [(d) => { d.effectTextures[0].file = 'layer0.webp'; }, /must be layer1\.webp/],
+    [(d) => { sky(d).texture = 1; }, /texture 1 is not in textures/],
+    [(d) => { flame(d).texture = 2; }, /texture 2 is not in textures/],
+    [(d) => { flame(d).shader.dissolve = []; sky(d).exact.shader.distort.maps[0].texture = null; }, /layer1\.webp is not sampled by any effect/],
+    [(d) => { flame(d).scroll = null; }, /an effect has no scroll/],
+    [(d) => { flame(d).shader.family = 'ripple'; }, /shader family must be/],
+    [(d) => { flame(d).shader.extra = 1; }, /a particle shader is/],
+    [(d) => { flame(d).shader.dissolve[0].border = 0; }, /border > 0/],
+    [(d) => { flame(d).shader.dissolve.push(...[1, 2].map(() => structuredClone(flame(d).shader.dissolve[0]))); }, /up to 2/],
+    [(d) => { flame(d).shader.dissolve[0].st = [1, 1]; }, /st \[sx, sy, ox, oy\]/],
+    [(d) => { flame(d).shader.edge = { color: [1, 1, 1, 1], pow: 1, epsilon: true }; flame(d).shader.dissolve = []; d.effectTextures = []; sky(d).exact.shader.distort.maps[0].texture = 0; }, /an edge needs a dissolve/],
+    [(d) => { flame(d).shader.distort = { space: 'sideways', main: 1, dissolve: 0, constant: [0, 0], maps: [], weight: null }; }, /distort must be/],
+    [(d) => { flame(d).shader.distort = { space: 'raw', main: 1, dissolve: 0, constant: [0, 0], maps: [], weight: null }; }, /moves nothing/],
+    [(d) => { flame(d).shader.vertex = { ...repo.map(), intensity: [1, 1], weight: null, matrix: [1, 0, 0, 0, 1, 0] }; }, /vertex intensity/],
+    [(d) => { flame(d).shader = { family: 'noise', mode: 'glow', main: flame(d).shader.main, noise: repo.map(), noise1: [1, 1, 1, 1], noise2: [1, 1, 1, 1], glow: null, animated: [] }; }, /glow must be/],
+    [(d) => { flame(d).shader.animated = ['dissolve.0.amount']; }, /a layer without a timeline animates no parameter/],
+    [(d) => { flame(d).cull = 2; }, /cull must be 0, or 1 \(front\) or 2 \(back\) for a layer that moves/],
+    [(d) => { delete flame(d).visible; }, /visible must be null or/],
+    // An effect frames by where it shows at its first frame: nowhere, and the frame leaves it out.
+    [(d) => { flame(d).visible = null; }, /effectBounds differ/],
+    [(d) => { flame(d).visible = [0, 0, 0.5, 1]; }, /effectBounds differ/],
+    [(d) => { delete flame(d).cull; }, /cull must be/],
+    [(d) => { flame(d).shader.animated = ['dissolve.1.amount']; }, /animated dissolve\.1\.amount is not a parameter/],
+    [(d) => { flame(d).shader.animated = ['dissolve.0.amount', 'dissolve.0.amount']; }, /distinct parameter paths/],
+    [(d) => { sky(d).exact.shader.animated = ['distort.maps.0.intensity']; }, /an exact effect animates no parameter/],
+    [(d) => { flame(d).shader.animated = ['dissolve.0.st']; flame(d).animation = { length: 1, loop: true, loopFrom: 0, frames: [[0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0]] }; flame(d).color = null; }, /frames\[0\] must be 20 numbers/],
+    [(d) => { sky(d).shader = sky(d).exact.shader; }, /a plain layer has no shader/],
+    [(d) => { sky(d).approximated = null; }, /only an approximated layer has an exact effect/],
+    [(d) => { sky(d).exact.uvs.pop(); }, /exact must be/],
+  ];
+  try {
+    // A dissolve an Animator drives: its amount and tiling ride on the frames, after the 16 numbers.
+    const moving = structuredClone(repo.doc);
+    Object.assign(flame(moving), { color: null, animation: { length: 1, loop: true, loopFrom: 0,
+      frames: [[0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0.1, 1, 1, 0, 0], [1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0.9, 1, 1, 0, 0.5]] } });
+    flame(moving).shader.animated = ['dissolve.0.amount', 'dissolve.0.st'];
+    await repo.saveEffects(moving);
+    await validateRepository(repo.root);
+    for (const [mutate, message] of variants) {
+      const doc = structuredClone(repo.doc);
+      mutate(doc);
+      await repo.saveEffects(doc);
+      await assert.rejects(validateRepository(repo.root), message, `expected ${message}`);
+    }
+    // The version model.json names must match what layers.json holds.
+    await repo.saveEffects(repo.doc, 1);
+    await assert.rejects(validateRepository(repo.root), /says layersVersion 1/);
+    await repo.saveEffects(repo.doc, 3);
+    await assert.rejects(validateRepository(repo.root), /layersVersion must be 1-2/);
+    const plain = structuredClone(repo.doc);
+    delete plain.effectTextures;
+    delete plain.effectBounds;
+    delete plain.draw[0].layer.exact;
+    await repo.saveEffects(plain, 1);
+    await assert.rejects(validateRepository(repo.root), /must be \{ part \} or \{ layer \}$/);
+    await repo.saveEffects();
+    await validateRepository(repo.root);
   } finally { await rm(repo.root, { recursive: true, force: true }); }
 });

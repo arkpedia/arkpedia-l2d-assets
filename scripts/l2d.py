@@ -683,7 +683,7 @@ class Decoded:
     layers: Callable[[list], object] | None = None
 
 
-def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, shaders: dict) -> Decoded:
+def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, shaders: dict, shared=None) -> Decoded:
     """Finds the illustration's skeleton, atlas and atlas page textures in a bundle, and its
     entrance's when the skin has one (`dyn_entrance_id`, the skin_table's dynEntranceId).
 
@@ -868,7 +868,7 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, 
         def export(slots: list, root_go=illust_roots[0]):
             try:
                 return layers.export_layers(root_go, read_any, mesh_of=mesh_of, texture_of=texture_of, classify_texture=classify_alpha,
-                                            external_of=external_of, shaders=shaders, slots=slots)
+                                            external_of=external_of, shaders=shaders, slots=slots, shared=shared)
             except (layers.LayerError, entrance_camera.CameraError, KeyError, TypeError, ValueError, ArithmeticError) as error:
                 raise SyncError(f'Layers of {dyn_illust_id}: {error}') from error
 
