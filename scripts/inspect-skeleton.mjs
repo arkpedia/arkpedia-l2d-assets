@@ -7,7 +7,7 @@
 // scripts/sync.py runs this on every new model before it writes model.json.
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { layersShape } from './layers.mjs';
+import { LAYERS_VERSION, layersShape } from './layers.mjs';
 import { inspectLayers, inspectSkeleton } from './spine.mjs';
 
 const folder = process.argv[2];
@@ -26,7 +26,8 @@ try {
   let result;
   if (mode === 'layers') {
     const doc = JSON.parse(readFileSync(path.join(folder, 'layers.json'), 'utf8'));
-    const version = Object.hasOwn(doc, 'effectTextures') ? 2 : 1;
+    // A file with effects is written in the current format (a file of layersVersion 1 has none).
+    const version = Object.hasOwn(doc, 'effectTextures') ? LAYERS_VERSION : 1;
     if (doc.bounds !== null || (version >= 2 && doc.effectBounds !== null)) throw new Error('layers.json already has its bounds');
     // Everything but the bounds this computes must already be right.
     const unit = { x: 0, y: 0, width: 1, height: 1 };

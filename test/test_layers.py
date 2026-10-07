@@ -16,13 +16,14 @@ from test_camera import Scene, linear, ref  # noqa: E402
 SHADERS_CAB = 'CAB-shaders'
 OTHER_CAB = 'CAB-other'
 EXTERNALS = {1: layers.BUILTIN_RESOURCES, 2: OTHER_CAB, 3: SHADERS_CAB}
-ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD, ERASE, ANCHOR, DISSOLVE_CD, RAM = 1, 2, 3, 4, 5, 6, 7, 8
+ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD, ERASE, ANCHOR, DISSOLVE_CD, RAM, NOISE2 = 1, 2, 3, 4, 5, 6, 7, 8, 9
 SHADERS = {
     (SHADERS_CAB, ALPHA_BLEND): layers.Shader('Torappu/Particles-L2D/AlphaBlend', 5.0, 10.0, 0.0, 3000, {'_TintColor': 0.5}),
     (SHADERS_CAB, ADDITIVE): layers.Shader('Torappu/Particles-L2D/Additive', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5}),
     # Disturb(CustomData) takes its second blend factor and its cull from the material.
     (SHADERS_CAB, DISTURB): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb(CustomData)', 5.0, '_DstBlend', '_CullMode', 3000,
-                                          {'_MainColor': 0.5, '_Opacity': 1.0, '_DstBlend': 10.0, '_CullMode': 0.0, '_Amount': 0.0}),
+                                          {'_MainColor': 0.5, '_Opacity': 1.0, '_DstBlend': 10.0, '_CullMode': 0.0, '_Amount': 0.0, '_DisturbUSpeed': 0.0,
+                                           '_DisturbVSpeed': 0.0}),
     (SHADERS_CAB, DISSOLVE_ADD): layers.Shader('Torappu/Particles-L2D/Dissolve/Dissolve Add', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5, '_Amount': 0.5}),
     (SHADERS_CAB, ERASE): layers.Shader('Torappu/Particles-L2D/Mask/Erase', 5.0, 10.0, 0.0, 3000, {'_Strength': 1.0}),
     (SHADERS_CAB, ANCHOR): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb Anchor (AlphaBlend)', 5.0, 10.0, 0.0, 3000,
@@ -30,7 +31,32 @@ SHADERS = {
     (SHADERS_CAB, DISSOLVE_CD): layers.Shader('Torappu/Particles-L2D/Dissolve/Dissolve(CustomData)', 5.0, 10.0, 0.0, 3000,
                                               {'_MainColor': 0.5, '_Opacity': 1.0, '_UseDissolveTex': 0.0}),
     (SHADERS_CAB, RAM): layers.Shader('Torappu/Particles-L2D/Ram/Disturb(CustomData)', 5.0, 10.0, 0.0, 3000, {'_MainColor': 0.5, '_Opacity': 1.0, '_Amount': 0.0}),
+    (SHADERS_CAB, NOISE2): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb2 (AlphaBlend)', 5.0, 10.0, 0.0, 3000,
+                                         {'_MainTex': 0.0, '_DisturTex': 0.0, '_MainColor': 0.5, '_GlowColor': 0.5, '_Noise1Param': 1.0, '_Noise2Param': 1.0}),
 }
+# A clip curve's binding attribute for a material property, as Unity writes it (layers.binding_keys): a
+# float with 8 in its top four bits, a colour channel with 4-7, a vector component (an _ST) with 0-3.
+
+
+def float_binding(name):
+    return ec.crc(name) & 0x0FFFFFFF | (8 << 28)
+
+
+def vector_binding(name, component):
+    return ec.crc(name) & 0x0FFFFFFF | (component << 28)
+
+
+def colour_binding(name, channel):
+    return ec.crc(name) & 0x0FFFFFFF | ((4 + channel) << 28)
+
+
+def ramp(p, name, binding, v0, v1, *, type_id=ec.RENDERER, stop=1.0, loop=False):
+    """A clip that moves one renderer curve straight from v0 to v1 over `stop` seconds."""
+    clip = p.clip(name, [{'path': 0, 'typeID': type_id, 'attribute': binding}],
+                  [(-3.0e38, [(0, (0, 0, 0, v0))]), (0.0, [(0, linear(v0, v1, 0, stop))]), (stop, [(0, (0, 0, 0, v1))]), (float('inf'), [])], stop=stop)
+    if loop:
+        p.objects[clip][1]['m_MuscleClip']['m_LoopTime'] = 1
+    return clip
 
 
 def external(ref_):
@@ -167,7 +193,7 @@ class Looks(unittest.TestCase):
         # hierarchy is drawn after it, so it covers it; one farther away covers nothing.
         omitted = []
         exporter = type('E', (), {})()
-        exporter.layer_bounds = lambda layer: (0, 0, 1, 1)
+        exporter.layer_bounds = lambda layer, solid=False: (0, 0, 1, 1)
         exporter.omit = lambda kind, name, reason: omitted.append(name)
         layer = {'layer': {'name': 'sky'}, 'sort': (0, 0, 3000, -1.0, 5)}
         exporter.masks = [{'name': 'near', 'sort': (0, 0, 3000, -0.5, 2), 'bounds': None}]
@@ -304,7 +330,7 @@ class Export(unittest.TestCase):
         noise = p.add('Texture2D', {'m_Name': 'noise', 'm_Width': 64, 'm_Height': 64})
         # A dissolve that sweeps in: amount 0 (nothing dissolved) at rest, so only its clip makes it one.
         go, _ = p.quad('sweep', effects, material_tree(DISSOLVE_ADD, p.texture, floats=[('_Amount', 0.0)], extra_textures=[('_DissolveTex', noise)]))
-        amount = ec.crc('_Amount') & 0x0FFFFFFF
+        amount = ec.crc('_Amount') & 0x0FFFFFFF | (layers.FLOAT_BINDING << 28)  # a float binds with 8 in its top bits
         clip = p.clip('sweep_idle', [{'path': 0, 'typeID': ec.RENDERER, 'attribute': amount}],
                       [(-3.0e38, [(0, (0, 0, 0, 0))]), (0.0, [(0, linear(0, 1, 0, 1))]), (1.0, [(0, (0, 0, 0, 1))]), (float('inf'), [])], stop=1.0)
         p.animate(go, clip)
@@ -502,6 +528,133 @@ class Export(unittest.TestCase):
         self.assertEqual(still['vertices'][:2], [50.0, -50.0], 'at its clip value: x = 1 unit')
         self.assertFalse(any(isinstance(e, dict) and e['name'] == 'never' for e in entries(result)))
         self.assertEqual(result.document['omitted']['hidden'], 1)
+
+
+class Depth(unittest.TestCase):
+    """Meshes whose own depth reaches the screen (the illustration camera is orthographic), and the curves
+    an Animator drives on materials, read under the bindings Unity writes."""
+
+    def test_material_floats_and_tilings_are_read_as_clips_bind_them(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        noise = p.add('Texture2D', {'m_Name': 'noise', 'm_Width': 64, 'm_Height': 64})
+        go, _ = p.quad('sweep', effects, material_tree(DISSOLVE_ADD, p.texture, floats=[('_Amount', 0.0)], extra_textures=[('_DissolveTex', noise)]))
+        p.animate(go, ramp(p, 'sweep_idle', float_binding('_Amount'), 0.0, 1.0))
+        pan_go, _ = p.quad('pan', effects, material_tree(ALPHA_BLEND, p.texture))
+        p.animate(pan_go, ramp(p, 'pan_idle', vector_binding('_MainTex_ST', 2), 0.0, 0.5))
+        # The same float under a binding Unity does not write is never read: left out, not drawn static.
+        wrong_go, _ = p.quad('wrong', effects, material_tree(DISSOLVE_ADD, p.texture, floats=[('_Amount', 0.0)], extra_textures=[('_DissolveTex', noise)]))
+        p.animate(wrong_go, ramp(p, 'wrong_idle', ec.crc('_Amount') & 0x0FFFFFFF, 0.0, 1.0))
+        result = p.export()
+        frames = layer_named(result, 'sweep')['animation']['frames']
+        self.assertEqual((frames[0][16], frames[-1][16]), (0.0, 1.0))
+        pan = layer_named(result, 'pan')['animation']['frames']
+        self.assertEqual((pan[0][13], pan[-1][13]), (0.0, 0.5), 'the u offset of the UV map follows _MainTex_ST.z')
+        self.assertIn({'name': 'wrong', 'reason': 'animated material property _Amount (binding 0) is not read'}, result.document['omitted']['other'])
+
+    def test_a_property_the_shader_does_not_declare_changes_nothing(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        go, _ = p.quad('glow', effects, material_tree(ALPHA_BLEND, p.texture, colours=[('_TintColor', (0.5, 0.5, 0.5, 0.5))]))
+        p.animate(go, ramp(p, 'glow_idle', colour_binding('_MainColor', 3), 0.0, 1.0))
+        glow = layer_named(p.export(), 'glow')
+        self.assertIsNone(glow['animation'])
+        self.assertEqual(glow['color'], [1.0, 1.0, 1.0, 1.0])
+
+    def test_an_animated_scroll_speed_rides_on_the_frames_integrated(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        noise = p.add('Texture2D', {'m_Name': 'noise', 'm_Width': 64, 'm_Height': 64})
+        go, _ = p.quad('flow', effects, material_tree(DISTURB, p.texture, floats=[('_IntensityU', 0.1), ('_DisturbVSpeed', 0.2)],
+                                                      extra_textures=[('_DisturbTex', noise)]))
+        p.animate(go, ramp(p, 'flow_idle', float_binding('_DisturbUSpeed'), 0.0, 1.0))
+        flow = layer_named(p.export(), 'flow')
+        self.assertEqual(flow['shader']['animated'], ['distort.maps.0.offset'])
+        self.assertNotIn('offset', flow['shader']['distort']['maps'][0], 'only the frames carry it')
+        frames = flow['animation']['frames']
+        self.assertEqual([len(f) for f in frames], [20] * len(frames), '16 numbers and [u, v, speed u, speed v]')
+        self.assertEqual(frames[0][16:20], [0.0, 0.0, 0.0, 0.2])
+        # u: the integral of a speed rising 0 -> 1 over a second; v: 0.2 a second throughout.
+        self.assertEqual([round(v, 4) for v in frames[-1][16:20]], [0.5, 0.2, 1.0, 0.2])
+
+    def test_a_tilted_mesh_that_only_changes_colour_is_flattened_once(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        p.mesh_id = p.add('Mesh', {})
+        # A floor in the mesh's x-z plane, turned a quarter round about x into the screen: z becomes -y.
+        p.meshes[p.mesh_id] = {'vertices': [(-1, 0, -1), (1, 0, -1), (-1, 0, 1), (1, 0, 1)], 'uv': [(0, 0), (1, 0), (0, 1), (1, 1)], 'colors': None,
+                               'submeshes': [[0, 3, 1, 3, 0, 2]]}
+        half = 0.5 ** 0.5
+        go, _ = p.quad('floor', effects, material_tree(ALPHA_BLEND, p.texture), position=(0, 1, 0), rotation=(half, 0, 0, half), mesh=p.mesh_id)
+        p.animate(go, ramp(p, 'floor_idle', colour_binding('_TintColor', 3), 0.0, 0.5))
+        floor = layer_named(p.export(), 'floor')
+        # Flattened through its projection: (1, 0, 1) shows at (1, -1) units (x 100), and the frames only
+        # place the result.
+        self.assertEqual(floor['vertices'][6:8], [100.0, -100.0])
+        self.assertEqual(floor['animation']['frames'][0][1:7], [1.0, 0.0, 0.0, 1.0, 0.0, 100.0])
+        self.assertEqual(len(floor['animation']['frames'][0]), 16)
+
+    def test_a_mesh_that_turns_in_depth_is_a_tilted_entry(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        p.mesh_id = p.add('Mesh', {})
+        p.meshes[p.mesh_id] = {'vertices': [(0, 0, 0), (1, 0, 0.5), (0, 1, -0.5)], 'uv': [(0, 0), (1, 0), (0, 1)], 'colors': None, 'submeshes': [[0, 1, 2]]}
+        go, _ = p.quad('star', effects, material_tree(ALPHA_BLEND, p.texture), mesh=p.mesh_id)
+        # Turning about x: half round in a second (Euler x streamed; y and z constant).
+        clip = p.clip('star_idle', [{'path': 0, 'typeID': ec.TRANSFORM, 'attribute': ec.EULER}],
+                      [(-3.0e38, [(0, (0, 0, 0, 0))]), (0.0, [(0, linear(0, 180, 0, 1))]), (1.0, [(0, (0, 0, 0, 180))]), (float('inf'), [])],
+                      constants=(0.0, 0.0), stop=1.0)
+        p.animate(go, clip)
+        result = p.export()
+        draw = [e for e in result.document['draw'] if 'tilted' in e]
+        self.assertEqual(len(draw), 1)
+        star = draw[0]['tilted']
+        self.assertEqual(star['vertices'], [0.0, 0.0, 0.0, 1.0, 0.0, 0.5, 0.0, 1.0, -0.5], 'its own 3D vertices')
+        frames = star['animation']['frames']
+        self.assertEqual(len(frames[0]), 18)
+        self.assertEqual((frames[0][16], frames[0][17]), (0.0, 0.0), 'facing the camera: depth does not show')
+        # A quarter round, y = cos(90) y - sin(90) z: the depth column is -100 skeleton units per unit.
+        quarter = next(f for f in frames if abs(f[0] - 0.5) < 0.02)
+        self.assertAlmostEqual(quarter[17], -100.0, delta=6)
+        self.assertEqual(star['shader']['family'], 'particle', 'drawn by an effect program (here with no stage)')
+        self.assertEqual(result.counts['tilted'], 1)
+
+    def test_unity_culls_the_other_faces_of_a_mirrored_mesh(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        culled = material_tree(DISTURB, p.texture, floats=[('_CullMode', 2.0)])
+        p.quad('front', effects, culled)
+        p.quad('mirrored', effects, culled, scale=(-1, 1, 1))
+        turned = material_tree(DISTURB, p.texture, floats=[('_CullMode', 2.0)])
+        p.quad('turned', effects, turned, rotation=(0, 1, 0, 0))
+        moving_go, _ = p.quad('moving', effects, material_tree(DISTURB, p.texture, floats=[('_CullMode', 2.0)]), scale=(-1, 1, 1))
+        p.animate(moving_go, p.clip('moving_idle', [{'path': 0, 'typeID': ec.TRANSFORM, 'attribute': ec.POSITION}],
+                                    [(-3.0e38, [(0, (0, 0, 0, 0))]), (0.0, [(0, linear(0, 1, 0, 1))]), (1.0, [(0, (0, 0, 0, 1))]), (float('inf'), [])],
+                                    constants=(0.0, 0.0), stop=1.0))
+        result = p.export()
+        # A mirror keeps the faces the unmirrored quad keeps (Unity flips its culling); a half turn shows
+        # the quad's back, which is culled.
+        self.assertEqual(len(layer_named(result, 'front')['triangles']), 6)
+        self.assertEqual(len(layer_named(result, 'mirrored')['triangles']), 6)
+        self.assertIn({'name': 'turned', 'reason': 'every face culled'}, result.document['omitted']['other'])
+        self.assertEqual(layer_named(result, 'moving')['cull'], 1, 'culled as drawn, the other face')
+
+    def test_disturb2_noise_params_ride_on_the_frames(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        noise = p.add('Texture2D', {'m_Name': 'noise', 'm_Width': 64, 'm_Height': 64})
+        go, _ = p.quad('shimmer', effects, material_tree(NOISE2, p.texture, colours=[('_Noise1Param', (1, 2, 0.1, 0)), ('_Noise2Param', (1, -1, 0, 0.1))],
+                                                         extra_textures=[('_DisturTex', noise)]))
+        p.animate(go, ramp(p, 'shimmer_idle', colour_binding('_Noise1Param', 2), 0.1, 0.5))
+        # Disturb2 never reads its noise texture's tiling: a clip that moves it changes nothing.
+        p.animate(go, ramp(p, 'shimmer_st', vector_binding('_DisturTex_ST', 2), 0.0, 1.0))
+        shimmer = layer_named(p.export(), 'shimmer')
+        self.assertEqual(shimmer['shader']['animated'], ['noise.offset', 'noise1'])
+        last = shimmer['animation']['frames'][-1]
+        self.assertEqual(len(last), 24)
+        # Channel 1 scrolls 2 x t / 20, channel 2 -1 x t / 20: after a second 0.1 and -0.05.
+        self.assertEqual([round(v, 4) for v in last[16:20]], [0.1, -0.05, 0.1, -0.05])
+        self.assertEqual(last[20:24], [1.0, 2.0, 0.5, 0.0])
 
 
 if __name__ == '__main__':

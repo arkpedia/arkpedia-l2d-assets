@@ -7,6 +7,8 @@ const WRAPS = new Set(['repeat', 'clamp', 'mirror']);
 const OMITTED_COUNTS = ['particles', 'trails', 'skinned', 'hidden', 'holders'];
 const OMITTED_LISTS = ['custom', 'externalTexture', 'other'];
 const FRAME_LENGTH = 16; // [t, a, b, c, d, tx, ty, r, g, b, alpha, active, su, ou, sv, ov]
+// A tilted entry's frames also carry the depth column [e, f] of their 2x4 projection, at 16 and 17.
+const SOLID_FRAME_LENGTH = 18;
 // Vertices further than this from the skeleton's origin (skeleton units) mean a unit went wrong.
 const REACH = 100000;
 
@@ -16,8 +18,10 @@ const index = (value, length) => Number.isSafeInteger(value) && value >= 0 && va
 const vec = (value, length) => Array.isArray(value) && value.length === length && value.every(finite);
 const keys = (value, wanted) => isObject(value) && Object.keys(value).length === wanted.length && wanted.every((key) => Object.hasOwn(value, key));
 // The layers.json format model.json's layersVersion names (scripts/layers.py LAYERS_VERSION): 1, plain
-// layers only; 2, also effect entries, a plain layer's exact, effectTextures and effectBounds.
-export const LAYERS_VERSION = 2;
+// layers only; 2, also effect entries, a plain layer's exact, effectTextures and effectBounds; 3, also
+// tilted entries (3D vertices and a 2x4 orthographic projection per frame), integrated scroll offsets
+// and Disturb2's animated parameters.
+export const LAYERS_VERSION = 3;
 const SHADER_FAMILIES = new Set(['particle', 'noise']);
 const NOISE_MODES = new Set(['default', 'add', 'glow']);
 const MAP_KEYS = ['texture', 'st', 'speed', 'scroll'];
@@ -40,12 +44,21 @@ export function animatedWidth(shader, label) {
   for (const path of shader.animated) {
     const p = typeof path === 'string' ? path.split('.') : [];
     const d = shader.distort;
-    const ok = (p[0] === 'dissolve' && p.length === 3 && index(Number(p[1]), shader.dissolve?.length ?? 0) && ['amount', 'border', 'st'].includes(p[2]))
-      || (p[0] === 'distort' && d && p[1] === 'maps' && p.length === 4 && index(Number(p[2]), d.maps.length) && (p[3] === 'intensity' || (p[3] === 'st' && d.maps[Number(p[2])].texture !== null)))
-      || (path === 'distort.weight.st' && d && d.weight) || (path === 'ramp.st' && shader.ramp) || (['vertex.st', 'vertex.intensity'].includes(path) && shader.vertex)
-      || (path === 'vertex.weight.st' && shader.vertex?.weight) || (path === 'edge.color' && shader.edge);
-    if (!ok || shader.family !== 'particle') throw new Error(`${label}: animated ${path} is not a parameter of this shader`);
-    width += path === 'vertex.intensity' ? 3 : { amount: 1, border: 1, st: 4, intensity: 2, color: 4 }[p.at(-1)];
+    let ok;
+    if (shader.family === 'noise') {
+      // Disturb2: its noise params, its glow colour, and the integrated scroll of its two noise channels.
+      ok = ['noise1', 'noise2', 'noise.offset'].includes(path) || (path === 'glow' && shader.glow !== null);
+    } else {
+      ok = (p[0] === 'dissolve' && p.length === 3 && index(Number(p[1]), shader.dissolve?.length ?? 0) && ['amount', 'border', 'st', 'offset'].includes(p[2]))
+        || (p[0] === 'distort' && d && p[1] === 'maps' && p.length === 4 && index(Number(p[2]), d.maps.length)
+          && (p[3] === 'intensity' || (['st', 'offset'].includes(p[3]) && d.maps[Number(p[2])].texture !== null)))
+        || (['distort.main', 'distort.dissolve'].includes(path) && d) || path === 'main.offset'
+        || (path === 'distort.weight.st' && d && d.weight) || (path === 'ramp.st' && shader.ramp)
+        || (['vertex.st', 'vertex.intensity', 'vertex.offset'].includes(path) && shader.vertex)
+        || (path === 'vertex.weight.st' && shader.vertex?.weight) || (path === 'edge.color' && shader.edge);
+    }
+    if (!ok) throw new Error(`${label}: animated ${path} is not a parameter of this shader`);
+    width += path === 'vertex.intensity' ? 3 : { amount: 1, border: 1, st: 4, intensity: 2, color: 4, offset: 4, main: 1, dissolve: 1, noise1: 4, noise2: 4, glow: 4 }[p.at(-1)];
   }
   return width;
 }
@@ -66,6 +79,7 @@ export function shaderShape(shader, label, count) {
     used.push(shaderMap(shader.noise, `${label} noise`, count));
     if (!vec(shader.noise1, 4) || !vec(shader.noise2, 4)) throw new Error(`${label}: noise1 and noise2 must be [scale, speed, x, y]`);
     if ((shader.mode === 'glow') !== (shader.glow !== null) || (shader.glow !== null && !vec(shader.glow, 4))) throw new Error(`${label}: glow must be [r, g, b, a] in glow mode, else null`);
+    animatedWidth(shader, label);
     return used;
   }
   if (!keys(shader, ['family', 'main', 'distort', 'dissolve', 'edge', 'ramp', 'vertex', 'animated'])) throw new Error(`${label}: a particle shader is { family, main, distort, dissolve, edge, ramp, vertex, animated }`);
@@ -165,11 +179,14 @@ export function layersShape(doc, label, version = LAYERS_VERSION) {
       parts.add(entry.part);
       return;
     }
-    const effect = isObject(entry) && Object.keys(entry).length === 1 && isObject(entry.effect);
-    if (!isObject(entry) || Object.keys(entry).length !== 1 || !(isObject(entry.layer) || (effect && version >= 2))) {
-      throw new Error(`${at}: must be ${version >= 2 ? '{ part }, { layer } or { effect }' : '{ part } or { layer }'}`);
+    // A tilted entry is an effect entry whose mesh turns in depth as it moves: 3D vertices, and frames
+    // that carry the depth column of their projection.
+    const solid = isObject(entry) && Object.keys(entry).length === 1 && isObject(entry.tilted);
+    const effect = (isObject(entry) && Object.keys(entry).length === 1 && isObject(entry.effect)) || solid;
+    if (!isObject(entry) || Object.keys(entry).length !== 1 || !(isObject(entry.layer) || (isObject(entry.effect) && version >= 2) || (solid && version >= 3))) {
+      throw new Error(`${at}: must be ${version >= 3 ? '{ part }, { layer }, { effect } or { tilted }' : version >= 2 ? '{ part }, { layer } or { effect }' : '{ part } or { layer }'}`);
     }
-    const layer = effect ? entry.effect : entry.layer;
+    const layer = solid ? entry.tilted : effect ? entry.effect : entry.layer;
     if (typeof layer.name !== 'string') throw new Error(`${at}: name missing`);
     if (!BLENDS.has(layer.blend)) throw new Error(`${at}: blend must be alpha or add`);
     if (effect) {
@@ -192,14 +209,18 @@ export function layersShape(doc, label, version = LAYERS_VERSION) {
       if (Object.hasOwn(layer, 'shader')) throw new Error(`${at}: a plain layer has no shader (an exact one goes in exact)`);
     }
     const { vertices, uvs, colors, triangles } = layer;
-    if (!Array.isArray(vertices) || vertices.length < 6 || vertices.length % 2 || !vertices.every(finite)) throw new Error(`${at}: vertices must be x, y pairs`);
-    const count = vertices.length / 2;
+    const stride = solid ? 3 : 2;
+    if (!Array.isArray(vertices) || vertices.length < 3 * stride || vertices.length % stride || !vertices.every(finite)) {
+      throw new Error(`${at}: vertices must be ${solid ? 'x, y, z triples' : 'x, y pairs'}`);
+    }
+    const count = vertices.length / stride;
     if (count > 65535) throw new Error(`${at}: ${count} vertices (16-bit indices)`);
-    if (!Array.isArray(uvs) || uvs.length !== vertices.length || !uvs.every(finite)) throw new Error(`${at}: uvs must pair with vertices`);
+    if (!Array.isArray(uvs) || uvs.length !== count * 2 || !uvs.every(finite)) throw new Error(`${at}: uvs must pair with vertices`);
     if (colors !== null && (!Array.isArray(colors) || colors.length !== count * 4 || !colors.every((c) => finite(c) && c >= 0 && c <= 1))) throw new Error(`${at}: colors must be null or r, g, b, a per vertex in 0-1`);
     if (!Array.isArray(triangles) || !triangles.length || triangles.length % 3 || !triangles.every((t) => index(t, count))) throw new Error(`${at}: triangles must index the vertices`);
-    // An effect's animated parameters ride on its frames, past the 16 every layer has.
-    const width = FRAME_LENGTH + (effect ? animatedWidth(layer.shader, `${at} shader`) : 0);
+    // An effect's animated parameters ride on its frames, past the 16 every layer has (18 for a tilted one).
+    const width = (solid ? SOLID_FRAME_LENGTH : FRAME_LENGTH) + (effect ? animatedWidth(layer.shader, `${at} shader`) : 0);
+    if (solid && layer.animation === null) throw new Error(`${at}: a tilted entry moves (a still one is flattened into an effect)`);
     if (layer.animation === null) {
       if (!Array.isArray(layer.color) || layer.color.length !== 4 || !layer.color.every((c) => finite(c) && c >= 0)) throw new Error(`${at}: color must be [r, g, b, a]`);
       if (width !== FRAME_LENGTH) throw new Error(`${at}: a layer without a timeline animates no parameter`);
@@ -288,20 +309,24 @@ export function followMatrix(follow, bone) {
     follow.xy ? bone.worldX : follow.position[0], follow.xy ? bone.worldY : follow.position[1]];
 }
 
-/** Points (x, y pairs in the layer's own units) in skeleton units for a frame (null for a static
- *  layer) and the bone it follows. */
-export function layerVertices(layer, frame, bone, points = layer.vertices) {
+/** Points (x, y pairs in the layer's own units; x, y, z triples when `solid`, a tilted entry's) in
+ *  skeleton units for a frame (null for a static layer) and the bone it follows. */
+export function layerVertices(layer, frame, bone, points = layer.vertices, solid = false) {
   const v = points;
   let m = frame ? frame.slice(0, 6) : [1, 0, 0, 1, 0, 0];
+  let z = solid && frame ? [frame[15], frame[16]] : [0, 0];
   if (layer.follow) {
     const f = followMatrix(layer.follow, bone);
     m = [f[0] * m[0] + f[1] * m[2], f[0] * m[1] + f[1] * m[3], f[2] * m[0] + f[3] * m[2], f[2] * m[1] + f[3] * m[3],
       f[0] * m[4] + f[1] * m[5] + f[4], f[2] * m[4] + f[3] * m[5] + f[5]];
+    z = [f[0] * z[0] + f[1] * z[1], f[2] * z[0] + f[3] * z[1]];
   }
-  const out = new Array(v.length);
-  for (let i = 0; i < v.length; i += 2) {
-    out[i] = m[0] * v[i] + m[1] * v[i + 1] + m[4];
-    out[i + 1] = m[2] * v[i] + m[3] * v[i + 1] + m[5];
+  const stride = solid ? 3 : 2;
+  const out = new Array((v.length / stride) * 2);
+  for (let i = 0, o = 0; i < v.length; i += stride, o += 2) {
+    const depth = solid ? v[i + 2] : 0;
+    out[o] = m[0] * v[i] + m[1] * v[i + 1] + z[0] * depth + m[4];
+    out[o + 1] = m[2] * v[i] + m[3] * v[i + 1] + z[1] * depth + m[5];
   }
   return out;
 }
@@ -330,14 +355,14 @@ function clipToRect(polygon, [u0, v0, u1, v1]) {
  * it draws. A triangle whose UVs leave 0-1 (a tiled texture) counts whole. `uvMap` is the frame's
  * [su, ou, sv, ov].
  */
-export function visiblePoints(layer, opaque, uvMap = [1, 0, 1, 0]) {
+export function visiblePoints(layer, opaque, uvMap = [1, 0, 1, 0], stride = 2) {
   const { vertices: p, uvs, triangles } = layer;
   const out = [];
   const uvAt = (i) => [uvs[i * 2] * uvMap[0] + uvMap[1], uvs[i * 2 + 1] * uvMap[2] + uvMap[3]];
   for (let t = 0; t < triangles.length; t += 3) {
     const ids = [triangles[t], triangles[t + 1], triangles[t + 2]];
     const uv = ids.map(uvAt);
-    const whole = () => { for (const i of ids) out.push(p[i * 2], p[i * 2 + 1]); };
+    const whole = () => { for (const i of ids) for (let k = 0; k < stride; k++) out.push(p[i * stride + k]); };
     if (uv.some(([u, v]) => u < -1e-6 || u > 1 + 1e-6 || v < -1e-6 || v > 1 + 1e-6)) { whole(); continue; }
     const [a, b, c] = uv;
     const det = (b[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (b[1] - a[1]);
@@ -346,7 +371,7 @@ export function visiblePoints(layer, opaque, uvMap = [1, 0, 1, 0]) {
       const w1 = ((q[0] - a[0]) * (c[1] - a[1]) - (c[0] - a[0]) * (q[1] - a[1])) / det;
       const w2 = ((b[0] - a[0]) * (q[1] - a[1]) - (q[0] - a[0]) * (b[1] - a[1])) / det;
       const w0 = 1 - w1 - w2;
-      out.push(w0 * p[ids[0] * 2] + w1 * p[ids[1] * 2] + w2 * p[ids[2] * 2], w0 * p[ids[0] * 2 + 1] + w1 * p[ids[1] * 2 + 1] + w2 * p[ids[2] * 2 + 1]);
+      for (let k = 0; k < stride; k++) out.push(w0 * p[ids[0] * stride + k] + w1 * p[ids[1] * stride + k] + w2 * p[ids[2] * stride + k]);
     }
   }
   return out;
@@ -365,8 +390,9 @@ export function layerBounds(doc, skeleton, skeletonBounds, label = 'layers', { e
   let x0 = skeletonBounds.x, y0 = skeletonBounds.y, x1 = skeletonBounds.x + skeletonBounds.width, y1 = skeletonBounds.y + skeletonBounds.height;
   for (const entry of doc.draw) {
     if (Object.hasOwn(entry, 'part')) continue;
-    const effect = Object.hasOwn(entry, 'effect');
-    const layer = effect ? entry.effect : entry.layer;
+    const solid = Object.hasOwn(entry, 'tilted');
+    const effect = Object.hasOwn(entry, 'effect') || solid;
+    const layer = solid ? entry.tilted : effect ? entry.effect : entry.layer;
     const bone = layer.follow ? skeleton.findBone(layer.follow.bone) : null;
     if (layer.follow && !bone) throw new Error(`${label}: ${layer.name} follows bone ${layer.follow.bone}, which the skeleton does not have`);
     // `bounds` frames what every reader draws; `effectBounds` the effects too (their main texture where
@@ -379,8 +405,8 @@ export function layerBounds(doc, skeleton, skeletonBounds, label = 'layers', { e
     // An effect frames by where it shows at its first frame: its `visible`, in its own UVs (the exporter
     // measured it with its dissolves and colour); null: too little or nothing yet.
     if (effect && !layer.visible) continue;
-    const points = layerVertices(layer, frame, bone, effect ? visiblePoints(layer, layer.visible)
-      : visiblePoints(layer, textures[layer.texture].opaque, frame ? frame.slice(11, 15) : undefined));
+    const points = layerVertices(layer, frame, bone, effect ? visiblePoints(layer, layer.visible, undefined, solid ? 3 : 2)
+      : visiblePoints(layer, textures[layer.texture].opaque, frame ? frame.slice(11, 15) : undefined), solid);
     for (let i = 0; i < points.length; i += 2) {
       x0 = Math.min(x0, points[i]); x1 = Math.max(x1, points[i]);
       y0 = Math.min(y0, points[i + 1]); y1 = Math.max(y1, points[i + 1]);

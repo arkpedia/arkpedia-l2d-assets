@@ -54,3 +54,17 @@ test('a layer frames by the part of its texture that shows', () => {
   const shifted = visiblePoints(quad, [0.25, 0.25, 0.75, 0.75], [0.5, 0, 0.5, 0]);
   close(Math.max(...shifted.filter((_, i) => i % 2 === 0)), 10);
 });
+
+test('a tilted entry projects its 3D vertices with the frame\'s depth column', () => {
+  // x' = a x + b y + e z + tx, y' = c x + d y + f z + ty: frame (after t) [a, b, c, d, tx, ty, ..., e, f] at 15 and 16.
+  const f = [1, 0, 0, 1, 10, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 2, -3];
+  assert.deepEqual(layerVertices({ vertices: [1, 2, 3], follow: null }, f, null, undefined, true), [1 + 6 + 10, 2 - 9]);
+  // Under a bone follower the depth column turns with the follower.
+  const bone = { worldX: 0, worldY: 0, scaleX: 1, scaleY: 1, getWorldRotationX: () => 90 };
+  const follow = { bone: 'b', xy: true, rotation: true, localScale: false, mirrored: false, parent: [1, 0, 0, 1], position: [0, 0], angle: 0 };
+  const [x, y] = layerVertices({ vertices: [0, 0, 1], follow }, [1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0], bone, undefined, true);
+  assert.ok(Math.abs(x) < 1e-9 && Math.abs(y - 1) < 1e-9, `${x}, ${y}`);
+  // Its visible part keeps the third coordinate.
+  const tri = { vertices: [0, 0, 0, 10, 0, 5, 0, 10, -5], uvs: [0, 1, 1, 1, 0, 0], triangles: [0, 1, 2] };
+  assert.equal(visiblePoints(tri, [0, 0, 1, 1], undefined, 3).length % 3, 0);
+});

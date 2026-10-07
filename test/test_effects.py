@@ -83,7 +83,10 @@ class Families(unittest.TestCase):
         tween = effects.describe(material(effects.L2D + 'Dissolve/Dissolve Add UVTween', floats={'_Amount': 0.5},
                                           colors={'_UVTween': [0.1, 0, 0, 0.2]}, textures={'_DissolveTex': tex()}))
         self.assertEqual((tween['color_property'], tween['main'], tween['dissolve'][0]['speed'], tween['dissolve'][0]['fract']),
-                         ('_TintColor', {'speed': [0.1, 0], 'fract': True}, [0.0, 0.2], True))
+                         ('_TintColor', {'speed': [0.1, 0], 'fract': True, 'speed_names': [('_UVTween', 0, 1.0), ('_UVTween', 1, 1.0)]}, [0.0, 0.2], True))
+        # Its speeds come from _UVTween: xy the main texture's, zw the dissolve's (an Animator that drives them
+        # moves an integrated offset, parameters()).
+        self.assertEqual(tween['dissolve'][0]['speed_names'], [('_UVTween', 2, 1.0), ('_UVTween', 3, 1.0)])
         double = effects.describe(material(effects.L2D + 'Dissolve/Dissolve AB Double edge', floats={'_Amount_01': 0.3, '_Amount_02': 0.6, '_pow': 2.0},
                                            colors={'_Edgecolor': [1, 0.5, 0, 0.2]}, textures={'_DissolveTex_01': tex(), '_DissolveTex_02': tex()},
                                            defaults={'_BorderWidth_01': 0.1, '_BorderWidth_02': 0.2}))
@@ -107,6 +110,28 @@ class Families(unittest.TestCase):
         self.assertEqual((n['family'], n['mode'], n['rgb_scale'], n['noise1'], n['glow']), ('noise', 'add', 0.5, [2, 1, 0.5, 0.5], None))
         glow = effects.describe(material(effects.L2D + 'Disturb/Disturb2 (AlphaBlend)', keywords='_DISTURBMODE_GLOW', colors={'_GlowColor': [1, 0, 0, 1]}))
         self.assertEqual((glow['mode'], glow['glow'], glow['noise']), ('glow', [1, 0, 0, 1], None))
+
+    def test_speeds_an_animator_drives_become_offsets_and_absent_stages_ignore_theirs(self):
+        disturb = effects.describe(material(effects.L2D + 'Disturb/Disturb(CustomData)', floats={'_IntensityU': 0.2, '_Amount': 0.4},
+                                            textures={'_DisturbTex': tex(), '_DissolveTex': tex()}))
+        params = effects.parameters(disturb)
+        self.assertEqual(params['main.offset'], ('offset', [('_MainUSpeed', None, 1.0), ('_MainVSpeed', None, 1.0)]))
+        self.assertEqual(params['distort.maps.0.offset'][1][0][0], '_DisturbUSpeed')
+        self.assertEqual(params['dissolve.0.offset'][1][1][0], '_DissolveVSpeed')
+        self.assertEqual(params['distort.main'], ('float', ['_DisturbScale']))
+        self.assertEqual(effects.width('distort.maps.0.offset'), 4, '[u, v, speed u, speed v]')
+        self.assertFalse(effects.inert(disturb, '_DisturbUSpeed'))
+        # No noise bound: no distortion, so its speed and influence change nothing.
+        plain = effects.describe(material(effects.L2D + 'Disturb/Disturb(CustomData)', floats={'_IntensityU': 0.2}))
+        self.assertTrue(effects.inert(plain, '_DisturbUSpeed'))
+        self.assertTrue(effects.inert(plain, '_DisturbScale'))
+        self.assertFalse(effects.inert(plain, '_MainUSpeed'))
+        # Disturb2 scrolls each channel with _Time.x (t / 20) and never reads its noise's tiling.
+        noise = effects.describe(material(effects.L2D + 'Disturb/Disturb2 (AlphaBlend)', textures={'_DisturTex': tex()}))
+        self.assertEqual(effects.parameters(noise)['noise.offset'], ('offset', [('_Noise1Param', 1, 0.05), ('_Noise2Param', 1, 0.05)]))
+        self.assertTrue(effects.inert(noise, '_DisturTex_ST'))
+        anchor = effects.describe(material(effects.L2D + 'Disturb/Disturb Anchor (AlphaBlend)', floats={'_IntensityU': 0.1}, textures={'_DisturTex': tex()}))
+        self.assertEqual(effects.parameters(anchor)['distort.maps.0.offset'][1], [('_UVTween', 2, 1.0), ('_UVTween', 3, 1.0)])
 
     def test_what_stays_out(self):
         for keywords, reason in (('_HG_UV_ROTATION', 'UV rotation'), ('_HGCUSTOMVERTEXSTREAM_ON', 'custom vertex stream'), ('HG_SPRITE_SHEET', 'sprite sheet')):
