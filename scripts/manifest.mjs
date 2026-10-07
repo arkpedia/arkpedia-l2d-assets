@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
-import { layersShape } from './layers.mjs';
+import { LAYERS_VERSION, layersShape } from './layers.mjs';
 import { inspectLayers, inspectSkeleton, isJsonSkeleton, readAtlas } from './spine.mjs';
 
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -260,13 +260,19 @@ export async function validateModel(root, folder, { deep = true } = {}) {
   // The illustration prefab's own mesh layers: layers.json (null only for a bundle without the
   // prefab), every texture it lists, its shape and, with `deep`, its bounds re-framed by the runtime.
   if (!Object.hasOwn(model, 'layers')) throw new Error(`${label}: layers must be present (null when the bundle has no illustration prefab)`);
+  // Which layers.json format the folder holds (absent: 1, from before effects). The sync exports an
+  // older folder's layers again, in place, when the format grows (scripts/layers.py LAYERS_VERSION).
+  const layersVersion = Object.hasOwn(model, 'layersVersion') ? model.layersVersion : 1;
+  if (!Number.isSafeInteger(layersVersion) || layersVersion < 1 || layersVersion > LAYERS_VERSION) {
+    throw new Error(`${label}: layersVersion must be 1-${LAYERS_VERSION}`);
+  }
   let layersDoc = null;
   if (model.layers !== null) {
     fileShape(model.layers, `${label}: layers`, 'layers.json');
     const layersPath = path.join(root, folder, 'layers.json');
     if (!existsSync(layersPath)) throw new Error(`${label}: missing file layers.json`);
     layersDoc = JSON.parse(await readFile(layersPath, 'utf8'));
-    const textures = layersShape(layersDoc, label);
+    const textures = layersShape(layersDoc, label, layersVersion);
     files.push(model.layers, ...textures);
   }
 
@@ -285,13 +291,16 @@ export async function validateModel(root, folder, { deep = true } = {}) {
   }
   checkSkeleton(model, label, contents, model.spineVersion, deep);
   if (layersDoc !== null) {
-    for (const texture of layersDoc.textures) {
+    for (const texture of [...layersDoc.textures, ...(layersDoc.effectTextures ?? [])]) {
       const size = webpSize(contents[texture.file]);
       if (size.width !== texture.width || size.height !== texture.height) throw new Error(`${label}: ${texture.file} is ${size.width}x${size.height}, layers.json says ${texture.width}x${texture.height}`);
     }
     if (deep) {
       const found = inspectLayers(contents[model.skeleton.file], contents[model.atlas.file].toString('utf8'), layersDoc, `${label}: layers`);
-      if (JSON.stringify(found) !== JSON.stringify(layersDoc.bounds)) throw new Error(`${label}: layers bounds differ from the skeleton and layers: ${JSON.stringify(found)}`);
+      if (JSON.stringify(found.bounds) !== JSON.stringify(layersDoc.bounds)) throw new Error(`${label}: layers bounds differ from the skeleton and layers: ${JSON.stringify(found.bounds)}`);
+      if (layersVersion >= 2 && JSON.stringify(found.effectBounds) !== JSON.stringify(layersDoc.effectBounds)) {
+        throw new Error(`${label}: layers effectBounds differ from the skeleton, layers and effects: ${JSON.stringify(found.effectBounds)}`);
+      }
     }
   }
   if (entrance !== null) {
@@ -339,6 +348,25 @@ export async function validateFailures(root) {
 }
 
 /**
+ * Checks shared-bundles.json, when present: the client's shared FX texture bundles by CAB name
+ * (scripts/shared_bundles.py), which the sync fetches when a layer's effect samples one of them.
+ */
+export async function validateSharedBundles(root) {
+  const file = path.join(root, 'shared-bundles.json');
+  if (!existsSync(file)) return 0;
+  const document = JSON.parse(await readFile(file, 'utf8'));
+  if (!isObject(document) || document.schemaVersion !== 1 || !isObject(document.bundles)) {
+    throw new Error('shared-bundles.json must be { schemaVersion: 1, bundles: {} }');
+  }
+  for (const [cab, bundle] of Object.entries(document.bundles)) {
+    if (!/^CAB-[a-f0-9]{32}$/.test(cab) || typeof bundle !== 'string' || !/^refs\/fx\/[^\s]+\.ab$/.test(bundle)) {
+      throw new Error(`shared-bundles.json: ${cab} must name a refs/fx/ bundle`);
+    }
+  }
+  return Object.keys(document.bundles).length;
+}
+
+/**
  * Validates manifest.json and every model folder (folders the manifest no longer names stay
  * published, so they are checked too). Returns counts.
  */
@@ -365,5 +393,6 @@ export async function validateRepository(root, { deep = true } = {}) {
     if (model.skinId !== skinId) throw new Error(`${skinId}: ${target} belongs to ${model.skinId}`);
   }
   const failures = await validateFailures(root);
+  await validateSharedBundles(root);
   return { listed: Object.keys(manifest.models).length, folders: models.size, failures };
 }

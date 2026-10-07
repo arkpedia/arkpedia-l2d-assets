@@ -11,13 +11,19 @@
    entrance.atlas, entrance-page<N>.webp and its soundtrack, entrance.mp3. The illustration prefab's
    own mesh layers (backdrops and effects drawn with the skeleton, scripts/layers.py) go into
    layers.json and layer<N>.webp; the client's shared shader bundle ([uc]shaders.ab, fetched once
-   per run and md5-checked like the rest) names the shaders their materials use.
+   per run and md5-checked like the rest) names the shaders their materials use, and its shared FX
+   texture bundles (refs/fx/texture/..., listed in shared-bundles.json) hold the noise, dissolve and
+   ramp textures of their effects: each is fetched, md5-checked, the first time a layer needs it.
 4. Reads each new skeleton with the vendored Spine 3.8 runtime (scripts/inspect-skeleton.mjs)
    for its animations and bounds (and the layers' bounds), then points manifest.json at the new
    folder.
 
 A model that fails is skipped and reported; the manifest only ever names complete folders.
-Folders are never deleted or rewritten. A bundle that downloaded and verified but could not be
+Folders are never deleted. A folder is rewritten in one case only: its model.json has a lower
+layersVersion than layers.LAYERS_VERSION (the layers' format grew), and then only its layers
+(layers.json, layer<N>.webp and model.json's `layers` and `layersVersion`) are exported again from
+its bundle, downloaded and checked again; the skeleton, atlas, pages and entrance stay byte for
+byte. Every file ever written stays at the commit that wrote it. A bundle that downloaded and verified but could not be
 turned into a model is recorded in sync-failures.json and not fetched again until its md5 or
 this code changes (--retry-failed, or naming it with --only, tries it anyway).
 
@@ -56,8 +62,11 @@ SERVER = 'en'
 USER_AGENT = 'arkpedia-l2d-assets-sync (+https://github.com/arkpedia/arkpedia-l2d-assets)'
 FAILURES_FILE = 'sync-failures.json'
 # A change to any of these retries every recorded failure once: the fix may be in them.
-CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/layers.py', 'scripts/sync.py', 'scripts/spine.mjs',
-              'scripts/layers.mjs', 'scripts/inspect-skeleton.mjs', 'vendor/spine-core-3.8/spine-core.js', 'requirements.txt']
+CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/layers.py', 'scripts/effects.py', 'scripts/sync.py', 'scripts/spine.mjs',
+              'scripts/layers.mjs', 'scripts/inspect-skeleton.mjs', 'vendor/spine-core-3.8/spine-core.js', 'requirements.txt',
+              'shared-bundles.json']
+# The client's shared FX texture bundles by CAB name (scripts/shared_bundles.py writes it).
+SHARED_BUNDLES_FILE = 'shared-bundles.json'
 
 
 def log(message: str) -> None:
@@ -165,11 +174,13 @@ def write_layers(staging: Path, exported) -> dict:
     """layers.json and layer<N>.webp (lossless, straight alpha as shipped: every layer shader samples its
     texture straight), framed by the Spine runtime. Returns model.json's `layers` record."""
     document = exported.document
-    for record, image in zip(document['textures'], exported.textures):
+    for record, image in zip(document['textures'] + document['effectTextures'], exported.textures):
         (staging / record['file']).write_bytes(l2d.encode_webp(image))
         record.update({k: v for k, v in file_record(staging, record['file']).items() if k in ('bytes', 'sha256')})
     write_json(staging / 'layers.json', document, compact=True)
-    document['bounds'] = inspect(staging, 'layers')['bounds']
+    framed = inspect(staging, 'layers')
+    document['bounds'] = framed['bounds']
+    document['effectBounds'] = framed['effectBounds']
     write_json(staging / 'layers.json', document, compact=True)
     return file_record(staging, 'layers.json')
 
@@ -177,19 +188,21 @@ def write_layers(staging: Path, exported) -> dict:
 def describe_layers(exported) -> str:
     """One line for the log: what is drawn and what was left out."""
     c, o = exported.counts, exported.document['omitted']
-    drawn = f'{c["layers"]} layers ({c["static"]} static, {c["animated"]} animated, {c["follow"]} on bones, {c["only"]} per animation, ' \
-            f'{c["states"]} with triggered states), {len(exported.textures)} textures, {c["parts"]} skeleton part(s)'
+    drawn = f'{c["layers"]} layers ({c["effects"]} with effect shaders, {c["exact"]} approximations with their exact effect; {c["static"]} static, ' \
+            f'{c["animated"]} animated, {c["follow"]} on bones, {c["only"]} per animation, {c["states"]} with triggered states), ' \
+            f'{len(exported.textures)} textures, {c["parts"]} skeleton part(s)'
     left = f'left out: {o["particles"]} particle systems, {o["trails"]} trails, {o["skinned"]} skinned, {o["hidden"]} hidden, ' \
            f'{len(o["custom"])} custom shaders, {len(o["externalTexture"])} textures in other bundles, {len(o["other"])} other, ' \
            f'{o["holders"]} shared-bundle effects'
     return f'{drawn}; {left}'
 
 
-def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: Path, shaders: dict) -> tuple[dict, list[dict], dict | None]:
+def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: Path, shaders: dict,
+                shared=None) -> tuple[dict, list[dict], dict | None]:
     """Decodes one verified bundle (l2d.unpack_dat) into `staging`. Returns its model.json content,
     per atlas page how the texture was shipped (separate [alpha] mask or not) and how its alpha
     measured, and the layers' counts."""
-    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id, shaders)
+    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id, shaders, shared)
     skeleton, textures, found, declared = write_skeleton(staging, 'skeleton', 'page', decoded.skeleton,
                                                          decoded.atlas_text, decoded.page_names, decoded.pages)
     if 'Idle' not in found['animations']:
@@ -213,6 +226,7 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         'dynEntranceId': planned.dyn_entrance_id,
         'entrance': build_entrance(staging, decoded.entrance, declared) if planned.dyn_entrance_id else None,
         'layers': write_layers(staging, exported) if exported is not None else None,
+        'layersVersion': layers.LAYERS_VERSION,
         'source': {'server': SERVER, 'bundle': planned.bundle, 'md5': planned.md5, 'resVersion': res_version},
     }
     write_json(staging / 'model.json', model)
@@ -232,16 +246,82 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         for info in decoded.entrance.page_info:
             log(f'  entrance page {describe_page(info)}')
         page_info += [{**info, 'entrance': True} for info in decoded.entrance.page_info]
-    layer_report = None
-    if exported is not None:
-        log(f'  layers: {describe_layers(exported)}')
-        for info in exported.texture_info:
-            log(f'  layer texture {info["name"]} {info["width"]}x{info["height"]} wrap {"/".join(info["wrap"])}: measured {info["measured"]["alpha"]}, drawn straight')
-        o = exported.document['omitted']
-        layer_report = {**exported.counts, 'omitted': {k: (v if isinstance(v, int) else len(v)) for k, v in o.items()}}
-    else:
+    return model, page_info, report_layers(exported)
+
+
+def report_layers(exported) -> dict | None:
+    """Logs what the layers export drew and left out; returns the counts for the run report."""
+    if exported is None:
         log('  layers: none (the bundle has no illustration prefab)')
-    return model, page_info, layer_report
+        return None
+    log(f'  layers: {describe_layers(exported)}')
+    for info in exported.texture_info:
+        log(f'  layer texture {info["name"]} {info["width"]}x{info["height"]} wrap {"/".join(info["wrap"])}: measured {info["measured"]["alpha"]}, drawn straight')
+    o = exported.document['omitted']
+    return {**exported.counts, 'omitted': {k: (v if isinstance(v, int) else len(v)) for k, v in o.items()}}
+
+
+LAYER_FILE_PREFIX = 'layer'  # layers.json and layer<N>.webp: what a layers re-export replaces
+
+
+def relayer_model(planned: l2d.Planned, bundle: bytes, staging: Path, shaders: dict, shared) -> tuple[dict, dict | None]:
+    """Exports the layers of an existing folder again (its layersVersion is older than LAYERS_VERSION)
+    into `staging`: a copy of the folder whose layers.json and layer<N>.webp are replaced and whose
+    model.json gains the new `layers` record and layersVersion. Everything else is copied byte for byte.
+    Returns the new model.json and the layers' counts."""
+    final = ROOT / planned.folder
+    model = json.loads((final / 'model.json').read_text('utf-8'))
+    for path in final.iterdir():
+        if path.is_file() and not path.name.startswith(LAYER_FILE_PREFIX) and path.name != 'model.json':
+            shutil.copy2(path, staging / path.name)
+    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id, shaders, shared)
+    exported = decoded.layers(inspect(staging, 'skeleton')['slots']) if decoded.layers is not None else None
+    rebuilt = {}
+    for key, value in model.items():
+        if key == 'layersVersion':
+            continue
+        rebuilt[key] = value
+        if key == 'layers':
+            rebuilt['layers'] = write_layers(staging, exported) if exported is not None else None
+            rebuilt['layersVersion'] = layers.LAYERS_VERSION
+    write_json(staging / 'model.json', rebuilt)
+    return rebuilt, report_layers(exported)
+
+
+def load_shared_textures(asset_base: str, res_version: str, hot_update_list: dict, bundles: Path | None, report: dict, pause: float):
+    """layers.SharedTextures over shared-bundles.json: each shared FX bundle from .cache/shared/<md5>.ab,
+    a local copy in --bundles (<dir>/<download name>.ab or .dat), or one GET (after the run's pause),
+    checked against the client list's size and md5. A bundle the list does not carry is None: the
+    layers that need it are left out under externalTexture."""
+    path = ROOT / SHARED_BUNDLES_FILE
+    table = (json.loads(path.read_text('utf-8')) if path.exists() else {}).get('bundles') or {}
+
+    def fetch(name: str):
+        info = l2d.shared_bundle(hot_update_list, name)
+        if info is None:
+            log(f'  shared bundle {name} is not in the client list')
+            return None
+        cache = ROOT / '.cache' / 'shared' / f'{info.md5}.ab'
+        local = l2d.download_name(name)
+        if cache.exists():
+            data = l2d.verify_bundle(cache.read_bytes(), info)
+        elif bundles is not None and (bundles / local.replace('.dat', '.ab')).exists():
+            data = l2d.verify_bundle((bundles / local.replace('.dat', '.ab')).read_bytes(), info)
+        elif bundles is not None and (bundles / local).exists():
+            data = l2d.unpack_dat((bundles / local).read_bytes(), info)
+        else:
+            time.sleep(pause)
+            url = l2d.download_url(asset_base, PLATFORM, res_version, info.bundle)
+            log(f'  shared textures <- {url}')
+            dat = get(url)
+            report['downloadedBytes'] += len(dat)
+            data = l2d.unpack_dat(dat, info)
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        if not cache.exists():
+            cache.write_bytes(data)
+        return data
+
+    return layers.SharedTextures(table, fetch, l2d._patch_unitypy())
 
 
 def write_skeleton(staging: Path, name: str, page_prefix: str, skeleton_bytes: bytes, atlas_text: str,
@@ -381,27 +461,33 @@ def main(argv: list[str] | None = None) -> int:
             log(f'Not found or not listed: {sorted(unknown)}')
         models = [m for m in models if m.skin_id in only]
 
-    report = {'resVersion': res_version, 'code': code, 'added': [], 'repointed': [], 'current': 0, 'failed': [],
+    report = {'resVersion': res_version, 'code': code, 'added': [], 'relayered': [], 'repointed': [], 'current': 0, 'failed': [],
               'knownFailures': [], 'unlisted': plan.unlisted, 'deferred': [], 'downloadedBytes': 0, 'pages': {}, 'layers': {}}
     # Drop records of skins that no longer have dynamic art in the client list.
     listed = {m.skin_id for m in plan.models}
     for skin_id in [s for s in failures if s not in listed]:
         del failures[skin_id]
     pending = []
+    relayer = set()  # skinIds whose existing folder only needs its layers exported again
     for planned in models:
         try:
             model = existing_model(planned)
         except l2d.SyncError as error:
             report['failed'].append({'skinId': planned.skin_id, 'error': str(error)})
             continue
-        if model is None:
+        stale = model is not None and int(model.get('layersVersion') or 1) < layers.LAYERS_VERSION
+        if model is None or stale:
             known = l2d.known_failure(failures, planned, code)
             if known and not (args.retry_failed or planned.skin_id in only):
                 report['knownFailures'].append({'skinId': planned.skin_id, 'md5': planned.md5, 'error': known.get('error', '')})
             else:
                 pending.append(planned)
-            continue
-        failures.pop(planned.skin_id, None)  # its folder exists, so any old record is stale
+                if stale:
+                    relayer.add(planned.skin_id)
+            if model is None:
+                continue
+        else:
+            failures.pop(planned.skin_id, None)  # its folder exists and is current, so any old record is stale
         target = f'{planned.folder}/model.json'
         if manifest['models'].get(planned.skin_id) != target:
             report['repointed'].append(planned.skin_id)
@@ -413,22 +499,25 @@ def main(argv: list[str] | None = None) -> int:
         report['deferred'] = [p.skin_id for p in pending[args.limit:]]
         pending = pending[:args.limit]
     need = sum(p.total_size for p in pending)
-    log(f'{report["current"]} current, {len(pending)} to download ({need / 1e6:.1f} MB), {len(report["deferred"])} deferred by --limit, '
+    log(f'{report["current"]} current, {len(pending)} to download ({need / 1e6:.1f} MB; {len(relayer & {p.skin_id for p in pending})} of them only to '
+        f'export their layers again for layersVersion {layers.LAYERS_VERSION}), {len(report["deferred"])} deferred by --limit, '
         f'{len(report["knownFailures"])} skipped as failed before (same bundle, same code)')
 
     if args.dry_run:
         for planned in pending:
-            log(f'  would fetch {planned.skin_id}: {l2d.download_url(asset_base, PLATFORM, res_version, planned.bundle)}')
+            log(f'  would fetch {planned.skin_id}{" (layers only)" if planned.skin_id in relayer else ""}: '
+                f'{l2d.download_url(asset_base, PLATFORM, res_version, planned.bundle)}')
         print(json.dumps(report, indent=2))
         return 0
 
     shaders = None
+    shared = load_shared_textures(asset_base, res_version, hot_update_list, args.bundles, report, args.pause)
     if pending:
         try:
             shaders = load_shaders(asset_base, res_version, hot_update_list, args.bundles)
         except Exception as error:  # noqa: BLE001 - reported below; nothing is built without it
-            # Not recorded as a failure of any model: the bundle may download tomorrow. A folder is
-            # never rewritten, so nothing is built without the shaders its layers need.
+            # Not recorded as a failure of any model: the bundle may download tomorrow. Nothing is
+            # built (or its layers exported again) without the shaders its layers need.
             log(f'Shared shaders unavailable, building nothing: {error}')
             for planned in pending:
                 report['failed'].append({'skinId': planned.skin_id, 'error': f'shared shaders unavailable: {error}'})
@@ -459,8 +548,23 @@ def main(argv: list[str] | None = None) -> int:
             shutil.rmtree(staging, ignore_errors=True)
             continue
         try:
-            _, page_info, layer_report = build_model(planned, bundle, res_version, staging, shaders)
             final = ROOT / planned.folder
+            if planned.skin_id in relayer:
+                # Only the layers change: the rest of the folder is copied over unchanged, and the
+                # folder is swapped for the copy in one rename once everything is written.
+                _, layer_report = relayer_model(planned, bundle, staging, shaders, shared)
+                old = final.with_name(final.name + '.replaced')
+                shutil.rmtree(old, ignore_errors=True)
+                os.replace(final, old)
+                os.replace(staging, final)
+                shutil.rmtree(old, ignore_errors=True)
+                report['relayered'].append(planned.skin_id)
+                if layer_report is not None:
+                    report['layers'][planned.skin_id] = layer_report
+                failures.pop(planned.skin_id, None)
+                log(f'  exported the layers of {planned.folder} again (layersVersion {layers.LAYERS_VERSION})')
+                continue
+            _, page_info, layer_report = build_model(planned, bundle, res_version, staging, shaders, shared)
             final.parent.mkdir(parents=True, exist_ok=True)
             if final.exists():
                 raise l2d.SyncError(f'{planned.folder} already exists')
@@ -482,6 +586,8 @@ def main(argv: list[str] | None = None) -> int:
         finally:
             shutil.rmtree(staging, ignore_errors=True)
 
+    if shared.used:
+        log(f'Shared texture bundles read: {", ".join(sorted(shared.used))}')
     if report['added'] or report['repointed']:
         # resVersion names the client list the newest entries came from; a run that changes
         # nothing leaves manifest.json untouched, so it produces no commit.
@@ -492,7 +598,7 @@ def main(argv: list[str] | None = None) -> int:
     report_path = Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2) + '\n', 'utf-8')
-    log(f'Added {len(report["added"])}, re-pointed {len(report["repointed"])}, current {report["current"]}, '
+    log(f'Added {len(report["added"])}, layers exported again {len(report["relayered"])}, re-pointed {len(report["repointed"])}, current {report["current"]}, '
         f'failed {len(report["failed"])}, skipped as failed before {len(report["knownFailures"])}, '
         f'downloaded {report["downloadedBytes"] / 1e6:.1f} MB')
     for failure in report['failed']:
@@ -504,6 +610,7 @@ def main(argv: list[str] | None = None) -> int:
         with open(summary, 'a', encoding='utf-8') as out:
             out.write(f'### Dynamic art sync ({res_version})\n\n')
             out.write(f'- Added: {len(report["added"])} {", ".join(report["added"])}\n')
+            out.write(f'- Layers exported again (layersVersion {layers.LAYERS_VERSION}): {len(report["relayered"])} {", ".join(report["relayered"])}\n')
             out.write(f'- Already current: {report["current"]}\n')
             out.write(f'- Deferred by limit: {len(report["deferred"])}\n')
             out.write(f'- Not in the client list: {", ".join(report["unlisted"]) or "none"}\n')

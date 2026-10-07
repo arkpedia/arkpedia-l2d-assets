@@ -94,9 +94,13 @@ export function inspectSkeleton(skeletonBytes, atlasText) {
 /**
  * The bounds the site frames an illustration with its layers (layers.json): the posed skeleton's
  * joined with the layers drawn at Idle's first frame (scripts/layers.mjs layerBounds), which also
- * checks every slot and bone the layers name exists in the skeleton.
+ * checks every slot and bone the layers name exists in the skeleton. { bounds, effectBounds }:
+ * effectBounds (null for a file without effects, layersVersion 1) with the effect entries drawn too.
  */
 export function inspectLayers(skeletonBytes, atlasText, layersDoc, label) {
   const { skeleton, bounds } = poseSkeleton(skeletonBytes, atlasText);
-  return layerBounds(layersDoc, skeleton, bounds, label);
+  return {
+    bounds: layerBounds(layersDoc, skeleton, bounds, label),
+    effectBounds: Object.hasOwn(layersDoc, 'effectTextures') ? layerBounds(layersDoc, skeleton, bounds, label, { effects: true }) : null,
+  };
 }

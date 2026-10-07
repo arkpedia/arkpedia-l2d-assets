@@ -62,7 +62,7 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          summary=$(python -c "import json; r = json.load(open('.cache/sync-report.json')); print(f\"{len(r['added'])} new, {len(r['failed'])} failed, client {r['resVersion']}\")")
+          summary=$(python -c "import json; r = json.load(open('.cache/sync-report.json')); print(f\"{len(r['added'])} new, {len(r.get('relayered', []))} layers exported again, {len(r['failed'])} failed, client {r['resVersion']}\")")
           git commit -q -m "Sync dynamic art ($summary)"
           git pull -q --rebase origin main
           npm run validate

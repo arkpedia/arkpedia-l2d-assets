@@ -16,7 +16,7 @@ from test_camera import Scene, linear, ref  # noqa: E402
 SHADERS_CAB = 'CAB-shaders'
 OTHER_CAB = 'CAB-other'
 EXTERNALS = {1: layers.BUILTIN_RESOURCES, 2: OTHER_CAB, 3: SHADERS_CAB}
-ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD, ERASE, ANCHOR = 1, 2, 3, 4, 5, 6
+ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD, ERASE, ANCHOR, DISSOLVE_CD, RAM = 1, 2, 3, 4, 5, 6, 7, 8
 SHADERS = {
     (SHADERS_CAB, ALPHA_BLEND): layers.Shader('Torappu/Particles-L2D/AlphaBlend', 5.0, 10.0, 0.0, 3000, {'_TintColor': 0.5}),
     (SHADERS_CAB, ADDITIVE): layers.Shader('Torappu/Particles-L2D/Additive', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5}),
@@ -27,6 +27,9 @@ SHADERS = {
     (SHADERS_CAB, ERASE): layers.Shader('Torappu/Particles-L2D/Mask/Erase', 5.0, 10.0, 0.0, 3000, {'_Strength': 1.0}),
     (SHADERS_CAB, ANCHOR): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb Anchor (AlphaBlend)', 5.0, 10.0, 0.0, 3000,
                                          {'_MainColor': 0.5, '_AnchorU': 0.5, '_AnchorV': 0.5, '_AnchorU_02': 0.5, '_AnchorV_02': 0.5}),
+    (SHADERS_CAB, DISSOLVE_CD): layers.Shader('Torappu/Particles-L2D/Dissolve/Dissolve(CustomData)', 5.0, 10.0, 0.0, 3000,
+                                              {'_MainColor': 0.5, '_Opacity': 1.0, '_UseDissolveTex': 0.0}),
+    (SHADERS_CAB, RAM): layers.Shader('Torappu/Particles-L2D/Ram/Disturb(CustomData)', 5.0, 10.0, 0.0, 3000, {'_MainColor': 0.5, '_Opacity': 1.0, '_Amount': 0.0}),
 }
 
 
@@ -83,22 +86,24 @@ class Prefab(Scene):
         self.renderer(go, [self.add('Material', material)], order)
         return go, tr
 
-    def export(self):
+    def export(self, shared=None, image=None):
         from PIL import Image
 
         def mesh_of(path_id):
             return self.meshes[path_id]
 
         def texture_of(path_id):
-            image = Image.new('RGBA', (4, 4), (200, 100, 50, 0))
-            image.putpixel((1, 1), (200, 100, 50, 255))
-            return image
+            if image:
+                return image(path_id)
+            picture = Image.new('RGBA', (4, 4), (200, 100, 50, 0))
+            picture.putpixel((1, 1), (200, 100, 50, 255))
+            return picture
         return layers.export_layers(self.root_go, self.read, mesh_of=mesh_of, texture_of=texture_of, classify_texture=l2d.classify_alpha,
-                                    external_of=external, shaders=SHADERS, slots=['slotA', 'slotB', 'slotC'])
+                                    external_of=external, shaders=SHADERS, slots=['slotA', 'slotB', 'slotC'], shared=shared)
 
 
 def entries(result):
-    return [e['part'] if 'part' in e else e['layer'] for e in result.document['draw']]
+    return [e['part'] if 'part' in e else e.get('layer') or e['effect'] for e in result.document['draw']]
 
 
 def layer_named(result, name):
@@ -135,13 +140,21 @@ class Looks(unittest.TestCase):
         # Two distortions at once: their sum moves the texture, so a slight first one does not pass a strong second.
         both = material_tree(ANCHOR, 1, floats=[('_IntensityU', 0.05), ('_ToggleUseDisturb2', 1.0), ('_IntensityU_02', 0.5)],
                              extra_textures=[('_DisturTex', 2), ('_DisturTex_02', 2)])
-        with self.assertRaisesRegex(layers.LayerError, r'flow distortion \(up to 0.55 UV, 281.6 texels\)'):
-            layers.look(read_material(both))
+        # Too strong to draw undistorted (0.55 UV): drawn with the anchor shader itself, both noises
+        # added to the mesh UV before the tiling.
+        strong = layers.look(read_material(both))
+        distort = strong.effect['distort']
+        self.assertEqual((distort['space'], [m['name'] for m in distort['maps']], [m['anchor'] for m in distort['maps']]),
+                         ('raw', ['_DisturTex', '_DisturTex_02'], [[0.5, 0.5], [0.5, 0.5]]))
+        self.assertEqual([m['intensity'] for m in distort['maps']], [[0.05, 0.0], [0.5, 0.0]])
+        self.assertIsNone(strong.approximated)
         # The second is off: only the first counts; its texels follow the texture's tiling (2x).
         one = material_tree(ANCHOR, 1, floats=[('_IntensityU', 0.02), ('_IntensityU_02', 0.5)], extra_textures=[('_DisturTex', 2), ('_DisturTex_02', 2)],
                             st=((2, 1), (0, 0)))
         slight = layers.look(read_material(one))
         self.assertEqual(slight.approximated, 'flow distortion (up to 0.02 UV, 20.5 texels) drawn without it')
+        # ... and carries its exact effect, on its own tiling.
+        self.assertEqual((slight.exact['distort']['space'], slight.exact['st']), ('raw', [2, 1, 0, 0]))
         # Drawn at the wobble's centre (texture 0.5 at anchor 0.5): no shift. Without a distortion texture the
         # anchor's constant shift (-anchor * intensity) stays.
         self.assertEqual(slight.st[2], 0.0)
@@ -184,20 +197,24 @@ class Looks(unittest.TestCase):
         slight = layers.look(read_material(material_tree(DISTURB, 1, floats=[('_IntensityU', 0.01)], extra_textures=[('_DisturbTex', 2)])))
         self.assertEqual(slight.approximated, 'flow distortion (up to 0.01 UV, 5.1 texels) drawn without it')
         self.assertIsNone(plain.approximated)
-        strong = material_tree(DISTURB, 1, floats=[('_IntensityU', 0.2)], extra_textures=[('_DisturbTex', 2)])
-        with self.assertRaisesRegex(layers.LayerError, r'flow distortion \(up to 0.2 UV, 102.4 texels\)'):
-            layers.look(read_material(strong))
+        strong = layers.look(read_material(material_tree(DISTURB, 1, floats=[('_IntensityU', 0.2)], extra_textures=[('_DisturbTex', 2)])))
+        self.assertEqual(strong.effect['distort']['space'], 'main')
+        self.assertEqual(strong.effect['distort']['maps'][0]['intensity'], [0.2, 0.0])
+        self.assertEqual(slight.exact['distort']['maps'][0]['intensity'], [0.01, 0.0])
         self.assertTrue(layers.slight_flow({'uv': 0.06, 'texels': 40.0}))
         for flow in ({'uv': 0.07, 'texels': 10.0}, {'uv': 0.01, 'texels': 41.0}, {'uv': 0.01, 'texels': 0.0}):
             self.assertFalse(layers.slight_flow(flow), flow)
-        with self.assertRaisesRegex(layers.LayerError, 'dissolve'):
-            layers.look(read_material(material_tree(DISTURB, 1, floats=[('_Amount', 0.3)], extra_textures=[('_DissolveTex', 2)])))
+        dissolving = layers.look(read_material(material_tree(DISTURB, 1, floats=[('_Amount', 0.3)], extra_textures=[('_DissolveTex', 2)])))
+        self.assertEqual([(d['name'], d['amount'], d['border']) for d in dissolving.effect['dissolve']], [('_DissolveTex', 0.3, 0.1)])
         # Dissolve without a texture is a constant factor; amount 0 is none.
         self.assertEqual(layers.look(read_material(material_tree(DISSOLVE_ADD, 1, floats=[('_Amount', 0.0)]))).alpha_scale, 1.0)
-        with self.assertRaisesRegex(layers.LayerError, 'dissolve'):
-            layers.look(read_material(material_tree(DISSOLVE_ADD, 1, extra_textures=[('_DissolveTex', 2)])))
+        self.assertEqual(len(layers.look(read_material(material_tree(DISSOLVE_ADD, 1, extra_textures=[('_DissolveTex', 2)]))).effect['dissolve']), 1)
         with self.assertRaisesRegex(layers.LayerError, 'UV rotation'):
             layers.look(read_material(material_tree(DISTURB, 1, keywords='_HG_UV_ROTATION')))
+
+    def test_an_effect_shader_that_changes_nothing_draws_plain(self):
+        quiet = layers.look(read_material(material_tree(DISSOLVE_CD, 1, floats=[('_Opacity', 0.5)], colours=[('_MainColor', (1, 1, 1, 1))])))
+        self.assertEqual((quiet.effect, quiet.color_property, quiet.opacity, quiet.color), (None, '_MainColor', 0.5, [1, 1, 1, 1]))
 
     def test_unknown_or_missing_shaders_are_reasons(self):
         tree = material_tree(ALPHA_BLEND, 1)
@@ -281,6 +298,42 @@ class Export(unittest.TestCase):
         self.assertEqual((end[0], end[5], end[10]), (0.9667, 96.67, 0.0333))
         self.assertEqual(last[1:], first[1:])
 
+    def test_an_effect_parameter_an_animator_drives_rides_on_the_frames(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        noise = p.add('Texture2D', {'m_Name': 'noise', 'm_Width': 64, 'm_Height': 64})
+        # A dissolve that sweeps in: amount 0 (nothing dissolved) at rest, so only its clip makes it one.
+        go, _ = p.quad('sweep', effects, material_tree(DISSOLVE_ADD, p.texture, floats=[('_Amount', 0.0)], extra_textures=[('_DissolveTex', noise)]))
+        amount = ec.crc('_Amount') & 0x0FFFFFFF
+        clip = p.clip('sweep_idle', [{'path': 0, 'typeID': ec.RENDERER, 'attribute': amount}],
+                      [(-3.0e38, [(0, (0, 0, 0, 0))]), (0.0, [(0, linear(0, 1, 0, 1))]), (1.0, [(0, (0, 0, 0, 1))]), (float('inf'), [])], stop=1.0)
+        p.animate(go, clip)
+        sweep = layer_named(p.export(), 'sweep')
+        self.assertEqual(sweep['shader']['animated'], ['dissolve.0.amount'])
+        self.assertEqual(sweep['shader']['dissolve'][0]['amount'], 0.0, 'its first value')
+        frames = sweep['animation']['frames']
+        self.assertEqual([len(f) for f in frames], [17] * len(frames), '16 numbers and the amount')
+        self.assertEqual((frames[0][16], frames[-1][16]), (0.0, 1.0))
+        # The same clip on a plain layer's colour property stays plain: no effect parameter moves.
+        go2, _ = p.quad('glow', effects, material_tree(ALPHA_BLEND, p.texture))
+        tint = ec.crc('_TintColor') & 0x0FFFFFFF | (7 << 28)
+        p.animate(go2, p.clip('glow_idle', [{'path': 0, 'typeID': ec.RENDERER, 'attribute': tint}],
+                              [(-3.0e38, [(0, (0, 0, 0, 0))]), (0.0, [(0, linear(0, 1, 0, 1))]), (1.0, [(0, (0, 0, 0, 1))]), (float('inf'), [])], stop=1.0))
+        self.assertNotIn('shader', layer_named(p.export(), 'glow'))
+
+    def test_a_moving_layer_that_culls_faces_is_culled_as_it_is_drawn(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        go, _ = p.quad('flag', effects, material_tree(DISTURB, p.texture, floats=[('_CullMode', 2.0)]))
+        clip = p.clip('flag_idle', [{'path': 0, 'typeID': ec.TRANSFORM, 'attribute': ec.POSITION}],
+                      [(-3.0e38, [(0, (0, 0, 0, 0))]), (0.0, [(0, linear(0, 1, 0, 1))]), (1.0, [(0, (0, 0, 0, 1))]), (float('inf'), [])],
+                      constants=(0.0, 0.0), stop=1.0)
+        p.animate(go, clip)
+        flag = layer_named(p.export(), 'flag')
+        # An effect entry (a reader of plain layers would draw both faces) whose shader does nothing more.
+        self.assertEqual((flag['cull'], flag['shader']['distort'], flag['shader']['dissolve']), (2, None, []))
+        self.assertIsNotNone(flag['animation'])
+
     def test_bone_followers_action_groups_and_delays(self):
         p = Prefab()
         follower_go, follower = p.game_object('Hand', p.root, position=(3, 0, 0))
@@ -309,10 +362,10 @@ class Export(unittest.TestCase):
         p.quad('bad', effects, {**material_tree(ALPHA_BLEND, p.texture), 'm_Name': 'broken'})
         real = layers.look
 
-        def look(material):
+        def look(material, animated=frozenset()):
             if material.name == 'broken':
                 raise ValueError('Unsupported topology: lines')
-            return real(material)
+            return real(material, animated)
         original, layers.look = layers.look, look
         try:
             result = p.export()
@@ -345,15 +398,79 @@ class Export(unittest.TestCase):
         result = p.export()
         omitted = result.document['omitted']
         self.assertEqual((omitted['particles'], omitted['trails'], omitted['hidden']), (1, 1, 1))
-        self.assertEqual(omitted['custom'], [{'name': 'cloud', 'reason': 'flow distortion (up to 0.3 UV, 1.2 texels)'},
-                                             {'name': 'times', 'reason': f'shader not found ({SHADERS_CAB}:98)'}])
+        self.assertEqual(omitted['custom'], [{'name': 'times', 'reason': f'shader not found ({SHADERS_CAB}:98)'}])
         self.assertEqual(omitted['externalTexture'], [{'name': 'shared', 'reason': f'texture in {OTHER_CAB}'}])
         self.assertEqual(omitted['other'], [{'name': 'rotating', 'reason': 'UV rotation script'}])
         tri = layer_named(result, 'tri')
         self.assertEqual((tri['triangles'], tri['colors'][:4]), ([0, 1, 2], [1.0, 1.0, 1.0, 0.5]))
         self.assertEqual(layer_named(result, 'mist')['approximated'], 'flow distortion (up to 0.02 UV, 0.1 texels) drawn without it')
         self.assertIsNone(tri['approximated'])
-        self.assertEqual(result.counts['layers'], 2)
+        # The strong flow is drawn with its shader: an effect entry, its noise among the textures only effects sample.
+        cloud = layer_named(result, 'cloud')
+        self.assertEqual(cloud['shader']['distort']['maps'][0]['texture'], 1)
+        self.assertEqual([t['width'] for t in result.document['textures']], [4])
+        self.assertEqual([t['file'] for t in result.document['effectTextures']], ['layer1.webp'])
+        self.assertEqual([info['name'] for info in result.texture_info], ['sky', 'noise'])
+        self.assertEqual((result.counts['layers'], result.counts['effects'], result.counts['exact']), (3, 1, 1))
+
+    def test_effects_sample_shared_textures_and_scroll_with_their_scripts(self):
+        from PIL import Image
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        tree = material_tree(DISTURB, p.texture, floats=[('_IntensityU', 0.3)], st=((2, 1), (0.5, 0)))
+        tree['m_SavedProperties']['m_TexEnvs'].append(['_DisturbTex', {'m_Texture': {'m_FileID': 2, 'm_PathID': 88}, 'm_Scale': {'x': 3, 'y': 3}, 'm_Offset': {'x': 0, 'y': 0}}])
+        go, _ = p.quad('flow', effects, tree)
+        script = {'m_Enabled': 1, 'xspeed': 0.0, 'yspeed': 0.0, 'keepInitOffset': 1, 'useSecondMap': 1, 'secondMapName': '_DisturbTex',
+                  'secondXSpeed': 0.0, 'secondYSpeed': 0.25, 'extraMapSettings': []}
+        p.attach(go, p.add('MonoBehaviour', script))
+        noise = ('Texture2D', {'m_Name': 'shared-noise', 'm_Width': 4, 'm_Height': 4, 'm_TextureSettings': {'m_WrapU': 0, 'm_WrapV': 0}})
+        shared = {OTHER_CAB: (lambda path_id: noise if path_id == 88 else None, lambda path_id: Image.new('RGBA', (4, 4), (128, 0, 0, 255)))}
+        result = p.export(shared=shared.get)
+        flow = layer_named(result, 'flow')
+        self.assertEqual(flow['uvs'], [0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0], "the mesh's own UVs, Unity space")
+        self.assertEqual(flow['shader']['main'], {'st': [2.0, 1.0, 0.5, 0.0], 'speed': [0.0, 0.0], 'scroll': [0.0, 0.0], 'fract': False})
+        noise_map = flow['shader']['distort']['maps'][0]
+        self.assertEqual((noise_map['texture'], noise_map['st'], noise_map['scroll']), (1, [3.0, 3.0, 0.0, 0.0], [0.0, 0.25]))
+        self.assertEqual([info['name'] for info in result.texture_info], ['sky', 'shared-noise'])
+        # Only an effect draws here, so its main texture too is one only effects sample.
+        self.assertEqual((result.document['textures'], [t['wrap'] for t in result.document['effectTextures']]), ([], [['clamp', 'repeat'], ['repeat', 'repeat']]))
+        # Without that bundle the layer waits for it; a script that restarts the noise's offset is not reproduced.
+        self.assertEqual(p.export().document['omitted']['externalTexture'], [{'name': 'flow', 'reason': f'texture in {OTHER_CAB}'}])
+        script['keepInitOffset'] = 0
+        self.assertEqual(p.export(shared=shared.get).document['omitted']['other'], [{'name': 'flow', 'reason': 'UV scroll script that restarts the offset'}])
+
+    def test_an_effect_without_a_main_texture_samples_white(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        p.quad('streak', effects, material_tree(RAM, None, extra_textures=[('_RamTex', p.texture)]))
+        p.quad('plain', effects, material_tree(ALPHA_BLEND, None))
+        result = p.export()
+        streak = layer_named(result, 'streak')
+        self.assertEqual((streak['texture'], streak['shader']['ramp']['texture']), (None, 0))
+        self.assertEqual(result.document['omitted']['other'], [{'name': 'plain', 'reason': 'no main texture'}])
+
+    def test_an_effect_frames_by_where_it_shows_at_its_first_frame(self):
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        from PIL import Image
+        noise = p.add('Texture2D', {'m_Name': 'noise', 'm_Width': 4, 'm_Height': 4})
+        spark = p.add('Texture2D', {'m_Name': 'spark', 'm_Width': 4, 'm_Height': 4})
+
+        def image(path_id):
+            # The main texture shows its left half (image columns 0-1); the noise reads red 200/255; a spark one texel.
+            picture = Image.new('RGBA', (4, 4), (200, 100, 50, 0))
+            for x, y in ((x, y) for x in range(4) for y in range(4)):
+                if (path_id == p.texture and x < 2) or path_id == noise or (path_id == spark and (x, y) == (1, 1)):
+                    picture.putpixel((x, y), (200, 100, 50, 255))
+            return picture
+        p.quad('shown', effects, material_tree(DISSOLVE_ADD, p.texture, floats=[('_Amount', 0.5)], extra_textures=[('_DissolveTex', noise)]))
+        p.quad('dissolved', effects, material_tree(DISSOLVE_ADD, p.texture, floats=[('_Amount', 0.9)], extra_textures=[('_DissolveTex', noise)]))
+        p.quad('sparkle', effects, material_tree(DISSOLVE_ADD, spark, floats=[('_Amount', 0.5)], extra_textures=[('_DissolveTex', noise)]))
+        result = p.export(image=image)
+        u0, v0, u1, v1 = layer_named(result, 'shown')['visible']
+        self.assertTrue(u0 < 0.0 and 0.5 <= u1 <= 0.53 and v0 < 0.0 and v1 > 1.0, (u0, v0, u1, v1))
+        self.assertIsNone(layer_named(result, 'dissolved')['visible'], 'red 0.78 under amount 0.9: nothing shows yet')
+        self.assertIsNone(layer_named(result, 'sparkle')['visible'], 'one texel in sixteen: too little to frame by')
 
     def test_layers_under_an_erase_mask_are_left_out(self):
         p = Prefab()

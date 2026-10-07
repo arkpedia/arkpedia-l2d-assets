@@ -23,12 +23,17 @@ shader bundle (shader_table).
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Callable
 
+import effects
 import entrance_camera as ec
 
 SCHEMA_VERSION = 1
+# model.json `layersVersion`: what layers.json holds. 1 (or absent): plain layers only. 2: effect entries,
+# exact upgrades, effectTextures and effectBounds, and textures from the shared FX bundles. The sync
+# re-exports the layers of a folder written by an older version (scripts/sync.py).
+LAYERS_VERSION = 2
 FPS = 30
 # The built-in meshes in Unity's "unity default resources" (by path id): only the Quad is used by
 # drawable layers (the Plane appears 8 times, all left out).
@@ -47,6 +52,9 @@ OPAQUE_ALPHA = 8
 POSITION_TOLERANCE = 0.25
 COLOUR_TOLERANCE = 0.004
 UV_TOLERANCE = 0.0005
+EFFECT_TOLERANCE = 0.0005  # an effect's animated parameters (amounts, tilings, intensities)
+# An effect frames the view only where it shows over at least this share of its UVs at its first frame.
+VISIBLE_COVERAGE = 0.1
 # Longest loop sampled: the clips of one layer loop with their own lengths; their common period is
 # sampled up to this many seconds.
 MAX_PERIOD = 60.0
@@ -207,7 +215,7 @@ def read_material(tree: dict, *, read, external_of, shaders: dict) -> Material:
                 else:
                     tex = {'external': 'this bundle (not a Texture2D)'}
             else:
-                tex = {'external': external_of(ref)}
+                tex = {'external': external_of(ref), 'id': ref['m_PathID']}
         textures[name] = {'tex': tex, 'scale': [env['m_Scale']['x'], env['m_Scale']['y']], 'offset': [env['m_Offset']['x'], env['m_Offset']['y']]}
     ref = tree.get('m_Shader') or {}
     shader, shader_ref = None, '(none)'
@@ -278,6 +286,11 @@ class Look:
     # The material's own _Opacity (Disturb/Ram), apart from alpha_scale: an animated _Opacity replaces it
     # rather than scaling it, so a fade in from 0 still shows.
     opacity: float = 1.0
+    # The game's effect shader as data (effects.describe), or None for a plain material: the layer is an
+    # `effect` entry. `exact`: the same for an approximated plain layer, which readers that know the
+    # effect draw exactly (its `exact`).
+    effect: dict | None = None
+    exact: dict | None = None
 
 
 # A flow-distortion layer whose texture moves at most this far is drawn without the distortion: the
@@ -338,8 +351,69 @@ def flow_distortion(m: Material, name: str) -> dict | None:
     return None
 
 
-def look(m: Material) -> Look:
-    """The material as the site draws it, or LayerError with why it cannot be."""
+# Animated properties a plain layer reproduces itself (its colour, tiling and opacity).
+PLAIN_ANIMATED = {'_TintColor', '_MainColor', '_MainTex_ST', '_Opacity'}
+
+
+def look(m: Material, animated=frozenset()) -> Look:
+    """The material as the site draws it, or LayerError with why it cannot be: plain (texture x 2 x vertex
+    colour x tint), or with the game's effect shader as data (effects.describe) when its effect changes
+    pixels. A slight flow distortion stays a plain, approximated layer that carries its exact effect.
+    `animated`: the material properties an Animator drives on the renderer; one that only an effect
+    reproduces (a dissolve's amount, a noise's tiling...) makes the layer an effect."""
+    if m.shader is not None and m.shader.name in effects.SHADERS and set(animated) - PLAIN_ANIMATED:
+        try:
+            return effect_look(m, animated)
+        except effects.Unsupported as unsupported:
+            raise LayerError(str(unsupported)) from None
+    try:
+        plain = plain_look(m)
+    except LayerError:
+        try:
+            return effect_look(m, animated)
+        except effects.Unsupported as unsupported:
+            raise LayerError(str(unsupported)) from None
+    if plain.approximated:
+        try:
+            exact = effect_look(m)
+            # Its own tiling: the approximation's may hold the undistorted wobble's centre.
+            plain.exact = {**exact.effect, 'st': exact.st} if exact.effect else None
+        except effects.Unsupported:
+            pass
+    return plain
+
+
+def effect_look(m: Material, animated=frozenset()) -> Look:
+    """A material with an effect the site reproduces (effects.describe), as a Look whose `effect` holds it,
+    with `params` (effects.parameters) and `animated_paths`, the parameters an Animator drives."""
+    effect = effects.describe(m, frozenset(animated))
+    effect['params'] = effects.parameters(effect)
+    effect['animated_paths'] = [path for path, (_, props) in sorted(effect['params'].items()) if set(props) & set(animated)]
+    blend = BLENDS.get((int(m.factor(m.shader.src)), int(m.factor(m.shader.dst))), f'{m.factor(m.shader.src):g},{m.factor(m.shader.dst):g}')
+    main = m.textures.get('_MainTex') or {'tex': None, 'scale': [1, 1], 'offset': [0, 0]}
+    prop = effect['color_property']
+    default = m.shader.defaults.get(prop, 0.5)
+    color = list(m.colors.get(prop) or [default] * 4)
+    speed = (effect.get('main') or {}).get('speed') or [0.0, 0.0]
+    # Nothing but the particle maths (Dissolve(CustomData) without its dissolve, say): a plain layer,
+    # as long as its main texture is bound (an unbound one is Unity's white, which only effects draw).
+    plain = effect['family'] == effects.PARTICLE and main['tex'] and not (effect.get('distort') or effect.get('dissolve') or effect.get('edge')
+                                                                          or effect.get('ramp') or effect.get('vertex') or effect['main'].get('fract')
+                                                                          or effect['animated_paths'])
+    return Look(blend=blend, texture=main['tex'], st=[*main['scale'], *main['offset']], color=color, color_property=prop,
+                rgb_scale=effect.get('rgb_scale', 1.0), alpha_scale=effect.get('alpha_scale', 1.0), scroll=list(speed),
+                cull=int(m.factor(m.shader.cull)), queue=m.queue, opacity=effect.get('opacity', 1.0), effect=None if plain else effect)
+
+
+def plain_effect(look_: Look) -> dict:
+    """A plain material as an effect with no stage (the particle maths alone), for a layer only an effect
+    entry can carry (one culled as it is drawn)."""
+    return {'family': effects.PARTICLE, 'plain': True, 'main': {'speed': list(look_.scroll), 'fract': False}, 'distort': None, 'dissolve': [],
+            'edge': None, 'ramp': None, 'vertex': None, 'params': {}, 'animated_paths': []}
+
+
+def plain_look(m: Material) -> Look:
+    """The material as a plain layer, or LayerError with why it is not one."""
     if m.shader is None:
         raise LayerError(f'shader not found ({m.shader_ref})')
     raw = m.shader.name
@@ -529,8 +603,11 @@ def texture_alpha(image, classify) -> dict:
 
 
 class _Exporter:
-    def __init__(self, root_go: int, read, *, mesh_of, texture_of, classify_texture, external_of, shaders, slots):
+    def __init__(self, root_go: int, read, *, mesh_of, texture_of, classify_texture, external_of, shaders, slots, shared=None):
         self.read = read
+        # CAB name -> (read, texture_of) of a shared texture bundle (refs/fx/texture/...), or None when it
+        # is not available: textures materials take from other bundles.
+        self.shared = shared or (lambda cab: None)
         self.slots = set(slots)
         self.mesh_of = mesh_of
         self.texture_of = texture_of
@@ -580,7 +657,7 @@ class _Exporter:
             scene = ec._Scene(root_go, read, choose=lambda pid, an, ctrl, n, a=animation: self._choose_state(pid, an, ctrl, n, a))
             if scene.switched:
                 self.state_scenes[animation] = scene
-        self.textures = {}  # texture path id -> index
+        self.textures = {}  # (CAB or None, texture path id) -> index
         self.texture_images = []
         self.texture_info = []
         self.omitted = {'particles': 0, 'trails': 0, 'skinned': 0, 'hidden': 0, 'holders': len(self.controller.get('_holders') or []),
@@ -717,9 +794,10 @@ class _Exporter:
         return found
 
     def scripts(self, tr):
-        """(UV scroll [u, v] in Unity UV units per second or None, delay in seconds) from the scripts on
-        the layer and its chain; LayerError for a script whose effect is not known."""
-        scroll, delay = None, 0.0
+        """(UV scroll [u, v] in Unity UV units per second or None, delay in seconds, {texture property:
+        [u, v]} the script scrolls besides the main texture) from the scripts on the layer and its chain;
+        LayerError for a script whose effect is not known."""
+        scroll, delay, maps = None, 0.0, {}
         for x in self.chain(tr):
             if x == self.root:
                 continue
@@ -743,11 +821,34 @@ class _Exporter:
                         if not tree.get('keepInitOffset', 1):
                             raise LayerError('UV scroll script that restarts the offset')
                         scroll = list(speed)
+                    # Its second map and extra maps (dissolve and noise textures) move the same way, which
+                    # matters only to an effect that samples them (entry checks those it uses).
+                    note = {'restarts': not tree.get('keepInitOffset', 1)}
+                    second = [float(tree.get('secondXSpeed') or 0.0), float(tree.get('secondYSpeed') or 0.0)]
+                    if tree.get('useSecondMap') and not tree.get('protectSecondUV', 0) and any(second) and isinstance(tree.get('secondMapName'), str):
+                        maps[tree['secondMapName']] = {**note, 'speed': second, 'tiling': False}
+                    for extra in tree.get('extraMapSettings') or []:
+                        if not isinstance(extra, dict) or not extra.get('enabled') or not isinstance(extra.get('mapName'), str):
+                            continue
+                        st = extra.get('mapST') or {}
+                        speed2 = [float(extra.get('XSpeed') or 0.0), float(extra.get('YSpeed') or 0.0)]
+                        tiling = any(float(st.get(k) or 0.0) for k in ('x', 'y', 'z', 'w'))
+                        if any(speed2) or tiling:
+                            maps[extra['mapName']] = {**note, 'speed': speed2, 'tiling': tiling}
                     continue
                 if '_rotateTex1' in fields:
                     raise LayerError('UV rotation script')
                 raise LayerError('script (' + ', '.join(sorted(fields)[:4]) + ')')
-        return scroll, delay
+        return scroll, delay, maps
+
+    def animated_properties(self, tr, material: Material) -> set:
+        """The material properties a clip (of the default states or a triggered one) drives on this renderer."""
+        out = set()
+        for scene in (self.scene, *self.state_scenes.values()):
+            for (target, type_id, attribute) in scene.float_curves:
+                if target == tr and type_id == ec.RENDERER and attribute != ec.ENABLED:
+                    out.add(property_name(material, ec.material_binding(attribute)[0]))
+        return out
 
     def check_curves(self, scene, tr, look_: Look, follower, material: Material):
         """Every curve that touches this layer must be one the export reproduces."""
@@ -755,6 +856,9 @@ class _Exporter:
         known = {colour_hash, ec.crc('_MainTex_ST') & 0x0FFFFFFF}
         if look_.color_property == '_MainColor':
             known.add(ec.crc('_Opacity') & 0x0FFFFFFF)
+        if look_.effect:
+            # An effect's animated parameters ride on its frames (extra_values).
+            known |= {ec.crc(prop) & 0x0FFFFFFF for path in look_.effect.get('animated_paths') or [] for prop in look_.effect['params'][path][1]}
         for (target, type_id, attribute) in scene.float_curves:
             if target != tr:
                 continue
@@ -861,10 +965,30 @@ class _Exporter:
             frames.append([t, m[0][0] * factor, m[0][1] * factor, m[1][0] * factor, m[1][1] * factor, m[0][3] * factor, m[1][3] * factor,
                            2 * colour[0] * look_.rgb_scale, 2 * colour[1] * look_.rgb_scale, 2 * colour[2] * look_.rgb_scale,
                            2 * colour[3] * look_.alpha_scale * opacity, active,
-                           su, st[2] - st0[2] * su, sv, 1 - sv - st[3] + st0[3] * sv])
+                           su, st[2] - st0[2] * su, sv, 1 - sv - st[3] + st0[3] * sv, *self.extra_values(scene, tr, look_, material, t)])
         animated = len(frames) > 1 and any(f[1:] != frames[0][1:] for f in frames)
         self.tilted = tilted
         return frames, round(length, 4), bool(looping), round(loop_from, 4), animated
+
+    def extra_values(self, scene, tr, look_: Look, material: Material, t: float) -> list:
+        """An effect's animated parameters at time t, in the order of its animated_paths (effects.width
+        numbers each): float properties by name, vector and colour ones by component."""
+        if not look_.effect or not look_.effect.get('animated_paths'):
+            return []
+        out = []
+        for path in look_.effect['animated_paths']:
+            kind, props = look_.effect['params'][path]
+            if kind == 'float':
+                out += [scene.float_value(tr, ec.RENDERER, ec.crc(prop) & 0x0FFFFFFF, t, material.float(prop)) for prop in props]
+                continue
+            prop = props[0]
+            if prop.endswith('_ST'):
+                env = material.textures.get(prop[:-3]) or {}
+                static = [*(env.get('scale') or [1.0, 1.0]), *(env.get('offset') or [0.0, 0.0])]
+            else:
+                static = list(material.colors.get(prop) or [material.shader.defaults.get(prop, 0.0) if material.shader else 0.0] * 4)
+            out += [scene.float_value(tr, ec.RENDERER, (ec.crc(prop) & 0x0FFFFFFF) | ((4 + c) << 28), t, static[c]) for c in range(effects.width(path))]
+        return out
 
     def decimate(self, frames, extent: float, to_skeleton: float) -> list:
         """Drops frames a straight line reproduces, with tolerances from the layer's size so no vertex
@@ -872,15 +996,33 @@ class _Exporter:
         matrix_tol = POSITION_TOLERANCE / max(extent * to_skeleton, 1e-6)
         move_tol = POSITION_TOLERANCE / to_skeleton
         tolerances = [matrix_tol] * 4 + [move_tol] * 2 + [COLOUR_TOLERANCE] * 4 + [0.01] + [UV_TOLERANCE] * 4
+        tolerances += [EFFECT_TOLERANCE] * (len(frames[0]) - 1 - len(tolerances))
         kept = ec.decimate(frames, tolerances)
-        return [[round(v, 6) if i in (1, 2, 3, 4, 12, 13, 14, 15) else round(v, 4) for i, v in enumerate(f)] for f in kept]
+        return [[round(v, 6) if i in (1, 2, 3, 4, 12, 13, 14, 15) or i > 15 else round(v, 4) for i, v in enumerate(f)] for f in kept]
 
-    def texture_index(self, texture: dict) -> int:
+    def texture_source(self, texture: dict):
+        """(read, texture_of) for a texture reference: this bundle's, or the shared bundle holding it;
+        LayerError when that bundle is not available."""
+        if 'external' not in texture:
+            return self.read, self.texture_of
+        source = self.shared(texture['external'])
+        if source is None or texture.get('id') is None:
+            raise LayerError(f'texture in {texture["external"]}')
+        entry = source[0](texture['id'])
+        if not entry or entry[0] != 'Texture2D':
+            raise LayerError(f'texture {texture["id"]} not in {texture["external"]}')
+        return source
+
+    def texture_index(self, texture: dict, main: bool = True) -> int:
+        """The texture's index (in the order first used), its image written once. A main texture must show
+        something; an effect's map (noise, dissolve, weight, ramp) is read whatever its alpha."""
+        key = (texture.get('external'), texture['id'])
+        if key in self.textures:
+            return self.textures[key]
+        read, texture_of = self.texture_source(texture)
         tid = texture['id']
-        if tid in self.textures:
-            return self.textures[tid]
-        tree = self.read(tid)[1]
-        image = self.texture_of(tid)
+        tree = read(tid)[1]
+        image = texture_of(tid)
         alpha = texture_alpha(image, self.classify_texture)
         settings = tree.get('m_TextureSettings') or {}
         modes = ['repeat', 'clamp', 'mirror', 'mirror-once']
@@ -890,13 +1032,14 @@ class _Exporter:
         if 'mirror-once' in wrap:
             raise LayerError('texture wraps mirror-once')
         box = image.getchannel('A').point(lambda a: 255 if a >= OPAQUE_ALPHA else 0).getbbox()
-        if box is None:
+        if box is None and main:
             raise LayerError('nothing visible (its texture is transparent)')
+        box = box or (0, 0, image.width, image.height)
         # The part of the texture that shows, in image-space UV: the frame is fitted to it, not to the
         # transparent margin around it.
         opaque = [round(box[0] / image.width, 5), round(box[1] / image.height, 5), round(box[2] / image.width, 5), round(box[3] / image.height, 5)]
         index = len(self.texture_images)
-        self.textures[tid] = index
+        self.textures[key] = index
         self.texture_images.append(image)
         self.texture_info.append({'name': tree.get('m_Name', ''), 'width': image.width, 'height': image.height, 'wrap': wrap,
                                   'opaque': opaque, 'measured': alpha})
@@ -924,7 +1067,7 @@ class _Exporter:
         if renderer.get('m_SortingLayerID', 0) != 0:
             raise LayerError(f'sorting layer {renderer.get("m_SortingLayerID")}')
         only, _ = self.group(tr)
-        scroll_script, delay = self.scripts(tr)
+        scroll_script, delay, map_scrolls = self.scripts(tr)
         follower = self.follower_on_chain(tr)
         mesh = self.mesh(tr)
         if len(mesh['vertices']) > MAX_VERTICES:
@@ -941,7 +1084,7 @@ class _Exporter:
                 continue
             try:
                 material = read_material(self.read(ref['m_PathID'])[1], read=self.read, external_of=self.external_of, shaders=self.shaders)
-                look_ = look(material)
+                look_ = look(material, self.animated_properties(tr, material))
             except LayerError as error:
                 self.omit('custom', label, str(error))
                 continue
@@ -949,7 +1092,7 @@ class _Exporter:
                 self.omit('other', label, unreadable(error))
                 continue
             try:
-                out.append(self.entry(tr, label, look_, material, triangles, mesh, follower, only, delay, scroll_script))
+                out.append(self.entry(tr, label, look_, material, triangles, mesh, follower, only, delay, scroll_script, map_scrolls))
             except LayerError as error:
                 if str(error) == 'hidden':
                     self.omitted['hidden'] += 1
@@ -996,13 +1139,13 @@ class _Exporter:
             raise LayerError('bone follower without a bone')
         return follow, _matrix_scale([[v / self.unit for v in row] for row in k]), own[2][3]
 
-    def entry(self, tr, label, look_: Look, material: Material, triangles, mesh, follower, only, delay, scroll_script) -> dict:
+    def entry(self, tr, label, look_: Look, material: Material, triangles, mesh, follower, only, delay, scroll_script, map_scrolls=None) -> dict:
         if look_.blend not in ('alpha', 'add'):
             raise LayerError(f'blend {look_.blend}')
-        if look_.texture is None:
+        if look_.texture is None and not look_.effect:
             raise LayerError('no main texture')
-        if 'external' in look_.texture:
-            raise LayerError(f'texture in {look_.texture["external"]}')
+        if look_.texture is not None:
+            self.texture_source(look_.texture)  # a texture in another bundle needs that bundle
         if not triangles or len(triangles) % 3:
             raise LayerError('no triangles')
         if scroll_script and any(look_.scroll):
@@ -1026,7 +1169,18 @@ class _Exporter:
         animated = animated or bool(states)
         if (animated or follower) and not flat and tilted:
             raise LayerError('a mesh that is not flat turns out of the plane')
-        texture = self.texture_index(look_.texture)
+        if (animated or follower is not None) and look_.cull and not look_.effect:
+            # A layer that culls faces while it moves is culled as it is drawn (its `cull`), which only an
+            # effect entry carries: drawn as one, with its exact effect or with none.
+            if look_.exact:
+                look_ = replace(look_, effect={k: v for k, v in look_.exact.items() if k != 'st'}, st=list(look_.exact['st']), approximated=None, exact=None)
+            else:
+                look_ = replace(look_, effect=plain_effect(look_), approximated=None)
+        # An effect's unbound main texture is Unity's default white (null).
+        texture = self.texture_index(look_.texture) if look_.texture is not None else None
+        if look_.effect and (animated or follower) and look_.effect.get('family') == effects.PARTICLE and look_.effect.get('vertex') \
+                and look_.effect['vertex']['intensity'][2] and not flat:
+            raise LayerError('a vertex effect that moves a mesh out of the plane')
         used = sorted(set(triangles))
         remap = {v: i for i, v in enumerate(used)}
         tris = [remap[i] for i in triangles]
@@ -1036,17 +1190,27 @@ class _Exporter:
             u0, v0 = mesh['uv'][v][:2]
             uvs += [u0 * st[0] + st[2], 1 - (v0 * st[1] + st[3])]
         colors = [round(float(c), 4) for v in used for c in mesh['colors'][v][:4]] if mesh.get('colors') else None
+        # An effect samples in Unity's UV space from the mesh's own UVs (raw_uvs) with the main tiling
+        # (main_st) as a parameter: its noise, dissolve and ramp maps have tilings of their own.
+        raw_uvs = [round(float(c), 6) for v in used for c in mesh['uv'][v][:2]] if (look_.effect or look_.exact) else None
+        exact_st = list(look_.exact['st']) if look_.exact else None
+        main_st = list(st)
         colour = None
         if not animated:
             colour = [round(c, 4) for c in first[7:11]]
             uvs = [uvs[i] * first[12] + first[13] if i % 2 == 0 else uvs[i] * first[14] + first[15] for i in range(len(uvs))]
+            # The same UV map on the tiling, in Unity space (image v = 1 - Unity v).
+            su, ou, sv, ov = first[12:16]
+            bake = lambda t: [t[0] * su, t[1] * sv, t[2] * su + ou, t[3] * sv + 1 - sv - ov]  # noqa: E731
+            main_st = bake(st)
+            exact_st = bake(exact_st) if exact_st else None
         uvs = [round(x, 6) for x in uvs]
         follow, to_skeleton, z = None, 1.0, 0.0
         if follower is not None:
             follow, to_skeleton, z = self.follow_of(follower)
             self.counts['follow'] += 1
-        if (animated or follower is not None) and look_.cull:
-            raise LayerError(f'culls {"back" if look_.cull == 2 else "front"} faces while it moves')
+        # Culled as drawn: a moving layer's faces turn (a static one's are culled here, below).
+        cull = look_.cull if (animated or follower is not None) else 0
         animation = None
         if animated:
             local = [mesh['vertices'][v] for v in used]
@@ -1062,12 +1226,14 @@ class _Exporter:
             if follower is None:
                 z = self.relative(self.scene, tr, 0.0)[2][3]
             self.counts['animated'] += 1
+            vertex_matrix = [1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
         elif follower is not None:
             links = self.chain(tr)
             below = ec.IDENTITY
             for link in links[links.index(follower[0]) + 1:]:
                 below = ec.multiply(below, self.scene.local(link, 0.0))
             vertices = [round(c, 5) for v in used for c in ec.transform_point(below, mesh['vertices'][v])[:2]]
+            vertex_matrix = [below[0][0], below[0][1], below[0][2], below[1][0], below[1][1], below[1][2]]
         else:
             m = self.relative(self.scene, tr, 0.0)
             points = [ec.transform_point(m, mesh['vertices'][v]) for v in used]
@@ -1085,6 +1251,7 @@ class _Exporter:
             vertices = [round(p[k] / self.unit, 3) for p in points for k in (0, 1)]
             z = sum(p[2] for p in points) / len(points)
             self.counts['static'] += 1
+            vertex_matrix = [m[0][0] / self.unit, m[0][1] / self.unit, m[0][2] / self.unit, m[1][0] / self.unit, m[1][1] / self.unit, m[1][2] / self.unit]
         speed = scroll_script or (look_.scroll if any(look_.scroll) else None)
         scroll = [round(speed[0], 6), round(-speed[1], 6)] if speed else None  # image space flips v
         if scroll:
@@ -1092,12 +1259,152 @@ class _Exporter:
         if only:
             self.counts['only'] += 1
         renderer = self.renderer_tree(tr)
+        sort = (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0), look_.queue, -z, self.walk[tr])
+        if look_.effect:
+            # Animated parameters: the frames carry them past column 16; a static layer keeps their first values.
+            paths = look_.effect.get('animated_paths') or []
+            shader = self.shader_json(look_.effect, main_st, look_.scroll, scroll_script, map_scrolls or {}, vertex_matrix,
+                                      values=first[16:16 + sum(effects.width(p) for p in paths)], animated=bool(animation))
+            layer = {'name': label, 'blend': look_.blend, 'texture': texture, 'color': colour, 'vertices': vertices, 'uvs': raw_uvs, 'colors': colors,
+                     'triangles': tris, 'follow': follow, 'animation': animation, 'only': only, 'delay': round(delay, 4), 'cull': cull, 'shader': shader}
+            layer['visible'] = self.visible_box(layer, first)
+            return {'effect': layer, 'sort': sort}
         layer = {'name': label, 'blend': look_.blend, 'texture': texture, 'color': colour, 'vertices': vertices, 'uvs': uvs, 'colors': colors,
                  'triangles': tris, 'follow': follow, 'animation': animation, 'scroll': scroll, 'only': only, 'delay': round(delay, 4),
                  'approximated': look_.approximated}
         if look_.approximated:
             self.counts['approximated'] = self.counts.get('approximated', 0) + 1
-        return {'layer': layer, 'sort': (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0), look_.queue, -z, self.walk[tr])}
+            if look_.exact:
+                # Readers that know the effect draw it exactly; others draw the approximation.
+                try:
+                    layer['exact'] = {'uvs': raw_uvs, 'shader': self.shader_json(look_.exact, exact_st, look_.exact['main']['speed'], scroll_script,
+                                                                                   map_scrolls or {}, vertex_matrix)}
+                except LayerError as error:
+                    layer['approximated'] += f' (exactly: {error})'
+        return {'layer': layer, 'sort': sort}
+
+    def visible_box(self, layer: dict, first: list):
+        """Where an effect shows at its first frame, in the mesh's own UVs ([u0, v0, u1, v1]), or None when it
+        shows in under VISIBLE_COVERAGE of them (scattered sparks and stars, or nothing yet): its main
+        texture's alpha (an additive one's colour x alpha) x its colour x its dissolves, sampled over the
+        mesh's UVs, undistorted. The frame the site opens on fits it (effectBounds): an opaque glow texture
+        faded down, a sky dissolved to wisps or a field of stars does not stretch it."""
+        shader = layer['shader']
+        colour = first[7:11]
+        add = layer['blend'] == 'add'
+        uvs = layer['uvs']
+        us, vs = uvs[0::2], uvs[1::2]
+        u_lo, u_hi, v_lo, v_hi = min(us), max(us), min(vs), max(vs)
+        main = shader['main']['st']
+        su, ou, sv, ov = first[12:16]
+        st = [main[0] * su, main[1] * sv, main[2] * su + ou, main[3] * sv + 1 - sv - ov] if layer['animation'] else main
+
+        def sampler(index):
+            if index is None:
+                return lambda u, v: (255, 255, 255, 255)
+            image = self.texture_images[index]
+            wrap = self.texture_info[index]['wrap']
+            pixels = image.load()
+            w, h = image.size
+
+            def fold(x, mode):
+                if mode == 'clamp':
+                    return min(max(x, 0.0), 1.0)
+                if mode == 'mirror':
+                    x = x % 2.0
+                    return 2.0 - x if x > 1.0 else x
+                return x % 1.0
+
+            def sample(u, v):
+                x = fold(u, wrap[0])
+                y = fold(1.0 - v, wrap[1])  # Unity v up, image rows down
+                return pixels[min(int(x * w), w - 1), min(int(y * h), h - 1)]
+            return sample
+        main_tex = sampler(layer['texture'])
+        if shader['family'] == effects.NOISE:
+            dissolves = []
+        else:
+            dissolves = [(sampler(d['texture']), d) for d in shader['dissolve']]
+        found = []
+        steps = 48
+        for i in range(steps + 1):
+            u = u_lo + (u_hi - u_lo) * i / steps
+            for j in range(steps + 1):
+                v = v_lo + (v_hi - v_lo) * j / steps
+                mu, mv = u * st[0] + st[2], v * st[1] + st[3]
+                r, g, b, a = main_tex(mu, mv)
+                alpha = a / 255 * colour[3]
+                for sample, d in dissolves:
+                    du, dv = u * d['st'][0] + d['st'][2], v * d['st'][1] + d['st'][3]
+                    f = (sample(du, dv)[0] / 255 - d['amount'] + d['border'] * effects.dissolve_k(d['amount'])) / d['border']
+                    alpha *= min(max(f, 0.0), 1.0)
+                alpha = min(alpha, 1.0)
+                if add:
+                    alpha *= min(max(r / 255 * colour[0], g / 255 * colour[1], b / 255 * colour[2]), 1.0)
+                if alpha * 255 >= OPAQUE_ALPHA:
+                    found.append((u, v))
+        if len(found) < VISIBLE_COVERAGE * (steps + 1) ** 2:
+            return None
+        pad_u, pad_v = (u_hi - u_lo) / steps, (v_hi - v_lo) / steps
+        return [round(min(p[0] for p in found) - pad_u, 5), round(min(p[1] for p in found) - pad_v, 5),
+                round(max(p[0] for p in found) + pad_u, 5), round(max(p[1] for p in found) + pad_v, 5)]
+
+    def shader_json(self, effect: dict, main_st: list, speed: list, script: list | None, map_scrolls: dict, vertex_matrix: list,
+                    values: list = (), animated: bool = False) -> dict:
+        """layers.json's `shader` for an effect (effects.describe): its textures as indices, every map with
+        its tiling (st), the shader's own scroll (speed, wrapped as the GLSL wraps it) and a UV scroll
+        script's (scroll, not wrapped). `values`: the animated parameters at the first frame; `animated`:
+        whether the layer's frames carry them (`animated` lists their paths)."""
+        r6 = lambda values: [round(float(v), 6) for v in values]  # noqa: E731
+
+        def scroll_of(name: str) -> list:
+            note = map_scrolls.get(name)
+            if not note:
+                return [0.0, 0.0]
+            if note['restarts']:
+                raise LayerError('UV scroll script that restarts the offset')
+            if note['tiling']:
+                raise LayerError('UV scroll script that sets a tiling')
+            return r6(note['speed'])
+
+        def texture_map(ref: dict, **extra) -> dict:
+            index = self.texture_index(ref['tex'], main=False) if ref.get('tex') else None
+            return {'texture': index, 'st': r6(ref['st']), 'speed': r6(ref.get('speed') or [0.0, 0.0]), 'scroll': scroll_of(ref['name']), **extra}
+
+        main = {'st': r6(main_st), 'speed': r6(speed if not script else [0.0, 0.0]), 'scroll': r6(script or [0.0, 0.0]),
+                'fract': bool((effect.get('main') or {}).get('fract'))}
+        if effect['family'] == effects.NOISE:
+            if not effect.get('noise'):
+                raise LayerError('Disturb2 without its noise texture')
+            return {'family': effects.NOISE, 'mode': effect['mode'], 'main': main, 'noise': texture_map(effect['noise']),
+                    'noise1': r6(effect['noise1']), 'noise2': r6(effect['noise2']), 'glow': r6(effect['glow']) if effect.get('glow') else None,
+                    'animated': []}
+        out = {'family': effects.PARTICLE, 'main': main, 'distort': None, 'dissolve': [], 'edge': None, 'ramp': None, 'vertex': None, 'animated': []}
+        distort = effect.get('distort')
+        if distort:
+            out['distort'] = {'space': distort['space'], 'main': round(distort['main'], 6), 'dissolve': round(distort['dissolve'], 6),
+                              'constant': r6(distort.get('constant') or [0.0, 0.0]),
+                              'maps': [texture_map(m, anchor=r6(m['anchor']), intensity=r6(m['intensity'])) for m in distort['maps']],
+                              'weight': texture_map(distort['weight']) if distort.get('weight') else None}
+        for d in effect.get('dissolve') or []:
+            out['dissolve'].append(texture_map(d, fract=bool(d.get('fract')), amount=round(d['amount'], 6), border=round(d['border'], 6)))
+        if effect.get('edge'):
+            e = effect['edge']
+            out['edge'] = {'color': r6(e['color']), 'pow': round(e['pow'], 6), 'epsilon': bool(e['epsilon'])}
+        if effect.get('ramp'):
+            out['ramp'] = texture_map(effect['ramp'])
+        v = effect.get('vertex')
+        if v:
+            out['vertex'] = {**texture_map(v), 'intensity': r6(v['intensity']), 'weight': texture_map(v['weight']) if v.get('weight') else None,
+                             'matrix': r6(vertex_matrix)}
+        paths = effect.get('animated_paths') or []
+        set_values(out, paths, list(values))
+        if animated:
+            out['animated'] = list(paths)
+        if not (out['distort'] or out['dissolve'] or out['edge'] or out['ramp'] or out['vertex']) and not any(main['speed']) and not main['fract'] \
+                and not effect.get('plain'):
+            raise LayerError('an effect that changes nothing')  # cannot happen: look() would have found it plain
+        return out
 
     def run(self) -> LayerExport:
         entries = self.parts()
@@ -1142,26 +1449,42 @@ class _Exporter:
                             self.omit('other', name, unreadable(error))
         entries.sort(key=lambda e: e['sort'])
         entries = self.unmasked(entries)
-        draw = [{'part': e['part']} if 'part' in e else {'layer': e['layer']} for e in entries]
-        # Textures only layers still draw, renumbered in order.
-        used = sorted({d['layer']['texture'] for d in draw if 'layer' in d})
-        renumber = {old: new for new, old in enumerate(used)}
+        draw = [{kind: e[kind]} for e in entries for kind in ('part', 'layer', 'effect') if kind in e]
+        # Textures still drawn, renumbered in order: first those plain layers draw (`textures`, which every
+        # reader fetches), then those only effects sample (`effectTextures`, which readers that know
+        # effects fetch), numbered on from the first.
+        plain = sorted({d['layer']['texture'] for d in draw if 'layer' in d})
+        refs = []  # every reference an effect makes: (holder dict, key)
+        for d in draw:
+            if 'effect' in d:
+                refs.append((d['effect'], 'texture'))  # null: Unity's white
+                refs += [(m, 'texture') for m in shader_maps(d['effect']['shader'])]
+            elif 'layer' in d and d['layer'].get('exact'):
+                refs += [(m, 'texture') for m in shader_maps(d['layer']['exact']['shader'])]
+        only_effects = sorted({holder[key] for holder, key in refs if holder[key] is not None} - set(plain))
+        order = plain + only_effects
+        renumber = {old: new for new, old in enumerate(order)}
         for d in draw:
             if 'layer' in d:
                 d['layer']['texture'] = renumber[d['layer']['texture']]
-        self.texture_images = [self.texture_images[i] for i in used]
-        self.texture_info = [self.texture_info[i] for i in used]
-        textures = [{'file': f'layer{i}.webp', 'width': info['width'], 'height': info['height'], 'wrap': info['wrap'], 'opaque': info['opaque']}
-                    for i, info in enumerate(self.texture_info)]
+        for holder, key in refs:
+            if holder[key] is not None:
+                holder[key] = renumber[holder[key]]
+        self.texture_images = [self.texture_images[i] for i in order]
+        self.texture_info = [self.texture_info[i] for i in order]
+        records = [{'file': f'layer{i}.webp', 'width': info['width'], 'height': info['height'], 'wrap': info['wrap'], 'opaque': info['opaque']}
+                   for i, info in enumerate(self.texture_info)]
         for bucket in ('custom', 'externalTexture', 'other'):
             self.omitted[bucket].sort(key=lambda item: (item['name'], item['reason']))
-        document = {'schemaVersion': SCHEMA_VERSION, 'textures': textures, 'bounds': None, 'separators': self.separators, 'draw': draw,
-                    'omitted': self.omitted}
+        document = {'schemaVersion': SCHEMA_VERSION, 'textures': records[:len(plain)], 'effectTextures': records[len(plain):], 'bounds': None,
+                    'effectBounds': None, 'separators': self.separators, 'draw': draw, 'omitted': self.omitted}
         layers = [d['layer'] for d in draw if 'layer' in d]
-        self.counts = {'layers': len(layers), 'parts': sum(1 for d in draw if 'part' in d),
-                       'static': sum(1 for l in layers if not l['animation'] and not l['follow']),
-                       'animated': sum(1 for l in layers if l['animation']), 'follow': sum(1 for l in layers if l['follow']),
-                       'only': sum(1 for l in layers if l['only']), 'states': sum(1 for l in layers if l['animation'] and l['animation'].get('states')),
+        drawn = layers + [d['effect'] for d in draw if 'effect' in d]
+        self.counts = {'layers': len(drawn), 'plain': len(layers), 'effects': len(drawn) - len(layers),
+                       'exact': sum(1 for l in layers if l.get('exact')), 'parts': sum(1 for d in draw if 'part' in d),
+                       'static': sum(1 for l in drawn if not l['animation'] and not l['follow']),
+                       'animated': sum(1 for l in drawn if l['animation']), 'follow': sum(1 for l in drawn if l['follow']),
+                       'only': sum(1 for l in drawn if l['only']), 'states': sum(1 for l in drawn if l['animation'] and l['animation'].get('states')),
                        'scroll': sum(1 for l in layers if l['scroll'])}
         return LayerExport(document, self.texture_images, self.texture_info, self.counts)
 
@@ -1225,14 +1548,15 @@ class _Exporter:
             return entries
         kept = []
         for entry in entries:
-            if 'layer' in entry:
-                box = self.layer_bounds(entry['layer'])
+            kind = 'layer' if 'layer' in entry else 'effect' if 'effect' in entry else None
+            if kind:
+                box = self.layer_bounds(entry[kind])
                 for mask in self.masks:
                     if mask['sort'] <= entry['sort']:
                         continue  # drawn before the layer: it paints over nothing of it
                     m = mask['bounds']
                     if m is None or box is None or (box[0] < m[2] and m[0] < box[2] and box[1] < m[3] and m[1] < box[3]):
-                        self.omit('other', entry['layer']['name'], f'under the mask {mask["name"]} (Erase), which is not drawn')
+                        self.omit('other', entry[kind]['name'], f'under the mask {mask["name"]} (Erase), which is not drawn')
                         break
                 else:
                     kept.append(entry)
@@ -1241,8 +1565,47 @@ class _Exporter:
         return kept
 
 
+def set_values(shader: dict, paths: list, values: list):
+    """Writes animated parameters (paths as effects.parameters names them, effects.width numbers each)
+    into a layers.json `shader`."""
+    at = 0
+    for path in paths:
+        n = effects.width(path)
+        chunk = [round(float(v), 6) for v in values[at:at + n]]
+        at += n
+        if len(chunk) < n:
+            return
+        *where, key = path.split('.')
+        node = shader
+        for part in where:
+            node = node[int(part)] if part.isdigit() else node[part]
+        node[key] = chunk[0] if n == 1 else chunk
+
+
+def shader_maps(shader: dict) -> list[dict]:
+    """The members of a layers.json `shader` that name a texture (`texture` index, or null for an unbound
+    noise map that reads 0)."""
+    if shader['family'] == effects.NOISE:
+        return [shader['noise']]
+    out = []
+    distort = shader.get('distort')
+    if distort:
+        out += distort['maps']
+        if distort.get('weight'):
+            out.append(distort['weight'])
+    out += shader.get('dissolve') or []
+    if shader.get('ramp'):
+        out.append(shader['ramp'])
+    vertex = shader.get('vertex')
+    if vertex:
+        out.append(vertex)
+        if vertex.get('weight'):
+            out.append(vertex['weight'])
+    return out
+
+
 def export_layers(root_go: int, read, *, mesh_of: Callable, texture_of: Callable, classify_texture: Callable,
-                  external_of: Callable, shaders: dict, slots: list[str]) -> LayerExport:
+                  external_of: Callable, shaders: dict, slots: list[str], shared: Callable | None = None) -> LayerExport:
     """The layers of the illustration prefab whose root GameObject is `root_go`.
 
     read(path_id) -> (type name, typetree) | None for any object in the bundle; mesh_of(path_id) ->
@@ -1250,10 +1613,12 @@ def export_layers(root_go: int, read, *, mesh_of: Callable, texture_of: Callable
     [[index, ...]]}; texture_of(path_id) -> PIL image (RGBA as shipped); classify_texture(image) ->
     l2d.classify_alpha's result; external_of(ref) -> the CAB name (or 'unity default resources') a
     reference with m_FileID != 0 points into; shaders: shader_table() of the shared shader bundle;
-    slots: the skeleton's slot names (the Spine runtime's reading), which separator names must match.
+    slots: the skeleton's slot names (the Spine runtime's reading), which separator names must match;
+    shared(CAB) -> (read, texture_of) of the shared texture bundle with that CAB name, or None (a layer
+    that needs it is left out under externalTexture).
     """
     return _Exporter(root_go, read, mesh_of=mesh_of, texture_of=texture_of, classify_texture=classify_texture,
-                     external_of=external_of, shaders=shaders, slots=slots).run()
+                     external_of=external_of, shaders=shaders, slots=slots, shared=shared).run()
 
 
 # ---------------------------------------------------------------------------
@@ -1297,6 +1662,46 @@ def bundle_readers(env, objects: dict):
         return objects[path_id].read().image.convert('RGBA')
 
     return mesh_of, texture_of, external_of
+
+
+class SharedTextures:
+    """The client's shared FX texture bundles (refs/fx/texture/...), which effect materials take their
+    noise, dissolve, ramp and some main textures from: `table` maps a CAB name to its bundle name
+    (shared-bundles.json, written by scripts/shared_bundles.py); `fetch(bundle name)` returns the unpacked,
+    md5-checked bundle or None. Each is fetched and decoded once, on first use. Callable as the
+    exporter's `shared`."""
+
+    def __init__(self, table: dict, fetch: Callable, unitypy):
+        self.table = table
+        self.fetch = fetch
+        self.unitypy = unitypy
+        self.loaded = {}  # CAB -> (read, texture_of) or None
+        self.used = set()  # bundle names actually read
+
+    def __call__(self, cab: str):
+        if cab in self.loaded:
+            return self.loaded[cab]
+        bundle = self.table.get(cab)
+        source = None
+        if bundle:
+            data = self.fetch(bundle)
+            if data is not None:
+                env = self.unitypy.load(data)
+                if cab_name(env) != cab:
+                    raise LayerError(f'{bundle} is {cab_name(env)}, not {cab} (shared-bundles.json is out of date)')
+                objects = {o.path_id: o for o in env.objects}
+
+                def read(path_id, objects=objects):
+                    obj = objects.get(path_id)
+                    return (obj.type.name, obj.read_typetree()) if obj is not None else None
+
+                def texture_of(path_id, objects=objects):
+                    return objects[path_id].read().image.convert('RGBA')
+
+                source = (read, texture_of)
+                self.used.add(bundle)
+        self.loaded[cab] = source
+        return source
 
 
 def cab_name(env) -> str:
