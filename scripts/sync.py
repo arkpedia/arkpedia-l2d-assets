@@ -59,6 +59,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import l2d  # noqa: E402
 import layers  # noqa: E402
+import particles as particle_export  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 PLATFORM = 'Android'
@@ -94,7 +95,7 @@ class ClientList:
 USER_AGENT = 'arkpedia-l2d-assets-sync (+https://github.com/arkpedia/arkpedia-l2d-assets)'
 FAILURES_FILE = 'sync-failures.json'
 # A change to any of these retries every recorded failure once: the fix may be in them.
-CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/layers.py', 'scripts/effects.py', 'scripts/sync.py', 'scripts/spine.mjs',
+CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/layers.py', 'scripts/effects.py', 'scripts/particles.py', 'scripts/sync.py', 'scripts/spine.mjs',
               'scripts/layers.mjs', 'scripts/inspect-skeleton.mjs', 'vendor/spine-core-3.8/spine-core.js', 'requirements.txt',
               'shared-bundles.json']
 # The client's shared FX texture bundles by CAB name (scripts/shared_bundles.py writes it).
@@ -204,11 +205,20 @@ def inspect(folder: Path, name: str) -> dict:
 
 def write_layers(staging: Path, exported) -> dict:
     """layers.json and layer<N>.webp (lossless, straight alpha as shipped: every layer shader samples its
-    texture straight), framed by the Spine runtime. Returns model.json's `layers` record."""
+    texture straight), framed by the Spine runtime, and layerParticles.json when the export has particles
+    (written first: layers.json's `particles` records its bytes and sha256). Returns model.json's `layers`
+    record."""
     document = exported.document
-    for record, image in zip(document['textures'] + document['effectTextures'], exported.textures):
+    particles = exported.particles
+    records = document['textures'] + document['effectTextures'] + (particles['textures'] if particles else [])
+    if len(records) != len(exported.textures):
+        raise l2d.SyncError(f'{len(records)} texture records for {len(exported.textures)} textures')
+    for record, image in zip(records, exported.textures):
         (staging / record['file']).write_bytes(l2d.encode_webp(image))
         record.update({k: v for k, v in file_record(staging, record['file']).items() if k in ('bytes', 'sha256')})
+    if particles is not None:
+        write_json(staging / particle_export.FILE, particles, compact=True)
+        document['particles'] = {**file_record(staging, particle_export.FILE), 'version': particle_export.VERSION}
     write_json(staging / 'layers.json', document, compact=True)
     framed = inspect(staging, 'layers')
     document['bounds'] = framed['bounds']
@@ -223,6 +233,8 @@ def describe_layers(exported) -> str:
     drawn = f'{c["layers"]} layers ({c["effects"]} with effect shaders, {c["exact"]} approximations with their exact effect; {c["static"]} static, ' \
             f'{c["animated"]} animated, {c["follow"]} on bones, {c["only"]} per animation, {c["states"]} with triggered states), ' \
             f'{len(exported.textures)} textures, {c["parts"]} skeleton part(s)'
+    if 'particles' in c:
+        drawn += f', {c["particles"]} particle systems in {c["particleRuns"]} runs ({c["particleTextures"]} textures of their own)'
     left = f'left out: {o["particles"]} particle systems, {o["trails"]} trails, {o["skinned"]} skinned, {o["hidden"]} hidden, ' \
            f'{len(o["custom"])} custom shaders, {len(o["externalTexture"])} textures in other bundles, {len(o["other"])} other, ' \
            f'{o["holders"]} shared-bundle effects'
@@ -230,11 +242,11 @@ def describe_layers(exported) -> str:
 
 
 def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: Path, shaders: dict,
-                shared=None) -> tuple[dict, list[dict], dict | None]:
+                shared=None, *, particles: bool) -> tuple[dict, list[dict], dict | None]:
     """Decodes one verified bundle (l2d.unpack_dat) into `staging`. Returns its model.json content,
     per atlas page how the texture was shipped (separate [alpha] mask or not) and how its alpha
-    measured, and the layers' counts."""
-    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id, shaders, shared)
+    measured, and the layers' counts. `particles`: export the ParticleSystems too (--particles)."""
+    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id, shaders, shared, particles=particles)
     skeleton, textures, found, declared = write_skeleton(staging, 'skeleton', 'page', decoded.skeleton,
                                                          decoded.atlas_text, decoded.page_names, decoded.pages)
     if 'Idle' not in found['animations']:
@@ -296,17 +308,17 @@ def report_layers(exported) -> dict | None:
 LAYER_FILE_PREFIX = 'layer'  # layers.json and layer<N>.webp: what a layers re-export replaces
 
 
-def relayer_model(planned: l2d.Planned, bundle: bytes, staging: Path, shaders: dict, shared) -> tuple[dict, dict | None]:
+def relayer_model(planned: l2d.Planned, bundle: bytes, staging: Path, shaders: dict, shared, *, particles: bool) -> tuple[dict, dict | None]:
     """Exports the layers of an existing folder again (its layersVersion is older than LAYERS_VERSION)
-    into `staging`: a copy of the folder whose layers.json and layer<N>.webp are replaced and whose
-    model.json gains the new `layers` record and layersVersion. Everything else is copied byte for byte.
-    Returns the new model.json and the layers' counts."""
+    into `staging`: a copy of the folder whose layers.json, layerParticles.json and layer<N>.webp are
+    replaced and whose model.json gains the new `layers` record and layersVersion. Everything else is
+    copied byte for byte. Returns the new model.json and the layers' counts."""
     final = ROOT / planned.folder
     model = json.loads((final / 'model.json').read_text('utf-8'))
     for path in final.iterdir():
         if path.is_file() and not path.name.startswith(LAYER_FILE_PREFIX) and path.name != 'model.json':
             shutil.copy2(path, staging / path.name)
-    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id, shaders, shared)
+    decoded = l2d.decode_bundle(bundle, planned.dyn_illust_id, planned.dyn_entrance_id, shaders, shared, particles=particles)
     exported = decoded.layers(inspect(staging, 'skeleton')['slots']) if decoded.layers is not None else None
     rebuilt = {}
     for key, value in model.items():
@@ -480,6 +492,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--report', default=str(ROOT / '.cache' / 'sync-report.json'), help='where to write the run report')
     parser.add_argument('--bundles', type=Path, default=None,
                         help='build from local unpacked bundles (<dir>/<slug>.ab, md5-checked against the list) instead of downloading')
+    parser.add_argument('--particles', action='store_true',
+                        help='also export the particle systems (layerParticles.json); no layersVersion includes them yet, so for trial runs only')
     args = parser.parse_args(argv)
     only = {s.strip() for value in args.only for s in value.split(',') if s.strip()}
 
@@ -621,7 +635,7 @@ def main(argv: list[str] | None = None) -> int:
             if planned.skin_id in relayer:
                 # Only the layers change: the rest of the folder is copied over unchanged, and the
                 # folder is swapped for the copy in one rename once everything is written.
-                _, layer_report = relayer_model(planned, bundle, staging, source.shaders, source.shared)
+                _, layer_report = relayer_model(planned, bundle, staging, source.shaders, source.shared, particles=args.particles)
                 old = final.with_name(final.name + '.replaced')
                 shutil.rmtree(old, ignore_errors=True)
                 os.replace(final, old)
@@ -633,7 +647,7 @@ def main(argv: list[str] | None = None) -> int:
                 failures.pop(planned.skin_id, None)
                 log(f'  exported the layers of {planned.folder} again (layersVersion {layers.LAYERS_VERSION})')
                 continue
-            _, page_info, layer_report = build_model(planned, bundle, source.res_version, staging, source.shaders, source.shared)
+            _, page_info, layer_report = build_model(planned, bundle, source.res_version, staging, source.shaders, source.shared, particles=args.particles)
             final.parent.mkdir(parents=True, exist_ok=True)
             if final.exists():
                 raise l2d.SyncError(f'{planned.folder} already exists')

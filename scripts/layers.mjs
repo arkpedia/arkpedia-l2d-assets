@@ -1,11 +1,16 @@
 // layers.json: the illustration prefab's own mesh layers (scripts/layers.py), checked and framed.
 // Used by scripts/spine.mjs (the sync's bounds, re-read by the validator) and scripts/manifest.mjs.
+import { PARTICLE_LIMITS, PARTICLES_FILE, PARTICLES_VERSION, particlesShape, runsShape } from './particles.mjs';
 
 const BLENDS = new Set(['alpha', 'add']);
 const ONLY = new Set(['Idle', 'Interact', 'Special', 'Start']);
 const WRAPS = new Set(['repeat', 'clamp', 'mirror']);
 const OMITTED_COUNTS = ['particles', 'trails', 'skinned', 'hidden', 'holders'];
 const OMITTED_LISTS = ['custom', 'externalTexture', 'other'];
+// The first layersVersion whose layers.json may point at layerParticles.json (scripts/particles.py) and draw
+// its {"particles": [...]} runs. The particle export is a trial behind a flag until a release names its
+// version; until then a file of the current version may carry it, and readers of every version skip it.
+export const PARTICLES_FROM = 3;
 const FRAME_LENGTH = 16; // [t, a, b, c, d, tx, ty, r, g, b, alpha, active, su, ou, sv, ov]
 // A tilted entry's frames also carry the depth column [e, f] of their 2x4 projection, at 16 and 17.
 const SOLID_FRAME_LENGTH = 18;
@@ -133,11 +138,25 @@ function timeline(value, label, width = FRAME_LENGTH) {
 
 /**
  * The shape of a layers.json: every field, every index in range, every texture named
- * layer<N>.webp in order. Returns the texture records. Slot and bone names are checked against the
- * skeleton by layerBounds (the Spine runtime has them).
+ * layer<N>.webp in order. Returns the texture records (and the particle textures). Slot and bone names
+ * are checked against the skeleton by layerBounds (the Spine runtime has them). `particles` (required):
+ * the layerParticles.json its `particles` points at, read by the caller, or null when it points at none.
  */
-export function layersShape(doc, label, version = LAYERS_VERSION) {
+export function layersShape(doc, label, version, particles) {
   if (!isObject(doc) || doc.schemaVersion !== 1) throw new Error(`${label}: layers.json schemaVersion must be 1`);
+  if (!Number.isSafeInteger(version)) throw new Error(`${label}: layersShape needs the folder's layersVersion`);
+  // layerParticles.json: present exactly when the pointer is, which only a file of PARTICLES_FROM on has.
+  const pointer = Object.hasOwn(doc, 'particles') ? doc.particles : undefined;
+  if (pointer !== undefined && version < PARTICLES_FROM) throw new Error(`${label}: layers.json points at particles, but layersVersion ${version} has none`);
+  if (pointer !== undefined && pointer !== null && (!keys(pointer, ['file', 'bytes', 'sha256', 'version']) || pointer.file !== PARTICLES_FILE
+      || !Number.isSafeInteger(pointer.bytes) || pointer.bytes <= 0 || typeof pointer.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(pointer.sha256)
+      || pointer.version !== PARTICLES_VERSION)) {
+    throw new Error(`${label}: particles must be null or { file: "${PARTICLES_FILE}", bytes, sha256, version: ${PARTICLES_VERSION} }`);
+  }
+  if (pointer && pointer.bytes > PARTICLE_LIMITS.bytes) throw new Error(`${label}: ${PARTICLES_FILE} is ${pointer.bytes} bytes (at most ${PARTICLE_LIMITS.bytes})`);
+  if ((pointer !== undefined && pointer !== null) !== (particles !== null)) {
+    throw new Error(pointer ? `${label}: layers.json points at ${PARTICLES_FILE}, which was not read` : `${label}: ${PARTICLES_FILE} given, but layers.json points at none`);
+  }
   if (!Array.isArray(doc.textures)) throw new Error(`${label}: layers.json textures missing`);
   if (version >= 2 && (!Array.isArray(doc.effectTextures) || !Object.hasOwn(doc, 'effectBounds'))) {
     throw new Error(`${label}: layers.json of layersVersion ${version} must have effectTextures and effectBounds`);
@@ -171,6 +190,14 @@ export function layersShape(doc, label, version = LAYERS_VERSION) {
   const parts = new Set();
   doc.draw.forEach((entry, i) => {
     const at = `${label}: layers draw[${i}]`;
+    if (isObject(entry) && Object.hasOwn(entry, 'particles') && Object.keys(entry).length === 1) {
+      // A run of particle systems (indices into layerParticles.json's systems), drawn in this place.
+      if (particles === null) throw new Error(`${at}: a particle run, but layers.json points at no ${PARTICLES_FILE}`);
+      if (!Array.isArray(entry.particles) || !entry.particles.length || !entry.particles.every((k) => index(k, particles.systems.length))) {
+        throw new Error(`${at}: particles must list systems of ${PARTICLES_FILE}`);
+      }
+      return;
+    }
     if (isObject(entry) && Object.hasOwn(entry, 'part') && Object.keys(entry).length === 1) {
       // Part k: the slots from the k-th separator met in the draw order to the next.
       if (!Number.isSafeInteger(entry.part) || entry.part < 0 || entry.part > doc.separators.length || parts.has(entry.part)) {
@@ -261,6 +288,19 @@ export function layersShape(doc, label, version = LAYERS_VERSION) {
     if (layer.follow === null && layer.animation === null && !vertices.every((v) => Math.abs(v) < REACH)) throw new Error(`${at}: vertices out of reach (${REACH} skeleton units)`);
   });
   if (!parts.size) throw new Error(`${label}: layers draw has no skeleton part`);
+  let particleTextures = [];
+  if (particles !== null) {
+    particleTextures = particlesShape(particles, `${label}: ${PARTICLES_FILE}`, all.length);
+    runsShape(doc.draw, particles.systems, `${label}: layers draw`);
+    particleTextures.forEach((texture, i) => {
+      if (!Number.isSafeInteger(texture.width) || texture.width <= 0 || !Number.isSafeInteger(texture.height) || texture.height <= 0) throw new Error(`${label}: ${texture.file} width/height missing`);
+      if (!Number.isSafeInteger(texture.bytes) || texture.bytes <= 0 || typeof texture.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(texture.sha256)) throw new Error(`${label}: ${texture.file} bytes/sha256 missing`);
+      if (!Array.isArray(texture.wrap) || texture.wrap.length !== 2 || !texture.wrap.every((w) => WRAPS.has(w))) throw new Error(`${label}: ${texture.file} wrap must be two of ${[...WRAPS].join(', ')}`);
+      const o = texture.opaque;
+      if (!Array.isArray(o) || o.length !== 4 || !o.every((v) => finite(v) && v >= 0 && v <= 1) || !(o[0] < o[2] && o[1] < o[3])) throw new Error(`${label}: ${texture.file} opaque must be [u0, v0, u1, v1] in 0-1`);
+      if (Object.keys(texture).length !== 8) throw new Error(`${label}: particle textures[${i}] must be { file, width, height, wrap, opaque, phase, bytes, sha256 }`);
+    });
+  }
   doc.textures.forEach((texture, i) => { if (!used.has(i)) throw new Error(`${label}: layers ${texture.file} is not drawn by any plain layer`); });
   (doc.effectTextures ?? []).forEach((texture, i) => {
     if (!usedByEffects.has(plainCount + i)) throw new Error(`${label}: layers ${texture.file} is not sampled by any effect`);
@@ -270,7 +310,16 @@ export function layersShape(doc, label, version = LAYERS_VERSION) {
       || !OMITTED_LISTS.every((k) => Array.isArray(omitted[k]) && omitted[k].every((item) => isObject(item) && typeof item.name === 'string' && typeof item.reason === 'string' && item.reason))) {
     throw new Error(`${label}: layers omitted must give ${OMITTED_COUNTS.join(', ')} and lists ${OMITTED_LISTS.join(', ')} of { name, reason }`);
   }
-  return all;
+  // With particles exported, omitted.particles counts the systems left out, each listed with its reason.
+  if (Object.hasOwn(omitted, 'particleReasons') !== (pointer !== undefined)) throw new Error(`${label}: omitted.particleReasons comes exactly with the particles pointer`);
+  if (pointer !== undefined) {
+    const reasons = omitted.particleReasons;
+    if (!Array.isArray(reasons) || !reasons.every((item) => keys(item, ['name', 'reason']) && typeof item.name === 'string' && typeof item.reason === 'string' && item.reason)
+        || reasons.length !== omitted.particles) {
+      throw new Error(`${label}: omitted.particleReasons must list { name, reason } for each of the omitted.particles systems`);
+    }
+  }
+  return [...all, ...particleTextures];
 }
 
 /** A timeline's frame at time t: linear between frames, active stepped; wraps from its end to
@@ -389,7 +438,8 @@ export function layerBounds(doc, skeleton, skeletonBounds, label = 'layers', { e
   const textures = [...doc.textures, ...(doc.effectTextures ?? [])];
   let x0 = skeletonBounds.x, y0 = skeletonBounds.y, x1 = skeletonBounds.x + skeletonBounds.width, y1 = skeletonBounds.y + skeletonBounds.height;
   for (const entry of doc.draw) {
-    if (Object.hasOwn(entry, 'part')) continue;
+    // Particles never frame the view: both deployed readers fix what bounds and effectBounds mean.
+    if (Object.hasOwn(entry, 'part') || Object.hasOwn(entry, 'particles')) continue;
     const solid = Object.hasOwn(entry, 'tilted');
     const effect = Object.hasOwn(entry, 'effect') || solid;
     const layer = solid ? entry.tilted : effect ? entry.effect : entry.layer;

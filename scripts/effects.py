@@ -14,11 +14,12 @@ Disturb: 'raw'). A dissolve is clamp((texture.r - amount + border x k) / border)
 roundEven(amount + 0.5). VertexDisturb also moves each vertex by a noise texture's rgb - 0.5 times
 its weight and intensity, in the mesh's own units.
 
-`describe(material)` returns that description with the material's texture references (resolved to
-layers.json indices by layers.py) or raises Unsupported with the reason the layer stays out:
-UV rotation and custom vertex streams (set by scripts and particle streams a mesh does not have),
-grab passes, 3D lighting, shaders not listed here. Disturb2 (two-channel noise, different colour
-maths) is the 'noise' family.
+`describe(material, animated, custom=...)` returns that description with the material's texture references
+(resolved to layers.json indices by layers.py) or raises Unsupported with the reason the layer stays out:
+UV rotation, custom vertex streams on a mesh (set by particle streams a mesh does not have), grab passes,
+3D lighting, shaders not listed here. Disturb2 (two-channel noise, different colour maths) is the 'noise'
+family. A particle (scripts/particles.py) passes the properties its custom vertex streams drive per
+particle (`custom`, CUSTOM_INPUTS); a mesh layer passes None.
 
 Time: every `speed` is the shader's own scroll, fract(_Time.y x speed) as the GLSL takes it; every
 `scroll` is a UV scroll script's (offset += speed x dt, not wrapped). Both are Unity UV units per
@@ -48,6 +49,17 @@ DISSOLVE_EDGE = {L2D + 'Dissolve/Dissolve Add Double edge': False, L2D + 'Dissol
 DISSOLVE_CD = {L2D + 'Dissolve/Dissolve(CustomData)'}
 DISTURB2 = {L2D + 'Disturb/Disturb2 (AlphaBlend)': 'default', L2D + 'Disturb/Disturb2 (Add)': 'add'}
 SHADERS = DISTURB | RAM | VERTEX | ANCHOR | OLD_DISTURB | DISSOLVE | DISSOLVE_TWEEN | DISSOLVE_DOUBLE | set(DISSOLVE_EDGE) | DISSOLVE_CD | set(DISTURB2)
+# The shaders with a _HGCUSTOMVERTEXSTREAM_ON variant, and what each of the 8 custom vertex inputs a particle
+# feeds them (TEXCOORD0.zw, TEXCOORD1.xyzw, TEXCOORD2.xy, in that order) adds to, read from their GLES3 GLSL:
+# the main UV (0, 1), the dissolve UV (2, 3), the dissolve amount (4) and the distortion intensities (5), or in
+# Dissolve(CustomData) _DissolveIntensity (4) and _BorderWidth (5), and the noise UV (6, 7). A property an input
+# drives makes its stage exist, as an animated one does.
+CUSTOM_INPUTS = {
+    **{name: (('_MainTex_ST',), ('_MainTex_ST',), ('_DissolveTex_ST',), ('_DissolveTex_ST',), ('_Amount',), ('_IntensityU', '_IntensityV'),
+              ('_DisturbTex_ST',), ('_DisturbTex_ST',)) for name in DISTURB | RAM | VERTEX},
+    **{name: (('_MainTex_ST',), ('_MainTex_ST',), ('_DissolveTex_ST',), ('_DissolveTex_ST',), ('_DissolveIntensity',), ('_BorderWidth',), (), ())
+       for name in DISSOLVE_CD},
+}
 
 
 class Unsupported(Exception):
@@ -93,15 +105,17 @@ def _colour(m, name: str, default: float = 0.5) -> list:
 
 
 def _dissolve(m, texture: str, amount: str, border: str, *, speed=(0.0, 0.0), speed_names=None, fract=False, amount_default=0.5, border_default=0.1,
-              animated=frozenset()):
+              animated=frozenset(), custom=frozenset()):
     """(map or None, constant alpha factor): a dissolve with a texture is a map; without one (white)
-    or with nothing to dissolve it is a constant. One whose amount or border an Animator drives is
-    always a map (its frames carry the values)."""
+    or with nothing to dissolve it is a constant. One whose amount or border an Animator drives (or a
+    particle's custom data, `custom`) is always a map (its frames, or the particle, carry the values)."""
     a = m.float(amount, amount_default)
     b = m.float(border, border_default)
-    moving = bool({amount, border, f'{texture}_ST'} & animated)
+    moving = bool({amount, border, f'{texture}_ST'} & (animated | custom))
     if moving and not m.texture(texture) and {amount, border} & animated:
         raise Unsupported(f'animated dissolve without its texture ({amount})')
+    if moving and not m.texture(texture) and {amount, border} & custom:
+        raise Unsupported(f'custom data drives a dissolve without its texture ({amount})')
     if not moving:
         if a <= 0:
             return None, 1.0
@@ -120,22 +134,29 @@ def _keywords(m) -> set:
     return set((m.keywords or '').split())
 
 
-def describe(m, animated=frozenset()) -> dict:
+def describe(m, animated=frozenset(), *, custom) -> dict:
     """The effect a material draws with: {'family', 'color_property', 'rgb_scale', 'alpha_scale',
     'opacity', 'main': {'speed', 'fract'}, 'distort', 'dissolve', 'edge', 'ramp', 'vertex'} (family
     'particle'), or Disturb2's {'family': 'noise', ...}. Texture members are the material's own
     references ({'id', 'w', 'h'} or {'external': CAB, 'id'}), resolved by layers.py. Raises
     Unsupported for anything this does not reproduce. `animated`: the material properties an Animator
     drives on this renderer; a stage they drive exists even where the material's own values switch it
-    off (parameters() names where their values go)."""
+    off (parameters() names where their values go). `custom` (required): None for a mesh layer, which
+    has no particle data, so _HGCUSTOMVERTEXSTREAM_ON is refused; for a particle, the properties its
+    custom vertex inputs drive (CUSTOM_INPUTS), which make their stages exist as animated ones do (an
+    empty set for a material without the keyword)."""
     if m.shader is None:
         raise Unsupported(f'shader not found ({m.shader_ref})')
     name = m.shader.name
     keywords = _keywords(m)
     if '_HG_UV_ROTATION' in keywords:
         raise Unsupported('UV rotation (_HG_UV_ROTATION)')
-    if '_HGCUSTOMVERTEXSTREAM_ON' in keywords:
+    if '_HGCUSTOMVERTEXSTREAM_ON' in keywords and (custom is None or name not in CUSTOM_INPUTS):
         raise Unsupported('custom vertex stream (_HGCUSTOMVERTEXSTREAM_ON)')
+    if custom and '_HGCUSTOMVERTEXSTREAM_ON' not in keywords:
+        raise ValueError('custom inputs for a material without _HGCUSTOMVERTEXSTREAM_ON (its shader reads none)')
+    custom = frozenset(custom or ())
+    driven = frozenset(animated) | custom
     if 'HG_SPRITE_SHEET' in keywords:
         raise Unsupported('sprite sheet (HG_SPRITE_SHEET)')
     if name not in SHADERS:
@@ -150,7 +171,7 @@ def describe(m, animated=frozenset()) -> dict:
         out['main']['speed'] = [m.float('_MainUSpeed'), m.float('_MainVSpeed')]
         out['main']['speed_names'] = _speeds('_MainUSpeed', '_MainVSpeed')
         dissolve, constant = _dissolve(m, '_DissolveTex', '_Amount', '_BorderWidth', speed=(m.float('_DissolveUSpeed'), m.float('_DissolveVSpeed')),
-                                       speed_names=_speeds('_DissolveUSpeed', '_DissolveVSpeed'), animated=animated)
+                                       speed_names=_speeds('_DissolveUSpeed', '_DissolveVSpeed'), animated=frozenset(animated), custom=custom)
         out['alpha_scale'] *= constant
         if dissolve:
             out['dissolve'].append(dissolve)
@@ -158,8 +179,8 @@ def describe(m, animated=frozenset()) -> dict:
         influence_name = None if name in VERTEX else '_DisturbScale' if name in DISTURB else '_DisturbInfluenceMainUV'
         influence = 1.0 if influence_name is None else m.float(influence_name, 1.0)
         dissolve_influence = m.float('_DisturbInfluenceDissolveUV')
-        moving = bool({'_IntensityU', '_IntensityV', '_DisturbTex_ST'} & animated)
-        influenced = bool({influence_name, '_DisturbInfluenceDissolveUV'} & animated)
+        moving = bool({'_IntensityU', '_IntensityV', '_DisturbTex_ST'} & driven)
+        influenced = bool({influence_name, '_DisturbInfluenceDissolveUV'} & driven)
         if m.texture('_DisturbTex') and (iu or iv or moving) and (influence or (dissolve and dissolve_influence) or influenced):
             weight = _map(m, '_WeightTex') if name in DISTURB and m.texture('_WeightTex') else None
             out['distort'] = {'space': 'main', 'main': influence, 'dissolve': dissolve_influence if dissolve else 0.0,
@@ -172,7 +193,7 @@ def describe(m, animated=frozenset()) -> dict:
                 out['ramp'] = _map(m, '_RamTex')
         if name in VERTEX:
             intensity = list((m.colors.get('_VertexDisturbIntensity') or [0.0, 0.0, 0.0, 0.0])[:3])
-            if m.texture('_VertexDisturbTex') and (any(intensity) or {'_VertexDisturbIntensity', '_VertexDisturbTex_ST'} & animated):
+            if m.texture('_VertexDisturbTex') and (any(intensity) or {'_VertexDisturbIntensity', '_VertexDisturbTex_ST'} & driven):
                 out['vertex'] = _map(m, '_VertexDisturbTex', (m.float('_VertexDisturbUSpeed'), m.float('_VertexDisturbVSpeed')),
                                      _speeds('_VertexDisturbUSpeed', '_VertexDisturbVSpeed'), intensity=intensity,
                                      weight=_map(m, '_VertexDisturbWeightTex') if m.texture('_VertexDisturbWeightTex') else None)
@@ -193,7 +214,7 @@ def describe(m, animated=frozenset()) -> dict:
             if toggle and not m.float(toggle) > 0:
                 continue
             iu, iv, au, av = m.float(iu_), m.float(iv_), m.float(au_, 0.5), m.float(av_, 0.5)
-            moving = bool({iu_, iv_, au_, av_, f'{texture}_ST'} & animated)
+            moving = bool({iu_, iv_, au_, av_, f'{texture}_ST'} & driven)
             if not (iu or iv or moving):
                 continue
             if m.texture(texture):
@@ -206,7 +227,7 @@ def describe(m, animated=frozenset()) -> dict:
                 constant[0] -= au * iu
                 constant[1] -= av * iv
         if m.float('_ToggleUseDissolve'):
-            dissolve, factor = _dissolve(m, '_DissolveTex', '_Amount', '_BorderWidth', animated=animated)
+            dissolve, factor = _dissolve(m, '_DissolveTex', '_Amount', '_BorderWidth', animated=frozenset(animated), custom=custom)
             out['alpha_scale'] *= factor
             if dissolve:
                 out['dissolve'].append(dissolve)
@@ -220,7 +241,7 @@ def describe(m, animated=frozenset()) -> dict:
         # texture x colour x vertex colour x colour alpha x 2.
         out['rgb_scale'] = out['alpha_scale'] = main_color[3]
         iu, iv = m.float('_IntensityU'), m.float('_IntensityV')
-        if m.texture('_DisturTex') and (iu or iv or {'_IntensityU', '_IntensityV', '_DisturTex_ST'} & animated):
+        if m.texture('_DisturTex') and (iu or iv or {'_IntensityU', '_IntensityV', '_DisturTex_ST'} & driven):
             out['distort'] = {'space': 'raw', 'main': 1.0, 'dissolve': 0.0, 'weight': None, 'constant': [0.0, 0.0],
                               'maps': [_map(m, '_DisturTex', anchor=[0.0, 0.0], intensity=[iu, iv], intensity_names=['_IntensityU', '_IntensityV'])]}
         return out
@@ -231,14 +252,14 @@ def describe(m, animated=frozenset()) -> dict:
         fract = name in DISSOLVE_TWEEN
         out['main'] = {'speed': [tween[0], tween[1]], 'fract': fract, 'speed_names': _tween(0) if fract else None}
         dissolve, factor = _dissolve(m, '_DissolveTex', '_Amount', '_BorderWidth', speed=(tween[2], tween[3]), speed_names=_tween(2) if fract else None,
-                                     fract=fract, animated=animated)
+                                     fract=fract, animated=frozenset(animated), custom=custom)
         out['alpha_scale'] *= factor
         if dissolve:
             out['dissolve'].append(dissolve)
         return out
     if name in DISSOLVE_DOUBLE or name in DISSOLVE_EDGE:
         for suffix in ('_01', '_02'):
-            dissolve, factor = _dissolve(m, '_DissolveTex' + suffix, '_Amount' + suffix, '_BorderWidth' + suffix, animated=animated)
+            dissolve, factor = _dissolve(m, '_DissolveTex' + suffix, '_Amount' + suffix, '_BorderWidth' + suffix, animated=frozenset(animated), custom=custom)
             out['alpha_scale'] *= factor
             if dissolve:
                 out['dissolve'].append(dissolve)
@@ -258,7 +279,7 @@ def describe(m, animated=frozenset()) -> dict:
             raise Unsupported(f'dissolve blended {use:g}')
         if use:
             dissolve, factor = _dissolve(m, '_DissolveTex', '_DissolveIntensity', '_BorderWidth', speed=(m.float('_DissolveUSpeed'), m.float('_DissolveVSpeed')),
-                                         speed_names=_speeds('_DissolveUSpeed', '_DissolveVSpeed'), animated=animated)
+                                         speed_names=_speeds('_DissolveUSpeed', '_DissolveVSpeed'), animated=frozenset(animated), custom=custom)
             out['alpha_scale'] *= factor
             if dissolve:
                 out['dissolve'].append(dissolve)

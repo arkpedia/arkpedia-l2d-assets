@@ -22,5 +22,7 @@ jobs:
         run: npm test
       - name: Python tests
         run: python -m unittest discover -s test -p 'test_*.py' -v
+      - name: Reference particle simulator
+        run: python -I scripts/tests/test_particle_oracle.py
       - name: Validate the manifest and every model folder
         run: npm run validate

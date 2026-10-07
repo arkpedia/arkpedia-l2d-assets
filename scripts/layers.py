@@ -97,6 +97,19 @@ class LayerError(Exception):
     """One layer cannot be reproduced; the message is its reason in `omitted`."""
 
 
+@dataclass(frozen=True)
+class RendererKind:
+    """Which Renderer a draw comes from: its component type as the typetree names it, and the type id an
+    AnimationClip binds its properties with (m_Enabled and the material properties). Every helper that
+    reads a renderer or its clip bindings takes one; none assumes the MeshRenderer."""
+    component: str
+    binding: int
+
+
+MESH = RendererKind('MeshRenderer', ec.RENDERER)
+PARTICLE = RendererKind('ParticleSystemRenderer', ec.PARTICLE_RENDERER)
+
+
 # ---------------------------------------------------------------------------
 # Shaders
 
@@ -215,7 +228,11 @@ class Material:
         return self.float(value) if isinstance(value, str) else float(value or 0.0)
 
 
-def read_material(tree: dict, *, read, external_of, shaders: dict) -> Material:
+def read_material(tree: dict, *, read, external_of, shaders: dict, home: str | None) -> Material:
+    """A Material typetree, read through the bundle that holds it: `read` and `external_of` are that bundle's,
+    and `home` is its CAB name, or None for the outfit bundle itself. A texture of a material in a shared
+    bundle (refs/fx/sharedbattle.ab...) that sits in that same bundle is named by `home`, so it is fetched from
+    there and not looked up in the outfit bundle."""
     saved = tree.get('m_SavedProperties') or {}
     textures = {}
     for name, env in _pairs(saved.get('m_TexEnvs')).items():
@@ -226,6 +243,8 @@ def read_material(tree: dict, *, read, external_of, shaders: dict) -> Material:
                 entry = read(ref['m_PathID'])
                 if entry and entry[0] == 'Texture2D':
                     tex = {'id': ref['m_PathID'], 'w': entry[1].get('m_Width'), 'h': entry[1].get('m_Height')}
+                    if home is not None:
+                        tex['external'] = home
                 else:
                     tex = {'external': 'this bundle (not a Texture2D)'}
             else:
@@ -397,19 +416,19 @@ def look(m: Material, animated=frozenset()) -> Look:
     reproduces (a dissolve's amount, a noise's tiling...) makes the layer an effect."""
     if m.shader is not None and m.shader.name in effects.SHADERS and set(animated) - PLAIN_ANIMATED:
         try:
-            return effect_look(m, animated)
+            return effect_look(m, animated, custom=None)
         except effects.Unsupported as unsupported:
             raise LayerError(str(unsupported)) from None
     try:
         plain = plain_look(m)
     except LayerError:
         try:
-            return effect_look(m, animated)
+            return effect_look(m, animated, custom=None)
         except effects.Unsupported as unsupported:
             raise LayerError(str(unsupported)) from None
     if plain.approximated:
         try:
-            exact = effect_look(m)
+            exact = effect_look(m, custom=None)
             # Its own tiling: the approximation's may hold the undistorted wobble's centre.
             plain.exact = {**exact.effect, 'st': exact.st} if exact.effect else None
         except effects.Unsupported:
@@ -417,10 +436,11 @@ def look(m: Material, animated=frozenset()) -> Look:
     return plain
 
 
-def effect_look(m: Material, animated=frozenset()) -> Look:
+def effect_look(m: Material, animated=frozenset(), *, custom) -> Look:
     """A material with an effect the site reproduces (effects.describe), as a Look whose `effect` holds it,
-    with `params` (effects.parameters) and `animated_paths`, the parameters an Animator drives."""
-    effect = effects.describe(m, frozenset(animated))
+    with `params` (effects.parameters) and `animated_paths`, the parameters an Animator drives. `custom`:
+    None for a mesh layer, or the properties a particle's custom vertex inputs drive (effects.describe)."""
+    effect = effects.describe(m, frozenset(animated), custom=custom)
     effect['params'] = effects.parameters(effect)
     effect['animated_paths'] = [path for path, (kind, props) in sorted(effect['params'].items()) if set(effects.property_names(kind, props)) & set(animated)]
     blend = BLENDS.get((int(m.factor(m.shader.src)), int(m.factor(m.shader.dst))), f'{m.factor(m.shader.src):g},{m.factor(m.shader.dst):g}')
@@ -583,11 +603,14 @@ def trigger_states(controller: dict, clip_count: int) -> dict:
 @dataclass
 class LayerExport:
     """layers.json without its bounds (scripts/sync.py adds them from the Spine runtime), the texture
-    images in index order (as shipped) with how their alpha measured, and counts for the run log."""
+    images in index order (as shipped: layers' textures, effectTextures, then the particles' own) with how
+    their alpha measured, counts for the run log, and layerParticles.json (scripts/particles.py) when the
+    export was asked for particles and drew any (layers.json's `particles` then points at it)."""
     document: dict
     textures: list = field(default_factory=list)
     texture_info: list = field(default_factory=list)
     counts: dict = field(default_factory=dict)
+    particles: dict | None = None
 
 
 def _component_trees(scene: ec._Scene, go: int):
@@ -672,7 +695,7 @@ def texture_alpha(image, classify) -> dict:
 
 
 class _Exporter:
-    def __init__(self, root_go: int, read, *, mesh_of, texture_of, classify_texture, external_of, shaders, slots, shared=None):
+    def __init__(self, root_go: int, read, *, mesh_of, texture_of, classify_texture, external_of, shaders, slots, shared=None, particles: bool):
         self.read = read
         # CAB name -> (read, texture_of) of a shared texture bundle (refs/fx/texture/...), or None when it
         # is not available: textures materials take from other bundles.
@@ -733,6 +756,12 @@ class _Exporter:
                         'custom': [], 'externalTexture': [], 'other': []}
         self.counts = {'static': 0, 'animated': 0, 'follow': 0, 'only': 0, 'states': 0, 'scroll': 0}
         self.masks = []
+        # The ParticleSystems as data (scripts/particles.py), when asked for; without it layers.json is what it
+        # was before particles were exported (each renderer only counted in omitted.particles).
+        self.particles = None
+        if particles:
+            import particles as particle_export  # here: it builds on this module
+            self.particles = particle_export.Particles(self)
 
     # --- what each Animator plays
 
@@ -776,8 +805,9 @@ class _Exporter:
     def omit(self, bucket: str, name: str, reason: str):
         self.omitted[bucket].append({'name': name, 'reason': reason})
 
-    def renderer_tree(self, tr) -> dict:
-        return next((tree for kind, _, tree in _component_trees(self.scene, self.scene.go_of[tr]) if kind == 'MeshRenderer'), {})
+    def renderer_tree(self, tr, renderer_kind: RendererKind) -> dict:
+        """The transform's renderer of that kind (a MeshRenderer, or a ParticleSystem's renderer), or {}."""
+        return next((tree for kind, _, tree in _component_trees(self.scene, self.scene.go_of[tr]) if kind == renderer_kind.component), {})
 
     def group(self, tr):
         """(Spine animation, group transform) of the controller's _particles entry the layer is in."""
@@ -793,17 +823,18 @@ class _Exporter:
         _, group = self.group(tr)
         return links[links.index(group) + 1:] if group is not None else links
 
-    def static_active(self, tr) -> bool:
-        if not self.renderer_tree(tr).get('m_Enabled', 1):
+    def static_active(self, tr, renderer_kind: RendererKind) -> bool:
+        """Whether the renderer of that kind is enabled and every GameObject below its action group is on."""
+        if not self.renderer_tree(tr, renderer_kind).get('m_Enabled', 1):
             return False
         return all(self.scene.tree(self.scene.go_of[link], 'GameObject').get('m_IsActive', 1) for link in self.switched_links(tr))
 
-    def toggled(self, tr) -> bool:
+    def toggled(self, tr, renderer_kind: RendererKind) -> bool:
         """Whether a clip (of the default states, or of a state the controller triggers) switches this
-        renderer or a GameObject on its chain."""
+        renderer (of that kind) or a GameObject on its chain."""
         for scene in (self.scene, *self.state_scenes.values()):
             if any(scene.float_curves.get((link, ec.GAMEOBJECT, ec.IS_ACTIVE)) for link in self.chain(tr)) or \
-                    scene.float_curves.get((tr, ec.RENDERER, ec.ENABLED)):
+                    scene.float_curves.get((tr, renderer_kind.binding, ec.ENABLED)):
                 return True
         return False
 
@@ -829,7 +860,7 @@ class _Exporter:
             part_transforms.append(tr)
         if part_transforms:
             for index, tr in enumerate(part_transforms[:len(self.separators) + 1]):
-                renderer = self.renderer_tree(tr)
+                renderer = self.renderer_tree(tr, MESH)
                 entries.append({'part': index,
                                 'sort': (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0), SPINE_QUEUE,
                                          -self.relative(self.scene, tr, 0.0)[2][3], self.walk[tr]), 'transform': tr})
@@ -910,12 +941,12 @@ class _Exporter:
                 raise LayerError('script (' + ', '.join(sorted(fields)[:4]) + ')')
         return scroll, delay, maps
 
-    def animated_properties(self, tr, material: Material) -> set:
+    def animated_properties(self, tr, material: Material, renderer_kind: RendererKind) -> set:
         """The material properties a clip (of the default states or a triggered one) drives on this renderer."""
         out = set()
         for scene in (self.scene, *self.state_scenes.values()):
             for (target, type_id, attribute) in scene.float_curves:
-                if target == tr and type_id == ec.RENDERER and attribute != ec.ENABLED:
+                if target == tr and type_id == renderer_kind.binding and attribute != ec.ENABLED:
                     out.add(property_name(material, ec.material_binding(attribute)[0]))
         return out
 
@@ -932,7 +963,7 @@ class _Exporter:
         kind = attribute >> 28
         return effects.inert(look_.effect, name, kind % 4 if kind < FLOAT_BINDING else None)
 
-    def check_curves(self, scene, tr, look_: Look, follower, material: Material):
+    def check_curves(self, scene, tr, look_: Look, follower, material: Material, renderer_kind: RendererKind):
         """Every curve that touches this layer must be one the export reproduces (or one that changes nothing)."""
         colour_hash = ec.crc(look_.color_property) & 0x0FFFFFFF
         known = {colour_hash, ec.crc('_MainTex_ST') & 0x0FFFFFFF}
@@ -945,11 +976,11 @@ class _Exporter:
         for (target, type_id, attribute) in scene.float_curves:
             if target != tr:
                 continue
-            if (type_id == ec.GAMEOBJECT and attribute == ec.IS_ACTIVE) or (type_id == ec.RENDERER and attribute == ec.ENABLED):
+            if (type_id == ec.GAMEOBJECT and attribute == ec.IS_ACTIVE) or (type_id == renderer_kind.binding and attribute == ec.ENABLED):
                 continue
-            if type_id == ec.RENDERER and (ec.material_binding(attribute)[0] in known or self.inert(material, look_, attribute)):
+            if type_id == renderer_kind.binding and (ec.material_binding(attribute)[0] in known or self.inert(material, look_, attribute)):
                 continue
-            if type_id == ec.RENDERER:
+            if type_id == renderer_kind.binding:
                 raise LayerError(f'animated material property {property_name(material, ec.material_binding(attribute)[0])}')
             raise LayerError(f'animated component (type {type_id})')
         if follower is not None:
@@ -968,7 +999,7 @@ class _Exporter:
                     if scene.transform_curves.get((link, ec.POSITION)):
                         raise LayerError('bone follower under an animated parent')
 
-    def clips_of(self, scene, tr, follower) -> list:
+    def clips_of(self, scene, tr, follower, renderer_kind: RendererKind) -> list:
         """The clips that move, tint or switch this layer."""
         clips = {}
 
@@ -985,25 +1016,25 @@ class _Exporter:
         for link in self.switched_links(tr):
             note(scene.float_curves.get((link, ec.GAMEOBJECT, ec.IS_ACTIVE)))
         for (target, type_id, attribute), entries in scene.float_curves.items():
-            if target == tr and type_id == ec.RENDERER:
+            if target == tr and type_id == renderer_kind.binding:
                 note(entries)
         return list(clips.values())
 
-    def material_value(self, scene, tr, prop: str, component: int | None, t: float, default: float) -> float:
+    def material_value(self, scene, tr, prop: str, component: int | None, t: float, default: float, renderer_kind: RendererKind) -> float:
         """A material property (a float, or one component of a colour or vector) on tr's renderer at time t,
         as the scene's clips drive it; `default` when none does. Notes the curve as read (check_read)."""
         for key in binding_keys(prop, component):
-            if scene.float_curves.get((tr, ec.RENDERER, key)):
+            if scene.float_curves.get((tr, renderer_kind.binding, key)):
                 self.read_curves.add(key)
-                return scene.float_value(tr, ec.RENDERER, key, t, default)
+                return scene.float_value(tr, renderer_kind.binding, key, t, default)
         return default
 
-    def check_read(self, tr, material: Material, look_: Look):
+    def check_read(self, tr, material: Material, look_: Look, renderer_kind: RendererKind):
         """Every material curve on the layer that check_curves let through was read by the sampling: a
         curve read under the wrong binding would otherwise draw its static value without a word."""
         for scene in (self.scene, *self.state_scenes.values()):
             for (target, type_id, attribute) in scene.float_curves:
-                if target != tr or type_id != ec.RENDERER or attribute == ec.ENABLED or attribute in self.read_curves:
+                if target != tr or type_id != renderer_kind.binding or attribute == ec.ENABLED or attribute in self.read_curves:
                     continue
                 if not self.inert(material, look_, attribute):
                     raise LayerError(f'animated material property {property_name(material, ec.material_binding(attribute)[0])} '
@@ -1021,7 +1052,7 @@ class _Exporter:
             return float([*(env.get('scale') or [1.0, 1.0]), *(env.get('offset') or [0.0, 0.0])][component])
         return float(material.shader.defaults.get(prop, 0.0)) if material.shader and component == 0 else 0.0
 
-    def integrals(self, scene, tr, look_: Look, material: Material, times: list) -> dict:
+    def integrals(self, scene, tr, look_: Look, material: Material, times: list, renderer_kind: RendererKind) -> dict:
         """For each animated `offset` parameter, [u, v, speed u, speed v] at each time: the integral from 0
         of the speed its properties give (Simpson's rule, 8 steps a frame; the curves are cubic between
         keys), and the speed itself, with which a reader carries the offset on past the timeline's end."""
@@ -1032,7 +1063,7 @@ class _Exporter:
                 continue
 
             def speed(t, props=props):
-                return [scale * self.material_value(scene, tr, prop, component, t, self.static_value(material, prop, component))
+                return [scale * self.material_value(scene, tr, prop, component, t, self.static_value(material, prop, component), renderer_kind)
                         for prop, component, scale in props]
             total = [0.0, 0.0]
             values = [[0.0, 0.0, *speed(times[0])]]
@@ -1049,7 +1080,7 @@ class _Exporter:
             out[path] = values
         return out
 
-    def sample(self, scene, tr, look_: Look, follower, material: Material, static: bool = False):
+    def sample(self, scene, tr, look_: Look, follower, material: Material, renderer_kind: RendererKind, static: bool = False):
         """Frames [t, a, b, c, d, tx, ty, r, g, b, alpha, active, su, ou, sv, ov, *parameters, e, f] (the
         matrix to skeleton units, or to the follower's units under a bone follower, with e and f its depth
         column, which entry() folds in or moves; colour with the x2 tint gain; active 0/1; the UV map on the
@@ -1057,8 +1088,8 @@ class _Exporter:
         timeline: (frames, length, loop, loopFrom, animated). Only t = 0 when nothing animates it or
         `static`. Sets self.tilted (the depth column reaches the screen) and self.dets (the signs of the
         frames' 3x3 determinants: Unity culls the other faces of a mirrored object)."""
-        self.check_curves(scene, tr, look_, follower, material)
-        clips = [] if static else self.clips_of(scene, tr, follower)
+        self.check_curves(scene, tr, look_, follower, material, renderer_kind)
+        clips = [] if static else self.clips_of(scene, tr, follower, renderer_kind)
         looping = [(c.stop - c.start) / c.speed for c in clips if c.loop and c.stop > c.start]
         once = [(c.stop - c.start) / c.speed for c in clips if not (c.loop and c.stop > c.start)]
         prelude = max(once, default=0.0)
@@ -1075,10 +1106,10 @@ class _Exporter:
         links = self.chain(tr)
         switched = self.switched_links(tr)
         below = links[links.index(follower[0]) + 1:] if follower else None
-        renderer = self.renderer_tree(tr)
+        renderer = self.renderer_tree(tr, renderer_kind)
         st0 = look_.st
-        opacity_animated = look_.color_property == '_MainColor' and any(scene.float_curves.get((tr, ec.RENDERER, k)) for k in binding_keys('_Opacity'))
-        offsets = self.integrals(scene, tr, look_, material, times)
+        opacity_animated = look_.color_property == '_MainColor' and any(scene.float_curves.get((tr, renderer_kind.binding, k)) for k in binding_keys('_Opacity'))
+        offsets = self.integrals(scene, tr, look_, material, times, renderer_kind)
         frames = []
         dets = set()
         tilted = False  # depth reaches the screen: a rotation out of the plane
@@ -1091,15 +1122,15 @@ class _Exporter:
             else:
                 m = self.relative(scene, tr, t)
                 factor = 1.0 / self.unit
-            colour = [self.material_value(scene, tr, look_.color_property, c, t, look_.color[c]) for c in range(4)]
-            opacity = self.material_value(scene, tr, '_Opacity', None, t, look_.opacity) if opacity_animated else look_.opacity
-            st = [self.material_value(scene, tr, '_MainTex_ST', c, t, st0[c]) for c in range(4)]
+            colour = [self.material_value(scene, tr, look_.color_property, c, t, look_.color[c], renderer_kind) for c in range(4)]
+            opacity = self.material_value(scene, tr, '_Opacity', None, t, look_.opacity, renderer_kind) if opacity_animated else look_.opacity
+            st = [self.material_value(scene, tr, '_MainTex_ST', c, t, st0[c], renderer_kind) for c in range(4)]
             active = 1.0
             for link in switched:
                 static_flag = 1.0 if self.scene.tree(self.scene.go_of[link], 'GameObject').get('m_IsActive', 1) else 0.0
                 if scene.float_value(link, ec.GAMEOBJECT, ec.IS_ACTIVE, t, static_flag) < 0.5:
                     active = 0.0
-            if scene.float_value(tr, ec.RENDERER, ec.ENABLED, t, 1.0 if renderer.get('m_Enabled', 1) else 0.0) < 0.5:
+            if scene.float_value(tr, renderer_kind.binding, ec.ENABLED, t, 1.0 if renderer.get('m_Enabled', 1) else 0.0) < 0.5:
                 active = 0.0
             # The exported UVs carry the material's own ST with v flipped; an animated ST maps them on:
             # u' = (u - o0) s / s0 + o and, in image space, v' = 1 - ((1 - v - o0v) sv / s0v + ov).
@@ -1113,14 +1144,14 @@ class _Exporter:
             frames.append([t, m[0][0] * factor, m[0][1] * factor, m[1][0] * factor, m[1][1] * factor, m[0][3] * factor, m[1][3] * factor,
                            2 * colour[0] * look_.rgb_scale, 2 * colour[1] * look_.rgb_scale, 2 * colour[2] * look_.rgb_scale,
                            2 * colour[3] * look_.alpha_scale * opacity, active,
-                           su, st[2] - st0[2] * su, sv, 1 - sv - st[3] + st0[3] * sv, *self.extra_values(scene, tr, look_, material, t, offsets, index),
+                           su, st[2] - st0[2] * su, sv, 1 - sv - st[3] + st0[3] * sv, *self.extra_values(scene, tr, look_, material, t, offsets, index, renderer_kind),
                            m[0][2] * factor, m[1][2] * factor])
         animated = len(frames) > 1 and any(f[1:] != frames[0][1:] for f in frames)
         self.tilted = tilted
         self.dets = dets
         return frames, round(length, 4), bool(looping), round(loop_from, 4), animated
 
-    def extra_values(self, scene, tr, look_: Look, material: Material, t: float, offsets: dict, index: int) -> list:
+    def extra_values(self, scene, tr, look_: Look, material: Material, t: float, offsets: dict, index: int, renderer_kind: RendererKind) -> list:
         """An effect's animated parameters at time t, in the order of its animated_paths (effects.width
         numbers each): float properties by name, vector and colour ones by component, offsets integrated."""
         if not look_.effect or not look_.effect.get('animated_paths'):
@@ -1131,10 +1162,10 @@ class _Exporter:
             if kind == 'offset':
                 out += offsets[path][index]
             elif kind == 'float':
-                out += [self.material_value(scene, tr, prop, None, t, material.float(prop)) for prop in props]
+                out += [self.material_value(scene, tr, prop, None, t, material.float(prop), renderer_kind) for prop in props]
             else:
                 prop = props[0]
-                out += [self.material_value(scene, tr, prop, c, t, self.static_value(material, prop, c)) for c in range(effects.width(path))]
+                out += [self.material_value(scene, tr, prop, c, t, self.static_value(material, prop, c), renderer_kind) for c in range(effects.width(path))]
         return out
 
     def decimate(self, frames, extent: float, to_skeleton: float, depth: bool = False) -> list:
@@ -1159,7 +1190,7 @@ class _Exporter:
         entry = source[0](texture['id'])
         if not entry or entry[0] != 'Texture2D':
             raise LayerError(f'texture {texture["id"]} not in {texture["external"]}')
-        return source
+        return source[0], source[1]
 
     def texture_index(self, texture: dict, main: bool = True) -> int:
         """The texture's index (in the order first used), its image written once. A main texture must show
@@ -1208,7 +1239,7 @@ class _Exporter:
     def layer(self, tr) -> list[dict]:
         """The draw entries of one MeshRenderer (one per submesh with a material), with their sort keys."""
         name = self.name(tr)
-        renderer = self.renderer_tree(tr)
+        renderer = self.renderer_tree(tr, MESH)
         materials = [r for r in renderer.get('m_Materials') or [] if isinstance(r, dict)]
         if not materials:
             raise LayerError('no material')
@@ -1231,8 +1262,8 @@ class _Exporter:
                 self.omit('other', label, 'material in another bundle')
                 continue
             try:
-                material = read_material(self.read(ref['m_PathID'])[1], read=self.read, external_of=self.external_of, shaders=self.shaders)
-                look_ = look(material, self.animated_properties(tr, material))
+                material = read_material(self.read(ref['m_PathID'])[1], read=self.read, external_of=self.external_of, shaders=self.shaders, home=None)
+                look_ = look(material, self.animated_properties(tr, material, MESH))
             except LayerError as error:
                 self.omit('custom', label, str(error))
                 continue
@@ -1304,20 +1335,20 @@ class _Exporter:
             raise LayerError('UV scroll from both its shader and a script')
         self.read_curves = set()
         flat = all(abs(v[2]) <= 1e-6 for v in mesh['vertices'])
-        frames, length, loop, loop_from, animated = self.sample(self.scene, tr, look_, follower, material)
+        frames, length, loop, loop_from, animated = self.sample(self.scene, tr, look_, follower, material, MESH)
         tilted, dets = self.tilted, set(self.dets)
         if not animated:
-            frames, length, loop, loop_from, _ = self.sample(self.scene, tr, look_, follower, material, static=True)
+            frames, length, loop, loop_from, _ = self.sample(self.scene, tr, look_, follower, material, MESH, static=True)
         # The states the controller's triggers put its _animators in (Interact, Special...), where they
         # play something else for this layer.
         states = {}
         for animation_name, scene in self.state_scenes.items():
-            other = self.sample(scene, tr, look_, follower, material)
+            other = self.sample(scene, tr, look_, follower, material, MESH)
             tilted = tilted or self.tilted
             dets |= self.dets
             if other[0] != frames and (other[4] or other[0][0][1:] != frames[0][1:]):
                 states[animation_name] = other
-        self.check_read(tr, material, look_)
+        self.check_read(tr, material, look_, MESH)
         first = frames[0]
         if not animated and first[11] < 0.5 and not any(any(f[11] >= 0.5 for f in st[0]) for st in states.values()):
             raise LayerError('hidden')
@@ -1438,7 +1469,7 @@ class _Exporter:
             vertex_matrix = [m[0][0] / self.unit, m[0][1] / self.unit, m[0][2] / self.unit, m[1][0] / self.unit, m[1][1] / self.unit, m[1][2] / self.unit]
         speed = scroll_script or (look_.scroll if any(look_.scroll) else None)
         scroll = [round(speed[0], 6), round(-speed[1], 6)] if speed else None  # image space flips v
-        renderer = self.renderer_tree(tr)
+        renderer = self.renderer_tree(tr, MESH)
         sort = (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0), look_.queue, -z, self.walk[tr])
         if look_.effect:
             # Animated parameters: the frames carry them past column 16 (18 for a tilted entry); a static
@@ -1604,7 +1635,10 @@ class _Exporter:
                 if kind == 'MeshRenderer' and tr in part_transforms:
                     continue
                 if kind == 'ParticleSystemRenderer' or (kind == 'MeshRenderer' and 'ParticleSystem' in kinds):
-                    self.omitted['particles'] += 1
+                    if self.particles is not None:
+                        self.particles.note(tr, kind)
+                    else:
+                        self.omitted['particles'] += 1
                 elif kind in ('TrailRenderer', 'LineRenderer'):
                     self.omitted['trails'] += 1
                 elif kind == 'SkinnedMeshRenderer':
@@ -1618,7 +1652,7 @@ class _Exporter:
                         self.omit('other', f'{name} (mask)', unreadable(error))
                     if any(k == 'MonoBehaviour' and t and 'skeletonDataAsset' in t for k, _, t in components):
                         self.omit('other', name, 'nested skeleton')
-                    elif not self.static_active(tr) and not self.toggled(tr):
+                    elif not self.static_active(tr, MESH) and not self.toggled(tr, MESH):
                         self.omitted['hidden'] += 1
                     else:
                         try:
@@ -1632,12 +1666,26 @@ class _Exporter:
                             self.omit('other', name, str(error))
                         except UNREADABLE as error:
                             self.omit('other', name, unreadable(error))
+        if self.particles is not None:
+            entries += self.particles.entries()
         entries.sort(key=lambda e: e['sort'])
         entries = self.unmasked(entries)
-        draw = [{kind: e[kind]} for e in entries for kind in ('part', 'layer', 'effect', 'tilted') if kind in e]
+        # Particle systems that sort next to each other, with no part, layer or effect between them, are one
+        # run: {"particles": [system indices]}, the systems numbered in draw order.
+        draw, systems = [], []
+        for e in entries:
+            if 'particles' in e:
+                if draw and 'particles' in draw[-1]:
+                    draw[-1]['particles'].append(len(systems))
+                else:
+                    draw.append({'particles': [len(systems)]})
+                systems.append(e['particles'])
+                continue
+            draw += [{kind: e[kind]} for kind in ('part', 'layer', 'effect', 'tilted') if kind in e]
         # Textures still drawn, renumbered in order: first those plain layers draw (`textures`, which every
         # reader fetches), then those only effects sample (`effectTextures`, which readers that know
-        # effects fetch), numbered on from the first.
+        # effects fetch), numbered on from the first, then those only particles sample (layerParticles.json's
+        # `textures`, which no reader of layers.json fetches).
         plain = sorted({d['layer']['texture'] for d in draw if 'layer' in d})
         refs = []  # every reference an effect makes: (holder dict, key)
         for d in draw:
@@ -1648,12 +1696,14 @@ class _Exporter:
             elif 'layer' in d and d['layer'].get('exact'):
                 refs += [(m, 'texture') for m in shader_maps(d['layer']['exact']['shader'])]
         only_effects = sorted({holder[key] for holder, key in refs if holder[key] is not None} - set(plain))
-        order = plain + only_effects
+        particle_refs = self.particles.texture_refs(systems) if self.particles is not None else []
+        only_particles = sorted({holder[key] for holder, key in particle_refs if holder[key] is not None} - set(plain) - set(only_effects))
+        order = plain + only_effects + only_particles
         renumber = {old: new for new, old in enumerate(order)}
         for d in draw:
             if 'layer' in d:
                 d['layer']['texture'] = renumber[d['layer']['texture']]
-        for holder, key in refs:
+        for holder, key in refs + particle_refs:
             if holder[key] is not None:
                 holder[key] = renumber[holder[key]]
         self.texture_images = [self.texture_images[i] for i in order]
@@ -1662,8 +1712,19 @@ class _Exporter:
                    for i, info in enumerate(self.texture_info)]
         for bucket in ('custom', 'externalTexture', 'other'):
             self.omitted[bucket].sort(key=lambda item: (item['name'], item['reason']))
-        document = {'schemaVersion': SCHEMA_VERSION, 'textures': records[:len(plain)], 'effectTextures': records[len(plain):], 'bounds': None,
+        layer_textures = len(plain) + len(only_effects)
+        document = {'schemaVersion': SCHEMA_VERSION, 'textures': records[:len(plain)], 'effectTextures': records[len(plain):layer_textures], 'bounds': None,
                     'effectBounds': None, 'separators': self.separators, 'draw': draw, 'omitted': self.omitted}
+        particle_document = None
+        if self.particles is not None:
+            # The pointer to layerParticles.json (scripts/sync.py writes it with the file's bytes and sha256),
+            # null when no system is drawn; omitted.particles counts the systems left out, each with its reason.
+            document = {**{k: document[k] for k in ('schemaVersion', 'textures', 'effectTextures', 'bounds', 'effectBounds')}, 'particles': None,
+                        **{k: document[k] for k in ('separators', 'draw', 'omitted')}}
+            self.omitted['particles'] = len(self.particles.reasons)
+            self.omitted['particleReasons'] = sorted(self.particles.reasons, key=lambda item: (item['name'], item['reason']))
+            if systems:
+                particle_document = self.particles.document(systems, records[layer_textures:], layer_textures)
         layers = [d['layer'] for d in draw if 'layer' in d]
         drawn = layers + [d.get('effect') or d['tilted'] for d in draw if 'effect' in d or 'tilted' in d]
         self.counts = {'layers': len(drawn), 'plain': len(layers), 'effects': len(drawn) - len(layers),
@@ -1673,7 +1734,11 @@ class _Exporter:
                        'animated': sum(1 for l in drawn if l['animation']), 'follow': sum(1 for l in drawn if l['follow']),
                        'only': sum(1 for l in drawn if l['only']), 'states': sum(1 for l in drawn if l['animation'] and l['animation'].get('states')),
                        'scroll': sum(1 for l in layers if l['scroll'])}
-        return LayerExport(document, self.texture_images, self.texture_info, self.counts)
+        if self.particles is not None:
+            self.counts['particles'] = len(systems)
+            self.counts['particleRuns'] = sum(1 for d in draw if 'particles' in d)
+            self.counts['particleTextures'] = len(only_particles)
+        return LayerExport(document, self.texture_images, self.texture_info, self.counts, particle_document)
 
     # --- masks
 
@@ -1685,11 +1750,11 @@ class _Exporter:
             if isinstance(ref, dict) and ref.get('m_FileID', 0) == 0 and ref.get('m_PathID'):
                 entry = self.read(ref['m_PathID'])
                 if entry and entry[0] == 'Material':
-                    material = read_material(entry[1], read=self.read, external_of=self.external_of, shaders=self.shaders)
+                    material = read_material(entry[1], read=self.read, external_of=self.external_of, shaders=self.shaders, home=None)
                     names.append(material.shader.name if material.shader else '')
                     queues.append(material.queue)
         erase = [q for n, q in zip(names, queues) if '/Mask/Erase' in n]
-        if not erase or not (self.static_active(tr) or self.toggled(tr)):
+        if not erase or not (self.static_active(tr, MESH) or self.toggled(tr, MESH)):
             return
         bounds = None  # everywhere, unless its mesh's box says otherwise
         mesh_filter = next((tree for kind, _, tree in _component_trees(self.scene, self.scene.go_of[tr]) if kind == 'MeshFilter'), None)
@@ -1796,7 +1861,7 @@ def shader_maps(shader: dict) -> list[dict]:
 
 
 def export_layers(root_go: int, read, *, mesh_of: Callable, texture_of: Callable, classify_texture: Callable,
-                  external_of: Callable, shaders: dict, slots: list[str], shared: Callable | None = None) -> LayerExport:
+                  external_of: Callable, shaders: dict, slots: list[str], shared: Callable | None = None, particles: bool) -> LayerExport:
     """The layers of the illustration prefab whose root GameObject is `root_go`.
 
     read(path_id) -> (type name, typetree) | None for any object in the bundle; mesh_of(path_id) ->
@@ -1805,11 +1870,13 @@ def export_layers(root_go: int, read, *, mesh_of: Callable, texture_of: Callable
     l2d.classify_alpha's result; external_of(ref) -> the CAB name (or 'unity default resources') a
     reference with m_FileID != 0 points into; shaders: shader_table() of the shared shader bundle;
     slots: the skeleton's slot names (the Spine runtime's reading), which separator names must match;
-    shared(CAB) -> (read, texture_of) of the shared texture bundle with that CAB name, or None (a layer
-    that needs it is left out under externalTexture).
+    shared(CAB) -> (read, texture_of[, external_of]) of the shared bundle with that CAB name, or None (a layer
+    that needs it is left out under externalTexture; a particle material in it is left out). `particles`
+    (required): also export the ParticleSystems (scripts/particles.py: LayerExport.particles, the
+    {"particles"} draw runs and omitted.particleReasons); False writes layers.json as before them.
     """
     return _Exporter(root_go, read, mesh_of=mesh_of, texture_of=texture_of, classify_texture=classify_texture,
-                     external_of=external_of, shaders=shaders, slots=slots, shared=shared).run()
+                     external_of=external_of, shaders=shaders, slots=slots, shared=shared, particles=particles).run()
 
 
 # ---------------------------------------------------------------------------
@@ -1847,7 +1914,9 @@ def bundle_readers(env, objects: dict):
         if handler.m_Colors:
             colours = [tuple((c / 255.0 if isinstance(c, int) else float(c)) for c in colour) for colour in handler.m_Colors]
         vertices = [tuple(float(x) for x in (list(v) + [0.0, 0.0])[:3]) for v in handler.m_Vertices]
-        return {'vertices': vertices, 'uv': [tuple(float(x) for x in uv[:2]) for uv in handler.m_UV0], 'colors': colours, 'submeshes': submeshes}
+        normals = [tuple(float(x) for x in (list(n) + [0.0, 0.0])[:3]) for n in handler.m_Normals] if handler.m_Normals else None
+        return {'vertices': vertices, 'uv': [tuple(float(x) for x in uv[:2]) for uv in handler.m_UV0], 'colors': colours, 'submeshes': submeshes,
+                'normals': normals}
 
     def texture_of(path_id: int):
         return objects[path_id].read().image.convert('RGBA')
@@ -1856,11 +1925,12 @@ def bundle_readers(env, objects: dict):
 
 
 class SharedTextures:
-    """The client's shared FX texture bundles (refs/fx/texture/...), which effect materials take their
-    noise, dissolve, ramp and some main textures from: `table` maps a CAB name to its bundle name
-    (shared-bundles.json, written by scripts/shared_bundles.py); `fetch(bundle name)` returns the unpacked,
-    md5-checked bundle or None. Each is fetched and decoded once, on first use. Callable as the
-    exporter's `shared`."""
+    """The client's shared FX bundles (refs/fx/texture/..., and refs/fx/material.ab and sharedbattle.ab for
+    particle materials), which effect materials take their noise, dissolve, ramp and some main textures
+    from: `table` maps a CAB name to its bundle name (shared-bundles.json, written by
+    scripts/shared_bundles.py); `fetch(bundle name)` returns the unpacked, md5-checked bundle or None. Each
+    is fetched and decoded once, on first use. Callable as the exporter's `shared`: CAB -> (read,
+    texture_of, external_of) of that bundle, external_of naming the CABs its own references point into."""
 
     def __init__(self, table: dict, fetch: Callable, unitypy):
         self.table = table
@@ -1881,15 +1951,18 @@ class SharedTextures:
                 if cab_name(env) != cab:
                     raise LayerError(f'{bundle} is {cab_name(env)}, not {cab} (shared-bundles.json is out of date)')
                 objects = {o.path_id: o for o in env.objects}
+                trees = {}
 
-                def read(path_id, objects=objects):
-                    obj = objects.get(path_id)
-                    return (obj.type.name, obj.read_typetree()) if obj is not None else None
+                def read(path_id, objects=objects, trees=trees):
+                    if path_id not in trees:
+                        obj = objects.get(path_id)
+                        trees[path_id] = (obj.type.name, obj.read_typetree()) if obj is not None else None
+                    return trees[path_id]
 
                 def texture_of(path_id, objects=objects):
                     return objects[path_id].read().image.convert('RGBA')
 
-                source = (read, texture_of)
+                source = (read, texture_of, bundle_readers(env, objects)[2])
                 self.used.add(bundle)
         self.loaded[cab] = source
         return source

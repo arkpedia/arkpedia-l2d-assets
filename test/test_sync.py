@@ -123,7 +123,8 @@ class RunLoop(unittest.TestCase):
             raise self.shaders_error
         return {('CAB-shaders', 1): 'a shader'}
 
-    def fake_build(self, planned, bundle, res_version, staging, shaders, shared=None):
+    def fake_build(self, planned, bundle, res_version, staging, shaders, shared=None, *, particles):
+        self.assertFalse(particles, 'particles are exported only with --particles')
         expected = self.cn_payloads.get(planned.skin_id) if planned.server == 'cn' else self.payloads.get(planned.skin_id)
         self.assertEqual(bundle, expected)  # verified and unpacked first
         self.built_from[planned.skin_id] = (planned.server, res_version)
@@ -184,7 +185,7 @@ class RunLoop(unittest.TestCase):
         self.payloads[BROKEN] = b'a bundle that builds'
         self.set_bundles()
         self.download_error = None
-        sync.build_model = lambda planned, bundle, res, staging, shaders, shared=None: (write_model(planned, staging), ({}, [], None))[1]
+        sync.build_model = lambda planned, bundle, res, staging, shaders, shared=None, *, particles: (write_model(planned, staging), ({}, [], None))[1]
         report = self.run_sync()
         self.assertEqual(report['added'], [BROKEN])
         self.assertEqual(self.failures(), {})
@@ -231,7 +232,8 @@ class RunLoop(unittest.TestCase):
             counts={k: 0 for k in ('layers', 'effects', 'exact', 'static', 'animated', 'follow', 'only', 'states', 'parts')})
         decoded = []
 
-        def fake_decode(bundle, dyn_illust_id, dyn_entrance_id, shaders, shared=None):
+        def fake_decode(bundle, dyn_illust_id, dyn_entrance_id, shaders, shared=None, *, particles):
+            self.assertFalse(particles)
             decoded.append(bundle)
             self.assertIsNotNone(shared, 'effects may need the shared textures')
             return type('Decoded', (), {'layers': staticmethod(lambda slots: export)})()

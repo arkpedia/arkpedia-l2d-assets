@@ -8,6 +8,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { LAYERS_VERSION, layersShape } from './layers.mjs';
+import { PARTICLES_FILE } from './particles.mjs';
 import { inspectLayers, inspectSkeleton } from './spine.mjs';
 
 const folder = process.argv[2];
@@ -29,9 +30,11 @@ try {
     // A file with effects is written in the current format (a file of layersVersion 1 has none).
     const version = Object.hasOwn(doc, 'effectTextures') ? LAYERS_VERSION : 1;
     if (doc.bounds !== null || (version >= 2 && doc.effectBounds !== null)) throw new Error('layers.json already has its bounds');
-    // Everything but the bounds this computes must already be right.
+    // Everything but the bounds this computes must already be right, layerParticles.json included (the sync
+    // writes it first).
     const unit = { x: 0, y: 0, width: 1, height: 1 };
-    layersShape({ ...doc, bounds: unit, ...(version >= 2 ? { effectBounds: unit } : {}) }, 'layers.json', version);
+    const particles = doc.particles ? JSON.parse(readFileSync(path.join(folder, PARTICLES_FILE), 'utf8')) : null;
+    layersShape({ ...doc, bounds: unit, ...(version >= 2 ? { effectBounds: unit } : {}) }, 'layers.json', version, particles);
     result = inspectLayers(skeleton, atlas, doc, 'layers.json');
   } else {
     result = inspectSkeleton(skeleton, atlas);
