@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 7058,
-    "sha256": "2c82068621e8b6ed333379b188aadae7ae08fb700f43e91218b620af1b1b332a"
+    "bytes": 143502,
+    "sha256": "7f3dcfe2290d01e2a827cf0af79533ea7deef72f0a0098a2064f13f643c15192"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2015_dusk_2.ab",

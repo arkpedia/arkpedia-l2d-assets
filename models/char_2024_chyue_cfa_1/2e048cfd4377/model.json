@@ -1011,9 +1011,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 1430,
-    "sha256": "cca01d7744e5fc49c933fb7fc5285e0c14fa0b04d5e8bc98a3e0e549208b59da"
+    "bytes": 34937,
+    "sha256": "c3e56b44dd2d10b27dc947d2ed58de01bf9a4dad63cf3130335d7641a95a61d5"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2024_chyue_cfa#1.ab",

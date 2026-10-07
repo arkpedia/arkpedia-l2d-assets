@@ -61,9 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 1396,
-    "sha256": "c88800b59ed5f0f756ebeab17740e7cf3a0bafa568b9140550a8f0fec7be2eea"
+    "bytes": 13316,
+    "sha256": "a4949c82677d9bbc99244bfa985360585ef9c4e23ee50e90a48c96fbdadffee1"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2014_nian_cfa#1.ab",

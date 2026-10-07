@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 20031,
-    "sha256": "0f3ae1c281cee7d9cb1114fe33770d852bb5f5b31fd6f094ec1a71d03ff4e505"
+    "bytes": 142279,
+    "sha256": "963fab59156b34ddf3bcef6fd6d3cd8f3fb8f1c366351bf0717543a3da8ad1a9"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_172_svrash_ambiencesynesthesia#4.ab",

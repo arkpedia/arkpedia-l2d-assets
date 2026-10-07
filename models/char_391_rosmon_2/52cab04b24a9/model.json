@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 1139,
-    "sha256": "8ab87c4dcc5da1bf10cc9c50a2392276aab7a3670a5ffe4e03255f5d61018e26"
+    "bytes": 36132,
+    "sha256": "6199143167cdb4b6a1169f2acc832001a0e456bb2f03f56f186d1e3f95d5c844"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_391_rosmon_2.ab",

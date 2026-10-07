@@ -61,9 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 418,
-    "sha256": "11dbdc38ec085b5cb45fa97fce987af60a5afcaab3be785afcb13379a4a0b683"
+    "bytes": 498,
+    "sha256": "7b661938c29a6c9bff979df34310b7482b11ab0c275050c3d6d81b51ea2bb798"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1019_siege2_epoque#50.ab",

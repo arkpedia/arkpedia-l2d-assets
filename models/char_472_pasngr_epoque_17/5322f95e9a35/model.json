@@ -418,9 +418,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 19926,
-    "sha256": "25f0459e9648e916c23966a8ab2de47d34e9e1010c036830a3ad3554b98c69f9"
+    "bytes": 53457,
+    "sha256": "e83b8e85fb85a5183dbf2201d998964bc829aeffdb7c896bff4a263219e3909c"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_472_pasngr_epoque#17.ab",

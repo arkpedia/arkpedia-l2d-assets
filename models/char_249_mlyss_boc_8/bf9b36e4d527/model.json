@@ -500,9 +500,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 52215,
-    "sha256": "58a4c3d8b504180df0f44e0de1cead18b8fb4537574ea9666929733f61d9bfdb"
+    "bytes": 142650,
+    "sha256": "5217a7b0680ba5ea0186786ecf9d56d3c3d9d5ac0908219f4a3b8eb9b1382ff9"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_249_mlyss_boc#8.ab",

@@ -63,9 +63,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 22114,
-    "sha256": "8ea2a4ebebaa0930b42b5f4e1fd55982c76fafaa08c2a576b84a3a7d4a22ce5c"
+    "bytes": 314540,
+    "sha256": "011f5969359089b3e231180f14ecfa12b7b9ea6e3460f1d92f6d87f8b913dc96"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2015_dusk_nian#7.ab",

@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 7648,
-    "sha256": "e7bb4863f10d6b06e020945dc3249cb80a61d038b658a5cd79c7cbdfdb9a1d77"
+    "bytes": 179162,
+    "sha256": "30a98ff3001609353223a9eb4d9e0814936151bcd135230412acb5f78e95a81e"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_179_cgbird_sightseer#1.ab",

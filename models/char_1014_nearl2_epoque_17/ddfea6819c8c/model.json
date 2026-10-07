@@ -66,9 +66,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 42377,
-    "sha256": "782496a007e79c04e02b855e4ab227ed409913780897b9c236fd188038e91486"
+    "bytes": 222452,
+    "sha256": "4fb8215bab7093d5c3580b209d257f4d0ca0ff51395211addd38c6b137e8224c"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1014_nearl2_epoque#17.ab",

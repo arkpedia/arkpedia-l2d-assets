@@ -63,9 +63,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 14852,
-    "sha256": "7e3a446052341756941ba0ea82dd77f56b296083eb97629d7b5cc51fe092d731"
+    "bytes": 108674,
+    "sha256": "f04a4fb6ba4a914dfc02b78954ab953a905508afb4db2e7fca8270d320fd3e39"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_250_phatom_sale#4.ab",

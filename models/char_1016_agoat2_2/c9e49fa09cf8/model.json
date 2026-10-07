@@ -61,9 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 3762,
-    "sha256": "43063c8c27d5c4fad3abab437a046dc90f5375654b282105cf1a034d76d3edaf"
+    "bytes": 31448,
+    "sha256": "be917fc091539deaf735d1674b23ed7fa538cb4dec8eb180175031af62a9bbe5"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1016_agoat2_2.ab",

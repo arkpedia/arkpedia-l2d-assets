@@ -61,9 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 1240,
-    "sha256": "fef3fafa47b2e2029ff9c7899a3e33d599b22e82de5328831701fa5ac5f282a2"
+    "bytes": 22924,
+    "sha256": "fb7a607fffe5abe8716982bcdf38cec0789481946dd5c28fc7f6cff2e1a083db"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_332_archet_sale#14.ab",

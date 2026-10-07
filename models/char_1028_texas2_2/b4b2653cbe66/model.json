@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 21040,
-    "sha256": "dc2e370ecd79c2889b1c2cafce2565b4b2299e96edaccde295e8770da828e933"
+    "bytes": 198367,
+    "sha256": "93056e03e7acc88c7eab288f6a24e9cb8a6ba072ab8a02d83328c9ca1f6e436d"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1028_texas2_2.ab",

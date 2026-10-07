@@ -664,9 +664,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 7704,
-    "sha256": "29a6335d847de8999180f1156e65942146c0844d3feaba2039bb94ea06b25b48"
+    "bytes": 159260,
+    "sha256": "ef5caac37385f2da921fbff6c3446e00888c85db8541f8258f302ece3bec5c92"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4064_mlynar_epoque#28.ab",

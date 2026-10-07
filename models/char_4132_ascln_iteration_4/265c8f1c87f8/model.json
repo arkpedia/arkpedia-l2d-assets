@@ -61,9 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 295,
-    "sha256": "9f0aa06366a81e9a89afe6a5d1e8beb08ca43ef1835f02fd5d39c0d331a7af54"
+    "bytes": 1344,
+    "sha256": "8b0215b82bd7dcd06e989ff9fbf5b1cb264139c10ebe0e28adafd39a6f545ce2"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4132_ascln_iteration#4.ab",

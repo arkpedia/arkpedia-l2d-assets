@@ -38,9 +38,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 8721,
-    "sha256": "4f307f39210a8e0c8ce6ea6eb49fb75b31f39d5526f52c587448f7add5fd92f1"
+    "bytes": 17104,
+    "sha256": "0e83f75eea7da5e0ce755f20a26fe174680fd4c214644e491c4e9326a510650e"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_124_kroos_sale#14.ab",

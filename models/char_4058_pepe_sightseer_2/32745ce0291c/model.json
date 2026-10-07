@@ -61,9 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 14463,
-    "sha256": "66f3e6f0ca7cec86d470ed5d4323e1154ee64958135a02de5c5f8022f2fdb5e6"
+    "bytes": 49931,
+    "sha256": "03d739a632da5e655e8a0485fa232abbc623138cac352fe1822df8e96943ffb6"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4058_pepe_sightseer#2.ab",

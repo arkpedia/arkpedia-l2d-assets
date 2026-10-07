@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 8994,
-    "sha256": "404da4dd16379d4fa11dd68c13ca172983faf627fc8f0afbb216492d4da496f0"
+    "bytes": 71318,
+    "sha256": "e989192e1a17aabb4823b66f48fa980ad8ad6152e0a591d593dc3c27d14bdca2"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_113_cqbw_2.ab",

@@ -61,9 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 67077,
-    "sha256": "237587d4277b31083ca775017a6196e43f045eb046541e92ac7000aff580e2d2"
+    "bytes": 309236,
+    "sha256": "7f29ace4055d2f28e8d78474afc885c922ae254bc37f520b044513c44d24546e"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1037_amiya3_sale#13.ab",

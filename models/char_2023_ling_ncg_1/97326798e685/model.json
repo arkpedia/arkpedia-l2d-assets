@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 11579,
-    "sha256": "37d03f8529b8e97c657d78631d6861b1c5104554a25081c6bff2801e357a7435"
+    "bytes": 102491,
+    "sha256": "dc92a1294fd01e88357100b3e5e29c1c8fc213564feb691b20b4f01fd97b8f14"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2023_ling_ncg#1.ab",

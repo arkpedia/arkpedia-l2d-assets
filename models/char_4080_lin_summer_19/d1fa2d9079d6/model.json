@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 368,
-    "sha256": "72bc846f3843b5953c14dca8b6878257f3708c62dfc0e06230fe9eee18b3ae09"
+    "bytes": 3809,
+    "sha256": "aebaeeee35dde1788f17dd5b8689d22acebb0ae0fc153f63d8a2a37af5b4e9fa"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4080_lin_summer#19.ab",

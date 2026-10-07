@@ -63,9 +63,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 24993,
-    "sha256": "91adca74e08b16c1cb68bef32e236a8e993f64144b1eeb72e7b3f4a97422c1e6"
+    "bytes": 92022,
+    "sha256": "18309b6ffcb58ece882e7969be12f8a798c2d2e1fb6e200bfa16553948f20528"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_377_gdglow_summer#12.ab",

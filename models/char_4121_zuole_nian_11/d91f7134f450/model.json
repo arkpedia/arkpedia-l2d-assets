@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 12270,
-    "sha256": "c49773d6dcda6af819d05c75cb7cd5c4f5f9eba162193bb563ca51e122169982"
+    "bytes": 340564,
+    "sha256": "c5b357b23330d5bab42fef5d7cc5462ec298b90209fe9bbaadfafac06a166eac"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4121_zuole_nian#11.ab",

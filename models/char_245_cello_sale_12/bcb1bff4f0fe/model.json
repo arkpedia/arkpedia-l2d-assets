@@ -647,9 +647,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 60365,
-    "sha256": "237a6d3bdcd8d71c095246cb7212998ecf243ba893579c1d287ecf4f1985e7c0"
+    "bytes": 217862,
+    "sha256": "6e0ef308157720cadf0b665196c562baab3908f96d935a9c904fd7a2b07213e7"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_245_cello_sale#12.ab",

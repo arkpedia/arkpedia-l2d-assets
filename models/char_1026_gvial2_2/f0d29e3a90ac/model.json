@@ -56,9 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 6623,
-    "sha256": "4dce53ca7a6e2cd5a384183a8938c70e7f7078a8f1def8915c2699e1858aacc9"
+    "bytes": 259703,
+    "sha256": "7b3537722f27ac98d20d12e6c4b5a48a4d5b26254fc10ffac0306ede2c6449a9"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1026_gvial2_2.ab",

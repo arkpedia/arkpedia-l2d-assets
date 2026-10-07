@@ -117,9 +117,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 16726,
-    "sha256": "39c64a84440837804c45be04354789f945aeecc64c3df53b136745ca7c83b735"
+    "bytes": 182406,
+    "sha256": "171e4716b44b32d81a9835a6ac8cc062905291e381935daab153004dd1b5638b"
   },
+  "layersVersion": 2,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4134_cetsyr_epoque#50.ab",
