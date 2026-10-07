@@ -275,6 +275,9 @@ class Look:
     # What the site draws differently from the game, or None: a slight flow distortion drawn without
     # its wobble (FLOW_UNDISTORTED).
     approximated: str | None = None
+    # The material's own _Opacity (Disturb/Ram), apart from alpha_scale: an animated _Opacity replaces it
+    # rather than scaling it, so a fade in from 0 still shows.
+    opacity: float = 1.0
 
 
 # A flow-distortion layer whose texture moves at most this far is drawn without the distortion: the
@@ -289,6 +292,24 @@ def slight_flow(flow: dict) -> bool:
     return flow['uv'] <= FLOW_UNDISTORTED['uv'] and 0 < flow['texels'] <= FLOW_UNDISTORTED['texels']
 
 
+ANCHOR_DISTORTIONS = (('_DisturTex', '_IntensityU', '_IntensityV', None),
+                      ('_DisturTex_02', '_IntensityU_02', '_IntensityV_02', '_ToggleUseDisturb2'))
+
+
+def anchor_distorts(m: Material, texture: str) -> bool:
+    """Whether an anchor distortion samples a texture (a moving offset) rather than nothing (a constant one)."""
+    return bool(m.texture(texture) or ('_WEIGHT_ON' in m.keywords and m.texture('_WeightTex')))
+
+
+# What one renderer's objects can throw when UnityPy cannot read them (line or point meshes, missing
+# fields): that renderer is left out under omitted.other, never the whole model (README: layers.json).
+UNREADABLE = (KeyError, TypeError, ValueError, AssertionError, IndexError, ArithmeticError)
+
+
+def unreadable(error: Exception) -> str:
+    return f'unreadable ({type(error).__name__}: {str(error)[:120]})'
+
+
 def flow_distortion(m: Material, name: str) -> dict | None:
     """The UV displacement a flow-distortion material applies (None when it applies none)."""
     main = m.texture('_MainTex') or {}
@@ -300,14 +321,20 @@ def flow_distortion(m: Material, name: str) -> dict | None:
                     'texels': round(max(abs(iu) * (main.get('w') or 0), abs(iv) * (main.get('h') or 0)) * abs(influence), 1)}
         return None
     if name in ANCHOR:
-        for texture, iu, iv, toggle in (('_DisturTex', '_IntensityU', '_IntensityV', None),
-                                        ('_DisturTex_02', '_IntensityU_02', '_IntensityV_02', '_ToggleUseDisturb2')):
+        # The anchor shader adds both distortions at once (uv + (d1 - anchor1) * I1 + (d2 - anchor2) * I2),
+        # before _MainTex_ST, so their sum moves the texture, scaled by its tiling.
+        scale = (m.textures.get('_MainTex') or {}).get('scale', [1, 1])
+        total_u = total_v = 0.0
+        for texture, iu, iv, toggle in ANCHOR_DISTORTIONS:
             if toggle and not m.float(toggle):
                 continue
             a, b = m.float(iu), m.float(iv)
-            if (a or b) and (m.texture(texture) or ('_WEIGHT_ON' in m.keywords and m.texture('_WeightTex'))):
-                return {'uv': round(max(abs(a), abs(b)), 4),
-                        'texels': round(max(abs(a) * (main.get('w') or 0), abs(b) * (main.get('h') or 0)), 1)}
+            if (a or b) and anchor_distorts(m, texture):
+                total_u += abs(a)
+                total_v += abs(b)
+        if total_u or total_v:
+            return {'uv': round(max(total_u, total_v), 4),
+                    'texels': round(max(total_u * (main.get('w') or 0) * abs(scale[0]), total_v * (main.get('h') or 0) * abs(scale[1])), 1)}
     return None
 
 
@@ -325,11 +352,11 @@ def look(m: Material) -> Look:
 
     approximated = None
 
-    def plain(color_property, rgb_scale=1.0, alpha_scale=1.0, scroll=(0.0, 0.0), st_=None):
+    def plain(color_property, rgb_scale=1.0, alpha_scale=1.0, scroll=(0.0, 0.0), st_=None, opacity=1.0):
         color = list(m.colors.get(color_property) or [m.shader.defaults.get(color_property, 0.5)] * 4)
         return Look(blend=blend, texture=main['tex'], st=list(st_ or st), color=color, color_property=color_property,
                     rgb_scale=rgb_scale, alpha_scale=alpha_scale, scroll=list(scroll), cull=cull, queue=m.queue,
-                    approximated=approximated)
+                    approximated=approximated, opacity=opacity)
 
     def check_flow():
         """Refuse a flow distortion the site cannot leave out without changing the picture."""
@@ -356,17 +383,18 @@ def look(m: Material) -> Look:
             raise LayerError(f'dissolve (amount {m.float("_Amount", 0.5):g})')
         if name in RAM_CD and m.texture('_RamTex'):
             raise LayerError('ramp texture')
-        return plain('_MainColor', alpha_scale=m.float('_Opacity', 1.0) * dissolve, scroll=(m.float('_MainUSpeed'), m.float('_MainVSpeed')))
+        return plain('_MainColor', alpha_scale=dissolve, opacity=m.float('_Opacity', 1.0), scroll=(m.float('_MainUSpeed'), m.float('_MainVSpeed')))
     if name in ANCHOR:
         check_flow()
-        # Without a distortion texture the anchor only shifts the UVs by a constant.
+        # Without a distortion texture the anchor only shifts the UVs by a constant (the texture reads 0);
+        # with one (a slight flow drawn without its wobble) the texture sits at the wobble's centre (0.5).
         offset = [0.0, 0.0]
-        for iu, iv, au, av, toggle in (('_IntensityU', '_IntensityV', '_AnchorU', '_AnchorV', None),
-                                       ('_IntensityU_02', '_IntensityV_02', '_AnchorU_02', '_AnchorV_02', '_ToggleUseDisturb2')):
+        for (texture, iu, iv, toggle), (au, av) in zip(ANCHOR_DISTORTIONS, (('_AnchorU', '_AnchorV'), ('_AnchorU_02', '_AnchorV_02'))):
             if toggle and not m.float(toggle):
                 continue
-            offset[0] -= m.float(au, 0.5) * m.float(iu)
-            offset[1] -= m.float(av, 0.5) * m.float(iv)
+            centre = 0.5 if anchor_distorts(m, texture) else 0.0
+            offset[0] += (centre - m.float(au, 0.5)) * m.float(iu)
+            offset[1] += (centre - m.float(av, 0.5)) * m.float(iv)
         dissolve = 1.0
         if m.float('_ToggleUseDissolve'):
             dissolve = dissolve_factor(m)
@@ -803,7 +831,6 @@ class _Exporter:
         renderer = self.renderer_tree(tr)
         st0 = look_.st
         opacity_animated = look_.color_property == '_MainColor' and bool(scene.float_curves.get((tr, ec.RENDERER, opacity_hash)))
-        base_opacity = material.float('_Opacity', 1.0) or 1.0
         frames = []
         tilted = False  # depth reaches the screen: a rotation out of the plane
         for t in times:
@@ -816,7 +843,7 @@ class _Exporter:
                 m = self.relative(scene, tr, t)
                 factor = 1.0 / self.unit
             colour = [scene.float_value(tr, ec.RENDERER, colour_hash | ((4 + c) << 28), t, look_.color[c]) for c in range(4)]
-            opacity = scene.float_value(tr, ec.RENDERER, opacity_hash, t, base_opacity) / base_opacity if opacity_animated else 1.0
+            opacity = scene.float_value(tr, ec.RENDERER, opacity_hash, t, look_.opacity) if opacity_animated else look_.opacity
             st = [scene.float_value(tr, ec.RENDERER, st_hash | ((4 + c) << 28), t, st0[c]) for c in range(4)]
             active = 1.0
             for link in switched:
@@ -912,11 +939,14 @@ class _Exporter:
             if ref.get('m_FileID', 0) != 0 or not ref.get('m_PathID'):
                 self.omit('other', label, 'material in another bundle')
                 continue
-            material = read_material(self.read(ref['m_PathID'])[1], read=self.read, external_of=self.external_of, shaders=self.shaders)
             try:
+                material = read_material(self.read(ref['m_PathID'])[1], read=self.read, external_of=self.external_of, shaders=self.shaders)
                 look_ = look(material)
             except LayerError as error:
                 self.omit('custom', label, str(error))
+                continue
+            except UNREADABLE as error:
+                self.omit('other', label, unreadable(error))
                 continue
             try:
                 out.append(self.entry(tr, label, look_, material, triangles, mesh, follower, only, delay, scroll_script))
@@ -927,6 +957,8 @@ class _Exporter:
                     self.omit('externalTexture' if str(error).startswith('texture in ') else 'other', label, str(error))
             except ec.CameraError as error:
                 self.omit('other', label, str(error))
+            except UNREADABLE as error:
+                self.omit('other', label, unreadable(error))
         return out
 
     def follow_of(self, follower) -> tuple[dict, float, float]:
@@ -1088,7 +1120,10 @@ class _Exporter:
                 elif kind in ('SpriteRenderer', 'BillboardRenderer', 'CanvasRenderer'):
                     self.omit('other', name, kind)
                 elif kind == 'MeshRenderer':
-                    self.note_mask(tr, tree)
+                    try:
+                        self.note_mask(tr, tree)
+                    except UNREADABLE as error:
+                        self.omit('other', f'{name} (mask)', unreadable(error))
                     if any(k == 'MonoBehaviour' and t and 'skeletonDataAsset' in t for k, _, t in components):
                         self.omit('other', name, 'nested skeleton')
                     elif not self.static_active(tr) and not self.toggled(tr):
@@ -1103,6 +1138,8 @@ class _Exporter:
                                 self.omit('externalTexture' if str(error).startswith('texture in ') else 'other', name, str(error))
                         except ec.CameraError as error:
                             self.omit('other', name, str(error))
+                        except UNREADABLE as error:
+                            self.omit('other', name, unreadable(error))
         entries.sort(key=lambda e: e['sort'])
         entries = self.unmasked(entries)
         draw = [{'part': e['part']} if 'part' in e else {'layer': e['layer']} for e in entries]
@@ -1133,14 +1170,16 @@ class _Exporter:
     def note_mask(self, tr, renderer: dict):
         """Remembers a visible renderer drawn with the Erase mask shader: it paints over what was drawn
         before it (alpha from its texture), so those layers do not look as the site would draw them."""
-        names = []
+        names, queues = [], []
         for ref in renderer.get('m_Materials') or []:
             if isinstance(ref, dict) and ref.get('m_FileID', 0) == 0 and ref.get('m_PathID'):
                 entry = self.read(ref['m_PathID'])
                 if entry and entry[0] == 'Material':
-                    shader = read_material(entry[1], read=self.read, external_of=self.external_of, shaders=self.shaders).shader
-                    names.append(shader.name if shader else '')
-        if not any('/Mask/Erase' in n for n in names) or not (self.static_active(tr) or self.toggled(tr)):
+                    material = read_material(entry[1], read=self.read, external_of=self.external_of, shaders=self.shaders)
+                    names.append(material.shader.name if material.shader else '')
+                    queues.append(material.queue)
+        erase = [q for n, q in zip(names, queues) if '/Mask/Erase' in n]
+        if not erase or not (self.static_active(tr) or self.toggled(tr)):
             return
         bounds = None  # everywhere, unless its mesh's box says otherwise
         mesh_filter = next((tree for kind, _, tree in _component_trees(self.scene, self.scene.go_of[tr]) if kind == 'MeshFilter'), None)
@@ -1153,13 +1192,16 @@ class _Exporter:
                 corners = [(c['x'] + sx * e['x'], c['y'] + sy * e['y'], c['z'] + sz * e['z']) for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
         elif ref.get('m_PathID') == BUILTIN_QUAD and self.external_of(ref) == BUILTIN_RESOURCES:
             corners = [(x, y, 0.0) for x in (-0.5, 0.5) for y in (-0.5, 0.5)]
+        m = self.relative(self.scene, tr, 0.0)
+        points = [ec.transform_point(m, p) for p in (corners or [(0.0, 0.0, 0.0)])]
         if corners is not None and not self.moves(tr):
-            m = self.relative(self.scene, tr, 0.0)
-            points = [ec.transform_point(m, p) for p in corners]
             bounds = (min(p[0] for p in points) / self.unit, min(p[1] for p in points) / self.unit,
                       max(p[0] for p in points) / self.unit, max(p[1] for p in points) / self.unit)
-        renderer_sort = (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0))
-        self.masks.append({'name': self.name(tr), 'sort': renderer_sort, 'walk': self.walk[tr], 'bounds': bounds})
+        # Ordered exactly as the layers are (sorting layer, order, render queue, depth, hierarchy): the
+        # Erase shader is a Transparent-queue material, so depth decides between it and a layer.
+        z = sum(p[2] for p in points) / len(points)
+        sort = (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0), erase[0], -z, self.walk[tr])
+        self.masks.append({'name': self.name(tr), 'sort': sort, 'bounds': bounds})
 
     def layer_bounds(self, layer: dict):
         """A layer's box in skeleton units over its timeline, or None when a bone places it (unknown here)."""
@@ -1186,7 +1228,7 @@ class _Exporter:
             if 'layer' in entry:
                 box = self.layer_bounds(entry['layer'])
                 for mask in self.masks:
-                    if (mask['sort'], mask['walk']) <= (entry['sort'][:2], entry['sort'][4]):
+                    if mask['sort'] <= entry['sort']:
                         continue  # drawn before the layer: it paints over nothing of it
                     m = mask['bounds']
                     if m is None or box is None or (box[0] < m[2] and m[0] < box[2] and box[1] < m[3] and m[1] < box[3]):

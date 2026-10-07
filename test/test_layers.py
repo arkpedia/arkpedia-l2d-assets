@@ -16,7 +16,7 @@ from test_camera import Scene, linear, ref  # noqa: E402
 SHADERS_CAB = 'CAB-shaders'
 OTHER_CAB = 'CAB-other'
 EXTERNALS = {1: layers.BUILTIN_RESOURCES, 2: OTHER_CAB, 3: SHADERS_CAB}
-ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD, ERASE = 1, 2, 3, 4, 5
+ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD, ERASE, ANCHOR = 1, 2, 3, 4, 5, 6
 SHADERS = {
     (SHADERS_CAB, ALPHA_BLEND): layers.Shader('Torappu/Particles-L2D/AlphaBlend', 5.0, 10.0, 0.0, 3000, {'_TintColor': 0.5}),
     (SHADERS_CAB, ADDITIVE): layers.Shader('Torappu/Particles-L2D/Additive', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5}),
@@ -25,6 +25,8 @@ SHADERS = {
                                           {'_MainColor': 0.5, '_Opacity': 1.0, '_DstBlend': 10.0, '_CullMode': 0.0, '_Amount': 0.0}),
     (SHADERS_CAB, DISSOLVE_ADD): layers.Shader('Torappu/Particles-L2D/Dissolve/Dissolve Add', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5, '_Amount': 0.5}),
     (SHADERS_CAB, ERASE): layers.Shader('Torappu/Particles-L2D/Mask/Erase', 5.0, 10.0, 0.0, 3000, {'_Strength': 1.0}),
+    (SHADERS_CAB, ANCHOR): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb Anchor (AlphaBlend)', 5.0, 10.0, 0.0, 3000,
+                                         {'_MainColor': 0.5, '_AnchorU': 0.5, '_AnchorV': 0.5, '_AnchorU_02': 0.5, '_AnchorV_02': 0.5}),
 }
 
 
@@ -129,6 +131,40 @@ def read_material(tree):
 
 
 class Looks(unittest.TestCase):
+    def test_anchor_adds_both_distortions_scaled_by_tiling(self):
+        # Two distortions at once: their sum moves the texture, so a slight first one does not pass a strong second.
+        both = material_tree(ANCHOR, 1, floats=[('_IntensityU', 0.05), ('_ToggleUseDisturb2', 1.0), ('_IntensityU_02', 0.5)],
+                             extra_textures=[('_DisturTex', 2), ('_DisturTex_02', 2)])
+        with self.assertRaisesRegex(layers.LayerError, r'flow distortion \(up to 0.55 UV, 281.6 texels\)'):
+            layers.look(read_material(both))
+        # The second is off: only the first counts; its texels follow the texture's tiling (2x).
+        one = material_tree(ANCHOR, 1, floats=[('_IntensityU', 0.02), ('_IntensityU_02', 0.5)], extra_textures=[('_DisturTex', 2), ('_DisturTex_02', 2)],
+                            st=((2, 1), (0, 0)))
+        slight = layers.look(read_material(one))
+        self.assertEqual(slight.approximated, 'flow distortion (up to 0.02 UV, 20.5 texels) drawn without it')
+        # Drawn at the wobble's centre (texture 0.5 at anchor 0.5): no shift. Without a distortion texture the
+        # anchor's constant shift (-anchor * intensity) stays.
+        self.assertEqual(slight.st[2], 0.0)
+        constant = layers.look(read_material(material_tree(ANCHOR, 1, floats=[('_IntensityU', 0.02)])))
+        self.assertIsNone(constant.approximated)
+        self.assertAlmostEqual(constant.st[2], -0.01)
+
+    def test_erase_masks_order_like_the_layers_they_cover(self):
+        # (sorting layer, order, queue, -z, hierarchy): a mask nearer the camera than a layer it precedes in the
+        # hierarchy is drawn after it, so it covers it; one farther away covers nothing.
+        omitted = []
+        exporter = type('E', (), {})()
+        exporter.layer_bounds = lambda layer: (0, 0, 1, 1)
+        exporter.omit = lambda kind, name, reason: omitted.append(name)
+        layer = {'layer': {'name': 'sky'}, 'sort': (0, 0, 3000, -1.0, 5)}
+        exporter.masks = [{'name': 'near', 'sort': (0, 0, 3000, -0.5, 2), 'bounds': None}]
+        self.assertEqual(layers._Exporter.unmasked(exporter, [layer]), [])
+        self.assertEqual(omitted, ['sky'])
+        omitted.clear()
+        exporter.masks = [{'name': 'far', 'sort': (0, 0, 3000, -2.0, 9), 'bounds': None}]
+        self.assertEqual(layers._Exporter.unmasked(exporter, [layer]), [layer])
+        self.assertEqual(omitted, [])
+
     def test_plain_particle_shaders(self):
         look = layers.look(read_material(material_tree(ALPHA_BLEND, 1, colours=[('_TintColor', (0.5, 0.25, 1, 0.5))], st=((2, 1), (0.5, 0)))))
         self.assertEqual((look.blend, look.color, look.st, look.color_property), ('alpha', [0.5, 0.25, 1, 0.5], [2, 1, 0.5, 0], '_TintColor'))
@@ -140,7 +176,10 @@ class Looks(unittest.TestCase):
         # No distortion texture: plain, blended by the material's _DstBlend, scrolled by its speeds.
         plain = layers.look(read_material(material_tree(DISTURB, 1, floats=[('_DstBlend', 1.0), ('_Opacity', 0.5), ('_MainUSpeed', 0.1)],
                                                         colours=[('_MainColor', (1, 1, 1, 1))])))
-        self.assertEqual((plain.blend, plain.alpha_scale, plain.scroll), ('add', 0.5, [0.1, 0.0]))
+        self.assertEqual((plain.blend, plain.alpha_scale, plain.opacity, plain.scroll), ('add', 1.0, 0.5, [0.1, 0.0]))
+        # The material's own opacity is apart, so an animated one that fades in from 0 can replace it.
+        faded = layers.look(read_material(material_tree(DISTURB, 1, floats=[('_Opacity', 0.0)])))
+        self.assertEqual((faded.alpha_scale, faded.opacity), (1.0, 0.0))
         # A slight flow (a few texels) is drawn without it, and says so; a strong one is left out.
         slight = layers.look(read_material(material_tree(DISTURB, 1, floats=[('_IntensityU', 0.01)], extra_textures=[('_DisturbTex', 2)])))
         self.assertEqual(slight.approximated, 'flow distortion (up to 0.01 UV, 5.1 texels) drawn without it')
@@ -260,6 +299,28 @@ class Export(unittest.TestCase):
         self.assertEqual(halo['vertices'][:2], [-1.0, -1.0], "the follower's own units")
         spark = found['spark']
         self.assertEqual((spark['only'], spark['delay']), ('Interact', 1.5), 'the group is switched with Interact; its own flag does not hide it')
+
+    def test_an_unreadable_renderer_leaves_out_only_itself(self):
+        # UnityPy raises ValueError on a line or point mesh, and missing fields raise KeyError: that renderer is
+        # listed under omitted.other, and the model (with its other layers) is still written.
+        p = Prefab()
+        _, effects = p.game_object('General Effects', p.root)
+        p.quad('good', effects, material_tree(ALPHA_BLEND, p.texture))
+        p.quad('bad', effects, {**material_tree(ALPHA_BLEND, p.texture), 'm_Name': 'broken'})
+        real = layers.look
+
+        def look(material):
+            if material.name == 'broken':
+                raise ValueError('Unsupported topology: lines')
+            return real(material)
+        original, layers.look = layers.look, look
+        try:
+            result = p.export()
+        finally:
+            layers.look = original
+        self.assertEqual([e['name'] for e in result.document['omitted']['other']], ['bad'])
+        self.assertIn('unreadable (ValueError: Unsupported topology: lines)', result.document['omitted']['other'][0]['reason'])
+        self.assertEqual(layer_named(result, 'good')['name'], 'good')
 
     def test_what_is_left_out_is_recorded_with_its_reason(self):
         p = Prefab()
