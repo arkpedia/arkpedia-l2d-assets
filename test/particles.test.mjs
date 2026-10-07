@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { layerBounds, layersShape, PARTICLES_FROM } from '../scripts/layers.mjs';
-import { colourShape, curveShape } from '../scripts/particles.mjs';
+import { checkCoverage, colourShape, curveShape, particleCoverage } from '../scripts/particles.mjs';
+import { readFileSync } from 'node:fs';
 
 const sha = 'a'.repeat(64);
 const texture = (i, extra = {}) => ({ file: `layer${i}.webp`, width: 4, height: 4, wrap: ['clamp', 'clamp'], opaque: [0, 0, 1, 1], bytes: 10, sha256: sha, ...extra });
@@ -88,6 +89,78 @@ test('an emitter timeline names its columns and carries their widths', () => {
   layersShape(doc, 'f', PARTICLES_FROM, particles);
   particles.systems[2].emitter.timeline.frames[1][20] = 0.5;
   assert.throws(() => layersShape(doc, 'f', PARTICLES_FROM, particles), /active must be 0 or 1/);
+});
+
+/** A family (a spawner drawing nothing, two children), a system with trail data and a TrailRenderer. */
+function family() {
+  const { doc, particles } = fixture();
+  const trail = { mode: 'perParticle', ratio: 1, lifetime: 0.5, minVertexDistance: 0.1, textureMode: 'stretch', ribbonCount: 1, worldSpace: false,
+    dieWithParticles: true, sizeAffectsWidth: true, sizeAffectsLifetime: false, inheritParticleColor: true, colorOverLifetime: [1, 1, 1, 1],
+    widthOverTrail: 1, colorOverTrail: [1, 1, 1, 1], attachRibbonsToTransform: false, splitSubEmitterRibbons: false, material: 1 };
+  particles.systems = [
+    system('ctrl', { requires: ['sub'], render: null, material: null, sub: [[1, 'birth', 1], [2, 'death', 0.5]] }),
+    system('ctrl/fire', { requires: ['sub'], child: true }),
+    system('ctrl/spark', { requires: ['sub', 'trail'], child: true, material: 1, trail }),
+    system('streaks', { requires: ['trail'], render: null, material: null, trail }),
+  ];
+  particles.meshes = [];
+  particles.trails = [{ name: 'Trail', requires: ['trail'], only: null, delay: 0, active: true, follow: null,
+    emitter: { matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0], rotation: [0, 0, 0, 1], scale: [1, 1, 1] }, time: 0.3, minVertexDistance: 0.1, widthMultiplier: 0.3,
+    widthCurve: ['c', 1, [0, 1, 0, 0]], colorGradient: { c: [0, 1, 1, 1], a: [0, 1] }, numCornerVertices: 0, numCapVertices: 0, alignment: 'view',
+    textureMode: 'stretch', emitting: true, material: 0, draw: [3, 1] }];
+  doc.draw = [{ part: 0 }, { particles: [1] }, { layer: plainLayer }, { particles: [2] }];
+  particles.trails[0].draw = [2, 0];
+  return { doc, particles };
+}
+
+test('sub-emitter families, spawners and trails validate, and broken ones do not', () => {
+  const { doc, particles } = family();
+  layersShape(doc, 'f', PARTICLES_FROM, particles);
+  const frame = (t, enabled, colour = []) => [t, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, enabled, ...colour];
+  const cases = [
+    ['a link to a system that is not a child', (d) => { d.particles.systems[0].sub[0][0] = 3; }, /not a sub-emitter/],
+    ['a child no system links', (d) => { d.particles.systems[0].sub.pop(); }, /no system links/],
+    ['a child with links of its own', (d) => { d.particles.systems[1].sub = [[2, 'birth', 1]]; }, /no sub-emitters of its own/],
+    ['a probability past 1', (d) => { d.particles.systems[0].sub[1][2] = 1.5; }, /probability 0-1/],
+    ['a system that draws nothing for nothing', (d) => { delete d.particles.systems[3].trail; d.particles.systems[3].requires = []; }, /spawns sub-emitters or carries trails/],
+    ['a trail without its capability', (d) => { d.particles.systems[3].requires = []; }, /requires trail exactly/],
+    ['a trail in an unknown mode', (d) => { d.particles.systems[3].trail.mode = 'comet'; }, /mode or textureMode/],
+    ['a trail colour column without trails', (d) => { d.particles.systems[1].emitter = { timeline: { columns: ['t', 'matrix', 'rotation', 'scale', 'active', 'trail.color'], length: 0, loop: false, loopFrom: 0, frames: [[0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]] } }; }, /drives nothing this record has/],
+    ['a tint on a system that draws nothing', (d) => { d.particles.systems[0].emitter = { timeline: { columns: ['t', 'matrix', 'rotation', 'scale', 'active', 'tint'], length: 0, loop: false, loopFrom: 0, frames: [[0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1]] } }; }, /drives nothing this record has/],
+    ['a switch half on', (d) => { d.particles.systems[1].emitter = { timeline: { columns: ['t', 'matrix', 'rotation', 'scale', 'active', 'emission.enabled'], length: 1, loop: false, loopFrom: 0, frames: [frame(0, 1), frame(1, 0.5)] } }; }, /emission.enabled must be 0 or 1/],
+    ['a TrailRenderer drawn past the list', (d) => { d.particles.trails[0].draw = [9, 0]; }, /not a place in the draw list/],
+    ['a TrailRenderer after a whole run', (d) => { d.particles.trails[0].draw = [1, 1]; }, /not a place in the draw list/],
+    ['a TrailRenderer inside a layer', (d) => { d.particles.trails[0].draw = [2, 1]; }, /not a place in the draw list/],
+    ['a TrailRenderer without its material', (d) => { d.particles.trails[0].material = 7; }, /not in materials/],
+  ];
+  for (const [what, change, error] of cases) {
+    const fix = family();
+    change(fix);
+    assert.throws(() => layersShape(fix.doc, 'f', PARTICLES_FROM, fix.particles), error, what);
+  }
+});
+
+test('coverage counts what the game draws and what an export carries, and a drop below the baseline fails', () => {
+  const { doc, particles } = family();
+  doc.omitted.particleReasons = [{ name: 'a', reason: 'renderer off' }, { name: 'b', reason: 'Collision module' }, { name: 'c (TrailRenderer)', reason: 'no material' }];
+  // Drawn: the two children (the spawner and the trails-only system draw nothing) and the left-out Collision system.
+  const counts = particleCoverage(doc, particles);
+  assert.deepEqual(counts, { drawn: 3, exported: 2, v1: 1 });
+  checkCoverage(counts, { drawn: 3, exported: 2, v1: 1 }, 'f');
+  checkCoverage(counts, undefined, 'f');
+  assert.throws(() => checkCoverage(counts, { drawn: 3, exported: 2, v1: 2 }, 'f'), /below its baseline/);
+  assert.throws(() => checkCoverage(counts, { drawn: 4, exported: 2, v1: 1 }, 'f'), /drawn by the game, the baseline says 4/);
+});
+
+test('the coverage baseline is whole', () => {
+  const baseline = JSON.parse(readFileSync(new URL('../particle-coverage.json', import.meta.url), 'utf8'));
+  const sum = { drawn: 0, exported: 0, v1: 0 };
+  for (const [folder, counts] of Object.entries(baseline.models)) {
+    assert.match(folder, /^models\/[A-Za-z0-9_]+\/[a-f0-9]{12}$/);
+    assert.ok(Number.isSafeInteger(counts.drawn) && counts.v1 <= counts.exported && counts.exported <= counts.drawn, folder);
+    for (const key of Object.keys(sum)) sum[key] += counts[key];
+  }
+  assert.deepEqual(baseline.totals, sum);
 });
 
 test('particles never frame the view', () => {

@@ -11,6 +11,16 @@ export const PHASES = ['idle', 'Start', 'Interact', 'Special'];
 // What one model's particles may ask of a reader: the file's bytes, its own textures (each a fetch and an
 // upload) and its systems.
 export const PARTICLE_LIMITS = { bytes: 1024 * 1024, textures: 128, systems: 2048 };
+// Reasons that mean the game draws nothing of a system either (scripts/particles.py NOT_DRAWN): not counted
+// as drawn by the coverage counts.
+export const NOT_DRAWN = ['renderer off', 'render mode None', 'render mode None (only its trails)', 'no material', 'never active', 'emits nothing',
+  'its sub-emitters draw nothing'];
+// The checked-in coverage baseline (scripts/particle_coverage.mjs writes it): per model folder, how many
+// particle systems the game draws, how many of them an export carries, and how many a reader of the first
+// release draws (one that knows `sub` and not `trail`). An export that carries fewer fails validation.
+export const COVERAGE_FILE = 'particle-coverage.json';
+// The capabilities the first site release reads (P4 adds sub-emitters; trails come later).
+export const V1_REQUIRES = new Set(['sub']);
 const ONLY = new Set(['Idle', 'Interact', 'Special', 'Start']);
 const SHAPES = new Set(['sphere', 'sphereShell', 'hemisphere', 'hemisphereShell', 'cone', 'box', 'mesh', 'coneShell', 'coneVolume', 'coneVolumeShell',
   'circle', 'circleEdge', 'edge', 'boxShell', 'boxEdge', 'donut', 'rectangle']);
@@ -34,10 +44,18 @@ const INPUT = /^(uv|uv2)\.[xy]$|^c[12]\.[xyzw]$/;
 export const TIMELINE_COLUMNS = {
   t: 1, matrix: 12, rotation: 4, scale: 3, active: 1, tint: 4, speed: 1, 'emission.rate': 1, 'emission.enabled': 1, 'emission.distance': 1,
   'main.startColor': 4, 'main.startSize': 1, 'main.gravity': 1, 'noise.strength': 1, 'velocity.speedModifier': 1, 'shape.radius': 1, 'size.multiplier': 1,
+  'trail.color': 4,
 };
+// Columns that hold their value until the next frame (0 or 1); the others interpolate linearly.
+const STEPPED = ['active', 'emission.enabled'];
+// The columns a record may carry only with what they drive: a material's, a trail's.
+const MATERIAL_COLUMNS = (name) => name === 'tint' || SHADER_COLUMN.test(name);
+const TRAIL_MODES = new Set(['perParticle', 'ribbon']);
+const TRAIL_TEXTURE_MODES = new Set(['stretch', 'tile', 'distributePerSegment', 'repeatPerSegment']);
 // Every timeline starts with these (the static emitter's matrix, rotation and scale, then whether it is on).
 const TIMELINE_HEAD = ['t', 'matrix', 'rotation', 'scale', 'active'];
-const ACTIVE = 20; // the active column's index in a frame
+const ACTIVE = 20; // the active column's index in a frame (the head's widths: 1 + 12 + 4 + 3)
+if (TIMELINE_HEAD.reduce((sum, name) => sum + (name === 'active' ? 0 : TIMELINE_COLUMNS[name]), 0) !== ACTIVE) throw new Error('timeline head');
 // Material parameters a timeline may carry (type 199 bindings), as layers.json's effects name them.
 const SHADER_COLUMN = /^(main\.(st|offset)|dissolve\.\d\.(amount|border|st|offset)|distort\.(main|dissolve|weight\.st)|distort\.maps\.\d\.(st|offset|intensity)|ramp\.st|edge\.color)$/;
 
@@ -113,17 +131,23 @@ function multiShape(value, label) {
   if (Object.hasOwn(value, 'speed')) curveShape(value.speed, `${label} speed`);
 }
 
-/** An emitter timeline: named columns, frames of their summed width, in time order (TIMELINE_COLUMNS). */
-function timelineShape(value, label) {
+/**
+ * An emitter timeline: named columns, frames of their summed width, in time order (TIMELINE_COLUMNS);
+ * stepped columns 0 or 1. `allowed(name)`: whether the record may carry a column it does not always have.
+ */
+function timelineShape(value, label, allowed = () => true) {
   only(value, label, ['columns', 'length', 'loop', 'loopFrom', 'frames', 'states'], ['columns', 'length', 'loop', 'loopFrom', 'frames']);
   const columns = value.columns;
   if (!Array.isArray(columns) || TIMELINE_HEAD.some((name, i) => columns[i] !== name) || new Set(columns).size !== columns.length) {
     throw new Error(`${label}: columns must start ${TIMELINE_HEAD.join(', ')} and name each column once`);
   }
   let width = 0;
+  const stepped = [];
   for (const name of columns) {
     const shader = typeof name === 'string' && SHADER_COLUMN.test(name);
     if (!shader && !Object.hasOwn(TIMELINE_COLUMNS, name)) throw new Error(`${label}: unknown column ${name}`);
+    if (!TIMELINE_HEAD.includes(name) && !allowed(name)) throw new Error(`${label}: column ${name} drives nothing this record has`);
+    if (STEPPED.includes(name)) stepped.push([width, name]);
     width += shader ? { amount: 1, border: 1, main: 1, dissolve: 1, st: 4, offset: 4, intensity: 2, color: 4 }[name.split('.').at(-1)] : TIMELINE_COLUMNS[name];
   }
   const line = (timeline, at) => {
@@ -135,7 +159,7 @@ function timelineShape(value, label) {
     timeline.frames.forEach((frame, i) => {
       if (!vec(frame, width)) throw new Error(`${at}: frames[${i}] must be ${width} numbers`);
       if (!(frame[0] > last)) throw new Error(`${at}: frames[${i}] is out of order`);
-      if (frame[ACTIVE] !== 0 && frame[ACTIVE] !== 1) throw new Error(`${at}: frames[${i}] active must be 0 or 1`);
+      for (const [k, name] of stepped) if (frame[k] !== 0 && frame[k] !== 1) throw new Error(`${at}: frames[${i}] ${name} must be 0 or 1`);
       last = frame[0];
     });
     if (timeline.frames[0][0] !== 0) throw new Error(`${at}: frames must start at 0`);
@@ -149,6 +173,60 @@ function timelineShape(value, label) {
       line(state, `${label} states.${name}`);
     }
   }
+}
+
+/** A still emitter { matrix, rotation, scale } or { timeline }. */
+function emitterShape(e, label, allowed) {
+  if (isObject(e) && Object.hasOwn(e, 'timeline')) {
+    only(e, label, ['timeline'], ['timeline']);
+    timelineShape(e.timeline, `${label}.timeline`, allowed);
+  } else {
+    only(e, label, ['matrix', 'rotation', 'scale'], ['matrix', 'rotation', 'scale']);
+    if (!vec(e.matrix, 12) || !vec(e.rotation, 4) || !vec(e.scale, 3)) throw new Error(`${label}: emitter matrix must be 12 numbers (3x4), rotation a quaternion and scale [x, y, z]`);
+  }
+}
+
+/** The Trails module (a system's `trail`): every member, and its material. */
+function trailShape(t, label, counts) {
+  only(t, label, ['mode', 'ratio', 'lifetime', 'minVertexDistance', 'textureMode', 'ribbonCount', 'worldSpace', 'dieWithParticles', 'sizeAffectsWidth',
+    'sizeAffectsLifetime', 'inheritParticleColor', 'colorOverLifetime', 'widthOverTrail', 'colorOverTrail', 'attachRibbonsToTransform',
+    'splitSubEmitterRibbons', 'material'], ['mode', 'ratio', 'lifetime', 'minVertexDistance', 'textureMode', 'ribbonCount', 'worldSpace', 'dieWithParticles',
+    'sizeAffectsWidth', 'sizeAffectsLifetime', 'inheritParticleColor', 'colorOverLifetime', 'widthOverTrail', 'colorOverTrail', 'attachRibbonsToTransform',
+    'splitSubEmitterRibbons', 'material']);
+  if (!TRAIL_MODES.has(t.mode) || !TRAIL_TEXTURE_MODES.has(t.textureMode)) throw new Error(`${label}: mode or textureMode unknown`);
+  if (!finite(t.ratio) || !finite(t.minVertexDistance) || !(Number.isSafeInteger(t.ribbonCount) && t.ribbonCount >= 1)) throw new Error(`${label}: ratio, minVertexDistance and ribbonCount must be numbers`);
+  for (const key of ['worldSpace', 'dieWithParticles', 'sizeAffectsWidth', 'sizeAffectsLifetime', 'inheritParticleColor', 'attachRibbonsToTransform', 'splitSubEmitterRibbons']) {
+    if (typeof t[key] !== 'boolean') throw new Error(`${label}: ${key} must be true or false`);
+  }
+  curveShape(t.lifetime, `${label} lifetime`);
+  curveShape(t.widthOverTrail, `${label} widthOverTrail`);
+  colourShape(t.colorOverLifetime, `${label} colorOverLifetime`);
+  colourShape(t.colorOverTrail, `${label} colorOverTrail`);
+  if (!index(t.material, counts.materials)) throw new Error(`${label}: material ${t.material} is not in materials`);
+  counts.usedMaterials.add(t.material);
+}
+
+/** A TrailRenderer record (layerParticles.json `trails`). */
+function trailRendererShape(t, label, counts) {
+  only(t, label, ['name', 'requires', 'only', 'delay', 'active', 'follow', 'emitter', 'time', 'minVertexDistance', 'widthMultiplier', 'widthCurve',
+    'colorGradient', 'numCornerVertices', 'numCapVertices', 'alignment', 'textureMode', 'emitting', 'material', 'draw'],
+  ['name', 'requires', 'only', 'delay', 'active', 'follow', 'emitter', 'time', 'minVertexDistance', 'widthMultiplier', 'widthCurve', 'colorGradient',
+    'numCornerVertices', 'numCapVertices', 'alignment', 'textureMode', 'emitting', 'material', 'draw']);
+  if (typeof t.name !== 'string' || !t.name) throw new Error(`${label}: name missing`);
+  if (!Array.isArray(t.requires) || t.requires.length !== 1 || t.requires[0] !== 'trail') throw new Error(`${label}: requires must be ["trail"]`);
+  if (t.only !== null && !ONLY.has(t.only)) throw new Error(`${label}: only must be null or ${[...ONLY].join(', ')}`);
+  if (!finite(t.delay) || t.delay < 0) throw new Error(`${label}: delay must be seconds >= 0`);
+  if (typeof t.active !== 'boolean' || typeof t.emitting !== 'boolean') throw new Error(`${label}: active and emitting must be true or false`);
+  if (t.follow !== null) followShape(t.follow, `${label} follow`);
+  emitterShape(t.emitter, `${label} emitter`, (name) => MATERIAL_COLUMNS(name) || name === 'main.st');
+  for (const key of ['time', 'minVertexDistance', 'widthMultiplier']) if (!finite(t[key])) throw new Error(`${label}: ${key} must be a number`);
+  curveShape(t.widthCurve, `${label} widthCurve`);
+  gradientShape(t.colorGradient, `${label} colorGradient`);
+  if (!Number.isSafeInteger(t.numCornerVertices) || !Number.isSafeInteger(t.numCapVertices)) throw new Error(`${label}: numCornerVertices and numCapVertices must be counts`);
+  if (!['view', 'transformZ'].includes(t.alignment) || !TRAIL_TEXTURE_MODES.has(t.textureMode)) throw new Error(`${label}: alignment or textureMode unknown`);
+  if (!index(t.material, counts.materials)) throw new Error(`${label}: material ${t.material} is not in materials`);
+  counts.usedMaterials.add(t.material);
+  if (!Array.isArray(t.draw) || t.draw.length !== 2 || !t.draw.every((v) => Number.isSafeInteger(v) && v >= 0)) throw new Error(`${label}: draw must be [draw entry, systems of its run]`);
 }
 
 function followShape(f, label) {
@@ -174,14 +252,8 @@ function systemShape(s, label, counts) {
   if (s.child && !s.requires.includes('sub')) throw new Error(`${label}: a sub-emitter child requires sub`);
   if (Object.hasOwn(s, 'sub') !== s.requires.includes('sub') && !s.child) throw new Error(`${label}: requires sub exactly with sub-emitters`);
   if (Object.hasOwn(s, 'trail') !== s.requires.includes('trail')) throw new Error(`${label}: requires trail exactly with trail data`);
-  const e = s.emitter;
-  if (isObject(e) && Object.hasOwn(e, 'timeline')) {
-    only(e, `${label} emitter`, ['timeline'], ['timeline']);
-    timelineShape(e.timeline, `${label} emitter.timeline`);
-  } else {
-    only(e, `${label} emitter`, ['matrix', 'rotation', 'scale'], ['matrix', 'rotation', 'scale']);
-    if (!vec(e.matrix, 12) || !vec(e.rotation, 4) || !vec(e.scale, 3)) throw new Error(`${label}: emitter matrix must be 12 numbers (3x4), rotation a quaternion and scale [x, y, z]`);
-  }
+  emitterShape(s.emitter, `${label} emitter`, (name) => (MATERIAL_COLUMNS(name) || name === 'main.st' ? s.render !== null
+    : name === 'trail.color' ? Object.hasOwn(s, 'trail') : true));
   const c = s.clock;
   only(c, `${label} clock`, ['duration', 'loop', 'prewarm', 'prewarmWindow', 'startDelay', 'speed', 'maxParticles', 'seed', 'space', 'scaling', 'maxAlive'], ['maxAlive']);
   for (const key of ['duration', 'speed']) if (Object.hasOwn(c, key) && !finite(c[key])) throw new Error(`${label}: clock.${key} must be a number`);
@@ -309,15 +381,22 @@ function systemShape(s, label, counts) {
   }
   if (Object.hasOwn(s, 'sub')) {
     if (!Array.isArray(s.sub) || !s.sub.length) throw new Error(`${label}: sub must list [child, birth | death, probability]`);
+    if (s.child) throw new Error(`${label}: a sub-emitter has no sub-emitters of its own`);
     s.sub.forEach((link, i) => {
-      if (!Array.isArray(link) || link.length !== 3 || !index(link[0], counts.systems) || !['birth', 'death'].includes(link[1]) || !finite(link[2])) {
-        throw new Error(`${label}: sub[${i}] must be [child system, birth | death, probability]`);
+      if (!Array.isArray(link) || link.length !== 3 || !index(link[0], counts.systems) || !['birth', 'death'].includes(link[1]) || !finite(link[2])
+          || link[2] < 0 || link[2] > 1) {
+        throw new Error(`${label}: sub[${i}] must be [child system, birth | death, probability 0-1]`);
       }
+      counts.links.push([counts.at, link[0]]);
     });
+  }
+  if (Object.hasOwn(s, 'trail')) {
+    trailShape(s.trail, `${label} trail`, counts);
   }
   const r = s.render;
   if (r === null) {
     if (s.material !== null) throw new Error(`${label}: a system that draws nothing (render null) has no material`);
+    if (!Object.hasOwn(s, 'sub') && !Object.hasOwn(s, 'trail')) throw new Error(`${label}: a system that draws nothing (render null) spawns sub-emitters or carries trails`);
   } else {
     only(r, `${label} render`, ['mode', 'align', 'pivot', 'sort', 'lengthScale', 'velocityScale', 'freeform', 'minSize', 'maxSize', 'meshes', 'allowRoll'], ['mode']);
     if (!RENDER_MODES.has(r.mode)) throw new Error(`${label}: render.mode must be ${[...RENDER_MODES].join(', ')}`);
@@ -381,8 +460,8 @@ function materialShape(m, label, textureCount) {
 export function particlesShape(doc, label, first) {
   only(doc, label, ['version', 'unit', 'camera', 'controller', 'textures', 'materials', 'meshes', 'systems', 'trails'],
     ['version', 'unit', 'camera', 'controller', 'textures', 'materials', 'meshes', 'systems']);
-  // TrailRenderer components (written with trail data, from the second export on; nothing draws them yet).
-  if (Object.hasOwn(doc, 'trails') && (!Array.isArray(doc.trails) || !doc.trails.every(isObject))) throw new Error(`${label}: trails must be a list of records`);
+  // TrailRenderer components (written as data; nothing draws them yet).
+  if (Object.hasOwn(doc, 'trails') && (!Array.isArray(doc.trails) || !doc.trails.length)) throw new Error(`${label}: trails must be a non-empty list (absent: none)`);
   if (doc.version !== PARTICLES_VERSION) throw new Error(`${label}: version must be ${PARTICLES_VERSION}`);
   if (!(finite(doc.unit) && doc.unit > 0)) throw new Error(`${label}: unit must be > 0`);
   only(doc.camera, `${label} camera`, ['size', 'height'], ['size', 'height']);
@@ -403,8 +482,17 @@ export function particlesShape(doc, label, first) {
   const sampled = new Set();
   doc.materials.forEach((m, i) => { for (const t of materialShape(m, `${label} materials[${i}]`, textureCount)) sampled.add(t); });
   doc.meshes.forEach((m, i) => meshShape(m, `${label} meshes[${i}]`));
-  const counts = { systems: doc.systems.length, materials: doc.materials.length, meshes: doc.meshes.length, usedMaterials: new Set(), renderMeshes: new Set(), shapeMeshes: new Set() };
-  doc.systems.forEach((s, i) => systemShape(s, `${label} systems[${i}]`, counts));
+  const counts = { systems: doc.systems.length, materials: doc.materials.length, meshes: doc.meshes.length, usedMaterials: new Set(), renderMeshes: new Set(),
+    shapeMeshes: new Set(), links: [], at: 0 };
+  doc.systems.forEach((s, i) => { counts.at = i; systemShape(s, `${label} systems[${i}]`, counts); });
+  // Sub-emitter families: every link names a child (child: true, requiring sub), and every child is linked.
+  const linked = new Set();
+  for (const [parent, child] of counts.links) {
+    if (!doc.systems[child].child) throw new Error(`${label}: systems[${parent}] links systems[${child}], which is not a sub-emitter (child)`);
+    linked.add(child);
+  }
+  doc.systems.forEach((s, i) => { if (s.child && !linked.has(i)) throw new Error(`${label}: systems[${i}] is a sub-emitter no system links`); });
+  (doc.trails ?? []).forEach((t, i) => trailRendererShape(t, `${label} trails[${i}]`, counts));
   doc.textures.forEach((t, i) => { if (!sampled.has(first + i)) throw new Error(`${label}: ${t.file} is not sampled by any particle material`); });
   doc.materials.forEach((_, i) => { if (!counts.usedMaterials.has(i)) throw new Error(`${label}: materials[${i}] is used by no system`); });
   doc.meshes.forEach((m, i) => {
@@ -415,7 +503,7 @@ export function particlesShape(doc, label, first) {
 }
 
 /** The {particles} runs of layers.json's draw list against the systems: each drawn system in exactly one run, in order. */
-export function runsShape(draw, systems, label) {
+export function runsShape(draw, systems, label, trails = []) {
   const order = [];
   draw.forEach((entry, i) => {
     if (!Object.hasOwn(entry, 'particles')) return;
@@ -424,4 +512,43 @@ export function runsShape(draw, systems, label) {
   });
   const drawn = systems.flatMap((s, i) => (s.render === null ? [] : [i]));
   if (order.length !== drawn.length || order.some((v, i) => v !== drawn[i])) throw new Error(`${label}: the particle runs must list every drawn system once, in order`);
+  // A TrailRenderer's place: before draw entry i, or after the first n (not all) systems of the run at i.
+  trails.forEach((t, k) => {
+    const [i, n] = t.draw;
+    if (i > draw.length || (n > 0 && !(i < draw.length && Object.hasOwn(draw[i], 'particles') && n < draw[i].particles.length))) {
+      throw new Error(`${label}: trails[${k}] draw [${i}, ${n}] is not a place in the draw list`);
+    }
+  });
+}
+
+/**
+ * A model's particle coverage from its layers.json and layerParticles.json (null when it points at none):
+ * `drawn`, the systems the game draws (exported ones with a renderer, and those left out for a reason other
+ * than drawing nothing; TrailRenderers are not counted); `exported`, of them, those the export carries;
+ * `v1`, of those, the ones a reader of the first release draws (V1_REQUIRES).
+ */
+export function particleCoverage(layersDoc, particlesDoc) {
+  const systems = particlesDoc ? particlesDoc.systems : [];
+  const drawnSystems = systems.filter((s) => s.render !== null);
+  const omitted = (layersDoc.omitted?.particleReasons ?? []).filter((r) => !NOT_DRAWN.includes(r.reason) && !r.name.endsWith(' (TrailRenderer)'));
+  return {
+    drawn: drawnSystems.length + omitted.length,
+    exported: drawnSystems.length,
+    v1: drawnSystems.filter((s) => s.requires.every((tag) => V1_REQUIRES.has(tag))).length,
+  };
+}
+
+/**
+ * Throws when a folder's coverage is below its baseline entry (none: a folder the baseline does not know yet),
+ * or counts another number of systems drawn by the game: for one bundle that number is the bundle's, so a
+ * change means a reason moved into or out of NOT_DRAWN without the baseline being written again.
+ */
+export function checkCoverage(counts, baseline, label) {
+  if (!baseline) return;
+  if (counts.drawn !== baseline.drawn) throw new Error(`${label}: ${COVERAGE_FILE}: ${counts.drawn} particle systems drawn by the game, the baseline says ${baseline.drawn}`);
+  for (const key of ['exported', 'v1']) {
+    if (counts[key] < baseline[key]) {
+      throw new Error(`${label}: ${COVERAGE_FILE}: the export carries ${counts[key]} particle systems (${key}), below its baseline of ${baseline[key]} of ${baseline.drawn}`);
+    }
+  }
 }

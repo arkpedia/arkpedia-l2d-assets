@@ -291,7 +291,7 @@ export function layersShape(doc, label, version, particles) {
   let particleTextures = [];
   if (particles !== null) {
     particleTextures = particlesShape(particles, `${label}: ${PARTICLES_FILE}`, all.length);
-    runsShape(doc.draw, particles.systems, `${label}: layers draw`);
+    runsShape(doc.draw, particles.systems, `${label}: layers draw`, particles.trails ?? []);
     particleTextures.forEach((texture, i) => {
       if (!Number.isSafeInteger(texture.width) || texture.width <= 0 || !Number.isSafeInteger(texture.height) || texture.height <= 0) throw new Error(`${label}: ${texture.file} width/height missing`);
       if (!Number.isSafeInteger(texture.bytes) || texture.bytes <= 0 || typeof texture.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(texture.sha256)) throw new Error(`${label}: ${texture.file} bytes/sha256 missing`);

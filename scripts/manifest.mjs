@@ -5,7 +5,7 @@ import { existsSync } from 'node:fs';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { LAYERS_VERSION, layersShape } from './layers.mjs';
-import { PARTICLES_FILE } from './particles.mjs';
+import { checkCoverage, COVERAGE_FILE, particleCoverage, PARTICLES_FILE } from './particles.mjs';
 import { inspectLayers, inspectSkeleton, isJsonSkeleton, readAtlas } from './spine.mjs';
 
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -213,6 +213,16 @@ function checkSkeleton(part, label, contents, spineVersion, deep) {
  * the atlas pages, the WebP sizes, the declared Spine version and (with `deep`) that the
  * Spine 3.8 runtime reads the skeleton to the recorded animations and bounds.
  */
+let baseline = null;
+/** The checked-in coverage baseline (this repository's COVERAGE_FILE, whichever root is validated), by folder. */
+export async function coverageBaseline() {
+  if (baseline === null) {
+    const file = new URL(`../${COVERAGE_FILE}`, import.meta.url);
+    baseline = existsSync(file) ? JSON.parse(await readFile(file, 'utf8')).models : {};
+  }
+  return baseline;
+}
+
 export async function validateModel(root, folder, { deep = true } = {}) {
   const label = folder;
   const model = JSON.parse(await readFile(path.join(root, folder, 'model.json'), 'utf8'));
@@ -286,6 +296,8 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     }
     const textures = layersShape(layersDoc, label, layersVersion, particlesDoc);
     files.push(model.layers, ...textures);
+    // An export with particles carries at least what the checked-in baseline records for this folder.
+    if (Object.hasOwn(layersDoc, 'particles')) checkCoverage(particleCoverage(layersDoc, particlesDoc), (await coverageBaseline())[folder], label);
   }
 
   const expectedNames = new Set(['model.json', ...files.map((file) => file.file)]);

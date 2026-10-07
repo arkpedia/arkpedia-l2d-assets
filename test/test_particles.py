@@ -14,11 +14,12 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'scripts'))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'scripts' / 'tests'))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import entrance_camera as ec  # noqa: E402
 import layers  # noqa: E402
 import particle_oracle as oracle  # noqa: E402
 import particles  # noqa: E402
-from test_camera import ref  # noqa: E402
-from test_layers import ADDITIVE, ALPHA_BLEND, DISTURB, ERASE, Prefab, material_tree  # noqa: E402
+from test_camera import linear, ref  # noqa: E402
+from test_layers import ADDITIVE, ALPHA_BLEND, DISTURB, ERASE, Prefab, colour_binding, material_tree  # noqa: E402
 from test_particle_oracle import burst, curve, gradient, key, make_ps, mmc, mmg, multi  # noqa: E402
 
 GROUP_INTERACT = 3
@@ -68,6 +69,55 @@ class ParticlePrefab(Prefab):
     def run(self):
         result = self.export(particles=True)
         return result, result.particles, result.document
+
+    def ps_of(self, go):
+        """The ParticleSystem typetree on a GameObject."""
+        return next(tree for kind, tree in self.objects.values() if kind == 'ParticleSystem' and tree['m_GameObject']['m_PathID'] == go)
+
+    def ps_id(self, go):
+        return next(pid for pid, (kind, tree) in self.objects.items() if kind == 'ParticleSystem' and tree['m_GameObject']['m_PathID'] == go)
+
+    def link(self, parent_go, child_go, kind=0, properties=0, probability=1.0):
+        """A sub-emitter link from one system to another (SubModule.subEmitters)."""
+        module = self.ps_of(parent_go).setdefault('SubModule', {'enabled': True, 'subEmitters': []})
+        module['subEmitters'].append({'emitter': ref(self.ps_id(child_go)), 'type': kind, 'properties': properties, 'emitProbability': probability})
+
+    def follower(self, name, parent, position=(0, 0, 0), local_scale=0):
+        go, tr = self.game_object(name, parent, position)
+        self.attach(go, self.add('MonoBehaviour', {'m_Enabled': 1, 'skeletonRenderer': ref(self.skeleton), 'boneName': 'hand', 'followXYPosition': 1,
+                                                   'followBoneRotation': 1, 'followLocalScale': local_scale}))
+        return go, tr
+
+    def triggered(self, go, default_clip, interact_clip):
+        """An Animator the illustration controller triggers: its default state plays default_clip, OnInteract
+        leads to interact_clip."""
+        def state(clip, transitions=()):
+            return {'data': {'m_Speed': 1.0, 'm_BlendTreeConstantArray': [{'data': {'m_NodeArray': [{'data': {'m_ClipID': clip}}]}}],
+                             'm_TransitionConstantArray': [{'data': {'m_DestinationState': d, 'm_ConditionConstantArray': [
+                                 {'data': {'m_ConditionMode': 1, 'm_EventID': e}}]}} for d, e in transitions]}}
+        controller = self.add('AnimatorController', {
+            'm_AnimationClips': [ref(default_clip), ref(interact_clip)], 'm_TOS': [(12, 'OnInteract')],
+            'm_Controller': {'m_LayerArray': [{'data': {'m_StateMachineIndex': 0}}], 'm_Values': {'data': {'m_ValueArray': [{'m_ID': 12, 'm_Type': 9}]}},
+                             'm_StateMachineArray': [{'data': {'m_DefaultState': 0, 'm_AnyStateTransitionConstantArray': [],
+                                                               'm_StateConstantArray': [state(0, [(1, 12)]), state(1)]}}]}})
+        animator = self.add('Animator', {'m_Controller': ref(controller), 'm_Enabled': 1})
+        self.attach(go, animator)
+        self.controller['_animators'].append(ref(animator))
+
+
+INF = float('inf')
+START = -3.0e38
+
+
+def column(timeline, name, frame):
+    """A frame's values of one named column (a number, or a list for wider columns)."""
+    at = 0
+    for c in timeline['columns']:
+        n = particles.COLUMN_WIDTHS.get(c) or layers.effects.width(c)
+        if c == name:
+            return frame[at] if n == 1 else frame[at:at + n]
+        at += n
+    raise KeyError(name)
 
 
 def reasons(document):
@@ -140,27 +190,15 @@ class Export(unittest.TestCase):
         p.system('nomaterial', emitting(), material=False)
         p.system('inactive', emitting(), active=0)
         p.system('silent', make_ps(EmissionModule__rateOverTime=mmc(0, 0.0)))
-        p.system('trails', emitting(TrailModule={'enabled': True}))
         p.system('collides', emitting(CollisionModule={'enabled': True}))
         p.system('layer', emitting(), m_SortingLayerID=7)
         p.system('grab', emitting(), material=material_tree(DISTURB, p.texture, keywords='_HGCUSTOMVERTEXSTREAM_ON'))
-        go, _ = p.system('follows', emitting())
-        p.attach(go, p.add('MonoBehaviour', {'m_Enabled': 1, 'boneName': 'b', 'skeletonRenderer': ref(p.skeleton), 'followXYPosition': 1,
-                                              'followBoneRotation': 1, 'followLocalScale': 0}))
-        parent_go, parent = p.system('parent', emitting())
-        child_go, child = p.system('child', emitting(), parent=parent)
-        child_ps = next(pid for pid, (kind, tree) in p.objects.items() if kind == 'ParticleSystem' and tree['m_GameObject']['m_PathID'] == child_go)
-        parent_ps = next(tree for kind, tree in p.objects.values() if kind == 'ParticleSystem' and tree['m_GameObject']['m_PathID'] == parent_go)
-        parent_ps['SubModule'] = {'enabled': True, 'subEmitters': [{'emitter': ref(child_ps), 'type': 0, 'properties': 0, 'emitProbability': 1.0}]}
         _, doc, layers_doc = p.run()
         self.assertIsNone(doc)  # nothing left to draw
         self.assertEqual(reasons(layers_doc), {
             'off': 'renderer off', 'none': 'render mode None', 'nomaterial': 'no material', 'inactive': 'never active', 'silent': 'emits nothing',
-            'trails': 'Trails module', 'collides': 'Collision module', 'layer': 'sorting layer 7',
-            'grab': "custom vertex stream keyword without the renderer's streams",
-            'follows': 'on a bone follower (not exported yet)', 'parent': 'sub-emitter (not exported yet)',
-            'parent/child': 'sub-emitter (not exported yet)'})
-        self.assertEqual(layers_doc['omitted']['particles'], 12)
+            'collides': 'Collision module', 'layer': 'sorting layer 7', 'grab': "custom vertex stream keyword without the renderer's streams"})
+        self.assertEqual(layers_doc['omitted']['particles'], 8)
         self.assertTrue(set(particles.NOT_DRAWN) >= {'renderer off', 'render mode None', 'no material', 'never active', 'emits nothing'})
 
     def test_systems_sharing_a_path_are_told_apart(self):
@@ -335,6 +373,232 @@ def module_systems():
     return systems
 
 
+class Moving(unittest.TestCase):
+    """Bone followers, emitter timelines, and what a clip may drive."""
+
+    def test_a_system_on_a_bone_follower_composes_as_unity_scales_it(self):
+        p = ParticlePrefab()
+        _, holder = p.game_object('holder', p.root, (5, 0, 0), (0, 0, 0, 1), (2, 2, 2))  # a scaled parent above the follower
+        _, hand = p.follower('Hand', holder, (3, 0, 0))
+        q90 = (0, 0, math.sin(math.pi / 4), math.cos(math.pi / 4))
+        p.system('local', emitting(scalingMode=1), parent=hand, position=(1, 0, 0), rotation=q90, scale=(0.5, 0.5, 0.5))
+        p.system('hierarchy', emitting(scalingMode=0), parent=hand, position=(1, 0, 0), rotation=q90, scale=(0.5, 0.5, 0.5))
+        _, doc, _ = p.run()
+        by = {s['name']: s for s in doc['systems']}
+        local, hierarchy = by['holder/Hand/local'], by['holder/Hand/hierarchy']
+        self.assertEqual(local['follow'], {'bone': 'hand', 'xy': True, 'rotation': True, 'localScale': False, 'mirrored': False,
+                                           'parent': [200.0, 0.0, 0.0, 200.0], 'position': [1100.0, 0.0], 'angle': 0.0})
+        # Relative to the follower: 1 unit along its x, turned 90 degrees, half its size.
+        for system in (hierarchy, local):
+            self.assertTrue(all(abs(a - b) < 1e-6 for a, b in zip(system['emitter']['matrix'], [0, -0.5, 0, 1, 0.5, 0, 0, 0, 0, 0, 0.5, 0])), system['emitter'])
+        self.assertEqual((local['emitter']['scale'], hierarchy['emitter']['scale']), ([0.5, 0.5, 0.5], [1, 1, 1]))
+        # Composed with the follower's frame where Unity has it (x 11, scale 2), Hierarchy takes the parent's
+        # scale and Local does not: Unity's matrices.
+        frame = ([2, 0, 0, 11, 0, 2, 0, 0, 0, 0, 2, 0], (0.0, 0.0, 0.0, 1.0))
+        h, lo = oracle.emitter_pose(hierarchy, 0.0, None, frame), oracle.emitter_pose(local, 0.0, None, frame)
+        self.assertEqual((h.position, lo.position), ((13.0, 0.0, 0.0), (13.0, 0.0, 0.0)))
+        for got, want in ((h.linear, (0, -1, 0, 1, 0, 0, 0, 0, 1)), (lo.linear, (0, -0.5, 0, 0.5, 0, 0, 0, 0, 0.5))):
+            self.assertTrue(all(abs(a - b) < 1e-6 for a, b in zip(got, want)), got)
+
+    def test_a_moving_switched_and_driven_system_has_a_timeline(self):
+        p = ParticlePrefab()
+        group_go, _ = p.game_object('fx', p.root)
+        p.system('spark', emitting())
+        go, _ = p.system('spark', emitting(), parent=p.objects[group_go][1]['m_Component'][0]['component']['m_PathID'])
+        # The group's clip (1 s): x 0 -> 3, the spark off at 0.5167 s (between two 30 fps samples), its speed 1 -> 2
+        # and its tint's alpha 0.5 -> 0. Bindings take the curves in order; the position's y and z are constants.
+        bindings = [{'path': ec.crc('spark'), 'typeID': ec.GAMEOBJECT, 'attribute': ec.IS_ACTIVE},
+                    {'path': ec.crc('spark'), 'typeID': ec.PARTICLE_SYSTEM, 'attribute': ec.crc('simulationSpeed')},
+                    {'path': ec.crc('spark'), 'typeID': ec.PARTICLE_RENDERER, 'attribute': colour_binding('_TintColor', 3)},
+                    {'path': 0, 'typeID': ec.TRANSFORM, 'attribute': ec.POSITION}]
+        clip = p.clip('fx_idle', bindings, [(START, [(0, (0, 0, 0, 1)), (1, (0, 0, 0, 1)), (2, (0, 0, 0, 0.5)), (3, (0, 0, 0, 0))]),
+                                            (0.0, [(0, (0, 0, 0, 1)), (1, linear(1, 2, 0, 1)), (2, linear(0.5, 0, 0, 1)), (3, linear(0, 3, 0, 1))]),
+                                            (0.5167, [(0, (0, 0, 0, 0))]),
+                                            (1.0, [(0, (0, 0, 0, 0)), (1, (0, 0, 0, 2)), (2, (0, 0, 0, 0)), (3, (0, 0, 0, 3))]), (INF, [])],
+                      constants=(0.0, 0.0), stop=1.0)
+        p.animate(group_go, clip)
+        _, doc, _ = p.run()
+        by = {s['name']: s for s in doc['systems']}
+        self.assertIn('matrix', by['spark']['emitter'], 'a still emitter')
+        timeline = by['fx/spark']['emitter']['timeline']
+        self.assertEqual(timeline['columns'], ['t', 'matrix', 'rotation', 'scale', 'active', 'speed', 'tint'])
+        self.assertEqual((timeline['length'], timeline['loop'], timeline['loopFrom']), (1, False, 0))
+        frames = timeline['frames']
+        # The switch is found between the samples, to 1e-4 s: on until 0.5167, off from there (stepped).
+        switch = next(f[0] for f in frames if column(timeline, 'active', f) == 0)
+        self.assertEqual(switch, 0.5167)
+        self.assertEqual(column(timeline, 'active', [f for f in frames if f[0] < switch][-1]), 1)
+        values = oracle.timeline_values(timeline, 0.5)
+        self.assertAlmostEqual(values['matrix'][3], 1.5, places=4)  # x, root Unity units
+        self.assertAlmostEqual(values['speed'], 1.5, places=4)
+        self.assertAlmostEqual(values['tint'][3], 0.5, places=4)  # the material colour x 2
+        self.assertEqual(oracle.timeline_values(timeline, 5.0)['matrix'][3], 3)  # it holds after its end
+        self.assertTrue(by['fx/spark']['active'])
+
+    def test_a_triggered_state_carries_its_own_timeline(self):
+        p = ParticlePrefab()
+        group_go, group = p.game_object('fx', p.root)
+        p.system('lightning', emitting(), parent=group)
+        off = [{'path': ec.crc('lightning'), 'typeID': ec.GAMEOBJECT, 'attribute': ec.IS_ACTIVE}]
+        idle = p.clip('idle', off, [(START, [(0, (0, 0, 0, 1))]), (0.0, [(0, (0, 0, 0, 1))]), (INF, [])], stop=1.0)
+        interact = p.clip('toInteract', off, [(START, [(0, (0, 0, 0, 0))]), (0.0, [(0, (0, 0, 0, 0))]), (13.0667, [(0, (0, 0, 0, 1))]), (INF, [])],
+                          stop=13.5333)
+        p.triggered(group_go, idle, interact)
+        _, doc, _ = p.run()
+        timeline = doc['systems'][0]['emitter']['timeline']
+        self.assertEqual({column(timeline, 'active', f) for f in timeline['frames']}, {1})
+        state = timeline['states']['Interact']
+        self.assertEqual(state['length'], 13.5333)
+        self.assertEqual([(f[0], column(timeline, 'active', f)) for f in state['frames'] if column(timeline, 'active', f) == 1][0], (13.0667, 1))
+
+    def test_a_clip_that_only_switches_a_system_off_leaves_it_never_active(self):
+        p = ParticlePrefab()
+        group_go, group = p.game_object('fx', p.root)
+        p.system('dust', emitting(), parent=group)
+        p.animate(group_go, p.clip('off', [{'path': ec.crc('dust'), 'typeID': ec.GAMEOBJECT, 'attribute': ec.IS_ACTIVE}],
+                                   [(START, [(0, (0, 0, 0, 0))]), (0.0, [(0, (0, 0, 0, 0))]), (INF, [])], stop=1.0))
+        _, _, layers_doc = p.run()
+        self.assertEqual(reasons(layers_doc), {'fx/dust': 'never active'})
+
+    def test_driven_fields_have_columns_and_others_are_reasons(self):
+        p = ParticlePrefab()
+        for name in ('rate', 'quiet', 'speed'):
+            go, _ = p.system(name, emitting())
+        field = {'rate': 'EmissionModule.rateOverTime.scalar', 'quiet': 'NoiseModule.strength.scalar', 'speed': 'InitialModule.startSpeed.scalar'}
+        for name, path in field.items():
+            go = next(g for g, (kind, tree) in p.objects.items() if kind == 'GameObject' and tree['m_Name'] == name)
+            p.animate(go, p.clip(name, [{'path': 0, 'typeID': ec.PARTICLE_SYSTEM, 'attribute': ec.crc(path)}],
+                                 [(START, [(0, (0, 0, 0, 10))]), (0.0, [(0, linear(10, 20, 0, 1))]), (1.0, [(0, (0, 0, 0, 20))]), (INF, [])], stop=1.0))
+        _, doc, layers_doc = p.run()
+        by = {s['name']: s for s in doc['systems']}
+        timeline = by['rate']['emitter']['timeline']
+        self.assertEqual(timeline['columns'][5:], ['emission.rate'])
+        self.assertEqual(oracle.timeline_values(timeline, 1.0)['emission.rate'], 20)
+        self.assertIn('matrix', by['quiet']['emitter'], 'the noise module is off: its strength changes nothing')
+        self.assertEqual(reasons(layers_doc), {'speed': 'driven by a clip: InitialModule.startSpeed.scalar'})
+
+    def test_a_camera_shake_script_changes_nothing_a_particle_draws(self):
+        p = ParticlePrefab()
+        shaker_go, shaker = p.game_object('shaker', p.root)
+        p.attach(shaker_go, p.add('MonoBehaviour', {'m_Enabled': 1, '_shakeTrigs': []}))
+        p.system('spark', emitting(), parent=shaker)
+        p.quad('glow', shaker, material_tree(ADDITIVE, p.texture))
+        _, doc, layers_doc = p.run()
+        self.assertEqual([s['name'] for s in doc['systems']], ['shaker/spark'])
+        # The layers' own export does not change (it is not versioned with particles): the mesh is still left out.
+        self.assertIn({'name': 'glow', 'reason': 'script (_shakeTrigs)'}, layers_doc['omitted']['other'])
+
+
+class SubEmitters(unittest.TestCase):
+    def test_a_family_is_exported_with_its_links_and_a_spawner_draws_nothing(self):
+        p = ParticlePrefab()
+        ctrl, ctrl_tr = p.system('ring_ctrl', emitting(), m_Enabled=0)  # its renderer is off: it only spawns
+        fire, _ = p.system('fire', emitting(), parent=ctrl_tr, m_SortingOrder=3)
+        spark, _ = p.system('spark', emitting(), parent=ctrl_tr, m_SortingOrder=-2)
+        p.link(ctrl, fire)
+        p.link(ctrl, spark, kind=2, probability=0.5)
+        _, doc, layers_doc = p.run()
+        names = [s['name'] for s in doc['systems']]
+        self.assertEqual(names, ['ring_ctrl/spark', 'ring_ctrl', 'ring_ctrl/fire'])
+        spawner = doc['systems'][1]
+        self.assertEqual((spawner['render'], spawner['material'], spawner['requires'], spawner['child']), (None, None, ['sub'], False))
+        self.assertEqual(spawner['sub'], [[2, 'birth', 1], [0, 'death', 0.5]])
+        self.assertEqual([(s['child'], s['requires']) for s in doc['systems'][::2]], [(True, ['sub']), (True, ['sub'])])
+        # The spawner has its index and no run; the children draw where they sort.
+        self.assertEqual([e['particles'] for e in layers_doc['draw'] if 'particles' in e], [[0], [2]])
+
+    def test_a_family_is_left_out_together(self):
+        p = ParticlePrefab()
+        parent, parent_tr = p.system('ctrl', emitting())
+        child, _ = p.system('fire', emitting(CollisionModule={'enabled': True}), parent=parent_tr)
+        p.link(parent, child)
+        inherit, inherit_tr = p.system('inherits', emitting())
+        heir, _ = p.system('heir', emitting(), parent=inherit_tr)
+        p.link(inherit, heir, properties=10)
+        _, doc, layers_doc = p.run()
+        self.assertIsNone(doc)
+        self.assertEqual(reasons(layers_doc), {'ctrl/fire': 'Collision module', 'ctrl': 'its sub-emitter ctrl/fire is left out',
+                                               'inherits': "a sub-emitter that inherits its parent's size, lifetime",
+                                               'inherits/heir': 'the systems it is a sub-emitter of are left out'})
+
+    def test_a_child_that_draws_nothing_loses_its_link(self):
+        p = ParticlePrefab()
+        ctrl, ctrl_tr = p.system('ctrl', emitting())
+        hidden, _ = p.system('hidden', emitting(), parent=ctrl_tr, active=0)
+        p.link(ctrl, hidden)
+        spawner, spawner_tr = p.system('spawner', emitting(), m_Enabled=0)
+        dark, _ = p.system('dark', emitting(), parent=spawner_tr, m_Enabled=0)
+        p.link(spawner, dark)
+        _, doc, layers_doc = p.run()
+        self.assertEqual([(s['name'], s['requires'], 'sub' in s) for s in doc['systems']], [('ctrl', [], False)])
+        self.assertEqual(reasons(layers_doc), {'ctrl/hidden': 'never active', 'spawner/dark': 'renderer off', 'spawner': 'its sub-emitters draw nothing'})
+        self.assertTrue(all(r in particles.NOT_DRAWN for r in reasons(layers_doc).values()))
+
+    def test_a_parent_prewarms_long_enough_for_its_children(self):
+        p = ParticlePrefab()
+        parent, parent_tr = p.system('ctrl', make_ps(lengthInSec=10.0, looping=True, prewarm=True, EmissionModule__rateOverTime=mmc(0, 2.0),
+                                                     InitialModule__startLifetime=mmc(0, 1.5)))
+        child, _ = p.system('fire', emitting(InitialModule__startLifetime=mmc(3, 0.5, 2.0)), parent=parent_tr)
+        p.link(parent, child)
+        _, doc, _ = p.run()
+        self.assertEqual(doc['systems'][0]['clock']['prewarmWindow'], 3.5)  # 1.5 + 2.0
+
+
+class Trails(unittest.TestCase):
+    def test_trails_are_written_as_data_under_their_capability(self):
+        p = ParticlePrefab()
+        trail = {'enabled': True, 'mode': 0, 'ratio': 1.0, 'lifetime': mmc(0, 0.5), 'minVertexDistance': 0.1, 'textureMode': 0, 'ribbonCount': 1,
+                 'worldSpace': False, 'dieWithParticles': True, 'sizeAffectsWidth': True, 'sizeAffectsLifetime': False, 'inheritParticleColor': True,
+                 'colorOverLifetime': mmg(), 'widthOverTrail': mmc(0, 1.0), 'colorOverTrail': mmg(), 'attachRibbonsToTransform': False,
+                 'splitSubEmitterRibbons': False}
+        own = p.add('Texture2D', {'m_Name': 'streak', 'm_Width': 4, 'm_Height': 4, 'm_TextureSettings': {'m_WrapU': 1, 'm_WrapV': 1}})
+        go, _ = p.system('comet', emitting(TrailModule=trail))
+        p.objects[p.objects[go][1]['m_Component'][-1]['component']['m_PathID']][1]['m_Materials'].append(ref(p.add('Material', material_tree(ADDITIVE, own))))
+        go2, _ = p.system('streaks', emitting(TrailModule=trail), m_RenderMode=5)
+        p.objects[p.objects[go2][1]['m_Component'][-1]['component']['m_PathID']][1]['m_Materials'].append(ref(p.add('Material', material_tree(ADDITIVE, own))))
+        p.system('one material', emitting(TrailModule=trail))  # trails without their material draw nothing: only the particles
+        tr_go, _ = p.game_object('Trail', p.root, (1, 2, 0))
+        p.attach(tr_go, p.add('TrailRenderer', {'m_GameObject': ref(tr_go), 'm_Enabled': 1, 'm_Materials': [ref(p.add('Material', material_tree(ADDITIVE, own)))],
+                                                'm_SortingLayerID': 0, 'm_SortingOrder': 0, 'm_Time': 0.3, 'm_MinVertexDistance': 0.1, 'm_Emitting': 1,
+                                                'm_Parameters': {'widthMultiplier': 0.3, 'widthCurve': curve([key(0, 1)]), 'colorGradient': gradient(),
+                                                                 'numCornerVertices': 0, 'numCapVertices': 0, 'alignment': 0, 'textureMode': 0}}))
+        _, doc, layers_doc = p.run()
+        by = {s['name']: s for s in doc['systems']}
+        self.assertEqual((by['comet']['requires'], by['comet']['render']['mode']), (['trail'], 'billboard'))
+        self.assertEqual((by['streaks']['requires'], by['streaks']['render'], by['streaks']['material']), (['trail'], None, None))
+        self.assertEqual((by['one material']['requires'], 'trail' in by['one material']), ([], False))
+        comet = by['comet']['trail']
+        self.assertEqual({k: comet[k] for k in ('mode', 'lifetime', 'textureMode', 'dieWithParticles')},
+                         {'mode': 'perParticle', 'lifetime': 0.5, 'textureMode': 'stretch', 'dieWithParticles': True})
+        self.assertEqual(doc['materials'][comet['material']]['texture'], doc['materials'][by['streaks']['trail']['material']]['texture'])
+        record = doc['trails'][0]
+        self.assertEqual((record['name'], record['requires'], record['time'], record['emitter']['matrix'][3]), ('Trail', ['trail'], 0.3, 1))
+        # It draws where it sorts: after the second part's... here before draw entry i, after n systems of a run there.
+        i, n = record['draw']
+        self.assertTrue(i <= len(layers_doc['draw']))
+        self.assertEqual(layers_doc['omitted']['trails'], 1, 'layers still count it as not drawn')
+
+
+class Copies(unittest.TestCase):
+    """The tables the exporter, the reference simulator and the validator each keep must agree."""
+
+    def test_the_tables_agree(self):
+        mjs = (Path(__file__).resolve().parent.parent / 'scripts' / 'particles.mjs').read_text()
+        not_drawn = json.loads(mjs.split('export const NOT_DRAWN = ', 1)[1].split(';', 1)[0].replace("'", '"'))
+        self.assertEqual(not_drawn, list(particles.NOT_DRAWN))
+        block = mjs.split('export const TIMELINE_COLUMNS = {', 1)[1].split('};', 1)[0]
+        widths = {}
+        for item in block.replace('\n', ' ').split(','):
+            if ':' in item:
+                name, width = item.split(':')
+                widths[name.strip().strip("'")] = int(width)
+        self.assertEqual({**widths, 'main.st': 4}, particles.COLUMN_WIDTHS)
+        self.assertEqual({k: v for k, v in particles.COLUMN_WIDTHS.items() if k != 'main.st'}, oracle.COLUMN_WIDTHS)
+        self.assertEqual(oracle.FIELD_COLUMNS, tuple(c for c in particles.FIELD_ORDER if c != 'trail.color'))
+        self.assertEqual(oracle.STEPPED_COLUMNS, particles.STEPPED)
+        self.assertEqual(oracle.MAX_SUB_LINKS, particles.MAX_SUB_LINKS)
+
+
 class Determinism(unittest.TestCase):
     def test_two_processes_export_the_same_bytes(self):
         # Python salts its string hashes per process (set and dict orders over strings can change): two
@@ -385,6 +649,95 @@ class RoundTrip(unittest.TestCase):
                     total += len(ra)
                 self.assertGreater(total, 0, 'the system emitted')
 
+    def test_families_mesh_shapes_followers_and_timelines_simulate_from_their_export(self):
+        """Sub-emitter families (birth and death, local and world children), a mesh shape with vertex colours,
+        a system on a bone follower and one on a timeline with a field column: from the trees and from the
+        export, with the same poses (the export's timeline and a moving follower frame) and field values."""
+        p = ParticlePrefab()
+        mesh = p.add('Mesh', {})
+        p.meshes[mesh] = {'vertices': [(0, 0, 0), (2, 0, 0), (0, 1, 0), (2, 1, 0.5)], 'uv': [(0, 0), (1, 0), (0, 1), (1, 1)],
+                          'colors': [(1, 0, 0, 1), (0, 1, 0, 1), (0, 0, 1, 1), (1, 1, 1, 0.5)], 'submeshes': [[0, 1, 2, 2, 1, 3]],
+                          'normals': [(0, 0, -1), (0, 0.6, -0.8), (0, 0, -1), (0.6, 0, -0.8)]}
+        _, hand = p.follower('Hand', p.root, (1, 1, 0))
+        parent, parent_tr = p.system('ctrl', emitting(InitialModule__startSpeed=mmc(0, 2.0), InitialModule__startLifetime=mmc(3, 0.4, 0.9),
+                                                      EmissionModule__rateOverTime=mmc(0, 6.0), moveWithTransform=1), parent=hand, m_Enabled=0)
+        born, _ = p.system('born', emitting(EmissionModule__rateOverTime=mmc(3, 20.0, 40.0), EmissionModule__m_Bursts=[burst(0.0, 2)],
+                                            InitialModule__startLifetime=mmc(0, 0.3), moveWithTransform=1), parent=parent_tr)
+        died, _ = p.system('died', emitting(EmissionModule__m_Bursts=[burst(0.0, 3), burst(0.1, mmc(3, 1.0, 4.0)['scalar'], probability=0.5)],
+                                            InitialModule__startSpeed=mmc(0, 1.0), InitialModule__startLifetime=mmc(0, 0.5), lengthInSec=0.5,
+                                            ShapeModule__enabled=True, ShapeModule__type=0, ShapeModule__radius=multi(0.2)),
+                            parent=parent_tr, position=(0.5, 0, 0))
+        p.link(parent, born)
+        p.link(parent, died, kind=2)
+        p.system('fromMesh', emitting(**{'ShapeModule__enabled': True, 'ShapeModule__type': 6, 'ShapeModule__m_Mesh': ref(mesh),
+                                         'ShapeModule__placementMode': 2, 'ShapeModule__m_MeshSpawn': multi(0.0), 'ShapeModule__m_UseMeshColors': True,
+                                         'ShapeModule__m_MeshNormalOffset': 0.1, 'InitialModule__startSpeed': mmc(0, 1.0)}))
+        p.system('fromVertices', emitting(**{'ShapeModule__enabled': True, 'ShapeModule__type': 6, 'ShapeModule__m_Mesh': ref(mesh),
+                                             'ShapeModule__placementMode': 0, 'ShapeModule__m_MeshSpawn': multi(0.0, mode=1),
+                                             'ShapeModule__m_UseMeshColors': True}))
+        mover_go, mover = p.game_object('mover', p.root)
+        p.system('moved', emitting(moveWithTransform=1, EmissionModule__rateOverDistance=mmc(0, 4.0)), parent=mover)
+        p.animate(mover_go, p.clip('move', [{'path': ec.crc('moved'), 'typeID': ec.PARTICLE_SYSTEM, 'attribute': ec.crc('simulationSpeed')},
+                                            {'path': 0, 'typeID': ec.TRANSFORM, 'attribute': ec.POSITION}],
+                                   [(START, [(0, (0, 0, 0, 1)), (1, (0, 0, 0, 0))]), (0.0, [(0, linear(1, 3, 0, 2)), (1, linear(0, 6, 0, 2))]),
+                                    (2.0, [(0, (0, 0, 0, 3)), (1, (0, 0, 0, 6))]), (INF, [])], constants=(0.0, 0.0), stop=2.0))
+        _, doc, layers_doc = p.run()
+        self.assertEqual(reasons(layers_doc), {})
+        names = {s['name']: i for i, s in enumerate(doc['systems'])}
+        self.assertEqual(doc['systems'][names['Hand/ctrl']]['render'], None)
+        self.assertIn('timeline', doc['systems'][names['mover/moved']]['emitter'])
+        mesh_of = lambda reference: p.meshes[reference['m_PathID']]  # noqa: E731
+
+        def frame(t):
+            angle = 0.6 * t
+            return [math.cos(angle), -math.sin(angle), 0, 1 + t, math.sin(angle), math.cos(angle), 0, 1, 0, 0, 1, 0], (0, 0, math.sin(angle / 2), math.cos(angle / 2))
+
+        def pose(system, t):
+            return oracle.emitter_pose(system, t, None, frame(t) if system['follow'] else None)
+
+        total = 0
+        for name in ('Hand/ctrl', 'fromMesh', 'fromVertices', 'mover/moved'):
+            index = names[name]
+            family = [index] + [link[0] for link in doc['systems'][index].get('sub', [])]
+            pairs = []
+            for k in family:
+                system = json.loads(json.dumps(doc['systems'][k]))
+                go = next(g for g, (kind, tree) in p.objects.items() if kind == 'GameObject' and tree['m_Name'] == system['name'].split('/')[-1])
+                lifetime = max((oracle.MinMaxCurve.from_tree(p.ps_of(g)['InitialModule']['startLifetime']).max_value()
+                                for g in (born, died)), default=0.0) if k == index and family[1:] else 0.0
+                seed = oracle.play_seed(3, k, 1)
+                a = oracle.Simulation(oracle.Config.from_trees(p.ps_of(go), None, child_lifetime=lifetime, mesh_of=mesh_of), seed=seed)
+                b = oracle.Simulation.from_export(system, doc, seed=seed)
+                self.assertEqual(a.c.prewarm_window, b.c.prewarm_window)
+                pairs.append((system, a, b))
+            for (_, a, b), link in zip(pairs[1:], doc['systems'][index].get('sub', [])):
+                pairs[0][1].link(a, link[1], link[2])
+                pairs[0][2].link(b, link[1], link[2])
+            for step in range(121):
+                t = step / 60
+                poses = [pose(system, t) for system, _, _ in pairs]
+                for system, a, b in pairs:
+                    if 'timeline' in system['emitter']:
+                        values = {k: v for k, v in oracle.timeline_values(system['emitter']['timeline'], t).items() if k in oracle.FIELD_COLUMNS}
+                        a.set_fields(values)
+                        b.set_fields(values)
+                for _, a, b in pairs[:1]:
+                    if step:
+                        a.step(1 / 60, poses[0], poses[1:])
+                        b.step(1 / 60, poses[0], poses[1:])
+                    else:
+                        a.play(poses[0], poses[1:])
+                        b.play(poses[0], poses[1:])
+                for system, a, b in pairs:
+                    ra, rb = records(a), records(b)
+                    self.assertEqual(len(ra), len(rb), system['name'])
+                    for x, y in zip(ra, rb):
+                        self.assertTrue(all(abs(u - v) <= 1e-9 for u, v in zip(x, y)), (system['name'], x, y))
+                    total += len(ra)
+            if name == 'Hand/ctrl':
+                self.assertGreater(len(pairs[1][1].particles) + pairs[2][1].emitted_total, 0, 'the children emitted')
+        self.assertGreater(total, 0)
+
     def test_the_prewarm_window_is_the_longest_lifetime_unless_max_particles_binds(self):
         p = ParticlePrefab()
         systems = module_systems()
@@ -398,3 +751,109 @@ class RoundTrip(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+def hoshiguma_export():
+    """Hoshiguma's (char_1044_hsgma2#2) layerParticles.json and layers.json: the committed folder's, or a trial
+    export's under $PARTICLE_EXPORT (a root with models/); None when neither has one."""
+    import os
+    roots = [Path(__file__).resolve().parent.parent] + ([Path(os.environ['PARTICLE_EXPORT'])] if os.environ.get('PARTICLE_EXPORT') else [])
+    for root in reversed(roots):
+        for path in sorted(root.glob('models/char_1044_hsgma2_2/*/layerParticles.json')):
+            return json.loads(path.read_text()), json.loads((path.parent / 'layers.json').read_text())
+    return None
+
+
+@unittest.skipUnless(hoshiguma_export(), 'Hoshiguma has no layerParticles.json here (set PARTICLE_EXPORT to a trial export)')
+class Hoshiguma(unittest.TestCase):
+    """The reference recordings' facts (particle research RECORDING.md section 6, corrected by RECORDING2.md
+    section 4) on Hoshiguma's export: what the idle Animator's Interact state does to the idle particles."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.doc, cls.layers = hoshiguma_export()
+
+    def systems(self, under):
+        found = [s for s in self.doc['systems'] if f'/{under}/' in s['name']]
+        self.assertTrue(found, under)
+        return found
+
+    @staticmethod
+    def interact(system):
+        timeline = system['emitter']['timeline']
+        return timeline, timeline['states']['Interact']
+
+    def series(self, system, name, step=1 / 60):
+        timeline, line = self.interact(system)
+        return [(k * step, oracle.timeline_values(timeline, k * step, 'Interact')[name]) for k in range(int(line['length'] / step) + 1)]
+
+    def switches(self, system):
+        timeline, line = self.interact(system)
+        out, last = [], None
+        for f in line['frames']:
+            value = column(timeline, 'active', f)
+            if value != last:
+                out.append((f[0], value))
+                last = value
+        return out
+
+    def test_the_gameobject_toggles(self):
+        # GameObject: (off from, back on at or None); every system under it switches with it, to within 1/60 s.
+        table = {'baoci_01': (6.833, 12.034), 'huaban_dust': (6.867, 12.034), 'fire_foot': (6.833, None), 'water_01': (6.833, 10.867),
+                 'fire_back': (6.833, 11.067), 'fire_front': (6.833, 11.467), 'face_fire': (4.067, 11.834)}
+        for under, (off, on) in table.items():
+            for system in self.systems(under):
+                with self.subTest(system['name']):
+                    got = self.switches(system)
+                    want = [(0, 1), (off, 0)] + ([(on, 1)] if on is not None else [])
+                    self.assertEqual([v for _, v in got], [v for _, v in want])
+                    for (t, _), (expected, _) in zip(got, want):
+                        self.assertLess(abs(t - expected), 1 / 60)
+        for system in self.systems('lighting_01'):
+            self.assertEqual([v for _, v in self.switches(system)], [0, 1])
+            self.assertLess(abs(self.switches(system)[1][0] - 13.067), 1 / 60)
+            self.assertEqual({column(self.interact(system)[0], 'active', f) for f in self.interact(system)[1]['frames'] if f[0] < 13}, {0})
+
+    def test_the_idle_tints_fade_out_and_come_back(self):
+        # Where the tint's alpha is back at its idle value after the fade (RECORDING section 6), within 0.1 s.
+        back = {'water_bg_01_p': 11.5, 'wave_p_01': 11.9, 'wave_p_02': 11.9, 'water_p_01': 12.3, 'water_p_03': 12.3, 'huaban_dust': 12.6,
+                'fire_bg_01': 12.97, 'fire_tip_02': 12.97, 'fire_tip_04_3': 13.47, 'drop_01': 13.47, 'baoci_01': 13.3}
+        checked = 0
+        for system in self.doc['systems']:
+            name = system['name'].split('fixed/')[-1]
+            key = next((k for k in back if name.endswith(k) or name.startswith(k + '/')), None)
+            if key is None or 'timeline' not in system['emitter'] or 'tint' not in system['emitter']['timeline']['columns']:
+                continue
+            with self.subTest(name):
+                alpha = [(t, v[3]) for t, v in self.series(system, 'tint')]
+                idle = alpha[0][1]
+                fall = next(t for t, v in alpha if v < idle - 0.01)
+                zero = next(t for t, v in alpha if v < 0.005)
+                self.assertTrue(6.1 < fall < 6.3 and 6.7 < zero < 6.9, (fall, zero))
+                returned = next(t for t, v in alpha if t > zero and v >= idle - 0.005)
+                self.assertLess(abs(returned - back[key]), 0.1, returned)
+                checked += 1
+        self.assertGreaterEqual(checked, 20)
+
+    def test_the_simulation_speeds(self):
+        # (base, peak, reached the peak at, back at the base at): wave_p, the blades and the small blades.
+        table = {'water_01/wave_p_01': (1.0, 1.5, 4.4, 7.1), 'water_01/wave_p_02': (1.0, 1.5, 4.4, 7.1), 'baoci_01/01': (1.0, 1.5, 4.6, 7.53),
+                 'baoci_01/02': (1.0, 1.5, 4.6, 7.53), 'baoci_01/baoci_small_01': (0.7, 2.0, 3.7, 7.7), 'baoci_01/baoci_small_02': (0.7, 2.0, 3.7, 7.7)}
+        for suffix, (base, peak, reached, returned) in table.items():
+            system = next(s for s in self.doc['systems'] if s['name'].endswith(suffix))
+            with self.subTest(suffix):
+                timeline, _ = self.interact(system)
+                at = lambda t: oracle.timeline_values(timeline, t, 'Interact')['speed']  # noqa: E731
+                self.assertAlmostEqual(at(0), base, places=3)
+                self.assertAlmostEqual(max(v for _, v in self.series(system, 'speed')), peak, places=3)
+                self.assertAlmostEqual(at(reached), peak, delta=0.01)
+                self.assertAlmostEqual(at(returned), base, delta=0.01)
+
+    def test_coverage(self):
+        # 272 systems drawn; all but huaban_fall and its ripple (collision) and the two shield-eye fires
+        # (Ram/VertexDisturb) exported, none needing trails.
+        drawn = [s for s in self.doc['systems'] if s['render'] is not None]
+        left = [r for r in self.layers['omitted']['particleReasons'] if r['reason'] not in particles.NOT_DRAWN]
+        self.assertEqual((len(drawn) + len(left), sum(1 for s in drawn if 'trail' not in s['requires'])), (272, 268))
+        self.assertEqual(sorted(r['reason'] for r in left), ['Collision module', 'Ram/VertexDisturb on particles', 'Ram/VertexDisturb on particles',
+                                                             'the systems it is a sub-emitter of are left out'])
