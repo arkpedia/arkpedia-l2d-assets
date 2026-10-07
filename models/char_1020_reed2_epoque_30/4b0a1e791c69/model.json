@@ -61,10 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 212344,
-    "sha256": "23839c7ba231427a39b90a0e861cc87b6287777f45bc040636d12a54457e410e"
+    "bytes": 289862,
+    "sha256": "9763cff772cf17b96e067bcbe0e713ea46b8241fc7f6ae26b2652fa7cf6403b6"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1020_reed2_epoque#30.ab",

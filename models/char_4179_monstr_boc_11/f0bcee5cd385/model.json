@@ -59,7 +59,7 @@
     "bytes": 43533,
     "sha256": "f4ad0d430eb0ea3719d60f1e651fe99957ab730d843351c84e8d64d6d1be1a09"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_4179_monstr_boc#11.ab",

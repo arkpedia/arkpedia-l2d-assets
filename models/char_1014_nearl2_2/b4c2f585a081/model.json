@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 162240,
-    "sha256": "9b94777888040cfa825420968fac0f69184d186ac7fa8a8dbcef7136260d2130"
+    "bytes": 212432,
+    "sha256": "a5ddd6aa9b22c70e83a1e9ddcf554263a459431ac5ed574f104cab2de724a030"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1014_nearl2_2.ab",

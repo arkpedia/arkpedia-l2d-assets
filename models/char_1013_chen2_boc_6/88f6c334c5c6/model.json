@@ -63,10 +63,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 185414,
-    "sha256": "d5ae0fa35ffb947685d61a6e30146eac27abbb7aef7fe884fd00145c17e96d23"
+    "bytes": 222073,
+    "sha256": "cdb3d1b746e6e4d329dd9192fbc303ee26b3efda81c3dc722acb51825fda7d3a"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1013_chen2_boc#6.ab",

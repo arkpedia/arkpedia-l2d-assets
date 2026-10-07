@@ -57,10 +57,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 41921,
-    "sha256": "a7027b0319f8991158248109cd7e3c7dac9574e15e26c0d6a2971b8c8decaa14"
+    "bytes": 55105,
+    "sha256": "4a2ce52732a7bcea53b274dbb91be21b14827ab6effc565ce070d8ce84e02eef"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_4202_haruka_iteration#6.ab",

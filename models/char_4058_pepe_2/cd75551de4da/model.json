@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 139202,
-    "sha256": "5e015913b695093bf537798a7726f3cc2d08dfe262acc9d278de40009e9e2cb8"
+    "bytes": 156160,
+    "sha256": "988b1fc808da265e562d8efd139d673ff578e59bb9eb0c1849da114aaf5b6406"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4058_pepe_2.ab",

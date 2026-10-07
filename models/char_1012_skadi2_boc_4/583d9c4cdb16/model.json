@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 81548,
-    "sha256": "b82f8d6a8431552bb0065552cd80049fe45a6f9a8d97f9a44db50dec65161b31"
+    "bytes": 84721,
+    "sha256": "00f6721c308c21756490f7efc911f455ae80e440d01fd718ce8f041f44f0fb98"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1012_skadi2_boc#4.ab",

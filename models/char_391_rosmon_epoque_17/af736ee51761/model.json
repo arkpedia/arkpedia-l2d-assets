@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 67916,
-    "sha256": "7595c14156aa58a41209d34e6e4520882b4684d256ca03743f348d97767bb18a"
+    "bytes": 100884,
+    "sha256": "77d0b85eb8818a7f44c320ff165ee9304c320da085998eca7632440045e2d880"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_391_rosmon_epoque#17.ab",

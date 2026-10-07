@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 49413,
-    "sha256": "d7237fe643eae7294ebc318b1c2432bedcb53229960da8a8bcaa4306b8853dad"
+    "bytes": 55842,
+    "sha256": "dc620be0e78292614610558154ab8d70b6d4fe4f9f777569e80dfbf2d21e0e9b"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1041_angel2_2.ab",

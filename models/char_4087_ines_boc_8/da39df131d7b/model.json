@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 75380,
-    "sha256": "b4dbe7c6084e1398f652d9b9e3e969d7fa7c7123fb71136583e715303967fdef"
+    "bytes": 79751,
+    "sha256": "798a901f13ccbfcc2f5672d04906c6c7ec5f0705b80640b4748629a39c4277d3"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4087_ines_boc#8.ab",

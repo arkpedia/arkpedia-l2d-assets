@@ -59,7 +59,7 @@
     "bytes": 69639,
     "sha256": "f186915c6d91a9964244e3a04ed5c981e73f8b877f93e82a7251ceff9ee21a06"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2026_yu_nian#12.ab",

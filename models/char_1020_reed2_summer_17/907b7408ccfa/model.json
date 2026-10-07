@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 77116,
-    "sha256": "b9195c9f183902748dc5b8c72a63b7c460877fd26b43341810fc3ca0834ec5d8"
+    "bytes": 151757,
+    "sha256": "f070c07e94d8a310307030a6c461da0bdf524ad22143048cb92523305d0b0b48"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1020_reed2_summer#17.ab",

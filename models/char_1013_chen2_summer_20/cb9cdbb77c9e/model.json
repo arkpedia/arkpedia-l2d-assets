@@ -59,7 +59,7 @@
     "bytes": 8211,
     "sha256": "b44babe2e7a6c246364fc0a1553c463c585c99965e15d80d11411ae660aeae4e"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1013_chen2_summer#20.ab",

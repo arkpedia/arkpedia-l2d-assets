@@ -64,7 +64,7 @@
     "bytes": 31448,
     "sha256": "be917fc091539deaf735d1674b23ed7fa538cb4dec8eb180175031af62a9bbe5"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1016_agoat2_2.ab",

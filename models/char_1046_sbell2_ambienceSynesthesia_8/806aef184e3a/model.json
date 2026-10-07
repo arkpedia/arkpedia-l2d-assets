@@ -66,10 +66,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 108166,
-    "sha256": "1a26f076e10454b617b20bad9f881c3da402223d99c7074a51670854ab7ad034"
+    "bytes": 108304,
+    "sha256": "24ef81a3e7efb92bf9b2f1b0c4bd73b7d02b4d810efa1ae4ba4724f46d74b6c6"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1046_sbell2_ambiencesynesthesia#8.ab",

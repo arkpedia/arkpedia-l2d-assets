@@ -160,7 +160,7 @@
     "bytes": 30982,
     "sha256": "b3cafef43108d04087264a53c96bff76069ab17fa1daf84ea63cd3f35540cf05"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1016_agoat2_epoque#57.ab",

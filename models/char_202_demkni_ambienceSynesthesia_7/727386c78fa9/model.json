@@ -59,7 +59,7 @@
     "bytes": 31756,
     "sha256": "f36a1821d247ae795f01f8914848dd888fb58f98563bc3bac6546693a11446e0"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_202_demkni_ambiencesynesthesia#7.ab",

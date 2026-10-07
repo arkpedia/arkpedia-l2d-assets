@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 151007,
-    "sha256": "4d6947ec5315d399b1362fb7dac277a93fcd4a8bf66c8aea979c84f25acf9807"
+    "bytes": 249498,
+    "sha256": "ebad0902cca4161d7efab53b6d7df819a3bd49be36e0b7651dc9bd36e25afd70"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4133_logos_ambiencesynesthesia#6.ab",

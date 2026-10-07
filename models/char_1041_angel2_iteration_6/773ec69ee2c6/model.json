@@ -41,7 +41,7 @@
     "bytes": 376,
     "sha256": "f525b9dd02b12c9cd8ed677331502e69992259a68306a72a446126566e0fba6c"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1041_angel2_iteration#6.ab",

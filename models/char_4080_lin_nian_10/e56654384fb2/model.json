@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 148395,
-    "sha256": "754661d1851a5f0f3d7e4f74d534e3218ae2c39a42e1294278b8dd099f7a6a8a"
+    "bytes": 200080,
+    "sha256": "007382ff2458dad23c3dff2929c1e005478aae3b6c30201b0a014b3fd28c698c"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4080_lin_nian#10.ab",

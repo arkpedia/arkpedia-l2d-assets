@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 113786,
-    "sha256": "76defa22a8b23a1b42079f06966729c35292998674c1057af655ed3c742d8ca1"
+    "bytes": 114897,
+    "sha256": "c9c61ac7463c3adb565d71fc62d4be42abb344d6412cc7b4445e34c977880c19"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2023_ling_nian#9.ab",

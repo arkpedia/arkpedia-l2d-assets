@@ -551,10 +551,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 122100,
-    "sha256": "598d82be2a06d06dda2125c3ed0a4a49b9305de4477e17e674e8935ee782513b"
+    "bytes": 135431,
+    "sha256": "165511df30c09721afeeb57d2de462a5a0ab801d28772fdeb88352c2d6ac836d"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_113_cqbw_epoque#7.ab",

@@ -64,7 +64,7 @@
     "bytes": 22924,
     "sha256": "fb7a607fffe5abe8716982bcdf38cec0789481946dd5c28fc7f6cff2e1a083db"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_332_archet_sale#14.ab",

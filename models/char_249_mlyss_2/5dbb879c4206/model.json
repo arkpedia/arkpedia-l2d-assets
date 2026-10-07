@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 45720,
-    "sha256": "8ec3ce8f62b63dc7c1f1d592cb6c15f05354555c5c785645d95860c01b353ace"
+    "bytes": 163173,
+    "sha256": "8730dfb275de04deb30c3c853ec4544edd9a3ef37c1f877c4bba889deae275f9"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_249_mlyss_2.ab",

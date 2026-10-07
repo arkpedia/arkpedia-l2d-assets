@@ -64,7 +64,7 @@
     "bytes": 1146,
     "sha256": "258b43f860717836de3173ed6072e06310f1b88faf7182ad30701b850b39e136"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4010_etlchi_winter#5.ab",

@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 259526,
-    "sha256": "d2b028c3883e551c523e62aa676a4e134d3df3883254b220680d6b7b994a635a"
+    "bytes": 382446,
+    "sha256": "ce9b7cdce8413e0d4ec9c9a91a8f1d10f066de5fe7a64553cef7d966fdac0ff6"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1038_whitw2_2.ab",

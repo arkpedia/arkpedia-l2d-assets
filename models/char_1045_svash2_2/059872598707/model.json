@@ -59,7 +59,7 @@
     "bytes": 19820,
     "sha256": "149940a72c650e2a12bcf57e721ca594073f9c647a076511b94dfeabfe85536d"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1045_svash2_2.ab",

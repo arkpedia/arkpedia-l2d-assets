@@ -59,7 +59,7 @@
     "bytes": 71318,
     "sha256": "e989192e1a17aabb4823b66f48fa980ad8ad6152e0a591d593dc3c27d14bdca2"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_113_cqbw_2.ab",

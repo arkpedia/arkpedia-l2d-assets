@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 63537,
-    "sha256": "c5d7b30cf12c72f1ed3f293295d3c080e16c77f09809411e44edf86699048d91"
+    "bytes": 68437,
+    "sha256": "2d47ec468548c15863209935d96a94b2d16eaf1d87fe93ae3754e47b77403499"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2027_wang_2.ab",

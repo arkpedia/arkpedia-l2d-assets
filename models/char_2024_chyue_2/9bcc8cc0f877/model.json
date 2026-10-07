@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 263099,
-    "sha256": "a4fb38a94a45e243545baf07ad9209df16f77697cf23e76ecbd98550bf7bacee"
+    "bytes": 279761,
+    "sha256": "870f229c48d2a07001adcde82becafa0be17d4c2dfb0d5b38aefd93912d51586"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2024_chyue_2.ab",

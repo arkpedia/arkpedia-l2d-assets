@@ -888,7 +888,7 @@
     "bytes": 11728,
     "sha256": "1a8689a76d7b64e413cff06f105f66fbd1c12f858cca4d027c27efa9bed5973a"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2023_ling_nian#12.ab",

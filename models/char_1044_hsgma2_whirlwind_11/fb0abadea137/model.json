@@ -64,7 +64,7 @@
     "bytes": 19227,
     "sha256": "c55996417751f583efb3be22e379e8ec406d9f69830fd89a7f35e1014a15746f"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1044_hsgma2_whirlwind#11.ab",

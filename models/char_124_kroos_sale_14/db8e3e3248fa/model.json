@@ -41,7 +41,7 @@
     "bytes": 17104,
     "sha256": "0e83f75eea7da5e0ce755f20a26fe174680fd4c214644e491c4e9326a510650e"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_124_kroos_sale#14.ab",

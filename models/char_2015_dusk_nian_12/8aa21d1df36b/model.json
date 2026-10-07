@@ -59,7 +59,7 @@
     "bytes": 62475,
     "sha256": "8501422bc3272f3d62d1cb48a50a4c4fb553f52e1c764f0d1eaa6a959bc3afde"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2015_dusk_nian#12.ab",

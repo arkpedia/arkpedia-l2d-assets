@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 29645,
-    "sha256": "0e9e1885e357fedbe3fdde40f1287ac6c56226c1bf97726e31035dc2f0a93a35"
+    "bytes": 42943,
+    "sha256": "a9b323229d16302ca2fcdc6b600f1d3bd364c942bac37046f58bc1f34e5843e9"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_450_necras_summer#20.ab",

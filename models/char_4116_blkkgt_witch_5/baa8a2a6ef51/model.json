@@ -40,10 +40,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 565141,
-    "sha256": "df69928e2a02fbe6431c7be36b9f82b8586c538eceebfd38f4c2c3e78deb8aaa"
+    "bytes": 693843,
+    "sha256": "a2421f9723197319256cd4f5fa4c9953a06d011e76b2af194eda19f175f27ce7"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4116_blkkgt_witch#5.ab",

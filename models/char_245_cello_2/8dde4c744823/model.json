@@ -59,7 +59,7 @@
     "bytes": 117232,
     "sha256": "25ebfcd971698fc379b39a0ccfc97e8c404b45ae32e2016db7b962f4ef5db78b"
   },
-  "layersVersion": 2,
+  "layersVersion": 3,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_245_cello_2.ab",
