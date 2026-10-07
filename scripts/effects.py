@@ -22,7 +22,11 @@ maths) is the 'noise' family.
 
 Time: every `speed` is the shader's own scroll, fract(_Time.y x speed) as the GLSL takes it; every
 `scroll` is a UV scroll script's (offset += speed x dt, not wrapped). Both are Unity UV units per
-second; the site adds them in Unity space and flips v only when it samples.
+second; the site adds them in Unity space and flips v only when it samples. A speed an Animator drives
+is not a speed any more: the layer's frames carry its integral over the layer's own time (an `offset`
+parameter, parameters()), which the site wraps as the GLSL wraps t x speed. The game itself multiplies
+the moving speed by _Time.y, the seconds since the client started, so a speed that changes makes the
+texture jump there; the integral is the motion the curve describes.
 """
 from __future__ import annotations
 
@@ -69,15 +73,26 @@ def _st(m, name: str) -> list:
     return [*(env.get('scale') or [1.0, 1.0]), *(env.get('offset') or [0.0, 0.0])]
 
 
-def _map(m, name: str, speed=(0.0, 0.0), **extra) -> dict:
-    return {'name': name, 'tex': m.texture(name), 'st': _st(m, name), 'speed': [float(speed[0]), float(speed[1])], **extra}
+def _map(m, name: str, speed=(0.0, 0.0), speed_names=None, **extra) -> dict:
+    """A texture map; `speed_names`: where its speed comes from, [(property, component or None, scale)] for
+    u and v, or None when it has no speed property (its offset parameter, parameters())."""
+    return {'name': name, 'tex': m.texture(name), 'st': _st(m, name), 'speed': [float(speed[0]), float(speed[1])], 'speed_names': speed_names, **extra}
+
+
+def _speeds(u: str, v: str) -> list:
+    return [(u, None, 1.0), (v, None, 1.0)]
+
+
+def _tween(first: int) -> list:
+    """Two components of _UVTween (a vector: xy the main texture's speed, zw the second map's)."""
+    return [('_UVTween', first, 1.0), ('_UVTween', first + 1, 1.0)]
 
 
 def _colour(m, name: str, default: float = 0.5) -> list:
     return list(m.colors.get(name) or [m.shader.defaults.get(name, default) if m.shader else default] * 4)
 
 
-def _dissolve(m, texture: str, amount: str, border: str, *, speed=(0.0, 0.0), fract=False, amount_default=0.5, border_default=0.1,
+def _dissolve(m, texture: str, amount: str, border: str, *, speed=(0.0, 0.0), speed_names=None, fract=False, amount_default=0.5, border_default=0.1,
               animated=frozenset()):
     """(map or None, constant alpha factor): a dissolve with a texture is a map; without one (white)
     or with nothing to dissolve it is a constant. One whose amount or border an Animator drives is
@@ -98,7 +113,7 @@ def _dissolve(m, texture: str, amount: str, border: str, *, speed=(0.0, 0.0), fr
         return None, 0.0  # fully dissolved (k = -1 from amount 1 on): nothing shows
     if not m.texture(texture):
         return None, dissolve_constant(a, b)  # only its tiling moves: still a constant
-    return _map(m, texture, speed, fract=fract, amount=a, border=b, amount_name=amount, border_name=border), 1.0
+    return _map(m, texture, speed, speed_names, fract=fract, amount=a, border=b, amount_name=amount, border_name=border), 1.0
 
 
 def _keywords(m) -> set:
@@ -128,25 +143,29 @@ def describe(m, animated=frozenset()) -> dict:
     if name in DISTURB2:
         return _noise(m, DISTURB2[name], keywords)
     out = {'family': PARTICLE, 'color_property': '_MainColor', 'rgb_scale': 1.0, 'alpha_scale': 1.0, 'opacity': 1.0,
-           'main': {'speed': [0.0, 0.0], 'fract': False}, 'distort': None, 'dissolve': [], 'edge': None, 'ramp': None, 'vertex': None}
+           'main': {'speed': [0.0, 0.0], 'fract': False, 'speed_names': None}, 'distort': None, 'dissolve': [], 'edge': None, 'ramp': None, 'vertex': None}
 
     if name in DISTURB or name in RAM or name in VERTEX:
         out['opacity'] = m.float('_Opacity', 1.0)
         out['main']['speed'] = [m.float('_MainUSpeed'), m.float('_MainVSpeed')]
+        out['main']['speed_names'] = _speeds('_MainUSpeed', '_MainVSpeed')
         dissolve, constant = _dissolve(m, '_DissolveTex', '_Amount', '_BorderWidth', speed=(m.float('_DissolveUSpeed'), m.float('_DissolveVSpeed')),
-                                       animated=animated)
+                                       speed_names=_speeds('_DissolveUSpeed', '_DissolveVSpeed'), animated=animated)
         out['alpha_scale'] *= constant
         if dissolve:
             out['dissolve'].append(dissolve)
         iu, iv = m.float('_IntensityU'), m.float('_IntensityV')
-        influence = 1.0 if name in VERTEX else m.float('_DisturbScale', 1.0) if name in DISTURB else m.float('_DisturbInfluenceMainUV', 1.0)
+        influence_name = None if name in VERTEX else '_DisturbScale' if name in DISTURB else '_DisturbInfluenceMainUV'
+        influence = 1.0 if influence_name is None else m.float(influence_name, 1.0)
         dissolve_influence = m.float('_DisturbInfluenceDissolveUV')
         moving = bool({'_IntensityU', '_IntensityV', '_DisturbTex_ST'} & animated)
-        if m.texture('_DisturbTex') and (iu or iv or moving) and (influence or (dissolve and dissolve_influence)):
+        influenced = bool({influence_name, '_DisturbInfluenceDissolveUV'} & animated)
+        if m.texture('_DisturbTex') and (iu or iv or moving) and (influence or (dissolve and dissolve_influence) or influenced):
             weight = _map(m, '_WeightTex') if name in DISTURB and m.texture('_WeightTex') else None
             out['distort'] = {'space': 'main', 'main': influence, 'dissolve': dissolve_influence if dissolve else 0.0,
-                              'maps': [_map(m, '_DisturbTex', (m.float('_DisturbUSpeed'), m.float('_DisturbVSpeed')), anchor=[0.0, 0.0], intensity=[iu, iv],
-                                            intensity_names=['_IntensityU', '_IntensityV'])],
+                              'main_name': influence_name, 'dissolve_name': '_DisturbInfluenceDissolveUV' if dissolve else None,
+                              'maps': [_map(m, '_DisturbTex', (m.float('_DisturbUSpeed'), m.float('_DisturbVSpeed')), _speeds('_DisturbUSpeed', '_DisturbVSpeed'),
+                                            anchor=[0.0, 0.0], intensity=[iu, iv], intensity_names=['_IntensityU', '_IntensityV'])],
                               'weight': weight}
         if name in RAM or name in VERTEX:
             if m.texture('_RamTex'):
@@ -154,7 +173,8 @@ def describe(m, animated=frozenset()) -> dict:
         if name in VERTEX:
             intensity = list((m.colors.get('_VertexDisturbIntensity') or [0.0, 0.0, 0.0, 0.0])[:3])
             if m.texture('_VertexDisturbTex') and (any(intensity) or {'_VertexDisturbIntensity', '_VertexDisturbTex_ST'} & animated):
-                out['vertex'] = _map(m, '_VertexDisturbTex', (m.float('_VertexDisturbUSpeed'), m.float('_VertexDisturbVSpeed')), intensity=intensity,
+                out['vertex'] = _map(m, '_VertexDisturbTex', (m.float('_VertexDisturbUSpeed'), m.float('_VertexDisturbVSpeed')),
+                                     _speeds('_VertexDisturbUSpeed', '_VertexDisturbVSpeed'), intensity=intensity,
                                      weight=_map(m, '_VertexDisturbWeightTex') if m.texture('_VertexDisturbWeightTex') else None)
         return out
 
@@ -164,11 +184,12 @@ def describe(m, animated=frozenset()) -> dict:
         out['rgb_scale'] = out['alpha_scale'] = gain
         tween = m.colors.get('_UVTween') or [0.0, 0.0, 0.0, 0.0]
         out['main']['speed'] = [tween[0], tween[1]]
+        out['main']['speed_names'] = _tween(0)
         weighted = '_WEIGHT_ON' in keywords and m.texture('_WeightTex')
         maps, constant = [], [0.0, 0.0]
-        sources = [('_DisturTex', '_IntensityU', '_IntensityV', '_AnchorU', '_AnchorV', None, (tween[2], tween[3])),
-                   ('_DisturTex_02', '_IntensityU_02', '_IntensityV_02', '_AnchorU_02', '_AnchorV_02', '_ToggleUseDisturb2', (0.0, 0.0))]
-        for texture, iu_, iv_, au_, av_, toggle, speed in sources:
+        sources = [('_DisturTex', '_IntensityU', '_IntensityV', '_AnchorU', '_AnchorV', None, (tween[2], tween[3]), _tween(2)),
+                   ('_DisturTex_02', '_IntensityU_02', '_IntensityV_02', '_AnchorU_02', '_AnchorV_02', '_ToggleUseDisturb2', (0.0, 0.0), None)]
+        for texture, iu_, iv_, au_, av_, toggle, speed, speed_names in sources:
             if toggle and not m.float(toggle) > 0:
                 continue
             iu, iv, au, av = m.float(iu_), m.float(iv_), m.float(au_, 0.5), m.float(av_, 0.5)
@@ -176,11 +197,11 @@ def describe(m, animated=frozenset()) -> dict:
             if not (iu or iv or moving):
                 continue
             if m.texture(texture):
-                maps.append(_map(m, texture, speed, anchor=[au, av], intensity=[iu, iv], intensity_names=[iu_, iv_]))
+                maps.append(_map(m, texture, speed, speed_names, anchor=[au, av], intensity=[iu, iv], intensity_names=[iu_, iv_]))
             elif weighted or moving:
                 # An unbound noise reads 0: a constant offset, scaled by the weight texture per texel.
-                maps.append({'name': texture, 'tex': None, 'st': [1.0, 1.0, 0.0, 0.0], 'speed': [0.0, 0.0], 'anchor': [au, av], 'intensity': [iu, iv],
-                             'intensity_names': [iu_, iv_]})
+                maps.append({'name': texture, 'tex': None, 'st': [1.0, 1.0, 0.0, 0.0], 'speed': [0.0, 0.0], 'speed_names': None, 'anchor': [au, av],
+                             'intensity': [iu, iv], 'intensity_names': [iu_, iv_]})
             else:
                 constant[0] -= au * iu
                 constant[1] -= av * iv
@@ -208,8 +229,9 @@ def describe(m, animated=frozenset()) -> dict:
     if name in DISSOLVE or name in DISSOLVE_TWEEN:
         tween = m.colors.get('_UVTween') or [0.0, 0.0, 0.0, 0.0] if name in DISSOLVE_TWEEN else [0.0, 0.0, 0.0, 0.0]
         fract = name in DISSOLVE_TWEEN
-        out['main'] = {'speed': [tween[0], tween[1]], 'fract': fract}
-        dissolve, factor = _dissolve(m, '_DissolveTex', '_Amount', '_BorderWidth', speed=(tween[2], tween[3]), fract=fract, animated=animated)
+        out['main'] = {'speed': [tween[0], tween[1]], 'fract': fract, 'speed_names': _tween(0) if fract else None}
+        dissolve, factor = _dissolve(m, '_DissolveTex', '_Amount', '_BorderWidth', speed=(tween[2], tween[3]), speed_names=_tween(2) if fract else None,
+                                     fract=fract, animated=animated)
         out['alpha_scale'] *= factor
         if dissolve:
             out['dissolve'].append(dissolve)
@@ -230,12 +252,13 @@ def describe(m, animated=frozenset()) -> dict:
         out['color_property'] = '_MainColor'
         out['opacity'] = m.float('_Opacity', 1.0)
         out['main']['speed'] = [m.float('_MainUSpeed'), m.float('_MainVSpeed')]
+        out['main']['speed_names'] = _speeds('_MainUSpeed', '_MainVSpeed')
         use = m.float('_UseDissolveTex')
         if use not in (0.0, 1.0):
             raise Unsupported(f'dissolve blended {use:g}')
         if use:
             dissolve, factor = _dissolve(m, '_DissolveTex', '_DissolveIntensity', '_BorderWidth', speed=(m.float('_DissolveUSpeed'), m.float('_DissolveVSpeed')),
-                                         animated=animated)
+                                         speed_names=_speeds('_DissolveUSpeed', '_DissolveVSpeed'), animated=animated)
             out['alpha_scale'] *= factor
             if dissolve:
                 out['dissolve'].append(dissolve)
@@ -260,22 +283,42 @@ def _noise(m, mode: str, keywords: set) -> dict:
 
 
 def parameters(effect: dict) -> dict:
-    """Where an animated material property's values go: {layers.json path: (kind, [property names])}.
-    kind 'float' (one value per property), 'vector' (a property's x, y, z, w; width given by the path)
-    or 'color'. Paths: dissolve.<i>.amount|border|st, distort.maps.<i>.st|intensity, distort.weight.st,
-    ramp.st, vertex.st|intensity, vertex.weight.st, edge.color. Disturb2's are not animated."""
+    """Where an animated material property's values go: {layers.json path: (kind, properties)}.
+    kind 'float' (one value per property name), 'vector' (a property's x, y, z, w; width given by the
+    path), 'color', or 'offset': a map's UV offset, the integral over the layer's own time of the speed
+    its properties give ([(property, component or None, scale)] for u and v), which replaces t x speed.
+    Paths: main.offset, dissolve.<i>.amount|border|st|offset, distort.main|dissolve,
+    distort.maps.<i>.st|intensity|offset, distort.weight.st, ramp.st, vertex.st|intensity|offset,
+    vertex.weight.st, edge.color; Disturb2's noise1, noise2, glow and noise.offset. An offset's frames carry
+    [u, v, speed u, speed v]: the integral, and the speed that carries it on past the timeline's end."""
     out = {}
-    if effect['family'] != PARTICLE:
+    if effect['family'] == NOISE:
+        out['noise1'] = ('vector', ['_Noise1Param'])
+        out['noise2'] = ('vector', ['_Noise2Param'])
+        if effect.get('glow') is not None:
+            out['glow'] = ('color', ['_GlowColor'])
+        # Disturb2 scrolls each noise channel by _Time.x (seconds / 20) x its param's y.
+        out['noise.offset'] = ('offset', [('_Noise1Param', 1, 0.05), ('_Noise2Param', 1, 0.05)])
         return out
+    if (effect.get('main') or {}).get('speed_names'):
+        out['main.offset'] = ('offset', effect['main']['speed_names'])
     for i, d in enumerate(effect.get('dissolve') or []):
         out[f'dissolve.{i}.amount'] = ('float', [d['amount_name']])
         out[f'dissolve.{i}.border'] = ('float', [d['border_name']])
         out[f'dissolve.{i}.st'] = ('vector', [d['name'] + '_ST'])
+        if d.get('speed_names'):
+            out[f'dissolve.{i}.offset'] = ('offset', d['speed_names'])
     distort = effect.get('distort')
     if distort:
+        if distort.get('main_name'):
+            out['distort.main'] = ('float', [distort['main_name']])
+        if distort.get('dissolve_name'):
+            out['distort.dissolve'] = ('float', [distort['dissolve_name']])
         for i, d in enumerate(distort['maps']):
             if d.get('tex'):
                 out[f'distort.maps.{i}.st'] = ('vector', [d['name'] + '_ST'])
+                if d.get('speed_names'):
+                    out[f'distort.maps.{i}.offset'] = ('offset', d['speed_names'])
             out[f'distort.maps.{i}.intensity'] = ('float', list(d['intensity_names']))
         if distort.get('weight'):
             out['distort.weight.st'] = ('vector', [distort['weight']['name'] + '_ST'])
@@ -285,6 +328,8 @@ def parameters(effect: dict) -> dict:
     if vertex:
         out['vertex.st'] = ('vector', [vertex['name'] + '_ST'])
         out['vertex.intensity'] = ('vector', ['_VertexDisturbIntensity'])
+        if vertex.get('speed_names'):
+            out['vertex.offset'] = ('offset', vertex['speed_names'])
         if vertex.get('weight'):
             out['vertex.weight.st'] = ('vector', [vertex['weight']['name'] + '_ST'])
     if effect.get('edge'):
@@ -292,8 +337,36 @@ def parameters(effect: dict) -> dict:
     return out
 
 
-# How many numbers each animated path adds to a frame.
-WIDTHS = {'amount': 1, 'border': 1, 'st': 4, 'intensity': 2, 'color': 4}
+def property_names(kind: str, props: list) -> list[str]:
+    """The material property names a parameter (parameters()) reads."""
+    return [p[0] for p in props] if kind == 'offset' else list(props)
+
+
+# Speeds (and the like) of stages an effect may leave out; when its description has no such stage the
+# property changes nothing it draws.
+STAGE_PROPERTIES = {'_DisturbUSpeed', '_DisturbVSpeed', '_DissolveUSpeed', '_DissolveVSpeed', '_VertexDisturbUSpeed', '_VertexDisturbVSpeed',
+                    '_DisturbScale', '_DisturbInfluenceMainUV', '_DisturbInfluenceDissolveUV'}
+# Properties a family's GLSL never reads although its shader declares them (Disturb2 samples its noise
+# at the main UV scaled by its params, never with _DisturTex_ST).
+UNREAD = {NOISE: {'_DisturTex_ST'}}
+# Components of a vector the GLSL never reads (VertexDisturb moves vertices by _VertexDisturbIntensity.xyz).
+UNREAD_COMPONENTS = {'_VertexDisturbIntensity': {3}}
+
+
+def inert(effect: dict | None, prop: str, component: int | None = None) -> bool:
+    """Whether an animated property (or one component of it) changes nothing this effect draws: a stage's
+    speed or influence where the description has no such stage, or what the family's GLSL does not read."""
+    if effect is None:
+        return False
+    if prop in UNREAD.get(effect['family'], ()) or component in UNREAD_COMPONENTS.get(prop, ()):
+        return True
+    if prop in STAGE_PROPERTIES:
+        return not any(prop in property_names(kind, props) for kind, props in parameters(effect).values())
+    return False
+
+
+# How many numbers each animated path adds to a frame (by its last part).
+WIDTHS = {'amount': 1, 'border': 1, 'st': 4, 'intensity': 2, 'color': 4, 'offset': 4, 'main': 1, 'dissolve': 1, 'noise1': 4, 'noise2': 4, 'glow': 4}
 
 
 def width(path: str) -> int:

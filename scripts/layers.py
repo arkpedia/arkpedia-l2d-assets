@@ -31,9 +31,12 @@ import entrance_camera as ec
 
 SCHEMA_VERSION = 1
 # model.json `layersVersion`: what layers.json holds. 1 (or absent): plain layers only. 2: effect entries,
-# exact upgrades, effectTextures and effectBounds, and textures from the shared FX bundles. The sync
-# re-exports the layers of a folder written by an older version (scripts/sync.py).
-LAYERS_VERSION = 2
+# exact upgrades, effectTextures and effectBounds, and textures from the shared FX bundles. 3: `tilted`
+# entries (a mesh that turns in depth while it moves: its own 3D vertices and, per frame, the 2x4
+# orthographic projection of its transform), animated scroll speeds as integrated `offset` parameters,
+# Disturb2's animated noise and glow, and animated float and _ST properties read as the clips bind them.
+# The sync re-exports the layers of a folder written by an older version (scripts/sync.py).
+LAYERS_VERSION = 3
 FPS = 30
 # The built-in meshes in Unity's "unity default resources" (by path id): only the Quad is used by
 # drawable layers (the Plane appears 8 times, all left out).
@@ -48,6 +51,17 @@ TRIGGERS = ('Idle', 'Interact', 'Special', 'Start')
 MAX_VERTICES = 65535  # 16-bit indices on the site
 # Texels at or above this alpha count as showing, for the frame the site opens on (layers.json bounds).
 OPAQUE_ALPHA = 8
+# A material property an Animator drives is bound as crc32(name) & 0x0FFFFFFF with its kind in the top
+# four bits: 8 a float, 4-7 a colour's r, g, b, a, 0-3 a vector's x, y, z, w (a texture's _ST). Counted
+# over every Renderer curve of the 88 Global bundles: 815 floats at 8, 2,221 _ST components at 0-3,
+# 10,532 colour channels at 4-7. A vector property saved as a colour (Disturb2's _Noise1Param) binds as
+# one, so a component is looked up both ways.
+FLOAT_BINDING = 8
+# The illustration is drawn by an orthographic camera (the controller's _cameraSize is its half height;
+# no illustration prefab has a camera of its own), so a mesh's depth only decides its draw order and which
+# of its faces are culled. Two frames' projections count as one when no vertex moves further apart than
+# this (skeleton units) between them.
+PROJECTION_TOLERANCE = 0.01
 # Decimation tolerances: positions in skeleton units, colours in 0-1 (x2 tint scale), UV.
 POSITION_TOLERANCE = 0.25
 COLOUR_TOLERANCE = 0.004
@@ -241,9 +255,29 @@ def read_material(tree: dict, *, read, external_of, shaders: dict) -> Material:
                     textures=textures, queue=queue)
 
 
+def binding_keys(prop: str, component: int | None = None) -> tuple:
+    """The clip binding attributes a material property (component None: a float) can be animated under."""
+    h = ec.crc(prop) & 0x0FFFFFFF
+    if component is None:
+        return (h | (FLOAT_BINDING << 28),)
+    return (h | ((4 + component) << 28), h | (component << 28))
+
+
+def declared(m: Material, hash28: int) -> bool:
+    """Whether the material's shader declares the property a binding names (or the texture whose _ST it
+    is). An Animator that drives a property the shader does not have changes nothing the game draws."""
+    if m.shader is None or not m.shader.defaults:
+        return True  # nothing to tell by: assume it does
+    for name in m.shader.defaults:
+        if isinstance(name, str) and hash28 in (ec.crc(name) & 0x0FFFFFFF, ec.crc(name + '_ST') & 0x0FFFFFFF):
+            return True
+    return False
+
+
 def property_name(m: Material, hash28: int) -> str:
     """The material property a curve's attribute hash names (crc32 low 28 bits), or the hash."""
-    for name in [*m.floats, *m.colors, *(f'{t}_ST' for t in m.textures), *(m.shader.defaults if m.shader else {})]:
+    defaults = list(m.shader.defaults) if m.shader else []
+    for name in [*m.floats, *m.colors, *(f'{t}_ST' for t in m.textures), *defaults, *(f'{t}_ST' for t in defaults if isinstance(t, str))]:
         if isinstance(name, str) and ec.crc(name) & 0x0FFFFFFF == hash28:
             return name
     return f'#{hash28:07x}'
@@ -388,7 +422,7 @@ def effect_look(m: Material, animated=frozenset()) -> Look:
     with `params` (effects.parameters) and `animated_paths`, the parameters an Animator drives."""
     effect = effects.describe(m, frozenset(animated))
     effect['params'] = effects.parameters(effect)
-    effect['animated_paths'] = [path for path, (_, props) in sorted(effect['params'].items()) if set(props) & set(animated)]
+    effect['animated_paths'] = [path for path, (kind, props) in sorted(effect['params'].items()) if set(effects.property_names(kind, props)) & set(animated)]
     blend = BLENDS.get((int(m.factor(m.shader.src)), int(m.factor(m.shader.dst))), f'{m.factor(m.shader.src):g},{m.factor(m.shader.dst):g}')
     main = m.textures.get('_MainTex') or {'tex': None, 'scale': [1, 1], 'offset': [0, 0]}
     prop = effect['color_property']
@@ -558,6 +592,41 @@ class LayerExport:
 
 def _component_trees(scene: ec._Scene, go: int):
     return [(kind, path_id, scene.read(path_id)[1]) for kind, path_id in scene.components(go)]
+
+
+def determinant(m) -> float:
+    """The determinant of a 3x4 matrix's 3x3 part."""
+    return (m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) - m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0])
+            + m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]))
+
+
+def common_projection(timelines: list, points: list, tolerance: float):
+    """(L0, factors) when every frame's 2x3 part L factors through the first frame's L0 as L = A L0 (one
+    flattening of the mesh holds throughout; factors: each timeline's A per frame, 2x2), or None when
+    the mesh turns in depth so that none does. Frames are [t, a, b, c, d, ..., e, f], e and f the depth
+    column (last); a residual may move no point of `points` (the mesh's vertices) more than `tolerance`
+    in the frames' units."""
+    f0 = timelines[0][0]
+    l0 = [[f0[1], f0[2], f0[-2]], [f0[3], f0[4], f0[-1]]]
+    g = [[sum(l0[i][k] * l0[j][k] for k in range(3)) for j in range(2)] for i in range(2)]
+    det = g[0][0] * g[1][1] - g[0][1] * g[1][0]
+    if abs(det) < 1e-12:
+        return None
+    gi = [[g[1][1] / det, -g[0][1] / det], [-g[1][0] / det, g[0][0] / det]]
+    pinv = [[sum(l0[k][i] * gi[k][j] for k in range(2)) for j in range(2)] for i in range(3)]  # 3x2
+    reach = max((math.sqrt(p[0] ** 2 + p[1] ** 2 + p[2] ** 2) for p in points), default=1.0) or 1.0
+    factors = []
+    for frames in timelines:
+        out = []
+        for f in frames:
+            l = [[f[1], f[2], f[-2]], [f[3], f[4], f[-1]]]  # noqa: E741
+            a = [[sum(l[i][k] * pinv[k][j] for k in range(3)) for j in range(2)] for i in range(2)]
+            back = [[sum(a[i][k] * l0[k][j] for k in range(2)) for j in range(3)] for i in range(2)]
+            if max(abs(back[i][j] - l[i][j]) for i in range(2) for j in range(3)) * reach > tolerance:
+                return None
+            out.append(a)
+        factors.append(out)
+    return l0, factors
 
 
 def _matrix_scale(k) -> float:
@@ -850,21 +919,35 @@ class _Exporter:
                     out.add(property_name(material, ec.material_binding(attribute)[0]))
         return out
 
+    def inert(self, material: Material, look_: Look, attribute: int) -> bool:
+        """Whether an animated material property changes nothing the game draws: one the shader does not
+        declare, the tiling of a texture the material does not bind (Unity's uniform default), or one the
+        effect does not use (effects.inert)."""
+        h = ec.material_binding(attribute)[0]
+        if not declared(material, h):
+            return True
+        name = property_name(material, h)
+        if name.endswith('_ST') and material.texture(name[:-3]) is None:
+            return True
+        kind = attribute >> 28
+        return effects.inert(look_.effect, name, kind % 4 if kind < FLOAT_BINDING else None)
+
     def check_curves(self, scene, tr, look_: Look, follower, material: Material):
-        """Every curve that touches this layer must be one the export reproduces."""
+        """Every curve that touches this layer must be one the export reproduces (or one that changes nothing)."""
         colour_hash = ec.crc(look_.color_property) & 0x0FFFFFFF
         known = {colour_hash, ec.crc('_MainTex_ST') & 0x0FFFFFFF}
         if look_.color_property == '_MainColor':
             known.add(ec.crc('_Opacity') & 0x0FFFFFFF)
         if look_.effect:
             # An effect's animated parameters ride on its frames (extra_values).
-            known |= {ec.crc(prop) & 0x0FFFFFFF for path in look_.effect.get('animated_paths') or [] for prop in look_.effect['params'][path][1]}
+            known |= {ec.crc(prop) & 0x0FFFFFFF for path in look_.effect.get('animated_paths') or []
+                      for prop in effects.property_names(*look_.effect['params'][path])}
         for (target, type_id, attribute) in scene.float_curves:
             if target != tr:
                 continue
             if (type_id == ec.GAMEOBJECT and attribute == ec.IS_ACTIVE) or (type_id == ec.RENDERER and attribute == ec.ENABLED):
                 continue
-            if type_id == ec.RENDERER and ec.material_binding(attribute)[0] in known:
+            if type_id == ec.RENDERER and (ec.material_binding(attribute)[0] in known or self.inert(material, look_, attribute)):
                 continue
             if type_id == ec.RENDERER:
                 raise LayerError(f'animated material property {property_name(material, ec.material_binding(attribute)[0])}')
@@ -906,11 +989,74 @@ class _Exporter:
                 note(entries)
         return list(clips.values())
 
+    def material_value(self, scene, tr, prop: str, component: int | None, t: float, default: float) -> float:
+        """A material property (a float, or one component of a colour or vector) on tr's renderer at time t,
+        as the scene's clips drive it; `default` when none does. Notes the curve as read (check_read)."""
+        for key in binding_keys(prop, component):
+            if scene.float_curves.get((tr, ec.RENDERER, key)):
+                self.read_curves.add(key)
+                return scene.float_value(tr, ec.RENDERER, key, t, default)
+        return default
+
+    def check_read(self, tr, material: Material, look_: Look):
+        """Every material curve on the layer that check_curves let through was read by the sampling: a
+        curve read under the wrong binding would otherwise draw its static value without a word."""
+        for scene in (self.scene, *self.state_scenes.values()):
+            for (target, type_id, attribute) in scene.float_curves:
+                if target != tr or type_id != ec.RENDERER or attribute == ec.ENABLED or attribute in self.read_curves:
+                    continue
+                if not self.inert(material, look_, attribute):
+                    raise LayerError(f'animated material property {property_name(material, ec.material_binding(attribute)[0])} '
+                                     f'(binding {attribute >> 28}) is not read')
+
+    def static_value(self, material: Material, prop: str, component: int | None) -> float:
+        """A property's value in the material (a float, or one component of a colour, vector or _ST)."""
+        if component is None:
+            return material.float(prop)
+        value = material.colors.get(prop)
+        if value:
+            return float(value[component])
+        if prop.endswith('_ST'):
+            env = material.textures.get(prop[:-3]) or {}
+            return float([*(env.get('scale') or [1.0, 1.0]), *(env.get('offset') or [0.0, 0.0])][component])
+        return float(material.shader.defaults.get(prop, 0.0)) if material.shader and component == 0 else 0.0
+
+    def integrals(self, scene, tr, look_: Look, material: Material, times: list) -> dict:
+        """For each animated `offset` parameter, [u, v, speed u, speed v] at each time: the integral from 0
+        of the speed its properties give (Simpson's rule, 8 steps a frame; the curves are cubic between
+        keys), and the speed itself, with which a reader carries the offset on past the timeline's end."""
+        out = {}
+        for path in (look_.effect or {}).get('animated_paths') or []:
+            kind, props = look_.effect['params'][path]
+            if kind != 'offset':
+                continue
+
+            def speed(t, props=props):
+                return [scale * self.material_value(scene, tr, prop, component, t, self.static_value(material, prop, component))
+                        for prop, component, scale in props]
+            total = [0.0, 0.0]
+            values = [[0.0, 0.0, *speed(times[0])]]
+            for a, b in zip(times, times[1:]):
+                steps = 8
+                h = (b - a) / steps
+                acc = [0.0, 0.0]
+                for k in range(steps + 1):
+                    w = 1 if k in (0, steps) else (4 if k % 2 else 2)
+                    v = speed(a + k * h)
+                    acc = [acc[0] + w * v[0], acc[1] + w * v[1]]
+                total = [total[0] + acc[0] * h / 3, total[1] + acc[1] * h / 3]
+                values.append([*total, *v])
+            out[path] = values
+        return out
+
     def sample(self, scene, tr, look_: Look, follower, material: Material, static: bool = False):
-        """Frames [t, a, b, c, d, tx, ty, r, g, b, alpha, active, su, ou, sv, ov] (the matrix to skeleton
-        units, or to the follower's units under a bone follower; colour with the x2 tint gain; active
-        0/1; the UV map on the exported UVs) at FPS over the clips that drive the layer, and the timeline:
-        (frames, length, loop, loopFrom, animated). Only t = 0 when nothing animates it or `static`."""
+        """Frames [t, a, b, c, d, tx, ty, r, g, b, alpha, active, su, ou, sv, ov, *parameters, e, f] (the
+        matrix to skeleton units, or to the follower's units under a bone follower, with e and f its depth
+        column, which entry() folds in or moves; colour with the x2 tint gain; active 0/1; the UV map on the
+        exported UVs; the effect's animated parameters) at FPS over the clips that drive the layer, and the
+        timeline: (frames, length, loop, loopFrom, animated). Only t = 0 when nothing animates it or
+        `static`. Sets self.tilted (the depth column reaches the screen) and self.dets (the signs of the
+        frames' 3x3 determinants: Unity culls the other faces of a mirrored object)."""
         self.check_curves(scene, tr, look_, follower, material)
         clips = [] if static else self.clips_of(scene, tr, follower)
         looping = [(c.stop - c.start) / c.speed for c in clips if c.loop and c.stop > c.start]
@@ -926,18 +1072,17 @@ class _Exporter:
             loop_from, length = 0.0, prelude
         count = int(round(length * FPS))
         times = [round(i / FPS, 4) for i in range(count + 1)] if count else [0.0]
-        colour_hash = ec.crc(look_.color_property) & 0x0FFFFFFF
-        st_hash = ec.crc('_MainTex_ST') & 0x0FFFFFFF
-        opacity_hash = ec.crc('_Opacity') & 0x0FFFFFFF
         links = self.chain(tr)
         switched = self.switched_links(tr)
         below = links[links.index(follower[0]) + 1:] if follower else None
         renderer = self.renderer_tree(tr)
         st0 = look_.st
-        opacity_animated = look_.color_property == '_MainColor' and bool(scene.float_curves.get((tr, ec.RENDERER, opacity_hash)))
+        opacity_animated = look_.color_property == '_MainColor' and any(scene.float_curves.get((tr, ec.RENDERER, k)) for k in binding_keys('_Opacity'))
+        offsets = self.integrals(scene, tr, look_, material, times)
         frames = []
+        dets = set()
         tilted = False  # depth reaches the screen: a rotation out of the plane
-        for t in times:
+        for index, t in enumerate(times):
             if below is not None:
                 m = ec.IDENTITY
                 for link in below:
@@ -946,9 +1091,9 @@ class _Exporter:
             else:
                 m = self.relative(scene, tr, t)
                 factor = 1.0 / self.unit
-            colour = [scene.float_value(tr, ec.RENDERER, colour_hash | ((4 + c) << 28), t, look_.color[c]) for c in range(4)]
-            opacity = scene.float_value(tr, ec.RENDERER, opacity_hash, t, look_.opacity) if opacity_animated else look_.opacity
-            st = [scene.float_value(tr, ec.RENDERER, st_hash | ((4 + c) << 28), t, st0[c]) for c in range(4)]
+            colour = [self.material_value(scene, tr, look_.color_property, c, t, look_.color[c]) for c in range(4)]
+            opacity = self.material_value(scene, tr, '_Opacity', None, t, look_.opacity) if opacity_animated else look_.opacity
+            st = [self.material_value(scene, tr, '_MainTex_ST', c, t, st0[c]) for c in range(4)]
             active = 1.0
             for link in switched:
                 static_flag = 1.0 if self.scene.tree(self.scene.go_of[link], 'GameObject').get('m_IsActive', 1) else 0.0
@@ -962,40 +1107,43 @@ class _Exporter:
             sv = st[1] / st0[1] if st0[1] else 1.0
             if abs(m[0][2]) > 1e-6 or abs(m[1][2]) > 1e-6:
                 tilted = True
+            det = determinant(m)
+            if abs(det) > 1e-12:
+                dets.add(det > 0)
             frames.append([t, m[0][0] * factor, m[0][1] * factor, m[1][0] * factor, m[1][1] * factor, m[0][3] * factor, m[1][3] * factor,
                            2 * colour[0] * look_.rgb_scale, 2 * colour[1] * look_.rgb_scale, 2 * colour[2] * look_.rgb_scale,
                            2 * colour[3] * look_.alpha_scale * opacity, active,
-                           su, st[2] - st0[2] * su, sv, 1 - sv - st[3] + st0[3] * sv, *self.extra_values(scene, tr, look_, material, t)])
+                           su, st[2] - st0[2] * su, sv, 1 - sv - st[3] + st0[3] * sv, *self.extra_values(scene, tr, look_, material, t, offsets, index),
+                           m[0][2] * factor, m[1][2] * factor])
         animated = len(frames) > 1 and any(f[1:] != frames[0][1:] for f in frames)
         self.tilted = tilted
+        self.dets = dets
         return frames, round(length, 4), bool(looping), round(loop_from, 4), animated
 
-    def extra_values(self, scene, tr, look_: Look, material: Material, t: float) -> list:
+    def extra_values(self, scene, tr, look_: Look, material: Material, t: float, offsets: dict, index: int) -> list:
         """An effect's animated parameters at time t, in the order of its animated_paths (effects.width
-        numbers each): float properties by name, vector and colour ones by component."""
+        numbers each): float properties by name, vector and colour ones by component, offsets integrated."""
         if not look_.effect or not look_.effect.get('animated_paths'):
             return []
         out = []
         for path in look_.effect['animated_paths']:
             kind, props = look_.effect['params'][path]
-            if kind == 'float':
-                out += [scene.float_value(tr, ec.RENDERER, ec.crc(prop) & 0x0FFFFFFF, t, material.float(prop)) for prop in props]
-                continue
-            prop = props[0]
-            if prop.endswith('_ST'):
-                env = material.textures.get(prop[:-3]) or {}
-                static = [*(env.get('scale') or [1.0, 1.0]), *(env.get('offset') or [0.0, 0.0])]
+            if kind == 'offset':
+                out += offsets[path][index]
+            elif kind == 'float':
+                out += [self.material_value(scene, tr, prop, None, t, material.float(prop)) for prop in props]
             else:
-                static = list(material.colors.get(prop) or [material.shader.defaults.get(prop, 0.0) if material.shader else 0.0] * 4)
-            out += [scene.float_value(tr, ec.RENDERER, (ec.crc(prop) & 0x0FFFFFFF) | ((4 + c) << 28), t, static[c]) for c in range(effects.width(path))]
+                prop = props[0]
+                out += [self.material_value(scene, tr, prop, c, t, self.static_value(material, prop, c)) for c in range(effects.width(path))]
         return out
 
-    def decimate(self, frames, extent: float, to_skeleton: float) -> list:
+    def decimate(self, frames, extent: float, to_skeleton: float, depth: bool = False) -> list:
         """Drops frames a straight line reproduces, with tolerances from the layer's size so no vertex
-        strays more than POSITION_TOLERANCE skeleton units."""
+        strays more than POSITION_TOLERANCE skeleton units. `depth`: the frames carry the depth column
+        (e, f) at 16 and 17, before the parameters."""
         matrix_tol = POSITION_TOLERANCE / max(extent * to_skeleton, 1e-6)
         move_tol = POSITION_TOLERANCE / to_skeleton
-        tolerances = [matrix_tol] * 4 + [move_tol] * 2 + [COLOUR_TOLERANCE] * 4 + [0.01] + [UV_TOLERANCE] * 4
+        tolerances = [matrix_tol] * 4 + [move_tol] * 2 + [COLOUR_TOLERANCE] * 4 + [0.01] + [UV_TOLERANCE] * 4 + ([matrix_tol] * 2 if depth else [])
         tolerances += [EFFECT_TOLERANCE] * (len(frames[0]) - 1 - len(tolerances))
         kept = ec.decimate(frames, tolerances)
         return [[round(v, 6) if i in (1, 2, 3, 4, 12, 13, 14, 15) or i > 15 else round(v, 4) for i, v in enumerate(f)] for f in kept]
@@ -1104,8 +1252,10 @@ class _Exporter:
                 self.omit('other', label, unreadable(error))
         return out
 
-    def follow_of(self, follower) -> tuple[dict, float, float]:
-        """model `follow` for a BoneFollower, how many skeleton units one of its units is, and its z."""
+    def follow_of(self, follower) -> tuple[dict, float, float, bool]:
+        """model `follow` for a BoneFollower, how many skeleton units one of its units is, its z, and whether
+        its parent's depth axis is mirrored (a negative z scale: Unity culls the other faces, and `parent`
+        does not show it)."""
         ftr, fields = follower
         parent = self.scene.parent[ftr]
         immediate = parent == self.root
@@ -1115,6 +1265,7 @@ class _Exporter:
             # spine-unity's local path: the follower's local position and rotation are the bone's.
             k = [[1.0, 0.0], [0.0, 1.0]]
             mirrored = False
+            depth_mirrored = False
         else:
             # The world path: its world rotation is set outright (skeleton's + bone's, negated under a
             # mirrored parent), so relative to the skeleton it is parent x inverse(parent rotation) x
@@ -1126,6 +1277,7 @@ class _Exporter:
             if abs(pr[0][2]) > 1e-6 or abs(pr[1][2]) > 1e-6:
                 raise LayerError('bone follower under a parent turned out of the plane')
             k = [[pr[0][0], pr[0][1]], [pr[1][0], pr[1][1]]]
+            depth_mirrored = pr[2][2] < 0
         own = self.relative(self.scene, ftr, 0.0)
         angle = 0.0
         if not fields.get('followBoneRotation'):
@@ -1137,7 +1289,7 @@ class _Exporter:
                   'position': [round(own[0][3] / self.unit, 3), round(own[1][3] / self.unit, 3)], 'angle': round(angle, 4)}
         if not isinstance(follow['bone'], str) or not follow['bone']:
             raise LayerError('bone follower without a bone')
-        return follow, _matrix_scale([[v / self.unit for v in row] for row in k]), own[2][3]
+        return follow, _matrix_scale([[v / self.unit for v in row] for row in k]), own[2][3], depth_mirrored
 
     def entry(self, tr, label, look_: Look, material: Material, triangles, mesh, follower, only, delay, scroll_script, map_scrolls=None) -> dict:
         if look_.blend not in ('alpha', 'add'):
@@ -1150,9 +1302,10 @@ class _Exporter:
             raise LayerError('no triangles')
         if scroll_script and any(look_.scroll):
             raise LayerError('UV scroll from both its shader and a script')
+        self.read_curves = set()
         flat = all(abs(v[2]) <= 1e-6 for v in mesh['vertices'])
         frames, length, loop, loop_from, animated = self.sample(self.scene, tr, look_, follower, material)
-        tilted = self.tilted
+        tilted, dets = self.tilted, set(self.dets)
         if not animated:
             frames, length, loop, loop_from, _ = self.sample(self.scene, tr, look_, follower, material, static=True)
         # The states the controller's triggers put its _animators in (Interact, Special...), where they
@@ -1161,27 +1314,46 @@ class _Exporter:
         for animation_name, scene in self.state_scenes.items():
             other = self.sample(scene, tr, look_, follower, material)
             tilted = tilted or self.tilted
+            dets |= self.dets
             if other[0] != frames and (other[4] or other[0][0][1:] != frames[0][1:]):
                 states[animation_name] = other
+        self.check_read(tr, material, look_)
         first = frames[0]
         if not animated and first[11] < 0.5 and not any(any(f[11] >= 0.5 for f in st[0]) for st in states.values()):
             raise LayerError('hidden')
         animated = animated or bool(states)
-        if (animated or follower) and not flat and tilted:
-            raise LayerError('a mesh that is not flat turns out of the plane')
-        if (animated or follower is not None) and look_.cull and not look_.effect:
-            # A layer that culls faces while it moves is culled as it is drawn (its `cull`), which only an
-            # effect entry carries: drawn as one, with its exact effect or with none.
+        moving = animated or follower is not None
+        follow, to_skeleton, z, depth_mirrored = None, 1.0, 0.0, False
+        if follower is not None:
+            follow, to_skeleton, z, depth_mirrored = self.follow_of(follower)
+        # Unity culls the other faces of an object whose transform mirrors it (a negative determinant): the
+        # faces kept are those that wind clockwise on screen, or anticlockwise when mirrored.
+        cull = look_.cull
+        if cull and len(dets) > 1:
+            raise LayerError('a culled layer turned inside out while it moves')
+        if cull and ((dets == {False}) != depth_mirrored):
+            cull = 3 - cull
+        used = sorted(set(triangles))
+        local = [mesh['vertices'][v] for v in used]
+        # How the mesh's depth reaches the screen (the camera is orthographic): `flat`, it does not (the
+        # frames' 2x3 places the mesh's x and y); `projected`, one flattening holds throughout (the mesh
+        # is flattened by it and the frames place the result); `solid`, it turns in depth, so its 3D
+        # vertices and a 2x4 projection per frame go to a `tilted` entry.
+        route = 'flat'
+        vertex_depth = bool(look_.effect and look_.effect.get('family') == effects.PARTICLE and look_.effect.get('vertex'))
+        if animated and tilted and (not flat or vertex_depth):
+            common = common_projection([frames] + [st[0] for st in states.values()], local, PROJECTION_TOLERANCE / to_skeleton)
+            route = 'projected' if common else 'solid'
+        if moving and (cull or route == 'solid') and not look_.effect:
+            # A layer that culls faces while it moves is culled as it is drawn (its `cull`), and a solid one
+            # needs its own projection: both only an effect entry carries. Drawn as one, with its exact effect
+            # or with none.
             if look_.exact:
                 look_ = replace(look_, effect={k: v for k, v in look_.exact.items() if k != 'st'}, st=list(look_.exact['st']), approximated=None, exact=None)
             else:
                 look_ = replace(look_, effect=plain_effect(look_), approximated=None)
         # An effect's unbound main texture is Unity's default white (null).
         texture = self.texture_index(look_.texture) if look_.texture is not None else None
-        if look_.effect and (animated or follower) and look_.effect.get('family') == effects.PARTICLE and look_.effect.get('vertex') \
-                and look_.effect['vertex']['intensity'][2] and not flat:
-            raise LayerError('a vertex effect that moves a mesh out of the plane')
-        used = sorted(set(triangles))
         remap = {v: i for i, v in enumerate(used)}
         tris = [remap[i] for i in triangles]
         st = look_.st
@@ -1205,75 +1377,83 @@ class _Exporter:
             main_st = bake(st)
             exact_st = bake(exact_st) if exact_st else None
         uvs = [round(x, 6) for x in uvs]
-        follow, to_skeleton, z = None, 1.0, 0.0
         if follower is not None:
-            follow, to_skeleton, z = self.follow_of(follower)
             self.counts['follow'] += 1
         # Culled as drawn: a moving layer's faces turn (a static one's are culled here, below).
-        cull = look_.cull if (animated or follower is not None) else 0
+        drawn_cull = cull if moving else 0
         animation = None
         if animated:
-            local = [mesh['vertices'][v] for v in used]
-            extent = max((math.hypot(p[0], p[1]) for p in local), default=1.0) or 1.0
             # Skeleton units per unit of the frames' matrix target: 1 (skeleton), or the follower's.
             scale = to_skeleton if follower is not None else 1.0
-            animation = {'length': length, 'loop': loop, 'loopFrom': loop_from, 'frames': self.decimate(frames, extent, scale)}
+            timelines = [frames] + [st_[0] for _, st_ in sorted(states.items())]
+            if route == 'projected':
+                l0, factors = common
+                factor_of = dict(zip([id(t) for t in [frames] + [st_[0] for st_ in states.values()]], factors))
+                points = [(l0[0][0] * p[0] + l0[0][1] * p[1] + l0[0][2] * p[2], l0[1][0] * p[0] + l0[1][1] * p[1] + l0[1][2] * p[2]) for p in local]
+                vertices = [round(c, 5) for p in points for c in p]
+                extent = max((math.hypot(*p) for p in points), default=1.0) or 1.0
+                vertex_matrix = [l0[0][0], l0[0][1], l0[0][2], l0[1][0], l0[1][1], l0[1][2]]
+                timelines = [[[f[0], a[0][0], a[0][1], a[1][0], a[1][1], *f[5:-2]] for f, a in zip(t, factor_of[id(t)])] for t in timelines]
+            elif route == 'solid':
+                vertices = [round(c, 5) for p in local for c in p[:3]]
+                extent = max((math.sqrt(p[0] ** 2 + p[1] ** 2 + p[2] ** 2) for p in local), default=1.0) or 1.0
+                vertex_matrix = [1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+                timelines = [[[*f[:16], *f[-2:], *f[16:-2]] for f in t] for t in timelines]
+            else:
+                vertices = [round(c, 5) for p in local for c in p[:2]]
+                extent = max((math.hypot(p[0], p[1]) for p in local), default=1.0) or 1.0
+                vertex_matrix = [1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
+                timelines = [[f[:-2] for f in t] for t in timelines]
+            depth = route == 'solid'
+            animation = {'length': length, 'loop': loop, 'loopFrom': loop_from, 'frames': self.decimate(timelines[0], extent, scale, depth)}
             if states:
-                animation['states'] = {name_: {'length': st[1], 'loop': st[2], 'loopFrom': st[3], 'frames': self.decimate(st[0], extent, scale)}
-                                       for name_, st in sorted(states.items())}
-                self.counts['states'] += 1
-            vertices = [round(c, 5) for p in local for c in p[:2]]
+                animation['states'] = {name_: {'length': st_[1], 'loop': st_[2], 'loopFrom': st_[3], 'frames': self.decimate(line, extent, scale, depth)}
+                                       for (name_, st_), line in zip(sorted(states.items()), timelines[1:])}
             if follower is None:
                 z = self.relative(self.scene, tr, 0.0)[2][3]
-            self.counts['animated'] += 1
-            vertex_matrix = [1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
         elif follower is not None:
             links = self.chain(tr)
             below = ec.IDENTITY
             for link in links[links.index(follower[0]) + 1:]:
                 below = ec.multiply(below, self.scene.local(link, 0.0))
+            # The orthographic camera drops depth: the mesh is flattened through its matrix below the follower.
             vertices = [round(c, 5) for v in used for c in ec.transform_point(below, mesh['vertices'][v])[:2]]
             vertex_matrix = [below[0][0], below[0][1], below[0][2], below[1][0], below[1][1], below[1][2]]
         else:
             m = self.relative(self.scene, tr, 0.0)
             points = [ec.transform_point(m, mesh['vertices'][v]) for v in used]
-            if look_.cull:
+            if cull:
                 kept = []
                 for i in range(0, len(tris), 3):
                     a, b, c = (points[tris[i + j]] for j in range(3))
                     area = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
                     # Unity's front faces wind clockwise on screen: Cull Back keeps the clockwise ones.
-                    if (look_.cull == 2 and area <= 0) or (look_.cull == 1 and area >= 0):
+                    if (cull == 2 and area <= 0) or (cull == 1 and area >= 0):
                         kept += tris[i:i + 3]
                 if not kept:
                     raise LayerError('every face culled')
                 tris = kept
             vertices = [round(p[k] / self.unit, 3) for p in points for k in (0, 1)]
             z = sum(p[2] for p in points) / len(points)
-            self.counts['static'] += 1
             vertex_matrix = [m[0][0] / self.unit, m[0][1] / self.unit, m[0][2] / self.unit, m[1][0] / self.unit, m[1][1] / self.unit, m[1][2] / self.unit]
         speed = scroll_script or (look_.scroll if any(look_.scroll) else None)
         scroll = [round(speed[0], 6), round(-speed[1], 6)] if speed else None  # image space flips v
-        if scroll:
-            self.counts['scroll'] += 1
-        if only:
-            self.counts['only'] += 1
         renderer = self.renderer_tree(tr)
         sort = (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0), look_.queue, -z, self.walk[tr])
         if look_.effect:
-            # Animated parameters: the frames carry them past column 16; a static layer keeps their first values.
+            # Animated parameters: the frames carry them past column 16 (18 for a tilted entry); a static
+            # layer keeps their first values.
             paths = look_.effect.get('animated_paths') or []
             shader = self.shader_json(look_.effect, main_st, look_.scroll, scroll_script, map_scrolls or {}, vertex_matrix,
                                       values=first[16:16 + sum(effects.width(p) for p in paths)], animated=bool(animation))
             layer = {'name': label, 'blend': look_.blend, 'texture': texture, 'color': colour, 'vertices': vertices, 'uvs': raw_uvs, 'colors': colors,
-                     'triangles': tris, 'follow': follow, 'animation': animation, 'only': only, 'delay': round(delay, 4), 'cull': cull, 'shader': shader}
+                     'triangles': tris, 'follow': follow, 'animation': animation, 'only': only, 'delay': round(delay, 4), 'cull': drawn_cull, 'shader': shader}
             layer['visible'] = self.visible_box(layer, first)
-            return {'effect': layer, 'sort': sort}
+            return {'tilted' if route == 'solid' else 'effect': layer, 'sort': sort}
         layer = {'name': label, 'blend': look_.blend, 'texture': texture, 'color': colour, 'vertices': vertices, 'uvs': uvs, 'colors': colors,
                  'triangles': tris, 'follow': follow, 'animation': animation, 'scroll': scroll, 'only': only, 'delay': round(delay, 4),
                  'approximated': look_.approximated}
         if look_.approximated:
-            self.counts['approximated'] = self.counts.get('approximated', 0) + 1
             if look_.exact:
                 # Readers that know the effect draw it exactly; others draw the approximation.
                 try:
@@ -1376,9 +1556,14 @@ class _Exporter:
         if effect['family'] == effects.NOISE:
             if not effect.get('noise'):
                 raise LayerError('Disturb2 without its noise texture')
-            return {'family': effects.NOISE, 'mode': effect['mode'], 'main': main, 'noise': texture_map(effect['noise']),
-                    'noise1': r6(effect['noise1']), 'noise2': r6(effect['noise2']), 'glow': r6(effect['glow']) if effect.get('glow') else None,
-                    'animated': []}
+            out = {'family': effects.NOISE, 'mode': effect['mode'], 'main': main, 'noise': texture_map(effect['noise']),
+                   'noise1': r6(effect['noise1']), 'noise2': r6(effect['noise2']), 'glow': r6(effect['glow']) if effect.get('glow') else None,
+                   'animated': []}
+            paths = effect.get('animated_paths') or []
+            set_values(out, paths, list(values))
+            if animated:
+                out['animated'] = list(paths)
+            return out
         out = {'family': effects.PARTICLE, 'main': main, 'distort': None, 'dissolve': [], 'edge': None, 'ramp': None, 'vertex': None, 'animated': []}
         distort = effect.get('distort')
         if distort:
@@ -1449,16 +1634,17 @@ class _Exporter:
                             self.omit('other', name, unreadable(error))
         entries.sort(key=lambda e: e['sort'])
         entries = self.unmasked(entries)
-        draw = [{kind: e[kind]} for e in entries for kind in ('part', 'layer', 'effect') if kind in e]
+        draw = [{kind: e[kind]} for e in entries for kind in ('part', 'layer', 'effect', 'tilted') if kind in e]
         # Textures still drawn, renumbered in order: first those plain layers draw (`textures`, which every
         # reader fetches), then those only effects sample (`effectTextures`, which readers that know
         # effects fetch), numbered on from the first.
         plain = sorted({d['layer']['texture'] for d in draw if 'layer' in d})
         refs = []  # every reference an effect makes: (holder dict, key)
         for d in draw:
-            if 'effect' in d:
-                refs.append((d['effect'], 'texture'))  # null: Unity's white
-                refs += [(m, 'texture') for m in shader_maps(d['effect']['shader'])]
+            shaded = d.get('effect') or d.get('tilted')
+            if shaded:
+                refs.append((shaded, 'texture'))  # null: Unity's white
+                refs += [(m, 'texture') for m in shader_maps(shaded['shader'])]
             elif 'layer' in d and d['layer'].get('exact'):
                 refs += [(m, 'texture') for m in shader_maps(d['layer']['exact']['shader'])]
         only_effects = sorted({holder[key] for holder, key in refs if holder[key] is not None} - set(plain))
@@ -1479,8 +1665,9 @@ class _Exporter:
         document = {'schemaVersion': SCHEMA_VERSION, 'textures': records[:len(plain)], 'effectTextures': records[len(plain):], 'bounds': None,
                     'effectBounds': None, 'separators': self.separators, 'draw': draw, 'omitted': self.omitted}
         layers = [d['layer'] for d in draw if 'layer' in d]
-        drawn = layers + [d['effect'] for d in draw if 'effect' in d]
+        drawn = layers + [d.get('effect') or d['tilted'] for d in draw if 'effect' in d or 'tilted' in d]
         self.counts = {'layers': len(drawn), 'plain': len(layers), 'effects': len(drawn) - len(layers),
+                       'tilted': sum(1 for d in draw if 'tilted' in d),
                        'exact': sum(1 for l in layers if l.get('exact')), 'parts': sum(1 for d in draw if 'part' in d),
                        'static': sum(1 for l in drawn if not l['animation'] and not l['follow']),
                        'animated': sum(1 for l in drawn if l['animation']), 'follow': sum(1 for l in drawn if l['follow']),
@@ -1526,19 +1713,21 @@ class _Exporter:
         sort = (renderer.get('m_SortingLayerID', 0), renderer.get('m_SortingOrder', 0), erase[0], -z, self.walk[tr])
         self.masks.append({'name': self.name(tr), 'sort': sort, 'bounds': bounds})
 
-    def layer_bounds(self, layer: dict):
-        """A layer's box in skeleton units over its timeline, or None when a bone places it (unknown here)."""
+    def layer_bounds(self, layer: dict, solid: bool = False):
+        """A layer's box in skeleton units over its timeline, or None when a bone places it (unknown here).
+        `solid`: a tilted entry (3D vertices, the depth column at 16 and 17 of its frames)."""
         if layer['follow']:
             return None
         v = layer['vertices']
-        frames = [f[1:7] for f in layer['animation']['frames']] if layer['animation'] else [[1, 0, 0, 1, 0, 0]]
-        for state in (layer['animation'] or {}).get('states', {}).values():
-            frames += [f[1:7] for f in state['frames']]
+        stride = 3 if solid else 2
+        lines = [layer['animation']] + list((layer['animation'] or {}).get('states', {}).values()) if layer['animation'] else []
+        frames = [[*f[1:7], *(f[16:18] if solid else (0.0, 0.0))] for line in lines for f in line['frames']] or [[1, 0, 0, 1, 0, 0, 0, 0]]
         xs, ys = [], []
-        for a, b, c, d, tx, ty in frames:
-            for i in range(0, len(v), 2):
-                xs.append(a * v[i] + b * v[i + 1] + tx)
-                ys.append(c * v[i] + d * v[i + 1] + ty)
+        for a, b, c, d, tx, ty, e, f in frames:
+            for i in range(0, len(v), stride):
+                depth = v[i + 2] if solid else 0.0
+                xs.append(a * v[i] + b * v[i + 1] + e * depth + tx)
+                ys.append(c * v[i] + d * v[i + 1] + f * depth + ty)
         return min(xs), min(ys), max(xs), max(ys)
 
     def unmasked(self, entries: list) -> list:
@@ -1548,9 +1737,9 @@ class _Exporter:
             return entries
         kept = []
         for entry in entries:
-            kind = 'layer' if 'layer' in entry else 'effect' if 'effect' in entry else None
+            kind = next((k for k in ('layer', 'effect', 'tilted') if k in entry), None)
             if kind:
-                box = self.layer_bounds(entry[kind])
+                box = self.layer_bounds(entry[kind], kind == 'tilted')
                 for mask in self.masks:
                     if mask['sort'] <= entry['sort']:
                         continue  # drawn before the layer: it paints over nothing of it
@@ -1575,6 +1764,8 @@ def set_values(shader: dict, paths: list, values: list):
         at += n
         if len(chunk) < n:
             return
+        if path.endswith('.offset'):
+            continue  # an integrated speed: 0 at the first frame, and only frames carry it
         *where, key = path.split('.')
         node = shader
         for part in where:

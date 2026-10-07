@@ -523,8 +523,8 @@ test('broken effects fail validation', async () => {
     // The version model.json names must match what layers.json holds.
     await repo.saveEffects(repo.doc, 1);
     await assert.rejects(validateRepository(repo.root), /says layersVersion 1/);
-    await repo.saveEffects(repo.doc, 3);
-    await assert.rejects(validateRepository(repo.root), /layersVersion must be 1-2/);
+    await repo.saveEffects(repo.doc, 4);
+    await assert.rejects(validateRepository(repo.root), /layersVersion must be 1-3/);
     const plain = structuredClone(repo.doc);
     delete plain.effectTextures;
     delete plain.effectBounds;
@@ -533,5 +533,34 @@ test('broken effects fail validation', async () => {
     await assert.rejects(validateRepository(repo.root), /must be \{ part \} or \{ layer \}$/);
     await repo.saveEffects();
     await validateRepository(repo.root);
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+test('layersVersion 3: a tilted entry validates, frames the effect bounds in 3D, and needs version 3', async () => {
+  const repo = await effectsRepo();
+  try {
+    const doc = structuredClone(repo.doc);
+    // The flame as a mesh turning in depth: x, y, z vertices; frames [t, a, b, c, d, tx, ty, rgba, active, uv, e, f, offset].
+    const flame = doc.draw[3].effect;
+    delete doc.draw[3].effect;
+    const frame = (t, e) => [t, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, e, 0, 0.1 * t, 0, 0.1, 0];
+    doc.draw[3].tilted = { ...flame, color: null, vertices: [100, 0, 0, 500, 0, 0, 100, 100, 0, 500, 100, 100],
+      animation: { length: 1, loop: true, loopFrom: 0, frames: [frame(0, 0), frame(1, 2)] },
+      shader: { ...flame.shader, animated: ['main.offset'] } };
+    const skeleton = await readFile(path.join(repo.dir, 'skeleton.json'));
+    const atlas = await readFile(path.join(repo.dir, 'skeleton.atlas'), 'utf8');
+    Object.assign(doc, inspectLayers(skeleton, atlas, { ...doc, bounds: null, effectBounds: null }, 'test'));
+    await repo.saveEffects(doc, 3);
+    assert.deepEqual(await validateRepository(repo.root), { listed: 1, folders: 1, failures: 0 });
+    await repo.saveEffects(doc, 2);
+    await assert.rejects(validateRepository(repo.root), /must be \{ part \}, \{ layer \} or \{ effect \}/);
+    const flat = structuredClone(doc);
+    flat.draw[3].tilted.vertices = flat.draw[3].tilted.vertices.slice(0, 8);
+    await repo.saveEffects(flat, 3);
+    await assert.rejects(validateRepository(repo.root), /vertices must be x, y, z triples/);
+    const short = structuredClone(doc);
+    short.draw[3].tilted.animation.frames = short.draw[3].tilted.animation.frames.map((f) => f.slice(0, 16));
+    await repo.saveEffects(short, 3);
+    await assert.rejects(validateRepository(repo.root), /must be 22 numbers/);
   } finally { await rm(repo.root, { recursive: true, force: true }); }
 });
