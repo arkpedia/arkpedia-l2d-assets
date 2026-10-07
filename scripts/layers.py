@@ -893,10 +893,11 @@ class _Exporter:
             x = self.scene.parent[x]
         return found
 
-    def scripts(self, tr):
+    def scripts(self, tr, *, ignore: frozenset):
         """(UV scroll [u, v] in Unity UV units per second or None, delay in seconds, {texture property:
         [u, v]} the script scrolls besides the main texture) from the scripts on the layer and its chain;
-        LayerError for a script whose effect is not known."""
+        LayerError for a script whose effect is not known. `ignore` (required): the field sets of scripts
+        known to change nothing this draw shows (particles.IGNORED_SCRIPTS; layers pass none)."""
         scroll, delay, maps = None, 0.0, {}
         for x in self.chain(tr):
             if x == self.root:
@@ -905,7 +906,7 @@ class _Exporter:
                 if kind != 'MonoBehaviour' or not tree or not tree.get('m_Enabled', 1):
                     continue
                 fields = {k for k in tree if not k.startswith('m_')}
-                if 'boneName' in fields:
+                if 'boneName' in fields or frozenset(fields) in ignore:
                     continue
                 if fields == {'_delayTime'}:
                     # Shows its object this long after it is switched on (the action's start).
@@ -1246,7 +1247,7 @@ class _Exporter:
         if renderer.get('m_SortingLayerID', 0) != 0:
             raise LayerError(f'sorting layer {renderer.get("m_SortingLayerID")}')
         only, _ = self.group(tr)
-        scroll_script, delay, map_scrolls = self.scripts(tr)
+        scroll_script, delay, map_scrolls = self.scripts(tr, ignore=frozenset())
         follower = self.follower_on_chain(tr)
         mesh = self.mesh(tr)
         if len(mesh['vertices']) > MAX_VERTICES:
@@ -1640,7 +1641,9 @@ class _Exporter:
                     else:
                         self.omitted['particles'] += 1
                 elif kind in ('TrailRenderer', 'LineRenderer'):
-                    self.omitted['trails'] += 1
+                    self.omitted['trails'] += 1  # layers draw none (the particle export writes TrailRenderers as data)
+                    if kind == 'TrailRenderer' and self.particles is not None:
+                        self.particles.note(tr, kind)
                 elif kind == 'SkinnedMeshRenderer':
                     self.omitted['skinned'] += 1
                 elif kind in ('SpriteRenderer', 'BillboardRenderer', 'CanvasRenderer'):
@@ -1671,17 +1674,35 @@ class _Exporter:
         entries.sort(key=lambda e: e['sort'])
         entries = self.unmasked(entries)
         # Particle systems that sort next to each other, with no part, layer or effect between them, are one
-        # run: {"particles": [system indices]}, the systems numbered in draw order.
-        draw, systems = [], []
+        # run: {"particles": [system indices]}, the systems numbered in draw order. A system that draws
+        # nothing itself (a sub-emitter spawner, or one that draws only trails) has its index and no run. A
+        # TrailRenderer (written as data, not drawn yet) notes where it would draw: before draw entry i, or
+        # after the first n systems of the particle run at i (`draw`: [i, n]).
+        draw, systems, transforms, trails = [], [], [], []
         for e in entries:
             if 'particles' in e:
-                if draw and 'particles' in draw[-1]:
-                    draw[-1]['particles'].append(len(systems))
-                else:
-                    draw.append({'particles': [len(systems)]})
+                if e['particles']['render'] is not None:
+                    if draw and 'particles' in draw[-1]:
+                        draw[-1]['particles'].append(len(systems))
+                    else:
+                        draw.append({'particles': [len(systems)]})
                 systems.append(e['particles'])
+                transforms.append(e['transform'])
+                continue
+            if 'trailRenderer' in e:
+                at = [len(draw) - 1, len(draw[-1]['particles'])] if draw and 'particles' in draw[-1] else [len(draw), 0]
+                e['trailRenderer']['draw'] = at
+                trails.append(e['trailRenderer'])
                 continue
             draw += [{kind: e[kind]} for kind in ('part', 'layer', 'effect', 'tilted') if kind in e]
+        for trail in trails:  # after a whole run is before the entry after it
+            i, n = trail['draw']
+            if n and n == len(draw[i]['particles']):
+                trail['draw'] = [i + 1, 0]
+        if trails and not systems:
+            for trail in trails:
+                self.particles.trail_omitted(trail['name'], 'no particle system is exported to carry it')
+            trails = []
         # Textures still drawn, renumbered in order: first those plain layers draw (`textures`, which every
         # reader fetches), then those only effects sample (`effectTextures`, which readers that know
         # effects fetch), numbered on from the first, then those only particles sample (layerParticles.json's
@@ -1696,7 +1717,7 @@ class _Exporter:
             elif 'layer' in d and d['layer'].get('exact'):
                 refs += [(m, 'texture') for m in shader_maps(d['layer']['exact']['shader'])]
         only_effects = sorted({holder[key] for holder, key in refs if holder[key] is not None} - set(plain))
-        particle_refs = self.particles.texture_refs(systems) if self.particles is not None else []
+        particle_refs = self.particles.texture_refs(systems, trails) if self.particles is not None else []
         only_particles = sorted({holder[key] for holder, key in particle_refs if holder[key] is not None} - set(plain) - set(only_effects))
         order = plain + only_effects + only_particles
         renumber = {old: new for new, old in enumerate(order)}
@@ -1724,7 +1745,7 @@ class _Exporter:
             self.omitted['particles'] = len(self.particles.reasons)
             self.omitted['particleReasons'] = sorted(self.particles.reasons, key=lambda item: (item['name'], item['reason']))
             if systems:
-                particle_document = self.particles.document(systems, records[layer_textures:], layer_textures)
+                particle_document = self.particles.document(systems, transforms, trails, records[layer_textures:], layer_textures)
         layers = [d['layer'] for d in draw if 'layer' in d]
         drawn = layers + [d.get('effect') or d['tilted'] for d in draw if 'effect' in d or 'tilted' in d]
         self.counts = {'layers': len(drawn), 'plain': len(layers), 'effects': len(drawn) - len(layers),

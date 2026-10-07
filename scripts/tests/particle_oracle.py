@@ -31,6 +31,7 @@ Angles are radians unless a name says degrees (Shape arc and cone angle are degr
 """
 from __future__ import annotations
 
+import copy
 import math
 import struct
 from dataclasses import dataclass, field
@@ -92,6 +93,11 @@ def play_seed(model_seed: int, system_index: int, play_count: int) -> int:
     """The seed of one play of an autoRandomSeed system (a replayed press draws new particles, as the game
     does): mix32(mix32(mix32(model_seed) ^ system_index) ^ play_count), all uint32."""
     return mix32(mix32(mix32(model_seed & M32) ^ (system_index & M32)) ^ (play_count & M32))
+
+
+def particle_word(seed: int, key: int) -> int:
+    """A particle's random 32-bit word for one key (RANDOM_KEYS index): mix32(seed ^ mix32(key + 1))."""
+    return mix32((seed ^ mix32(key + 1)) & M32)
 
 
 def particle_random(seed: int, key: int) -> float:
@@ -564,6 +570,9 @@ class Pose:
         r = q_rotate(q_conj(self.rotation), v)
         return tuple(c / s if s else 0.0 for c, s in zip(r, self.scale))
 
+    def inverse_point(self, p):
+        return self.inverse_vector(v_sub(p, self.position))
+
 
 def _mat_vec(m, v):
     return (m[0] * v[0] + m[1] * v[1] + m[2] * v[2], m[3] * v[0] + m[4] * v[1] + m[5] * v[2], m[6] * v[0] + m[7] * v[1] + m[8] * v[2])
@@ -668,12 +677,21 @@ class Config:
     renderer: dict | None
     # The prewarm's window (prewarm_window()), None unless the system prewarms and loops.
     prewarm_window: float | None = None
+    # A mesh shape's mesh (mesh_shape_data), or None.
+    shape_mesh: dict | None = None
 
     @classmethod
-    def from_trees(cls, ps: dict, renderer: dict | None = None) -> 'Config':
+    def from_trees(cls, ps: dict, renderer: dict | None = None, child_lifetime: float = 0.0, mesh_of=None) -> 'Config':
+        """`child_lifetime`: the longest life of its sub-emitter children's particles (which lengthens the
+        prewarm window); `mesh_of(reference)`: a mesh shape's mesh as {vertices, normals, submeshes, colors}
+        (layers.bundle_readers' mesh_of), needed only for a mesh shape."""
         config = cls._read(ps, renderer)
-        # Sub-emitter children (their lifetimes lengthen the window) are not simulated yet.
-        config.prewarm_window = prewarm_window(config, 0.0)
+        config.prewarm_window = prewarm_window(config, child_lifetime)
+        if config.shape and config.shape.get('type') == SHAPE['Mesh']:
+            if mesh_of is None:
+                raise ValueError('a mesh shape needs mesh_of')
+            mesh = mesh_of(config.shape['m_Mesh'])
+            config.shape_mesh = mesh_shape_data(mesh['vertices'], mesh['normals'], mesh['submeshes'][0], mesh.get('colors'))
         return config
 
     @classmethod
@@ -682,6 +700,13 @@ class Config:
         back into the typetree shapes from_trees reads; its prewarm window is the one the export wrote."""
         ps, renderer = trees_from_export(system, document)
         config = cls._read(ps, renderer)
+        if config.shape and config.shape.get('type') == SHAPE['Mesh']:
+            m = document['meshes'][system['shape']['mesh']]
+            group = lambda values, n: [values[i:i + n] for i in range(0, len(values), n)]  # noqa: E731
+            config.shape_mesh = mesh_shape_data(group(m['vertices'], 3), group(m['normals'], 3), m['triangles'],
+                                                group(m['colors'], 4) if m['colors'] else None)
+            if [f32(x) for x in m['areaCdf']] != config.shape_mesh['cdf']:
+                raise ValueError(f'{system["name"]}: the mesh shape\'s areaCdf is not its triangles\' areas')
         clock = system['clock']
         config.prewarm_window = f32(clock['prewarmWindow']) if 'prewarmWindow' in clock else None
         if (config.prewarm_window is None) != (prewarm_window(config, 0.0) is None):
@@ -776,8 +801,9 @@ def _arc_fraction(rng: XorShift128, multi: dict, state: dict, key: str, burst_in
     return min(max(f, 0.0), 1.0)
 
 
-def sample_shape(shape: dict | None, rng: XorShift128, state: dict, sys_t01: float, burst_index=None, burst_size=0):
-    """(position, direction) of one new particle in emitter space (before the emitter pose)."""
+def sample_shape(shape: dict | None, rng: XorShift128, state: dict, sys_t01: float, burst_index=None, burst_size=0, mesh=None, colour_out=None):
+    """(position, direction) of one new particle in emitter space (before the emitter pose). `mesh`: a mesh
+    shape's mesh (mesh_shape_data); a vertex colour it gives the particle is appended to `colour_out`."""
     if not shape:
         return (0.0, 0.0, 0.0), (0.0, 0.0, 1.0)
     kind = shape['type']
@@ -842,7 +868,12 @@ def sample_shape(shape: dict | None, rng: XorShift128, state: dict, sys_t01: flo
         outward = (math.cos(a), math.sin(a), 0.0)
         off = v_add(v_mul(outward, math.cos(tube) * rr), (0.0, 0.0, math.sin(tube) * rr))
         pos, d = v_add(ring, off), v_norm(off, outward)
-    # Mesh / MeshRenderer / Sprite shapes need the mesh: not reproduced here (section 5.2), emit at the origin.
+    elif kind == SHAPE['Mesh']:
+        if mesh is None:
+            raise ValueError('a mesh shape needs its mesh')
+        pos, d, colour = _mesh_point(shape, mesh, rng, state, burst_index, burst_size)
+        if colour is not None and colour_out is not None and shape.get('m_UseMeshColors', True):
+            colour_out.append(colour)
     rd = float(shape.get('randomDirectionAmount', 0.0))
     if rd > 0:
         d = v_norm(v_lerp(d, rng.unit_vector(), rd))
@@ -860,6 +891,78 @@ def sample_shape(shape: dict | None, rng: XorShift128, state: dict, sys_t01: flo
         d = v_hadamard(d, scale)
     d = v_norm(q_rotate(q, d), d)
     return pos, d
+
+
+def mesh_shape_data(vertices: list, normals: list, triangles: list, colors: list | None) -> dict:
+    """A mesh shape's mesh as the simulation samples it: vertices and normals (x, y, z), triangles (flat
+    indices), colours (r, g, b, a) or None, every number float32, and `cdf`, each triangle's cumulative share of
+    the area as layerParticles.json's areaCdf has it (float32, the last exactly 1)."""
+    v = [tuple(f32(c) for c in p[:3]) for p in vertices]
+    n = [tuple(f32(c) for c in p[:3]) for p in normals]
+    col = [tuple(f32(c) for c in p[:4]) for p in colors] if colors else None
+    areas = []
+    for i in range(0, len(triangles), 3):
+        a, b, c = v[triangles[i]], v[triangles[i + 1]], v[triangles[i + 2]]
+        u, w = v_sub(b, a), v_sub(c, a)
+        areas.append(0.5 * v_len(v_cross(u, w)))
+    total, running, cdf = sum(areas), 0.0, []
+    for area in areas:
+        running += area
+        cdf.append(f32(running / total))
+    cdf[-1] = 1.0
+    return {'vertices': v, 'normals': n, 'triangles': list(triangles), 'colors': col, 'cdf': cdf}
+
+
+def _mesh_point(shape: dict, mesh: dict, rng, state: dict, burst_index, burst_size):
+    """(position, normal, colour or None) on a mesh shape (section 5.2), by `placementMode`: 0 a vertex, 1 a
+    point on an edge of a triangle, 2 a point in a triangle (barycentric, uniform). Random spawn picks a
+    vertex uniformly and a triangle by area (binary search of `cdf`); Loop, PingPong and BurstSpread
+    (`m_MeshSpawn`) step through vertices or triangles in order. Then `m_MeshNormalOffset` along the normal.
+    The choices beyond Unity's documentation (edges per triangle by area, normals interpolated) are inferred."""
+    placement = int(shape.get('placementMode', 0))
+    spawn = shape.get('m_MeshSpawn') or {}
+    random_spawn = spawn.get('mode', MULTI_RANDOM) == MULTI_RANDOM
+    v, nrm, tri, col = mesh['vertices'], mesh['normals'], mesh['triangles'], mesh['colors']
+    offset = float(shape.get('m_MeshNormalOffset', 0.0))
+    if placement == 0:
+        if random_spawn:
+            i = min(int(rng.value() * len(v)), len(v) - 1)
+        else:
+            i = min(int(_arc_fraction(rng, spawn, state, 'mesh', burst_index, burst_size) * len(v)), len(v) - 1)
+        normal = v_norm(nrm[i])
+        return v_add(v[i], v_mul(normal, offset)), normal, (col[i] if col else None)
+    count = len(tri) // 3
+    if random_spawn:
+        u = rng.value()
+        lo, hi = 0, count - 1
+        while lo < hi:  # the first triangle whose cumulative share reaches u
+            mid = (lo + hi) // 2
+            if mesh['cdf'][mid] < u:
+                lo = mid + 1
+            else:
+                hi = mid
+        t = lo
+    else:
+        t = min(int(_arc_fraction(rng, spawn, state, 'mesh', burst_index, burst_size) * count), count - 1)
+    ia, ib, ic = tri[3 * t], tri[3 * t + 1], tri[3 * t + 2]
+    if placement == 1:
+        edge = min(int(rng.value() * 3), 2)
+        i0, i1 = ((ia, ib), (ib, ic), (ic, ia))[edge]
+        f = rng.value()
+        weights = {i0: 1.0 - f, i1: f}
+    else:
+        r1, r2 = math.sqrt(rng.value()), rng.value()
+        weights = {ia: 1.0 - r1, ib: r1 * (1.0 - r2)}
+        weights[ic] = weights.get(ic, 0.0) + r1 * r2
+    pos, normal = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0)
+    colour = (0.0, 0.0, 0.0, 0.0) if col else None
+    for i, w in weights.items():
+        pos = v_add(pos, v_mul(v[i], w))
+        normal = v_add(normal, v_mul(nrm[i], w))
+        if col:
+            colour = tuple(c + x * w for c, x in zip(colour, col[i]))
+    normal = v_norm(normal)
+    return v_add(pos, v_mul(normal, offset)), normal, colour
 
 
 # ---------------------------------------------------------------------------------------------------------
@@ -929,6 +1032,11 @@ class Particle:
     emitter_velocity: tuple = (0.0, 0.0, 0.0)
     row: int = 0
     noise_sum: tuple = (0.0, 0.0, 0.0)
+    seed: int = 0              # its 32-bit seed (hashed randoms): every random value of it, and of its sub-emissions
+    serial: int = 0            # its birth number in the system (orders sub-emitter births)
+    subs: list | None = None   # per sub-emitter link: [generator, rate accumulator] while that link emits from it, else None
+    previous: tuple | None = None  # its position at the start of the step (sub-emitter births are placed along the step)
+    parent: int = -1           # a sub-emitter's particle: the serial of the parent particle it was born from
 
     @property
     def age01(self) -> float:
@@ -943,9 +1051,13 @@ RAND_KEYS = ('size', 'sizeY', 'sizeZ', 'rotX', 'rotY', 'rotZ', 'color', 'velX', 
 START_KEYS = ('startSpeed', 'startLifetime', 'startSizeX', 'startSizeY', 'startSizeZ', 'startRotationX', 'startRotationY',
               'startRotationZ', 'flip', 'startColor')
 SHAPE_DRAWS = 16  # keyed values one particle's shape sampling may draw, in order: shape0 ... shape15
+MAX_SUB_LINKS = 8  # sub-emitter links a parent may have (the export leaves out a parent with more)
 # Every per-particle random value, by key: its index here is the `key` of particle_random (the site keeps the
-# same table). The over-lifetime factors (RAND_KEYS), the start values, then the shape's draws.
-RANDOM_KEYS = RAND_KEYS + START_KEYS + tuple(f'shape{i}' for i in range(SHAPE_DRAWS))
+# same table). The over-lifetime factors (RAND_KEYS), the start values, the shape's draws, then for each
+# sub-emitter link i of a parent: `sub<i>`, the roll against the link's probability, and `subSeed<i>`, the
+# seed (particle_word) of the generator that link's emission from this particle draws from.
+RANDOM_KEYS = (RAND_KEYS + START_KEYS + tuple(f'shape{i}' for i in range(SHAPE_DRAWS)) + tuple(f'sub{i}' for i in range(MAX_SUB_LINKS))
+               + tuple(f'subSeed{i}' for i in range(MAX_SUB_LINKS)))
 RANDOM_KEY = {name: index for index, name in enumerate(RANDOM_KEYS)}
 
 
@@ -954,9 +1066,12 @@ class Simulation:
 
     def __init__(self, config: Config, seed: int = 1, options: Options | None = None):
         """`seed`: the seed of this play when the system draws a new one every play (autoRandomSeed; the
-        site's is play_seed()); a fixed-seed system uses its randomSeed."""
-        self.c = config
+        site's is play_seed()); a fixed-seed system uses its randomSeed. The config is copied: set_fields
+        changes this simulation's own."""
+        self.c = copy.deepcopy(config)
         self.options = options or Options()
+        self.links = []        # [(child Simulation, 'birth' | 'death', probability)] (section 9)
+        self.is_child = False  # a sub-emitter: it emits only where its parents' particles tell it to
         if self.options.randoms == 'hashed':
             self.seed = (seed if config.auto_random_seed else config.random_seed) & M32
         else:
@@ -1004,16 +1119,78 @@ class Simulation:
         self.emitted_total = 0
         self.dead_total = 0
         self.burst_cycle_state = {}
-        self.delay = 0.0 if (self.c.prewarm and self.c.looping) else self.c.start_delay.evaluate(0.0, self.rng.value())
+        self.delay = 0.0 if (self.c.prewarm and self.c.looping) or self.is_child else self.c.start_delay.evaluate(0.0, self.rng.value())
 
-    def play(self, pose: Pose | None = None):
+    def link(self, child: 'Simulation', kind: str, probability: float):
+        """Makes `child` a sub-emitter of this system (a layerParticles.json `sub` link): 'birth', the child
+        emits from each of this system's particles while it lives, with its own rate and bursts timed by the
+        particle's age; 'death', the child's bursts fire once where a particle dies. `probability`: of each
+        particle's link firing. Only with hashed random values (the default)."""
+        if kind not in ('birth', 'death'):
+            raise ValueError(f'a {kind} sub-emitter')
+        if self.options.randoms != 'hashed':
+            raise ValueError('sub-emitters draw hashed random values')
+        if len(self.links) >= MAX_SUB_LINKS:
+            raise ValueError(f'more than {MAX_SUB_LINKS} sub-emitter links')
+        if child.is_child or child.links:
+            raise ValueError('a sub-emitter has one parent and no sub-emitters of its own')
+        child.is_child = True
+        child.reset()
+        self.links.append((child, kind, f32(probability)))
+
+    def set_fields(self, values: dict):
+        """Values of an emitter timeline's field columns (the README's emitter timelines), which replace the
+        serialized ones from now on: `speed` simulationSpeed; `emission.rate` and `emission.distance` the
+        rate curves' scalar (a constant, a curve's multiplier, the max of two constants: ["r", min, max]'s second); `emission.enabled`
+        (0 or 1); `main.startColor` the start colour's max colour (a constant, the second of two; a gradient
+        reads none); `main.startSize`, `main.gravity`, `noise.strength`, `velocity.speedModifier`,
+        `size.multiplier` the scalar of the start size (x), the gravity modifier, the noise strength (x), the
+        speed modifier and the size over lifetime (x); `shape.radius` the shape's radius."""
+        c = self.c
+        for column, value in values.items():
+            if column == 'speed':
+                c.simulation_speed = float(value)
+            elif column == 'emission.rate':
+                c.rate_over_time.scalar = float(value)
+            elif column == 'emission.enabled':
+                c.emission_enabled = float(value) >= 0.5
+            elif column == 'emission.distance':
+                c.rate_over_distance.scalar = float(value)
+            elif column == 'main.startColor':
+                if c.start_color.state in (GRAD_COLOR, GRAD_TWO_COLORS):
+                    c.start_color.max_color = tuple(float(v) for v in value)
+            elif column == 'main.startSize':
+                c.start_size[0].scalar = float(value)
+            elif column == 'main.gravity':
+                c.gravity_modifier.scalar = float(value)
+            elif column == 'noise.strength':
+                if 'NoiseModule' in c.modules:
+                    self.mm(c.modules['NoiseModule']['strength']).scalar = float(value)
+            elif column == 'velocity.speedModifier':
+                if 'VelocityModule' in c.modules:
+                    self.mm(c.modules['VelocityModule']['speedModifier']).scalar = float(value)
+            elif column == 'size.multiplier':
+                if 'SizeModule' in c.modules:
+                    self.mm(c.modules['SizeModule']['curve']).scalar = float(value)
+            elif column == 'shape.radius':
+                if c.shape:
+                    c.shape['radius'] = {**c.shape['radius'], 'value': float(value)}
+            else:
+                raise ValueError(f'no field column {column}')
+
+    def play(self, pose: Pose | None = None, child_poses: list | None = None):
         """Start playing (playOnAwake = the GameObject became active). Prewarm simulates one loop first: its
         last prewarm_window (Options.prewarm 'window') or all of it ('full'), in equal steps of at most
-        Options.prewarm_step, from a fresh state at the window's start."""
+        Options.prewarm_step, from a fresh state at the window's start. Its sub-emitter children start with
+        it (`child_poses`: theirs, in link order) and are prewarmed with it; a child does not play itself."""
         self.reset()
         if pose is not None:
             self.pose = self.prev_pose = pose
-        if self.c.prewarm and self.c.looping:
+        for k, (child, _, _) in enumerate(self.links):
+            child.reset()
+            if child_poses is not None and child_poses[k] is not None:
+                child.pose = child.prev_pose = child_poses[k]
+        if self.c.prewarm and self.c.looping and not self.is_child:
             duration = max(self.c.duration, 0.0)
             window = duration if self.options.prewarm == 'full' or self.c.prewarm_window is None else min(self.c.prewarm_window, duration)
             self.time = duration - window
@@ -1023,14 +1200,21 @@ class Simulation:
             self.time = 0.0  # the system clock restarts; the loop it simulated is the one that "already happened"
             self.burst_cycle_state = {}
 
-    def step(self, dt: float, pose: Pose | None = None):
-        """Advance by dt seconds of game time (scaled by simulationSpeed). pose: the emitter's pose this frame."""
+    def step(self, dt: float, pose: Pose | None = None, child_poses: list | None = None):
+        """Advance by dt seconds of game time (scaled by simulationSpeed). pose: the emitter's pose this frame;
+        child_poses: its sub-emitter children's, in link order (None keeps one)."""
         self.prev_pose = self.pose
         if pose is not None:
             self.pose = pose
         if dt > 0:
             self.emitter_velocity = v_mul(v_sub(self.pose.position, self.prev_pose.position), 1.0 / dt)
-        self._advance(dt * self.c.simulation_speed)
+        for k, (child, _, _) in enumerate(self.links):
+            child.prev_pose = child.pose
+            if child_poses is not None and child_poses[k] is not None:
+                child.pose = child_poses[k]
+            if dt > 0:
+                child.emitter_velocity = v_mul(v_sub(child.pose.position, child.prev_pose.position), 1.0 / dt)
+        self._advance(dt * self.c.simulation_speed, dt)
 
     # --- time
 
@@ -1050,12 +1234,168 @@ class Simulation:
 
     # --- one step
 
-    def _advance(self, dt: float):
+    def _advance(self, dt: float, game_dt: float | None = None):
+        """One step of dt seconds of this system's time (game_dt of game time: its sub-emitter children run
+        at their own speed; a prewarm's steps are in this system's time)."""
+        if game_dt is None:
+            game_dt = dt / self.c.simulation_speed if self.c.simulation_speed > 0 else 0.0
         if dt <= 0:
+            for child, _, _ in self.links:
+                child._advance_driven(game_dt * child.c.simulation_speed, [])
             return
         t0, t1 = self.time, self.time + dt
         self.time = t1
-        # 1. age and kill (frees slots for this step's emission)
+        # 1. age and kill (frees slots for this step's emission; a death sub-emitter fires where it died)
+        alive, deaths = [], []
+        for p in self.particles:
+            age = p.age
+            p.age += dt
+            if p.age < p.start_lifetime:
+                alive.append(p)
+            else:
+                self.dead_total += 1
+                if self.links:
+                    deaths.append((p, min(max((p.start_lifetime - age) / dt, 0.0), 1.0)))
+        self.particles = alive
+        # 2. integrate the survivors over the whole step
+        for p in self.particles:
+            p.previous = p.position
+            self._integrate(p, dt)
+        # 3. emit, each new particle at its own time inside the step, aged to t1
+        newborn = {}
+        for te_abs, burst_index, burst_size in self._emission_events(t0, t1, dt):
+            if len(self.particles) >= self.c.max_particles:
+                continue  # dropped, not queued (section 4.3)
+            p = self._spawn(te_abs, burst_index, burst_size, (te_abs - t0) / dt if dt else 1.0)
+            p.serial, p.previous = self.emitted_total, p.position
+            remaining = t1 - te_abs if self.options.subframe_emission else 0.0
+            if remaining > 0:
+                p.age += remaining
+                self._integrate(p, remaining)
+            if p.age < p.start_lifetime:
+                self.particles.append(p)
+                newborn[id(p)] = (te_abs - t0) / dt
+            self.emitted_total += 1
+        # 4. shape Loop/PingPong positions move with the arc speed curve
+        if self.c.shape:
+            for key, at in (('arc', 'arc'), ('radius', 'radius'), ('m_MeshSpawn', 'mesh')):
+                multi = self.c.shape.get(key) or {}
+                if multi.get('mode') in (MULTI_LOOP, MULTI_PINGPONG):
+                    speed = self.mm(multi.get('speed')).evaluate(self.system_t01(self.emission_time(t1)))
+                    self.shape_state[at] = self.shape_state.get(at, 0.0) + speed * dt
+        # 5. sub-emitters: each child ages and moves its particles, then takes this step's births
+        for k, (child, kind, probability) in enumerate(self.links):
+            child._advance_driven(game_dt * child.c.simulation_speed, self._sub_events(k, child, kind, probability, dt, deaths, newborn))
+
+    # --- sub-emitters (section 9)
+
+    def _root(self, position, velocity) -> tuple:
+        """A particle's position and velocity in root space (the prefab root, where children are placed)."""
+        if self.c.space == SPACE_WORLD:
+            return position, velocity
+        return self.pose.point(position), self.pose.vector(velocity)
+
+    def _sub_events(self, k: int, child: 'Simulation', kind: str, probability: float, dt: float, deaths: list, newborn: dict) -> list:
+        """The births this step's particles give link k's child: [(fraction of the step, parent serial, n, root
+        position, parent velocity in root space, child system time 0-1, particle seed, burst index, burst
+        size)], sorted. Birth: from every live particle whose link fired, over the age it lived this step, the
+        child's rate (its own accumulator, rate over distance by the particle's own movement) and bursts timed
+        by that age, looping with the child's duration; Death: the child's bursts, once each. The draws come
+        from the link's generator of that particle (seeded by its subSeed<k>), so a child's particles never
+        depend on other parents' particles or on the order they are handled in."""
+        events = []
+        if kind == 'birth':
+            for p in self.particles:
+                state = p.subs[k] if p.subs else None
+                if state is None:
+                    continue
+                born = newborn.get(id(p))
+                a1 = p.age
+                a0 = 0.0 if born is not None else a1 - dt
+                f0 = born if born is not None else 0.0
+                moved = v_len(v_sub(p.position, p.previous)) if p.previous is not None else 0.0
+                n = 0
+                for age, s01, burst_index, burst_size in self._child_schedule(child.c, a0, a1, state, moved):
+                    w = (age - a0) / (a1 - a0) if a1 > a0 else 1.0
+                    where = v_lerp(p.previous, p.position, w) if p.previous is not None else p.position
+                    origin, velocity = self._root(where, v_add(p.velocity, p.animated))
+                    events.append((f0 + (age - a0) / dt, p.serial, n, origin, velocity, s01, state[0].next_u32(), burst_index, burst_size))
+                    n += 1
+        else:
+            for p, fraction in deaths:
+                if not (probability >= 1.0 or particle_random(p.seed, RANDOM_KEY[f'sub{k}']) < probability):
+                    continue
+                rng = XorShift128(particle_word(p.seed, RANDOM_KEY[f'subSeed{k}']))
+                origin, velocity = self._root(p.position, v_add(p.velocity, p.animated))
+                n = 0
+                for b in child.c.bursts:
+                    if not (b.probability >= 1.0 or rng.value() < b.probability):
+                        continue
+                    count = b.count.evaluate(b.time / child.c.duration if child.c.duration > 0 else 0.0, rng.value() if b.count.is_random else 1.0)
+                    count = max(0, int(math.floor(count + 0.5)))
+                    for i in range(count):
+                        events.append((fraction, p.serial, n, origin, velocity, 0.0, rng.next_u32(), i, count))
+                        n += 1
+        events.sort(key=lambda e: (e[0], e[1], e[2]))
+        return events
+
+    def _child_schedule(self, c: 'Config', a0: float, a1: float, state: list, moved: float) -> list:
+        """(age, child system time 0-1, burst index, burst size) of the births one parent particle gives a birth
+        sub-emitter while its age runs over [a0, a1): the child's emission with the particle's age for its
+        clock (no start delay; a child that does not loop stops after its duration), `state` the particle's
+        [generator, accumulator] for the link."""
+        rng = state[0]
+        d = c.duration
+        if not c.emission_enabled or d <= 0 or a1 <= a0:
+            return []
+        end = a1 if c.looping else min(a1, d)
+        if end <= a0:
+            return []
+        t01 = (lambda a: (a % d) / d) if c.looping else (lambda a: min(a, d) / d)
+        out = []
+        rate = c.rate_over_time.evaluate(t01(a0), rng.value() if c.rate_over_time.is_random else 1.0)
+        if rate > 0:
+            acc0 = state[1]
+            acc1 = acc0 + rate * (end - a0)
+            for k in range(1, int(math.floor(acc1)) - int(math.floor(acc0)) + 1):
+                age = a0 + (math.floor(acc0) + k - acc0) / rate
+                out.append((age, t01(age), None, 0))
+            state[1] = acc1 - math.floor(acc1)
+        rod = c.rate_over_distance.evaluate(t01(a0))
+        if rod > 0 and moved > 0:
+            acc = (state[2] if len(state) > 2 else 0.0) + moved * rod
+            count = int(math.floor(acc))
+            for k in range(count):
+                age = a0 + (end - a0) * (k + 1) / (count + 1)
+                out.append((age, t01(age), None, 0))
+            if len(state) > 2:
+                state[2] = acc - count
+            else:
+                state.append(acc - count)
+        first = int(math.floor(a0 / d)) if c.looping else 0
+        last = int(math.floor(end / d)) if c.looping else 0
+        for loop in range(first, last + 1):
+            base = loop * d
+            for b in c.bursts:
+                k = 0
+                while not (b.cycles and k >= b.cycles):
+                    bt = b.time + k * b.interval
+                    if bt >= d or base + bt >= end:
+                        break
+                    if base + bt >= a0 and (b.probability >= 1.0 or rng.value() < b.probability):
+                        count = b.count.evaluate(bt / d, rng.value() if b.count.is_random else 1.0)
+                        count = max(0, int(math.floor(count + 0.5)))
+                        for i in range(count):
+                            out.append((base + bt, bt / d, i, count))
+                    if b.interval <= 0:
+                        break
+                    k += 1
+        out.sort(key=lambda e: e[0])
+        return out
+
+    def _advance_driven(self, dt: float, events: list):
+        """A sub-emitter child's step: its particles age, die and move over dt (its own time), then the
+        parents' births of the step (from _sub_events) are added, each aged to the end of the step."""
         alive = []
         for p in self.particles:
             p.age += dt
@@ -1064,28 +1404,21 @@ class Simulation:
             else:
                 self.dead_total += 1
         self.particles = alive
-        # 2. integrate the survivors over the whole step
         for p in self.particles:
             self._integrate(p, dt)
-        # 3. emit, each new particle at its own time inside the step, aged to t1
-        for te_abs, burst_index, burst_size in self._emission_events(t0, t1, dt):
+        for fraction, serial, _, origin, velocity, s01, seed, burst_index, burst_size in events:
             if len(self.particles) >= self.c.max_particles:
-                continue  # dropped, not queued (section 4.3)
-            p = self._spawn(te_abs, burst_index, burst_size, (te_abs - t0) / dt if dt else 1.0)
-            remaining = t1 - te_abs if self.options.subframe_emission else 0.0
+                continue
+            p = self._spawn(0.0, burst_index, burst_size, fraction, seed=seed, origin=origin, s01=s01, emitter_velocity=velocity)
+            p.parent = serial
+            remaining = (1.0 - fraction) * dt if self.options.subframe_emission else 0.0
             if remaining > 0:
                 p.age += remaining
                 self._integrate(p, remaining)
             if p.age < p.start_lifetime:
                 self.particles.append(p)
             self.emitted_total += 1
-        # 4. shape Loop/PingPong positions move with the arc speed curve
-        if self.c.shape:
-            for key in ('arc', 'radius'):
-                multi = self.c.shape.get(key) or {}
-                if multi.get('mode') in (MULTI_LOOP, MULTI_PINGPONG):
-                    speed = self.mm(multi.get('speed')).evaluate(self.system_t01(self.emission_time(t1)))
-                    self.shape_state[key] = self.shape_state.get(key, 0.0) + speed * dt
+        self.time += dt
 
     def _emission_events(self, t0: float, t1: float, dt: float):
         """Absolute times (with burst index and size) of the particles born in the step [t0, t1).
@@ -1093,7 +1426,7 @@ class Simulation:
         Windows are half-open in emission time (time since the start delay ended): [te0, te1), so a burst at
         0 fires on the first step and each instant belongs to exactly one step (section 4.2)."""
         c = self.c
-        if not c.emission_enabled or not self.emitting or c.duration <= 0:
+        if not c.emission_enabled or not self.emitting or c.duration <= 0 or self.is_child:
             return []
         te0, te1 = max(self.emission_time(t0), 0.0), self.emission_time(t1)
         if not c.looping:
@@ -1147,12 +1480,16 @@ class Simulation:
 
     # --- birth
 
-    def _spawn(self, t_abs: float, burst_index, burst_size, frame_fraction: float) -> Particle:
+    def _spawn(self, t_abs: float, burst_index, burst_size, frame_fraction: float, *, seed: int | None = None, origin=None, s01: float | None = None,
+               emitter_velocity=None) -> Particle:
+        """A new particle at time t_abs. A sub-emitter's (`origin`: its parent particle's position in root
+        space) comes with its seed, its system time and the parent particle's velocity."""
         c, rng = self.c, self.rng
-        te = self.emission_time(t_abs)
-        s01 = self.system_t01(te)
+        if s01 is None:
+            s01 = self.system_t01(self.emission_time(t_abs))
         if self.options.randoms == 'hashed':
-            seed = rng.next_u32()  # the one draw a birth makes from the system's generator
+            if seed is None:
+                seed = rng.next_u32()  # the one draw a birth makes from the system's generator
 
             def draw(key):
                 return particle_random(seed, RANDOM_KEY[key])
@@ -1163,7 +1500,8 @@ class Simulation:
                 return rng.value()
             rand = {k: rng.value() for k in RAND_KEYS}  # fixed draw order -> deterministic per seed
             shape_rng = rng
-        pos, direction = sample_shape(c.shape, shape_rng, self.shape_state, s01, burst_index, burst_size)
+        mesh_colour = []
+        pos, direction = sample_shape(c.shape, shape_rng, self.shape_state, s01, burst_index, burst_size, c.shape_mesh, mesh_colour)
         speed = c.start_speed.evaluate(s01, draw('startSpeed'))
         velocity = v_mul(direction, speed)
         lifetime = c.start_lifetime.evaluate(s01, draw('startLifetime'))
@@ -1178,8 +1516,16 @@ class Simulation:
             rot = (0.0, 0.0, c.start_rotation[2].evaluate(s01, draw('startRotationZ')))
         flip = -1.0 if c.flip_rotation > 0 and draw('flip') < c.flip_rotation else 1.0
         rot = tuple(r * flip for r in rot)
-        color = color32(c.start_color.evaluate(s01, draw('startColor')))
-        if c.space == SPACE_WORLD:
+        color = c.start_color.evaluate(s01, draw('startColor'))
+        if mesh_colour:  # a mesh shape's vertex colour tints it (m_UseMeshColors)
+            color = tuple(x * y for x, y in zip(color, mesh_colour[0]))
+        color = color32(color)
+        if origin is not None:  # a sub-emitter's particle: at its parent particle, the shape turned by its own emitter
+            if c.space == SPACE_WORLD:
+                pos, velocity = v_add(origin, self.pose.vector(pos)), self.pose.vector(velocity)
+            else:
+                pos = v_add(self.pose.inverse_point(origin), pos)
+        elif c.space == SPACE_WORLD:
             pose = self.pose
             if self.options.subframe_emission:  # the emitter is interpolated across the frame
                 pose = Pose(v_lerp(self.prev_pose.position, self.pose.position, frame_fraction), self.pose.rotation, self.pose.scale,
@@ -1187,7 +1533,12 @@ class Simulation:
             pos, velocity = pose.point(pos), pose.vector(velocity)
         p = Particle(position=pos, velocity=velocity, animated=(0.0, 0.0, 0.0), start_lifetime=max(lifetime, 0.0), age=0.0,
                      start_size=size, start_color=color, rotation=rot, flip=flip, rand=rand,
-                     emitter_velocity=self.emitter_velocity)
+                     emitter_velocity=self.emitter_velocity if emitter_velocity is None else emitter_velocity,
+                     seed=seed if seed is not None else 0)
+        if self.links:  # which of its sub-emitter links fire from it (each with its own generator)
+            p.subs = [[XorShift128(particle_word(seed, RANDOM_KEY[f'subSeed{k}'])), 0.0]
+                      if kind == 'birth' and (probability >= 1.0 or particle_random(seed, RANDOM_KEY[f'sub{k}']) < probability) else None
+                      for k, (_, kind, probability) in enumerate(self.links)]
         uv = c.modules.get('UVModule')
         if uv and uv.get('animationType') == 1:
             if uv.get('rowMode', 1) == 1:
@@ -1598,3 +1949,72 @@ def emitter_from_export(system: dict) -> tuple[Pose, tuple]:
     if 'matrix' not in emitter:
         raise ValueError(f'{system["name"]}: the emitter moves (a timeline), not a static matrix')
     return Pose.from_export(emitter), tuple(f32(v) for v in emitter['scale'])
+
+
+# The widths of an emitter timeline's columns (the README's emitter timelines); a material parameter's is
+# its last part's (layers.json's effect paths).
+COLUMN_WIDTHS = {'t': 1, 'matrix': 12, 'rotation': 4, 'scale': 3, 'active': 1, 'tint': 4, 'speed': 1, 'emission.rate': 1, 'emission.enabled': 1,
+                 'emission.distance': 1, 'main.startColor': 4, 'main.startSize': 1, 'main.gravity': 1, 'noise.strength': 1,
+                 'velocity.speedModifier': 1, 'shape.radius': 1, 'size.multiplier': 1, 'trail.color': 4}
+PATH_WIDTHS = {'amount': 1, 'border': 1, 'main': 1, 'dissolve': 1, 'st': 4, 'offset': 4, 'intensity': 2, 'color': 4}
+STEPPED_COLUMNS = ('active', 'emission.enabled')
+FIELD_COLUMNS = ('speed', 'emission.rate', 'emission.enabled', 'emission.distance', 'main.startColor', 'main.startSize', 'main.gravity',
+                 'noise.strength', 'velocity.speedModifier', 'shape.radius', 'size.multiplier')
+
+
+def timeline_values(timeline: dict, t: float, state: str | None = None) -> dict:
+    """An emitter timeline's values at time t of its clock ({column: number or list}): the frames of
+    `state` (Interact...) or the default ones, interpolated linearly, stepped columns held; after `length`
+    it wraps to `loopFrom` when it loops, else holds its last frame."""
+    line = timeline['states'][state] if state is not None else timeline
+    length, frames = f32(line['length']), line['frames']
+    if t > length:
+        loop_from = f32(line['loopFrom'])
+        t = loop_from + (t - loop_from) % (length - loop_from) if line['loop'] and length > loop_from else length
+    i = 0
+    while i + 1 < len(frames) and f32(frames[i + 1][0]) <= t:
+        i += 1
+    a = frames[i]
+    b = frames[i + 1] if i + 1 < len(frames) else a
+    span = f32(b[0]) - f32(a[0])
+    w = (t - f32(a[0])) / span if span > 0 else 0.0
+    out, at = {}, 0
+    for column in timeline['columns']:
+        n = COLUMN_WIDTHS.get(column) or PATH_WIDTHS[column.rsplit('.', 1)[-1]]
+        if column in STEPPED_COLUMNS:
+            values = [f32(a[at])]
+        else:
+            values = [f32(x) + (f32(y) - f32(x)) * w for x, y in zip(a[at:at + n], b[at:at + n])]
+        out[column] = values[0] if n == 1 else values
+        at += n
+    return out
+
+
+def emitter_pose(system: dict, t: float = 0.0, state: str | None = None, placement: tuple | None = None) -> Pose:
+    """The emitter's pose in root space at time t of its clock (a timeline's frame there, or the still emitter),
+    for a system on a bone follower composed with `placement`, the follower's frame then: (3x4 matrix,
+    row-major 12 numbers, Unity units of the root; its rotation quaternion). Hierarchy and Shape scaling take
+    the matrix through the whole frame; Local only its origin, the linear part turned by the frame's rotation."""
+    emitter = system['emitter']
+    if 'timeline' in emitter:
+        values = timeline_values(emitter['timeline'], t, state)
+        m, q = values['matrix'], tuple(values['rotation'])
+        q = q_mul(q, (0.0, 0.0, 0.0, 1.0))
+        norm = math.sqrt(sum(x * x for x in q)) or 1.0
+        q = tuple(x / norm for x in q)
+    else:
+        m, q = [f32(x) for x in emitter['matrix']], tuple(f32(x) for x in emitter['rotation'])
+    if system.get('follow') is None:
+        return Pose((m[3], m[7], m[11]), q, (1.0, 1.0, 1.0), (m[0], m[1], m[2], m[4], m[5], m[6], m[8], m[9], m[10]))
+    if placement is None:
+        raise ValueError(f'{system["name"]}: on a bone follower; a placement is needed')
+    f, fq = placement
+    lin = (m[0], m[1], m[2], m[4], m[5], m[6], m[8], m[9], m[10])
+    origin = v_add(_mat_vec((f[0], f[1], f[2], f[4], f[5], f[6], f[8], f[9], f[10]), (m[3], m[7], m[11])), (f[3], f[7], f[11]))
+    turned = q_mul(fq, q)
+    if system['clock'].get('scaling', 'local') == 'local':
+        rot = [q_rotate(fq, (lin[c], lin[3 + c], lin[6 + c])) for c in range(3)]  # each column turned by the frame
+    else:
+        fl = (f[0], f[1], f[2], f[4], f[5], f[6], f[8], f[9], f[10])
+        rot = [_mat_vec(fl, (lin[c], lin[3 + c], lin[6 + c])) for c in range(3)]
+    return Pose(origin, turned, (1.0, 1.0, 1.0), (rot[0][0], rot[1][0], rot[2][0], rot[0][1], rot[1][1], rot[2][1], rot[0][2], rot[1][2], rot[2][2]))

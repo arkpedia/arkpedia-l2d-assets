@@ -508,5 +508,157 @@ class Export(unittest.TestCase):
         self.assertEqual(pose.inverse_vector(pose.vector((0.3, -1, 2))), (0.3, -1.0, 2.0))
 
 
+
+MESH = {'vertices': [(0, 0, 0), (2, 0, 0), (0, 1, 0), (2, 1, 0)], 'normals': [(0, 0, -1)] * 4, 'submeshes': [[0, 1, 2, 2, 1, 3, 0, 2, 2]],
+        'colors': [(1, 0, 0, 1), (0, 1, 0, 1), (0, 0, 1, 1), (1, 1, 1, 1)]}
+
+
+def mesh_ps(placement, **kw):
+    return make_ps(**{'ShapeModule__enabled': True, 'ShapeModule__type': 6, 'ShapeModule__m_Mesh': {'m_FileID': 0, 'm_PathID': 1},
+                      'ShapeModule__placementMode': placement, 'ShapeModule__m_MeshSpawn': multi(0.0), 'ShapeModule__m_UseMeshColors': True,
+                      'ShapeModule__m_MeshNormalOffset': 0.0, 'InitialModule__startSpeed': mmc(0, 1.0), 'EmissionModule__m_Bursts': [burst(0.0, 400)],
+                      **kw})
+
+
+class MeshShapes(unittest.TestCase):
+    def sim(self, placement, **kw):
+        sim = up.Simulation(up.Config.from_trees(mesh_ps(placement, **kw), mesh_of=lambda ref: MESH))
+        sim.play()
+        sim.step(1 / 60)
+        return sim
+
+    def test_triangles_by_area_with_their_normal_and_colours(self):
+        sim = self.sim(2, ShapeModule__m_MeshNormalOffset=0.5)
+        cdf = sim.c.shape_mesh['cdf']
+        self.assertEqual(cdf, [0.5, 1.0, 1.0], 'two triangles of equal area and a degenerate one')
+        for p in sim.particles:
+            x, y, z = p.position
+            self.assertTrue(-1e-9 <= x <= 2 + 1e-9 and -1e-9 <= y <= 1 + 1e-9, p.position)
+            self.assertAlmostEqual(z, -0.5 + p.velocity[2] * p.age, places=6)  # offset along the normal, moving along it
+            self.assertAlmostEqual(p.velocity[2], -1.0)
+        # Uniform over the area: about half on each side of the diagonal x / 2 + y = 1.
+        above = sum(1 for p in sim.particles if p.position[0] / 2 + p.position[1] > 1)
+        self.assertTrue(150 < above < 250, above)
+        # The mesh's vertex colours tint the start colour (Color32).
+        self.assertTrue(any(p.start_color[0] < 0.9 for p in sim.particles) and all(abs(sum(p.start_color[:3]) - 1) < 0.02 or p.start_color[:3] != (1, 1, 1)
+                                                                                    for p in sim.particles))
+
+    def test_vertices_in_order_with_loop_spawn(self):
+        sim = self.sim(0, ShapeModule__m_MeshSpawn=multi(0.0, mode=1))
+        self.assertEqual({p.position[:2] for p in sim.particles}, {(0.0, 0.0)}, 'a loop that has not moved stays on the first vertex')
+        random = self.sim(0)
+        self.assertEqual({p.position[:2] for p in random.particles}, {tuple(map(float, v[:2])) for v in MESH['vertices']})
+
+    def test_a_mesh_shape_needs_its_mesh(self):
+        with self.assertRaises(ValueError):
+            up.Config.from_trees(mesh_ps(2))
+
+
+def parent_ps(**kw):
+    return make_ps(**{'lengthInSec': 1.0, 'looping': True, 'EmissionModule__rateOverTime': mmc(0, 10.0), 'InitialModule__startLifetime': mmc(0, 0.5),
+                      'InitialModule__startSpeed': mmc(0, 2.0), **kw})
+
+
+class SubEmitters(unittest.TestCase):
+    def family(self, child_kw, kind='birth', probability=1.0, parent_kw=None, seed=1):
+        parent = up.Simulation.from_trees(parent_ps(**(parent_kw or {})), seed=seed)
+        child = up.Simulation.from_trees(make_ps(**{'InitialModule__startLifetime': mmc(0, 0.2), **child_kw}), seed=seed + 1)
+        parent.link(child, kind, probability)
+        parent.play()
+        return parent, child
+
+    def test_birth_children_follow_the_rate_and_bursts_of_each_parent_particle(self):
+        parent, child = self.family({'EmissionModule__rateOverTime': mmc(0, 20.0), 'EmissionModule__m_Bursts': [burst(0.0, 3)], 'lengthInSec': 5.0})
+        for _ in range(120):
+            parent.step(1 / 60)
+        # 2 s at 10/s: 19 parents (the 20th is due at 2 s). Each emits a burst of 3 at its birth and, at 20/s from a
+        # rate accumulator of its own, children at ages 0.05, 0.1, ... 0.45 (it dies at 0.5): 12 for the 15 that have
+        # lived out, 10, 8, 6 and 4 for the last four, born 1.6 to 1.9.
+        self.assertEqual(parent.emitted_total, 19)
+        self.assertEqual(child.emitted_total, 15 * 12 + 10 + 8 + 6 + 4)
+        self.assertFalse(child._emission_events(0.0, 1.0, 1.0), 'a child does not emit on its own')
+
+    def test_death_children_burst_where_a_particle_dies(self):
+        parent, child = self.family({'EmissionModule__m_Bursts': [burst(0.0, 4)], 'InitialModule__startLifetime': mmc(0, 5.0)}, kind='death')
+        steps = 0
+        while parent.dead_total == 0:
+            parent.step(1 / 60)
+            steps += 1
+        self.assertEqual(child.emitted_total, 4 * parent.dead_total)
+        # Born where the parent died: 2 u/s along +Z for its 0.5 s (the first particle, about 1 u out).
+        for p in child.particles:
+            self.assertAlmostEqual(p.position[2], 1.0, delta=0.05)
+
+    def test_a_link_fires_by_its_probability(self):
+        none, child = self.family({'EmissionModule__m_Bursts': [burst(0.0, 1)]}, probability=0.0)
+        for _ in range(60):
+            none.step(1 / 60)
+        self.assertEqual(child.emitted_total, 0)
+        half, child = self.family({'EmissionModule__m_Bursts': [burst(0.0, 1)]}, probability=0.5, parent_kw={'EmissionModule__rateOverTime': mmc(0, 200.0)})
+        for _ in range(60):
+            half.step(1 / 60)
+        self.assertTrue(0.4 < child.emitted_total / half.emitted_total < 0.6, (child.emitted_total, half.emitted_total))
+
+    def test_a_childs_particles_do_not_depend_on_other_parents_particles(self):
+        """Each parent particle's link draws from its own generator: the children of the first parent
+        particle are the same whatever the parent emits after it."""
+        def first_children(rate):
+            parent, child = self.family({'EmissionModule__rateOverTime': mmc(3, 10.0, 30.0), 'InitialModule__startSpeed': mmc(3, 0.0, 1.0)},
+                                        parent_kw={'EmissionModule__rateOverTime': mmc(0, rate), 'EmissionModule__m_Bursts': [burst(0.0, 1)]})
+            for _ in range(20):
+                parent.step(1 / 60)
+            return sorted((p.velocity, p.age, p.position) for p in child.particles if p.parent == 0)
+        self.assertEqual(first_children(1.0), first_children(50.0))
+
+    def test_a_child_is_placed_in_its_own_space(self):
+        # A local child at x 5: its particles are the parent particles' positions seen from it.
+        parent, child = self.family({'EmissionModule__m_Bursts': [burst(0.0, 1)], 'InitialModule__startLifetime': mmc(0, 9.0)},
+                                    parent_kw={'EmissionModule__m_Bursts': [burst(0.0, 1)]})
+        child.pose = child.prev_pose = up.Pose((5.0, 0.0, 0.0))
+        parent.step(1 / 60)
+        parent.step(1 / 60)
+        self.assertTrue(child.particles)
+        for p in child.particles:
+            self.assertAlmostEqual(p.position[0], -5.0)
+
+
+class Fields(unittest.TestCase):
+    def test_timeline_fields_replace_the_serialized_ones(self):
+        base = up.Simulation.from_trees(make_ps(looping=True, EmissionModule__rateOverTime=mmc(0, 10.0)))
+        base.play()
+        fast = up.Simulation.from_trees(make_ps(looping=True, EmissionModule__rateOverTime=mmc(0, 10.0)))
+        fast.play()
+        fast.set_fields({'speed': 2.0})
+        for _ in range(60):
+            base.step(1 / 60)
+            fast.step(1 / 60)
+        self.assertAlmostEqual(fast.time, 2 * base.time)
+        rate = up.Simulation.from_trees(make_ps(looping=True, EmissionModule__rateOverTime=mmc(3, 5.0, 10.0)))
+        rate.set_fields({'emission.rate': 30.0})
+        self.assertEqual((rate.c.rate_over_time.min_scalar, rate.c.rate_over_time.scalar), (10.0, 30.0), 'the max (scalar) of two constants')
+        rate.set_fields({'emission.enabled': 0})
+        rate.play()
+        for _ in range(60):
+            rate.step(1 / 60)
+        self.assertEqual(rate.emitted_total, 0)
+        tree = make_ps(NoiseModule={'enabled': True, 'strength': mmc(0, 1.0)}, ShapeModule__enabled=True, ShapeModule__type=10)
+        sim = up.Simulation.from_trees(tree)
+        sim.set_fields({'noise.strength': 3.0, 'shape.radius': 2.0, 'main.startSize': 0.5})
+        self.assertEqual((sim.mm(sim.c.modules['NoiseModule']['strength']).scalar, sim.c.shape['radius']['value'], sim.c.start_size[0].scalar), (3.0, 2.0, 0.5))
+        self.assertEqual(tree['NoiseModule']['strength']['scalar'], 1.0, 'the trees are left as they were')
+
+    def test_a_timeline_is_read_by_column_name(self):
+        timeline = {'columns': ['t', 'matrix', 'rotation', 'scale', 'active', 'speed', 'dissolve.0.amount'], 'length': 2, 'loop': True, 'loopFrom': 1,
+                    'frames': [[0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
+                               [1, 1, 0, 0, 4, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 3, 1],
+                               [2, 1, 0, 0, 8, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0]]}
+        v = up.timeline_values(timeline, 0.5)
+        self.assertEqual((v['matrix'][3], v['active'], v['speed'], v['dissolve.0.amount']), (2.0, 1.0, 2.0, 0.5))
+        self.assertEqual(up.timeline_values(timeline, 1.5)['active'], 0.0, 'stepped: held from the frame at 1')
+        self.assertEqual(up.timeline_values(timeline, 2.5)['matrix'][3], up.timeline_values(timeline, 1.5)['matrix'][3], 'loops from loopFrom')
+        pose = up.emitter_pose({'emitter': {'timeline': timeline}, 'follow': None, 'name': 'x'}, 0.5)
+        self.assertEqual(pose.point((0, 0, 0)), (2.0, 0.0, 0.0))
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=1)
