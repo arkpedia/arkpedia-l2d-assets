@@ -28,7 +28,10 @@ export function isJsonSkeleton(bytes) {
   return bytes[i] === 0x7b;
 }
 
-const round3 = (value) => Math.round(value * 1000) / 1000;
+// `+ 0` turns -0 into 0: Math.round(-0.3) is -0, which JSON writes as 0, so a value re-read from the
+// skeleton would differ from the one model.json stored (Chongyue's Elite 2 bounds, y -0).
+const round3 = (value) => Math.round(value * 1000) / 1000 + 0;
+export const whole = (value) => Math.round(value) + 0;
 
 /** Parses an atlas with the real runtime and a dummy texture loader. */
 export function readAtlas(atlasText) {
@@ -60,7 +63,7 @@ function poseSkeleton(skeletonBytes, atlasText) {
   const offset = new spine.Vector2();
   const size = new spine.Vector2();
   skeleton.getBounds(offset, size, []);
-  const bounds = { x: Math.round(offset.x), y: Math.round(offset.y), width: Math.round(size.x), height: Math.round(size.y) };
+  const bounds = { x: whole(offset.x), y: whole(offset.y), width: whole(size.x), height: whole(size.y) };
   if (!Object.values(bounds).every(Number.isFinite) || bounds.width <= 0 || bounds.height <= 0) {
     throw new Error(`Skeleton has no visible attachments in its first pose: ${JSON.stringify(bounds)}`);
   }

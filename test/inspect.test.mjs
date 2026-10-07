@@ -75,3 +75,11 @@ test('Hoshiguma the Breacher (Elite 2) matches the prototype that rendered it', 
   assert.deepEqual(result.animations, { Idle: 9.333, Interact: 13.6, Special: 15 });
   assert.deepEqual(result.bounds, { x: -1018, y: -218, width: 1976, height: 2027 });
 });
+
+test('bounds and durations never come out as -0, which JSON would store as 0', async () => {
+  const { whole } = await import('../scripts/spine.mjs');
+  assert.ok(Object.is(whole(-0.3), 0));
+  assert.ok(Object.is(whole(-0), 0));
+  assert.equal(whole(-0.6), -1);
+  assert.equal(whole(2.5), 3);
+});
