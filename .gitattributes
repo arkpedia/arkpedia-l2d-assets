@@ -1,0 +1,6 @@
+# Published files are hashed byte for byte: never let git rewrite line endings.
+*.atlas -text
+*.skel binary
+*.webp binary
+*.png binary
+*.json -text

@@ -1,0 +1,13 @@
+{
+  "name": "arkpedia-l2d-assets",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "test:py": "python3 -m unittest discover -s test -p 'test_*.py'",
+    "validate": "node scripts/validate.mjs",
+    "inspect": "node scripts/inspect-skeleton.mjs",
+    "sync": "python3 scripts/sync.py"
+  }
+}

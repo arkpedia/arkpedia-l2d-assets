@@ -1,0 +1,8 @@
+{"skeleton":{"hash":"arkpedia-test","spine":"3.8.99","x":0,"y":0,"width":0,"height":0},
+"bones":[{"name":"root"},{"name":"body","parent":"root","y":100}],
+"slots":[{"name":"body","bone":"body","attachment":"body"}],
+"skins":[{"name":"default","attachments":{"body":{"body":{"width":100,"height":200}}}}],
+"animations":{
+"Idle":{"bones":{"body":{"translate":[{"time":0},{"time":1.23456,"x":40}]}}},
+"Interact":{"bones":{"body":{"rotate":[{"time":0},{"time":0.5,"angle":10}]}}}
+}}
