@@ -1,8 +1,8 @@
 # Arkpedia dynamic art assets
 
-Animated outfit art for Arkpedia: the dynamic illustrations ("dynamic art") of the Arknights Global client, as Spine 3.8 models the site's focused artwork view can play. Stats, skin records and everything else stay in `arkpedia-data`; this repository holds only the animation files and where each came from.
+Animated outfit art for Arkpedia: the dynamic illustrations ("dynamic art") of the Arknights Global client, and of the CN client for outfits Global does not have yet, as Spine 3.8 models the site's focused artwork view can play. Stats, skin records and everything else stay in `arkpedia-data`; this repository holds only the animation files and where each came from.
 
-Scope: every skin in the EN `skin_table.json` that has a `dynIllustId` (88 as of client `26-09-23-17-49-43_b9cc4a`: 64 outfits and 24 default Elite 2 artworks). The 14 outfits with a `dynEntranceId` also carry their entrance: the sequence the game plays before the illustration, with its soundtrack. Each model also carries the illustration prefab's own mesh layers (skies, windows, frames, glows the game draws with the skeleton) that can be drawn exactly as the game draws them, including those drawn with the game's effect shaders (flow distortion, dissolve, ramps, vertex disturbance), whose parameters and textures are carried as data. CN-only skins, `sp_` variants, the client's particle systems and the effects no shader description covers are not included; `layers.json` records per model what was left out and why.
+Scope: every skin in the EN `skin_table.json` that has a `dynIllustId` (88 as of client `26-09-23-17-49-43_b9cc4a`: 64 outfits and 24 default Elite 2 artworks), and every skin in the zh_CN one that Global's plan does not have, from the CN client (8 as of CN client `26-09-22-07-47-20_6c71fa`: 6 outfits and 2 Elite 2 artworks). When Global's client carries one of those, its Global bundle is built into a new folder and the manifest moves to it; the CN folder stays published. The outfits with a `dynEntranceId` also carry their entrance: the sequence the game plays before the illustration, with its soundtrack. Each model also carries the illustration prefab's own mesh layers (skies, windows, frames, glows the game draws with the skeleton) that can be drawn exactly as the game draws them, including those drawn with the game's effect shaders (flow distortion, dissolve, ramps, vertex disturbance), whose parameters and textures are carried as data. `sp_` variants, the client's particle systems and the effects no shader description covers are not included; `layers.json` records per model what was left out and why.
 
 ## Layout
 
@@ -27,7 +27,8 @@ models/<slug>/<md5_12>/layer0.webp          (layer1.webp, ...: their textures)
 `manifest.json` names the current folder of each skin:
 
 ```json
-{ "schemaVersion": 1, "server": "en", "resVersion": "<client list the newest entries came from>",
+{ "schemaVersion": 1, "server": "en", "resVersion": "<Global's client list>",
+  "resVersions": { "en": "<Global's client list>", "cn": "<CN's client list>" },
   "models": { "char_1044_hsgma2#2": "models/char_1044_hsgma2_2/b1259edb8fff/model.json" } }
 ```
 
@@ -49,7 +50,7 @@ models/<slug>/<md5_12>/layer0.webp          (layer1.webp, ...: their textures)
 | `entrance.camera` | The camera the game plays the entrance through, or `null` when its prefab names none: `frames`, `[t, centre x, centre y, visible height, roll]` in skeleton units and degrees from 0 s (sampled at 30 fps, points a straight line reproduces within half a unit dropped; interpolate linearly), and `fades`, the full-screen quads that hide its cuts and flash at the end, as `{color: [r, g, b], keys: [[t, alpha]]}`, and `handover`, the colour the controller hands over to the illustration through (`_params.fadeColor`). Decoded by `scripts/entrance_camera.py` from the prefab's Animators (Mecanim streamed, dense and constant curves) through the whole transform chain; a camera it cannot reproduce fails the model. Particle systems and other effects are not included. |
 | `layers` | `layers.json` with `bytes` and `sha256`, or `null` for a bundle without an illustration prefab (none so far). Always present. |
 | `layersVersion` | What `layers.json` holds: `2`, plain layers and effect layers (below); absent or `1`, plain layers only (folders written before effects, until the sync exports their layers again). |
-| `source` | `server` (`en`), the client `bundle` path, its full `md5` and the `resVersion` it was downloaded from. |
+| `source` | `server` (`en` for Global, `cn` for CN), the client `bundle` path, its full `md5` and the `resVersion` it was downloaded from. |
 
 ### layers.json
 
@@ -106,7 +107,7 @@ Every texture an effect needs that sits in one of the client's shared FX bundles
 
 `scripts/sync.py` runs daily on GitHub Actions (`.github/workflows/sync.yml`) and can be started by hand with a `limit` or a list of skinIds.
 
-1. It reads the EN `skin_table.json` from ArknightsAssets/ArknightsGamedata and the Global client's network config, version file and `hot_update_list.json`.
+1. It reads the EN `skin_table.json` from ArknightsAssets/ArknightsGamedata and the Global client's network config, version file and `hot_update_list.json`, then the zh_CN `skin_table.json` from Kengxxiao/ArknightsGameData and the CN client's (`ak-conf.hypergryph.com`, `ak.hycdn.cn`). Global comes first: CN only fills the skins Global's plan does not have. Each model is downloaded, and its shared shader and FX bundles read, from its own client, and `sync-failures.json` keeps the records of both clients' skins.
 2. For each skin with a `dynIllustId` whose bundle (`arts/dynchars/<id>.ab`) the list carries, it skips the bundle if a folder for that md5 already exists. Otherwise it downloads the `.dat` from the client's asset CDN (GET only, one at a time, a 3 second pause between downloads) and checks its size and md5 against the list.
 3. It decodes the bundle with UnityPy (plus the LZ4AK patch Arknights bundles need). When anything is to be built, the run first fetches the client's shared shader bundle `[uc]shaders.ab` (734 KB, size and md5 checked against the list, cached under `.cache/shared/`): layer materials name their shaders by reference into it. A layer whose texture sits in a shared FX bundle (`shared-bundles.json`) makes the run fetch that bundle the same way, once (`refs/fx/texture/flow.ab` 10 MB and `mask.ab` 3.6 MB are the usual ones). Without it nothing is built that run, and nothing is recorded as failed. File names come from the bundle, never from the id. The skeleton is the one the illustration prefab (`dyn/arts/dynchars/.../<id>.prefab` in the bundle's container) plays, and its SkeletonDataAsset links it to its atlas. Names alone are not enough: Kal'tsit's boc#6 bundle has an entrance skeleton with exactly the same name as the illustration. Names are used only for a bundle without that prefab, and then entrance (`_Start`, `_Start#N`) and portrait skeletons are left out. Particle textures and effect masks are always ignored. A skin with a `dynEntranceId` also takes the skeleton its entrance prefab (`dyn/arts/dyncharstart/.../<dynEntranceId>.prefab`) plays, never one picked by name, and the soundtrack under `.../dynentrance/<dynEntranceId>/`, exported by UnityPy and encoded as MP3 (lameenc). A missing entrance prefab fails the model.
 4. Skeleton bytes are written unchanged. In the atlas only the page name lines change, to `page0.webp`, `page1.webp`, ... (the originals contain `#`, which breaks URLs). Each page is saved as premultiplied, lossless WebP at exactly the size the atlas was packed at. The client ships a page in one of two ways, and each needs different handling:

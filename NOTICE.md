@@ -4,10 +4,10 @@ Arknights names, characters, artwork, music and the Spine models in `models/` be
 
 ## Where each file comes from
 
-Every model folder comes from the Arknights Global (EN) Android client:
+Every model folder comes from an Arknights Android client: the Global (EN) one, or the CN one for a skin Global does not have yet. `source.server` in each `model.json` says which (`en` or `cn`).
 
-- The list of skins with dynamic art is the EN `skin_table.json` from [ArknightsAssets/ArknightsGamedata](https://github.com/ArknightsAssets/ArknightsGamedata).
-- The files come from that skin's asset bundle (`arts/dynchars/<id>.ab`) on Yostar's client asset CDN, as named by the client's own `hot_update_list.json`. Each `model.json` records the bundle path, its md5 and the client `resVersion` under `source`.
+- The list of skins with dynamic art is the EN `skin_table.json` from [ArknightsAssets/ArknightsGamedata](https://github.com/ArknightsAssets/ArknightsGamedata), and for CN the zh_CN one from [Kengxxiao/ArknightsGameData](https://github.com/Kengxxiao/ArknightsGameData).
+- The files come from that skin's asset bundle (`arts/dynchars/<id>.ab`) on the client's asset CDN (Yostar's for Global, Hypergryph's for CN), as named by that client's own `hot_update_list.json`. Each `model.json` records the bundle path, its md5 and the client `resVersion` under `source`.
 - The skeleton (`skeleton.skel` or `skeleton.json`) is the bundle's bytes, unchanged.
 - The atlas (`skeleton.atlas`) is the bundle's bytes with only the page name lines renamed to `page0.webp`, `page1.webp`, ...
 - Each `page<N>.webp` is the bundle's Android page texture, decoded and stored as lossless WebP with premultiplied alpha. The client ships a page in one of two ways:
