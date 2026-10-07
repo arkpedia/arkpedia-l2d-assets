@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1016_agoat2@epoque#57",
+  "dynIllustId": "dyn_illust_char_1016_agoat2_epoque#57",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1863874,
+    "sha256": "4263e90973082a79e30ea56529637a4c07ede4133c2174e066b18ce4f9d75e1d"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 60045,
+    "sha256": "0f4a9519fc868748c4d387a1e3f0ae0ca5d16e73436655e8802131b05b5416e9"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2280,
+      "height": 2280,
+      "bytes": 3051118,
+      "sha256": "d9c728d9dc65b397d32e8ab45a81c8f4f5bd63f627b6df0fb10958556a7fc5f7"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 18.367,
+    "Interact": 25.667,
+    "Special": 23.9,
+    "Start": 7.533
+  },
+  "bounds": {
+    "x": -514,
+    "y": 419,
+    "width": 1453,
+    "height": 1004
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.25
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.25
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.25
+    }
+  ],
+  "dynEntranceId": "dyn_entrance_char_1016_agoat2_epoque#57",
+  "entrance": {
+    "skeleton": {
+      "file": "entrance.skel",
+      "format": "binary",
+      "bytes": 318327,
+      "sha256": "284680f6582fdbf8dd829bd78440d9e4fbcbc30a57429c5ef93b40d1afdf726c"
+    },
+    "atlas": {
+      "file": "entrance.atlas",
+      "bytes": 26124,
+      "sha256": "523fc23734511f8bc66436ecfef93b7ba426f8ff24a92846686961bf0caef45b"
+    },
+    "textures": [
+      {
+        "file": "entrance-page0.webp",
+        "width": 1640,
+        "height": 1640,
+        "bytes": 1612812,
+        "sha256": "ec6e9247e1766588a71e9f97c5077ad84dcdc69dcc0235f1b7240f00ccc84565"
+      }
+    ],
+    "animations": {
+      "Start": 15.5
+    },
+    "bounds": {
+      "x": -442,
+      "y": 494,
+      "width": 1087,
+      "height": 866
+    },
+    "camera": {
+      "frames": [
+        [
+          0.0,
+          -11.0,
+          937.0,
+          740.0,
+          -0.0
+        ],
+        [
+          2.7,
+          -11.0,
+          937.0,
+          800.0,
+          -0.0
+        ],
+        [
+          10.867,
+          -11.0,
+          937.0,
+          791.4,
+          -0.0
+        ],
+        [
+          15.5,
+          -11.0,
+          937.0,
+          790.8,
+          -0.0
+        ]
+      ],
+      "fades": [
+        {
+          "color": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "keys": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              9.833,
+              0.0
+            ],
+            [
+              11.267,
+              1.0
+            ],
+            [
+              15.5,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "handover": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "audio": {
+      "file": "entrance.mp3",
+      "duration": 13.306,
+      "bytes": 266880,
+      "sha256": "d5fdd3cd51ddaeddf72579c156ae61390f2372d026fc393dcf29d3cd213d682c"
+    }
+  },
+  "layers": {
+    "file": "layers.json",
+    "bytes": 30982,
+    "sha256": "b3cafef43108d04087264a53c96bff76069ab17fa1daf84ea63cd3f35540cf05"
+  },
+  "layersVersion": 2,
+  "source": {
+    "server": "cn",
+    "bundle": "arts/dynchars/char_1016_agoat2_epoque#57.ab",
+    "md5": "6134f3efa902a201798b3d0dc72124c6",
+    "resVersion": "26-09-22-07-47-20_6c71fa"
+  }
+}

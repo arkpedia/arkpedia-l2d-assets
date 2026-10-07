@@ -132,6 +132,21 @@ test('missing or wrong fields fail validation', async () => {
   } finally { await rm(repo.root, { recursive: true, force: true }); }
 });
 
+test('a model from the CN client validates; another server, or a bad resVersions, does not', async () => {
+  const repo = await fixtureRepo();
+  try {
+    const cn = { ...repo.model, source: { ...repo.model.source, server: 'cn' } };
+    await repo.save(cn, { ...repo.manifest, resVersions: { en: 'test', cn: 'cn-test' } });
+    assert.deepEqual(await validateRepository(repo.root), { listed: 1, folders: 1, failures: 0 });
+    await repo.save({ ...repo.model, source: { ...repo.model.source, server: 'jp' } });
+    await assert.rejects(validateRepository(repo.root), /source must give server/);
+    await repo.save(repo.model, { ...repo.manifest, resVersions: { en: 'test', jp: 'x' } });
+    await assert.rejects(validateRepository(repo.root), /resVersions/);
+    await repo.save(repo.model, { ...repo.manifest, resVersions: { en: '' } });
+    await assert.rejects(validateRepository(repo.root), /resVersions/);
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
 test('the manifest must point at existing folders of the same skin', async () => {
   const repo = await fixtureRepo();
   try {

@@ -14,6 +14,8 @@ const HEX64 = /^[a-f0-9]{64}$/;
 const MD5 = /^[a-f0-9]{32}$/;
 const VERSION = /^\d+\.\d+\.\d+$/;
 const ENTRANCE_ID = /^dyn_entrance_[A-Za-z0-9_#]+$/;
+/** The clients models come from (scripts/sync.py CLIENTS): Global, then CN for outfits Global lacks. */
+const SERVERS = ['en', 'cn'];
 
 /** skinId with '@' and '#' replaced by '_'. Mirrors slug_for in scripts/l2d.py. */
 export function slugFor(skinId) {
@@ -218,7 +220,7 @@ export async function validateModel(root, folder, { deep = true } = {}) {
   if (typeof model.dynIllustId !== 'string' || !/^dyn_illust_[A-Za-z0-9_#]+$/.test(model.dynIllustId)) throw new Error(`${label}: dynIllustId missing`);
   if (typeof model.spineVersion !== 'string' || !VERSION.test(model.spineVersion)) throw new Error(`${label}: spineVersion missing`);
   const source = model.source;
-  if (!isObject(source) || source.server !== 'en' || typeof source.bundle !== 'string' || !/^arts\/dynchars\/[^/]+\.ab$/.test(source.bundle) ||
+  if (!isObject(source) || !SERVERS.includes(source.server) || typeof source.bundle !== 'string' || !/^arts\/dynchars\/[^/]+\.ab$/.test(source.bundle) ||
       typeof source.md5 !== 'string' || !MD5.test(source.md5) || typeof source.resVersion !== 'string' || !source.resVersion) {
     throw new Error(`${label}: source must give server, bundle, md5 and resVersion`);
   }
@@ -376,6 +378,10 @@ export async function validateRepository(root, { deep = true } = {}) {
     throw new Error('manifest.json must be { schemaVersion: 1, server: "en", resVersion, models: {} }');
   }
   if (manifest.resVersion !== null && typeof manifest.resVersion !== 'string') throw new Error('manifest.json: resVersion must be a string');
+  if (manifest.resVersions !== undefined && (!isObject(manifest.resVersions)
+      || Object.entries(manifest.resVersions).some(([server, version]) => !SERVERS.includes(server) || typeof version !== 'string' || !version))) {
+    throw new Error(`manifest.json: resVersions must give each client's resVersion by server (${SERVERS.join(', ')})`);
+  }
   const models = new Map();
   for (const folder of await modelFolders(root)) {
     if (!existsSync(path.join(root, folder, 'model.json'))) throw new Error(`${folder}: model.json missing`);

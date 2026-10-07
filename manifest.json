@@ -14,8 +14,10 @@
     "char_1013_chen2@summer#20": "models/char_1013_chen2_summer_20/cb9cdbb77c9e/model.json",
     "char_1014_nearl2#2": "models/char_1014_nearl2_2/b4c2f585a081/model.json",
     "char_1014_nearl2@epoque#17": "models/char_1014_nearl2_epoque_17/ddfea6819c8c/model.json",
+    "char_1015_aglna2#2": "models/char_1015_aglna2_2/928202b5f7ae/model.json",
     "char_1016_agoat2#2": "models/char_1016_agoat2_2/c9e49fa09cf8/model.json",
     "char_1016_agoat2@epoque#34": "models/char_1016_agoat2_epoque_34/9164f1972257/model.json",
+    "char_1016_agoat2@epoque#57": "models/char_1016_agoat2_epoque_57/6134f3efa902/model.json",
     "char_1019_siege2@epoque#50": "models/char_1019_siege2_epoque_50/fdcd15744877/model.json",
     "char_1020_reed2@epoque#30": "models/char_1020_reed2_epoque_30/4b0a1e791c69/model.json",
     "char_1020_reed2@summer#17": "models/char_1020_reed2_summer_17/907b7408ccfa/model.json",
@@ -34,8 +36,12 @@
     "char_1038_whitw2@sale#15": "models/char_1038_whitw2_sale_15/10a58008e8bf/model.json",
     "char_1039_thorn2@marthe#9": "models/char_1039_thorn2_marthe_9/33ffeaf5b01f/model.json",
     "char_1041_angel2#2": "models/char_1041_angel2_2/a22fd3facbb0/model.json",
+    "char_1041_angel2@iteration#6": "models/char_1041_angel2_iteration_6/773ec69ee2c6/model.json",
     "char_1044_hsgma2#2": "models/char_1044_hsgma2_2/b1259edb8fff/model.json",
+    "char_1044_hsgma2@whirlwind#11": "models/char_1044_hsgma2_whirlwind_11/fb0abadea137/model.json",
     "char_1045_svash2#2": "models/char_1045_svash2_2/059872598707/model.json",
+    "char_1046_sbell2@ambienceSynesthesia#8": "models/char_1046_sbell2_ambienceSynesthesia_8/806aef184e3a/model.json",
+    "char_1052_kalts2#2": "models/char_1052_kalts2_2/999738312b6a/model.json",
     "char_113_cqbw#2": "models/char_113_cqbw_2/40ebd6afcbe7/model.json",
     "char_113_cqbw@epoque#7": "models/char_113_cqbw_epoque_7/037a693590b1/model.json",
     "char_124_kroos@sale#14": "models/char_124_kroos_sale_14/db8e3e3248fa/model.json",
@@ -88,8 +94,14 @@
     "char_4132_ascln@iteration#4": "models/char_4132_ascln_iteration_4/265c8f1c87f8/model.json",
     "char_4133_logos@ambienceSynesthesia#6": "models/char_4133_logos_ambienceSynesthesia_6/ae949877a607/model.json",
     "char_4134_cetsyr@epoque#50": "models/char_4134_cetsyr_epoque_50/e6a05bf32e40/model.json",
+    "char_4179_monstr@boc#11": "models/char_4179_monstr_boc_11/f0bcee5cd385/model.json",
+    "char_4202_haruka@iteration#6": "models/char_4202_haruka_iteration_6/f869b36a807c/model.json",
     "char_437_mizuki@sale#7": "models/char_437_mizuki_sale_7/dc932ae0ba93/model.json",
     "char_450_necras@summer#20": "models/char_450_necras_summer_20/e4fec5161ec3/model.json",
     "char_472_pasngr@epoque#17": "models/char_472_pasngr_epoque_17/5322f95e9a35/model.json"
+  },
+  "resVersions": {
+    "en": "26-09-23-17-49-43_b9cc4a",
+    "cn": "26-09-22-07-47-20_6c71fa"
   }
 }

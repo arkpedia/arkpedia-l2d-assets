@@ -23,6 +23,9 @@ import sync  # noqa: E402
 
 GOOD = 'char_1044_hsgma2#2'
 BROKEN = 'char_003_kalts@boc#6'
+CN_ONLY = 'char_4179_monstr@boc#11'
+GLOBAL_BASE = 'https://cdn.example/assetbundle/official'
+CN_BASE = 'https://cn.example/assetbundle/official'
 
 
 def write_model(planned, staging, layers_version=layers.LAYERS_VERSION):
@@ -52,11 +55,15 @@ class RunLoop(unittest.TestCase):
             BROKEN: {'dynIllustId': 'dyn_illust_char_003_kalts_boc#6'},
         }}
         self.set_bundles()
+        # The CN client: by default the same skins as Global, so it adds nothing.
+        self.cn_skin_table = None
+        self.cn_payloads = {}
+        self.built_from = {}
         patches = {
             'ROOT': self.root,
             'code_version': lambda: self.code,
-            'get_json': lambda url: self.skin_table,
-            'client_list': lambda: ('https://cdn.example/assetbundle/official', 'res-1', self.hot_update_list),
+            'get_json': lambda url: (self.cn_skin_table or self.skin_table) if 'zh_CN' in url else self.skin_table,
+            'client_list': self.fake_client_list,
             'get': self.fake_get,
             'build_model': self.fake_build,
             'load_shaders': self.fake_shaders,
@@ -72,7 +79,7 @@ class RunLoop(unittest.TestCase):
 
     def set_bundles(self):
         self.dats = {skin: dat_for(payload) for skin, payload in self.payloads.items()}
-        names = {GOOD: 'arts/dynchars/char_1044_hsgma2_2.ab', BROKEN: 'arts/dynchars/char_003_kalts_boc#6.ab'}
+        names = {skin: l2d.bundle_name_for(self.skin_table['charSkins'][skin]['dynIllustId']) for skin in self.payloads}
         self.hot_update_list = {'abInfos': [
             {'name': names[skin], 'md5': hashlib.md5(self.payloads[skin]).hexdigest(),
              'totalSize': len(self.dats[skin]), 'abSize': len(self.payloads[skin])}
@@ -80,10 +87,34 @@ class RunLoop(unittest.TestCase):
         ]}
         self.by_url = {l2d.download_name(names[skin]): skin for skin in self.payloads}
 
+    def cn_list(self):
+        """CN's list: Global's bundles plus the CN-only ones (other md5s where CN's payload differs)."""
+        infos = [dict(info) for info in self.hot_update_list['abInfos']]
+        for skin, payload in self.cn_payloads.items():
+            name = self.cn_name(skin)
+            infos = [i for i in infos if i['name'] != name]
+            infos.append({'name': name, 'md5': hashlib.md5(payload).hexdigest(), 'totalSize': len(dat_for(payload)), 'abSize': len(payload)})
+        return {'abInfos': infos}
+
+    def cn_name(self, skin):
+        table = (self.cn_skin_table or self.skin_table)['charSkins']
+        return l2d.bundle_name_for(table[skin]['dynIllustId'])
+
+    def fake_client_list(self, client):
+        if client.server == 'cn':
+            return CN_BASE, 'cn-res-1', self.cn_list()
+        return GLOBAL_BASE, 'res-1', self.hot_update_list
+
     def fake_get(self, url):
         if self.download_error:
             raise self.download_error
-        skin = self.by_url[url.rsplit('/', 1)[-1]]
+        name = url.rsplit('/', 1)[-1]
+        if url.startswith(CN_BASE):
+            for skin, payload in self.cn_payloads.items():
+                if l2d.download_name(self.cn_name(skin)) == name:
+                    self.downloads.append(('cn', skin))
+                    return dat_for(payload)
+        skin = self.by_url[name]
         self.downloads.append(skin)
         return self.dats[skin]
 
@@ -93,7 +124,9 @@ class RunLoop(unittest.TestCase):
         return {('CAB-shaders', 1): 'a shader'}
 
     def fake_build(self, planned, bundle, res_version, staging, shaders, shared=None):
-        self.assertEqual(bundle, self.payloads[planned.skin_id])  # verified and unpacked first
+        expected = self.cn_payloads.get(planned.skin_id) if planned.server == 'cn' else self.payloads.get(planned.skin_id)
+        self.assertEqual(bundle, expected)  # verified and unpacked first
+        self.built_from[planned.skin_id] = (planned.server, res_version)
         self.assertEqual(shaders, {('CAB-shaders', 1): 'a shader'})
         if planned.skin_id == BROKEN:
             raise l2d.SyncError('Expected one illustration skeleton, found 2')
@@ -229,6 +262,79 @@ class RunLoop(unittest.TestCase):
         self.downloads.clear()
         self.run_sync()
         self.assertEqual(self.downloads, [])
+
+    # --- the CN client -------------------------------------------------------------------
+
+    def with_cn_only(self):
+        """CN carries one more animated outfit, CN_ONLY, and its own build of GOOD (another md5)."""
+        self.cn_skin_table = {'charSkins': {**self.skin_table['charSkins'], CN_ONLY: {'dynIllustId': 'dyn_illust_char_4179_monstr_boc#11'}}}
+        self.cn_payloads = {CN_ONLY: b'cn only bundle', GOOD: b'good bundle, CN build'}
+
+    def manifest(self):
+        return json.loads((self.root / 'manifest.json').read_text())
+
+    def test_cn_fills_only_the_skins_global_does_not_have(self):
+        self.with_cn_only()
+        report = self.run_sync()
+        self.assertEqual(sorted(report['added']), sorted([GOOD, CN_ONLY]))
+        # GOOD from Global's bundle though CN has its own; CN_ONLY from CN's client, at CN's resVersion.
+        self.assertEqual(self.built_from, {GOOD: ('en', 'res-1'), BROKEN: ('en', 'res-1'), CN_ONLY: ('cn', 'cn-res-1')})
+        self.assertIn(('cn', CN_ONLY), self.downloads)
+        self.assertNotIn(('cn', GOOD), self.downloads)
+        self.assertEqual(report['otherClients'], {CN_ONLY: 'cn'})
+        manifest = self.manifest()
+        self.assertEqual(manifest['models'][CN_ONLY], f'{l2d.folder_for(CN_ONLY, hashlib.md5(b"cn only bundle").hexdigest())}/model.json')
+        self.assertEqual((manifest['server'], manifest['resVersion'], manifest['resVersions']), ('en', 'res-1', {'en': 'res-1', 'cn': 'cn-res-1'}))
+        # The next day: nothing new from either client.
+        self.downloads.clear()
+        self.assertEqual(self.run_sync()['added'], [])
+        self.assertEqual(self.downloads, [])
+
+    def test_global_takes_a_skin_over_the_day_its_client_has_it(self):
+        self.with_cn_only()
+        self.run_sync()
+        cn_target = self.manifest()['models'][CN_ONLY]
+        self.skin_table['charSkins'][CN_ONLY] = {'dynIllustId': 'dyn_illust_char_4179_monstr_boc#11'}
+        self.payloads[CN_ONLY] = b'cn only bundle, Global build'
+        self.set_bundles()
+        self.downloads.clear()
+        report = self.run_sync()
+        self.assertEqual((report['added'], self.downloads, self.built_from[CN_ONLY]), ([CN_ONLY], [CN_ONLY], ('en', 'res-1')))
+        self.assertEqual(report['otherClients'], {})
+        target = self.manifest()['models'][CN_ONLY]
+        self.assertEqual(target, f'{l2d.folder_for(CN_ONLY, hashlib.md5(self.payloads[CN_ONLY]).hexdigest())}/model.json')
+        self.assertTrue((self.root / cn_target).exists(), 'the CN folder stays published')
+
+    def test_a_cn_model_that_failed_keeps_its_record_and_is_not_downloaded_again(self):
+        self.with_cn_only()
+        build = self.fake_build
+
+        def failing(planned, *rest, **named):
+            if planned.skin_id == CN_ONLY:
+                raise l2d.SyncError('Expected one illustration skeleton, found 2')
+            return build(planned, *rest, **named)
+        sync.build_model = failing
+        self.run_sync()
+        self.assertEqual(self.failures()[CN_ONLY]['resVersion'], 'cn-res-1')
+        # Global's list does not carry it, but CN's does: the record is kept, nothing downloaded.
+        self.downloads.clear()
+        report = self.run_sync()
+        self.assertEqual(self.downloads, [])
+        self.assertIn(CN_ONLY, [f['skinId'] for f in report['knownFailures']])
+        self.assertIn(CN_ONLY, self.failures())
+
+    def test_without_cn_shaders_only_the_cn_models_wait(self):
+        self.with_cn_only()
+
+        def shaders(asset_base, res_version, hot_update_list, bundles):
+            if asset_base == CN_BASE:
+                raise l2d.SyncError('The client list has no [uc]shaders.ab')
+            return {('CAB-shaders', 1): 'a shader'}
+        sync.load_shaders = shaders
+        report = self.run_sync()
+        self.assertEqual(report['added'], [GOOD])
+        self.assertEqual([f['skinId'] for f in report['failed'] if 'shared shaders' in f['error']], [CN_ONLY])
+        self.assertNotIn(CN_ONLY, self.failures(), 'it may work tomorrow')
 
     def test_a_dry_run_writes_nothing(self):
         out = io.StringIO()

@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Sync Global dynamic illustrations (animated outfit art) into this repository.
+"""Sync the game's dynamic illustrations (animated outfit art) into this repository.
 
-1. Reads the EN skin_table (ArknightsAssets/ArknightsGamedata, master) and the Global client's
-   network config -> version file -> resVersion -> hot_update_list.json.
-2. Picks every skin with a dynIllustId whose bundle the list carries.
+1. Reads each client's skin_table and its network config -> version file -> resVersion ->
+   hot_update_list.json: Global (the EN skin_table, ArknightsAssets/ArknightsGamedata), then CN
+   (the zh_CN one, Kengxxiao/ArknightsGameData).
+2. Picks every skin with a dynIllustId whose bundle the list carries. Global comes first: CN only
+   fills the skins Global's plan does not have (outfits CN released first), each from CN's own
+   client. The day Global's client carries one, its Global bundle is built into a new folder and the
+   manifest moves to it; the CN folder stays, like every folder. model.json's source.server says
+   which client a model came from.
 3. Downloads only bundles that have no folder yet (GET, one at a time, with a pause), checks
    their size and md5 against the list, decodes the skeleton, atlas and atlas pages, and writes
    models/<slug>/<md5_12>/ (skeleton.skel|json, skeleton.atlas, page<N>.webp, model.json). A skin
@@ -48,6 +53,7 @@ import tempfile
 import time
 import urllib.error
 import urllib.request
+from dataclasses import dataclass
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -55,10 +61,36 @@ import l2d  # noqa: E402
 import layers  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-SKIN_TABLE_URL = 'https://raw.githubusercontent.com/ArknightsAssets/ArknightsGamedata/master/en/gamedata/excel/skin_table.json'
-NETWORK_CONFIG_URL = 'https://ak-conf.arknights.global/config/prod/official/network_config'
 PLATFORM = 'Android'
-SERVER = 'en'
+
+
+@dataclass(frozen=True)
+class Client:
+    server: str  # model.json's source.server
+    name: str
+    skin_table_url: str
+    network_config_url: str
+
+
+# In order of precedence: a skin comes from the first client whose plan has it.
+CLIENTS = (
+    Client('en', 'Global', 'https://raw.githubusercontent.com/ArknightsAssets/ArknightsGamedata/master/en/gamedata/excel/skin_table.json',
+           'https://ak-conf.arknights.global/config/prod/official/network_config'),
+    Client('cn', 'CN', 'https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/master/zh_CN/gamedata/excel/skin_table.json',
+           'https://ak-conf.hypergryph.com/config/prod/official/network_config'),
+)
+
+
+@dataclass
+class ClientList:
+    """One client's list for this run, and the shared bundles read from it."""
+    client: Client
+    asset_base: str
+    res_version: str
+    hot_update_list: dict
+    shaders: dict | None = None
+    shared: object = None
+
 USER_AGENT = 'arkpedia-l2d-assets-sync (+https://github.com/arkpedia/arkpedia-l2d-assets)'
 FAILURES_FILE = 'sync-failures.json'
 # A change to any of these retries every recorded failure once: the fix may be in them.
@@ -94,9 +126,9 @@ def get_json(url: str):
     return json.loads(get(url).decode('utf-8'))
 
 
-def client_list() -> tuple[str, str, dict]:
-    """(asset base URL, resVersion, hot_update_list) of the Global Android client."""
-    config = get_json(NETWORK_CONFIG_URL)
+def client_list(client: Client) -> tuple[str, str, dict]:
+    """(asset base URL, resVersion, hot_update_list) of the client's Android build."""
+    config = get_json(client.network_config_url)
     content = json.loads(config['content']) if isinstance(config.get('content'), str) else config['content']
     network = content['configs'][content['funcVer']]['network']
     version = get_json(network['hv'].replace('{0}', PLATFORM))
@@ -109,7 +141,7 @@ def client_list() -> tuple[str, str, dict]:
 def read_manifest() -> dict:
     path = ROOT / 'manifest.json'
     if not path.exists():
-        return {'schemaVersion': 1, 'server': SERVER, 'resVersion': None, 'models': {}}
+        return {'schemaVersion': 1, 'server': CLIENTS[0].server, 'resVersion': None, 'models': {}}
     manifest = json.loads(path.read_text('utf-8'))
     if manifest.get('schemaVersion') != 1 or not isinstance(manifest.get('models'), dict):
         raise SystemExit('manifest.json is not schemaVersion 1')
@@ -227,7 +259,7 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         'entrance': build_entrance(staging, decoded.entrance, declared) if planned.dyn_entrance_id else None,
         'layers': write_layers(staging, exported) if exported is not None else None,
         'layersVersion': layers.LAYERS_VERSION,
-        'source': {'server': SERVER, 'bundle': planned.bundle, 'md5': planned.md5, 'resVersion': res_version},
+        'source': {'server': planned.server, 'bundle': planned.bundle, 'md5': planned.md5, 'resVersion': res_version},
     }
     write_json(staging / 'model.json', model)
     log(f'  skeleton {decoded.skeleton_name} (chosen by {decoded.skeleton_choice}), atlas {decoded.atlas_name}')
@@ -421,6 +453,13 @@ def load_shaders(asset_base: str, res_version: str, hot_update_list: dict, bundl
     return table
 
 
+def stamp_manifest(manifest: dict, report: dict) -> None:
+    """The client lists the manifest was last brought up to: resVersion is Global's, resVersions every
+    client's by server."""
+    manifest['resVersion'] = report['resVersion']
+    manifest['resVersions'] = report['resVersions']
+
+
 def existing_model(planned: l2d.Planned) -> dict | None:
     path = ROOT / planned.folder / 'model.json'
     if not path.exists():
@@ -448,23 +487,49 @@ def main(argv: list[str] | None = None) -> int:
     failures = read_failures()
     recorded = json.dumps(failures, sort_keys=True)
     code = code_version()
-    log('Reading the EN skin table and the Global client list')
-    skin_table = get_json(SKIN_TABLE_URL)
-    asset_base, res_version, hot_update_list = client_list()
-    plan = l2d.plan_models(skin_table, hot_update_list)
-    log(f'resVersion {res_version}: {len(plan.models)} skins with dynamic art listed, {len(plan.unlisted)} not in the client list')
+    clients: dict[str, ClientList] = {}
+    planned_all: list[l2d.Planned] = []
+    unlisted: set[str] = set()
+    for client in CLIENTS:
+        log(f'Reading the {client.name} skin table and client list')
+        skin_table = get_json(client.skin_table_url)
+        asset_base, res_version, hot_update_list = client_list(client)
+        clients[client.server] = ClientList(client, asset_base, res_version, hot_update_list)
+        plan = l2d.plan_models(skin_table, hot_update_list, client.server)
+        taken = {m.skin_id for m in planned_all}
+        fills = [m for m in plan.models if m.skin_id not in taken]
+        planned_all += fills
+        unlisted |= set(plan.unlisted)
+        log(f'{client.name} resVersion {res_version}: {len(plan.models)} skins with dynamic art listed, {len(plan.unlisted)} not in the client list'
+            + ('' if client == CLIENTS[0] else f'; {len(fills)} of them not planned from {", ".join(c.name for c in CLIENTS[:CLIENTS.index(client)])}, '
+               f'synced from {client.name}'))
+    # A skin a later client fills is listed after all.
+    unlisted = sorted(unlisted - {m.skin_id for m in planned_all})
+    slugs: dict[str, str] = {}
+    for planned in planned_all:
+        other = slugs.setdefault(l2d.slug_for(planned.skin_id), planned.skin_id)
+        if other != planned.skin_id:
+            raise l2d.SyncError(f'{planned.skin_id} and {other} share the folder name {l2d.slug_for(planned.skin_id)}')
+    primary = clients[CLIENTS[0].server]
 
-    models = plan.models
+    def url_of(planned: l2d.Planned) -> str:
+        source = clients[planned.server]
+        return l2d.download_url(source.asset_base, PLATFORM, source.res_version, planned.bundle)
+
+    models = planned_all
     if only:
         unknown = only - {m.skin_id for m in models}
         if unknown:
             log(f'Not found or not listed: {sorted(unknown)}')
         models = [m for m in models if m.skin_id in only]
 
-    report = {'resVersion': res_version, 'code': code, 'added': [], 'relayered': [], 'repointed': [], 'current': 0, 'failed': [],
-              'knownFailures': [], 'unlisted': plan.unlisted, 'deferred': [], 'downloadedBytes': 0, 'pages': {}, 'layers': {}}
-    # Drop records of skins that no longer have dynamic art in the client list.
-    listed = {m.skin_id for m in plan.models}
+    report = {'resVersion': primary.res_version, 'resVersions': {server: c.res_version for server, c in clients.items()}, 'code': code,
+              'added': [], 'relayered': [], 'repointed': [], 'current': 0, 'failed': [], 'knownFailures': [], 'unlisted': unlisted,
+              'deferred': [], 'downloadedBytes': 0, 'pages': {}, 'layers': {},
+              # Skins synced from a client other than Global's, until Global's has them.
+              'otherClients': {m.skin_id: m.server for m in planned_all if m.server != primary.client.server}}
+    # Drop records of skins that no longer have dynamic art in any client's list.
+    listed = {m.skin_id for m in planned_all}
     for skin_id in [s for s in failures if s not in listed]:
         del failures[skin_id]
     pending = []
@@ -506,22 +571,25 @@ def main(argv: list[str] | None = None) -> int:
     if args.dry_run:
         for planned in pending:
             log(f'  would fetch {planned.skin_id}{" (layers only)" if planned.skin_id in relayer else ""}: '
-                f'{l2d.download_url(asset_base, PLATFORM, res_version, planned.bundle)}')
+                f'{url_of(planned)}')
         print(json.dumps(report, indent=2))
         return 0
 
-    shaders = None
-    shared = load_shared_textures(asset_base, res_version, hot_update_list, args.bundles, report, args.pause)
-    if pending:
+    # Each client's own shared bundles: its shader bundle and FX textures carry its own md5s.
+    for source in clients.values():
+        source.shared = load_shared_textures(source.asset_base, source.res_version, source.hot_update_list, args.bundles, report, args.pause)
+    for source in clients.values():
+        if not any(p.server == source.client.server for p in pending):
+            continue
         try:
-            shaders = load_shaders(asset_base, res_version, hot_update_list, args.bundles)
+            source.shaders = load_shaders(source.asset_base, source.res_version, source.hot_update_list, args.bundles)
         except Exception as error:  # noqa: BLE001 - reported below; nothing is built without it
             # Not recorded as a failure of any model: the bundle may download tomorrow. Nothing is
             # built (or its layers exported again) without the shaders its layers need.
-            log(f'Shared shaders unavailable, building nothing: {error}')
-            for planned in pending:
+            log(f'{source.client.name} shared shaders unavailable, building nothing from it: {error}')
+            for planned in [p for p in pending if p.server == source.client.server]:
                 report['failed'].append({'skinId': planned.skin_id, 'error': f'shared shaders unavailable: {error}'})
-            pending = []
+            pending = [p for p in pending if p.server != source.client.server]
 
     staging_root = ROOT / '.cache' / 'staging'
     staging_root.mkdir(parents=True, exist_ok=True)
@@ -529,7 +597,8 @@ def main(argv: list[str] | None = None) -> int:
         local = args.bundles / f'{l2d.slug_for(planned.skin_id)}.ab' if args.bundles else None
         if index and local is None:
             time.sleep(args.pause)
-        url = l2d.download_url(asset_base, PLATFORM, res_version, planned.bundle)
+        source = clients[planned.server]
+        url = url_of(planned)
         log(f'[{index + 1}/{len(pending)}] {planned.skin_id} <- {local or url}')
         staging = Path(tempfile.mkdtemp(prefix=f'{l2d.slug_for(planned.skin_id)}-', dir=staging_root))
         try:
@@ -552,7 +621,7 @@ def main(argv: list[str] | None = None) -> int:
             if planned.skin_id in relayer:
                 # Only the layers change: the rest of the folder is copied over unchanged, and the
                 # folder is swapped for the copy in one rename once everything is written.
-                _, layer_report = relayer_model(planned, bundle, staging, shaders, shared)
+                _, layer_report = relayer_model(planned, bundle, staging, source.shaders, source.shared)
                 old = final.with_name(final.name + '.replaced')
                 shutil.rmtree(old, ignore_errors=True)
                 os.replace(final, old)
@@ -564,13 +633,13 @@ def main(argv: list[str] | None = None) -> int:
                 failures.pop(planned.skin_id, None)
                 log(f'  exported the layers of {planned.folder} again (layersVersion {layers.LAYERS_VERSION})')
                 continue
-            _, page_info, layer_report = build_model(planned, bundle, res_version, staging, shaders, shared)
+            _, page_info, layer_report = build_model(planned, bundle, source.res_version, staging, source.shaders, source.shared)
             final.parent.mkdir(parents=True, exist_ok=True)
             if final.exists():
                 raise l2d.SyncError(f'{planned.folder} already exists')
             os.replace(staging, final)
             manifest['models'][planned.skin_id] = f'{planned.folder}/model.json'
-            manifest['resVersion'] = res_version
+            stamp_manifest(manifest, report)
             write_manifest(manifest)
             report['added'].append(planned.skin_id)
             report['pages'][planned.skin_id] = page_info
@@ -581,17 +650,17 @@ def main(argv: list[str] | None = None) -> int:
         except Exception as error:  # noqa: BLE001 - one model never stops the run
             message = f'{type(error).__name__}: {error}'
             report['failed'].append({'skinId': planned.skin_id, 'error': message})
-            failures[planned.skin_id] = l2d.failure_record(planned, code, res_version, message)
+            failures[planned.skin_id] = l2d.failure_record(planned, code, source.res_version, message)
             log(f'  FAILED {planned.skin_id}: {error}')
         finally:
             shutil.rmtree(staging, ignore_errors=True)
 
-    if shared.used:
-        log(f'Shared texture bundles read: {", ".join(sorted(shared.used))}')
+    for source in clients.values():
+        if source.shared.used:
+            log(f'{source.client.name} shared texture bundles read: {", ".join(sorted(source.shared.used))}')
     if report['added'] or report['repointed']:
-        # resVersion names the client list the newest entries came from; a run that changes
-        # nothing leaves manifest.json untouched, so it produces no commit.
-        manifest['resVersion'] = res_version
+        # A run that changes nothing leaves manifest.json untouched, so it produces no commit.
+        stamp_manifest(manifest, report)
         write_manifest(manifest)
     if json.dumps(failures, sort_keys=True) != recorded:
         write_failures(failures)
@@ -608,12 +677,13 @@ def main(argv: list[str] | None = None) -> int:
     summary = os.environ.get('GITHUB_STEP_SUMMARY')
     if summary:
         with open(summary, 'a', encoding='utf-8') as out:
-            out.write(f'### Dynamic art sync ({res_version})\n\n')
+            out.write(f'### Dynamic art sync ({", ".join(f"{server} {v}" for server, v in report["resVersions"].items())})\n\n')
             out.write(f'- Added: {len(report["added"])} {", ".join(report["added"])}\n')
             out.write(f'- Layers exported again (layersVersion {layers.LAYERS_VERSION}): {len(report["relayered"])} {", ".join(report["relayered"])}\n')
             out.write(f'- Already current: {report["current"]}\n')
             out.write(f'- Deferred by limit: {len(report["deferred"])}\n')
-            out.write(f'- Not in the client list: {", ".join(report["unlisted"]) or "none"}\n')
+            out.write(f'- Not in any client list: {", ".join(report["unlisted"]) or "none"}\n')
+            out.write(f'- Synced from CN until Global has them: {", ".join(report["otherClients"]) or "none"}\n')
             out.write(f'- Downloaded: {report["downloadedBytes"] / 1e6:.1f} MB\n')
             for failure in report['failed']:
                 out.write(f'- **Failed** `{failure["skinId"]}`: {failure["error"]}\n')

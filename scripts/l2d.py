@@ -82,6 +82,8 @@ class Planned:
     md5: str
     total_size: int
     ab_size: int
+    # The client the bundle comes from: 'en' (Global) or 'cn', for model.json's source.server.
+    server: str = 'en'
 
     @property
     def folder(self) -> str:
@@ -94,7 +96,7 @@ class Plan:
     unlisted: list[str] = field(default_factory=list)  # has a dynIllustId, bundle not in the client list
 
 
-def plan_models(skin_table: dict, hot_update_list: dict) -> Plan:
+def plan_models(skin_table: dict, hot_update_list: dict, server: str = 'en') -> Plan:
     """Every skin with a dynIllustId whose bundle the client's hot_update_list carries."""
     by_name = {}
     for info in hot_update_list.get('abInfos', []):
@@ -123,7 +125,7 @@ def plan_models(skin_table: dict, hot_update_list: dict) -> Plan:
         if entrance is not None and not ENTRANCE_ID_RE.match(str(entrance)):
             raise SyncError(f'{skin_id}: unexpected dynEntranceId {entrance!r}')
         plan.models.append(Planned(skin_id, dyn, entrance, info['name'], md5,
-                                   int(info.get('totalSize') or 0), int(info.get('abSize') or 0)))
+                                   int(info.get('totalSize') or 0), int(info.get('abSize') or 0), server))
     return plan
 
 
