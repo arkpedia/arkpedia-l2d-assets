@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "bundles": {
+    "CAB-0d0c905b03658da84d810b34eba903e0": "refs/fx/material.ab",
     "CAB-1512fc0efbde6852b5d5a28ec9cec589": "refs/fx/texture/ray.ab",
     "CAB-218479e261e84de653d0a19de29f60f2": "refs/fx/texture/pattern.ab",
     "CAB-24585c6bdc5a7af80bd929dc17f77f2b": "refs/fx/texture/blood.ab",

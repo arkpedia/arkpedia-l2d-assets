@@ -685,7 +685,7 @@ class Decoded:
     layers: Callable[[list], object] | None = None
 
 
-def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, shaders: dict, shared=None) -> Decoded:
+def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, shaders: dict, shared=None, *, particles: bool) -> Decoded:
     """Finds the illustration's skeleton, atlas and atlas page textures in a bundle, and its
     entrance's when the skin has one (`dyn_entrance_id`, the skin_table's dynEntranceId).
 
@@ -696,7 +696,8 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, 
     skeleton its own prefab (dyn/arts/dyncharstart/<dynEntranceId>.prefab) plays, with its
     soundtrack (an AudioClip under .../dynentrance/<dynEntranceId>/); it is never picked by name.
     The illustration prefab's own mesh layers come out through layers.export_layers, with `shaders`
-    (layers.shader_table of the client's shared shader bundle) naming the shaders their materials use.
+    (layers.shader_table of the client's shared shader bundle) naming the shaders their materials use, and
+    its ParticleSystems with them when `particles` is set (scripts/particles.py).
     """
     UnityPy = _patch_unitypy()
     env = UnityPy.load(data)
@@ -870,7 +871,7 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, 
         def export(slots: list, root_go=illust_roots[0]):
             try:
                 return layers.export_layers(root_go, read_any, mesh_of=mesh_of, texture_of=texture_of, classify_texture=classify_alpha,
-                                            external_of=external_of, shaders=shaders, slots=slots, shared=shared)
+                                            external_of=external_of, shaders=shaders, slots=slots, shared=shared, particles=particles)
             except (layers.LayerError, entrance_camera.CameraError, KeyError, TypeError, ValueError, ArithmeticError) as error:
                 raise SyncError(f'Layers of {dyn_illust_id}: {error}') from error
 

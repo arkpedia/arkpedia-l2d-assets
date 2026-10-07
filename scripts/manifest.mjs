@@ -5,6 +5,7 @@ import { existsSync } from 'node:fs';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { LAYERS_VERSION, layersShape } from './layers.mjs';
+import { PARTICLES_FILE } from './particles.mjs';
 import { inspectLayers, inspectSkeleton, isJsonSkeleton, readAtlas } from './spine.mjs';
 
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -274,7 +275,16 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     const layersPath = path.join(root, folder, 'layers.json');
     if (!existsSync(layersPath)) throw new Error(`${label}: missing file layers.json`);
     layersDoc = JSON.parse(await readFile(layersPath, 'utf8'));
-    const textures = layersShape(layersDoc, label, layersVersion);
+    // layerParticles.json, when layers.json points at it (its bytes and sha256 are checked with the rest).
+    let particlesDoc = null;
+    if (isObject(layersDoc.particles)) {
+      fileShape(layersDoc.particles, `${label}: layers particles`, PARTICLES_FILE);
+      const particlesPath = path.join(root, folder, PARTICLES_FILE);
+      if (!existsSync(particlesPath)) throw new Error(`${label}: missing file ${PARTICLES_FILE}`);
+      particlesDoc = JSON.parse(await readFile(particlesPath, 'utf8'));
+      files.push(layersDoc.particles);
+    }
+    const textures = layersShape(layersDoc, label, layersVersion, particlesDoc);
     files.push(model.layers, ...textures);
   }
 
@@ -293,7 +303,7 @@ export async function validateModel(root, folder, { deep = true } = {}) {
   }
   checkSkeleton(model, label, contents, model.spineVersion, deep);
   if (layersDoc !== null) {
-    for (const texture of [...layersDoc.textures, ...(layersDoc.effectTextures ?? [])]) {
+    for (const texture of files.filter((file) => /^layer\d+\.webp$/.test(file.file))) {
       const size = webpSize(contents[texture.file]);
       if (size.width !== texture.width || size.height !== texture.height) throw new Error(`${label}: ${texture.file} is ${size.width}x${size.height}, layers.json says ${texture.width}x${texture.height}`);
     }

@@ -33,6 +33,9 @@ COVER_ASPECT = 2.4
 NEG_INFINITY = -3.0e38
 
 TRANSFORM, GAMEOBJECT, CAMERA, RENDERER = 4, 1, 20, 23
+# A ParticleSystem's own fields (attribute: crc32 of the serialized field path, 'EmissionModule.enabled') and
+# its ParticleSystemRenderer's (m_Enabled, and material properties bound as a MeshRenderer's are).
+PARTICLE_SYSTEM, PARTICLE_RENDERER = 198, 199
 POSITION, ROTATION, SCALE, EULER = 1, 2, 3, 4
 CHANNELS = {4: 0, 5: 1, 6: 2, 7: 3}  # a material colour binding's top four bits: r, g, b, a
 

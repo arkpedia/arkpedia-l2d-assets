@@ -112,7 +112,7 @@ class Prefab(Scene):
         self.renderer(go, [self.add('Material', material)], order)
         return go, tr
 
-    def export(self, shared=None, image=None):
+    def export(self, shared=None, image=None, particles=False):
         from PIL import Image
 
         def mesh_of(path_id):
@@ -125,7 +125,7 @@ class Prefab(Scene):
             picture.putpixel((1, 1), (200, 100, 50, 255))
             return picture
         return layers.export_layers(self.root_go, self.read, mesh_of=mesh_of, texture_of=texture_of, classify_texture=l2d.classify_alpha,
-                                    external_of=external, shaders=SHADERS, slots=['slotA', 'slotB', 'slotC'], shared=shared)
+                                    external_of=external, shaders=SHADERS, slots=['slotA', 'slotB', 'slotC'], shared=shared, particles=particles)
 
 
 def entries(result):
@@ -158,7 +158,7 @@ def read_material(tree):
     for env in tree['m_SavedProperties']['m_TexEnvs']:
         if env[1]['m_Texture'].get('m_FileID') == 0:
             env[1]['m_Texture'] = ref(tex if env[0] == '_MainTex' else other)
-    return layers.read_material(tree, read=scene.read, external_of=external, shaders=SHADERS)
+    return layers.read_material(tree, read=scene.read, external_of=external, shaders=SHADERS, home=None)
 
 
 class Looks(unittest.TestCase):
