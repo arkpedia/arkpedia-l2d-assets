@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
  "totals": {
-  "drawn": 9762,
-  "exported": 8936,
-  "v1": 8794
+  "drawn": 12211,
+  "exported": 11174,
+  "v1": 11003
  },
  "models": {
   "models/char_003_kalts_boc_6/a4834f5119b5": {
@@ -16,10 +16,20 @@
    "exported": 63,
    "v1": 63
   },
+  "models/char_003_kalts_sale_14_sp_dyn/ad673b10f4d4": {
+   "drawn": 36,
+   "exported": 36,
+   "v1": 36
+  },
   "models/char_1001_amiya2_sale_16/c26f5ea3adee": {
    "drawn": 55,
    "exported": 55,
    "v1": 50
+  },
+  "models/char_1001_amiya2_sale_16_sp_dyn/c26f5ea3adee": {
+   "drawn": 47,
+   "exported": 47,
+   "v1": 47
   },
   "models/char_1012_skadi2_2/acce1ffc11c5": {
    "drawn": 14,
@@ -62,9 +72,9 @@
    "v1": 83
   },
   "models/char_1015_aglna2_2/928202b5f7ae": {
-   "drawn": 77,
-   "exported": 77,
-   "v1": 65
+   "drawn": 155,
+   "exported": 155,
+   "v1": 127
   },
   "models/char_1016_agoat2_2/c9e49fa09cf8": {
    "drawn": 174,
@@ -77,9 +87,9 @@
    "v1": 73
   },
   "models/char_1016_agoat2_epoque_57/6134f3efa902": {
-   "drawn": 31,
-   "exported": 31,
-   "v1": 31
+   "drawn": 103,
+   "exported": 103,
+   "v1": 97
   },
   "models/char_1019_siege2_epoque_50/fdcd15744877": {
    "drawn": 101,
@@ -123,8 +133,8 @@
   },
   "models/char_1028_texas2_epoque_36/146dce21e1ec": {
    "drawn": 125,
-   "exported": 119,
-   "v1": 116
+   "exported": 123,
+   "v1": 120
   },
   "models/char_1028_texas2_iteration_1/8b5cada0b4d8": {
    "drawn": 118,
@@ -163,8 +173,8 @@
   },
   "models/char_1039_thorn2_marthe_9/33ffeaf5b01f": {
    "drawn": 219,
-   "exported": 215,
-   "v1": 214
+   "exported": 218,
+   "v1": 217
   },
   "models/char_1041_angel2_2/a22fd3facbb0": {
    "drawn": 256,
@@ -176,30 +186,35 @@
    "exported": 69,
    "v1": 69
   },
+  "models/char_1041_angel2_iteration_6_sp_dyn/773ec69ee2c6": {
+   "drawn": 54,
+   "exported": 54,
+   "v1": 54
+  },
   "models/char_1044_hsgma2_2/b1259edb8fff": {
    "drawn": 272,
    "exported": 268,
    "v1": 268
   },
   "models/char_1044_hsgma2_whirlwind_11/fb0abadea137": {
-   "drawn": 72,
-   "exported": 70,
-   "v1": 70
+   "drawn": 166,
+   "exported": 152,
+   "v1": 152
   },
   "models/char_1045_svash2_2/059872598707": {
-   "drawn": 90,
-   "exported": 72,
-   "v1": 72
+   "drawn": 370,
+   "exported": 332,
+   "v1": 332
   },
   "models/char_1046_sbell2_ambienceSynesthesia_8/806aef184e3a": {
-   "drawn": 52,
-   "exported": 52,
-   "v1": 52
+   "drawn": 180,
+   "exported": 154,
+   "v1": 154
   },
   "models/char_1052_kalts2_2/999738312b6a": {
-   "drawn": 58,
-   "exported": 44,
-   "v1": 44
+   "drawn": 211,
+   "exported": 211,
+   "v1": 208
   },
   "models/char_113_cqbw_2/40ebd6afcbe7": {
    "drawn": 58,
@@ -215,6 +230,11 @@
    "drawn": 17,
    "exported": 17,
    "v1": 17
+  },
+  "models/char_124_kroos_sale_14_sp_dyn/db8e3e3248fa": {
+   "drawn": 28,
+   "exported": 27,
+   "v1": 27
   },
   "models/char_172_svrash_ambienceSynesthesia_4/1a12853ce999": {
    "drawn": 50,
@@ -247,9 +267,9 @@
    "v1": 37
   },
   "models/char_2015_dusk_nian_12/8aa21d1df36b": {
-   "drawn": 19,
-   "exported": 19,
-   "v1": 19
+   "drawn": 107,
+   "exported": 104,
+   "v1": 100
   },
   "models/char_2015_dusk_nian_7/69971e4346a1": {
    "drawn": 81,
@@ -267,9 +287,9 @@
    "v1": 63
   },
   "models/char_2023_ling_nian_12/675ce76a79ca": {
-   "drawn": 63,
-   "exported": 63,
-   "v1": 63
+   "drawn": 189,
+   "exported": 180,
+   "v1": 180
   },
   "models/char_2023_ling_nian_9/daa2fd6eb5a8": {
    "drawn": 140,
@@ -307,19 +327,19 @@
    "v1": 150
   },
   "models/char_2026_yu_nian_12/70696808f2e0": {
-   "drawn": 17,
-   "exported": 17,
-   "v1": 17
+   "drawn": 46,
+   "exported": 44,
+   "v1": 44
   },
   "models/char_2027_wang_2/b042da73256c": {
-   "drawn": 65,
-   "exported": 62,
-   "v1": 62
+   "drawn": 178,
+   "exported": 133,
+   "v1": 133
   },
   "models/char_202_demkni_ambienceSynesthesia_7/727386c78fa9": {
-   "drawn": 16,
-   "exported": 16,
-   "v1": 16
+   "drawn": 218,
+   "exported": 176,
+   "v1": 176
   },
   "models/char_245_cello_2/8dde4c744823": {
    "drawn": 97,
@@ -362,9 +382,9 @@
    "v1": 85
   },
   "models/char_350_surtr_ambienceSynesthesia_6/a509ccbee966": {
-   "drawn": 75,
-   "exported": 75,
-   "v1": 75
+   "drawn": 276,
+   "exported": 258,
+   "v1": 258
   },
   "models/char_350_surtr_summer_9/04df2a7d6458": {
    "drawn": 117,
@@ -387,14 +407,14 @@
    "v1": 152
   },
   "models/char_391_rosmon_sale_16/0e02a5914aee": {
-   "drawn": 52,
-   "exported": 52,
-   "v1": 52
+   "drawn": 323,
+   "exported": 278,
+   "v1": 278
   },
   "models/char_4010_etlchi_winter_5/1861cfbc3e34": {
-   "drawn": 67,
-   "exported": 67,
-   "v1": 67
+   "drawn": 128,
+   "exported": 128,
+   "v1": 128
   },
   "models/char_4055_bgsnow_wild_7/74b226f2fa80": {
    "drawn": 115,
@@ -457,19 +477,19 @@
    "v1": 207
   },
   "models/char_4134_cetsyr_epoque_50/e6a05bf32e40": {
-   "drawn": 113,
-   "exported": 108,
-   "v1": 107
+   "drawn": 214,
+   "exported": 204,
+   "v1": 203
   },
   "models/char_4179_monstr_boc_11/f0bcee5cd385": {
-   "drawn": 23,
-   "exported": 12,
-   "v1": 12
+   "drawn": 104,
+   "exported": 89,
+   "v1": 89
   },
   "models/char_4202_haruka_iteration_6/f869b36a807c": {
-   "drawn": 63,
-   "exported": 63,
-   "v1": 63
+   "drawn": 269,
+   "exported": 266,
+   "v1": 266
   },
   "models/char_437_mizuki_sale_7/dc932ae0ba93": {
    "drawn": 53,

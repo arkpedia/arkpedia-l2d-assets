@@ -59,7 +59,7 @@
     "bytes": 104872,
     "sha256": "84042ae08af5efe1591f3dd36c5a47f600cc821d2488694bf14851c055698882"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_391_rosmon_epoque#17.ab",

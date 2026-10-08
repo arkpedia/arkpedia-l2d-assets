@@ -59,7 +59,7 @@
     "bytes": 392041,
     "sha256": "9a54feb13f94b3a554d4e0243e26d2e104de43568299008129bd4a221e27fff1"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1038_whitw2_2.ab",

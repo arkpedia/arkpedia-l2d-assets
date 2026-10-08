@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1001_amiya2@sale#16^sp_dyn",
+  "dynIllustId": "sp_dyn_illust_char_1001_amiya2_sale#16",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.json",
+    "format": "json",
+    "bytes": 7818313,
+    "sha256": "2efdb481466fe3a1773e4c7caacaf5deaf2554b519e9898f2cbace55b539e315"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 45666,
+    "sha256": "3c4e30a48b4152d4a62c6af4e235d9be32c09412cab714526c6ea10b3127e6d3"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2312,
+      "height": 2312,
+      "bytes": 3713634,
+      "sha256": "39b4ea921fd61a8c0b259c2c38abd25b3786615fe763eb975fe49c47654315d5"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 8,
+    "Idle_2": 8,
+    "Idle_3": 8,
+    "Interact_1": 10.333,
+    "Interact_2": 9.1,
+    "Interact_3": 10,
+    "Interact_4": 8.833,
+    "Interact_5": 10.333,
+    "Interact_6": 9.1,
+    "Interact_7": 10,
+    "Special": 18.267,
+    "Talk_1": 0.333,
+    "Talk_2": 0.367,
+    "Talk_3": 0.3,
+    "Talk_4": 0.3,
+    "Talk_5": 0.333,
+    "Talk_6": 0.367
+  },
+  "bounds": {
+    "x": -882,
+    "y": 1,
+    "width": 1814,
+    "height": 1661
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_1",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_2",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_3",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_4",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_1",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_2",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_3",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_4",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_5",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_5",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Idle_3",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Idle_3",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_6",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_6",
+      "duration": 0.2
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 871,
+    "sha256": "40660956dacc5508551327b496c021ec924572b2f57b959560fe157a95ef4d23"
+  },
+  "layersVersion": 5,
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1001_amiya2_sale#16.ab",
+    "md5": "c26f5ea3adee609a11c94edf97dbb4ab",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

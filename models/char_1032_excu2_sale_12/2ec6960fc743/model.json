@@ -995,7 +995,7 @@
     "bytes": 400357,
     "sha256": "3ab1c8bc265e15d78937bdb0449fa43a4a6a3b01731b135d0ccd173732b051da"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1032_excu2_sale#12.ab",

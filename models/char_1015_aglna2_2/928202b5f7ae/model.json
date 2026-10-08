@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 14132,
-    "sha256": "63ed5e031cfab90bd36d882eed18104de28f2ab1260747e80071cc9b95fbcff3"
+    "bytes": 20884,
+    "sha256": "d24aa9fae1d67e792c2e65cdb4c72727f258f8ed18cecec6ed92fe54b1b48b4a"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1015_aglna2_2.ab",

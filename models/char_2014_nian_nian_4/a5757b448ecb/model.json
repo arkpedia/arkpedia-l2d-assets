@@ -59,7 +59,7 @@
     "bytes": 204300,
     "sha256": "42d56867c50f0c9ba2555a2b9d970a4a7f040e36b52a5272734c9b2cf6b0e61f"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2014_nian_nian#4.ab",

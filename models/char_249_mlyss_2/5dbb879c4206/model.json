@@ -59,7 +59,7 @@
     "bytes": 166089,
     "sha256": "ad5113545afe904bf7ffae770ca5bed7436d634c951833adeee8d1d687875ae1"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_249_mlyss_2.ab",

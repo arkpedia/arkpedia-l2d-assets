@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 9470,
-    "sha256": "3ae7498b45f48913194fe33e3fcac2c641560b4c9d5ce6c502dcc9c5cd5a8e92"
+    "bytes": 8955,
+    "sha256": "ffb2c28bad34a6453f314fb1a447e6cf83e2adf23028433ddcc5314b082fcec7"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1028_texas2_epoque#36.ab",

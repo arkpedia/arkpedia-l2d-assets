@@ -566,7 +566,7 @@
     "bytes": 155056,
     "sha256": "7d395f61d8e0aa077568e5f5ce8050cf17dcf53fe4b1e99a13290d556d1505f6"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1035_wisdel_sale#14.ab",

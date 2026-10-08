@@ -64,7 +64,7 @@
     "bytes": 296999,
     "sha256": "843ae053c726f24078458b689eb0853a59aa3dc39e471ac588602d7b3faf59ef"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1020_reed2_epoque#30.ab",

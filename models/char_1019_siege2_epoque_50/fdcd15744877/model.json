@@ -64,7 +64,7 @@
     "bytes": 5418,
     "sha256": "d899f70009b6b8a76397df629ee123550a0b11b197c89e92287af4870a62be2c"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1019_siege2_epoque#50.ab",

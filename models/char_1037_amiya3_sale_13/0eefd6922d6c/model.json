@@ -64,7 +64,7 @@
     "bytes": 320251,
     "sha256": "5cf5b7702a96c0cdbc48f14e0aaecbd16faad015746979cda8ea484d3e426912"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1037_amiya3_sale#13.ab",

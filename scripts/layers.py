@@ -39,7 +39,7 @@ SCHEMA_VERSION = 1
 # no system is drawn) to layerParticles.json, its `{"particles": [...]}` draw runs and
 # omitted.particleReasons; every layers.json of 4 has the pointer (the validator holds it to that).
 # The sync re-exports the layers of a folder written by an older version (scripts/sync.py).
-LAYERS_VERSION = 4
+LAYERS_VERSION = 5
 FPS = 30
 # The built-in meshes in Unity's "unity default resources" (by path id): only the Quad is used by
 # drawable layers (the Plane appears 8 times, all left out).
@@ -702,6 +702,10 @@ def texture_alpha(image, classify) -> dict:
 
 class _Exporter:
     def __init__(self, root_go: int, read, *, mesh_of, texture_of, classify_texture, external_of, shaders, slots, shared=None, particles: bool):
+        # Holders are instantiated before the scene binds transforms and animator clips.
+        if shared is not None and getattr(shared, 'prefab', None):
+            from holders import graft_holders
+            read, mesh_of, texture_of, external_of = graft_holders(root_go, read, mesh_of, texture_of, external_of, shared)
         self.read = read
         # CAB name -> (read, texture_of) of a shared texture bundle (refs/fx/texture/...), or None when it
         # is not available: textures materials take from other bundles.
@@ -1269,6 +1273,8 @@ class _Exporter:
         scroll_script, delay, map_scrolls = self.scripts(tr, ignore=frozenset())
         follower = self.follower_on_chain(tr)
         mesh = self.mesh(tr)
+        if len(mesh['uv']) != len(mesh['vertices']):
+            raise LayerError('mesh without UVs')
         if len(mesh['vertices']) > MAX_VERTICES:
             raise LayerError(f'{len(mesh["vertices"])} vertices')
         submeshes = mesh['submeshes']
@@ -1944,8 +1950,6 @@ def bundle_readers(env, objects: dict):
         handler.process()
         if not handler.m_Vertices:
             raise LayerError('mesh without vertices')
-        if not handler.m_UV0:
-            raise LayerError('mesh without UVs')
         submeshes = []
         for submesh, triangles in zip(mesh.m_SubMeshes, handler.get_triangles()):
             base = getattr(submesh, 'baseVertex', 0) or 0
@@ -1955,7 +1959,8 @@ def bundle_readers(env, objects: dict):
             colours = [tuple((c / 255.0 if isinstance(c, int) else float(c)) for c in colour) for colour in handler.m_Colors]
         vertices = [tuple(float(x) for x in (list(v) + [0.0, 0.0])[:3]) for v in handler.m_Vertices]
         normals = [tuple(float(x) for x in (list(n) + [0.0, 0.0])[:3]) for n in handler.m_Normals] if handler.m_Normals else None
-        return {'vertices': vertices, 'uv': [tuple(float(x) for x in uv[:2]) for uv in handler.m_UV0], 'colors': colours, 'submeshes': submeshes,
+        # Unity's missing TEXCOORD0 attribute defaults to zero, including on particle meshes.
+        return {'vertices': vertices, 'uv': [tuple(float(x) for x in uv[:2]) for uv in (handler.m_UV0 or [(0.0, 0.0)] * len(vertices))], 'colors': colours, 'submeshes': submeshes,
                 'normals': normals}
 
     def texture_of(path_id: int):
@@ -1978,6 +1983,27 @@ class SharedTextures:
         self.unitypy = unitypy
         self.loaded = {}  # CAB -> (read, texture_of) or None
         self.used = set()  # bundle names actually read
+        self.prefabs = None
+
+    def prefab(self, effect_path: str):
+        if self.prefabs is None:
+            self.prefabs = {}
+            data = self.fetch('arts/dynchars/effect.ab')
+            if data is not None:
+                env = self.unitypy.load(data)
+                objects = {o.path_id: o for o in env.objects}
+                trees = {}
+                def read(pid):
+                    if pid not in trees:
+                        obj = objects.get(pid)
+                        trees[pid] = (obj.type.name, obj.read_typetree()) if obj else None
+                    return trees[pid]
+                mesh, texture, external = bundle_readers(env, objects)
+                for path, ref in env.container.items():
+                    if path.lower().endswith('.prefab'):
+                        self.prefabs[path.lower()] = (ref.path_id, read, mesh, texture, external)
+                self.used.add('arts/dynchars/effect.ab')
+        return self.prefabs.get(f'dyn/{effect_path.lower()}.prefab')
 
     def __call__(self, cab: str):
         if cab in self.loaded:

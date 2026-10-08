@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 140325,
-    "sha256": "bfd2cba00d55e5adb2673478c4d8a16af1285e6b5c5d782e8198707401932c4e"
+    "bytes": 139929,
+    "sha256": "fe4d4ed68ec6d0e41af0187079372209df53b2010adcbe9fc583260eaaa230a2"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1039_thorn2_marthe#9.ab",

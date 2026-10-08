@@ -61,10 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 3874,
-    "sha256": "3f7c3a0f4fe5968523cb5794dd70773e6498be80f9428bca629f0887a1868cf9"
+    "bytes": 9431,
+    "sha256": "54bd238566fa9727a7309bb4279a1413a560e6a6185fc57f1f3d08469a6bcdeb"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4010_etlchi_winter#5.ab",

@@ -66,7 +66,7 @@
     "bytes": 350674,
     "sha256": "f80d288643336cbf9aed9d29c40184b4bfd4eb89aa147f759b124bdf351c650f"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2023_ling_2.ab",

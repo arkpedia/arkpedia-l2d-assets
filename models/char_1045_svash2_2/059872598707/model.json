@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 23540,
-    "sha256": "fbc300635520665519cf7a9ea26dfffc8c2f3a90a727595553d23202a9e76ebf"
+    "bytes": 79238,
+    "sha256": "a1198acfb81b11f2a08052c69edb6834c717ea54f99c4061894b3e2340613802"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1045_svash2_2.ab",

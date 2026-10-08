@@ -59,7 +59,7 @@
     "bytes": 35411,
     "sha256": "33a58fded8ff309e2fcf9e44f5f6518c238327403d85c2c2b98e34a161ef3101"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2025_shu_2.ab",

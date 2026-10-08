@@ -1014,7 +1014,7 @@
     "bytes": 58076,
     "sha256": "713bb401fe166900d3455f263dc45517f7130c5de98ec520ef5233801715eb43"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2024_chyue_cfa#1.ab",

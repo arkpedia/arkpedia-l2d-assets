@@ -59,7 +59,7 @@
     "bytes": 204067,
     "sha256": "fd603a5ca3c856641fce97ba8d599e6c673fc1742e7c6b81890fa246e0ee4903"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4080_lin_nian#10.ab",

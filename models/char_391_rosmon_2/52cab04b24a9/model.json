@@ -59,7 +59,7 @@
     "bytes": 41841,
     "sha256": "31c0ea31efcc022342bba3bfceb6f6afcff0850b51a1c47c7ac681c5c1e4cbf4"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_391_rosmon_2.ab",

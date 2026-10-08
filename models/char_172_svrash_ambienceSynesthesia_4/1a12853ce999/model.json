@@ -59,7 +59,7 @@
     "bytes": 148806,
     "sha256": "72457cee0c2da2c4ffe5ea7ecc01c639148dcfd18b8dea3712c8811dab04d574"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_172_svrash_ambiencesynesthesia#4.ab",

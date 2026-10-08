@@ -61,10 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 13502,
-    "sha256": "8e77dae57a5bf03de8b26fa5634c3f6ea6eb740267631f0247baee297a54f850"
+    "bytes": 100177,
+    "sha256": "a69194a71d363269e45e8fb6a0d2789aec3007fc571abe502c4582a9955149d7"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_391_rosmon_sale#16.ab",

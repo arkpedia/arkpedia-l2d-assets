@@ -64,7 +64,7 @@
     "bytes": 210852,
     "sha256": "f02c5586d348f68dceb23a0f6ac1ec318653c9f8d21a95355f3347ca4a6463b0"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1044_hsgma2_2.ab",

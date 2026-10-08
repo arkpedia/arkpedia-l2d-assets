@@ -97,7 +97,7 @@ FAILURES_FILE = 'sync-failures.json'
 # A change to any of these retries every recorded failure once: the fix may be in them.
 CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/layers.py', 'scripts/effects.py', 'scripts/particles.py', 'scripts/sync.py', 'scripts/spine.mjs',
               'scripts/layers.mjs', 'scripts/inspect-skeleton.mjs', 'vendor/spine-core-3.8/spine-core.js', 'requirements.txt',
-              'shared-bundles.json']
+              'shared-bundles.json', 'holders.py']
 # The client's shared FX texture bundles by CAB name (scripts/shared_bundles.py writes it).
 SHARED_BUNDLES_FILE = 'shared-bundles.json'
 

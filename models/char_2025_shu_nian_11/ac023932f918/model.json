@@ -59,7 +59,7 @@
     "bytes": 121372,
     "sha256": "b4606c91d4e24522f924dae9ee54e0813dc28d567ea2326aff1d5d5b873bb8c3"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2025_shu_nian#11.ab",

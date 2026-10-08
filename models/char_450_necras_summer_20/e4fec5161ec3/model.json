@@ -59,7 +59,7 @@
     "bytes": 45996,
     "sha256": "1e1fb5e5084a31435399d009a307fc202a6d7b599351a9739c57ea92bbb6e0e2"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_450_necras_summer#20.ab",

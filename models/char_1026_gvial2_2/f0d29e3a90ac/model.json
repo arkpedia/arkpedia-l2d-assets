@@ -59,7 +59,7 @@
     "bytes": 385352,
     "sha256": "cb804852354454797a96c7b98f1f4f23cf0b129a228f0725dd08378ad9fa87fa"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1026_gvial2_2.ab",

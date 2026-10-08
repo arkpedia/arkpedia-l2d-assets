@@ -41,7 +41,7 @@
     "bytes": 5903,
     "sha256": "bd076181a5498f45a0b1549dcc148d599505d9fd8259b092b3c456e497cc5c84"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_003_kalts_sale#14.ab",

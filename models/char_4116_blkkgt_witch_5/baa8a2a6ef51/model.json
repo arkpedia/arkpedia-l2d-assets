@@ -43,7 +43,7 @@
     "bytes": 703923,
     "sha256": "e672180ffed7ae5e0c5749c90497f14f066b4478bc058a8d11a30913c6863510"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4116_blkkgt_witch#5.ab",

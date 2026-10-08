@@ -66,7 +66,7 @@
     "bytes": 122890,
     "sha256": "63338ff08337348b2cfb89ded0f6059b6a2fc85cabf12e530a6861e6849cd73f"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_250_phatom_sale#4.ab",
