@@ -1762,35 +1762,39 @@ class Simulation:
 
 def billboard_corners(center, size, rotation_z, pivot=(0.0, 0.0, 0.0), flip=(1.0, 1.0)):
     """The four corners (bottom-left, bottom-right, top-left, top-right) of a View-aligned billboard for an
-    orthographic camera looking down +Z with X right and Y up. Unity rotates billboards clockwise on screen for
-    a positive rotation (inferred, section 8.2): corner = centre + R(-rot) * ((corner - pivot) * size)."""
+    orthographic camera looking down +Z with X right and Y up: corner = centre + R(-rot) * ((corner + pivot) * size).
+    A positive rotation turns the billboard clockwise on screen, and the quad moves towards its pivot, both settled
+    against the recordings in P6 (particle-research verify/RECORDING-CHECK.md: X8's crossed flares turn clockwise;
+    X3's flare, pivot x -0.02 of 25 units, sits 0.5 units left of its emitter)."""
     c, s = math.cos(-rotation_z), math.sin(-rotation_z)
     out = []
     for cx, cy in ((-0.5, -0.5), (0.5, -0.5), (-0.5, 0.5), (0.5, 0.5)):
-        x = (cx * flip[0] - pivot[0]) * size[0]
-        y = (cy * flip[1] - pivot[1]) * size[1]
+        x = (cx * flip[0] + pivot[0]) * size[0]
+        y = (cy * flip[1] + pivot[1]) * size[1]
         out.append((center[0] + x * c - y * s, center[1] + x * s + y * c, center[2]))
     return out
 
 
 def stretched_corners(center, size, velocity, length_scale, velocity_scale, pivot=(0.0, 0.0, 0.0)):
-    """Stretched billboard seen from +Z (section 8.3): the quad's long axis follows the screen-space velocity,
-    width = size.x, length = size.y * lengthScale + |v| * velocityScale (a negative length flips the quad),
-    centred on the particle and shifted by the pivot in units of the quad's own width and length (inferred)."""
+    """Stretched billboard seen from +Z (section 8.3; corners bottom-left, bottom-right, top-left, top-right of
+    the texture): the quad's long axis follows the screen-space velocity, width = size.x, length = size.y *
+    lengthScale + |v| * velocityScale (a negative length flips the quad), centred on the particle. Settled against
+    the recordings in P6: the texture's U runs along the stretch and its +U points against the motion (rec3's fish,
+    drawn head left, swim head first), and the pivot's y moves the quad along that same axis, its x across, corner
+    + pivot as billboards (X6's sparks, pivot y -0.7 with lengthScale -2, trail behind their particles from the
+    chest flash). Without screen motion the axis is +Y (a stand-in: Unity keeps the last one)."""
     vx, vy = velocity[0], velocity[1]
-    speed = math.hypot(vx, vy)
-    if speed < 1e-6:
-        dx, dy = 0.0, 1.0  # no motion: Unity keeps the last/default axis; up is a stand-in
-    else:
-        dx, dy = vx / speed, vy / speed
-    length = size[1] * length_scale + speed * velocity_scale
+    flat = math.hypot(vx, vy)
+    dx, dy = (vx / flat, vy / flat) if flat > 1e-6 else (0.0, 1.0)
+    length = size[1] * length_scale + v_len(velocity) * velocity_scale
     width = size[0]
-    nx, ny = dy, -dx  # right-hand side of the motion direction
+    ex, ey = -dx, -dy  # the texture's +U and the pivot's +y: against the motion
+    nx, ny = -ey, ex   # its +V: e's left, a proper turn of the quad
     out = []
     for cx, cy in ((-0.5, -0.5), (0.5, -0.5), (-0.5, 0.5), (0.5, 0.5)):
-        across = (cx - pivot[0]) * width
-        along = (cy - pivot[1]) * length
-        out.append((center[0] + nx * across + dx * along, center[1] + ny * across + dy * along, center[2]))
+        along = (cx + pivot[1]) * length
+        across = (cy + pivot[0]) * width
+        out.append((center[0] + ex * along + nx * across, center[1] + ey * along + ny * across, center[2]))
     return out
 
 

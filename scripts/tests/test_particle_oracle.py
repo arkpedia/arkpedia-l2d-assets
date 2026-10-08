@@ -381,6 +381,23 @@ class Rendering(unittest.TestCase):
         self.assertAlmostEqual(top_right[0], 1.0)
         self.assertAlmostEqual(top_right[1], -1.0)
 
+    def test_the_quad_moves_towards_its_pivot(self):
+        # X3's flare: pivot x -0.02 of a 25-unit quad sits 0.5 units left of the particle.
+        corners = up.billboard_corners((0, 0, 0), (25, 5, 1), 0.0, (-0.02, 0.0, 0.0))
+        self.assertAlmostEqual((corners[0][0] + corners[1][0]) / 2, -0.5)
+
+    def test_a_stretched_quad_runs_its_texture_from_the_front(self):
+        # Moving +X: U = 0 (the texture's left, a fish's head) at the front, U = 1 behind; V a quarter turn on
+        # from U (the quad turned, never mirrored), so here +V points down.
+        bl, br, tl, tr = up.stretched_corners((0, 0, 0), (1, 1, 1), (10, 0, 0), 2.0, 0.0)
+        self.assertGreater(bl[0], br[0])
+        self.assertAlmostEqual(bl[0], 1.0)
+        self.assertGreater(bl[1], tl[1])
+        # X6's sparks: lengthScale -2 and pivot y -0.7 put the quad behind the particle (0.4 to 2.4 sizes back).
+        xs = [c[0] for c in up.stretched_corners((0, 0, 0), (1, 1, 1), (10, 0, 0), -2.0, 0.0, (0.0, -0.7, 0.0))]
+        self.assertAlmostEqual(min(xs), -2.4)
+        self.assertAlmostEqual(max(xs), -0.4)
+
 
 class RealBundle(unittest.TestCase):
     def test_every_system_of_one_bundle(self):
