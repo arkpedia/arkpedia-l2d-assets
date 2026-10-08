@@ -504,6 +504,26 @@ def v_lerp(a, b, f):
     return (a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f)
 
 
+def orbit_velocity(omega, rel, h: float):
+    """Orbital velocity (rad/s about each axis; `rel` the particle's offset from the orbit's centre) as the velocity
+    that turns `rel` about `omega` by exactly |omega| h over a step of h seconds (Rodrigues): (R rel - rel) / h, so
+    the radius holds. Adding cross(omega, rel) and integrating it explicitly instead grows the radius by
+    sqrt(1 + (|omega| h)^2) every step: Hoshiguma's fire_ring_ctrl went from 3.3 to 19 Unity units in 3 s, where both
+    recordings keep the ring on the shield. A step of 0 takes the limit, cross(omega, rel)."""
+    w = v_len(omega)
+    if h == 0.0 or w == 0.0:
+        return v_cross(omega, rel)
+    kx, ky, kz = omega[0] / w, omega[1] / w, omega[2] / w
+    angle = w * h
+    c, s = math.cos(angle), math.sin(angle)
+    rx, ry, rz = rel
+    kd = kx * rx + ky * ry + kz * rz
+    tx = rx * c + (ky * rz - kz * ry) * s + kx * kd * (1.0 - c)
+    ty = ry * c + (kz * rx - kx * rz) * s + ky * kd * (1.0 - c)
+    tz = rz * c + (kx * ry - ky * rx) * s + kz * kd * (1.0 - c)
+    return ((tx - rx) / h, (ty - ry) / h, (tz - rz) / h)
+
+
 def q_mul(a, b):
     ax, ay, az, aw = a
     bx, by, bz, bw = b
@@ -611,7 +631,10 @@ def emitter_pose(scaling_mode: int, world_position, world_rotation, local_scale,
 @dataclass
 class Options:
     gravity: tuple = (0.0, -9.81, 0.0)          # Physics.gravity default; the game may change it (unverified)
-    emit_accumulator_start: float = 0.0          # 0: first rate particle after 1/rate s; 1: one at once (inferred 0)
+    # Where every rate-over-time accumulator starts (a system's at each play, a sub-emitter link's per parent
+    # particle), 0..1: the fraction of the way to the first birth. 0: the first rate particle after 1/rate s;
+    # 1: one at once, on the first step (inferred; P6 settles it on the recordings).
+    emit_accumulator_start: float = 0.0
     dampen_reference_fps: float = 0.0            # 0: apply `dampen` once per step; >0: (1-d)^(dt*fps) (inferred)
     dampen_excess_only: bool = True              # True: |v| -> L + (|v|-L)(1-d); False: max(L, |v|(1-d)) (Cocos)
     prewarm_step: float = 1.0 / 60.0             # step used to simulate one loop for prewarm (Unity's is internal; the site's h)
@@ -1357,8 +1380,8 @@ class Simulation:
         if rate > 0:
             acc0 = state[1]
             acc1 = acc0 + rate * (end - a0)
-            for k in range(1, int(math.floor(acc1)) - int(math.floor(acc0)) + 1):
-                age = a0 + (math.floor(acc0) + k - acc0) / rate
+            for k in range(1, int(math.floor(acc1)) + 1):  # see _emission_events
+                age = a0 + max(k - acc0, 0.0) / rate
                 out.append((age, t01(age), None, 0))
             state[1] = acc1 - math.floor(acc1)
         rod = c.rate_over_distance.evaluate(t01(a0))
@@ -1436,14 +1459,16 @@ class Simulation:
                 self.emitting = False
             return []
         events = []
-        # rate over time: acc += rate * dt; every integer the accumulator crosses is one particle, born at the
-        # instant it crosses (the rate is evaluated at the window start: normalized loop time)
+        # rate over time: acc += rate * dt; every integer k >= 1 the accumulator reaches is one particle, born at
+        # the instant it reaches k (the rate is evaluated at the window start: normalized loop time). The
+        # accumulator holds a fraction in [0, 1) after every step; it starts at Options.emit_accumulator_start, so a
+        # start of 1 has reached 1 already: one particle at the window's start.
         rate = c.rate_over_time.evaluate(self.system_t01(te0), self.rng.value() if c.rate_over_time.is_random else 1.0)
         if rate > 0:
             acc0 = self.acc_time
             acc1 = acc0 + rate * (te1 - te0)
-            for k in range(1, int(math.floor(acc1)) - int(math.floor(acc0)) + 1):
-                events.append((te0 + (math.floor(acc0) + k - acc0) / rate + self.delay, None, 0))
+            for k in range(1, int(math.floor(acc1)) + 1):
+                events.append((te0 + max(k - acc0, 0.0) / rate + self.delay, None, 0))
             self.acc_time = acc1 - math.floor(acc1)
         # rate over distance: the distance the emitter moved this step (world-space systems)
         rod = c.rate_over_distance.evaluate(self.system_t01(te0))
@@ -1536,7 +1561,7 @@ class Simulation:
                      emitter_velocity=self.emitter_velocity if emitter_velocity is None else emitter_velocity,
                      seed=seed if seed is not None else 0)
         if self.links:  # which of its sub-emitter links fire from it (each with its own generator)
-            p.subs = [[XorShift128(particle_word(seed, RANDOM_KEY[f'subSeed{k}'])), 0.0]
+            p.subs = [[XorShift128(particle_word(seed, RANDOM_KEY[f'subSeed{k}'])), self.options.emit_accumulator_start]
                       if kind == 'birth' and (probability >= 1.0 or particle_random(seed, RANDOM_KEY[f'sub{k}']) < probability) else None
                       for k, (_, kind, probability) in enumerate(self.links)]
         uv = c.modules.get('UVModule')
@@ -1588,13 +1613,14 @@ class Simulation:
                    self.mm(vel['orbitalOffsetY']).evaluate(a, p.rand['offY']),
                    self.mm(vel['orbitalOffsetZ']).evaluate(a, p.rand['offZ']))
             radial = self.mm(vel['radial']).evaluate(a, p.rand['radial'])
+            speed_mod = self.mm(vel['speedModifier']).evaluate(a, p.rand['speedMod'])
             centre = self.pose.point(off) if c.space == SPACE_WORLD else off
             rel = v_sub(p.position, centre)
             if any(orb):
-                animated = v_add(animated, v_cross(orb, rel))  # rad/s about the system centre (inferred units)
+                # rad/s about the system centre, turned exactly over the step the position advances by
+                animated = v_add(animated, orbit_velocity(orb, rel, dt * speed_mod))
             if radial:
                 animated = v_add(animated, v_mul(v_norm(rel, (0.0, 0.0, 0.0)), radial))
-            speed_mod = self.mm(vel['speedModifier']).evaluate(a, p.rand['speedMod'])
         inherit = m.get('InheritVelocityModule')
         if inherit and c.space == SPACE_WORLD:  # only world-space systems inherit (documented)
             k = self.mm(inherit['m_Curve']).evaluate(a, p.rand['inherit'])
