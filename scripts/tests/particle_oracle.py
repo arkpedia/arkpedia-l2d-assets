@@ -635,7 +635,11 @@ class Options:
     # particle), 0..1: the fraction of the way to the first birth. 0: the first rate particle after 1/rate s;
     # 1: one at once, on the first step (inferred; P6 settles it on the recordings).
     emit_accumulator_start: float = 0.0
-    dampen_reference_fps: float = 0.0            # 0: apply `dampen` once per step; >0: (1-d)^(dt*fps) (inferred)
+    # Limit velocity keeps (1 - dampen)^(dt * fps) of a speed's excess over a step of dt; 0 applies `dampen` once per
+    # step whatever its length. 60: once per frame at the game's 60 fps (the recordings' rate), and the same decay when
+    # a reader steps at 1/30 s or a newborn particle's first part-step is shorter (P6: the recordings cannot tell R
+    # apart, X6's sparks look the same under 30, 60 and 120).
+    dampen_reference_fps: float = 60.0
     dampen_excess_only: bool = True              # True: |v| -> L + (|v|-L)(1-d); False: max(L, |v|(1-d)) (Cocos)
     prewarm_step: float = 1.0 / 60.0             # step used to simulate one loop for prewarm (Unity's is internal; the site's h)
     # 'window': prewarm simulates only the last Config.prewarm_window of the first loop, which every particle
