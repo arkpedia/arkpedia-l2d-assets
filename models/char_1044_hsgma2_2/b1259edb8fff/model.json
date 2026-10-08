@@ -61,10 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 206253,
-    "sha256": "6934ad87ffd823ccc2466d00d2ecbebb0e1cbde2d54f7828d672a03bceb21706"
+    "bytes": 210852,
+    "sha256": "f02c5586d348f68dceb23a0f6ac1ec318653c9f8d21a95355f3347ca4a6463b0"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1044_hsgma2_2.ab",

@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 66138,
-    "sha256": "44ac0b4d00cf15703a4a31b8f050f40c450ffb3bac02c3140f35611273613a84"
+    "bytes": 68321,
+    "sha256": "c99910cf4d5c1a521eec3d832bdf21f0dc241a442a59e00515facac85a072ea1"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1035_wisdel_2.ab",

@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 201892,
-    "sha256": "a137bab01fa8f6bc027f02bd79c0e5a45c45509d2a91352a50fdce51e85a8b87"
+    "bytes": 204300,
+    "sha256": "42d56867c50f0c9ba2555a2b9d970a4a7f040e36b52a5272734c9b2cf6b0e61f"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2014_nian_nian#4.ab",

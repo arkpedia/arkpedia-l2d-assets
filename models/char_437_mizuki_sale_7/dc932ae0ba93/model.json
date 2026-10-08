@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 16857,
-    "sha256": "55ac7155590f48615fd1cfaddf544bc2944d4d9942db9458fbabc608f6ed9e99"
+    "bytes": 21617,
+    "sha256": "218a2c7ebb8e583cc3a1dfd545b26dfeae6a877bcfe74ca7f03e10dc8795a685"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_437_mizuki_sale#7.ab",

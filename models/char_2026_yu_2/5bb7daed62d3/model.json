@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 198241,
-    "sha256": "2e92ebab687dccd848c7f05337f375467231561c6ce886b3c061e4da17d6b63e"
+    "bytes": 208153,
+    "sha256": "375951f516b36852bc9adddc1039a509b52a32a193aa5ba0d2706e5b2bd8c9fc"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2026_yu_2.ab",

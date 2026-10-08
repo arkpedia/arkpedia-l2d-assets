@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 90174,
-    "sha256": "7ae827d3b520fbef99da207c715717b67ed0cf4b64fe57773f680eaa06e2f64c"
+    "bytes": 105937,
+    "sha256": "23e3e2020b6359642e333b247c8916bedb68d6194ce6d91173836f9df2ae0bab"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_350_surtr_summer#9.ab",

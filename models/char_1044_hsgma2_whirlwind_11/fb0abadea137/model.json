@@ -61,10 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 19227,
-    "sha256": "c55996417751f583efb3be22e379e8ec406d9f69830fd89a7f35e1014a15746f"
+    "bytes": 22435,
+    "sha256": "e3e4b60b90cccbfc91ead9cc6dd68dc1ed8d099001c73d932eacb500594b46a8"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1044_hsgma2_whirlwind#11.ab",

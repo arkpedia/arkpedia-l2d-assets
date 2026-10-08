@@ -61,10 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 206664,
-    "sha256": "35c67880d7b2d10ab9891967737f7e7a5431781d57fd9a3652d34a044aaf7f8b"
+    "bytes": 210670,
+    "sha256": "9cbbc313674e210cd8db8bcf5debddd795437671405631619af6c2f5334a1fe2"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_350_surtr_ambiencesynesthesia#6.ab",

@@ -404,10 +404,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 26997,
-    "sha256": "cbade0b53590bfef0ba9912205c0e268f1dcd5fa78d16f3d4d16bda07da5283c"
+    "bytes": 39632,
+    "sha256": "efef925797d1e5e27797c3d066b70088720a3e96ccb6e8f7884df7dc1cbbaeab"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1038_whitw2_sale#15.ab",

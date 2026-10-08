@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 117232,
-    "sha256": "25ebfcd971698fc379b39a0ccfc97e8c404b45ae32e2016db7b962f4ef5db78b"
+    "bytes": 120754,
+    "sha256": "02f6e06f3a839a2919244111df21c0a2aa047a756b69ea11ec367fadfa0d9edc"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_245_cello_2.ab",

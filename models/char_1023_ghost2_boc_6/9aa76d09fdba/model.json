@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 125871,
-    "sha256": "ae5bb0ed9a4f6d89abd6f6fc74ffafe7b472bfd92afecc2443ce6261642de886"
+    "bytes": 127908,
+    "sha256": "4043f90f90ce024c8a9a6e36d3b33371eb59b899ab3edfe643b9b8d9711e840e"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1023_ghost2_boc#6.ab",

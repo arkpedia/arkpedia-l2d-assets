@@ -992,10 +992,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 393949,
-    "sha256": "5f7ca4c71cb8c80dde1de571ef563cf3984168ac08a50339c7c6202f7b65072c"
+    "bytes": 400357,
+    "sha256": "3ab1c8bc265e15d78937bdb0449fa43a4a6a3b01731b135d0ccd173732b051da"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1032_excu2_sale#12.ab",

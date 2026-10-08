@@ -57,10 +57,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 191744,
-    "sha256": "0b4f97949bd54d78af82134e868b8c4a976bde52dd40fc927787ee2e692a42c7"
+    "bytes": 196905,
+    "sha256": "88754da4a1feb14c4db3c6bd7151df5f86f5bfc94e2794ca89385e843ba7a932"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_322_lmlee_witch#3.ab",

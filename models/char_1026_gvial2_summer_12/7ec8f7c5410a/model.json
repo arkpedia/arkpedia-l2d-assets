@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 80007,
-    "sha256": "c0a0c118db81ffcd515232168a9eafdf95659426bdfec087c64bd4d15b70fed4"
+    "bytes": 80897,
+    "sha256": "2dad5efc3027ff2cd24ad9f51b2b1c056e818b0363200b0677299af094847307"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1026_gvial2_summer#12.ab",

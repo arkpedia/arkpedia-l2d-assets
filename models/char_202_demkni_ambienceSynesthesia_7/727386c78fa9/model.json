@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 31756,
-    "sha256": "f36a1821d247ae795f01f8914848dd888fb58f98563bc3bac6546693a11446e0"
+    "bytes": 32422,
+    "sha256": "fb9ffd6727440aa05a2ea0edea2f18a1ab1e20b64d9c029e61a94fb9f2575d0f"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_202_demkni_ambiencesynesthesia#7.ab",

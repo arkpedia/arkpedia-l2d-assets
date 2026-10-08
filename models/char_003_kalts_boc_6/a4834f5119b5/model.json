@@ -430,10 +430,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 245875,
-    "sha256": "e64f675d3e1af62a3cbb9f3d1cd9dd1c315dee44f5c507342602514c0710a5ee"
+    "bytes": 260548,
+    "sha256": "17e2e7b5881c16f2f146869a27fce0d97d3dcb0e3ec2730beb5a0f5b0925fe57"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_003_kalts_boc#6.ab",

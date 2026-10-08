@@ -38,10 +38,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 1901,
-    "sha256": "d7283418983aa82316a1dc70b2e2aab0f23613242950a448efabf1899ec2f2b2"
+    "bytes": 5903,
+    "sha256": "bd076181a5498f45a0b1549dcc148d599505d9fd8259b092b3c456e497cc5c84"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_003_kalts_sale#14.ab",

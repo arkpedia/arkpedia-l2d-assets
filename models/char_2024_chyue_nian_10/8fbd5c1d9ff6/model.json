@@ -61,10 +61,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 8776,
-    "sha256": "fb55442347ca72d0c25b5bc8383dbd82d7229155a496177c34c686d33de61663"
+    "bytes": 19152,
+    "sha256": "99ad5a779ef363516714ed96d360b6e46110d964abd5b33eed99492ff0471cdf"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2024_chyue_nian#10.ab",

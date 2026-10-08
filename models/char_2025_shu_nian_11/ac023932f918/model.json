@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 115748,
-    "sha256": "3f9329f0b8057c774bd7594a9e4ac62d2fe0a55855b2c083a533705fd95b856f"
+    "bytes": 121372,
+    "sha256": "b4606c91d4e24522f924dae9ee54e0813dc28d567ea2326aff1d5d5b873bb8c3"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2025_shu_nian#11.ab",

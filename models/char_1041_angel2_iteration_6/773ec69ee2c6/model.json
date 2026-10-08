@@ -38,10 +38,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 376,
-    "sha256": "f525b9dd02b12c9cd8ed677331502e69992259a68306a72a446126566e0fba6c"
+    "bytes": 3819,
+    "sha256": "05503f8bbb65b2489598f7bac8d6a5601a1e29131508b8392afd0fe9b1234e3f"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1041_angel2_iteration#6.ab",

@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 287633,
-    "sha256": "c566bd66ac0f1c29d6d623576731ae0eb3a54973fca3b88e6309f92c37c5a22b"
+    "bytes": 290071,
+    "sha256": "0a0bb4b2398838a8406a0096b949af69c484126cc43be1986c1cc3486b3a0534"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4055_bgsnow_wild#7.ab",

@@ -157,10 +157,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 30982,
-    "sha256": "b3cafef43108d04087264a53c96bff76069ab17fa1daf84ea63cd3f35540cf05"
+    "bytes": 31754,
+    "sha256": "ff6704aa64a00b42b4bd20ea44105250ef9a4ec35ddefb135adda9a7fb2379bb"
   },
-  "layersVersion": 3,
+  "layersVersion": 4,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1016_agoat2_epoque#57.ab",
