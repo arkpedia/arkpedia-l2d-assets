@@ -14,13 +14,20 @@ TEX = {'id': 5, 'w': 256, 'h': 256}
 NOISE = {'external': 'CAB-c2c688f710a565b7cce0cc93f7bd219f', 'id': 9}
 
 
+def unbound_defaults(shader: str) -> dict:
+    """The textures a shader samples where nothing is bound, as the client's shader bundle declares them: every
+    dissolve map white, except Dissolve(CustomData)'s, black."""
+    return {'_MainTex': 'white', '_DissolveTex': 'black' if shader.endswith('Dissolve(CustomData)') else 'white',
+            '_DissolveTex_01': 'white', '_DissolveTex_02': 'white'}
+
+
 def material(shader, *, floats=None, colors=None, textures=None, keywords='', defaults=None):
     """A material on `shader` (a name), textures {name: (ref, scale, offset)}."""
     envs = {'_MainTex': {'tex': TEX, 'scale': [1, 1], 'offset': [0, 0]}}
     for name, (tex, scale, offset) in (textures or {}).items():
         envs[name] = {'tex': tex, 'scale': list(scale), 'offset': list(offset)}
-    return layers.Material(name='m', shader=layers.Shader(shader, 5.0, 10.0, 0.0, 3000, defaults or {}), shader_ref='x', keywords=keywords,
-                           floats=floats or {}, colors=colors or {}, textures=envs, queue=3000)
+    return layers.Material(name='m', shader=layers.Shader(shader, 5.0, 10.0, 0.0, 3000, defaults or {}, unbound_defaults(shader)), shader_ref='x',
+                           keywords=keywords, floats=floats or {}, colors=colors or {}, textures=envs, queue=3000)
 
 
 def tex(ref=NOISE, scale=(1, 1), offset=(0, 0)):
@@ -37,9 +44,12 @@ class Rounding(unittest.TestCase):
         self.assertEqual([effects.round_even(x) for x in (0.5, 1.5, 2.5, -0.5, 0.4, 0.6)], [0, 2, 2, 0, 0, 1])
         # k = 1 - roundEven(amount + 0.5): 1 at amount 0, 0 inside (0, 1), -1 at 1.
         self.assertEqual([effects.dissolve_k(a) for a in (0.0, 0.1, 0.5, 0.99, 1.0)], [1, 0, 0, 0, -1])
-        self.assertEqual(effects.dissolve_constant(0.0, 0.1), 1.0)
-        self.assertAlmostEqual(effects.dissolve_constant(0.95, 0.1), 0.5)
-        self.assertEqual(effects.dissolve_constant(1.0, 0.1), 0.0)
+        self.assertEqual(effects.dissolve_constant(0.0, 0.1, 1.0), 1.0)
+        self.assertAlmostEqual(effects.dissolve_constant(0.95, 0.1, 1.0), 0.5)
+        self.assertEqual(effects.dissolve_constant(1.0, 0.1, 1.0), 0.0)
+        # Over black (Dissolve(CustomData)'s default) anything above amount 0 is gone.
+        self.assertEqual(effects.dissolve_constant(0.0, 0.1, 0.0), 1.0)
+        self.assertEqual(effects.dissolve_constant(0.25, 0.1, 0.0), 0.0)
 
 
 class Families(unittest.TestCase):
@@ -109,6 +119,21 @@ class Families(unittest.TestCase):
         self.assertEqual(layer_describe(material(effects.L2D + 'Dissolve/Dissolve(CustomData)', textures={'_DissolveTex': tex()}))['dissolve'], [])
         with self.assertRaisesRegex(effects.Unsupported, 'dissolve blended'):
             layer_describe(material(effects.L2D + 'Dissolve/Dissolve(CustomData)', floats={'_UseDissolveTex': 0.5}))
+        # Unbound, Dissolve(CustomData) reads its default black texture: amount 0.25 hides the layer.
+        black = layer_describe(material(effects.L2D + 'Dissolve/Dissolve(CustomData)', floats={'_UseDissolveTex': 1.0, '_DissolveIntensity': 0.25}))
+        self.assertEqual((black['dissolve'], black['alpha_scale']), ([], 0.0))
+
+    def test_custom_data_on_an_unbound_dissolve_samples_the_shaders_default(self):
+        # A particle's custom data moves the amount per particle, so the dissolve stays a map: one texel of the
+        # default the shader declares (layers.py writes it as a 1x1 texture).
+        for shader, amount, value in (('Disturb/Disturb(CustomData)', '_Amount', 1.0), ('Dissolve/Dissolve(CustomData)', '_DissolveIntensity', 0.0)):
+            m = material(effects.L2D + shader, floats={'_UseDissolveTex': 1.0, amount: 0.3}, keywords='_HGCUSTOMVERTEXSTREAM_ON')
+            d = effects.describe(m, frozenset(), custom=frozenset({amount}))['dissolve'][0]
+            self.assertEqual((d['tex'], d['amount'], d['amount_name']), ({'solid': value}, 0.3, amount))
+        unknown = material(effects.L2D + 'Disturb/Disturb(CustomData)', floats={'_Amount': 0.3}, keywords='_HGCUSTOMVERTEXSTREAM_ON')
+        unknown.shader.textures['_DissolveTex'] = 'bump'
+        with self.assertRaisesRegex(effects.Unsupported, 'default .bump. unknown'):
+            effects.describe(unknown, frozenset(), custom=frozenset({'_Amount'}))
 
     def test_disturb2_is_the_noise_family_without_the_x2(self):
         n = layer_describe(material(effects.L2D + 'Disturb/Disturb2 (Add)', colors={'_Noise1Param': [2, 1, 0.5, 0.5]}, textures={'_DisturTex': tex()}))

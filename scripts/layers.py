@@ -122,6 +122,7 @@ class Shader:
     cull: float | str  # 0 off, 1 front, 2 back, or the material float
     queue: int
     defaults: dict  # property name -> default value (first component)
+    textures: dict  # texture property name -> the texture it samples when nothing is bound ('white', 'black', 'gray', ...)
 
 
 def _state_value(entry):
@@ -168,11 +169,13 @@ def read_shader(tree: dict) -> Shader:
     state = sub['m_Passes'][0].get('m_State') or {}
     blend = state.get('rtBlend0') or state.get('m_RtBlend0') or {}
     queue = _tags(sub.get('m_Tags')).get('queue') or _tags(state.get('m_Tags')).get('queue')
-    defaults = {}
+    defaults, textures = {}, {}
     for prop in (form.get('m_PropInfo') or {}).get('m_Props') or []:
         defaults[prop.get('m_Name')] = prop.get('m_DefValue[0]', 0.0)
+        if prop.get('m_Type') == 4:  # a texture: Unity binds its named default when the material leaves it empty
+            textures[prop.get('m_Name')] = (prop.get('m_DefTexture') or {}).get('m_DefaultName', '')
     return Shader(name=form.get('m_Name') or tree.get('m_Name') or '', src=_state_value(blend.get('srcBlend')), dst=_state_value(blend.get('destBlend')),
-                  cull=_state_value(state.get('culling')), queue=queue_of(queue), defaults=defaults)
+                  cull=_state_value(state.get('culling')), queue=queue_of(queue), defaults=defaults, textures=textures)
 
 
 def shader_table(cab: str, objects) -> dict:
@@ -1195,7 +1198,20 @@ class _Exporter:
 
     def texture_index(self, texture: dict, main: bool = True) -> int:
         """The texture's index (in the order first used), its image written once. A main texture must show
-        something; an effect's map (noise, dissolve, weight, ramp) is read whatever its alpha."""
+        something; an effect's map (noise, dissolve, weight, ramp) is read whatever its alpha. `{'solid': v}` is
+        the texture a shader samples where the material binds none (effects.unbound_value): one opaque texel of
+        grey v, written as an image like any other so that a reader needs nothing new to draw it."""
+        if 'solid' in texture:
+            key = ('solid', texture['solid'])
+            if key not in self.textures:
+                from PIL import Image  # as l2d.py imports it: only where an image is made
+                level = round(255 * texture['solid'])
+                image = Image.new('RGBA', (1, 1), (level, level, level, 255))
+                self.textures[key] = len(self.texture_images)
+                self.texture_images.append(image)
+                self.texture_info.append({'name': f'unbound ({texture["solid"]:g})', 'width': 1, 'height': 1, 'wrap': ['repeat', 'repeat'],
+                                          'opaque': [0.0, 0.0, 1.0, 1.0], 'measured': texture_alpha(image, self.classify_texture)})
+            return self.textures[key]
         key = (texture.get('external'), texture['id'])
         if key in self.textures:
             return self.textures[key]

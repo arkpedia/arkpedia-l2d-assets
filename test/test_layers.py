@@ -18,21 +18,22 @@ OTHER_CAB = 'CAB-other'
 EXTERNALS = {1: layers.BUILTIN_RESOURCES, 2: OTHER_CAB, 3: SHADERS_CAB}
 ALPHA_BLEND, ADDITIVE, DISTURB, DISSOLVE_ADD, ERASE, ANCHOR, DISSOLVE_CD, RAM, NOISE2 = 1, 2, 3, 4, 5, 6, 7, 8, 9
 SHADERS = {
-    (SHADERS_CAB, ALPHA_BLEND): layers.Shader('Torappu/Particles-L2D/AlphaBlend', 5.0, 10.0, 0.0, 3000, {'_TintColor': 0.5}),
-    (SHADERS_CAB, ADDITIVE): layers.Shader('Torappu/Particles-L2D/Additive', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5}),
+    (SHADERS_CAB, ALPHA_BLEND): layers.Shader('Torappu/Particles-L2D/AlphaBlend', 5.0, 10.0, 0.0, 3000, {'_TintColor': 0.5}, {'_MainTex': 'white'}),
+    (SHADERS_CAB, ADDITIVE): layers.Shader('Torappu/Particles-L2D/Additive', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5}, {'_MainTex': 'white'}),
     # Disturb(CustomData) takes its second blend factor and its cull from the material.
     (SHADERS_CAB, DISTURB): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb(CustomData)', 5.0, '_DstBlend', '_CullMode', 3000,
                                           {'_MainColor': 0.5, '_Opacity': 1.0, '_DstBlend': 10.0, '_CullMode': 0.0, '_Amount': 0.0, '_DisturbUSpeed': 0.0,
-                                           '_DisturbVSpeed': 0.0}),
-    (SHADERS_CAB, DISSOLVE_ADD): layers.Shader('Torappu/Particles-L2D/Dissolve/Dissolve Add', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5, '_Amount': 0.5}),
-    (SHADERS_CAB, ERASE): layers.Shader('Torappu/Particles-L2D/Mask/Erase', 5.0, 10.0, 0.0, 3000, {'_Strength': 1.0}),
+                                           '_DisturbVSpeed': 0.0}, {'_MainTex': 'white', '_DissolveTex': 'white'}),
+    (SHADERS_CAB, DISSOLVE_ADD): layers.Shader('Torappu/Particles-L2D/Dissolve/Dissolve Add', 5.0, 1.0, 0.0, 3000, {'_TintColor': 0.5, '_Amount': 0.5}, {'_MainTex': 'white', '_DissolveTex': 'white'}),
+    (SHADERS_CAB, ERASE): layers.Shader('Torappu/Particles-L2D/Mask/Erase', 5.0, 10.0, 0.0, 3000, {'_Strength': 1.0}, {'_MainTex': 'white'}),
     (SHADERS_CAB, ANCHOR): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb Anchor (AlphaBlend)', 5.0, 10.0, 0.0, 3000,
-                                         {'_MainColor': 0.5, '_AnchorU': 0.5, '_AnchorV': 0.5, '_AnchorU_02': 0.5, '_AnchorV_02': 0.5}),
+                                         {'_MainColor': 0.5, '_AnchorU': 0.5, '_AnchorV': 0.5, '_AnchorU_02': 0.5, '_AnchorV_02': 0.5}, {'_MainTex': 'white', '_DissolveTex': 'white'}),
     (SHADERS_CAB, DISSOLVE_CD): layers.Shader('Torappu/Particles-L2D/Dissolve/Dissolve(CustomData)', 5.0, 10.0, 0.0, 3000,
-                                              {'_MainColor': 0.5, '_Opacity': 1.0, '_UseDissolveTex': 0.0}),
-    (SHADERS_CAB, RAM): layers.Shader('Torappu/Particles-L2D/Ram/Disturb(CustomData)', 5.0, 10.0, 0.0, 3000, {'_MainColor': 0.5, '_Opacity': 1.0, '_Amount': 0.0}),
+                                              {'_MainColor': 0.5, '_Opacity': 1.0, '_UseDissolveTex': 0.0}, {'_MainTex': 'white', '_DissolveTex': 'black'}),
+    (SHADERS_CAB, RAM): layers.Shader('Torappu/Particles-L2D/Ram/Disturb(CustomData)', 5.0, 10.0, 0.0, 3000, {'_MainColor': 0.5, '_Opacity': 1.0, '_Amount': 0.0}, {'_MainTex': 'white', '_DissolveTex': 'white'}),
     (SHADERS_CAB, NOISE2): layers.Shader('Torappu/Particles-L2D/Disturb/Disturb2 (AlphaBlend)', 5.0, 10.0, 0.0, 3000,
-                                         {'_MainTex': 0.0, '_DisturTex': 0.0, '_MainColor': 0.5, '_GlowColor': 0.5, '_Noise1Param': 1.0, '_Noise2Param': 1.0}),
+                                         {'_MainTex': 0.0, '_DisturTex': 0.0, '_MainColor': 0.5, '_GlowColor': 0.5, '_Noise1Param': 1.0, '_Noise2Param': 1.0},
+                                         {'_MainTex': 'white', '_DisturTex': 'white'}),
 }
 # A clip curve's binding attribute for a material property, as Unity writes it (layers.binding_keys): a
 # float with 8 in its top four bits, a colour channel with 4-7, a vector component (an _ST) with 0-3.

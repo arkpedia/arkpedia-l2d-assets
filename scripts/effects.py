@@ -74,8 +74,22 @@ def dissolve_k(amount: float) -> float:
     return 1.0 - round_even(amount + 0.5)
 
 
-def dissolve_constant(amount: float, border: float, value: float = 1.0) -> float:
-    """What a dissolve multiplies alpha by when its texture reads `value` everywhere (unbound: white)."""
+# What a texture property samples when the material binds no texture: Unity's built-in defaults, by the name the
+# shader declares (layers.Shader.textures), as the red channel a dissolve reads.
+UNBOUND = {'white': 1.0, 'black': 0.0, 'gray': 0.5, 'grey': 0.5}
+
+
+def unbound_value(m, name: str) -> float:
+    """The red channel `name` samples on `m` when nothing is bound: its shader's declared default. Most of the
+    game's dissolves default to white; Dissolve(CustomData)'s _DissolveTex defaults to black."""
+    default = m.shader.textures.get(name) if m.shader else None
+    if default not in UNBOUND:
+        raise Unsupported(f'{name} unbound, its default {default!r} unknown')
+    return UNBOUND[default]
+
+
+def dissolve_constant(amount: float, border: float, value: float) -> float:
+    """What a dissolve multiplies alpha by when its texture reads `value` everywhere (unbound_value)."""
     border = border or 1e-6
     return max(0.0, min(1.0, (value - amount + border * dissolve_k(amount)) / border))
 
@@ -106,27 +120,29 @@ def _colour(m, name: str, default: float = 0.5) -> list:
 
 def _dissolve(m, texture: str, amount: str, border: str, *, speed=(0.0, 0.0), speed_names=None, fract=False, amount_default=0.5, border_default=0.1,
               animated=frozenset(), custom=frozenset()):
-    """(map or None, constant alpha factor): a dissolve with a texture is a map; without one (white)
-    or with nothing to dissolve it is a constant. One whose amount or border an Animator drives (or a
-    particle's custom data, `custom`) is always a map (its frames, or the particle, carry the values)."""
+    """(map or None, constant alpha factor): a dissolve with a texture is a map; without one (the shader's
+    default, unbound_value) or with nothing to dissolve it is a constant. One whose amount or border an Animator
+    drives (or a particle's custom data, `custom`) is always a map (its frames, or the particle, carry the
+    values); a particle's without a texture samples one texel of the default (`tex`: {'solid': value})."""
     a = m.float(amount, amount_default)
     b = m.float(border, border_default)
     moving = bool({amount, border, f'{texture}_ST'} & (animated | custom))
     if moving and not m.texture(texture) and {amount, border} & animated:
         raise Unsupported(f'animated dissolve without its texture ({amount})')
-    if moving and not m.texture(texture) and {amount, border} & custom:
-        raise Unsupported(f'custom data drives a dissolve without its texture ({amount})')
     if not moving:
         if a <= 0:
             return None, 1.0
         if not m.texture(texture):
-            return None, dissolve_constant(a, b)
+            return None, dissolve_constant(a, b, unbound_value(m, texture))
     if b <= 0:
         raise Unsupported(f'dissolve border {b:g}')
     if a >= 1 and not moving:
         return None, 0.0  # fully dissolved (k = -1 from amount 1 on): nothing shows
     if not m.texture(texture):
-        return None, dissolve_constant(a, b)  # only its tiling moves: still a constant
+        if {amount, border} & custom:
+            return {**_map(m, texture, speed, speed_names, fract=fract, amount=a, border=b, amount_name=amount, border_name=border),
+                    'tex': {'solid': unbound_value(m, texture)}}, 1.0
+        return None, dissolve_constant(a, b, unbound_value(m, texture))  # only its tiling moves: still a constant
     return _map(m, texture, speed, speed_names, fract=fract, amount=a, border=b, amount_name=amount, border_name=border), 1.0
 
 
