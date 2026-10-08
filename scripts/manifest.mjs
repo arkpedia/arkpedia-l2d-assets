@@ -1,6 +1,7 @@
 // Validation of manifest.json and every models/<slug>/<md5_12>/ folder.
 // Used by scripts/validate.mjs (CI and the sync workflow) and the tests.
 import { createHash } from 'node:crypto';
+import { playbackShape } from './playback.mjs';
 import { existsSync } from 'node:fs';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
@@ -245,6 +246,9 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     isObject(mix) && typeof mix.from === 'string' && typeof mix.to === 'string' && Number.isFinite(mix.duration)))) {
     throw new Error(`${label}: mixes must be a list of {from, to, duration}`);
   }
+  if (model.playbackVersion !== undefined && model.playbackVersion !== 1) throw new Error(`${label}: unsupported playbackVersion`);
+  if (model.playbackVersion === 1 && !Object.hasOwn(model, 'playback')) throw new Error(`${label}: playback missing`);
+  playbackShape(model.playback, model.animations);
   // The skin's dynEntranceId, recorded by the sync from skin_table: a skin that has one must
   // carry its entrance, and one without must not, so an entrance can never go missing quietly.
   if (!Object.hasOwn(model, 'dynEntranceId') || !(model.dynEntranceId === null || (typeof model.dynEntranceId === 'string' && ENTRANCE_ID.test(model.dynEntranceId)))) {

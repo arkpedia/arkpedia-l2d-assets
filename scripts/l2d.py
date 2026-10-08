@@ -14,6 +14,7 @@ from typing import Callable
 
 import entrance_camera
 import layers
+import playback
 
 DYN_PREFIX = 'dyn_illust_'
 BUNDLE_DIR = 'arts/dynchars/'
@@ -690,6 +691,7 @@ class Decoded:
     # The illustration prefab's own mesh layers for the skeleton's slot names (layers.export_layers), None
     # for a bundle without the prefab.
     layers: Callable[[list], object] | None = None
+    playback: dict | None = None
 
 
 def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, shaders: dict, shared=None, *, particles: bool) -> Decoded:
@@ -882,4 +884,4 @@ def decode_bundle(data: bytes, dyn_illust_id: str, dyn_entrance_id: str | None, 
             except (layers.LayerError, entrance_camera.CameraError, KeyError, TypeError, ValueError, ArithmeticError) as error:
                 raise SyncError(f'Layers of {dyn_illust_id}: {error}') from error
 
-    return Decoded(skeleton[1], skeleton[0], skeleton_choice, atlas_text, atlas[0], pages, page_names, page_info, mixes, entrance, export)
+    return Decoded(skeleton[1], skeleton[0], skeleton_choice, atlas_text, atlas[0], pages, page_names, page_info, mixes, entrance, export, playback.controller_playback(illust_roots, read_any))

@@ -30,7 +30,7 @@ CN_BASE = 'https://cn.example/assetbundle/official'
 
 def write_model(planned, staging, layers_version=layers.LAYERS_VERSION):
     """The fields the run loop reads back from an existing folder."""
-    (staging / 'model.json').write_text(json.dumps({'skinId': planned.skin_id, 'source': {'md5': planned.md5}, 'layersVersion': layers_version}))
+    (staging / 'model.json').write_text(json.dumps({'skinId': planned.skin_id, 'source': {'md5': planned.md5}, 'layersVersion': layers_version, 'playbackVersion': 1, 'playback': None}))
 
 
 def dat_for(payload: bytes) -> bytes:
@@ -142,6 +142,33 @@ class RunLoop(unittest.TestCase):
         write_model(planned, staging)
         return {}, [{'page': 'p.png', 'mask': False, 'alpha': 'straight', 'transparentColour': 150.0,
                      'semiColourAboveAlpha': 0.9}], None
+
+    def test_missing_playback_metadata_updates_only_model_json_once(self):
+        self.run_sync('--only', GOOD)
+        folder = next((self.root / 'models' / 'char_1044_hsgma2_2').iterdir())
+        model = json.loads((folder / 'model.json').read_text())
+        del model['playbackVersion']
+        del model['playback']
+        (folder / 'model.json').write_text(json.dumps(model))
+        media = {'skeleton.skel': b'SKEL', 'page0.webp': b'PAGE', 'layers.json': b'EFFECTS'}
+        for name, data in media.items(): (folder / name).write_bytes(data)
+        before = (self.root / 'manifest.json').read_bytes()
+        original = sync.playback.bundle_playback
+        decoded = []
+        def decode(bundle, dyn):
+            decoded.append(bundle)
+            return None
+        sync.playback.bundle_playback = decode
+        self.addCleanup(setattr, sync.playback, 'bundle_playback', original)
+        report = self.run_sync('--only', GOOD)
+        self.assertEqual(report['playbackUpdated'], [GOOD])
+        self.assertEqual(decoded, [self.payloads[GOOD]])
+        self.assertEqual({n: (folder / n).read_bytes() for n in media}, media)
+        self.assertEqual((self.root / 'manifest.json').read_bytes(), before)
+        self.assertEqual(json.loads((folder / 'model.json').read_text())['playbackVersion'], 1)
+        self.downloads.clear()
+        self.run_sync('--only', GOOD)
+        self.assertEqual(self.downloads, [])
 
     def run_sync(self, *args, status=0):
         with contextlib.redirect_stdout(io.StringIO()):
@@ -284,7 +311,7 @@ class RunLoop(unittest.TestCase):
         self.assertEqual(sorted(p.name for p in folder.iterdir()), ['layer0.webp', 'layers.json', 'model.json', 'page0.webp', 'skeleton.skel'])
         self.assertEqual(((folder / 'skeleton.skel').read_bytes(), (folder / 'page0.webp').read_bytes()), (b'SKEL', b'PAGE'))
         written = json.loads((folder / 'model.json').read_text())
-        self.assertEqual(list(written), ['schemaVersion', 'skinId', 'skeleton', 'layers', 'layersVersion', 'source'])
+        self.assertEqual(list(written), ['schemaVersion', 'skinId', 'skeleton', 'layers', 'layersVersion', 'source', 'playback', 'playbackVersion'])
         self.assertEqual(written['layersVersion'], layers.LAYERS_VERSION)
         doc = json.loads((folder / 'layers.json').read_text())
         self.assertEqual((doc['bounds']['width'], doc['effectBounds']['width'], doc['textures'][0]['bytes']), (1, 2, (folder / 'layer0.webp').stat().st_size))
