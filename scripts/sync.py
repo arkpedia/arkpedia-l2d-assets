@@ -58,6 +58,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import l2d  # noqa: E402
+import playback  # noqa: E402
 import layers  # noqa: E402
 import particles as particle_export  # noqa: E402
 
@@ -97,7 +98,7 @@ FAILURES_FILE = 'sync-failures.json'
 # A change to any of these retries every recorded failure once: the fix may be in them.
 CODE_FILES = ['scripts/l2d.py', 'scripts/entrance_camera.py', 'scripts/layers.py', 'scripts/effects.py', 'scripts/particles.py', 'scripts/sync.py', 'scripts/spine.mjs',
               'scripts/layers.mjs', 'scripts/inspect-skeleton.mjs', 'vendor/spine-core-3.8/spine-core.js', 'requirements.txt',
-              'shared-bundles.json', 'holders.py']
+              'shared-bundles.json', 'holders.py', 'scripts/playback.py']
 # The client's shared FX texture bundles by CAB name (scripts/shared_bundles.py writes it).
 SHARED_BUNDLES_FILE = 'shared-bundles.json'
 
@@ -262,6 +263,8 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         raise l2d.SyncError(f'{decoded.skeleton_name} has no Idle animation (it has {sorted(found["animations"])}); '
                             'is it the entrance skeleton?')
 
+    if decoded.playback is not None:
+        playback.validate_playback(decoded.playback, found['animations'])
     exported = decoded.layers(found['slots']) if decoded.layers is not None else None
     model = {
         'schemaVersion': 1,
@@ -275,6 +278,8 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         'animations': found['animations'],
         'bounds': found['bounds'],
         'mixes': decoded.mixes,
+        'playback': decoded.playback,
+        'playbackVersion': playback.VERSION,
         'dynEntranceId': planned.dyn_entrance_id,
         'entrance': build_entrance(staging, decoded.entrance, declared) if planned.dyn_entrance_id else None,
         'layers': write_layers(staging, exported) if exported is not None else None,
@@ -336,6 +341,8 @@ def relayer_model(planned: l2d.Planned, bundle: bytes, staging: Path, shaders: d
         if key == 'layers':
             rebuilt['layers'] = write_layers(staging, exported) if exported is not None else None
             rebuilt['layersVersion'] = layers.LAYERS_VERSION
+    rebuilt['playback'] = getattr(decoded, 'playback', None)
+    rebuilt['playbackVersion'] = playback.VERSION
     write_json(staging / 'model.json', rebuilt)
     return rebuilt, report_layers(exported)
 
@@ -557,6 +564,7 @@ def main(argv: list[str] | None = None) -> int:
     for skin_id in [s for s in failures if s not in listed]:
         del failures[skin_id]
     pending = []
+    replay = set()  # metadata-only upgrades, with all existing media unchanged
     relayer = set()  # skinIds whose existing folder only needs its layers exported again
     for planned in models:
         try:
@@ -565,7 +573,8 @@ def main(argv: list[str] | None = None) -> int:
             report['failed'].append({'skinId': planned.skin_id, 'error': str(error)})
             continue
         stale = model is not None and int(model.get('layersVersion') or 1) < layers.LAYERS_VERSION
-        if model is None or stale:
+        stale_playback = model is not None and model.get('playbackVersion', 0) < playback.VERSION
+        if model is None or stale or stale_playback:
             known = l2d.known_failure(failures, planned, code)
             if known and not (args.retry_failed or planned.skin_id in only):
                 report['knownFailures'].append({'skinId': planned.skin_id, 'md5': planned.md5, 'error': known.get('error', '')})
@@ -573,6 +582,8 @@ def main(argv: list[str] | None = None) -> int:
                 pending.append(planned)
                 if stale:
                     relayer.add(planned.skin_id)
+                elif stale_playback:
+                    replay.add(planned.skin_id)
             if model is None:
                 continue
         else:
@@ -642,6 +653,17 @@ def main(argv: list[str] | None = None) -> int:
             continue
         try:
             final = ROOT / planned.folder
+            if planned.skin_id in replay:
+                previous = existing_model(planned)
+                previous['playback'] = playback.bundle_playback(bundle, planned.dyn_illust_id)
+                if previous['playback'] is not None:
+                    playback.validate_playback(previous['playback'], previous['animations'])
+                previous['playbackVersion'] = playback.VERSION
+                write_json(final / 'model.json', previous)
+                report.setdefault('playbackUpdated', []).append(planned.skin_id)
+                shutil.rmtree(staging)
+                failures.pop(planned.skin_id, None)
+                continue
             if planned.skin_id in relayer:
                 # Only the layers change: the rest of the folder is copied over unchanged, and the
                 # folder is swapped for the copy in one rename once everything is written.

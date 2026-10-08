@@ -66,5 +66,15 @@
     "bundle": "arts/dynchars/char_4202_haruka_iteration#6.ab",
     "md5": "f869b36a807cd31d2f4b009d5b7b658d",
     "resVersion": "26-09-22-07-47-20_6c71fa"
-  }
+  },
+  "playback": {
+    "extraTracks": [
+      {
+        "track": 2,
+        "name": "exLayer_1"
+      }
+    ],
+    "voiceActions": []
+  },
+  "playbackVersion": 1
 }
