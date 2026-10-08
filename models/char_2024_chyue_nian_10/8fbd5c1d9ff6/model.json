@@ -64,7 +64,7 @@
     "bytes": 19152,
     "sha256": "99ad5a779ef363516714ed96d360b6e46110d964abd5b33eed99492ff0471cdf"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2024_chyue_nian#10.ab",

@@ -26,7 +26,7 @@ const keys = (value, wanted) => isObject(value) && Object.keys(value).length ===
 // layers only; 2, also effect entries, a plain layer's exact, effectTextures and effectBounds; 3, also
 // tilted entries (3D vertices and a 2x4 orthographic projection per frame), integrated scroll offsets
 // and Disturb2's animated parameters; 4, also the particle systems (PARTICLES_FROM).
-export const LAYERS_VERSION = 4;
+export const LAYERS_VERSION = 5;
 const SHADER_FAMILIES = new Set(['particle', 'noise']);
 const NOISE_MODES = new Set(['default', 'add', 'glow']);
 const MAP_KEYS = ['texture', 'st', 'speed', 'scroll'];

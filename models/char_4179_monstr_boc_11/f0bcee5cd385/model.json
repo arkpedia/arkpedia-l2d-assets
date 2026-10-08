@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 46803,
-    "sha256": "e65b81f2cf922bb7199d668f236092e9f3e593f51ff176d9cade1bc327707248"
+    "bytes": 58148,
+    "sha256": "c1539a6719c1f3f19ca7140574c28c395b1d6ec10e7fd6cfd2787f9cb7fb5b76"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_4179_monstr_boc#11.ab",

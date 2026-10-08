@@ -59,7 +59,7 @@
     "bytes": 159137,
     "sha256": "8fa7a0807244aad7fb5ae28af18f658a1091233eeedcd4ea68fdd1d3499183de"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4058_pepe_2.ab",

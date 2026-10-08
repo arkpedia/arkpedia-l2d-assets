@@ -1418,6 +1418,8 @@ class Particles:
             self.mesh_index[key] = len(self.meshes)
             self.meshes.append((key, mesh))
         index = self.mesh_index[key]
+        if not shape and len(self.meshes[index][1]['uv']) != len(self.meshes[index][1]['vertices']):
+            raise Omit('render mesh without UVs')
         if shape:
             if key[0] == 'quad':
                 raise Omit('mesh shape on the built-in quad')
@@ -1452,7 +1454,7 @@ class Particles:
                     running += area
                     cdf.append(num(running / total))
                 cdf[-1] = 1
-            out.append({'vertices': [num(c) for v in mesh['vertices'] for c in v[:3]], 'uvs': [num(c) for uv in mesh['uv'] for c in uv[:2]],
+            out.append({'vertices': [num(c) for v in mesh['vertices'] for c in v[:3]], 'uvs': [num(c) for uv in (mesh['uv'] or [(0.0, 0.0)] * len(mesh['vertices'])) for c in uv[:2]],
                         'colors': [num(c) for col in mesh['colors'] for c in col[:4]] if mesh.get('colors') else None,
                         'triangles': [int(i) for i in mesh['submeshes'][0]],
                         'normals': [num(c) for n in mesh['normals'] for c in n[:3]] if shape else None, 'areaCdf': cdf})

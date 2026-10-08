@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_124_kroos@sale#14^sp_dyn",
+  "dynIllustId": "sp_dyn_illust_char_124_kroos_sale#14",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.json",
+    "format": "json",
+    "bytes": 1301273,
+    "sha256": "605281a2fd7a07f0d2ae8173d7c0f21fd85dfdc9a86426d7b8fbf442a74d225c"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 15660,
+    "sha256": "67e4011ac16ae36707748c4c8ddff93653fbf0bbf2158e885e76bab4dc9f6856"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 1884,
+      "height": 1884,
+      "bytes": 1852530,
+      "sha256": "b16f12c87c6d7c1ab5b684e4900793a75c3b29da9646b8804ca37b16b4b50392"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 4,
+    "Idle_2": 4,
+    "Interact_1": 7.733,
+    "Interact_2": 10.167,
+    "Interact_3": 7.733,
+    "Interact_4": 8.833,
+    "Special": 11.667,
+    "Talk_1": 0.467,
+    "Talk_2": 0.433,
+    "Talk_3": 0.433,
+    "Talk_4": 0.433
+  },
+  "bounds": {
+    "x": -851,
+    "y": 16,
+    "width": 1473,
+    "height": 1775
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 1274,
+    "sha256": "efa65f099ccde97eff820309359b1c729c953ed77263ff3352d6cecfe244da78"
+  },
+  "layersVersion": 5,
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_124_kroos_sale#14.ab",
+    "md5": "db8e3e3248fa455260e5d5200bef1722",
+    "resVersion": "26-09-23-17-49-43_b9cc4a"
+  }
+}

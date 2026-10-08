@@ -60,7 +60,7 @@
     "bytes": 196905,
     "sha256": "88754da4a1feb14c4db3c6bd7151df5f86f5bfc94e2794ca89385e843ba7a932"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_322_lmlee_witch#3.ab",

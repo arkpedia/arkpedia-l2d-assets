@@ -22,6 +22,11 @@ test('slug and folder names follow the shared naming table', () => {
   assert.throws(() => folderFor('char_1044_hsgma2#2', 'b1259edb'));
 });
 
+test('native special-illustration tags retain a distinct folder', () => {
+  assert.equal(slugFor('char_1041_angel2@iteration#6^sp_dyn'), 'char_1041_angel2_iteration_6_sp_dyn');
+  assert.throws(() => slugFor('char_1041_angel2@iteration#6^other'));
+});
+
 test('skeleton versions come from the file: binary header or JSON skeleton.spine', () => {
   assert.equal(skeletonVersion(header('hash', '3.8.99')), '3.8.99');
   assert.equal(skeletonVersion(Buffer.from('{"skeleton":{"hash":"x","spine":"3.8.99"}}')), '3.8.99');

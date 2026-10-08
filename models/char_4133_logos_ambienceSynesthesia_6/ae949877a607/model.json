@@ -59,7 +59,7 @@
     "bytes": 259435,
     "sha256": "094bb0f1619a81443614f675272c56edf3583f1f0e7adaada037c03f21124f24"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4133_logos_ambiencesynesthesia#6.ab",

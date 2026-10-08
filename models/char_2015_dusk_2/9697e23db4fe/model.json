@@ -59,7 +59,7 @@
     "bytes": 146071,
     "sha256": "1fa3160968b1cc6fecad17fc799c0bc5dcb36758a8873ac6e64d88e2a0ff9641"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2015_dusk_2.ab",

@@ -71,7 +71,7 @@ test('the particle checks refuse what a reader could not trust', () => {
     ['a stretched member on a billboard', (d) => { d.particles.systems[0].render = { mode: 'billboard', lengthScale: 2 }; d.particles.systems[0].material = 1; }, /for stretched/],
     ['reasons that do not add up', (d) => { d.doc.omitted.particles = 2; }, /particleReasons/],
     ['a file past the size limit', (d) => { d.doc.particles.bytes = 2 * 1024 * 1024; }, /at most/],
-    ['too many systems', (d) => { d.particles.systems = Array.from({ length: 2049 }, (_, i) => system(`s${i}`)); }, /at most 128 and 2048/],
+    ['too many systems', (d) => { d.particles.systems = Array.from({ length: 2049 }, (_, i) => system(`s${i}`)); }, /at most 256 and 2048/],
     ['an unknown timeline column', (d) => { d.particles.systems[2].emitter = { timeline: { columns: ['t', 'matrix', 'rotation', 'scale', 'active', 'colour'], length: 0, loop: false, loopFrom: 0, frames: [[0]] } }; }, /unknown column colour/],
   ];
   for (const [what, change, error] of cases) {

@@ -59,7 +59,7 @@
     "bytes": 68321,
     "sha256": "c99910cf4d5c1a521eec3d832bdf21f0dc241a442a59e00515facac85a072ea1"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1035_wisdel_2.ab",

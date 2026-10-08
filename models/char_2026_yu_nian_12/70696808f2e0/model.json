@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 71716,
-    "sha256": "6e8aad8535ef95e377453838831a0f0dd70b8e988e9ad62036af61ee358ea276"
+    "bytes": 116449,
+    "sha256": "2b60dabf267790fffb54f4980e40a01b99c4ec43fea5176c06e7cb365bd5b04e"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2026_yu_nian#12.ab",

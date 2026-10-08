@@ -10,7 +10,7 @@ import { inspectLayers, inspectSkeleton, isJsonSkeleton, readAtlas } from './spi
 
 export const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
-const SKIN_ID = /^[A-Za-z0-9_]+(?:@[A-Za-z0-9_]+)?#[0-9]+$/;
+const SKIN_ID = /^[A-Za-z0-9_]+(?:@[A-Za-z0-9_]+)?#[0-9]+(?:\^sp_dyn)?$/;
 const HEX64 = /^[a-f0-9]{64}$/;
 const MD5 = /^[a-f0-9]{32}$/;
 const VERSION = /^\d+\.\d+\.\d+$/;
@@ -21,7 +21,7 @@ const SERVERS = ['en', 'cn'];
 /** skinId with '@' and '#' replaced by '_'. Mirrors slug_for in scripts/l2d.py. */
 export function slugFor(skinId) {
   if (typeof skinId !== 'string' || !SKIN_ID.test(skinId)) throw new Error(`Unexpected skinId: ${skinId}`);
-  return skinId.replace(/[@#]/g, '_');
+  return skinId.replace(/[@#^]/g, '_');
 }
 
 /** models/<slug>/<first 12 hex of the bundle md5>. Mirrors folder_for in scripts/l2d.py. */
@@ -228,7 +228,7 @@ export async function validateModel(root, folder, { deep = true } = {}) {
   const model = JSON.parse(await readFile(path.join(root, folder, 'model.json'), 'utf8'));
   if (!isObject(model) || model.schemaVersion !== 1) throw new Error(`${label}: model.json schemaVersion must be 1`);
   const slug = slugFor(model.skinId);
-  if (typeof model.dynIllustId !== 'string' || !/^dyn_illust_[A-Za-z0-9_#]+$/.test(model.dynIllustId)) throw new Error(`${label}: dynIllustId missing`);
+  if (typeof model.dynIllustId !== 'string' || !/^(?:sp_)?dyn_illust_[A-Za-z0-9_#]+$/.test(model.dynIllustId)) throw new Error(`${label}: dynIllustId missing`);
   if (typeof model.spineVersion !== 'string' || !VERSION.test(model.spineVersion)) throw new Error(`${label}: spineVersion missing`);
   const source = model.source;
   if (!isObject(source) || !SERVERS.includes(source.server) || typeof source.bundle !== 'string' || !/^arts\/dynchars\/[^/]+\.ab$/.test(source.bundle) ||

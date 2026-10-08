@@ -77,6 +77,15 @@ class Planning(unittest.TestCase):
         self.assertEqual(plan.models[0].folder, 'models/char_1044_hsgma2_2/b1259edb8fff')
         self.assertEqual(plan.models[1].bundle, 'arts/dynchars/char_1046_sbell2_ambiencesynesthesia#8.ab')
 
+    def test_special_illustration_is_planned_from_its_native_tag(self):
+        table = {'charSkins': {'char_1044_hsgma2#2': {'dynIllustId': 'dyn_illust_char_1044_hsgma2_2'}},
+                 'spDynSkins': {'char_1044_hsgma2#2': {'spDynIllustId': 'sp_dyn_illust_char_1044_hsgma2_2'}}}
+        plan = l2d.plan_models(table, self.hot_update_list)
+        self.assertEqual([m.skin_id for m in plan.models], ['char_1044_hsgma2#2', 'char_1044_hsgma2#2^sp_dyn'])
+        self.assertEqual(plan.models[1].folder, 'models/char_1044_hsgma2_2_sp_dyn/b1259edb8fff')
+        self.assertEqual(plan.models[0].bundle, plan.models[1].bundle)
+        self.assertIsNone(plan.models[1].dyn_entrance_id)
+
     def test_folder_name_collisions_are_refused(self):
         table = {'charSkins': {'char_1@a#1': {'dynIllustId': 'dyn_illust_char_1_a#1'}, 'char_1_a#1': {'dynIllustId': 'dyn_illust_char_1_a_1'}}}
         hul = {'abInfos': [{'name': 'arts/dynchars/char_1_a#1.ab', 'md5': 'a' * 32}, {'name': 'arts/dynchars/char_1_a_1.ab', 'md5': 'b' * 32}]}

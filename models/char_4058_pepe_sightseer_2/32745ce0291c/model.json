@@ -64,7 +64,7 @@
     "bytes": 57086,
     "sha256": "ef202516c0c60e1ef8975b812138b05c0903c0478583596741f8361aca017a5c"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4058_pepe_sightseer#2.ab",

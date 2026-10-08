@@ -59,7 +59,7 @@
     "bytes": 116029,
     "sha256": "c0fa815fb657a11354fdbbc0342d7083931c1ea3c73baff2e479e83967c38042"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2023_ling_nian#9.ab",

@@ -59,7 +59,7 @@
     "bytes": 290071,
     "sha256": "0a0bb4b2398838a8406a0096b949af69c484126cc43be1986c1cc3486b3a0534"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4055_bgsnow_wild#7.ab",

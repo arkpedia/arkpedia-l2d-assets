@@ -650,7 +650,7 @@
     "bytes": 248494,
     "sha256": "9d438124e137beb9bfbe55680948280d4d2b0b1770065b2a3fda2fb70d92d097"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_245_cello_sale#12.ab",

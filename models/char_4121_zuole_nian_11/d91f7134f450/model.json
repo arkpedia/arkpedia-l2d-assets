@@ -59,7 +59,7 @@
     "bytes": 487485,
     "sha256": "e0fcb12a869ca54791f7e041b088643e191c736796ba1fb74fcb0d3bde025df0"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4121_zuole_nian#11.ab",

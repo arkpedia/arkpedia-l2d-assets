@@ -59,7 +59,7 @@
     "bytes": 527298,
     "sha256": "9d61ea3dc4100eca58aead556b7c019d294ad00c348592cc6a08a49243ee1b63"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1028_texas2_2.ab",

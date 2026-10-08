@@ -17,7 +17,7 @@ import layers
 
 DYN_PREFIX = 'dyn_illust_'
 BUNDLE_DIR = 'arts/dynchars/'
-SKIN_ID_RE = re.compile(r'^[A-Za-z0-9_]+(?:@[A-Za-z0-9_]+)?#[0-9]+$')
+SKIN_ID_RE = re.compile(r'^[A-Za-z0-9_]+(?:@[A-Za-z0-9_]+)?#[0-9]+(?:\^sp_dyn)?$')
 MD5_RE = re.compile(r'^[0-9a-f]{32}$')
 ENTRANCE_ID_RE = re.compile(r'^dyn_entrance_[A-Za-z0-9_#]+$')
 ATLAS_HEADER_RE = re.compile(r'^\s*(size|format|filter|repeat|pma)\s*:')
@@ -35,7 +35,7 @@ def slug_for(skin_id: str) -> str:
     """skinId with '@' and '#' replaced by '_': char_113_cqbw@epoque#7 -> char_113_cqbw_epoque_7."""
     if not isinstance(skin_id, str) or not SKIN_ID_RE.match(skin_id):
         raise SyncError(f'Unexpected skinId: {skin_id!r}')
-    return skin_id.replace('@', '_').replace('#', '_')
+    return skin_id.replace('@', '_').replace('#', '_').replace('^', '_')
 
 
 def folder_for(skin_id: str, md5: str) -> str:
@@ -47,6 +47,8 @@ def folder_for(skin_id: str, md5: str) -> str:
 
 def bundle_name_for(dyn_illust_id: str) -> str:
     """dyn_illust_char_113_cqbw_epoque#7 -> arts/dynchars/char_113_cqbw_epoque#7.ab (lower case)."""
+    if dyn_illust_id.startswith('sp_' + DYN_PREFIX):
+        dyn_illust_id = dyn_illust_id[3:]
     if not dyn_illust_id.startswith(DYN_PREFIX) or len(dyn_illust_id) == len(DYN_PREFIX):
         raise SyncError(f'Unexpected dynIllustId: {dyn_illust_id!r}')
     return f'{BUNDLE_DIR}{dyn_illust_id[len(DYN_PREFIX):].lower()}.ab'
@@ -105,7 +107,12 @@ def plan_models(skin_table: dict, hot_update_list: dict, server: str = 'en') -> 
             by_name[name.lower()] = info
     plan = Plan()
     slugs: dict[str, str] = {}
-    for skin_id, skin in sorted(skin_table.get('charSkins', {}).items()):
+    illustrations = dict(skin_table.get('charSkins', {}))
+    for skin_id, skin in list(illustrations.items()):
+        special = (skin_table.get('spDynSkins') or {}).get(skin_id) or skin
+        if isinstance(special, dict) and special.get('spDynIllustId'):
+            illustrations[skin_id + '^sp_dyn'] = {'dynIllustId': special['spDynIllustId']}
+    for skin_id, skin in sorted(illustrations.items()):
         dyn = skin.get('dynIllustId') if isinstance(skin, dict) else None
         if not dyn:
             continue
@@ -304,7 +311,7 @@ def is_main_illust_name(name: str) -> bool:
     """dyn_illust_* but not an entrance skeleton (..._Start, or ..._Start#12 as in
     dyn_illust_char_2023_ling_nian_Start#12); dyn_portrait_* is never the illustration."""
     base = strip_skeleton_ext(name)
-    return base.startswith(DYN_PREFIX) and not ENTRANCE_SUFFIX_RE.search(base)
+    return base.startswith((DYN_PREFIX, 'sp_' + DYN_PREFIX)) and not ENTRANCE_SUFFIX_RE.search(base)
 
 
 def pick_one(candidates: list, name_of, dyn_illust_id: str, what: str):
@@ -335,7 +342,7 @@ def illust_prefab_roots(container: dict, dyn_illust_id: str) -> list:
     dyn/arts/dynportraits/, so they never match, whatever their skeletons are called.
     """
     prefabs = {path.lower(): root for path, root in container.items()
-               if path.lower().startswith(DYNCHARS_PREFAB_DIR) and path.lower().endswith('.prefab')}
+               if path.lower().startswith('dyn/arts/dyncharssp/' if dyn_illust_id.startswith('sp_') else DYNCHARS_PREFAB_DIR) and path.lower().endswith('.prefab')}
     named = [root for path, root in prefabs.items() if path.rsplit('/', 1)[-1] == f'{dyn_illust_id.lower()}.prefab']
     return named or [prefabs[path] for path in sorted(prefabs)]
 

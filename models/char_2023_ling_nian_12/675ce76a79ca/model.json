@@ -885,10 +885,10 @@
   },
   "layers": {
     "file": "layers.json",
-    "bytes": 13280,
-    "sha256": "3cad7e5ed0c40f613f08f1c9b2c2769af6d496e4023e6a96bd465214e17b9103"
+    "bytes": 28587,
+    "sha256": "5d264ae99cf09b1e303d93226129c2745e5398e00879a423f63a60f390a27235"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2023_ling_nian#12.ab",

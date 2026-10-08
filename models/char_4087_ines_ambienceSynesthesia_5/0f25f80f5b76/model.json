@@ -64,7 +64,7 @@
     "bytes": 363276,
     "sha256": "423e089eeb52dffe033998149333874bd2c6805d42b7737fc6d990ad0429dbd4"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4087_ines_ambiencesynesthesia#5.ab",

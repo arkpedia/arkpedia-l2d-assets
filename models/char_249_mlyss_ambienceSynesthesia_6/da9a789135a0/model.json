@@ -59,7 +59,7 @@
     "bytes": 6300,
     "sha256": "a9211470a3e1fe585af2ad023ea022e071472f7bd289f47c9d0008ba73237b05"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_249_mlyss_ambiencesynesthesia#6.ab",

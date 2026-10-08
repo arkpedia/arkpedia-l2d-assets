@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1041_angel2@iteration#6^sp_dyn",
+  "dynIllustId": "sp_dyn_illust_char_1041_angel2_iteration#6",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1977545,
+    "sha256": "8eaee963872547e76406b31e25be4c09a753fd30b728e090a72fcecd8047375a"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 40126,
+    "sha256": "261668ee664584f00f7cd237425e43288ef4e3618f307388348b4d563bf85016"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2560,
+      "height": 2560,
+      "bytes": 3839940,
+      "sha256": "b976bd4ef0c8f899649b2b09affdb71f99f56f4a5bfecc458d0d940e99e17bd1"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 5.333,
+    "Idle2": 2.667,
+    "Idle3": 5.333,
+    "Idle4": 2.667,
+    "Interact_1": 8,
+    "Interact_1_2": 8,
+    "Interact_2": 7.333,
+    "Interact_2_2": 7.333,
+    "Interact_3": 7.333,
+    "Interact_3_2": 7.333,
+    "Interact_4": 7.667,
+    "Interact_4_2": 7.667,
+    "Interact_5": 7,
+    "Interact_5_2": 7,
+    "Special": 14,
+    "Talk_1": 0.3,
+    "Talk_2": 0.3,
+    "Talk_3": 0.3,
+    "Talk_4": 0.3,
+    "Talk_5": 0.3,
+    "Talk_6": 0.3,
+    "Talk_7": 0.3
+  },
+  "bounds": {
+    "x": -572,
+    "y": -174,
+    "width": 1133,
+    "height": 1807
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Idle2",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Idle3",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Idle4",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_1",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_1_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_2_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_3",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_3_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_4",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_4_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_5",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_5_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Idle",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Idle2",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Idle3",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Idle4",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_1",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_1_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_2_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_3",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_3_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_4",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_4_2",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_5",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact_5_2",
+      "duration": 0.5
+    }
+  ],
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 5263,
+    "sha256": "0872fe7672e9a49e79172f04ea779b9602df22ccbcce141501a0286b66253c55"
+  },
+  "layersVersion": 5,
+  "source": {
+    "server": "cn",
+    "bundle": "arts/dynchars/char_1041_angel2_iteration#6.ab",
+    "md5": "773ec69ee2c62c3cfffd345587f9ed04",
+    "resVersion": "26-09-22-07-47-20_6c71fa"
+  }
+}

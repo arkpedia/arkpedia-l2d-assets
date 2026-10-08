@@ -59,7 +59,7 @@
     "bytes": 83907,
     "sha256": "6dd18c72d3bf9e030d442f88b7c84d400245639325528571f75fe06b614d4c5e"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1023_ghost2_2.ab",

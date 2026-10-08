@@ -10,7 +10,7 @@ export const REQUIRES = new Set(['sub', 'trail']);
 export const PHASES = ['idle', 'Start', 'Interact', 'Special'];
 // What one model's particles may ask of a reader: the file's bytes, its own textures (each a fetch and an
 // upload) and its systems.
-export const PARTICLE_LIMITS = { bytes: 1024 * 1024, textures: 128, systems: 2048 };
+export const PARTICLE_LIMITS = { bytes: 1024 * 1024, textures: 256, systems: 2048 };
 // Reasons that mean the game draws nothing of a system either (scripts/particles.py NOT_DRAWN): not counted
 // as drawn by the coverage counts.
 export const NOT_DRAWN = ['renderer off', 'render mode None', 'render mode None (only its trails)', 'no material', 'never active', 'emits nothing',

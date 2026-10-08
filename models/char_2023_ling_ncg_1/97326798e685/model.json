@@ -59,7 +59,7 @@
     "bytes": 103261,
     "sha256": "458e63e1740943da9b4f100144144286ed6f935db5dde1c5533f526a77ebb3dd"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_2023_ling_ncg#1.ab",

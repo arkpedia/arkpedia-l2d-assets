@@ -66,7 +66,7 @@
     "bytes": 226314,
     "sha256": "58be801790fbc9c47c4b43db4e7ca27e79e543920e6d36fee0e29cbb5814096e"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1013_chen2_boc#6.ab",

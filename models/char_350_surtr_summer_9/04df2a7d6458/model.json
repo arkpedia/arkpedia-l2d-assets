@@ -59,7 +59,7 @@
     "bytes": 105937,
     "sha256": "23e3e2020b6359642e333b247c8916bedb68d6194ce6d91173836f9df2ae0bab"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_350_surtr_summer#9.ab",

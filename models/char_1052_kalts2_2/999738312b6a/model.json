@@ -56,10 +56,10 @@
   "entrance": null,
   "layers": {
     "file": "layers.json",
-    "bytes": 190230,
-    "sha256": "e12381b2750f4e2d2b47d7585a7ec8812e44422e87d9eb6e1ac3f6a5cf3121bc"
+    "bytes": 213435,
+    "sha256": "decf61019d8adb4e290c0d7d3d9ca2b590639af5ced533c05d240ed14918739b"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "cn",
     "bundle": "arts/dynchars/char_1052_kalts2_2.ab",

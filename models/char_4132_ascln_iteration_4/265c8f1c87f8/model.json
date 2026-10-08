@@ -64,7 +64,7 @@
     "bytes": 10990,
     "sha256": "9c83309cc8a7c440bbb05cfbe009b63cba83d482818a388465c912a19d7671f9"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4132_ascln_iteration#4.ab",

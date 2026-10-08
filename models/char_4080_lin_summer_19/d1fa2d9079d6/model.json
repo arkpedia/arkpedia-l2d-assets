@@ -59,7 +59,7 @@
     "bytes": 17039,
     "sha256": "423362659e713e75c1b04dc55f695c7bbdb834bd860768921b25aae905572cf0"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_4080_lin_summer#19.ab",

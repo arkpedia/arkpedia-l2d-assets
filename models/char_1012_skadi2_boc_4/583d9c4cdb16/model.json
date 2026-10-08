@@ -59,7 +59,7 @@
     "bytes": 88978,
     "sha256": "61694d49f0e3d2984d3cdbf0dfc5880579fb953e1c769114b324dcbd1e70b166"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1012_skadi2_boc#4.ab",

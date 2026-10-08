@@ -66,7 +66,7 @@
     "bytes": 163698,
     "sha256": "90abaf27e63395ed7530b33d2ed758fca9dcc850d7cd678b5cb909b47995cf5d"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_377_gdglow_summer#12.ab",

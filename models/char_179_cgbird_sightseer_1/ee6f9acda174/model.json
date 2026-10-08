@@ -59,7 +59,7 @@
     "bytes": 201728,
     "sha256": "0ca3e1c933f41d5b763528125318808628a553a2514d2c6d58e161131f7d475d"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_179_cgbird_sightseer#1.ab",

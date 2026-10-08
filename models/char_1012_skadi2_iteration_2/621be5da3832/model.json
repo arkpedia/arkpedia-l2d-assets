@@ -977,7 +977,7 @@
     "bytes": 160136,
     "sha256": "53da82ab62982976055c2977e168ca0c753b8446fd82231232ad982729230af6"
   },
-  "layersVersion": 4,
+  "layersVersion": 5,
   "source": {
     "server": "en",
     "bundle": "arts/dynchars/char_1012_skadi2_iteration#2.ab",
