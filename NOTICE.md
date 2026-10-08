@@ -16,6 +16,7 @@ Every model folder comes from an Arknights Android client: the Global (EN) one, 
 
   Before a page is written, the sync measures it to confirm which of the two it is, and it skips any model whose page doesn't match. The Android textures are compressed, so these pages are the client's compressed art, not the original source files.
 - For a skin with an entrance (`dynEntranceId`), `entrance.skel` or `entrance.json`, `entrance.atlas` and `entrance-page<N>.webp` come from the same bundle in the same way, and `entrance.mp3` is the entrance's soundtrack (the bundle's AudioClip), decoded and re-encoded as a 160 kbit/s MP3.
+- `layers.json` and `layerParticles.json` are data read from the same bundle's illustration prefab: its mesh layers (meshes, materials, transforms and animation clips) and its particle systems (their modules, materials and meshes), written as JSON. Their textures, `layer<N>.webp`, are the bundle's textures, or ones from the client's shared FX bundles (`refs/fx/...`, as named in `shared-bundles.json` and that client's `hot_update_list.json`), decoded and stored as lossless WebP with straight alpha. A dissolve whose texture the material leaves unbound gets a generated 1x1 grey texture, the shader's declared default.
 - `test/fixtures/pages/` holds three 64x64 crops of the same kind of page textures, used by the tests. Its README names the source of each.
 
 No model files come from fan sites or mirrors.

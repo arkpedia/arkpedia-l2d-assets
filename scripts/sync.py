@@ -227,6 +227,14 @@ def write_layers(staging: Path, exported) -> dict:
     return file_record(staging, 'layers.json')
 
 
+def record_coverage() -> tuple[int, list[str]]:
+    """`node scripts/particle_coverage.mjs <ROOT> --add`: an entry in particle-coverage.json for each folder
+    with particles that has none (an existing entry is never changed). Returns its exit code and output lines."""
+    result = subprocess.run(['node', str(Path(__file__).resolve().parent / 'particle_coverage.mjs'), str(ROOT), '--add'],
+                            capture_output=True, text=True, check=False)
+    return result.returncode, (result.stdout + result.stderr).strip().splitlines()
+
+
 def describe_layers(exported) -> str:
     """One line for the log: what is drawn and what was left out."""
     c, o = exported.counts, exported.document['omitted']
@@ -492,8 +500,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--report', default=str(ROOT / '.cache' / 'sync-report.json'), help='where to write the run report')
     parser.add_argument('--bundles', type=Path, default=None,
                         help='build from local unpacked bundles (<dir>/<slug>.ab, md5-checked against the list) instead of downloading')
-    parser.add_argument('--particles', action='store_true',
-                        help='also export the particle systems (layerParticles.json); no layersVersion includes them yet, so for trial runs only')
+    parser.add_argument('--particles', action=argparse.BooleanOptionalAction, default=True,
+                        help='export the particle systems (layerParticles.json), as layersVersion 4 requires (the default); '
+                             '--no-particles leaves them out, for trial comparisons only: the validator rejects a folder of layersVersion 4 '
+                             'without them, so such a run is never committed')
     args = parser.parse_args(argv)
     only = {s.strip() for value in args.only for s in value.split(',') if s.strip()}
 
@@ -678,6 +688,16 @@ def main(argv: list[str] | None = None) -> int:
         write_manifest(manifest)
     if json.dumps(failures, sort_keys=True) != recorded:
         write_failures(failures)
+    status = 0
+    if args.particles and (report['added'] or report['relayered']):
+        # A folder written with its particles gets an entry in particle-coverage.json when it has none (a new
+        # bundle's first export); an entry it has stays, and the validator holds the export to it.
+        code, lines = record_coverage()
+        report['coverage'] = lines[-1] if lines else ''
+        log(f'Particle coverage: {report["coverage"]}')
+        if code != 0:
+            log('  particle_coverage.mjs --add failed:\n' + '\n'.join(lines))
+            status = 1
     report_path = Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2) + '\n', 'utf-8')
@@ -699,6 +719,8 @@ def main(argv: list[str] | None = None) -> int:
             out.write(f'- Not in any client list: {", ".join(report["unlisted"]) or "none"}\n')
             out.write(f'- Synced from CN until Global has them: {", ".join(report["otherClients"]) or "none"}\n')
             out.write(f'- Downloaded: {report["downloadedBytes"] / 1e6:.1f} MB\n')
+            if 'coverage' in report:
+                out.write(f'- Particle coverage: {report["coverage"]}\n')
             for failure in report['failed']:
                 out.write(f'- **Failed** `{failure["skinId"]}`: {failure["error"]}\n')
             for failure in report['knownFailures']:
@@ -707,7 +729,8 @@ def main(argv: list[str] | None = None) -> int:
                 out.write('\n#### Layers\n\n')
                 for skin_id, counts in report['layers'].items():
                     o = counts['omitted']
-                    out.write(f'- `{skin_id}`: {counts["layers"]} drawn ({counts["static"]} static, {counts["animated"]} animated); left out '
+                    drawn = f'; {counts["particles"]} particle systems drawn' if 'particles' in counts else ''
+                    out.write(f'- `{skin_id}`: {counts["layers"]} drawn ({counts["static"]} static, {counts["animated"]} animated){drawn}; left out '
                               f'{o["custom"]} custom shaders, {o["externalTexture"]} external textures, {o["other"]} other, '
                               f'{o["particles"]} particle systems\n')
             if report['pages']:
@@ -715,7 +738,7 @@ def main(argv: list[str] | None = None) -> int:
                 for skin_id, pages in report['pages'].items():
                     for info in pages:
                         out.write(f'- `{skin_id}` {describe_page(info)}\n')
-    return 0
+    return status
 
 
 if __name__ == '__main__':

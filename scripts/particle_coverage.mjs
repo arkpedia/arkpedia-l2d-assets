@@ -2,9 +2,11 @@
 // The particle coverage of every model folder under a root (the repository, or a trial export): how many of
 // the systems the game draws each export carries (scripts/particles.mjs particleCoverage), checked against
 // the baseline in particle-coverage.json; `--write` records the root's counts as the baseline (the folders it
-// has; others are kept).
+// has; others are kept); `--add` records only the folders the baseline has no entry for, and never changes
+// one it has (the sync runs it after writing folders: a new bundle's first export becomes its baseline, and
+// the validator, which requires an entry for every folder with particles, holds every later export to it).
 //
-//   node scripts/particle_coverage.mjs [<root with models/>] [--write]
+//   node scripts/particle_coverage.mjs [<root with models/>] [--write | --add]
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -34,6 +36,17 @@ export function coverageOf(base) {
   return out;
 }
 
+/** The baseline's models with an entry added for each folder of `found` it has none for; existing entries stay. */
+export function addMissing(models, found) {
+  const added = Object.keys(found).filter((folder) => !Object.hasOwn(models, folder));
+  return { models: { ...models, ...Object.fromEntries(added.map((folder) => [folder, found[folder]])) }, added };
+}
+
+function save(models) {
+  const sorted = Object.fromEntries(Object.keys(models).sort().map((k) => [k, models[k]]));
+  writeFileSync(baselinePath, `${JSON.stringify({ schemaVersion: 1, totals: totals(sorted), models: sorted }, null, 1)}\n`);
+}
+
 export function totals(models) {
   const sum = { drawn: 0, exported: 0, v1: 0 };
   for (const counts of Object.values(models)) for (const key of Object.keys(sum)) sum[key] += counts[key];
@@ -55,10 +68,13 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const share = (n) => (sum.drawn ? `${(100 * n / sum.drawn).toFixed(1)}%` : '-');
   console.log(`${Object.keys(found).length} folders with particles: ${sum.drawn} systems drawn, ${sum.exported} exported (${share(sum.exported)}), ${sum.v1} for the first release (${share(sum.v1)}); ${below} below the baseline`);
   if (args.includes('--write')) {
-    const models = { ...baseline.models, ...found };
-    const sorted = Object.fromEntries(Object.keys(models).sort().map((k) => [k, models[k]]));
-    writeFileSync(baselinePath, `${JSON.stringify({ schemaVersion: 1, totals: totals(sorted), models: sorted }, null, 1)}\n`);
+    save({ ...baseline.models, ...found });
     console.log(`wrote ${COVERAGE_FILE}`);
+  } else if (args.includes('--add')) {
+    // Below-baseline folders are the validator's to fail; this only records folders without an entry.
+    const { models, added } = addMissing(baseline.models, found);
+    if (added.length) save(models);
+    console.log(`${COVERAGE_FILE}: ${added.length} new entries${added.length ? ` (${added.join(', ')})` : ''}`);
   } else if (below) {
     process.exit(1);
   }

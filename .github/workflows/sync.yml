@@ -52,10 +52,11 @@ jobs:
           npm run validate
           npm test
       # sync-failures.json records bundles that downloaded but could not be built, so the next
-      # run does not fetch them again until their md5 or the sync code changes.
+      # run does not fetch them again until their md5 or the sync code changes. particle-coverage.json
+      # gains an entry for each new folder (scripts/particle_coverage.mjs --add), never changes one.
       - name: Commit and push new models
         run: |
-          git add manifest.json models sync-failures.json
+          git add manifest.json models sync-failures.json particle-coverage.json
           if git diff --cached --quiet; then
             echo "Nothing new."
             exit 0

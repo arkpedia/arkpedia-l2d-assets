@@ -1,9 +1,10 @@
 // The deployed site readers against layers.json files that carry particles: they must not notice them.
 //
-// dynamicLayers-v1.ts and dynamicLayers-v2.ts are byte-for-byte copies of the site's lib/skins/dynamicLayers.ts
-// (arkpedia/arkpedia): v1 at main 54995c2a (www until 2026-10-07), v2 at aaddab47 (the shader port, which main
-// ea1b1e6e and dev 078d46ff still carry). Each reader, given a layers.json with particles and the same file
-// without them, must:
+// dynamicLayers-v1.ts, -v2.ts and -v3.ts are byte-for-byte copies of the site's lib/skins/dynamicLayers.ts
+// (arkpedia/arkpedia): v1 at main 54995c2a (www until 2026-10-07), v2 at aaddab47 (the shader port, www on
+// 2026-10-07), v3 at e5762c0c (tilted meshes, layersVersion 3: www from release 666dcbc2 on, main d20c73e5
+// still). Any of them may still run in a tab opened before a release. Each reader, given a layers.json with
+// particles and the same file without them, must:
 // - not throw;
 // - skip exactly one more entry per particle run (an entry it does not know);
 // - list the same textures (so fetch the same files) and frame the same bounds;
@@ -17,7 +18,9 @@
 // reasons taken out; with it, the baseline export's layers.json for the same folder (an export without
 // --particles), which also proves the particle export leaves the layers as they were. --inject gives a file
 // without particles three runs (first, middle and last in its draw list), a pointer and reasons, as the
-// readers would meet them: the Check runs it over every committed folder (test/compat.test.mjs).
+// readers would meet them, and a file that carries particles (layersVersion 4) is checked as it is: the Check
+// runs it over every committed folder (test/compat.test.mjs). The summary's `injected` counts the files given
+// runs, `exported` the files that carry the `particles` member (pointer or null) and `exportedRuns` their runs.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -28,6 +31,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const readers = {
   v1: (await import(path.join(here, 'dynamicLayers-v1.ts'))).parseDynamicLayers,
   v2: (await import(path.join(here, 'dynamicLayers-v2.ts'))).parseDynamicLayers,
+  v3: (await import(path.join(here, 'dynamicLayers-v3.ts'))).parseDynamicLayers,
 };
 
 /** `doc` as if it had particles: three runs, a pointer and an empty list of reasons. */
@@ -96,13 +100,14 @@ async function main() {
     console.error('Usage: node --experimental-strip-types test/compat/check.mjs <root with models/> [--baseline <root with models/>]');
     process.exit(2);
   }
-  let files = 0, withParticles = 0, runs = 0, systems = 0, failures = 0;
+  let files = 0, injected = 0, exported = 0, withParticles = 0, runs = 0, exportedRuns = 0, systems = 0, failures = 0;
   for (const folder of folders(root)) {
     const file = path.join(root, folder, 'layers.json');
     if (!existsSync(file)) continue;
     files++;
     let doc = JSON.parse(readFileSync(file, 'utf8'));
     if (inject && !Object.hasOwn(doc, 'particles')) {
+      injected++;
       const result = compare(withInjectedParticles(doc), doc);
       runs += result.runs;
       if (result.problems.length) {
@@ -112,6 +117,7 @@ async function main() {
       continue;
     }
     const problems = [];
+    if (Object.hasOwn(doc, 'particles')) exported++;
     let before = withoutParticles(doc);
     if (baseline) {
       const other = path.join(baseline, folder, 'layers.json');
@@ -131,6 +137,7 @@ async function main() {
     }
     const result = compare(doc, before);
     runs += result.runs;
+    if (Object.hasOwn(doc, 'particles')) exportedRuns += result.runs;
     problems.push(...result.problems);
     if (baseline && JSON.stringify(withoutParticles(doc)) !== JSON.stringify(withoutParticles(before))) {
       const a = withoutParticles(doc), b = withoutParticles(before);
@@ -145,7 +152,7 @@ async function main() {
       console.log(`${folder}: ${problems.join('; ')}`);
     }
   }
-  console.log(JSON.stringify({ files, withParticles, runs, systems, failures }));
+  console.log(JSON.stringify({ files, injected, exported, withParticles, runs, exportedRuns, systems, failures }));
   process.exit(failures ? 1 : 0);
 }
 

@@ -152,6 +152,17 @@ test('coverage counts what the game draws and what an export carries, and a drop
   assert.throws(() => checkCoverage(counts, { drawn: 4, exported: 2, v1: 1 }, 'f'), /drawn by the game, the baseline says 4/);
 });
 
+test('the sync adds a coverage entry only for a folder the baseline does not know', async () => {
+  const { addMissing } = await import('../scripts/particle_coverage.mjs');
+  const models = { 'models/a/000000000001': { drawn: 3, exported: 2, v1: 2 } };
+  const found = { 'models/a/000000000001': { drawn: 3, exported: 1, v1: 1 }, 'models/b/000000000002': { drawn: 5, exported: 5, v1: 4 } };
+  const { models: after, added } = addMissing(models, found);
+  assert.deepEqual(added, ['models/b/000000000002']);
+  // An export below its entry keeps the entry (the validator fails it), never lowers it.
+  assert.deepEqual(after, { 'models/a/000000000001': { drawn: 3, exported: 2, v1: 2 }, 'models/b/000000000002': { drawn: 5, exported: 5, v1: 4 } });
+  assert.deepEqual(models, { 'models/a/000000000001': { drawn: 3, exported: 2, v1: 2 } }, 'not changed in place');
+});
+
 test('the coverage baseline is whole', () => {
   const baseline = JSON.parse(readFileSync(new URL('../particle-coverage.json', import.meta.url), 'utf8'));
   const sum = { drawn: 0, exported: 0, v1: 0 };
