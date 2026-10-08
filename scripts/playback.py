@@ -21,7 +21,7 @@ def controller_playback(roots, read):
         elif kind in ('Transform', 'RectTransform'):
             stack.extend(local(c) for c in tree.get('m_Children', []))
             stack.append(local(tree.get('m_GameObject')))
-        elif kind == 'MonoBehaviour' and '_extraTrackAnimations' in tree:
+        elif kind == 'MonoBehaviour' and ('_extraTrackAnimations' in tree or ('_lipSyncDatas' in tree and '_voiceToActionIds' in tree)):
             controllers.append(tree)
     if len(controllers) > 1:
         raise ValueError('Several illustration playback controllers')

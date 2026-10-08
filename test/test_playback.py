@@ -23,3 +23,9 @@ class Playback(unittest.TestCase):
             with self.assertRaises(ValueError): playback.validate_playback({'extraTracks':tracks,'voiceActions':[]})
     def test_no_controller_is_compatible_with_older_models(self):
         self.assertIsNone(playback.controller_playback([],lambda _:None))
+
+    def test_older_voice_controller_without_extra_tracks_is_recognised(self):
+        tree={'_lipSyncDatas':[{'actionName':'line_1','animationInfos':[{'name':'Interact_3','time':0,'blendInDuration':0}], 'eventInfos':[{'name':'Talk_1','time':0}]}], '_voiceToActionIds':[{'voiceName':'CN_002','actionId':'line_1'}]}
+        result=playback.controller_playback([1],lambda _:('MonoBehaviour',tree))
+        self.assertEqual(result['extraTracks'],[])
+        self.assertEqual(result['voiceActions'][0]['body'][0]['name'],'Interact_3')
