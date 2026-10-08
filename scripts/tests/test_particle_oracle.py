@@ -151,6 +151,23 @@ class Emission(unittest.TestCase):
         b = run(make_ps(EmissionModule__rateOverTime=mmc(0, 7.0), looping=True), 3.0, dt=1 / 144).emitted_total
         self.assertLessEqual(abs(a - b), 1)
 
+    def test_the_accumulator_start_is_the_way_to_the_first_birth(self):
+        ps = make_ps(EmissionModule__rateOverTime=mmc(0, 2.0))
+        first = {}
+        for start in (0.0, 0.5, 1.0):
+            sim = up.Simulation.from_trees(ps, None, options=up.Options(emit_accumulator_start=start))
+            sim.play()
+            for n in range(1, 120):
+                sim.step(1 / 64)  # exact in binary: the accumulator reaches 1 on its step
+                if sim.emitted_total:
+                    first[start] = (n, sim.emitted_total)
+                    break
+        self.assertEqual(first[0.0], (32, 1))   # 1 / rate: at 0.5 s
+        self.assertEqual(first[0.5], (16, 1))   # half way there: 0.25 s
+        self.assertEqual(first[1.0], (1, 1))    # one at once, on the first step
+        sim = run(make_ps(EmissionModule__rateOverTime=mmc(0, 10.0)), 6.0, options=up.Options(emit_accumulator_start=1.0))
+        self.assertEqual(sim.emitted_total, 51)  # the one at once, then one every 0.1 s over the 5 s loop
+
     def test_burst_at_zero_and_cycles(self):
         sim = run(make_ps(EmissionModule__m_Bursts=[burst(0.0, 7)]), 1 / 60)
         self.assertEqual(len(sim.particles), 7)
@@ -239,6 +256,33 @@ class Motion(unittest.TestCase):
         self.assertTrue(all(b <= a + 1e-9 for a, b in zip(speeds, speeds[1:])))
         self.assertGreaterEqual(min(speeds), 1.0 - 1e-9)
         self.assertLess(speeds[-1], 1.01)
+
+    def test_orbital_velocity_turns_without_drifting_outward(self):
+        # A particle 3 units from the centre orbiting about Z at up to 10 rad/s (Hoshiguma's fire_ring_ctrl): an exact
+        # turn each step keeps the radius, at any step and speed modifier, and turns by the integral of the speed.
+        ps = make_ps(EmissionModule__m_Bursts=[burst(0.0, 1)], ShapeModule__enabled=True, ShapeModule__type=up.SHAPE['CircleEdge'],
+                     ShapeModule__radius=multi(3.0), ShapeModule__arc=multi(0.0001))
+        orbital = mmc(1, 10.0, max_keys=(key(0.0, 0.0, 1.0, 1.0), key(1.0, 1.0, 1.0, 1.0)))
+        for dt, speed_mod in ((1 / 60, 1.0), (1 / 30, 1.0), (1 / 60, 2.0)):
+            ps['VelocityModule'] = {'enabled': True, 'x': mmc(), 'y': mmc(), 'z': mmc(), 'orbitalX': mmc(), 'orbitalY': mmc(),
+                                    'orbitalZ': copy.deepcopy(orbital), 'orbitalOffsetX': mmc(), 'orbitalOffsetY': mmc(), 'orbitalOffsetZ': mmc(),
+                                    'radial': mmc(), 'speedModifier': mmc(0, speed_mod), 'inWorldSpace': False}
+            ps['InitialModule']['startLifetime'] = mmc(0, 3.0)
+            sim = up.Simulation.from_trees(ps)
+            sim.play()
+            turned = 0.0
+            last = math.atan2(sim.particles[0].position[1], sim.particles[0].position[0]) if sim.particles else None
+            for _ in range(int(round(2.9 / dt))):
+                sim.step(dt)
+                x, y, _z = sim.particles[0].position
+                self.assertAlmostEqual(math.hypot(x, y), 3.0, places=9)
+                angle = math.atan2(y, x)
+                if last is not None:
+                    turned += (angle - last + math.pi) % (2 * math.pi) - math.pi
+                last = angle
+            # 10 rad/s x age / 3 integrated over the age (the speed modifier scales the step): 10 x a^2 / 6 rad.
+            age = sim.particles[0].age
+            self.assertAlmostEqual(turned, speed_mod * 10.0 * age * age / 6.0, delta=0.05 * speed_mod * 10.0 * age * age / 6.0)
 
     def test_rotation_over_lifetime(self):
         ps = make_ps(EmissionModule__m_Bursts=[burst(0.0, 1)])
@@ -336,6 +380,23 @@ class Rendering(unittest.TestCase):
         top_right = corners[3]
         self.assertAlmostEqual(top_right[0], 1.0)
         self.assertAlmostEqual(top_right[1], -1.0)
+
+    def test_the_quad_moves_towards_its_pivot(self):
+        # X3's flare: pivot x -0.02 of a 25-unit quad sits 0.5 units left of the particle.
+        corners = up.billboard_corners((0, 0, 0), (25, 5, 1), 0.0, (-0.02, 0.0, 0.0))
+        self.assertAlmostEqual((corners[0][0] + corners[1][0]) / 2, -0.5)
+
+    def test_a_stretched_quad_runs_its_texture_from_the_front(self):
+        # Moving +X: U = 0 (the texture's left, a fish's head) at the front, U = 1 behind; V a quarter turn on
+        # from U (the quad turned, never mirrored), so here +V points down.
+        bl, br, tl, tr = up.stretched_corners((0, 0, 0), (1, 1, 1), (10, 0, 0), 2.0, 0.0)
+        self.assertGreater(bl[0], br[0])
+        self.assertAlmostEqual(bl[0], 1.0)
+        self.assertGreater(bl[1], tl[1])
+        # X6's sparks: lengthScale -2 and pivot y -0.7 put the quad behind the particle (0.4 to 2.4 sizes back).
+        xs = [c[0] for c in up.stretched_corners((0, 0, 0), (1, 1, 1), (10, 0, 0), -2.0, 0.0, (0.0, -0.7, 0.0))]
+        self.assertAlmostEqual(min(xs), -2.4)
+        self.assertAlmostEqual(max(xs), -0.4)
 
 
 class RealBundle(unittest.TestCase):

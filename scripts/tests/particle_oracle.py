@@ -504,6 +504,26 @@ def v_lerp(a, b, f):
     return (a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f)
 
 
+def orbit_velocity(omega, rel, h: float):
+    """Orbital velocity (rad/s about each axis; `rel` the particle's offset from the orbit's centre) as the velocity
+    that turns `rel` about `omega` by exactly |omega| h over a step of h seconds (Rodrigues): (R rel - rel) / h, so
+    the radius holds. Adding cross(omega, rel) and integrating it explicitly instead grows the radius by
+    sqrt(1 + (|omega| h)^2) every step: Hoshiguma's fire_ring_ctrl went from 3.3 to 19 Unity units in 3 s, where both
+    recordings keep the ring on the shield. A step of 0 takes the limit, cross(omega, rel)."""
+    w = v_len(omega)
+    if h == 0.0 or w == 0.0:
+        return v_cross(omega, rel)
+    kx, ky, kz = omega[0] / w, omega[1] / w, omega[2] / w
+    angle = w * h
+    c, s = math.cos(angle), math.sin(angle)
+    rx, ry, rz = rel
+    kd = kx * rx + ky * ry + kz * rz
+    tx = rx * c + (ky * rz - kz * ry) * s + kx * kd * (1.0 - c)
+    ty = ry * c + (kz * rx - kx * rz) * s + ky * kd * (1.0 - c)
+    tz = rz * c + (kx * ry - ky * rx) * s + kz * kd * (1.0 - c)
+    return ((tx - rx) / h, (ty - ry) / h, (tz - rz) / h)
+
+
 def q_mul(a, b):
     ax, ay, az, aw = a
     bx, by, bz, bw = b
@@ -611,8 +631,15 @@ def emitter_pose(scaling_mode: int, world_position, world_rotation, local_scale,
 @dataclass
 class Options:
     gravity: tuple = (0.0, -9.81, 0.0)          # Physics.gravity default; the game may change it (unverified)
-    emit_accumulator_start: float = 0.0          # 0: first rate particle after 1/rate s; 1: one at once (inferred 0)
-    dampen_reference_fps: float = 0.0            # 0: apply `dampen` once per step; >0: (1-d)^(dt*fps) (inferred)
+    # Where every rate-over-time accumulator starts (a system's at each play, a sub-emitter link's per parent
+    # particle), 0..1: the fraction of the way to the first birth. 0: the first rate particle after 1/rate s;
+    # 1: one at once, on the first step (inferred; P6 settles it on the recordings).
+    emit_accumulator_start: float = 0.0
+    # Limit velocity keeps (1 - dampen)^(dt * fps) of a speed's excess over a step of dt; 0 applies `dampen` once per
+    # step whatever its length. 60: once per frame at the game's 60 fps (the recordings' rate), and the same decay when
+    # a reader steps at 1/30 s or a newborn particle's first part-step is shorter (P6: the recordings cannot tell R
+    # apart, X6's sparks look the same under 30, 60 and 120).
+    dampen_reference_fps: float = 60.0
     dampen_excess_only: bool = True              # True: |v| -> L + (|v|-L)(1-d); False: max(L, |v|(1-d)) (Cocos)
     prewarm_step: float = 1.0 / 60.0             # step used to simulate one loop for prewarm (Unity's is internal; the site's h)
     # 'window': prewarm simulates only the last Config.prewarm_window of the first loop, which every particle
@@ -1357,8 +1384,8 @@ class Simulation:
         if rate > 0:
             acc0 = state[1]
             acc1 = acc0 + rate * (end - a0)
-            for k in range(1, int(math.floor(acc1)) - int(math.floor(acc0)) + 1):
-                age = a0 + (math.floor(acc0) + k - acc0) / rate
+            for k in range(1, int(math.floor(acc1)) + 1):  # see _emission_events
+                age = a0 + max(k - acc0, 0.0) / rate
                 out.append((age, t01(age), None, 0))
             state[1] = acc1 - math.floor(acc1)
         rod = c.rate_over_distance.evaluate(t01(a0))
@@ -1436,14 +1463,16 @@ class Simulation:
                 self.emitting = False
             return []
         events = []
-        # rate over time: acc += rate * dt; every integer the accumulator crosses is one particle, born at the
-        # instant it crosses (the rate is evaluated at the window start: normalized loop time)
+        # rate over time: acc += rate * dt; every integer k >= 1 the accumulator reaches is one particle, born at
+        # the instant it reaches k (the rate is evaluated at the window start: normalized loop time). The
+        # accumulator holds a fraction in [0, 1) after every step; it starts at Options.emit_accumulator_start, so a
+        # start of 1 has reached 1 already: one particle at the window's start.
         rate = c.rate_over_time.evaluate(self.system_t01(te0), self.rng.value() if c.rate_over_time.is_random else 1.0)
         if rate > 0:
             acc0 = self.acc_time
             acc1 = acc0 + rate * (te1 - te0)
-            for k in range(1, int(math.floor(acc1)) - int(math.floor(acc0)) + 1):
-                events.append((te0 + (math.floor(acc0) + k - acc0) / rate + self.delay, None, 0))
+            for k in range(1, int(math.floor(acc1)) + 1):
+                events.append((te0 + max(k - acc0, 0.0) / rate + self.delay, None, 0))
             self.acc_time = acc1 - math.floor(acc1)
         # rate over distance: the distance the emitter moved this step (world-space systems)
         rod = c.rate_over_distance.evaluate(self.system_t01(te0))
@@ -1536,7 +1565,7 @@ class Simulation:
                      emitter_velocity=self.emitter_velocity if emitter_velocity is None else emitter_velocity,
                      seed=seed if seed is not None else 0)
         if self.links:  # which of its sub-emitter links fire from it (each with its own generator)
-            p.subs = [[XorShift128(particle_word(seed, RANDOM_KEY[f'subSeed{k}'])), 0.0]
+            p.subs = [[XorShift128(particle_word(seed, RANDOM_KEY[f'subSeed{k}'])), self.options.emit_accumulator_start]
                       if kind == 'birth' and (probability >= 1.0 or particle_random(seed, RANDOM_KEY[f'sub{k}']) < probability) else None
                       for k, (_, kind, probability) in enumerate(self.links)]
         uv = c.modules.get('UVModule')
@@ -1588,13 +1617,14 @@ class Simulation:
                    self.mm(vel['orbitalOffsetY']).evaluate(a, p.rand['offY']),
                    self.mm(vel['orbitalOffsetZ']).evaluate(a, p.rand['offZ']))
             radial = self.mm(vel['radial']).evaluate(a, p.rand['radial'])
+            speed_mod = self.mm(vel['speedModifier']).evaluate(a, p.rand['speedMod'])
             centre = self.pose.point(off) if c.space == SPACE_WORLD else off
             rel = v_sub(p.position, centre)
             if any(orb):
-                animated = v_add(animated, v_cross(orb, rel))  # rad/s about the system centre (inferred units)
+                # rad/s about the system centre, turned exactly over the step the position advances by
+                animated = v_add(animated, orbit_velocity(orb, rel, dt * speed_mod))
             if radial:
                 animated = v_add(animated, v_mul(v_norm(rel, (0.0, 0.0, 0.0)), radial))
-            speed_mod = self.mm(vel['speedModifier']).evaluate(a, p.rand['speedMod'])
         inherit = m.get('InheritVelocityModule')
         if inherit and c.space == SPACE_WORLD:  # only world-space systems inherit (documented)
             k = self.mm(inherit['m_Curve']).evaluate(a, p.rand['inherit'])
@@ -1736,35 +1766,39 @@ class Simulation:
 
 def billboard_corners(center, size, rotation_z, pivot=(0.0, 0.0, 0.0), flip=(1.0, 1.0)):
     """The four corners (bottom-left, bottom-right, top-left, top-right) of a View-aligned billboard for an
-    orthographic camera looking down +Z with X right and Y up. Unity rotates billboards clockwise on screen for
-    a positive rotation (inferred, section 8.2): corner = centre + R(-rot) * ((corner - pivot) * size)."""
+    orthographic camera looking down +Z with X right and Y up: corner = centre + R(-rot) * ((corner + pivot) * size).
+    A positive rotation turns the billboard clockwise on screen, and the quad moves towards its pivot, both settled
+    against the recordings in P6 (particle-research verify/RECORDING-CHECK.md: X8's crossed flares turn clockwise;
+    X3's flare, pivot x -0.02 of 25 units, sits 0.5 units left of its emitter)."""
     c, s = math.cos(-rotation_z), math.sin(-rotation_z)
     out = []
     for cx, cy in ((-0.5, -0.5), (0.5, -0.5), (-0.5, 0.5), (0.5, 0.5)):
-        x = (cx * flip[0] - pivot[0]) * size[0]
-        y = (cy * flip[1] - pivot[1]) * size[1]
+        x = (cx * flip[0] + pivot[0]) * size[0]
+        y = (cy * flip[1] + pivot[1]) * size[1]
         out.append((center[0] + x * c - y * s, center[1] + x * s + y * c, center[2]))
     return out
 
 
 def stretched_corners(center, size, velocity, length_scale, velocity_scale, pivot=(0.0, 0.0, 0.0)):
-    """Stretched billboard seen from +Z (section 8.3): the quad's long axis follows the screen-space velocity,
-    width = size.x, length = size.y * lengthScale + |v| * velocityScale (a negative length flips the quad),
-    centred on the particle and shifted by the pivot in units of the quad's own width and length (inferred)."""
+    """Stretched billboard seen from +Z (section 8.3; corners bottom-left, bottom-right, top-left, top-right of
+    the texture): the quad's long axis follows the screen-space velocity, width = size.x, length = size.y *
+    lengthScale + |v| * velocityScale (a negative length flips the quad), centred on the particle. Settled against
+    the recordings in P6: the texture's U runs along the stretch and its +U points against the motion (rec3's fish,
+    drawn head left, swim head first), and the pivot's y moves the quad along that same axis, its x across, corner
+    + pivot as billboards (X6's sparks, pivot y -0.7 with lengthScale -2, trail behind their particles from the
+    chest flash). Without screen motion the axis is +Y (a stand-in: Unity keeps the last one)."""
     vx, vy = velocity[0], velocity[1]
-    speed = math.hypot(vx, vy)
-    if speed < 1e-6:
-        dx, dy = 0.0, 1.0  # no motion: Unity keeps the last/default axis; up is a stand-in
-    else:
-        dx, dy = vx / speed, vy / speed
-    length = size[1] * length_scale + speed * velocity_scale
+    flat = math.hypot(vx, vy)
+    dx, dy = (vx / flat, vy / flat) if flat > 1e-6 else (0.0, 1.0)
+    length = size[1] * length_scale + v_len(velocity) * velocity_scale
     width = size[0]
-    nx, ny = dy, -dx  # right-hand side of the motion direction
+    ex, ey = -dx, -dy  # the texture's +U and the pivot's +y: against the motion
+    nx, ny = -ey, ex   # its +V: e's left, a proper turn of the quad
     out = []
     for cx, cy in ((-0.5, -0.5), (0.5, -0.5), (-0.5, 0.5), (0.5, 0.5)):
-        across = (cx - pivot[0]) * width
-        along = (cy - pivot[1]) * length
-        out.append((center[0] + nx * across + dx * along, center[1] + ny * across + dy * along, center[2]))
+        along = (cx + pivot[1]) * length
+        across = (cy + pivot[0]) * width
+        out.append((center[0] + ex * along + nx * across, center[1] + ey * along + ny * across, center[2]))
     return out
 
 
