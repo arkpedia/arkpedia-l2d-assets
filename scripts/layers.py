@@ -35,8 +35,11 @@ SCHEMA_VERSION = 1
 # entries (a mesh that turns in depth while it moves: its own 3D vertices and, per frame, the 2x4
 # orthographic projection of its transform), animated scroll speeds as integrated `offset` parameters,
 # Disturb2's animated noise and glow, and animated float and _ST properties read as the clips bind them.
+# 4: the prefab's particle systems (scripts/particles.py): layers.json's `particles` pointer (null when
+# no system is drawn) to layerParticles.json, its `{"particles": [...]}` draw runs and
+# omitted.particleReasons; every layers.json of 4 has the pointer (the validator holds it to that).
 # The sync re-exports the layers of a folder written by an older version (scripts/sync.py).
-LAYERS_VERSION = 3
+LAYERS_VERSION = 4
 FPS = 30
 # The built-in meshes in Unity's "unity default resources" (by path id): only the Quad is used by
 # drawable layers (the Plane appears 8 times, all left out).

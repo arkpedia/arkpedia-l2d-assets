@@ -67,7 +67,11 @@ class RunLoop(unittest.TestCase):
             'get': self.fake_get,
             'build_model': self.fake_build,
             'load_shaders': self.fake_shaders,
+            'record_coverage': self.fake_coverage,
         }
+        self.particles = True  # what build_model must be asked for: on unless --no-particles
+        self.coverage_runs = 0
+        self.coverage_result = (0, ['particle-coverage.json: 0 new entries'])
         self.shaders_error = None
         for name, value in patches.items():
             original = getattr(sync, name)
@@ -123,8 +127,12 @@ class RunLoop(unittest.TestCase):
             raise self.shaders_error
         return {('CAB-shaders', 1): 'a shader'}
 
+    def fake_coverage(self):
+        self.coverage_runs += 1
+        return self.coverage_result
+
     def fake_build(self, planned, bundle, res_version, staging, shaders, shared=None, *, particles):
-        self.assertFalse(particles, 'particles are exported only with --particles')
+        self.assertEqual(particles, self.particles, 'particles are exported unless --no-particles')
         expected = self.cn_payloads.get(planned.skin_id) if planned.server == 'cn' else self.payloads.get(planned.skin_id)
         self.assertEqual(bundle, expected)  # verified and unpacked first
         self.built_from[planned.skin_id] = (planned.server, res_version)
@@ -135,9 +143,9 @@ class RunLoop(unittest.TestCase):
         return {}, [{'page': 'p.png', 'mask': False, 'alpha': 'straight', 'transparentColour': 150.0,
                      'semiColourAboveAlpha': 0.9}], None
 
-    def run_sync(self, *args):
+    def run_sync(self, *args, status=0):
         with contextlib.redirect_stdout(io.StringIO()):
-            self.assertEqual(sync.main(['--pause', '0', '--report', str(self.root / 'report.json'), *args]), 0)
+            self.assertEqual(sync.main(['--pause', '0', '--report', str(self.root / 'report.json'), *args]), status)
         return json.loads((self.root / 'report.json').read_text())
 
     def failures(self):
@@ -190,6 +198,27 @@ class RunLoop(unittest.TestCase):
         self.assertEqual(report['added'], [BROKEN])
         self.assertEqual(self.failures(), {})
 
+    def test_particles_are_exported_by_default_and_each_written_folder_gets_its_coverage_entry(self):
+        report = self.run_sync()
+        self.assertEqual(report['added'], [GOOD])
+        self.assertEqual((self.coverage_runs, report['coverage']), (1, 'particle-coverage.json: 0 new entries'))
+        # Nothing written: no coverage step.
+        self.run_sync()
+        self.assertEqual(self.coverage_runs, 1)
+
+    def test_no_particles_leaves_them_out_and_records_no_coverage(self):
+        self.particles = False
+        report = self.run_sync('--no-particles')
+        self.assertEqual(report['added'], [GOOD])
+        self.assertEqual(self.coverage_runs, 0)
+        self.assertNotIn('coverage', report)
+
+    def test_a_coverage_step_that_fails_fails_the_run_after_the_report(self):
+        self.coverage_result = (1, ['Error: cannot write particle-coverage.json'])
+        report = self.run_sync(status=1)
+        self.assertEqual(report['added'], [GOOD], 'the folders and the report are written; the run fails, so nothing is committed')
+        self.assertEqual(report['coverage'], 'Error: cannot write particle-coverage.json')
+
     def test_without_the_shared_shaders_nothing_is_built_or_recorded(self):
         self.shaders_error = l2d.SyncError('The client list has no [uc]shaders.ab')
         report = self.run_sync()
@@ -233,7 +262,7 @@ class RunLoop(unittest.TestCase):
         decoded = []
 
         def fake_decode(bundle, dyn_illust_id, dyn_entrance_id, shaders, shared=None, *, particles):
-            self.assertFalse(particles)
+            self.assertTrue(particles)
             decoded.append(bundle)
             self.assertIsNotNone(shared, 'effects may need the shared textures')
             return type('Decoded', (), {'layers': staticmethod(lambda slots: export)})()

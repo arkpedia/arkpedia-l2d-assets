@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
-import { LAYERS_VERSION, layersShape } from './layers.mjs';
+import { LAYERS_VERSION, layersShape, PARTICLES_FROM } from './layers.mjs';
 import { checkCoverage, COVERAGE_FILE, particleCoverage, PARTICLES_FILE } from './particles.mjs';
 import { inspectLayers, inspectSkeleton, isJsonSkeleton, readAtlas } from './spine.mjs';
 
@@ -285,6 +285,12 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     const layersPath = path.join(root, folder, 'layers.json');
     if (!existsSync(layersPath)) throw new Error(`${label}: missing file layers.json`);
     layersDoc = JSON.parse(await readFile(layersPath, 'utf8'));
+    // From PARTICLES_FROM on the export carries the particle systems: a layers.json without its `particles`
+    // member was exported with them turned off (sync.py --no-particles), and must not be published as that
+    // version (no later run would export it again, its version being current).
+    if (layersVersion >= PARTICLES_FROM && !Object.hasOwn(layersDoc, 'particles')) {
+      throw new Error(`${label}: layers.json of layersVersion ${layersVersion} must have particles (null or the pointer to ${PARTICLES_FILE}); was it exported with --no-particles?`);
+    }
     // layerParticles.json, when layers.json points at it (its bytes and sha256 are checked with the rest).
     let particlesDoc = null;
     if (isObject(layersDoc.particles)) {
@@ -296,8 +302,13 @@ export async function validateModel(root, folder, { deep = true } = {}) {
     }
     const textures = layersShape(layersDoc, label, layersVersion, particlesDoc);
     files.push(model.layers, ...textures);
-    // An export with particles carries at least what the checked-in baseline records for this folder.
-    if (Object.hasOwn(layersDoc, 'particles')) checkCoverage(particleCoverage(layersDoc, particlesDoc), (await coverageBaseline())[folder], label);
+    // An export with particles carries at least what the checked-in baseline records for this folder, which
+    // has an entry (the sync adds one for a folder it writes: scripts/particle_coverage.mjs --add).
+    if (Object.hasOwn(layersDoc, 'particles')) {
+      const entry = (await coverageBaseline())[folder];
+      if (!entry) throw new Error(`${label}: ${COVERAGE_FILE} has no entry for this folder (node scripts/particle_coverage.mjs --add records one)`);
+      checkCoverage(particleCoverage(layersDoc, particlesDoc), entry, label);
+    }
   }
 
   const expectedNames = new Set(['model.json', ...files.map((file) => file.file)]);

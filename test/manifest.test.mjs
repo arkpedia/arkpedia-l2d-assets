@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { folderFor, isMp3, sha256, skeletonVersion, slugFor, validateRepository, webpSize } from '../scripts/manifest.mjs';
+import { LAYERS_VERSION } from '../scripts/layers.mjs';
 import { inspectLayers, inspectSkeleton } from '../scripts/spine.mjs';
 
 const fixtures = path.join(path.dirname(fileURLToPath(import.meta.url)), 'fixtures');
@@ -523,8 +524,8 @@ test('broken effects fail validation', async () => {
     // The version model.json names must match what layers.json holds.
     await repo.saveEffects(repo.doc, 1);
     await assert.rejects(validateRepository(repo.root), /says layersVersion 1/);
-    await repo.saveEffects(repo.doc, 4);
-    await assert.rejects(validateRepository(repo.root), /layersVersion must be 1-3/);
+    await repo.saveEffects(repo.doc, LAYERS_VERSION + 1);
+    await assert.rejects(validateRepository(repo.root), new RegExp(`layersVersion must be 1-${LAYERS_VERSION}`));
     const plain = structuredClone(repo.doc);
     delete plain.effectTextures;
     delete plain.effectBounds;
@@ -562,5 +563,22 @@ test('layersVersion 3: a tilted entry validates, frames the effect bounds in 3D,
     short.draw[3].tilted.animation.frames = short.draw[3].tilted.animation.frames.map((f) => f.slice(0, 16));
     await repo.saveEffects(short, 3);
     await assert.rejects(validateRepository(repo.root), /must be 22 numbers/);
+  } finally { await rm(repo.root, { recursive: true, force: true }); }
+});
+
+test('layersVersion 4: layers.json must say whether it has particles, and a folder with them needs its coverage entry', async () => {
+  const repo = await effectsRepo();
+  try {
+    // Exported with --no-particles: no `particles` member, which no later run would put right.
+    await repo.saveEffects(repo.doc, 4);
+    await assert.rejects(validateRepository(repo.root), /layersVersion 4 must have particles \(null or the pointer/);
+    // With it (no system drawn), the folder is held to particle-coverage.json, which has no entry for a test folder.
+    const doc = { ...structuredClone(repo.doc), particles: null };
+    doc.omitted = { ...doc.omitted, particles: 0, particleReasons: [] };
+    await repo.saveEffects(doc, 4);
+    await assert.rejects(validateRepository(repo.root), /particle-coverage\.json has no entry for this folder/);
+    // An older version may not carry particles at all.
+    await repo.saveEffects(doc, 3);
+    await assert.rejects(validateRepository(repo.root), /points at particles, but layersVersion 3 has none/);
   } finally { await rm(repo.root, { recursive: true, force: true }); }
 });

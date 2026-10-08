@@ -7,10 +7,10 @@ const ONLY = new Set(['Idle', 'Interact', 'Special', 'Start']);
 const WRAPS = new Set(['repeat', 'clamp', 'mirror']);
 const OMITTED_COUNTS = ['particles', 'trails', 'skinned', 'hidden', 'holders'];
 const OMITTED_LISTS = ['custom', 'externalTexture', 'other'];
-// The first layersVersion whose layers.json may point at layerParticles.json (scripts/particles.py) and draw
-// its {"particles": [...]} runs. The particle export is a trial behind a flag until a release names its
-// version; until then a file of the current version may carry it, and readers of every version skip it.
-export const PARTICLES_FROM = 3;
+// The first layersVersion whose layers.json points at layerParticles.json (scripts/particles.py) and draws
+// its {"particles": [...]} runs: every layers.json of it has the `particles` member (null when no system is
+// drawn; scripts/manifest.mjs holds a folder to that), and none older may. Readers of older versions skip both.
+export const PARTICLES_FROM = 4;
 const FRAME_LENGTH = 16; // [t, a, b, c, d, tx, ty, r, g, b, alpha, active, su, ou, sv, ov]
 // A tilted entry's frames also carry the depth column [e, f] of their 2x4 projection, at 16 and 17.
 const SOLID_FRAME_LENGTH = 18;
@@ -25,8 +25,8 @@ const keys = (value, wanted) => isObject(value) && Object.keys(value).length ===
 // The layers.json format model.json's layersVersion names (scripts/layers.py LAYERS_VERSION): 1, plain
 // layers only; 2, also effect entries, a plain layer's exact, effectTextures and effectBounds; 3, also
 // tilted entries (3D vertices and a 2x4 orthographic projection per frame), integrated scroll offsets
-// and Disturb2's animated parameters.
-export const LAYERS_VERSION = 3;
+// and Disturb2's animated parameters; 4, also the particle systems (PARTICLES_FROM).
+export const LAYERS_VERSION = 4;
 const SHADER_FAMILIES = new Set(['particle', 'noise']);
 const NOISE_MODES = new Set(['default', 'add', 'glow']);
 const MAP_KEYS = ['texture', 'st', 'speed', 'scroll'];
