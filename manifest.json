@@ -40,6 +40,7 @@
     "char_1041_angel2#2": "models/char_1041_angel2_2/a22fd3facbb0/model.json",
     "char_1041_angel2@iteration#6": "models/char_1041_angel2_iteration_6/773ec69ee2c6/model.json",
     "char_1041_angel2@iteration#6^sp_dyn": "models/char_1041_angel2_iteration_6_sp_dyn/773ec69ee2c6/model.json",
+    "char_1042_phatm2@sightseer#4": "models/char_1042_phatm2_sightseer_4/79b2eb372ae2/model.json",
     "char_1044_hsgma2#2": "models/char_1044_hsgma2_2/b1259edb8fff/model.json",
     "char_1044_hsgma2@whirlwind#11": "models/char_1044_hsgma2_whirlwind_11/fb0abadea137/model.json",
     "char_1045_svash2#2": "models/char_1045_svash2_2/059872598707/model.json",
@@ -106,6 +107,6 @@
   },
   "resVersions": {
     "en": "26-09-23-17-49-43_b9cc4a",
-    "cn": "26-09-22-07-47-20_6c71fa"
+    "cn": "26-10-08-04-51-28-56071834"
   }
 }

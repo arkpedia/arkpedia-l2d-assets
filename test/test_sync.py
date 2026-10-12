@@ -40,6 +40,13 @@ def dat_for(payload: bytes) -> bytes:
     return buffer.getvalue()
 
 
+class CodeFingerprint(unittest.TestCase):
+    def test_real_checkout_can_compute_fingerprint(self):
+        # RunLoop stubs this function; exercise the actual paths before any network work.
+        self.assertRegex(sync.code_version(), r'^[0-9a-f]{12}$')
+        self.assertEqual(len(sync.CODE_FILES), len(set(sync.CODE_FILES)))
+
+
 class RunLoop(unittest.TestCase):
     """One good bundle and one that always fails to build, like Kal'tsit's boc#6 did."""
 

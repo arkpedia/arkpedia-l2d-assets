@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
  "totals": {
-  "drawn": 12211,
-  "exported": 11174,
-  "v1": 11003
+  "drawn": 12406,
+  "exported": 11319,
+  "v1": 11148
  },
  "models": {
   "models/char_003_kalts_boc_6/a4834f5119b5": {
@@ -190,6 +190,11 @@
    "drawn": 54,
    "exported": 54,
    "v1": 54
+  },
+  "models/char_1042_phatm2_sightseer_4/79b2eb372ae2": {
+   "drawn": 195,
+   "exported": 145,
+   "v1": 145
   },
   "models/char_1044_hsgma2_2/b1259edb8fff": {
    "drawn": 272,
