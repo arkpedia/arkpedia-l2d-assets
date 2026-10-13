@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1028_texas2_2.ab",
     "md5": "b4b2653cbe663ebdfb1123e5b4e65039",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

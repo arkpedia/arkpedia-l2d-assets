@@ -656,5 +656,7 @@
     "bundle": "arts/dynchars/char_245_cello_sale#12.ab",
     "md5": "bcb1bff4f0fe72637010bf54da4609f6",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

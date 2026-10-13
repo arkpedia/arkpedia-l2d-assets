@@ -70,5 +70,7 @@
     "bundle": "arts/dynchars/char_1016_agoat2_2.ab",
     "md5": "c9e49fa09cf84b65dc58347bd720b7f8",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

@@ -75,5 +75,7 @@
     "bundle": "arts/dynchars/char_1046_sbell2_ambiencesynesthesia#8.ab",
     "md5": "806aef184e3a9cd7a664d6a31f3b8f25",
     "resVersion": "26-09-22-07-47-20_6c71fa"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

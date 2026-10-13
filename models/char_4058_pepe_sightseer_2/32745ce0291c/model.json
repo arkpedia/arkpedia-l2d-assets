@@ -70,5 +70,7 @@
     "bundle": "arts/dynchars/char_4058_pepe_sightseer#2.ab",
     "md5": "32745ce0291c1ec3cc4a885ddb3d5e9d",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

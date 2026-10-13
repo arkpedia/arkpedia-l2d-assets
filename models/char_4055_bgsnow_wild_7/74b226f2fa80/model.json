@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_4055_bgsnow_wild#7.ab",
     "md5": "74b226f2fa80895cb1b0b8cd198dbd24",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

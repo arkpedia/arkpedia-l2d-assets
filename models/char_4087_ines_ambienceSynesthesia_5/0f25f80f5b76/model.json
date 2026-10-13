@@ -70,5 +70,7 @@
     "bundle": "arts/dynchars/char_4087_ines_ambiencesynesthesia#5.ab",
     "md5": "0f25f80f5b76d3763c1806402dc97341",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

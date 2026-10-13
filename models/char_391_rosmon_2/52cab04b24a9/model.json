@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_391_rosmon_2.ab",
     "md5": "52cab04b24a9c4d6be04fd831a1205ec",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

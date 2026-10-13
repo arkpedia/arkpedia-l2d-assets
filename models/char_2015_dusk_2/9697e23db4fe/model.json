@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_2015_dusk_2.ab",
     "md5": "9697e23db4fe5dac9b6bdbbe96154681",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

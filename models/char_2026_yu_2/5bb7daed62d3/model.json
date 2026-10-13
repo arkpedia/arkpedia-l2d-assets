@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_2026_yu_2.ab",
     "md5": "5bb7daed62d349d375cc8b2c945109c4",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

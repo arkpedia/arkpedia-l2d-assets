@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1013_chen2_2.ab",
     "md5": "bf12d8271e5fa86d0cd21d154a2cfeb3",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

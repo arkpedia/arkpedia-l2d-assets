@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_172_svrash_ambiencesynesthesia#4.ab",
     "md5": "1a12853ce999a0d3f641cf1acd55ecc1",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_245_cello_2.ab",
     "md5": "8dde4c7448231558bbae15c774d03493",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

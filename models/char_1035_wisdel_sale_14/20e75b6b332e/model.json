@@ -572,5 +572,7 @@
     "bundle": "arts/dynchars/char_1035_wisdel_sale#14.ab",
     "md5": "20e75b6b332e6ae0c1e5a34cce1fb3b9",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

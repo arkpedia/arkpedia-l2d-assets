@@ -560,5 +560,7 @@
     "bundle": "arts/dynchars/char_113_cqbw_epoque#7.ab",
     "md5": "037a693590b18350fa89729db6db5b26",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

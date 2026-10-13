@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1023_ghost2_2.ab",
     "md5": "18660aa8f36fc148e538707aa79f91cc",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

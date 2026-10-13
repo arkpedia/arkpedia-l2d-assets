@@ -368,5 +368,7 @@
     "bundle": "arts/dynchars/char_1016_agoat2_epoque#34.ab",
     "md5": "9164f1972257c1a0d199a1eb36d2ab64",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

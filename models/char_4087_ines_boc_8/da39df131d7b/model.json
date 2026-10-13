@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_4087_ines_boc#8.ab",
     "md5": "da39df131d7b41cd2772ae7a79fd1f71",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

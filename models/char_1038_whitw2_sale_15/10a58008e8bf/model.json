@@ -413,5 +413,7 @@
     "bundle": "arts/dynchars/char_1038_whitw2_sale#15.ab",
     "md5": "10a58008e8bf03742fedda70f2bc3346",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

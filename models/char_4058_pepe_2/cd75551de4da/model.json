@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_4058_pepe_2.ab",
     "md5": "cd75551de4da34014817741a7d86315e",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

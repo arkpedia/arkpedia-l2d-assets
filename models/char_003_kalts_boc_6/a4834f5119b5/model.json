@@ -439,5 +439,7 @@
     "bundle": "arts/dynchars/char_003_kalts_boc#6.ab",
     "md5": "a4834f5119b5d33e0feea1699bfb64a3",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

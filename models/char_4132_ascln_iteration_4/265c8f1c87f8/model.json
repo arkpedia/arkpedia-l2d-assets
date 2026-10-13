@@ -70,5 +70,7 @@
     "bundle": "arts/dynchars/char_4132_ascln_iteration#4.ab",
     "md5": "265c8f1c87f896c076415dbac0999697",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

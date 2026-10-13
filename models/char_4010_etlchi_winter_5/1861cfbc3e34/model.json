@@ -70,5 +70,7 @@
     "bundle": "arts/dynchars/char_4010_etlchi_winter#5.ab",
     "md5": "1861cfbc3e34ac4a778ceb1646c82190",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

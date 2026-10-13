@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_2025_shu_2.ab",
     "md5": "df7959b869e4535e529d1701f56b3b17",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

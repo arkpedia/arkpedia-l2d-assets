@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1015_aglna2_2.ab",
     "md5": "928202b5f7aef30fa1fafad482bc7117",
     "resVersion": "26-09-22-07-47-20_6c71fa"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

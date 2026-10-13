@@ -1,4 +1,11 @@
 {
   "schemaVersion": 1,
-  "failures": {}
+  "failures": {
+    "char_1044_hsgma2@whirlwind#11": {
+      "md5": "fb0abadea1374d59a1203ce0295991be",
+      "code": "51639b3b6fcf",
+      "resVersion": "26-10-08-04-51-28-56071834",
+      "error": "ValueError: Invalid extra animation track"
+    }
+  }
 }

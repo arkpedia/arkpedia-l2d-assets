@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1012_skadi2_boc#4.ab",
     "md5": "583d9c4cdb16f8f498fd995e9a54a29b",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

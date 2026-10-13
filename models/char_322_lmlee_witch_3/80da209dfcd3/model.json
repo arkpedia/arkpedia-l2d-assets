@@ -66,5 +66,7 @@
     "bundle": "arts/dynchars/char_322_lmlee_witch#3.ab",
     "md5": "80da209dfcd3dc33244faeef12969195",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

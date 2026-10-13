@@ -427,5 +427,7 @@
     "bundle": "arts/dynchars/char_472_pasngr_epoque#17.ab",
     "md5": "5322f95e9a3533d0dd94bdd8865dadec",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

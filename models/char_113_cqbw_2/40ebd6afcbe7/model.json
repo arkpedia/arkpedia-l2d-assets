@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_113_cqbw_2.ab",
     "md5": "40ebd6afcbe71c0db6ea4769f2881d31",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

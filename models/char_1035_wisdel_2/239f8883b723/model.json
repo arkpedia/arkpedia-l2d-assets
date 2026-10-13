@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1035_wisdel_2.ab",
     "md5": "239f8883b7238a512162164198eea620",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

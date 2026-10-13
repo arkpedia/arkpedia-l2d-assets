@@ -72,5 +72,7 @@
     "bundle": "arts/dynchars/char_2023_ling_2.ab",
     "md5": "c6e058b26417c3e530c4f364e3c3b891",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

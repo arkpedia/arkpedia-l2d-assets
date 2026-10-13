@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1045_svash2_2.ab",
     "md5": "0598725987078ba3be667b8ae750534e",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

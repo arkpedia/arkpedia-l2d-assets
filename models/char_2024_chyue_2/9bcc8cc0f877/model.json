@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_2024_chyue_2.ab",
     "md5": "9bcc8cc0f8771055f03c5f1669255da9",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

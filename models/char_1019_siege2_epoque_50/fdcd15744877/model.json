@@ -70,5 +70,7 @@
     "bundle": "arts/dynchars/char_1019_siege2_epoque#50.ab",
     "md5": "fdcd157448770144a788a53c375f23f7",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

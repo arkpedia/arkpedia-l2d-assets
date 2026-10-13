@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1038_whitw2_2.ab",
     "md5": "419a2086a4842944eeff7c979a6b1f60",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

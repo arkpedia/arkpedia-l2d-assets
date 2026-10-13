@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1052_kalts2_2.ab",
     "md5": "999738312b6ab1ccf3d5c0272fd56dfb",
     "resVersion": "26-09-22-07-47-20_6c71fa"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

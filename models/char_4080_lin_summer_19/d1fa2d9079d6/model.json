@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_4080_lin_summer#19.ab",
     "md5": "d1fa2d9079d613d9effafa6cd60fd928",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

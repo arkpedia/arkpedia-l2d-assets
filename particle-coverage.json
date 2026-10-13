@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
  "totals": {
-  "drawn": 12406,
-  "exported": 11319,
-  "v1": 11148
+  "drawn": 12638,
+  "exported": 11531,
+  "v1": 11360
  },
  "models": {
   "models/char_003_kalts_boc_6/a4834f5119b5": {
@@ -186,7 +186,17 @@
    "exported": 69,
    "v1": 69
   },
+  "models/char_1041_angel2_iteration_6/7ce0194a9f5e": {
+   "drawn": 74,
+   "exported": 69,
+   "v1": 69
+  },
   "models/char_1041_angel2_iteration_6_sp_dyn/773ec69ee2c6": {
+   "drawn": 54,
+   "exported": 54,
+   "v1": 54
+  },
+  "models/char_1041_angel2_iteration_6_sp_dyn/7ce0194a9f5e": {
    "drawn": 54,
    "exported": 54,
    "v1": 54
@@ -485,6 +495,11 @@
    "drawn": 214,
    "exported": 204,
    "v1": 203
+  },
+  "models/char_4179_monstr_boc_11/adfbccbf7fa5": {
+   "drawn": 104,
+   "exported": 89,
+   "v1": 89
   },
   "models/char_4179_monstr_boc_11/f0bcee5cd385": {
    "drawn": 104,

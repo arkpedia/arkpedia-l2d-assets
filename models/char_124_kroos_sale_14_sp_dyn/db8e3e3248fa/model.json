@@ -63,5 +63,273 @@
     "bundle": "arts/dynchars/char_124_kroos_sale#14.ab",
     "md5": "db8e3e3248fa455260e5d5200bef1722",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": {
+    "extraTracks": [],
+    "voiceActions": [
+      {
+        "id": "CN_002",
+        "body": [
+          {
+            "name": "Interact_3",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_1",
+            "time": 7.733333110809326,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_2",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_4",
+            "time": 3.95
+          },
+          {
+            "name": "Talk_1",
+            "time": 9.166666666666666
+          },
+          {
+            "name": "Talk_2",
+            "time": 13.0
+          }
+        ]
+      },
+      {
+        "id": "CN_003",
+        "body": [
+          {
+            "name": "Interact_4",
+            "time": 0.0,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_2",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_1",
+            "time": 0.8833333333333333
+          },
+          {
+            "name": "Talk_2",
+            "time": 3.6
+          },
+          {
+            "name": "Talk_1",
+            "time": 6.5
+          }
+        ]
+      },
+      {
+        "id": "CN_004",
+        "body": [
+          {
+            "name": "Interact_4",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_1",
+            "time": 8.833333015441895,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_4",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_1",
+            "time": 4.4
+          },
+          {
+            "name": "Talk_2",
+            "time": 6.666666666666667
+          },
+          {
+            "name": "Talk_1",
+            "time": 7.466666666666667
+          },
+          {
+            "name": "Talk_4",
+            "time": 9.683333333333334
+          }
+        ]
+      },
+      {
+        "id": "CN_005",
+        "body": [
+          {
+            "name": "Interact_4",
+            "time": 0.0,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_4",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_2",
+            "time": 6.483333333333333
+          }
+        ]
+      },
+      {
+        "id": "CN_006",
+        "body": [
+          {
+            "name": "Interact_3",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Idle_2",
+            "time": 7.733333110809326,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_4",
+            "time": 10.766666984558109,
+            "mix": 0.9666661262512192
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_2",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_4",
+            "time": 4.0
+          },
+          {
+            "name": "Talk_1",
+            "time": 5.983333333333333
+          },
+          {
+            "name": "Talk_2",
+            "time": 10.383333333333333
+          },
+          {
+            "name": "Talk_1",
+            "time": 15.25
+          }
+        ]
+      },
+      {
+        "id": "CN_007",
+        "body": [
+          {
+            "name": "Interact_2",
+            "time": 0.0,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_1",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_2",
+            "time": 2.166666666666667
+          },
+          {
+            "name": "Talk_1",
+            "time": 4.283333333333333
+          }
+        ]
+      },
+      {
+        "id": "CN_008",
+        "body": [
+          {
+            "name": "Interact_1",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_4",
+            "time": 7.733333110809326,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_4",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_2",
+            "time": 3.5166666666666666
+          },
+          {
+            "name": "Talk_1",
+            "time": 5.933333333333334
+          },
+          {
+            "name": "Talk_2",
+            "time": 9.25
+          },
+          {
+            "name": "Talk_1",
+            "time": 13.916666666666666
+          }
+        ]
+      },
+      {
+        "id": "CN_009",
+        "body": [
+          {
+            "name": "Interact_1",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_2",
+            "time": 7.733333110809326,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_2",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_1",
+            "time": 2.6166666666666667
+          },
+          {
+            "name": "Talk_2",
+            "time": 6.516666666666667
+          },
+          {
+            "name": "Talk_1",
+            "time": 8.083333333333334
+          },
+          {
+            "name": "Talk_2",
+            "time": 11.5
+          },
+          {
+            "name": "Talk_1",
+            "time": 13.133333333333333
+          }
+        ]
+      }
+    ]
+  },
+  "playbackVersion": 1
 }

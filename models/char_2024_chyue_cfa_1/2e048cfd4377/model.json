@@ -1020,5 +1020,7 @@
     "bundle": "arts/dynchars/char_2024_chyue_cfa#1.ab",
     "md5": "2e048cfd4377107d46840e4dd6e21fb4",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1026_gvial2_2.ab",
     "md5": "f0d29e3a90aca93197e83f1a89bdb807",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

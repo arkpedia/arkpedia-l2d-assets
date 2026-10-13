@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_1041_angel2_2.ab",
     "md5": "a22fd3facbb063937ab931408e9f7a44",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

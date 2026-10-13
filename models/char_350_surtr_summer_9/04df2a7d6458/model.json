@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_350_surtr_summer#9.ab",
     "md5": "04df2a7d6458cb893bb06b83fcfa67d5",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

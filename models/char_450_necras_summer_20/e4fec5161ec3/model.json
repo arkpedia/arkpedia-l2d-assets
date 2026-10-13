@@ -65,5 +65,7 @@
     "bundle": "arts/dynchars/char_450_necras_summer#20.ab",
     "md5": "e4fec5161ec32b52fd69927a14462a4d",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

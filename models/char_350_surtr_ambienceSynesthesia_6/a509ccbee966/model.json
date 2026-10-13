@@ -70,5 +70,7 @@
     "bundle": "arts/dynchars/char_350_surtr_ambiencesynesthesia#6.ab",
     "md5": "a509ccbee9668ab69fd9a016745347f9",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }

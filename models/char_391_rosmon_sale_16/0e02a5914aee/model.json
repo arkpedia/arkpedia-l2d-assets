@@ -70,5 +70,7 @@
     "bundle": "arts/dynchars/char_391_rosmon_sale#16.ab",
     "md5": "0e02a5914aeec682b307dbb61c10cdf0",
     "resVersion": "26-09-23-17-49-43_b9cc4a"
-  }
+  },
+  "playback": null,
+  "playbackVersion": 1
 }
