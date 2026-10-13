@@ -21,6 +21,18 @@ class Playback(unittest.TestCase):
     def test_reserved_and_duplicate_tracks_are_rejected(self):
         for tracks in [[{'track':0,'name':'x'}],[{'track':1,'name':'x'}],[{'track':2,'name':'x'},{'track':2,'name':'x'}]]:
             with self.assertRaises(ValueError): playback.validate_playback({'extraTracks':tracks,'voiceActions':[]})
+    def test_a_track_the_skeleton_lacks_is_left_out_not_fatal(self):
+        # char_1044_hsgma2@whirlwind#11 (CN, 2026-10): exLayer_1 on track 2, skeleton Idle/Interact/Special.
+        anims={'Idle':5,'Interact':3,'Special':4}
+        only_missing={'extraTracks':[{'track':2,'name':'exLayer_1'}],'voiceActions':[]}
+        with self.assertRaises(ValueError): playback.validate_playback(only_missing,anims)
+        self.assertIsNone(playback.playable(only_missing,anims))
+        mixed={'extraTracks':[{'track':2,'name':'exLayer_1'},{'track':3,'name':'Special'}],'voiceActions':[]}
+        self.assertEqual(playback.playable(mixed,anims)['extraTracks'],[{'track':3,'name':'Special'}])
+        self.assertIsNone(playback.playable(None,anims))
+        with self.assertRaises(ValueError): playback.playable({'extraTracks':[{'track':1,'name':'Idle'}],'voiceActions':[]},anims)
+        voice={'extraTracks':[],'voiceActions':[{'id':'CN_002','body':[{'name':'Gone','time':0,'mix':0}],'mouth':[]}]}
+        with self.assertRaises(ValueError): playback.playable(voice,anims)
     def test_no_controller_is_compatible_with_older_models(self):
         self.assertIsNone(playback.controller_playback([],lambda _:None))
 

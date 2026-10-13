@@ -64,6 +64,23 @@ def validate_playback(out, animations=None):
                 previous = x['time']
 
 
+def playable(out, animations, label=''):
+    """The playback a model can ship: an extra track naming an animation its skeleton lacks is
+    left out, because the site can only play what the skeleton has. The CN client ships one:
+    char_1044_hsgma2@whirlwind#11 puts exLayer_1 on track 2 and its skeleton has only Idle,
+    Interact and Special; failing the whole model for it lost the outfit (sync, 2026-10-13).
+    Everything else stays strict (validate_playback)."""
+    if out is None:
+        return None
+    missing = [x for x in out['extraTracks'] if isinstance(x.get('name'), str) and x['name'] not in animations]
+    if missing:
+        print(f'  playback{" of " + label if label else ""}: left out extra track(s) the skeleton has no animation for: '
+              + ', '.join(f"{x['track']}={x['name']}" for x in missing), flush=True)
+    out = {**out, 'extraTracks': [x for x in out['extraTracks'] if x not in missing]}
+    validate_playback(out, animations)
+    return out if out['extraTracks'] or out['voiceActions'] else None
+
+
 def bundle_playback(bundle, dyn_illust_id):
     import l2d
     env = l2d._patch_unitypy().load(bundle)
