@@ -263,8 +263,7 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         raise l2d.SyncError(f'{decoded.skeleton_name} has no Idle animation (it has {sorted(found["animations"])}); '
                             'is it the entrance skeleton?')
 
-    if decoded.playback is not None:
-        playback.validate_playback(decoded.playback, found['animations'])
+    played = playback.playable(decoded.playback, found['animations'], planned.skin_id)
     exported = decoded.layers(found['slots']) if decoded.layers is not None else None
     model = {
         'schemaVersion': 1,
@@ -278,7 +277,7 @@ def build_model(planned: l2d.Planned, bundle: bytes, res_version: str, staging: 
         'animations': found['animations'],
         'bounds': found['bounds'],
         'mixes': decoded.mixes,
-        'playback': decoded.playback,
+        'playback': played,
         'playbackVersion': playback.VERSION,
         'dynEntranceId': planned.dyn_entrance_id,
         'entrance': build_entrance(staging, decoded.entrance, declared) if planned.dyn_entrance_id else None,
@@ -341,7 +340,7 @@ def relayer_model(planned: l2d.Planned, bundle: bytes, staging: Path, shaders: d
         if key == 'layers':
             rebuilt['layers'] = write_layers(staging, exported) if exported is not None else None
             rebuilt['layersVersion'] = layers.LAYERS_VERSION
-    rebuilt['playback'] = getattr(decoded, 'playback', None)
+    rebuilt['playback'] = playback.playable(getattr(decoded, 'playback', None), model.get('animations'), planned.skin_id)
     rebuilt['playbackVersion'] = playback.VERSION
     write_json(staging / 'model.json', rebuilt)
     return rebuilt, report_layers(exported)
@@ -655,9 +654,8 @@ def main(argv: list[str] | None = None) -> int:
             final = ROOT / planned.folder
             if planned.skin_id in replay:
                 previous = existing_model(planned)
-                previous['playback'] = playback.bundle_playback(bundle, planned.dyn_illust_id)
-                if previous['playback'] is not None:
-                    playback.validate_playback(previous['playback'], previous['animations'])
+                previous['playback'] = playback.playable(playback.bundle_playback(bundle, planned.dyn_illust_id),
+                                                         previous.get('animations'), planned.skin_id)
                 previous['playbackVersion'] = playback.VERSION
                 write_json(final / 'model.json', previous)
                 report.setdefault('playbackUpdated', []).append(planned.skin_id)
