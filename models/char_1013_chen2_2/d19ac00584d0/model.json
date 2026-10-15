@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1013_chen2#2",
+  "dynIllustId": "dyn_illust_char_1013_chen2_2",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 683781,
+    "sha256": "7aa91a1ffd5da1570a9bad91cb83f9a18c04759ed477cfd45e62ee81a6a38f6e"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 16860,
+    "sha256": "b20fd08ce13b95bd0b4b2d6e5bd9b4adb6350ec7bdc3c9d48ba3dc3c8de090fc"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 1263594,
+      "sha256": "7ad10c9e1d80f9f7428d2f61d178ae4b130ec9263cebf9f3a1758f556773d9d4"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 10,
+    "Interact": 2.5,
+    "Special": 10
+  },
+  "bounds": {
+    "x": -888,
+    "y": 56,
+    "width": 1905,
+    "height": 1583
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    }
+  ],
+  "playback": null,
+  "playbackVersion": 1,
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 10334,
+    "sha256": "23a42ff3a408257116ede6b4d7900e6a9d390633ec2031dde7051fe0ee473de5"
+  },
+  "layersVersion": 5,
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1013_chen2_2.ab",
+    "md5": "d19ac00584d025bfa67156dcc062dcc5",
+    "resVersion": "26-10-03-16-06-39_0a6acf"
+  }
+}

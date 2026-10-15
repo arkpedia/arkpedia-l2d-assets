@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1019_siege2@epoque#50",
+  "dynIllustId": "dyn_illust_char_1019_siege2_epoque#50",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 1535304,
+    "sha256": "5be86e4b5559b513529a56ec3b5a9e2b9b8e5c9ab054c8bbf0730fd617cf4e11"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 52760,
+    "sha256": "e2b60b727ca4d30ddf0f91d8b78693485d7db5158617d66aedf3f89cb734c678"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2228,
+      "height": 2228,
+      "bytes": 4248218,
+      "sha256": "130d468b7cca6dd57665b366856be33a0a251a65c8aa4052f96b78946ee73d60"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 6.667,
+    "Interact": 15.667,
+    "Special": 7.6
+  },
+  "bounds": {
+    "x": -1064,
+    "y": 0,
+    "width": 1894,
+    "height": 2176
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.5
+    },
+    {
+      "from": "Special",
+      "to": "Interact",
+      "duration": 0.5
+    },
+    {
+      "from": "Interact",
+      "to": "Idle",
+      "duration": 0.0
+    }
+  ],
+  "playback": null,
+  "playbackVersion": 1,
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 5418,
+    "sha256": "d899f70009b6b8a76397df629ee123550a0b11b197c89e92287af4870a62be2c"
+  },
+  "layersVersion": 5,
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1019_siege2_epoque#50.ab",
+    "md5": "db88629cba1d60a39fd737459cfd696a",
+    "resVersion": "26-10-03-16-06-39_0a6acf"
+  }
+}
