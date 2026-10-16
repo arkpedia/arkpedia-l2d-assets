@@ -16,10 +16,10 @@
     "char_1013_chen2@summer#20": "models/char_1013_chen2_summer_20/5f0f723da6dd/model.json",
     "char_1014_nearl2#2": "models/char_1014_nearl2_2/7f92bf8fd7ef/model.json",
     "char_1014_nearl2@epoque#17": "models/char_1014_nearl2_epoque_17/d8667c9adf25/model.json",
-    "char_1015_aglna2#2": "models/char_1015_aglna2_2/928202b5f7ae/model.json",
+    "char_1015_aglna2#2": "models/char_1015_aglna2_2/71317357dc5b/model.json",
     "char_1016_agoat2#2": "models/char_1016_agoat2_2/c651711572c6/model.json",
     "char_1016_agoat2@epoque#34": "models/char_1016_agoat2_epoque_34/49c486d8b216/model.json",
-    "char_1016_agoat2@epoque#57": "models/char_1016_agoat2_epoque_57/6134f3efa902/model.json",
+    "char_1016_agoat2@epoque#57": "models/char_1016_agoat2_epoque_57/92503de43055/model.json",
     "char_1019_siege2@epoque#50": "models/char_1019_siege2_epoque_50/db88629cba1d/model.json",
     "char_1020_reed2@epoque#30": "models/char_1020_reed2_epoque_30/95ed0c5cc1ec/model.json",
     "char_1020_reed2@summer#17": "models/char_1020_reed2_summer_17/e3d2de3345bb/model.json",
@@ -67,6 +67,7 @@
     "char_2024_chyue@nian#10": "models/char_2024_chyue_nian_10/348a3a840cbe/model.json",
     "char_2025_shu#2": "models/char_2025_shu_2/e8f702f85586/model.json",
     "char_2025_shu@nian#11": "models/char_2025_shu_nian_11/dbaf40b16adb/model.json",
+    "char_2025_shu@nlc#1": "models/char_2025_shu_nlc_1/a364290d1a53/model.json",
     "char_2026_yu#2": "models/char_2026_yu_2/4f9fd3857061/model.json",
     "char_2026_yu@nian#12": "models/char_2026_yu_nian_12/a50a90eca51b/model.json",
     "char_2027_wang#2": "models/char_2027_wang_2/fe152b2f3790/model.json",
@@ -107,6 +108,6 @@
   },
   "resVersions": {
     "en": "26-10-03-16-06-39_0a6acf",
-    "cn": "26-10-08-04-51-28-56071834"
+    "cn": "26-10-14-13-45-10-99469376"
   }
 }
