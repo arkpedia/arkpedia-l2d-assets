@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
  "totals": {
-  "drawn": 24644,
-  "exported": 22515,
-  "v1": 22173
+  "drawn": 24785,
+  "exported": 22650,
+  "v1": 22308
  },
  "models": {
   "models/char_003_kalts_boc_6/a4834f5119b5": {
@@ -645,6 +645,11 @@
    "drawn": 141,
    "exported": 116,
    "v1": 116
+  },
+  "models/char_2025_shu_nlc_1/cdd047cb4126": {
+   "drawn": 141,
+   "exported": 135,
+   "v1": 135
   },
   "models/char_2026_yu_2/4f9fd3857061": {
    "drawn": 152,
