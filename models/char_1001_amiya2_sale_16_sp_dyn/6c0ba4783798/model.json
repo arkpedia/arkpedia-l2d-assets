@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1001_amiya2@sale#16^sp_dyn",
+  "dynIllustId": "sp_dyn_illust_char_1001_amiya2_sale#16",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.json",
+    "format": "json",
+    "bytes": 7818313,
+    "sha256": "2efdb481466fe3a1773e4c7caacaf5deaf2554b519e9898f2cbace55b539e315"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 45666,
+    "sha256": "3c4e30a48b4152d4a62c6af4e235d9be32c09412cab714526c6ea10b3127e6d3"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2312,
+      "height": 2312,
+      "bytes": 3713634,
+      "sha256": "39b4ea921fd61a8c0b259c2c38abd25b3786615fe763eb975fe49c47654315d5"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 8,
+    "Idle_2": 8,
+    "Idle_3": 8,
+    "Interact_1": 10.333,
+    "Interact_2": 9.1,
+    "Interact_3": 10,
+    "Interact_4": 8.833,
+    "Interact_5": 10.333,
+    "Interact_6": 9.1,
+    "Interact_7": 10,
+    "Special": 18.267,
+    "Talk_1": 0.333,
+    "Talk_2": 0.367,
+    "Talk_3": 0.3,
+    "Talk_4": 0.3,
+    "Talk_5": 0.333,
+    "Talk_6": 0.367
+  },
+  "bounds": {
+    "x": -882,
+    "y": 1,
+    "width": 1814,
+    "height": 1661
+  },
+  "mixes": [
+    {
+      "from": "Idle",
+      "to": "Special",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_1",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_2",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_3",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_4",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_1",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_2",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_3",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_4",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_5",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_5",
+      "duration": 0.2
+    },
+    {
+      "from": "Idle",
+      "to": "Idle_3",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Idle_3",
+      "duration": 0.5
+    },
+    {
+      "from": "Idle",
+      "to": "Interact_6",
+      "duration": 0.2
+    },
+    {
+      "from": "Special",
+      "to": "Interact_6",
+      "duration": 0.2
+    }
+  ],
+  "playback": {
+    "extraTracks": [],
+    "voiceActions": [
+      {
+        "id": "CN_002",
+        "body": [
+          {
+            "name": "Interact_2",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Idle_2",
+            "time": 9.100000381469728,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_3",
+            "time": 13.05,
+            "mix": 1.7666666666666657
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_1",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_2",
+            "time": 3.95
+          },
+          {
+            "name": "Talk_1",
+            "time": 15.266666666666667
+          }
+        ]
+      },
+      {
+        "id": "CN_003",
+        "body": [
+          {
+            "name": "Interact_4",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Idle_2",
+            "time": 8.833333015441895,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_2",
+            "time": 11.766666666666667,
+            "mix": 0.6333333333333329
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_1",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_3",
+            "time": 2.7666666666666666
+          },
+          {
+            "name": "Talk_2",
+            "time": 5.083333333333333
+          },
+          {
+            "name": "Talk_3",
+            "time": 9.166666666666666
+          },
+          {
+            "name": "Talk_1",
+            "time": 13.933333333333334
+          },
+          {
+            "name": "Talk_2",
+            "time": 18.05
+          }
+        ]
+      },
+      {
+        "id": "CN_004",
+        "body": [
+          {
+            "name": "Interact_2",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_1",
+            "time": 9.100000381469728,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_1",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_2",
+            "time": 5.95
+          },
+          {
+            "name": "Talk_1",
+            "time": 10.15
+          },
+          {
+            "name": "Talk_2",
+            "time": 13.783333333333333
+          }
+        ]
+      },
+      {
+        "id": "CN_005",
+        "body": [
+          {
+            "name": "Interact_5",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_6",
+            "time": 10.333333015441896,
+            "mix": 0.0
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_5",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_4",
+            "time": 5.383333333333334
+          },
+          {
+            "name": "Talk_5",
+            "time": 7.183333333333334
+          },
+          {
+            "name": "Talk_4",
+            "time": 8.783333333333333
+          },
+          {
+            "name": "Talk_6",
+            "time": 11.45
+          },
+          {
+            "name": "Talk_5",
+            "time": 13.866666666666667
+          },
+          {
+            "name": "Talk_2",
+            "time": 16.283333333333335
+          },
+          {
+            "name": "Talk_6",
+            "time": 16.3
+          }
+        ]
+      },
+      {
+        "id": "CN_006",
+        "body": [
+          {
+            "name": "Interact_6",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Idle_2",
+            "time": 8.65,
+            "mix": 0.7833333333333332
+          },
+          {
+            "name": "Interact_7",
+            "time": 12.483333333333333,
+            "mix": 1.166666285196941
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_5",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_6",
+            "time": 5.583333333333333
+          },
+          {
+            "name": "Talk_1",
+            "time": 14.1
+          },
+          {
+            "name": "Talk_2",
+            "time": 17.133333333333333
+          }
+        ]
+      },
+      {
+        "id": "CN_007",
+        "body": [
+          {
+            "name": "Interact_4",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Idle_2",
+            "time": 8.4,
+            "mix": 0.8166666666666664
+          },
+          {
+            "name": "Interact_2",
+            "time": 12.35,
+            "mix": 0.5333333333333332
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_2",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_5",
+            "time": 13.516666666666667
+          }
+        ]
+      },
+      {
+        "id": "CN_008",
+        "body": [
+          {
+            "name": "Interact_4",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Idle_3",
+            "time": 7.933333333333334,
+            "mix": 1.5666666666666664
+          },
+          {
+            "name": "Interact_6",
+            "time": 13.0,
+            "mix": 0.5999999999999996
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_1",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_2",
+            "time": 2.0166666666666666
+          },
+          {
+            "name": "Talk_5",
+            "time": 12.633333333333333
+          },
+          {
+            "name": "Talk_4",
+            "time": 19.45
+          }
+        ]
+      },
+      {
+        "id": "CN_009",
+        "body": [
+          {
+            "name": "Idle_3",
+            "time": 0.0,
+            "mix": 0.0
+          },
+          {
+            "name": "Interact_7",
+            "time": 3.7,
+            "mix": 1.2666666666666668
+          },
+          {
+            "name": "Interact_6",
+            "time": 13.035010956398756,
+            "mix": 0.6649890436012438
+          }
+        ],
+        "mouth": [
+          {
+            "name": "Talk_5",
+            "time": 0.0
+          },
+          {
+            "name": "Talk_6",
+            "time": 5.85
+          },
+          {
+            "name": "Talk_6",
+            "time": 14.666666666666666
+          },
+          {
+            "name": "Talk_4",
+            "time": 17.833333333333332
+          },
+          {
+            "name": "Talk_1",
+            "time": 19.466666666666665
+          }
+        ]
+      }
+    ]
+  },
+  "playbackVersion": 1,
+  "dynEntranceId": null,
+  "entrance": null,
+  "layers": {
+    "file": "layers.json",
+    "bytes": 871,
+    "sha256": "40660956dacc5508551327b496c021ec924572b2f57b959560fe157a95ef4d23"
+  },
+  "layersVersion": 5,
+  "source": {
+    "server": "en",
+    "bundle": "arts/dynchars/char_1001_amiya2_sale#16.ab",
+    "md5": "6c0ba478379881cff4b45d6161006067",
+    "resVersion": "26-10-26-10-03-17_824ce7"
+  }
+}
