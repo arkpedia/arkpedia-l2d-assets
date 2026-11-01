@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "skinId": "char_1045_svash2@sale#20",
+  "dynIllustId": "dyn_illust_char_1045_svash2_sale#20",
+  "spineVersion": "3.8.99",
+  "skeleton": {
+    "file": "skeleton.skel",
+    "format": "binary",
+    "bytes": 929447,
+    "sha256": "8c81ebeba2ae0299b8b41b4d1e125d83840d9374b230954f78f40b61d7382687"
+  },
+  "atlas": {
+    "file": "skeleton.atlas",
+    "bytes": 30390,
+    "sha256": "08669f4bc007550e75e70fad98f320426693ecd80a25eb0294925ac8749b409d"
+  },
+  "textures": [
+    {
+      "file": "page0.webp",
+      "width": 2352,
+      "height": 2352,
+      "bytes": 4497696,
+      "sha256": "9e156c45ce271a51b965e3018fc196535db89126cf8fa5d61268c68d642eb423"
+    }
+  ],
+  "premultipliedAlpha": true,
+  "animations": {
+    "Idle": 10,
+    "Start": 4.667
+  },
+  "bounds": {
+    "x": -1024,
+    "y": 33,
+    "width": 2039,
+    "height": 2032
+  },
+  "mixes": [],
+  "playback": null,
+  "playbackVersion": 1,
+  "dynEntranceId": "dyn_entrance_char_1045_svash2_sale#20",
+  "entrance": {
+    "skeleton": {
+      "file": "entrance.skel",
+      "format": "binary",
+      "bytes": 465826,
+      "sha256": "f7cad9412a540e9b587057f4dca83be0c597f69e85a16496ff1010b8e0b70e12"
+    },
+    "atlas": {
+      "file": "entrance.atlas",
+      "bytes": 24367,
+      "sha256": "7aa67675bfe7a65181a2d9703f4d8940cffcef14c0008e197b9e1c62c1525838"
+    },
+    "textures": [
+      {
+        "file": "entrance-page0.webp",
+        "width": 2600,
+        "height": 2600,
+        "bytes": 4270054,
+        "sha256": "c028d4d8908ff7c58650c2c346d5a54bdca7bbbeab025dbf5e399a88bb171d83"
+      }
+    ],
+    "animations": {
+      "Start": 14.9
+    },
+    "bounds": {
+      "x": -914,
+      "y": 31,
+      "width": 2857,
+      "height": 1960
+    },
+    "camera": {
+      "frames": [
+        [
+          0.0,
+          0.0,
+          1100.0,
+          1140.0,
+          -0.0
+        ],
+        [
+          14.9,
+          0.0,
+          1100.0,
+          1140.0,
+          -0.0
+        ]
+      ],
+      "fades": [],
+      "handover": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "audio": {
+      "file": "entrance.mp3",
+      "duration": 15.131,
+      "bytes": 303360,
+      "sha256": "b5fec691335f7533dbed3ef0a4475b1271c4ec1054ee5376266a82b2b8a70051"
+    }
+  },
+  "layers": {
+    "file": "layers.json",
+    "bytes": 5869,
+    "sha256": "0412801ae8a9939b61a610155b7124be853df2c60bc5830fa4657d283663cd15"
+  },
+  "layersVersion": 5,
+  "source": {
+    "server": "cn",
+    "bundle": "arts/dynchars/char_1045_svash2_sale#20.ab",
+    "md5": "26a9db1b4aa684b058f0aa79f90eafa1",
+    "resVersion": "26-10-29-15-36-11-33649006"
+  }
+}

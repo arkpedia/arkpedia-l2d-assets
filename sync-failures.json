@@ -1,4 +1,11 @@
 {
   "schemaVersion": 1,
-  "failures": {}
+  "failures": {
+    "char_4098_vvana@epoque#59": {
+      "md5": "808aabba570ba7356228726e703f1fc3",
+      "code": "caf69b848c56",
+      "resVersion": "26-10-29-15-36-11-33649006",
+      "error": "SyncError: Spine 3.8 runtime could not read the skeleton: Error: Skeleton has no visible attachments in its first pose: {\"x\":null,\"y\":null,\"width\":null,\"height\":null}"
+    }
+  }
 }

@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
  "totals": {
-  "drawn": 25549,
-  "exported": 23390,
-  "v1": 23038
+  "drawn": 25906,
+  "exported": 23657,
+  "v1": 23305
  },
  "models": {
   "models/char_003_kalts_boc_6/a4834f5119b5": {
@@ -425,6 +425,16 @@
    "drawn": 370,
    "exported": 332,
    "v1": 332
+  },
+  "models/char_1045_svash2_sale_20/26a9db1b4aa6": {
+   "drawn": 76,
+   "exported": 50,
+   "v1": 50
+  },
+  "models/char_1045_svash2_sale_20_sp_dyn/26a9db1b4aa6": {
+   "drawn": 60,
+   "exported": 20,
+   "v1": 20
   },
   "models/char_1046_sbell2_ambienceSynesthesia_8/806aef184e3a": {
    "drawn": 180,
@@ -1025,6 +1035,11 @@
    "drawn": 269,
    "exported": 266,
    "v1": 266
+  },
+  "models/char_4247_oxi_2/3b0a829a94b8": {
+   "drawn": 221,
+   "exported": 197,
+   "v1": 197
   },
   "models/char_437_mizuki_sale_7/749c45406233": {
    "drawn": 53,
