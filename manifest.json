@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "server": "en",
-  "resVersion": "26-10-26-10-03-17_824ce7",
+  "resVersion": "26-11-02-05-12-02_1cd3b6",
   "models": {
     "char_003_kalts@boc#6": "models/char_003_kalts_boc_6/f48ae1bc05e3/model.json",
     "char_003_kalts@sale#14": "models/char_003_kalts_sale_14/5a131d36f7c5/model.json",
@@ -100,7 +100,7 @@
     "char_4116_blkkgt@witch#5": "models/char_4116_blkkgt_witch_5/7b92fdbec3cc/model.json",
     "char_4121_zuole@nian#11": "models/char_4121_zuole_nian_11/c90876592f19/model.json",
     "char_4132_ascln@iteration#4": "models/char_4132_ascln_iteration_4/0f2d63e11818/model.json",
-    "char_4133_logos@ambienceSynesthesia#6": "models/char_4133_logos_ambienceSynesthesia_6/0d33f6c3b4ff/model.json",
+    "char_4133_logos@ambienceSynesthesia#6": "models/char_4133_logos_ambienceSynesthesia_6/65d87413de21/model.json",
     "char_4134_cetsyr@epoque#50": "models/char_4134_cetsyr_epoque_50/13dbe9ca3034/model.json",
     "char_4179_monstr@boc#11": "models/char_4179_monstr_boc_11/4cf9ae892f27/model.json",
     "char_4202_haruka@iteration#6": "models/char_4202_haruka_iteration_6/a323d4a9f4f2/model.json",
@@ -110,7 +110,7 @@
     "char_472_pasngr@epoque#17": "models/char_472_pasngr_epoque_17/db9b44697ddc/model.json"
   },
   "resVersions": {
-    "en": "26-10-26-10-03-17_824ce7",
+    "en": "26-11-02-05-12-02_1cd3b6",
     "cn": "26-10-29-15-36-11-33649006"
   }
 }
