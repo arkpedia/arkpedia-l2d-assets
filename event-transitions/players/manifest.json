@@ -7,7 +7,7 @@
       "source": "events/en/act42side/d5558b1bd102/asset.json",
       "clip": "act42side_entry_stage_anim_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "6162c08068878c4b9d3449249507c190b7e81d7d688f533ce6dfb724b0d25b50",
+      "rendererSourceSha256": "bf1b957e036a494a160b44a525de6be2a09f8c7a2f5ecc76456f1974bfad6c85",
       "poster": {
         "file": "menu.webp",
         "time": 4.0,
@@ -202,7 +202,7 @@
       "source": "events/en/act42sre/37ff509bbdff/asset.json",
       "clip": "act42side_entry_stage_anim_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "6162c08068878c4b9d3449249507c190b7e81d7d688f533ce6dfb724b0d25b50",
+      "rendererSourceSha256": "bf1b957e036a494a160b44a525de6be2a09f8c7a2f5ecc76456f1974bfad6c85",
       "poster": {
         "file": "menu.webp",
         "time": 4.0,
