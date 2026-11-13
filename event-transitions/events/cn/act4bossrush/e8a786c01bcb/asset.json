@@ -1,0 +1,637 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act4bossrush",
+  "status": "source-recovered",
+  "role": "event",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "24-03-29-14-33-44-5002d2",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/aa84183556333c22861bdfd0430d507a98ec951d/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act4bossrush.ab",
+    "bundleMd5": "e8a786c01bcbad953f258a318c23a43b",
+    "manifestEntry": {
+      "name": "activity/[uc]act4bossrush.ab",
+      "hash": "03aaff93f45a961b9347872469cab494",
+      "md5": "e8a786c01bcbad953f258a318c23a43b",
+      "totalSize": 2499262,
+      "abSize": 2672237,
+      "thash": "Ca26zl31122f",
+      "pid": "lpack_misc",
+      "cid": 14
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/24-03-29-14-33-44-5002d2/activity_%5Buc%5Dact4bossrush.dat",
+    "archiveSha256": "6233fe1be5767a43a7f51c8ac536c9583edc3f51d5faf7fe43e65a52ed35bb43",
+    "bundleSha256": "ae51f80af4a82004f9d38e10a628d25453726cbe81cec268f275bcef70124a68"
+  },
+  "animations": [
+    {
+      "id": "3862660853243796039",
+      "name": "bossrush_entry_anim",
+      "candidate": true,
+      "durationSeconds": 1.3333333730697632,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-8107519575330290339",
+      "file": "textures/0.webp",
+      "name": "map_act4bossrush_group03_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7687899966624779628",
+      "file": "textures/1.webp",
+      "name": "bossrush_milestone#1",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7243354631692013365",
+      "file": "textures/2.webp",
+      "name": "SpriteAtlasTexture-UI_ACT_BOSSRUSH_ENTRY_BG-1024x1024-fmt34",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6272678065913733643",
+      "file": "textures/3.webp",
+      "name": "stage_act4bossrush_group01_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6072973885630094896",
+      "file": "textures/4.webp",
+      "name": "SpriteAtlasTexture-UI_ACT_4BOSSRUSH_TEAM_BUFF_H2_0-256x256-fmt55",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5847115316520670670",
+      "file": "textures/5.webp",
+      "name": "stage_act4bossrush_group02_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4295419923092255116",
+      "file": "textures/6.webp",
+      "name": "stage_act4bossrush_group02_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3959690345481715502",
+      "file": "textures/7.webp",
+      "name": "map_act4bossrush_group04_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3813866994502847069",
+      "file": "textures/8.webp",
+      "name": "stage_act4bossrush_group02_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3525073356806259010",
+      "file": "textures/9.webp",
+      "name": "bossrush_milestone#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3432774231864199622",
+      "file": "textures/10.webp",
+      "name": "reward",
+      "width": 1020,
+      "height": 557,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3307710104542464135",
+      "file": "textures/11.webp",
+      "name": "scroll_vertical_line",
+      "width": 18,
+      "height": 10,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1535833914769773867",
+      "file": "textures/12.webp",
+      "name": "SpriteAtlasTexture-UI_ACT_4BOSSRUSH_TEAM_ICON_H2_0-256x128-fmt55",
+      "width": 256,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1208319982809300776",
+      "file": "textures/13.webp",
+      "name": "stage_act4bossrush_group04_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-783200003237223130",
+      "file": "textures/14.webp",
+      "name": "SpriteAtlasTexture-UI_ACT_BOSSRUSH_MILESTONE_BG-1024x1024-fmt34",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-692647550631048016",
+      "file": "textures/15.webp",
+      "name": "act4bossrush_milestone#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-438628220693373748",
+      "file": "textures/16.webp",
+      "name": "stage_act4bossrush_group04_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-294478840280619516",
+      "file": "textures/17.webp",
+      "name": "img_home_entry",
+      "width": 463,
+      "height": 227,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-165828620637729922",
+      "file": "textures/18.webp",
+      "name": "stage_act4bossrush_group03_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "14981917782143940",
+      "file": "textures/19.webp",
+      "name": "img_home_entry_mini",
+      "width": 463,
+      "height": 121,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "148986927619924901",
+      "file": "textures/20.webp",
+      "name": "map_act4bossrush_group03_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "512825963045507460",
+      "file": "textures/21.webp",
+      "name": "act4bossrush_entry#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "634970150611492401",
+      "file": "textures/22.webp",
+      "name": "map_act4bossrush_group04_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "665030992061684705",
+      "file": "textures/23.webp",
+      "name": "act4bossrush_milestone#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "824401188193425258",
+      "file": "textures/24.webp",
+      "name": "bossrush_milestone#1a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2547165031143428269",
+      "file": "textures/25.webp",
+      "name": "bossrush_entry#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2986633907845038245",
+      "file": "textures/26.webp",
+      "name": "stage_act4bossrush_group01_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3462928850057819072",
+      "file": "textures/27.webp",
+      "name": "map_act4bossrush_group01_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3674234062390342471",
+      "file": "textures/28.webp",
+      "name": "act4bossrush_entry#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4411402257853897151",
+      "file": "textures/29.webp",
+      "name": "SpriteAtlasTexture-UI_ACT_4BOSSRUSH_RELIC_ICON_H2_0-256x256-fmt55",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4454042947503101599",
+      "file": "textures/30.webp",
+      "name": "stage_act4bossrush_group03_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5015912520096267053",
+      "file": "textures/31.webp",
+      "name": "map_act4bossrush_group04_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5086870338647985410",
+      "file": "textures/32.webp",
+      "name": "bossrush_milestone#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5209181736058919240",
+      "file": "textures/33.webp",
+      "name": "map_act4bossrush_group02_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6014320214651617923",
+      "file": "textures/34.webp",
+      "name": "map_act4bossrush_group03_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6403451431447504394",
+      "file": "textures/35.webp",
+      "name": "map_act4bossrush_group02_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7000804330796990322",
+      "file": "textures/36.webp",
+      "name": "map_act4bossrush_group01_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7082825910774571668",
+      "file": "textures/37.webp",
+      "name": "map_act4bossrush_group02_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7136865444971914209",
+      "file": "textures/38.webp",
+      "name": "bossrush_entry#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7225406672621664608",
+      "file": "textures/39.webp",
+      "name": "stage_act4bossrush_group03_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8215570494562650313",
+      "file": "textures/40.webp",
+      "name": "stage_act4bossrush_group04_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8481348377616388410",
+      "file": "textures/41.webp",
+      "name": "squad_plugin_atlas#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8905601745603741713",
+      "file": "textures/42.webp",
+      "name": "squad_plugin_atlas#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 1,
+    "AnimationClip": 1,
+    "AssetBundle": 1,
+    "CanvasGroup": 10,
+    "CanvasRenderer": 87,
+    "GameObject": 131,
+    "MonoBehaviour": 193,
+    "MonoScript": 45,
+    "RectTransform": 130,
+    "Sprite": 38,
+    "Texture2D": 43,
+    "Transform": 1
+  },
+  "externalFiles": {
+    "CAB-0c3f13ff87d202b119978012a63cf2b0": [
+      "archive:/cab-580061e156ea5e60815bbe6b768da65c/cab-580061e156ea5e60815bbe6b768da65c"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 2503,
+      "sha256": "18678e8c6accd2cd142dbb59b5be5086fc161960a12509d8a95c16f3f9b7d18b"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 2499262,
+      "sha256": "6233fe1be5767a43a7f51c8ac536c9583edc3f51d5faf7fe43e65a52ed35bb43"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 86809,
+      "sha256": "5f9d9074396a72e4aaf08d312bf6b84be4562e12d4faa2c81e3e02d9591e38a5"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 208672,
+      "sha256": "b62cc6e194c3b923197c0d31ce26503d9ae5e2cd4978ee736c0237ba015de96f"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 15950,
+      "sha256": "395c9bef427aebf5a59c4c91a2281592ecc86c1d45bab8b8acd5403c7180944a"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 192688,
+      "sha256": "c76a425fb0149a9e3bf5d827028fb68dd41ecec0715757b23e936dc831f590fb"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 96,
+      "sha256": "229161a9d612a3986dd1984319318627ff3224718053afaee6dc618a924b045d"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 4830,
+      "sha256": "42bcb135fd327f168ddf8fab0efc92103fa5269597dabe4fb3455fffa90d22b6"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 228276,
+      "sha256": "118abf457b108d2af1fecf2e0daa530dabb8789eb60696a00d5a87d7cb610580"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 140644,
+      "sha256": "623cf497397fc48bb7f1ef068dff0a4d95794adbf4fa8a589989de422b8304ee"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 426422,
+      "sha256": "0e0c0eaf72d40b55cdad44abe2e3b5c0a5836ed01fbee3742942e2d0f32fc359"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 220954,
+      "sha256": "28c6d7adb8f277ead7a1fd8952e6a592903c09dfb76faddc17a14fe6614be7f6"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 93634,
+      "sha256": "c88bf397d8f4d3dfa68c220cc33cb481eab24a8d1a5fb3dc17033827a82a738b"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 229766,
+      "sha256": "e1d7b741784edb31d7ad3b9b7ed5729336f86e793351a724442784d28ead4120"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 49122,
+      "sha256": "388e7afe9fba5d78fdf3719efb410ac9033dd8c68d1af18168025bb084120dd6"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 305392,
+      "sha256": "b8c68f560be8112e0cb1dda3875cfc31f73d51d4bfbea1397715c65f5b1b1fd1"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 230558,
+      "sha256": "afcec5c09566d2a8a466694eb657f5d1224ff5bde5c38fc28eac21c4d680e45f"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 19332,
+      "sha256": "480d0ae511f18190ebc4e4b612b1c1d5e1c463cca1d1ca09b1a30630d1a42958"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 206454,
+      "sha256": "4ed82d7296b99491e2d5d914e65533d4e0c9afb1ad10874f7ab0a8bd038f0b0c"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 75052,
+      "sha256": "9fba2cefbfaf3562c20ee229b33daf662b540e1464990793b437beb0cb284c62"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 5468,
+      "sha256": "3ef97711b19e0921f77d3ce05348b303750d3eb89ac6541fd3b8b8a0d7842cb2"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 42398,
+      "sha256": "75e08cfa52c7d801cd288ebdc5186671d8191cc20a25b9d25e20d26e8d8533aa"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 213566,
+      "sha256": "d37b0b12c7e0b90ec0af6025c545816700143064837a22d8d9d2288d1c91e98c"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 202012,
+      "sha256": "6d50adb3c240022c5692a5520a4c872f25b3d7cd5e6c68eb6a3b7afc94e15be2"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 8256,
+      "sha256": "3ed4a24461646e8f12d4e997d311b4b770d7ac7fb94fca64aab1f7ad7ec623e6"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 5500,
+      "sha256": "ad28c3a82559d756264a7a0315f34ebaa4fc2d6006063bafcc1e783e00a03c57"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 199444,
+      "sha256": "fabaee1fe74b407af6e5cb1c7ac11d5b60a921c8247c1af3ef93a91f7dd6c545"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 218410,
+      "sha256": "12d70306379d0057e5c79227f08f54605d22894ee1582169be37920b2a0c10ff"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 200846,
+      "sha256": "0ca7ddfd7922d9657ccde5ae18425f832b6d12ffcbdc6f119f23434f1e2a424d"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 33152,
+      "sha256": "ebe1417dc3f7b56440064bfef29ce6bde90239758972789b8a8f90ca33ca9819"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 233150,
+      "sha256": "aabec5637b101999aabb28e978149d57f6487dcee53187505f539bd4e405c1a7"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 226460,
+      "sha256": "334c1dc94b560d3f6f26b17e754ef719637c49c0f8ce5776924820f470e05dc3"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 234488,
+      "sha256": "7f33a1774c5587047b22742efaf5abb8badee8191e73a705c5b1fa6de71c1c5b"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 181444,
+      "sha256": "b977f801e456d66b3f57e9d6a9de7ce116837d7884113bf9d8efb4eb51d713f5"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 209482,
+      "sha256": "802aeff2d8630a138d79c096d49aa040d77d6d3687fda9f4607e27018daa6dca"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 217528,
+      "sha256": "17aab080a7cf2bfa6a28469a12c4b0448b2d2c39a28def9cc75c59fade427fef"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 225316,
+      "sha256": "2827d6b6c27145c92dc3c32e0fdaf041e54efbd752abe258b775ea27dc64d688"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 21942,
+      "sha256": "bb3d7842ccbabd10c7094cc9f2dd4bfb392cc8ba448fd0211f9679d33ce9230c"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 223604,
+      "sha256": "de918983eda2184754c4674c0bf4a67e29f6c396b2e1342037b6b84a2ea99837"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 4418,
+      "sha256": "a663632ce15159e7bc56309844ce1d216408368f270b34cf2077c341cd465b59"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 8964,
+      "sha256": "687fbdf721794183b464558c00d4e6200a650907fcb06490fc0243a0ef85c347"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 225966,
+      "sha256": "8769774ae227ca5c120b8fc6cfb44e70b1bfdd8f7c360a436e581aad62bb832c"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 243244,
+      "sha256": "e6fc1a93c4001f5460e6f9d96932df00d20f38b705b8f762ded06ff0a31e5f18"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 195020,
+      "sha256": "6e2e6e003d18ab0c4366a5127f6b799b8a5dddce956c3d8e5c7c18d2828c005c"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 244436,
+      "sha256": "ee3efbe1e6ca97908829af33b1242e1f77871e139807951820758704e3c222d5"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 8502,
+      "sha256": "55f040ee73bb59e78ba214150059d802bf3dd6a48a3bdd1c1ce194b7e0c8c55f"
+    }
+  ]
+}

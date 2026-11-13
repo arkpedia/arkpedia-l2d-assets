@@ -1,0 +1,3692 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act55side",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "26-11-06-12-56-09-07186384",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/774d93398fc56df29b4f55e406edda1a9df451e9/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act55side.ab",
+    "bundleMd5": "247e46c2cbd08f28a377be0e4b5eefe8",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/26-11-06-12-56-09-07186384/activity_%5Buc%5Dact55side.dat",
+    "archiveSha256": "711447a9a451bc37a47ba780e72ce76905337103754f8b62661e22ab434f8c60",
+    "bundleSha256": "9cc49a364810ebb7ebc1f503b7c6de59e6183761b32cc0eed058a4afc4c42ffc",
+    "manifestEntry": {
+      "name": "activity/[uc]act55side.ab",
+      "hash": "86745cd69d219b99df0d4c65fd5d53a3",
+      "md5": "247e46c2cbd08f28a377be0e4b5eefe8",
+      "totalSize": 16832055,
+      "abSize": 18567944,
+      "pid": "lpack_misc1",
+      "cid": 54
+    }
+  },
+  "animations": [
+    {
+      "id": "-6443250088433273619",
+      "name": "act55side_entry_kv2",
+      "candidate": true,
+      "durationSeconds": 4.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act55side_entry_kv2",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.01666666753590107,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT55SIDE_LOAD2",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 4.0,
+          "functionName": "_OnAnimEnd",
+          "data": "act55side_entry_kv2",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-5153611260172374736",
+      "name": "act55side_trans_kv1tokv2",
+      "candidate": true,
+      "durationSeconds": 1.5,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act55side_trans_kv1tokv2",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.01666666753590107,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT55SIDE_SWITCHFREEZING",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.5,
+          "functionName": "_OnAnimEnd",
+          "data": "act55side_trans_kv1tokv2",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-5047074051351116724",
+      "name": "act55side_entry_kv1",
+      "candidate": true,
+      "durationSeconds": 3.5833332538604736,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act55side_entry_kv1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.01666666753590107,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT55SIDE_LOAD1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 3.5833332538604736,
+          "functionName": "_OnAnimEnd",
+          "data": "act55side_entry_kv1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "208456891946403069",
+      "name": "act55side_trans_kv2tokv1",
+      "candidate": true,
+      "durationSeconds": 2.1666667461395264,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act55side_trans_kv2tokv1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.01666666753590107,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT55SIDE_SWITCHBURNING",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 2.1666667461395264,
+          "functionName": "_OnAnimEnd",
+          "data": "act55side_trans_kv2tokv1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "1412499703528783580",
+      "name": "act55side_map_zone1_anim",
+      "candidate": false,
+      "durationSeconds": 8.350000381469727,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act55side_map_zone1_anim",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 12.833333015441895,
+          "functionName": "_OnAnimEnd",
+          "data": "act55side_map_zone1_anim",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "4197102845697601720",
+      "name": "act53side_map_zone2_loop",
+      "candidate": false,
+      "durationSeconds": 6.0,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-9057061701497743997",
+      "file": "textures/0.webp",
+      "name": "buff_shadow",
+      "width": 472,
+      "height": 324,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9051677924050626514",
+      "file": "textures/1.webp",
+      "name": "img_completed",
+      "width": 864,
+      "height": 172,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9029491303575593064",
+      "file": "textures/2.webp",
+      "name": "img_tapestry",
+      "width": 356,
+      "height": 380,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9019831920326066918",
+      "file": "textures/3.webp",
+      "name": "img_bkg",
+      "width": 1412,
+      "height": 240,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9011931082938293929",
+      "file": "textures/4.webp",
+      "name": "img_icon_white",
+      "width": 64,
+      "height": 52,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8899563754419365336",
+      "file": "textures/5.webp",
+      "name": "img_char01",
+      "width": 460,
+      "height": 232,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8768312346522291814",
+      "file": "textures/6.webp",
+      "name": "img_shadow03",
+      "width": 28,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8714592866358319219",
+      "file": "textures/7.webp",
+      "name": "fire_top_02",
+      "width": 440,
+      "height": 220,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8665016604847665405",
+      "file": "textures/8.webp",
+      "name": "img_castrle",
+      "width": 1560,
+      "height": 368,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8623387018796592577",
+      "file": "textures/9.webp",
+      "name": "img_tree_m03",
+      "width": 324,
+      "height": 848,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8598837196411536872",
+      "file": "textures/10.webp",
+      "name": "img_castle_bg_02",
+      "width": 492,
+      "height": 272,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8521178176479770621",
+      "file": "textures/11.webp",
+      "name": "mask_frame02",
+      "width": 512,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8395452337281634231",
+      "file": "textures/12.webp",
+      "name": "img_lake_deco_02",
+      "width": 48,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8389386105594078488",
+      "file": "textures/13.webp",
+      "name": "img_flag_mask",
+      "width": 260,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8278529865613147085",
+      "file": "textures/14.webp",
+      "name": "img_house_03",
+      "width": 196,
+      "height": 400,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8226509041634586446",
+      "file": "textures/15.webp",
+      "name": "img_tree_03",
+      "width": 260,
+      "height": 332,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8165848667521527233",
+      "file": "textures/16.webp",
+      "name": "img_people_02",
+      "width": 524,
+      "height": 124,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8147597737577782004",
+      "file": "textures/17.webp",
+      "name": "bg_zone_02",
+      "width": 284,
+      "height": 156,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8102408313825609949",
+      "file": "textures/18.webp",
+      "name": "img_s_selected",
+      "width": 260,
+      "height": 100,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8085403681966829737",
+      "file": "textures/19.webp",
+      "name": "img_frame_L",
+      "width": 192,
+      "height": 860,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7854022725620959926",
+      "file": "textures/20.webp",
+      "name": "kv1_entry_bird_02",
+      "width": 308,
+      "height": 236,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7820943973024284074",
+      "file": "textures/21.webp",
+      "name": "img_lake_deco_03",
+      "width": 44,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7738957392189511560",
+      "file": "textures/22.webp",
+      "name": "bg_zone_end",
+      "width": 292,
+      "height": 176,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7727676547550733201",
+      "file": "textures/23.webp",
+      "name": "img_char02",
+      "width": 336,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7696719929607467259",
+      "file": "textures/24.webp",
+      "name": "kv1_entry",
+      "width": 1560,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7559383683353018018",
+      "file": "textures/25.webp",
+      "name": "kv1_bg_show_dissolve",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7486741500781921490",
+      "file": "textures/26.webp",
+      "name": "img_deco_bottom02",
+      "width": 387,
+      "height": 53,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7438333389324246177",
+      "file": "textures/27.webp",
+      "name": "bg_zone_02_end",
+      "width": 284,
+      "height": 156,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7292144755525099552",
+      "file": "textures/28.webp",
+      "name": "img_littketree",
+      "width": 272,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7289930582181124336",
+      "file": "textures/29.webp",
+      "name": "kv1_entry_bird_04",
+      "width": 368,
+      "height": 112,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7287595737868030599",
+      "file": "textures/30.webp",
+      "name": "img_tree_05",
+      "width": 760,
+      "height": 1092,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7283663571187042629",
+      "file": "textures/31.webp",
+      "name": "snow",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7280239836516523485",
+      "file": "textures/32.webp",
+      "name": "kv1_entry_logo",
+      "width": 432,
+      "height": 112,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7279572930735826077",
+      "file": "textures/33.webp",
+      "name": "parti_bird",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7211429492063045990",
+      "file": "textures/34.webp",
+      "name": "img_house02",
+      "width": 392,
+      "height": 756,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7211135833990701325",
+      "file": "textures/35.webp",
+      "name": "img_people_03",
+      "width": 384,
+      "height": 92,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7106746830754060674",
+      "file": "textures/36.webp",
+      "name": "icon_film",
+      "width": 48,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7069522373304428564",
+      "file": "textures/37.webp",
+      "name": "img_cloud_gold",
+      "width": 732,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7044520523856897592",
+      "file": "textures/38.webp",
+      "name": "parti_fire",
+      "width": 260,
+      "height": 260,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6972179980935752693",
+      "file": "textures/39.webp",
+      "name": "sprite_white",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6934151233913299536",
+      "file": "textures/40.webp",
+      "name": "img_castle_mask",
+      "width": 296,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6790319951492756793",
+      "file": "textures/41.webp",
+      "name": "branch_04",
+      "width": 164,
+      "height": 92,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6782822571475741897",
+      "file": "textures/42.webp",
+      "name": "img_house_01",
+      "width": 244,
+      "height": 96,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6766588836572675986",
+      "file": "textures/43.webp",
+      "name": "img_tree_06",
+      "width": 852,
+      "height": 904,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6668878666616737838",
+      "file": "textures/44.webp",
+      "name": "img_flag_01",
+      "width": 260,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6648866823923667201",
+      "file": "textures/45.webp",
+      "name": "fire",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6559130870995194009",
+      "file": "textures/46.webp",
+      "name": "bkg01",
+      "width": 1120,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6432022373096534233",
+      "file": "textures/47.webp",
+      "name": "arrow",
+      "width": 24,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6114388968440901334",
+      "file": "textures/48.webp",
+      "name": "img_progress_bkg",
+      "width": 116,
+      "height": 16,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6108757070649361465",
+      "file": "textures/49.webp",
+      "name": "img_grass",
+      "width": 1532,
+      "height": 428,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6079414172788723299",
+      "file": "textures/50.webp",
+      "name": "img_lake_deco_06",
+      "width": 36,
+      "height": 156,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6057501505288857413",
+      "file": "textures/51.webp",
+      "name": "kv1_title_sword",
+      "width": 328,
+      "height": 264,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6027910137739125163",
+      "file": "textures/52.webp",
+      "name": "icon_pic",
+      "width": 48,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5884600630228125382",
+      "file": "textures/53.webp",
+      "name": "img_castle_03",
+      "width": 84,
+      "height": 216,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5678920505834027637",
+      "file": "textures/54.webp",
+      "name": "kv2",
+      "width": 1560,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5625831373259834917",
+      "file": "textures/55.webp",
+      "name": "sash_05",
+      "width": 244,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5570541881007777063",
+      "file": "textures/56.webp",
+      "name": "kv1_entry_bird_05",
+      "width": 176,
+      "height": 80,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5473731841243075714",
+      "file": "textures/57.webp",
+      "name": "sash_03",
+      "width": 304,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5454980592301151820",
+      "file": "textures/58.webp",
+      "name": "img_fire_disturb",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5410572370253498391",
+      "file": "textures/59.webp",
+      "name": "kv1_entry_bird_group",
+      "width": 1364,
+      "height": 624,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5391502258278828644",
+      "file": "textures/60.webp",
+      "name": "switch_icon",
+      "width": 44,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5347799823813603743",
+      "file": "textures/61.webp",
+      "name": "img_dissolve_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5318929445468343010",
+      "file": "textures/62.webp",
+      "name": "sash_02",
+      "width": 244,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5064007226768089601",
+      "file": "textures/63.webp",
+      "name": "img_castle_06",
+      "width": 72,
+      "height": 204,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4850472309817580251",
+      "file": "textures/64.webp",
+      "name": "zone3_map_button",
+      "width": 220,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4744015265974845835",
+      "file": "textures/65.webp",
+      "name": "img_castle_01",
+      "width": 332,
+      "height": 288,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4719400872379983364",
+      "file": "textures/66.webp",
+      "name": "img_castle_05",
+      "width": 84,
+      "height": 252,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4656054201111949417",
+      "file": "textures/67.webp",
+      "name": "stage_act_entry_act55side_tiny",
+      "width": 468,
+      "height": 124,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4510661613095058128",
+      "file": "textures/68.webp",
+      "name": "img_castle_04",
+      "width": 68,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4426765103997835467",
+      "file": "textures/69.webp",
+      "name": "bg_s_02",
+      "width": 340,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4425006885823042248",
+      "file": "textures/70.webp",
+      "name": "bg_s_end",
+      "width": 220,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4398431706899270259",
+      "file": "textures/71.webp",
+      "name": "kv2_entry_logo",
+      "width": 440,
+      "height": 124,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4396414171450888752",
+      "file": "textures/72.webp",
+      "name": "bg_bottom",
+      "width": 1560,
+      "height": 672,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4360912940734189878",
+      "file": "textures/73.webp",
+      "name": "PaperFont",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4095472241658120190",
+      "file": "textures/74.webp",
+      "name": "kv1_title_en_02",
+      "width": 172,
+      "height": 76,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4029331011774540179",
+      "file": "textures/75.webp",
+      "name": "img_s_unselected",
+      "width": 212,
+      "height": 92,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3908514732839422526",
+      "file": "textures/76.webp",
+      "name": "img_lake",
+      "width": 1247,
+      "height": 577,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3895234306830597401",
+      "file": "textures/77.webp",
+      "name": "bg_tree",
+      "width": 704,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3879321159537546917",
+      "file": "textures/78.webp",
+      "name": "bg_ex_02_end",
+      "width": 304,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3810952037927477055",
+      "file": "textures/79.webp",
+      "name": "img_shadow01",
+      "width": 48,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3773742763021589123",
+      "file": "textures/80.webp",
+      "name": "kv1_bird_01",
+      "width": 124,
+      "height": 116,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3690884310621939067",
+      "file": "textures/81.webp",
+      "name": "img_red",
+      "width": 1024,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3677675250857618392",
+      "file": "textures/82.webp",
+      "name": "bg_shop_02",
+      "width": 192,
+      "height": 140,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3442182570749258053",
+      "file": "textures/83.webp",
+      "name": "dissolve_02",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3363768494921163680",
+      "file": "textures/84.webp",
+      "name": "sword_fire_01",
+      "width": 776,
+      "height": 236,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3308581358026443347",
+      "file": "textures/85.webp",
+      "name": "img_burn_right_black",
+      "width": 336,
+      "height": 240,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3295747680748021108",
+      "file": "textures/86.webp",
+      "name": "kv1",
+      "width": 1560,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3189451418791122607",
+      "file": "textures/87.webp",
+      "name": "img_icon",
+      "width": 40,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3173238674233658979",
+      "file": "textures/88.webp",
+      "name": "img_cloud_bg",
+      "width": 1560,
+      "height": 553,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3146813854079935252",
+      "file": "textures/89.webp",
+      "name": "img_tree_01",
+      "width": 60,
+      "height": 288,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3115738033356642797",
+      "file": "textures/90.webp",
+      "name": "icon_operator",
+      "width": 48,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2952631385744971112",
+      "file": "textures/91.webp",
+      "name": "img_tree_m03_dissolve",
+      "width": 324,
+      "height": 396,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2916278184669231042",
+      "file": "textures/92.webp",
+      "name": "lock",
+      "width": 40,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2881674408831144319",
+      "file": "textures/93.webp",
+      "name": "img_castle_bg_01",
+      "width": 504,
+      "height": 284,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2809764498840571645",
+      "file": "textures/94.webp",
+      "name": "img_cloud_loop02",
+      "width": 1559,
+      "height": 329,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2750685328552973583",
+      "file": "textures/95.webp",
+      "name": "kv2_r_doc",
+      "width": 712,
+      "height": 564,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2743714906038348943",
+      "file": "textures/96.webp",
+      "name": "img_castle_mask",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2729197820172293939",
+      "file": "textures/97.webp",
+      "name": "parti_spark",
+      "width": 260,
+      "height": 260,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2687068402215509752",
+      "file": "textures/98.webp",
+      "name": "progress_bg",
+      "width": 116,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2447768578171109505",
+      "file": "textures/99.webp",
+      "name": "img_castle_bg_03",
+      "width": 476,
+      "height": 268,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2381923848782311868",
+      "file": "textures/100.webp",
+      "name": "img_shop",
+      "width": 296,
+      "height": 92,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2326048804693399264",
+      "file": "textures/101.webp",
+      "name": "mask_frame",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2273963307721932433",
+      "file": "textures/102.webp",
+      "name": "img_burn_right_fire",
+      "width": 336,
+      "height": 240,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2216174006852284698",
+      "file": "textures/103.webp",
+      "name": "kv2_logo",
+      "width": 364,
+      "height": 268,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2214457859423259571",
+      "file": "textures/104.webp",
+      "name": "sash_mask",
+      "width": 240,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2052123578628011101",
+      "file": "textures/105.webp",
+      "name": "white_mask",
+      "width": 204,
+      "height": 204,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1764295234569696807",
+      "file": "textures/106.webp",
+      "name": "img_fire",
+      "width": 260,
+      "height": 260,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1742891544107888110",
+      "file": "textures/107.webp",
+      "name": "kv1_title_fire_show",
+      "width": 372,
+      "height": 260,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1667767653366409862",
+      "file": "textures/108.webp",
+      "name": "img_castle_bg",
+      "width": 612,
+      "height": 392,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1612222796237336189",
+      "file": "textures/109.webp",
+      "name": "bg_zone",
+      "width": 292,
+      "height": 176,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1467090456242472344",
+      "file": "textures/110.webp",
+      "name": "sprite_white",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1461084484255887908",
+      "file": "textures/111.webp",
+      "name": "bg_ex_02",
+      "width": 304,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1452017419300258813",
+      "file": "textures/112.webp",
+      "name": "img_bg_bottom",
+      "width": 1560,
+      "height": 536,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1378237931598315698",
+      "file": "textures/113.webp",
+      "name": "img_tree_04",
+      "width": 60,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1365285573295653850",
+      "file": "textures/114.webp",
+      "name": "img_vien",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1335421713207643165",
+      "file": "textures/115.webp",
+      "name": "news_edit",
+      "width": 300,
+      "height": 144,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1084231166421974677",
+      "file": "textures/116.webp",
+      "name": "img_tree_bg_black",
+      "width": 804,
+      "height": 704,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-912101837245475861",
+      "file": "textures/117.webp",
+      "name": "img_tree_04_dark",
+      "width": 1060,
+      "height": 672,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-854405226419859569",
+      "file": "textures/118.webp",
+      "name": "img_bkg",
+      "width": 300,
+      "height": 300,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-792079378420781971",
+      "file": "textures/119.webp",
+      "name": "fire_top",
+      "width": 516,
+      "height": 220,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-697437754780020682",
+      "file": "textures/120.webp",
+      "name": "img_fire_dissolve",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-652051122004247451",
+      "file": "textures/121.webp",
+      "name": "fire_add",
+      "width": 460,
+      "height": 144,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-646999954238868579",
+      "file": "textures/122.webp",
+      "name": "img_cloud02",
+      "width": 820,
+      "height": 68,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-613893902982499899",
+      "file": "textures/123.webp",
+      "name": "img_tree_02",
+      "width": 532,
+      "height": 1008,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-558304523930935965",
+      "file": "textures/124.webp",
+      "name": "img_iron_02",
+      "width": 144,
+      "height": 456,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-270835039389080791",
+      "file": "textures/125.webp",
+      "name": "img_tree_01",
+      "width": 804,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-96433775227789453",
+      "file": "textures/126.webp",
+      "name": "img_iron_shadow03",
+      "width": 268,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-42762979274663986",
+      "file": "textures/127.webp",
+      "name": "img_flag_02",
+      "width": 260,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4518819058771286",
+      "file": "textures/128.webp",
+      "name": "stage_act_entry_act55side",
+      "width": 468,
+      "height": 232,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "36981288491072756",
+      "file": "textures/129.webp",
+      "name": "img_lake_deco_01",
+      "width": 76,
+      "height": 140,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "134495757981742164",
+      "file": "textures/130.webp",
+      "name": "progress_fill_noshadow",
+      "width": 84,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "137836115378871309",
+      "file": "textures/131.webp",
+      "name": "trackpoint_r",
+      "width": 88,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "149589279682962869",
+      "file": "textures/132.webp",
+      "name": "img_ex_unselected",
+      "width": 212,
+      "height": 92,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "194484946931652242",
+      "file": "textures/133.webp",
+      "name": "scarf",
+      "width": 800,
+      "height": 300,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "225357847486001927",
+      "file": "textures/134.webp",
+      "name": "img_vein",
+      "width": 116,
+      "height": 116,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "225879413906612236",
+      "file": "textures/135.webp",
+      "name": "img_shop",
+      "width": 244,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "225979893967055393",
+      "file": "textures/136.webp",
+      "name": "building",
+      "width": 300,
+      "height": 300,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "294548512762188854",
+      "file": "textures/137.webp",
+      "name": "img_progress_bar",
+      "width": 116,
+      "height": 16,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "325955736367597996",
+      "file": "textures/138.webp",
+      "name": "bg_mission",
+      "width": 184,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "328429967830099239",
+      "file": "textures/139.webp",
+      "name": "img_fire_01",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "447283455184522037",
+      "file": "textures/140.webp",
+      "name": "img_bg_house",
+      "width": 1264,
+      "height": 360,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "471681225106501176",
+      "file": "textures/141.webp",
+      "name": "img_normal_selected",
+      "width": 260,
+      "height": 100,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "599364103128352773",
+      "file": "textures/142.webp",
+      "name": "branch_02",
+      "width": 96,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "704003892194647497",
+      "file": "textures/143.webp",
+      "name": "img_tab",
+      "width": 324,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "724580233796420967",
+      "file": "textures/144.webp",
+      "name": "img_tree_03",
+      "width": 72,
+      "height": 688,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "749749597708231958",
+      "file": "textures/145.webp",
+      "name": "img_icon_black",
+      "width": 52,
+      "height": 52,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "755689792987949829",
+      "file": "textures/146.webp",
+      "name": "kv1_title_fire_01",
+      "width": 268,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "779636205869341245",
+      "file": "textures/147.webp",
+      "name": "kv1_entry_bird_01",
+      "width": 296,
+      "height": 192,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "867494707478005660",
+      "file": "textures/148.webp",
+      "name": "img_iron_01",
+      "width": 400,
+      "height": 136,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "926066074913692062",
+      "file": "textures/149.webp",
+      "name": "icon_stage_rank_4",
+      "width": 44,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1025087002098374894",
+      "file": "textures/150.webp",
+      "name": "img_cloud01",
+      "width": 612,
+      "height": 120,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1063266268607555524",
+      "file": "textures/151.webp",
+      "name": "bg_shop",
+      "width": 204,
+      "height": 108,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1070236218671754581",
+      "file": "textures/152.webp",
+      "name": "img_burn_left_black",
+      "width": 688,
+      "height": 436,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1070632047860925448",
+      "file": "textures/153.webp",
+      "name": "kv2_shadow",
+      "width": 204,
+      "height": 204,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1253752086102912108",
+      "file": "textures/154.webp",
+      "name": "bg_s_02_end",
+      "width": 340,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1356584394859599923",
+      "file": "textures/155.webp",
+      "name": "dissolve_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1374472882074707058",
+      "file": "textures/156.webp",
+      "name": "img_lake",
+      "width": 1308,
+      "height": 224,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1471968541893995103",
+      "file": "textures/157.webp",
+      "name": "line_huo",
+      "width": 300,
+      "height": 292,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1684952908851101571",
+      "file": "textures/158.webp",
+      "name": "img_blood02",
+      "width": 1140,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1777387830849781162",
+      "file": "textures/159.webp",
+      "name": "fire_castlebg",
+      "width": 748,
+      "height": 372,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1804148691751430276",
+      "file": "textures/160.webp",
+      "name": "kv1_title_ch",
+      "width": 180,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1862377089164169041",
+      "file": "textures/161.webp",
+      "name": "img_tree_04",
+      "width": 1060,
+      "height": 672,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1927296669257876870",
+      "file": "textures/162.webp",
+      "name": "lv_line_02",
+      "width": 8,
+      "height": 52,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2024526255908408778",
+      "file": "textures/163.webp",
+      "name": "mask_bg",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2072713452767870774",
+      "file": "textures/164.webp",
+      "name": "img_tree_01",
+      "width": 324,
+      "height": 812,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2210914945659186221",
+      "file": "textures/165.webp",
+      "name": "img_icon_white",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2299092694825147464",
+      "file": "textures/166.webp",
+      "name": "img_burn_left_fire",
+      "width": 688,
+      "height": 436,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2300258519855509893",
+      "file": "textures/167.webp",
+      "name": "lv_image_shadow",
+      "width": 24,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2304715199182374123",
+      "file": "textures/168.webp",
+      "name": "bg_mission_02",
+      "width": 208,
+      "height": 108,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2426675721581847362",
+      "file": "textures/169.webp",
+      "name": "sash_06",
+      "width": 124,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2571732781868976627",
+      "file": "textures/170.webp",
+      "name": "img_deco_bottom",
+      "width": 1560,
+      "height": 53,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2600340904501728650",
+      "file": "textures/171.webp",
+      "name": "kv1_entry_tree_blur",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2749986987666868180",
+      "file": "textures/172.webp",
+      "name": "branch_03",
+      "width": 72,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2805080972512042819",
+      "file": "textures/173.webp",
+      "name": "icon_stage_rank_0",
+      "width": 44,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2806524037493654266",
+      "file": "textures/174.webp",
+      "name": "img_tree_02",
+      "width": 92,
+      "height": 696,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2900465375089857114",
+      "file": "textures/175.webp",
+      "name": "img_bkg_can_claim",
+      "width": 964,
+      "height": 172,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2928762822963692332",
+      "file": "textures/176.webp",
+      "name": "kv1_bird_02",
+      "width": 92,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2958289532845011442",
+      "file": "textures/177.webp",
+      "name": "sword_fire_02",
+      "width": 300,
+      "height": 300,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3062098318771566731",
+      "file": "textures/178.webp",
+      "name": "img_gold_02",
+      "width": 552,
+      "height": 632,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3070056832100831380",
+      "file": "textures/179.webp",
+      "name": "icon_coin",
+      "width": 48,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3086708970098965187",
+      "file": "textures/180.webp",
+      "name": "coin_bg_02",
+      "width": 80,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3222011878992594876",
+      "file": "textures/181.webp",
+      "name": "img_blood01",
+      "width": 1168,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3367564107476678682",
+      "file": "textures/182.webp",
+      "name": "img_fire_dissolve",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3383383023583035252",
+      "file": "textures/183.webp",
+      "name": "homepage_total_score_check_shadow",
+      "width": 116,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3441481478489054635",
+      "file": "textures/184.webp",
+      "name": "coin_bg",
+      "width": 104,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3579514264864247294",
+      "file": "textures/185.webp",
+      "name": "icon_stage_rank_3",
+      "width": 44,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3719486773204912963",
+      "file": "textures/186.webp",
+      "name": "img_tree_04",
+      "width": 84,
+      "height": 644,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3793372984960881610",
+      "file": "textures/187.webp",
+      "name": "img_house_07",
+      "width": 408,
+      "height": 564,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3884420011100766861",
+      "file": "textures/188.webp",
+      "name": "img_deco",
+      "width": 1559,
+      "height": 51,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3910168079998330132",
+      "file": "textures/189.webp",
+      "name": "bg_s",
+      "width": 220,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4225015135963277665",
+      "file": "textures/190.webp",
+      "name": "sprite_white",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4306100753707639762",
+      "file": "textures/191.webp",
+      "name": "img_bkg_claim_all",
+      "width": 864,
+      "height": 172,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4319686668041312921",
+      "file": "textures/192.webp",
+      "name": "img_iron_shadow01",
+      "width": 284,
+      "height": 68,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4446523668165269960",
+      "file": "textures/193.webp",
+      "name": "img_flag",
+      "width": 320,
+      "height": 540,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4449660778981235868",
+      "file": "textures/194.webp",
+      "name": "kv1_title_en_01",
+      "width": 172,
+      "height": 96,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4743640684138018302",
+      "file": "textures/195.webp",
+      "name": "img_castle_02",
+      "width": 364,
+      "height": 272,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4775978423313187265",
+      "file": "textures/196.webp",
+      "name": "img_ex_selected",
+      "width": 260,
+      "height": 100,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4862424012181539684",
+      "file": "textures/197.webp",
+      "name": "img_castle",
+      "width": 480,
+      "height": 176,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4909277872792637076",
+      "file": "textures/198.webp",
+      "name": "img_tree_05",
+      "width": 180,
+      "height": 336,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4920792743448801402",
+      "file": "textures/199.webp",
+      "name": "news_edit_lock",
+      "width": 300,
+      "height": 144,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5028012720454199492",
+      "file": "textures/200.webp",
+      "name": "fire_top_03",
+      "width": 196,
+      "height": 204,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5067830441584455206",
+      "file": "textures/201.webp",
+      "name": "img_house01",
+      "width": 336,
+      "height": 80,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5117117200845409483",
+      "file": "textures/202.webp",
+      "name": "img_vein",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5179643733278869109",
+      "file": "textures/203.webp",
+      "name": "img_house_06",
+      "width": 364,
+      "height": 300,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5184824306950723376",
+      "file": "textures/204.webp",
+      "name": "img_icon",
+      "width": 40,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5356487241544291531",
+      "file": "textures/205.webp",
+      "name": "sash_chara",
+      "width": 164,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5357001789322049058",
+      "file": "textures/206.webp",
+      "name": "sash_01",
+      "width": 244,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5514046487434298570",
+      "file": "textures/207.webp",
+      "name": "smoke_black",
+      "width": 84,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5535445764140206193",
+      "file": "textures/208.webp",
+      "name": "img_iron02",
+      "width": 64,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5647211766147732404",
+      "file": "textures/209.webp",
+      "name": "img_bkg_uncomplete",
+      "width": 864,
+      "height": 172,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5747440750095282476",
+      "file": "textures/210.webp",
+      "name": "bkg02",
+      "width": 1200,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5757952407769601093",
+      "file": "textures/211.webp",
+      "name": "kv1_entry_bird_03",
+      "width": 328,
+      "height": 152,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5764108530183792445",
+      "file": "textures/212.webp",
+      "name": "bg_ex_end",
+      "width": 268,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5840131281077557507",
+      "file": "textures/213.webp",
+      "name": "img_fence01",
+      "width": 120,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5875414194095301067",
+      "file": "textures/214.webp",
+      "name": "img_fence02",
+      "width": 416,
+      "height": 152,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5895607869146210677",
+      "file": "textures/215.webp",
+      "name": "fire_r",
+      "width": 424,
+      "height": 468,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6173116950238867109",
+      "file": "textures/216.webp",
+      "name": "img_ex_lock",
+      "width": 216,
+      "height": 100,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6189679324909027698",
+      "file": "textures/217.webp",
+      "name": "img_tree_m02_dissolve",
+      "width": 124,
+      "height": 284,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6265213587045621092",
+      "file": "textures/218.webp",
+      "name": "ribbon",
+      "width": 512,
+      "height": 368,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6280409028356781806",
+      "file": "textures/219.webp",
+      "name": "img_normal_unselected",
+      "width": 212,
+      "height": 92,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6354478769493257506",
+      "file": "textures/220.webp",
+      "name": "img_shadow02",
+      "width": 44,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6369008656442184868",
+      "file": "textures/221.webp",
+      "name": "kv1_entry_blur",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6371559839855386582",
+      "file": "textures/222.webp",
+      "name": "img_gold_01",
+      "width": 1180,
+      "height": 196,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6494915514825304564",
+      "file": "textures/223.webp",
+      "name": "fire_r_glow",
+      "width": 204,
+      "height": 204,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6535053481328159595",
+      "file": "textures/224.webp",
+      "name": "img_iron_shadow02",
+      "width": 72,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6679266820932693123",
+      "file": "textures/225.webp",
+      "name": "trackpoint_l",
+      "width": 88,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6722513661924359212",
+      "file": "textures/226.webp",
+      "name": "img_title",
+      "width": 160,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6785816110709806053",
+      "file": "textures/227.webp",
+      "name": "img_lake_deco_04",
+      "width": 68,
+      "height": 68,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7034910097072121021",
+      "file": "textures/228.webp",
+      "name": "disk",
+      "width": 1024,
+      "height": 352,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7045190979853849234",
+      "file": "textures/229.webp",
+      "name": "mask_bg",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7046184948955691576",
+      "file": "textures/230.webp",
+      "name": "img_lake_deco_05",
+      "width": 284,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7144023802023245889",
+      "file": "textures/231.webp",
+      "name": "kv1_entry_logo_shadow",
+      "width": 492,
+      "height": 176,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7215929555813175361",
+      "file": "textures/232.webp",
+      "name": "img_tree_m01_dissolve",
+      "width": 324,
+      "height": 392,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7217528271163724822",
+      "file": "textures/233.webp",
+      "name": "btn_line",
+      "width": 8,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7240611195822433847",
+      "file": "textures/234.webp",
+      "name": "gold_flow",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7345585105582697648",
+      "file": "textures/235.webp",
+      "name": "kv1_entry_tree",
+      "width": 960,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7349781111557327204",
+      "file": "textures/236.webp",
+      "name": "img_tree_bg_white",
+      "width": 804,
+      "height": 704,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7393277138668290468",
+      "file": "textures/237.webp",
+      "name": "progress_max_shadow",
+      "width": 52,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7487914568413805046",
+      "file": "textures/238.webp",
+      "name": "bg_ex",
+      "width": 268,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7593021155965647518",
+      "file": "textures/239.webp",
+      "name": "branch_01",
+      "width": 116,
+      "height": 96,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7651942404800644317",
+      "file": "textures/240.webp",
+      "name": "img_cloud_loop03",
+      "width": 564,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7677391194535335497",
+      "file": "textures/241.webp",
+      "name": "sprite_white",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7696603599097475234",
+      "file": "textures/242.webp",
+      "name": "img_tree_m02",
+      "width": 124,
+      "height": 744,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7697519542121467143",
+      "file": "textures/243.webp",
+      "name": "img_iron_shadow04",
+      "width": 68,
+      "height": 76,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7736650011001564128",
+      "file": "textures/244.webp",
+      "name": "disturb_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7779680684880589694",
+      "file": "textures/245.webp",
+      "name": "img_people_01",
+      "width": 544,
+      "height": 120,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7789299772724741311",
+      "file": "textures/246.webp",
+      "name": "switch_frame",
+      "width": 60,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7991663812540049786",
+      "file": "textures/247.webp",
+      "name": "img_iron01",
+      "width": 216,
+      "height": 76,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8055560788846702821",
+      "file": "textures/248.webp",
+      "name": "img_castle_07",
+      "width": 76,
+      "height": 188,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8129751173230888019",
+      "file": "textures/249.webp",
+      "name": "img_s_lock",
+      "width": 216,
+      "height": 100,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8460733053481897109",
+      "file": "textures/250.webp",
+      "name": "icon_medal",
+      "width": 40,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8492305933748168784",
+      "file": "textures/251.webp",
+      "name": "bkg03",
+      "width": 960,
+      "height": 628,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8623207774551423269",
+      "file": "textures/252.webp",
+      "name": "kv1_title_fire_02",
+      "width": 372,
+      "height": 252,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8688635064518750699",
+      "file": "textures/253.webp",
+      "name": "progress_line",
+      "width": 8,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8713398775016002907",
+      "file": "textures/254.webp",
+      "name": "icon_stage_rank_2",
+      "width": 44,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8717699774270426757",
+      "file": "textures/255.webp",
+      "name": "img_house_02",
+      "width": 308,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8759373851112983959",
+      "file": "textures/256.webp",
+      "name": "kv1_bird_03",
+      "width": 60,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8906743447456001743",
+      "file": "textures/257.webp",
+      "name": "img_clouth",
+      "width": 984,
+      "height": 304,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9128878139735836718",
+      "file": "textures/258.webp",
+      "name": "frame_angle",
+      "width": 160,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9134555244816823389",
+      "file": "textures/259.webp",
+      "name": "img_cloud_loop01",
+      "width": 1847,
+      "height": 203,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9196547408247008634",
+      "file": "textures/260.webp",
+      "name": "sash_04",
+      "width": 244,
+      "height": 64,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 3,
+    "AnimationClip": 6,
+    "AssetBundle": 1,
+    "CanvasGroup": 91,
+    "CanvasRenderer": 533,
+    "Font": 1,
+    "GameObject": 820,
+    "Material": 159,
+    "Mesh": 2,
+    "MonoBehaviour": 748,
+    "ParticleSystem": 91,
+    "ParticleSystemRenderer": 91,
+    "RectTransform": 819,
+    "Sprite": 229,
+    "Texture2D": 261,
+    "Transform": 1
+  },
+  "externalFiles": {
+    "CAB-fe410533f7b6926f3000346bedf3fe7f": [
+      "archive:/CAB-658d74aab777086fc32b93f385be999a/CAB-658d74aab777086fc32b93f385be999a",
+      "archive:/CAB-4069f2380ca9d60b5fb743b320c66956/CAB-4069f2380ca9d60b5fb743b320c66956",
+      "archive:/CAB-1b70e77fd118dea4a32415ac87839ac6/CAB-1b70e77fd118dea4a32415ac87839ac6",
+      "archive:/CAB-559a9830f896916d268cbc808860c0db/CAB-559a9830f896916d268cbc808860c0db",
+      "archive:/CAB-5c102732c06b4b58997d91e3b7da192b/CAB-5c102732c06b4b58997d91e3b7da192b",
+      "archive:/CAB-73af6f522fece51508a91fccd60c68f6/CAB-73af6f522fece51508a91fccd60c68f6",
+      "Library/unity default resources"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 153233,
+      "sha256": "c9f8959e7a3ddf42b1285ad46fe51b1de91da8b63ec7d9dd87d27ac343280893"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 16832055,
+      "sha256": "711447a9a451bc37a47ba780e72ce76905337103754f8b62661e22ab434f8c60"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 1265254,
+      "sha256": "5a49f93fabe24bc335c34645d93dc622b1bff84e8f24710ae83a814b2665426e"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 21798,
+      "sha256": "4ebed1e4fc645e5a11e892c43b03c38158a556bffc42f00d182716cdef9ae801"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 4294,
+      "sha256": "36c5e77931857dae22f48d0cbd9b69589f5b55f900cbbc0f50af8055d063912c"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 132470,
+      "sha256": "47f4343ed45db0199ca0268ec2c19360774007843e78abdec81f958896e27dbb"
+    },
+    {
+      "file": "textures/100.webp",
+      "bytes": 16226,
+      "sha256": "1eeeb4be25cd2e4e6bdc7d058f521b50825ea084b17c83d032dcc50f9a47e740"
+    },
+    {
+      "file": "textures/101.webp",
+      "bytes": 1650,
+      "sha256": "f83ec49890d5ae226818bd49f92445b87bcd01faae7e95c7cc69d2198467ef28"
+    },
+    {
+      "file": "textures/102.webp",
+      "bytes": 115550,
+      "sha256": "be142cd6bdd8bf34bdf19bd6f0a08dbc5b86eedd1267d8590a36ec0f409d00cf"
+    },
+    {
+      "file": "textures/103.webp",
+      "bytes": 86778,
+      "sha256": "8cd2d3b98b55d85fe2baa7eb21769a91cc76b3266b923593f47bde4fcd2ffca5"
+    },
+    {
+      "file": "textures/104.webp",
+      "bytes": 560,
+      "sha256": "cec107d2f08d87ed69c4ce917b9812f728e9e60421caa9568a8875460bbef9ae"
+    },
+    {
+      "file": "textures/105.webp",
+      "bytes": 1110,
+      "sha256": "1311bd8f37804e26cbe48169f034218de648c11dfa11a827c11dcfd5f4dbb890"
+    },
+    {
+      "file": "textures/106.webp",
+      "bytes": 22712,
+      "sha256": "4928993927561aae6238bd5b631f0a35ff935e992251f55508cd4d4e14572dff"
+    },
+    {
+      "file": "textures/107.webp",
+      "bytes": 54884,
+      "sha256": "0f9e70039e5e5bc95871ce87ef67845bd164eca96acdeb9f2995c2e03df4d192"
+    },
+    {
+      "file": "textures/108.webp",
+      "bytes": 197480,
+      "sha256": "c462d3e6c75021e5568806bb7acbeb1e234489bef07a0ed564bfb224455a21d5"
+    },
+    {
+      "file": "textures/109.webp",
+      "bytes": 29978,
+      "sha256": "141192edaa07a8151b28eabb7799ee13d269d50d878f62752025c236efe896fe"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 49980,
+      "sha256": "1d51942bd2a15887eea8f94d2a930d6314d77c560878825549bed4e40c41b669"
+    },
+    {
+      "file": "textures/110.webp",
+      "bytes": 60,
+      "sha256": "aac3dc6fc53769fe4ddf7a38030e1c06d11ce001769c615f314ea50dec3732ac"
+    },
+    {
+      "file": "textures/111.webp",
+      "bytes": 42964,
+      "sha256": "8efc19efc9fefb903cdf1ed3f50aed512d2c5abc8d22e19d1b2d1b629491d926"
+    },
+    {
+      "file": "textures/112.webp",
+      "bytes": 346070,
+      "sha256": "d3f57c97add831c95b3b2b12303ce9822ab99cab2944f588cbeb0e380ede0aa6"
+    },
+    {
+      "file": "textures/113.webp",
+      "bytes": 4024,
+      "sha256": "875b14e86afcb315038d3d20165df184ef14c1b26dead8bfd00be836695aebec"
+    },
+    {
+      "file": "textures/114.webp",
+      "bytes": 45230,
+      "sha256": "71116fde122cbe4600e49fcfbf4e772a319e94da24506897a11a0fefa93658c0"
+    },
+    {
+      "file": "textures/115.webp",
+      "bytes": 36804,
+      "sha256": "20021244cb7238879066c7ab7124681ab073f5c5017d4375f2659432e1e2529f"
+    },
+    {
+      "file": "textures/116.webp",
+      "bytes": 169374,
+      "sha256": "f19177e08600d1d6b9db4a1b1dccc3136b77f48afa459380f8a05f6ac63e06e0"
+    },
+    {
+      "file": "textures/117.webp",
+      "bytes": 554382,
+      "sha256": "2a824d93f9164bea2d9e27fc0ee20372d4e7737dec59068969c689fb88bb494d"
+    },
+    {
+      "file": "textures/118.webp",
+      "bytes": 58084,
+      "sha256": "53a0db62c9f3c6ec818880dbfdec599818b206bf1681e7f30d97cd444368a9d8"
+    },
+    {
+      "file": "textures/119.webp",
+      "bytes": 72804,
+      "sha256": "ffdbd1d5347f6651516b62441c2afa32767ad4c0c966de712ebbdeaac6950109"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 708,
+      "sha256": "af9fa5ae614ace2adf6c2590df94e2f11feb7fe34c93a4a161ccbeb661e1ead6"
+    },
+    {
+      "file": "textures/120.webp",
+      "bytes": 38908,
+      "sha256": "34ae15ef491e87523fd172e265bfc32bb082f5c12edda32a992e18e7576f10f3"
+    },
+    {
+      "file": "textures/121.webp",
+      "bytes": 71082,
+      "sha256": "c0e9a63193facab440ff573124d9a636dcd763ead29357722efaefc66432d09b"
+    },
+    {
+      "file": "textures/122.webp",
+      "bytes": 35854,
+      "sha256": "81dca53494d8de77ac9537b124ee0f729eb5b679f4a609b69d19fbcf1025a6b7"
+    },
+    {
+      "file": "textures/123.webp",
+      "bytes": 385058,
+      "sha256": "b62e59e932afb057732a2c3de706aff82001f7e795b6936d7fc0802e23700bb9"
+    },
+    {
+      "file": "textures/124.webp",
+      "bytes": 5040,
+      "sha256": "3d8a7d8515b4e9eb88f1a6e7118bde933d989e415d07dcfac89405fae47be52e"
+    },
+    {
+      "file": "textures/125.webp",
+      "bytes": 659502,
+      "sha256": "f240c4575811196a464bc1d943443ca6dea455d6201857100e2cdf3497742934"
+    },
+    {
+      "file": "textures/126.webp",
+      "bytes": 2448,
+      "sha256": "e25e1e2df9ee74d11ec9036836c3fbb086fa7119f9b1b8963bbc2488c5e8cd98"
+    },
+    {
+      "file": "textures/127.webp",
+      "bytes": 13738,
+      "sha256": "5e70dacc8069b8589d7de138448573e970242cd59f1f56855b1adcd6768c20a9"
+    },
+    {
+      "file": "textures/128.webp",
+      "bytes": 153442,
+      "sha256": "2739aa4f3e211be9be003295d6b5aa2a6e5b3a6e21e24f6b0283bb49a014d7b5"
+    },
+    {
+      "file": "textures/129.webp",
+      "bytes": 6092,
+      "sha256": "1f5844765ea6cffc8775c887bf26bd017c9d7a77ed574af1eadac99dc8dad3b0"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 700,
+      "sha256": "a2a9516a64508242102361f668dd44213a4d2e09ab2e3444a7dae283e9d0fcc6"
+    },
+    {
+      "file": "textures/130.webp",
+      "bytes": 1588,
+      "sha256": "11ced98029e95bd3339bc14cdb1666d0bbfc7a07cb3a90dd29343874d9c8dea6"
+    },
+    {
+      "file": "textures/131.webp",
+      "bytes": 3122,
+      "sha256": "ae7e1d37c1c1b9a3f0fd4b71d040a2df579131a1a0039d1907eba3fe89a54cfd"
+    },
+    {
+      "file": "textures/132.webp",
+      "bytes": 17616,
+      "sha256": "78296ecee80d02f85f19a3794e48956ec575bb1dbae5c8f418488510eaa3ea74"
+    },
+    {
+      "file": "textures/133.webp",
+      "bytes": 148704,
+      "sha256": "e06e8d6655ac49d8276c9308d161c4025fa414485ebdc19fb309d6930c94f25b"
+    },
+    {
+      "file": "textures/134.webp",
+      "bytes": 16722,
+      "sha256": "2b66fc2984aa5ac0ce7b2483dfaf48a181b9e8360e75a54d0402783eb798d5ba"
+    },
+    {
+      "file": "textures/135.webp",
+      "bytes": 28746,
+      "sha256": "1c216be909e999240320a677705ce748aeaf24b132cdebb43c30c519b44a9007"
+    },
+    {
+      "file": "textures/136.webp",
+      "bytes": 113506,
+      "sha256": "ddec09af2bf6b6cf10d38a2175510ceeb3782c34fabef3a2e03ef7bcbfac19bc"
+    },
+    {
+      "file": "textures/137.webp",
+      "bytes": 1630,
+      "sha256": "ca97aec8cbcb529d71fe9fdc7f7d681fcb606a1f5445134200ec00006696bdca"
+    },
+    {
+      "file": "textures/138.webp",
+      "bytes": 14792,
+      "sha256": "411816dec26827194c860275423fe037796ec9749a32fe3c48287ed30de7dc6b"
+    },
+    {
+      "file": "textures/139.webp",
+      "bytes": 9344,
+      "sha256": "132bd8721997428a728a882a438bbc8af6f4a599da927da967819379ddbb0b1b"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 35220,
+      "sha256": "17a485e082d3e696ede8281b3ee6ab247fcb4ae28491fdb0dbbc2ec928c831ac"
+    },
+    {
+      "file": "textures/140.webp",
+      "bytes": 193086,
+      "sha256": "78107582a321f6a245871ebb6f250ee4f02f650011b59ed54094c87d984a7ecc"
+    },
+    {
+      "file": "textures/141.webp",
+      "bytes": 21542,
+      "sha256": "bd03b38b4a3b4c1e71e1ba4d7c3dd20f240eb6953252a5ae1a760dfd2d655c1d"
+    },
+    {
+      "file": "textures/142.webp",
+      "bytes": 4426,
+      "sha256": "4b24ae79b6b706da28648c632f6416443213283dc6bbb58b75d32973bcc39aa4"
+    },
+    {
+      "file": "textures/143.webp",
+      "bytes": 340,
+      "sha256": "5e592f1598767a94cd9bfda63a285c265469b81da01df0033c9621bf48a95050"
+    },
+    {
+      "file": "textures/144.webp",
+      "bytes": 20616,
+      "sha256": "5f5128c60bb7c5fcf75ea4c1e4126d044ed29219a4c3b47bf9c9fdcedd0e4017"
+    },
+    {
+      "file": "textures/145.webp",
+      "bytes": 144,
+      "sha256": "473889d8b6f6adb9dcfadeb84e60d0437780a203e9611d218f33a49b66d43ed1"
+    },
+    {
+      "file": "textures/146.webp",
+      "bytes": 39736,
+      "sha256": "710d71c5fe02b13b4392c840f5f4fb751ff943c01b717d5f4451c7a9c0a2b5e7"
+    },
+    {
+      "file": "textures/147.webp",
+      "bytes": 24352,
+      "sha256": "f7529741e40e2bca6c82de9ce669c07849161edc4210f6d82e0853ee0e443b73"
+    },
+    {
+      "file": "textures/148.webp",
+      "bytes": 4320,
+      "sha256": "d33afbf3fb5e38b4795fea61c52ebfec5e6bb20d84c61058610befdb089d1ca5"
+    },
+    {
+      "file": "textures/149.webp",
+      "bytes": 1918,
+      "sha256": "382ba22c393351d27bbac5be3dcf6d7f1c9e78a57705d498bc3d629a657c004b"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 54978,
+      "sha256": "7f081266a0662d2c8fedc74dfaa89624ff37396bb08c008a24f22db50e45e51f"
+    },
+    {
+      "file": "textures/150.webp",
+      "bytes": 38454,
+      "sha256": "19c8b226d8507a41095c7f917b3e49877bc6975971dc8b4c527dfcbb308d2d85"
+    },
+    {
+      "file": "textures/151.webp",
+      "bytes": 16270,
+      "sha256": "e5957ec46c6d4977fa1f047ac72ded86ea63e7c12a9435269059fe43d8822ff8"
+    },
+    {
+      "file": "textures/152.webp",
+      "bytes": 92038,
+      "sha256": "f6b8173dd798dd1282658ba0c9fac2ef296e371da7ce448167620fb14607d6a7"
+    },
+    {
+      "file": "textures/153.webp",
+      "bytes": 6330,
+      "sha256": "225c5d608e53892829a760ed6ab9ec622f0d64484b3073f23495a2b19a52a258"
+    },
+    {
+      "file": "textures/154.webp",
+      "bytes": 43978,
+      "sha256": "310a6293f4d97296ddd7369bd3a65ce8415df072e17ba4ca16707bbab4a231ea"
+    },
+    {
+      "file": "textures/155.webp",
+      "bytes": 19772,
+      "sha256": "7835412e85bfec02b800b927cb658b1954ac2f9b39f049c37b18c1855292bb91"
+    },
+    {
+      "file": "textures/156.webp",
+      "bytes": 104526,
+      "sha256": "028be6e7534764194ccc34202e46fda0199d964c222a4b543f79fcac8d6e8db7"
+    },
+    {
+      "file": "textures/157.webp",
+      "bytes": 73882,
+      "sha256": "0587d0de18aa8e28aaae4b8c9de249d6dad385e3a76c7f4bca28b9a1e06362f2"
+    },
+    {
+      "file": "textures/158.webp",
+      "bytes": 18824,
+      "sha256": "a4439926b8b30fd076f16bfc0f20e3eac205ae6cfc662bbf062386f9b82c6db2"
+    },
+    {
+      "file": "textures/159.webp",
+      "bytes": 393700,
+      "sha256": "3371577b4660023540fd18141cbe72c42eccc904f33f63b8ef5ffb3c0dc86235"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 41456,
+      "sha256": "cdaec3b7227431cd5155278d7002e00459d550ec078375eb531777fc9d19714d"
+    },
+    {
+      "file": "textures/160.webp",
+      "bytes": 6744,
+      "sha256": "65d676dafc9a3ea082ade6aa287a458341cf5276796e71950a143fabcb610d20"
+    },
+    {
+      "file": "textures/161.webp",
+      "bytes": 678456,
+      "sha256": "dad4195826c0551f519c5566cbf04c72e26583f1725392dc4e4c2b65210c91e9"
+    },
+    {
+      "file": "textures/162.webp",
+      "bytes": 450,
+      "sha256": "b704a4183053b0fbdb4da4854cd533094ee34858e6a02a927bf6261844eac749"
+    },
+    {
+      "file": "textures/163.webp",
+      "bytes": 270,
+      "sha256": "2b0823d9a07ef0b2b392ecebd24ca9654b9f06f18fd52ba08ad4e76398877327"
+    },
+    {
+      "file": "textures/164.webp",
+      "bytes": 119724,
+      "sha256": "bfdcdcc3191af6c103b103dd907842b2b9b7acbaba918b8f8875e203ec63cb41"
+    },
+    {
+      "file": "textures/165.webp",
+      "bytes": 126,
+      "sha256": "f6a03b076f9b3395bb095005b79d9e67bb7def40af69baabdbc21725e571cc31"
+    },
+    {
+      "file": "textures/166.webp",
+      "bytes": 373374,
+      "sha256": "97371a09e836dae9b8d1794c46f749ef3f3259486752cc048310c4ce4246f5ed"
+    },
+    {
+      "file": "textures/167.webp",
+      "bytes": 624,
+      "sha256": "c3c7b2dbed5ad0ff973402fe6d3c96d5b7b2b88a3a55c3792a250318a4493314"
+    },
+    {
+      "file": "textures/168.webp",
+      "bytes": 25884,
+      "sha256": "69dc7a1edb62020809e2a0713c462929f681aa7414f9eb3a7cd99f0caf5b4d86"
+    },
+    {
+      "file": "textures/169.webp",
+      "bytes": 6310,
+      "sha256": "3bef2166c7e79e4194ba98f40399c69804e6b5aafb63818674744a2c1b59ba20"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 42458,
+      "sha256": "3261567c1920e8fc1f1377751d4f15680fb799a387b6df0d89b4e49e019be7c6"
+    },
+    {
+      "file": "textures/170.webp",
+      "bytes": 25756,
+      "sha256": "bf01054a8e9315031673ff30f1546c945947f972e130d9e9a42ec14b60cf2697"
+    },
+    {
+      "file": "textures/171.webp",
+      "bytes": 196904,
+      "sha256": "12fd57bb21f798da1f5f398d32cec6873fffd5cbe0506adefb3b6929618c68b5"
+    },
+    {
+      "file": "textures/172.webp",
+      "bytes": 5266,
+      "sha256": "5c36751e890f276363a86397e8b99c3e2375f11aa105f2eb9e83fedfc7453e19"
+    },
+    {
+      "file": "textures/173.webp",
+      "bytes": 1452,
+      "sha256": "4ec810185246aae48e5d1b349d5660f26a02baf434f42c6e4b73517ee1ab8f83"
+    },
+    {
+      "file": "textures/174.webp",
+      "bytes": 18726,
+      "sha256": "038d13780792363240ca45f59abed67f10aa6b2fb021620ba998095e46637228"
+    },
+    {
+      "file": "textures/175.webp",
+      "bytes": 147136,
+      "sha256": "013e323c453eee1b78ccab7dd3007ae4a8438496bd57ffde6ebe1c609ee93cfb"
+    },
+    {
+      "file": "textures/176.webp",
+      "bytes": 7236,
+      "sha256": "847a545445a89ead72634e18ff8b0801730b46a3fe9c3aba3dced9ece0a7a6a8"
+    },
+    {
+      "file": "textures/177.webp",
+      "bytes": 55022,
+      "sha256": "10336c9c2efb13be554b5a4ea3336cf51d02f82721cdd94df616813736cf8c22"
+    },
+    {
+      "file": "textures/178.webp",
+      "bytes": 323726,
+      "sha256": "c09f8508712761ba7c7ac4e937a47deb51336cf1ec32cbbae296ac25c1f4eddc"
+    },
+    {
+      "file": "textures/179.webp",
+      "bytes": 2862,
+      "sha256": "a041e02cfc7a9fd10c4819eb92a9d79f852342c92b7f5f4fb9888db475df7303"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 25504,
+      "sha256": "96e0a9201dd56c2ac5d91340dae7fae7979c56b8e42d44b46e96e240a36ba9fc"
+    },
+    {
+      "file": "textures/180.webp",
+      "bytes": 1384,
+      "sha256": "90512279a0fbd582deffb3068ad593220e02e06c8154fe22a40fb6c589077857"
+    },
+    {
+      "file": "textures/181.webp",
+      "bytes": 17520,
+      "sha256": "040ad309e97d5227cb003c6d7dcd3b864c217c51384f205bd7f736b4178d81a5"
+    },
+    {
+      "file": "textures/182.webp",
+      "bytes": 38908,
+      "sha256": "34ae15ef491e87523fd172e265bfc32bb082f5c12edda32a992e18e7576f10f3"
+    },
+    {
+      "file": "textures/183.webp",
+      "bytes": 2552,
+      "sha256": "ecea1a0cb672a225bf8d541a69a5eed37b7d00581e0dbaae829a7a03ea07270b"
+    },
+    {
+      "file": "textures/184.webp",
+      "bytes": 2304,
+      "sha256": "152926b10370ffaa45eb826ae4a6847d3b104dd30b0c348999cd35c969f09201"
+    },
+    {
+      "file": "textures/185.webp",
+      "bytes": 2094,
+      "sha256": "2f9fa6b489d3b9327756071b3f4891dc9ebbc09d4ca905725dd623f45ceb8212"
+    },
+    {
+      "file": "textures/186.webp",
+      "bytes": 20140,
+      "sha256": "fb15948f0f72a6d9ae9441969d2a609158ddf293afe81e82ce6243faa2ed795f"
+    },
+    {
+      "file": "textures/187.webp",
+      "bytes": 106500,
+      "sha256": "f36ce1db4df3ce8603e27ac4327aaaf1abf46ca26304fe097b16b53d8a6969d9"
+    },
+    {
+      "file": "textures/188.webp",
+      "bytes": 113042,
+      "sha256": "89cdbeffa3340a21f173782ff8387514a01924bd7e36f9421144e9355d7a96fe"
+    },
+    {
+      "file": "textures/189.webp",
+      "bytes": 30220,
+      "sha256": "b3fc6308434bf990143fbffd7ad64e3a20505107e6ae72adcaabe473f89e3a5a"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 75714,
+      "sha256": "57b3869c03e8388d99a4117ab7a024902660ef356fc8f2f1b607cfa218183fa8"
+    },
+    {
+      "file": "textures/190.webp",
+      "bytes": 38,
+      "sha256": "42d578990f9fa0532cd3e5bca57da41475ccb3643a64c91f2957e4a56d992a1a"
+    },
+    {
+      "file": "textures/191.webp",
+      "bytes": 112582,
+      "sha256": "e15b3caf8e06f29f020f3900386d1235c3b8481f2d2ebfad22f8faeba653d64d"
+    },
+    {
+      "file": "textures/192.webp",
+      "bytes": 2412,
+      "sha256": "41937db289eb8b70b28e8ed2d35021bf8702166b9cac697dc5f0d5664131926e"
+    },
+    {
+      "file": "textures/193.webp",
+      "bytes": 47048,
+      "sha256": "5bfae4a048b28f31552226e3b68d9095f4459761ac5b962eeff1007c33b77a18"
+    },
+    {
+      "file": "textures/194.webp",
+      "bytes": 14026,
+      "sha256": "3996c901cc721b9b56cb80f8afe0e524496b9868e9c594c95005399bd8eeb854"
+    },
+    {
+      "file": "textures/195.webp",
+      "bytes": 88136,
+      "sha256": "b669f6b7433858a3c42156091c90989582b70539db86d9c4d1497a489399db93"
+    },
+    {
+      "file": "textures/196.webp",
+      "bytes": 20266,
+      "sha256": "8cda48800e2a716c37ce6473c190e5f5fca4d25cd3b4f0d55b412d857751032b"
+    },
+    {
+      "file": "textures/197.webp",
+      "bytes": 50030,
+      "sha256": "c801d56f06e3fa5e7e499a99dd34069cddcf93d80c28bda6327b11373d9107b3"
+    },
+    {
+      "file": "textures/198.webp",
+      "bytes": 34630,
+      "sha256": "afe8bdd78b2962c736547ce38bcea73de1f3c9911697e9edd743e39ea872ebae"
+    },
+    {
+      "file": "textures/199.webp",
+      "bytes": 26196,
+      "sha256": "8f0f105f9f20d19ecaee6a6f384cbe9cc07f5b06b522615cf5d36a258302cd03"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 145066,
+      "sha256": "c72a0d2ff421135a0d9f277829f61e538f79792a73587ff4addeef700aa0e021"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 26456,
+      "sha256": "137c89432d8760bd73e4359bc7f704c37ba29f3b8df7a3bcff0190a3c5821d4e"
+    },
+    {
+      "file": "textures/200.webp",
+      "bytes": 15250,
+      "sha256": "cd8aa498637b2be2265e8afafd0ef996df0755ba0b404acd5a3696fad4b0d26e"
+    },
+    {
+      "file": "textures/201.webp",
+      "bytes": 10292,
+      "sha256": "a86ce35dc69a6ea2639f556620aa2601db71e43ecf1a7ec32fe40d4a6c7e65d3"
+    },
+    {
+      "file": "textures/202.webp",
+      "bytes": 45230,
+      "sha256": "71116fde122cbe4600e49fcfbf4e772a319e94da24506897a11a0fefa93658c0"
+    },
+    {
+      "file": "textures/203.webp",
+      "bytes": 83644,
+      "sha256": "3895524f520c5aea486ff9e35be12d04cde9bdeff6b6296a20e0be38acae7f8e"
+    },
+    {
+      "file": "textures/204.webp",
+      "bytes": 184,
+      "sha256": "4ba2478060f172e7189e7974c4342c98a22fd0bfb173dbb0a70c96dd10c6eddc"
+    },
+    {
+      "file": "textures/205.webp",
+      "bytes": 13510,
+      "sha256": "f068d5ed86b08bb5746efc83229631c2acb6f57ebcbacc77606bcc02439eff1b"
+    },
+    {
+      "file": "textures/206.webp",
+      "bytes": 12578,
+      "sha256": "2c92dac13eb0a33409af41204a1a5bcfdc9561aeda1f16fab7b57af320ba06bf"
+    },
+    {
+      "file": "textures/207.webp",
+      "bytes": 2390,
+      "sha256": "92e4c8e01ce1de91e0dbf5e11410b569a174232feaf47c823464304e7db286a0"
+    },
+    {
+      "file": "textures/208.webp",
+      "bytes": 1150,
+      "sha256": "913119dfe7d32ee3f7491bb83d0ddea22553c035550eaf483b6e7013095c92b3"
+    },
+    {
+      "file": "textures/209.webp",
+      "bytes": 82992,
+      "sha256": "4e6700561a6494e8c12bb6e5761316637cebf52cc11bd8900829139b6ea4d537"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 710,
+      "sha256": "f1a7884f9b12e8246a1fbe7073f97b338995c0eaf0507c85985c627e2b34dbd2"
+    },
+    {
+      "file": "textures/210.webp",
+      "bytes": 581698,
+      "sha256": "ec3c6a72cfd72cfa5477b9bca2d85a750a53c00662784e09f03a995bfdff3996"
+    },
+    {
+      "file": "textures/211.webp",
+      "bytes": 22096,
+      "sha256": "7892a1541ef49edc2c9d8aef12646a7095c0fd1be8c3cbef051a59316e56146c"
+    },
+    {
+      "file": "textures/212.webp",
+      "bytes": 25258,
+      "sha256": "0a581afb4e76dee582f93787e08b3259a9466454dda1b2f8a67ceada914ba6f2"
+    },
+    {
+      "file": "textures/213.webp",
+      "bytes": 8830,
+      "sha256": "120fcd144cba353a71d9b8bebe1891134b063966834b0496636395bbc073ae6a"
+    },
+    {
+      "file": "textures/214.webp",
+      "bytes": 46928,
+      "sha256": "488914c6978dea14efff496acc32a33289107769c365b0c7526f48cd240c5716"
+    },
+    {
+      "file": "textures/215.webp",
+      "bytes": 83752,
+      "sha256": "3c7d8ce97e390c34cea568671a3fef079d83bff38612641e508367526d412049"
+    },
+    {
+      "file": "textures/216.webp",
+      "bytes": 14058,
+      "sha256": "c7ed29ee109e145efa33003b56a0836a6b85f0f708eac2a7864b55d9c70d15d5"
+    },
+    {
+      "file": "textures/217.webp",
+      "bytes": 9406,
+      "sha256": "fb773770d8b04f16875a62a179caf5ff24b57c3e2f58806ee372e330c9a85ab2"
+    },
+    {
+      "file": "textures/218.webp",
+      "bytes": 73870,
+      "sha256": "d8b0d3b344d2223933c19f1508c974b4dd48cceb12b6500c6ae3bafa83846a72"
+    },
+    {
+      "file": "textures/219.webp",
+      "bytes": 18794,
+      "sha256": "343e2ddf171c5c5518d8881140b5c804d22d050eecef860cb8c45623d65279d1"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 22408,
+      "sha256": "aa99653131bf925e0e77885ec65a5d16c87210658c63c6d97910ca1f7aa3c251"
+    },
+    {
+      "file": "textures/220.webp",
+      "bytes": 2300,
+      "sha256": "4682c820c0963e6576c9c3420d755848fa1b84dc493de36894d8056a5af42d0e"
+    },
+    {
+      "file": "textures/221.webp",
+      "bytes": 63846,
+      "sha256": "aaedd0bc3db912bc31cbe7f3dbf993d88f66a43126f2f42dce3c868ce4d0c95e"
+    },
+    {
+      "file": "textures/222.webp",
+      "bytes": 220530,
+      "sha256": "644467adb3b7b4eb2e1c7581d07edbd29e88a0eec339ba53a7642644bc18ee62"
+    },
+    {
+      "file": "textures/223.webp",
+      "bytes": 6160,
+      "sha256": "feec8e9aee8818d0fc914679464f7457bbebea641bdbe27de237fbace4494ff9"
+    },
+    {
+      "file": "textures/224.webp",
+      "bytes": 1254,
+      "sha256": "1216e1bf19a8022f62d8d84b7bcb113659fba5cfac9a2fefeb3f66ecdb9c96db"
+    },
+    {
+      "file": "textures/225.webp",
+      "bytes": 3104,
+      "sha256": "205645d10645082a73706a6b260d67bdddaa24ef1c419b8a86348a34ad8efa04"
+    },
+    {
+      "file": "textures/226.webp",
+      "bytes": 12966,
+      "sha256": "5e3ed79479ff0aa13e94c8145330ddc5e10b8d44ee79ef88113d6846b1bc5274"
+    },
+    {
+      "file": "textures/227.webp",
+      "bytes": 972,
+      "sha256": "e4b61db6c11ddd0544004968ee6a376634f438e1f5928300d65fea140ed72049"
+    },
+    {
+      "file": "textures/228.webp",
+      "bytes": 205290,
+      "sha256": "34bd3ee676426ab555a6414ff312982e27cee91014ea1a9da491e79fb7611671"
+    },
+    {
+      "file": "textures/229.webp",
+      "bytes": 270,
+      "sha256": "2b0823d9a07ef0b2b392ecebd24ca9654b9f06f18fd52ba08ad4e76398877327"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 9318,
+      "sha256": "2c20af1107f11f1a2bedc372b621cf28a2378a591f809dd536a941d050ae6079"
+    },
+    {
+      "file": "textures/230.webp",
+      "bytes": 1926,
+      "sha256": "fcd8e38cb1fdd2d0936623f1abdf2b46e641033b417ac2a145d27e1e1d9fb17d"
+    },
+    {
+      "file": "textures/231.webp",
+      "bytes": 16128,
+      "sha256": "64a131ba97b77ebadcaf5b0aadaa836b2c5b25a8adb821b0cbe29a20a36da5b0"
+    },
+    {
+      "file": "textures/232.webp",
+      "bytes": 59106,
+      "sha256": "b03fe17f01da57bb15cba227e47889d3a78a820c0440df395f2fa2664a626b4b"
+    },
+    {
+      "file": "textures/233.webp",
+      "bytes": 116,
+      "sha256": "1dcbb2a49f043f95fca587a2e1717eee8262c6735837f260a7370e8b9cc0789e"
+    },
+    {
+      "file": "textures/234.webp",
+      "bytes": 111026,
+      "sha256": "d1ff957917038d210d96e9de0763d7ffa22615d12db58a9890308e12c97d6e50"
+    },
+    {
+      "file": "textures/235.webp",
+      "bytes": 679092,
+      "sha256": "8d8d576158cc6fb6f60c8220a7256cfb1e4161680dba6958ca82e476afd0029a"
+    },
+    {
+      "file": "textures/236.webp",
+      "bytes": 444986,
+      "sha256": "f4de5d46cd54a53255918f40f168ee4108c46458ac597c98b2e6b1013afae095"
+    },
+    {
+      "file": "textures/237.webp",
+      "bytes": 1520,
+      "sha256": "9217850a51886eeebfea7cea703344ba4b39b088616a02980b6d4f95f572f254"
+    },
+    {
+      "file": "textures/238.webp",
+      "bytes": 31252,
+      "sha256": "de18f7dda17c837925b94cf01cd9b53f22d1a18de50655c249c598a4ca906cd0"
+    },
+    {
+      "file": "textures/239.webp",
+      "bytes": 7244,
+      "sha256": "3e9d69c187f03ede9cd32b6c285a14d51caa36b49519078e0fac9cd7bd281a46"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 1009054,
+      "sha256": "26fb3d2bea532d2b9dfe61dbbb2b9b14f03bd9febd92edc7d203d29059430633"
+    },
+    {
+      "file": "textures/240.webp",
+      "bytes": 10730,
+      "sha256": "f50e958f065ec26c4c5b2bec48c44c197d1fd6ff5274de466ae9b08130c5c59f"
+    },
+    {
+      "file": "textures/241.webp",
+      "bytes": 60,
+      "sha256": "aac3dc6fc53769fe4ddf7a38030e1c06d11ce001769c615f314ea50dec3732ac"
+    },
+    {
+      "file": "textures/242.webp",
+      "bytes": 32142,
+      "sha256": "7601f6a8e3377b1a42aa6f15be00dcc98ee0c97e241d8c1eb06cc3812aafe457"
+    },
+    {
+      "file": "textures/243.webp",
+      "bytes": 1368,
+      "sha256": "933c459446f40cd79b5fd60e4315edebf7cc259abecf710585319c1480e04702"
+    },
+    {
+      "file": "textures/244.webp",
+      "bytes": 47646,
+      "sha256": "ace9abd00a03d521d8c0cd8f606b3dcebe9bf178946d15c5d0b0888b6628a84b"
+    },
+    {
+      "file": "textures/245.webp",
+      "bytes": 46368,
+      "sha256": "138934c93077c974a92cfcd2e8bf362c0ac51a1ed9794b018bbf0fdc53483703"
+    },
+    {
+      "file": "textures/246.webp",
+      "bytes": 2130,
+      "sha256": "ea07ba6d100b4a55e0e3d7f788a1bcdc61b24200d47329d197c016cbac56cd1a"
+    },
+    {
+      "file": "textures/247.webp",
+      "bytes": 2050,
+      "sha256": "6c4958b374016e39336ca5d04742ebc211f1fb3eca99e6ac7b00b742d1c0803b"
+    },
+    {
+      "file": "textures/248.webp",
+      "bytes": 14844,
+      "sha256": "b0c22953db01d5cb06669575081478451a3dbad37e549506a0b0939d7509ff92"
+    },
+    {
+      "file": "textures/249.webp",
+      "bytes": 17726,
+      "sha256": "0e2fe173e733e3b61a786d306c9e1e00fa2f5173d0b416bb2b6caafe5d4afb03"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 33254,
+      "sha256": "eb226e3eaf72348dac1c2a74840349c3e82cd6ab92ca4aef3958a515f9ce00af"
+    },
+    {
+      "file": "textures/250.webp",
+      "bytes": 1842,
+      "sha256": "65a1f3f500153c07d2013bb057c242e0677300fad9ce7e13b6900ba42a182a05"
+    },
+    {
+      "file": "textures/251.webp",
+      "bytes": 608110,
+      "sha256": "dad02186c2537da89786a52fb0b000635417587993671de2150a3c5e3e110f18"
+    },
+    {
+      "file": "textures/252.webp",
+      "bytes": 31114,
+      "sha256": "0b20dacd4ed7b18e0a25ed8134dc1b468ea641af77d14102c2be0be39783c2a5"
+    },
+    {
+      "file": "textures/253.webp",
+      "bytes": 136,
+      "sha256": "621fce37c6946fa82d8f70849e52b375b699d11e9e95577ffaad932c31910c06"
+    },
+    {
+      "file": "textures/254.webp",
+      "bytes": 2140,
+      "sha256": "99c12188419cc9db4c1fe2a0952c41e94b92ea57c4f844b52bf44267f51b8b3c"
+    },
+    {
+      "file": "textures/255.webp",
+      "bytes": 7226,
+      "sha256": "474dfa9f2cfd49b8b3a7adc4fb3a6002d5bd5fadf623063996e39e2a4acefd33"
+    },
+    {
+      "file": "textures/256.webp",
+      "bytes": 2374,
+      "sha256": "8a0099db4b9da269dc8ecb1e5c6971dcfcef32cd0844ef3610c893ed32a72ef7"
+    },
+    {
+      "file": "textures/257.webp",
+      "bytes": 191984,
+      "sha256": "37f6f97f7a0914c9b21a0f4911788e78b78781f8a2ed07d3406b83a723a5e469"
+    },
+    {
+      "file": "textures/258.webp",
+      "bytes": 544,
+      "sha256": "e1a3259b5dd4ced2eb19c74556b66601a1aaec62d1eae7c5afef82346b59e778"
+    },
+    {
+      "file": "textures/259.webp",
+      "bytes": 164000,
+      "sha256": "236ca78a80cb082e5ef7323326223c8d0a4452ebff18e7a991b55b4dd675ad42"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 17044,
+      "sha256": "c51ddc9c7dd0a77785695818f49a556c05e8787691581def8071d4e0cd56624b"
+    },
+    {
+      "file": "textures/260.webp",
+      "bytes": 10084,
+      "sha256": "b8c50df8c464adee5194ccef7e0f7e289ef3a3dcb8e998f8f0e9208227a5f6aa"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 31318,
+      "sha256": "da7ab1614adde869796bbc75270982ea2c516b8036abcfa9d8bbb3fdec3aca35"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 11452,
+      "sha256": "4e602818301b4a41d6e7809d5434dd01a81a2ffa21c91fe599fd336790db4d41"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 19186,
+      "sha256": "c1386638146580ce316456e7e59c77a1befc48450bd9314ca25e0279c6ebe3f7"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 277946,
+      "sha256": "711c28e214e09376b362b8287f59c16ebc330ee75f165de897061fb45cd34399"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 382114,
+      "sha256": "de1e9ea70754364d8eb57a05f43798a8e460b3c53a4d2d2cca4d309540204a0a"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 5136,
+      "sha256": "10774625682b3e981328249b647f0b901d17653fb878385b0770a00dac99b803"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 47734,
+      "sha256": "d8bbea3158d258f7cf1c3cb621b528d37c3248e379ae6b052678f36950be190f"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 1940,
+      "sha256": "1370049a941c3e67d31905df3b7b0b4ac6cee02054b5451beb2fb38a30b0ca45"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 210298,
+      "sha256": "c7beb6817acf5469fbff54d6a4803d5f698f43fe8799a373ce82ac756a3dede1"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 27606,
+      "sha256": "b738b9437e44743d9964b3675c14aacb545b9dc3eef6e847e8bfd9eb9716b829"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 1250,
+      "sha256": "6ae4c087dcf7625c6f0e3b67c6981ae87079555202f44869d646b39964e6fcdc"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 33794,
+      "sha256": "54f320d48ce80f1adfaefdd6c8c5262702b80b73162dfd1f1543b5177eb3c198"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 22446,
+      "sha256": "83b02d9585f03e20e8719ca29967be65997de238d7e8ef53bc142724ec3deb5a"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 60,
+      "sha256": "aac3dc6fc53769fe4ddf7a38030e1c06d11ce001769c615f314ea50dec3732ac"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 134,
+      "sha256": "8408ee5072e00063adb1920f9d83b435eb015bc467014c7d653f560a4f557a36"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 4270,
+      "sha256": "dd5fa8a63a8a7c76c33af768b2a1e352f9e017592d9d2aa599b356b18463a72e"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 10976,
+      "sha256": "118bdf8c3736d5cbe47218bacce3b9e59f3bb886e1a11267b3a62ed029d719c8"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 24322,
+      "sha256": "2a9ef2d30c2479b22a0e22d4efdaf5b5c732acff1685583178ff416ab9263b15"
+    },
+    {
+      "file": "textures/43.webp",
+      "bytes": 308438,
+      "sha256": "b99e85577360c71c5996c8867dab1b4367827c08102fcc15cb10993b7c7e2421"
+    },
+    {
+      "file": "textures/44.webp",
+      "bytes": 12732,
+      "sha256": "f08be20084f36083d3c18bde7ba826704d390198055e01517096f7f1c9b52559"
+    },
+    {
+      "file": "textures/45.webp",
+      "bytes": 22430,
+      "sha256": "d84ef753883353649011b673dd83d67e0de5a19f37947ac3acdc39e13e55af81"
+    },
+    {
+      "file": "textures/46.webp",
+      "bytes": 459714,
+      "sha256": "900f13c56ed2d82dbdd3514d04b55b1e70df35ab0fa1830c3ca9d8ded94413e8"
+    },
+    {
+      "file": "textures/47.webp",
+      "bytes": 566,
+      "sha256": "a54e401c062d8f10061bcca1a82e290e9e143e26569a459a146537e1e435e967"
+    },
+    {
+      "file": "textures/48.webp",
+      "bytes": 1100,
+      "sha256": "bc9df0bd2e29616db5921b73bd7e3fce50d20586c58313fdf79fb6d7c575172c"
+    },
+    {
+      "file": "textures/49.webp",
+      "bytes": 480184,
+      "sha256": "320db547f94a1850867ee9d03dd2ff1632a721d3c88d6dfcfd085ef832942047"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 93290,
+      "sha256": "0ee1add95018bbfe7d16f340d18f26dcc37edc51d36da70970f2092a1fcd932e"
+    },
+    {
+      "file": "textures/50.webp",
+      "bytes": 3026,
+      "sha256": "25728705238ab8beacf958478e3b3e172194cf9a0fefc4b72fb6032fe583fac9"
+    },
+    {
+      "file": "textures/51.webp",
+      "bytes": 43022,
+      "sha256": "5e6328d45651799fe66b67fc4a121c607ebbe819b043eaa105c298a52332ec96"
+    },
+    {
+      "file": "textures/52.webp",
+      "bytes": 1328,
+      "sha256": "a029ab75cbb87880eb597513e59b57cad957755dfc02d6cebbe131dfd2528783"
+    },
+    {
+      "file": "textures/53.webp",
+      "bytes": 20580,
+      "sha256": "f134d21f1004fd3b2d796429e65681d29fbe8b651b8780189e3edc9d58a6bfbf"
+    },
+    {
+      "file": "textures/54.webp",
+      "bytes": 903988,
+      "sha256": "4916f9bc0e288b8380d1e41305b0ac3b81af44161072ede056d5c4bd84f5b85f"
+    },
+    {
+      "file": "textures/55.webp",
+      "bytes": 11780,
+      "sha256": "4195998f0e527c1937165d32977738293a5c2623f5df475750b8264408c36dc1"
+    },
+    {
+      "file": "textures/56.webp",
+      "bytes": 7928,
+      "sha256": "64919ba722eeaf5098f34740d40388571b24ee4d57bd9251f51a298688a962bc"
+    },
+    {
+      "file": "textures/57.webp",
+      "bytes": 12458,
+      "sha256": "1e7577d675191ed050ec2077ce13c68ced77c843a86b21961277ddac816313f0"
+    },
+    {
+      "file": "textures/58.webp",
+      "bytes": 47646,
+      "sha256": "ace9abd00a03d521d8c0cd8f606b3dcebe9bf178946d15c5d0b0888b6628a84b"
+    },
+    {
+      "file": "textures/59.webp",
+      "bytes": 23966,
+      "sha256": "5e60c5a16f735648ce6025ee9d0a30c0536caabc640c119b6cd0ed8fa8ca05f7"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 1600,
+      "sha256": "245b34fc194d4ce2db6e3407d7369f4104984cf25eee7a377bcc1be668fd54c9"
+    },
+    {
+      "file": "textures/60.webp",
+      "bytes": 1014,
+      "sha256": "4b4569db2d4cfcaf6a85e01033089d9c1a50979a01e42bc562de5171b4e51843"
+    },
+    {
+      "file": "textures/61.webp",
+      "bytes": 14784,
+      "sha256": "377ffa8426b9a56680a86932e82138d5f25ac70f9609a3ecf7084848e8f6bb68"
+    },
+    {
+      "file": "textures/62.webp",
+      "bytes": 13714,
+      "sha256": "b845df36ff675a0519a781443926238e3fcf8699448513c4bb90e69e487c584f"
+    },
+    {
+      "file": "textures/63.webp",
+      "bytes": 14034,
+      "sha256": "be21440dfd713bd510dd2b42402856c79875832ba957c045f28c6a283b26a4e9"
+    },
+    {
+      "file": "textures/64.webp",
+      "bytes": 11874,
+      "sha256": "0bdba407f2e80103e4d1adce4901da79c22f71254133e215e69c20a360df2b1a"
+    },
+    {
+      "file": "textures/65.webp",
+      "bytes": 67670,
+      "sha256": "50c885259f627162de07e58da124d79968aedf63c4b5ab3e5373a4bf6f089a42"
+    },
+    {
+      "file": "textures/66.webp",
+      "bytes": 19926,
+      "sha256": "b257bf69c19ea0d4b451dabf32c6fc50c8bd72d66bcf6e5ca77a858c3d40e74e"
+    },
+    {
+      "file": "textures/67.webp",
+      "bytes": 79886,
+      "sha256": "b4169ee16be7f6dce370f4c7927131bf51c2d70fbf5ad31280d2dd9103a8256a"
+    },
+    {
+      "file": "textures/68.webp",
+      "bytes": 8104,
+      "sha256": "75b753e73a1f3f3092a0a17fc296ed3d6cbecb2d4be05bb28576880db40d62fd"
+    },
+    {
+      "file": "textures/69.webp",
+      "bytes": 57422,
+      "sha256": "a3e7da7be70a46edfd70c185885118f520645f11fa6bd3655ab19276a6cbbfe1"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 57760,
+      "sha256": "e4dc255f0484d1320dbb7f02eb765ceec0aa3dac2bdef3c95d5e815af2729bfa"
+    },
+    {
+      "file": "textures/70.webp",
+      "bytes": 20882,
+      "sha256": "a4fcfe6dbace4c61533c732427874b914be25a32d202d6dfa9fafe93da65e15e"
+    },
+    {
+      "file": "textures/71.webp",
+      "bytes": 55162,
+      "sha256": "b52d1342c6c91242b6a65f1cf60f4e92b4a3bb759ed5fcf9a55bcb9239b5185a"
+    },
+    {
+      "file": "textures/72.webp",
+      "bytes": 1049010,
+      "sha256": "a04a3919aaac23fb808b9493b5a50539df5f170ee1296bcae373fb338afb06dd"
+    },
+    {
+      "file": "textures/73.webp",
+      "bytes": 2848,
+      "sha256": "f7ec1544d55d7b6ec5e068c078c32980b66ea6e735e7e6d1fd70cfefb40b1195"
+    },
+    {
+      "file": "textures/74.webp",
+      "bytes": 9918,
+      "sha256": "5d40c9beb3a3523bfeb31204f3cb3fb3a400d9e0365057e9eaf3cffd52269dd9"
+    },
+    {
+      "file": "textures/75.webp",
+      "bytes": 23616,
+      "sha256": "b20665cfd09e49d86dd4b78524e8dd0bd0b6a7dc9de11adf28c2d81fbff22a89"
+    },
+    {
+      "file": "textures/76.webp",
+      "bytes": 462084,
+      "sha256": "8c72f069c5d9bdd4ecdadd9c93d4a2fa6d060303e81cc56592dd3fec6f47f614"
+    },
+    {
+      "file": "textures/77.webp",
+      "bytes": 20788,
+      "sha256": "d8b0c5fd3883c5b78f3e562ef0a5836b65db8fdc27c3994bfeec710a3bf07d8d"
+    },
+    {
+      "file": "textures/78.webp",
+      "bytes": 32344,
+      "sha256": "338f0d15ef01d9902338d9c00a73925126c7f6c9b2d035cbc2619e87569f3aa3"
+    },
+    {
+      "file": "textures/79.webp",
+      "bytes": 1864,
+      "sha256": "8a855894cee4f8f11227c8a05c6956ec2be94d837091904eecc2d4e7c48c040d"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 275814,
+      "sha256": "f14c9fb1398cac4c6ae4f95f6554c198a7c6370d94467118893690aa6d1e6821"
+    },
+    {
+      "file": "textures/80.webp",
+      "bytes": 16520,
+      "sha256": "96918264fc72e2a2918f5f8356c73d1e666e58eb9452bef4b74c8e087c859e30"
+    },
+    {
+      "file": "textures/81.webp",
+      "bytes": 23768,
+      "sha256": "0d2eaf2abeaaa6b7d9d80ac39114fd2f73a9a936b5162982df03453cc9b4a3d3"
+    },
+    {
+      "file": "textures/82.webp",
+      "bytes": 25360,
+      "sha256": "90bee110c42b7914fea11acd86409af3af61dece1ff3ac44d10b00a6da273ed4"
+    },
+    {
+      "file": "textures/83.webp",
+      "bytes": 9344,
+      "sha256": "132bd8721997428a728a882a438bbc8af6f4a599da927da967819379ddbb0b1b"
+    },
+    {
+      "file": "textures/84.webp",
+      "bytes": 134362,
+      "sha256": "06360fb7ac361499bfe5b7695822b1d4d8032bdcc445805cfefad09d5997bb9c"
+    },
+    {
+      "file": "textures/85.webp",
+      "bytes": 35580,
+      "sha256": "f6fd3048c1b0a2dc8dcfa09adac5a814d4bd0a6e4bed8b3fecc440683f9708c2"
+    },
+    {
+      "file": "textures/86.webp",
+      "bytes": 1450502,
+      "sha256": "d81618304c2699ca684ae53c859941181c526a6f51742c882ff6b98347dfe1fa"
+    },
+    {
+      "file": "textures/87.webp",
+      "bytes": 118,
+      "sha256": "50b3a065cce766627665e48f7ffd263e08ba6895d266b1808e5b3288ddb2fe5b"
+    },
+    {
+      "file": "textures/88.webp",
+      "bytes": 641356,
+      "sha256": "393742329f19f507c8668bf904855405020d5ef432cd3068caaf5ebf90cafcb0"
+    },
+    {
+      "file": "textures/89.webp",
+      "bytes": 6770,
+      "sha256": "97e223bbabbf89030493988535ee1b0fe9e7bd083ff07fe8648b804d02334774"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 146164,
+      "sha256": "3ba70d6b7e4e9784e54942b08b017ad98edff838bd620e8afca488411dce055e"
+    },
+    {
+      "file": "textures/90.webp",
+      "bytes": 1550,
+      "sha256": "dca317459ea68d9171340901538be3c21e39a86ab8ed6fa8003e0433f1c545a6"
+    },
+    {
+      "file": "textures/91.webp",
+      "bytes": 54522,
+      "sha256": "e604b45bdc30f1547e4aad80612056dfd4b6fc0d1186932a4a1bb308bd765b11"
+    },
+    {
+      "file": "textures/92.webp",
+      "bytes": 1550,
+      "sha256": "8f0ddfcdc23416326263806afdb6526a49a6b9acb2d0d7a5eb11a3861ce3142d"
+    },
+    {
+      "file": "textures/93.webp",
+      "bytes": 133966,
+      "sha256": "81a3b98cee578bf9fa0344170c778d479af8bebf94d8b0a2d985ff20b83c35cf"
+    },
+    {
+      "file": "textures/94.webp",
+      "bytes": 443242,
+      "sha256": "09016b91a5f680410f805e3ce75300236be7fac0c83a79911b33034aba800e06"
+    },
+    {
+      "file": "textures/95.webp",
+      "bytes": 157786,
+      "sha256": "3b44cf10de77206f6a80ff2139c3e16c1c4e9553435d431bb7ea32004969239f"
+    },
+    {
+      "file": "textures/96.webp",
+      "bytes": 11682,
+      "sha256": "e7c191b8d6964105187be546b2d4e7819fc4e980fa2a7da9ee8593a3d5adab52"
+    },
+    {
+      "file": "textures/97.webp",
+      "bytes": 13122,
+      "sha256": "e9fd49d2ea02ea35c7f533242f6fc36891fa2ea7694fd91ede06e0b959f187a5"
+    },
+    {
+      "file": "textures/98.webp",
+      "bytes": 2520,
+      "sha256": "8361c076eceed6ea29cc86b596d41f17ec9d8e368df4849ef4131fb6e36c26bb"
+    },
+    {
+      "file": "textures/99.webp",
+      "bytes": 106854,
+      "sha256": "2fe732a6eebdf5f3341162c204178f9f52f76ae5f9e18578ab87f304f170639e"
+    }
+  ]
+}

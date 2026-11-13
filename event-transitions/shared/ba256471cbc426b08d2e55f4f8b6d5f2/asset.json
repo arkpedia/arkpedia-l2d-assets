@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act1multi",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "25-05-20-12-36-22_4803e1",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/165c1269485961dd8cdd761298ab9c5a12f1c80f/bundles/hot_update_list.json",
+    "bundle": "audio/custom_se/act1multi.ab",
+    "bundleMd5": "ba256471cbc426b08d2e55f4f8b6d5f2",
+    "manifestEntry": {
+      "name": "audio/custom_se/act1multi.ab",
+      "hash": "991c042c9bb3dcef38fe2a067c7094b7",
+      "md5": "ba256471cbc426b08d2e55f4f8b6d5f2",
+      "totalSize": 171299,
+      "abSize": 171866,
+      "cid": 5243
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/25-05-20-12-36-22_4803e1/audio_custom_se_act1multi.dat",
+    "archiveSha256": "06c5b5a7170f05631f66c1e66a3d976cb5b95b0d562e56cd3cedd4b334a66936",
+    "bundleSha256": "175c3519ed04a14085f9ebadad3e470703f03281622827189356c2e5ce5dbacf"
+  },
+  "animations": [],
+  "textures": [],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "AudioClip": 2
+  },
+  "externalFiles": {
+    "CAB-bf67c5ec5c316803daf4337c2f072ada": []
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "audio/-6055480214880940439-0.wav",
+      "bytes": 341872,
+      "sha256": "ceccbe9e7ea053100855df383ae4eed22c784478d82fc9ad8665b8f9158e38af"
+    },
+    {
+      "file": "audio/-868323537742573863-0.wav",
+      "bytes": 286640,
+      "sha256": "9054701dde4d40d739873634d51d60c842c59a1a4653fe848bd0d0ba0fd497d1"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 171299,
+      "sha256": "06c5b5a7170f05631f66c1e66a3d976cb5b95b0d562e56cd3cedd4b334a66936"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 736,
+      "sha256": "6e113821f13d6035f32a40520b26fcb77876fbbd62d46c3b2e80048f584eca50"
+    }
+  ]
+}

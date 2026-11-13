@@ -1,0 +1,2492 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "server": "cn",
+      "activityId": "act2multi",
+      "bundle": "audio/custom_se/act2multi.ab",
+      "asset": "shared/020f05a054d1975b354b31ba75c5d5b5/asset.json",
+      "externalFiles": [
+        "CAB-020a5bb4c05a413760d752e9b7f66aa1"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/0687f5a8b6b5050dbadce01985cbe566/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act49side",
+      "bundle": "audio/custom_se/act49side.ab",
+      "asset": "shared/08ac459c421cc74c0a5d26da79ad63a2/asset.json",
+      "externalFiles": [
+        "CAB-4db9e7fd8e324584d24ce9d690c7cf45"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/0a1f13316b10481541c7acc2892fcb68/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/0e3842fede67317726565f94f07320db/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/1087b11c722036eb6438c4ab006fd783/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/11357dc2c0270d2d867819fe590c77ad/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/11905adb12fc16e337701fb94a78ebc4/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act35side",
+      "bundle": "audio/custom_se/act35side.ab",
+      "asset": "shared/12c437ba7848dda67f392e842f77c704/asset.json",
+      "externalFiles": [
+        "CAB-362d574b53eda47e850c01816f416c54"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/16bca470c82644e54134c1743236af59/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/1af7ab5a94e47d8c6324629f4760dffe/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/1b57de587474563a0a7c3e8cab7f682c/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/24376077f83972a9c1f6f2794c8e93be/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "mask",
+      "bundle": "refs/fx/texture/mask.ab",
+      "asset": "shared/26dc1f978faeead1c75c36ca8d564f2a/asset.json",
+      "externalFiles": [
+        "CAB-92fdf60cd1676328e17f73f0bf852e97"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/26ef8e2be974c7a4249232d030bf1da9/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act55side",
+      "bundle": "audio/custom_se/act55side.ab",
+      "asset": "shared/27d038c8c27f672ced403eb0eee8f870/asset.json",
+      "externalFiles": [
+        "CAB-8a0f6b0d5c5661203413144277507732"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/294295015d08ade8432d9bdfc06ff156/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1autochess",
+      "bundle": "audio/custom_se/act1autochess.ab",
+      "asset": "shared/2c84ced958ae235984a758181371e472/asset.json",
+      "externalFiles": [
+        "CAB-e33aea32661e69fdd00b674b89734407"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/30528641097db57309354abdb71c1384/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/3136128054fc0a88cc02c08974459d44/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/328f03864f7bb875771577d2a8df1ce9/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/33723e425e8650f7980c894cbada20ed/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act50side",
+      "bundle": "audio/custom_se/act50side.ab",
+      "asset": "shared/33ccb4ecc7aca8198e1080e9d0a3599d/asset.json",
+      "externalFiles": [
+        "CAB-736ad59e59c76cf57491201de754d0da"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act40side",
+      "bundle": "audio/custom_se/act40side.ab",
+      "asset": "shared/36c31ef0639b6d97e9a395d55506da23/asset.json",
+      "externalFiles": [
+        "CAB-51169484fb1f3d773bd0d9902f2cc4ed"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act6fun",
+      "bundle": "audio/custom_se/act6fun.ab",
+      "asset": "shared/38bbaaedff9b7867b15bf2ae89d848bd/asset.json",
+      "externalFiles": [
+        "CAB-13143898490765e3ef45143a03e5e6d1"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/38cc9848887829331ec4e137579cb340/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act38side",
+      "bundle": "audio/custom_se/act38side.ab",
+      "asset": "shared/3960c5802e103cc7862fd85f7406cea1/asset.json",
+      "externalFiles": [
+        "CAB-8bbc60b3eb9b79d1e5128596261ea4e8"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/3ccf410b937a9dd8c7eb08c1d1fd334c/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/3cfbf32a6575fc0c5dd7d53204f2f30d/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/3f7c54196f54f8fb0e390a1ef03e0e74/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2vmulti",
+      "bundle": "audio/custom_se/act2vmulti.ab",
+      "asset": "shared/42b0baf1d8363c5cb82dfd99fbe50e60/asset.json",
+      "externalFiles": [
+        "CAB-cd505637314a47dc8e758b5d5e93d36e"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/4379648714e711629fc374bd700539f0/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/43b316485c3220e0eed52e75fcd4029b/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/441beb5b6228cdcf322df290b331ec27/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/45c2d7d49afe47fea4982279aa437012/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1football",
+      "bundle": "audio/custom_se/act1football.ab",
+      "asset": "shared/5056073309659b0d5bdf4d9efeb57381/asset.json",
+      "externalFiles": [
+        "CAB-ce070da29f32be08d95a1cfa0edeb0e5"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act47side",
+      "bundle": "audio/custom_se/act47side.ab",
+      "asset": "shared/505b39ee63cc944b4975133e18307f72/asset.json",
+      "externalFiles": [
+        "CAB-5a6b29e89dcc2e5bc4059effe7528435"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/50e2dd6060d613fc7ba41897ed1a7ccb/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act41side",
+      "bundle": "audio/custom_se/act41side.ab",
+      "asset": "shared/54b72d349cf1dbb5c02ac59fc95451e9/asset.json",
+      "externalFiles": [
+        "CAB-86442215f63c67fce7d4fc44c47fedf3"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act27side",
+      "bundle": "audio/custom_se/act27side.ab",
+      "asset": "shared/5764552d70051e78e5e97a88249707ff/asset.json",
+      "externalFiles": [
+        "CAB-51f9b5564ebca93c7131311c4a21cbd1"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/591b28ebdd98d73e440ea64851f78e75/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/594d35603777e705fdfc2ab17c6ff39a/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/594da49112d94c750b884fbeb179fc55/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/5b357a6a908d9aa1c7d299c880fccb1b/asset.json",
+      "externalFiles": [
+        "CAB-294654857b1679eecfb3d7d77c6c95e6"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/61eec06df3314384ddbe138dee872b35/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/627d1bba331e1c608bbe1b27b14fc3dc/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1dp",
+      "bundle": "audio/custom_se/act1dp.ab",
+      "asset": "shared/6395b20651cdb00e7aea8d8c24d475bf/asset.json",
+      "externalFiles": [
+        "CAB-045a1cf4738658f218340e1eb97a235e"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/65834d53c81c27d4ff9b7a9ce4a54c90/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/69aae1a28ba00926d1090925ad88e804/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vhalfidle",
+      "bundle": "audio/custom_se/act1vhalfidle.ab",
+      "asset": "shared/69e1e98ce5a720e1aa69890238e0a85c/asset.json",
+      "externalFiles": [
+        "CAB-5f3a0ebc9d65fa37974e3da2979e14db"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/6edd4d1499cd2c95704028a6540a7261/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/6eeaf746126a20f01a140799d55a21b0/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/712c46eb2348a8c4f9ed9dacb8094068/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act36side",
+      "bundle": "audio/custom_se/act36side.ab",
+      "asset": "shared/7158ebcfd5af73be4602b0abf2507ce5/asset.json",
+      "externalFiles": [
+        "CAB-a74ed359e7edd7690bfd4252df32bf36"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/7223c5a52debf27cb087c5fbb49d798c/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/7814e148b827d405e751dc6bd9dbc194/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/79b873d922ff3075abe0451f3debd538/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/7a360569122099e26b173de641994d2c/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/7dde3f0cef1cc7f95d1983a3f2ac0747/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act31side",
+      "bundle": "audio/custom_se/act31side.ab",
+      "asset": "shared/7e01a2fb6062597bc39f0e354eb72d8a/asset.json",
+      "externalFiles": [
+        "CAB-f350efc945b108186bec769dab068782"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act40side",
+      "bundle": "audio/custom_se/act40side.ab",
+      "asset": "shared/7f7e809a07b69425c93bd33b1c04f615/asset.json",
+      "externalFiles": [
+        "CAB-1ac99200fd70e841e6dcccaf710a33ec"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/80ae405325457f4a450f71fa5bb69a2b/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act35side",
+      "bundle": "audio/custom_se/act35side.ab",
+      "asset": "shared/83c6e0ca626d1a77b4f9f9ab025342dc/asset.json",
+      "externalFiles": [
+        "CAB-c0f135d852039f9be3437dfc6aac72ea"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act42side",
+      "bundle": "audio/custom_se/act42side.ab",
+      "asset": "shared/854800183018ade63bb3e1abd6ab85a4/asset.json",
+      "externalFiles": [
+        "CAB-7e8f8db7517890afcdead0a0e9b0a01a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act25side",
+      "bundle": "audio/custom_se/act25side.ab",
+      "asset": "shared/86954bbe3e91e0b9f1c219ba09b0da57/asset.json",
+      "externalFiles": [
+        "CAB-5ad2bf34699fcb8e415b0891a833568d"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "star",
+      "bundle": "refs/fx/texture/star.ab",
+      "asset": "shared/8902df1c83bb685e74ad9a273388be2e/asset.json",
+      "externalFiles": [
+        "CAB-3fcda8e432a735264d43b49ecbf8fbee"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/896f43b8cc7927e1b03f3e7ca8803ccf/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act46side",
+      "bundle": "audio/custom_se/act46side.ab",
+      "asset": "shared/8c64aef4ea67ab09690c1bc2531cb960/asset.json",
+      "externalFiles": [
+        "CAB-d78de05396bd98c68e695bc17c1addf1"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/93a28cbd90414478c7e1e72790f9a6c5/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/961e46fa1b1fc859c6ed14235a254bd6/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/97eec95a32e5f05760f3b0e3b6000e56/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act24side",
+      "bundle": "audio/custom_se/act24side.ab",
+      "asset": "shared/9994e4ab0013dda95bbffc0a63e4db98/asset.json",
+      "externalFiles": [
+        "CAB-27b5939111a8c190b41ed8dd397e4763"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/99fa882fe5204a749fce56dcbfaaa923/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/9b113d04b7b49624e110a0424711cf20/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/9b5b31a5f738ffb0f5ebb0831386ca38/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/9b806e0346ced166ced0708338b4a339/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/9babc6741d8654cb7c963c15710d8656/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/a1a9bf7cd48e9be81412837f253f628e/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/a1cd671323f8e80549c6d98a5755f217/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/a539c1b67a77d7468f0b36f91d718c6b/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/a6148930c175cefd2ca79e004995d3f5/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/aa39fbb4ac1a5eef4bd484bb128bad39/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/af2c901cd88e3a85f1f978e6b4482afd/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/b07a09edd1e5de25e2e602329f4432eb/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "material",
+      "bundle": "refs/fx/material.ab",
+      "asset": "shared/b730d64b72464b45586b58dd1bf9fcfc/asset.json",
+      "externalFiles": [
+        "CAB-0d0c905b03658da84d810b34eba903e0"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/b7af306cd715b226f51889da6def2bbe/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/b846be3e0a9dd652eb9ff45057536a16/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1multi",
+      "bundle": "audio/custom_se/act1multi.ab",
+      "asset": "shared/ba256471cbc426b08d2e55f4f8b6d5f2/asset.json",
+      "externalFiles": [
+        "CAB-bf67c5ec5c316803daf4337c2f072ada"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/baa56ae3b62276b39695bb58ec2de760/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/bb6ef923f727530acbce13830f54500a/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/c36f34f178409dad95a268dd7dcacda7/asset.json",
+      "externalFiles": [
+        "CAB-294654857b1679eecfb3d7d77c6c95e6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/c3c94e656b02fc4b6820893ab0bff59f/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act53side",
+      "bundle": "audio/custom_se/act53side.ab",
+      "asset": "shared/c549dea2aee1fe681468a6918adcc70b/asset.json",
+      "externalFiles": [
+        "CAB-9712b8d3f21d1b965b9434ef44eb2619"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/c6903e978207f87d17d7c3890fc64e87/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/cc980f4c337d591503447d021220cfa8/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/cdd88e4883a635406bf7f0579eb31f64/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act29side",
+      "bundle": "audio/custom_se/act29side.ab",
+      "asset": "shared/ce3e71edde4ed981d9342ce4c70f56db/asset.json",
+      "externalFiles": [
+        "CAB-51f62cd6f4737019a658dc7bf7808ec8"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1arkhub",
+      "bundle": "audio/custom_se/act1arkhub.ab",
+      "asset": "shared/d16192018cf49ed768782c35a234508d/asset.json",
+      "externalFiles": [
+        "CAB-e04f0179598cb7601436eab12ee50ed8"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/d2827d1b79399af0e8c4388433445d0c/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/d4a6910393bc78d1f73be449101d35c1/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act54side",
+      "bundle": "audio/custom_se/act54side.ab",
+      "asset": "shared/d73df4b1286e27864099780ad79ec792/asset.json",
+      "externalFiles": [
+        "CAB-98f0aa639c3a280368bf7ff429e555db"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/d78f68dbf03a241585dd0a241df39f38/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/d855eb8bc5793d6f0de1b8ee7c6ff8d8/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/d8a1bae27d05ef3400941733f2f4a319/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/d8e05b24e77e351e96d4483112ff6741/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/daaee9f321458bc04e1e1467280b37ca/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/dda0709ea92289aff2ebc36017a92cf0/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act52side",
+      "bundle": "audio/custom_se/act52side.ab",
+      "asset": "shared/e00e11812faaee00e511aa5b3bed089b/asset.json",
+      "externalFiles": [
+        "CAB-060d0d3ed4612f9871386a9cf5e147bb"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vautochess",
+      "bundle": "audio/custom_se/act1vautochess.ab",
+      "asset": "shared/e02b1fdc380523e474e4fa17bcb9136e/asset.json",
+      "externalFiles": [
+        "CAB-59fae40adcd85e6fe9aa483a34e874b7"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/e1ce3036dbf30d5f1acc9701187241f7/asset.json",
+      "externalFiles": [
+        "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/e21674f7313d0a638be023d32e64731b/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/e2a03eeac8b8d27fcd1e23d905a2424b/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act38side",
+      "bundle": "audio/custom_se/act38side.ab",
+      "asset": "shared/e413d476111a822634d114aa93499bc5/asset.json",
+      "externalFiles": [
+        "CAB-9f5d0b2f35a8737b7ae685ec61b8c178"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act44side",
+      "bundle": "audio/custom_se/act44side.ab",
+      "asset": "shared/e6d0b0f61f323979c32cd1293f76e677/asset.json",
+      "externalFiles": [
+        "CAB-59bb947603ce0cb4c345371dc4023458"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act42d0",
+      "bundle": "audio/custom_se/act42d0.ab",
+      "asset": "shared/e7b96287dca1b025d5d9afef9ad1805b/asset.json",
+      "externalFiles": [
+        "CAB-8b3432c5cc44dcb285d3df5b6ea04e8b"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/ea3872907efafe95660c7c5861d36c33/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/ec4b4bb9d278f2240881044415d69c5a/asset.json",
+      "externalFiles": [
+        "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "asset": "shared/ecaceba155c8fa817921f189296a3a98/asset.json",
+      "externalFiles": [
+        "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/edc3add55389b55645b7ff78847d26ad/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/eeaab632e3feac3527b924f22e2c049f/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act45side",
+      "bundle": "audio/custom_se/act45side.ab",
+      "asset": "shared/ef5ad5a0e606ff61e443005d75b4fdc2/asset.json",
+      "externalFiles": [
+        "CAB-277ffd8e374dc61207ce2d7e8a70c314"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1arcade",
+      "bundle": "audio/custom_se/act1arcade.ab",
+      "asset": "shared/f5361a5c880748dd2a48f85b1b5ba226/asset.json",
+      "externalFiles": [
+        "CAB-1bb97bacc40730c9be2ef3dad476fb84"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/f659c7053808bd9ded8a79e0a9e85514/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/f8404322cce8e87791bb144a36c66218/asset.json",
+      "externalFiles": [
+        "CAB-86b4d6de723dc8e66275ab5fa8a60b3a"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "asset": "shared/fea8907836990290fc4e8ad136cf7f93/asset.json",
+      "externalFiles": [
+        "CAB-294654857b1679eecfb3d7d77c6c95e6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "asset": "shared/fedf319b4ab828eb4692d707b389a0db/asset.json",
+      "externalFiles": [
+        "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "3f7c54196f54f8fb0e390a1ef03e0e74",
+      "status": "recovered",
+      "asset": "shared/3f7c54196f54f8fb0e390a1ef03e0e74/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "896f43b8cc7927e1b03f3e7ca8803ccf",
+      "status": "recovered",
+      "asset": "shared/896f43b8cc7927e1b03f3e7ca8803ccf/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "594d35603777e705fdfc2ab17c6ff39a",
+      "status": "recovered",
+      "asset": "shared/594d35603777e705fdfc2ab17c6ff39a/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "fea8907836990290fc4e8ad136cf7f93",
+      "status": "recovered",
+      "asset": "shared/fea8907836990290fc4e8ad136cf7f93/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "1af7ab5a94e47d8c6324629f4760dffe",
+      "status": "recovered",
+      "asset": "shared/1af7ab5a94e47d8c6324629f4760dffe/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "e1ce3036dbf30d5f1acc9701187241f7",
+      "status": "recovered",
+      "asset": "shared/e1ce3036dbf30d5f1acc9701187241f7/asset.json",
+      "candidates": [
+        "battle_finish_first_view_entry_normal_progress_text",
+        "battle_finish_first_view_entry_succer",
+        "stage_certain_in",
+        "battle_finish_first_view_entry_normal_reward_tween",
+        "multiv3_prepare_start_countdown_show",
+        "act3vmulti_entry_main_to_room",
+        "battle_finish_first_view_entry_fortress_progress_text",
+        "in",
+        "act3vmulti_view_arena_top_easy_in",
+        "multi_v3_prepare_sys_alloc_entry",
+        "act3vmulti_entry_main_to_match",
+        "battle_finish_first_view_entry_fortress_final_record",
+        "multi_v3_prepare_squal_check_entry",
+        "act_multi_v3_state_loading_in",
+        "act3vmulti_view_arena_top_hard_in",
+        "battle_finish_first_view_entry_fortress_final_record_new_effects",
+        "battle_finish_first_view_entry_fortress_progress_text1",
+        "act3vmulti_entry_room_to_main",
+        "quick_match_state_in",
+        "battle_finish_first_view_entry_fortress",
+        "multi_v3_prepare_top_view_entry",
+        "start_in_invert",
+        "act_fade_in",
+        "matching_banner_in",
+        "stage_choose_guest_in_2",
+        "battle_finish_first_view_entry_normal",
+        "act3vmulti_entry_room_joining_bar",
+        "stage_choose_guest_in_1",
+        "battle_finish_first_view_entry_normal_progress_text2",
+        "multi_v3_prepare_squal_skill_entry",
+        "multi_v3_prepare_squad_sel_entry",
+        "act3vmulti_view_arena_top_normal_in",
+        "battle_settle_camera_enter",
+        "start_in_normal",
+        "battle_finish_first_view_entry_fortress_progress_text2",
+        "battle_finish_first_view_entry_fortress_final_record_clear",
+        "quick_match_state_inversion_in",
+        "act3vmulti_entry_stage_entry",
+        "act_multi_v3_banner_in",
+        "multi_v3_char_pick_entry",
+        "multi_v3_prepare_squad_entry",
+        "battle_finish_first_view_entry_com",
+        "battle_settle_part_2_view_entry",
+        "tiny_in",
+        "battle_finish_first_view_entry_normal_progress_text1",
+        "full_in",
+        "battle_finish_first_view_entry_com_quit",
+        "stage_choose_host_in_1"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "7223c5a52debf27cb087c5fbb49d798c",
+      "status": "recovered",
+      "asset": "shared/7223c5a52debf27cb087c5fbb49d798c/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "5b357a6a908d9aa1c7d299c880fccb1b",
+      "status": "recovered",
+      "asset": "shared/5b357a6a908d9aa1c7d299c880fccb1b/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "38cc9848887829331ec4e137579cb340",
+      "status": "recovered",
+      "asset": "shared/38cc9848887829331ec4e137579cb340/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "0687f5a8b6b5050dbadce01985cbe566",
+      "status": "recovered",
+      "asset": "shared/0687f5a8b6b5050dbadce01985cbe566/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "f659c7053808bd9ded8a79e0a9e85514",
+      "status": "recovered",
+      "asset": "shared/f659c7053808bd9ded8a79e0a9e85514/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "baa56ae3b62276b39695bb58ec2de760",
+      "status": "recovered",
+      "asset": "shared/baa56ae3b62276b39695bb58ec2de760/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1arcade",
+      "bundle": "audio/custom_se/act1arcade.ab",
+      "md5": "f5361a5c880748dd2a48f85b1b5ba226",
+      "status": "recovered",
+      "asset": "shared/f5361a5c880748dd2a48f85b1b5ba226/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "9b806e0346ced166ced0708338b4a339",
+      "status": "recovered",
+      "asset": "shared/9b806e0346ced166ced0708338b4a339/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "69aae1a28ba00926d1090925ad88e804",
+      "status": "recovered",
+      "asset": "shared/69aae1a28ba00926d1090925ad88e804/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "0a1f13316b10481541c7acc2892fcb68",
+      "status": "recovered",
+      "asset": "shared/0a1f13316b10481541c7acc2892fcb68/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "3ccf410b937a9dd8c7eb08c1d1fd334c",
+      "status": "recovered",
+      "asset": "shared/3ccf410b937a9dd8c7eb08c1d1fd334c/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1arkhub",
+      "bundle": "audio/custom_se/act1arkhub.ab",
+      "md5": "d16192018cf49ed768782c35a234508d",
+      "status": "recovered",
+      "asset": "shared/d16192018cf49ed768782c35a234508d/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "d8a1bae27d05ef3400941733f2f4a319",
+      "status": "recovered",
+      "asset": "shared/d8a1bae27d05ef3400941733f2f4a319/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "93a28cbd90414478c7e1e72790f9a6c5",
+      "status": "recovered",
+      "asset": "shared/93a28cbd90414478c7e1e72790f9a6c5/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1autochess",
+      "bundle": "audio/custom_se/act1autochess.ab",
+      "md5": "2c84ced958ae235984a758181371e472",
+      "status": "recovered",
+      "asset": "shared/2c84ced958ae235984a758181371e472/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1dp",
+      "bundle": "audio/custom_se/act1dp.ab",
+      "md5": "6395b20651cdb00e7aea8d8c24d475bf",
+      "status": "recovered",
+      "asset": "shared/6395b20651cdb00e7aea8d8c24d475bf/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "30528641097db57309354abdb71c1384",
+      "status": "recovered",
+      "asset": "shared/30528641097db57309354abdb71c1384/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "50e2dd6060d613fc7ba41897ed1a7ccb",
+      "status": "recovered",
+      "asset": "shared/50e2dd6060d613fc7ba41897ed1a7ccb/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "1b57de587474563a0a7c3e8cab7f682c",
+      "status": "recovered",
+      "asset": "shared/1b57de587474563a0a7c3e8cab7f682c/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1football",
+      "bundle": "audio/custom_se/act1football.ab",
+      "md5": "5056073309659b0d5bdf4d9efeb57381",
+      "status": "recovered",
+      "asset": "shared/5056073309659b0d5bdf4d9efeb57381/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "594da49112d94c750b884fbeb179fc55",
+      "status": "recovered",
+      "asset": "shared/594da49112d94c750b884fbeb179fc55/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "cdd88e4883a635406bf7f0579eb31f64",
+      "status": "recovered",
+      "asset": "shared/cdd88e4883a635406bf7f0579eb31f64/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "1087b11c722036eb6438c4ab006fd783",
+      "status": "recovered",
+      "asset": "shared/1087b11c722036eb6438c4ab006fd783/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "c6903e978207f87d17d7c3890fc64e87",
+      "status": "recovered",
+      "asset": "shared/c6903e978207f87d17d7c3890fc64e87/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "daaee9f321458bc04e1e1467280b37ca",
+      "status": "recovered",
+      "asset": "shared/daaee9f321458bc04e1e1467280b37ca/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1multi",
+      "bundle": "audio/custom_se/act1multi.ab",
+      "md5": "ba256471cbc426b08d2e55f4f8b6d5f2",
+      "status": "recovered",
+      "asset": "shared/ba256471cbc426b08d2e55f4f8b6d5f2/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "d855eb8bc5793d6f0de1b8ee7c6ff8d8",
+      "status": "recovered",
+      "asset": "shared/d855eb8bc5793d6f0de1b8ee7c6ff8d8/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vautochess",
+      "bundle": "audio/custom_se/act1vautochess.ab",
+      "md5": "e02b1fdc380523e474e4fa17bcb9136e",
+      "status": "recovered",
+      "asset": "shared/e02b1fdc380523e474e4fa17bcb9136e/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "6eeaf746126a20f01a140799d55a21b0",
+      "status": "recovered",
+      "asset": "shared/6eeaf746126a20f01a140799d55a21b0/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "c36f34f178409dad95a268dd7dcacda7",
+      "status": "recovered",
+      "asset": "shared/c36f34f178409dad95a268dd7dcacda7/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "3136128054fc0a88cc02c08974459d44",
+      "status": "recovered",
+      "asset": "shared/3136128054fc0a88cc02c08974459d44/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "a539c1b67a77d7468f0b36f91d718c6b",
+      "status": "recovered",
+      "asset": "shared/a539c1b67a77d7468f0b36f91d718c6b/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "d2827d1b79399af0e8c4388433445d0c",
+      "status": "recovered",
+      "asset": "shared/d2827d1b79399af0e8c4388433445d0c/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "79b873d922ff3075abe0451f3debd538",
+      "status": "recovered",
+      "asset": "shared/79b873d922ff3075abe0451f3debd538/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vhalfidle",
+      "bundle": "audio/custom_se/act1vhalfidle.ab",
+      "md5": "69e1e98ce5a720e1aa69890238e0a85c",
+      "status": "recovered",
+      "asset": "shared/69e1e98ce5a720e1aa69890238e0a85c/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "9b113d04b7b49624e110a0424711cf20",
+      "status": "recovered",
+      "asset": "shared/9b113d04b7b49624e110a0424711cf20/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "43b316485c3220e0eed52e75fcd4029b",
+      "status": "recovered",
+      "asset": "shared/43b316485c3220e0eed52e75fcd4029b/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "65834d53c81c27d4ff9b7a9ce4a54c90",
+      "status": "recovered",
+      "asset": "shared/65834d53c81c27d4ff9b7a9ce4a54c90/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "af2c901cd88e3a85f1f978e6b4482afd",
+      "status": "recovered",
+      "asset": "shared/af2c901cd88e3a85f1f978e6b4482afd/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "9babc6741d8654cb7c963c15710d8656",
+      "status": "recovered",
+      "asset": "shared/9babc6741d8654cb7c963c15710d8656/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "cc980f4c337d591503447d021220cfa8",
+      "status": "recovered",
+      "asset": "shared/cc980f4c337d591503447d021220cfa8/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "961e46fa1b1fc859c6ed14235a254bd6",
+      "status": "recovered",
+      "asset": "shared/961e46fa1b1fc859c6ed14235a254bd6/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "11905adb12fc16e337701fb94a78ebc4",
+      "status": "recovered",
+      "asset": "shared/11905adb12fc16e337701fb94a78ebc4/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "ec4b4bb9d278f2240881044415d69c5a",
+      "status": "recovered",
+      "asset": "shared/ec4b4bb9d278f2240881044415d69c5a/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "a1a9bf7cd48e9be81412837f253f628e",
+      "status": "recovered",
+      "asset": "shared/a1a9bf7cd48e9be81412837f253f628e/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act24side",
+      "bundle": "audio/custom_se/act24side.ab",
+      "md5": "9994e4ab0013dda95bbffc0a63e4db98",
+      "status": "recovered",
+      "asset": "shared/9994e4ab0013dda95bbffc0a63e4db98/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "star",
+      "bundle": "refs/fx/texture/star.ab",
+      "md5": "8902df1c83bb685e74ad9a273388be2e",
+      "status": "recovered",
+      "asset": "shared/8902df1c83bb685e74ad9a273388be2e/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "material",
+      "bundle": "refs/fx/material.ab",
+      "md5": "b730d64b72464b45586b58dd1bf9fcfc",
+      "status": "recovered",
+      "asset": "shared/b730d64b72464b45586b58dd1bf9fcfc/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "mask",
+      "bundle": "refs/fx/texture/mask.ab",
+      "md5": "26dc1f978faeead1c75c36ca8d564f2a",
+      "status": "recovered",
+      "asset": "shared/26dc1f978faeead1c75c36ca8d564f2a/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act25side",
+      "bundle": "audio/custom_se/act25side.ab",
+      "md5": "86954bbe3e91e0b9f1c219ba09b0da57",
+      "status": "recovered",
+      "asset": "shared/86954bbe3e91e0b9f1c219ba09b0da57/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "99fa882fe5204a749fce56dcbfaaa923",
+      "status": "recovered",
+      "asset": "shared/99fa882fe5204a749fce56dcbfaaa923/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "7814e148b827d405e751dc6bd9dbc194",
+      "status": "recovered",
+      "asset": "shared/7814e148b827d405e751dc6bd9dbc194/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act27side",
+      "bundle": "audio/custom_se/act27side.ab",
+      "md5": "5764552d70051e78e5e97a88249707ff",
+      "status": "recovered",
+      "asset": "shared/5764552d70051e78e5e97a88249707ff/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act29side",
+      "bundle": "audio/custom_se/act29side.ab",
+      "md5": "ce3e71edde4ed981d9342ce4c70f56db",
+      "status": "recovered",
+      "asset": "shared/ce3e71edde4ed981d9342ce4c70f56db/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "e2a03eeac8b8d27fcd1e23d905a2424b",
+      "status": "recovered",
+      "asset": "shared/e2a03eeac8b8d27fcd1e23d905a2424b/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "bb6ef923f727530acbce13830f54500a",
+      "status": "recovered",
+      "asset": "shared/bb6ef923f727530acbce13830f54500a/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "c3c94e656b02fc4b6820893ab0bff59f",
+      "status": "recovered",
+      "asset": "shared/c3c94e656b02fc4b6820893ab0bff59f/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "97eec95a32e5f05760f3b0e3b6000e56",
+      "status": "recovered",
+      "asset": "shared/97eec95a32e5f05760f3b0e3b6000e56/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2multi",
+      "bundle": "audio/custom_se/act2multi.ab",
+      "md5": "020f05a054d1975b354b31ba75c5d5b5",
+      "status": "recovered",
+      "asset": "shared/020f05a054d1975b354b31ba75c5d5b5/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2vmulti",
+      "bundle": "audio/custom_se/act2vmulti.ab",
+      "md5": "42b0baf1d8363c5cb82dfd99fbe50e60",
+      "status": "recovered",
+      "asset": "shared/42b0baf1d8363c5cb82dfd99fbe50e60/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act31side",
+      "bundle": "audio/custom_se/act31side.ab",
+      "md5": "7e01a2fb6062597bc39f0e354eb72d8a",
+      "status": "recovered",
+      "asset": "shared/7e01a2fb6062597bc39f0e354eb72d8a/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "d8e05b24e77e351e96d4483112ff6741",
+      "status": "recovered",
+      "asset": "shared/d8e05b24e77e351e96d4483112ff6741/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "11357dc2c0270d2d867819fe590c77ad",
+      "status": "recovered",
+      "asset": "shared/11357dc2c0270d2d867819fe590c77ad/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "eeaab632e3feac3527b924f22e2c049f",
+      "status": "recovered",
+      "asset": "shared/eeaab632e3feac3527b924f22e2c049f/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "712c46eb2348a8c4f9ed9dacb8094068",
+      "status": "recovered",
+      "asset": "shared/712c46eb2348a8c4f9ed9dacb8094068/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "4379648714e711629fc374bd700539f0",
+      "status": "recovered",
+      "asset": "shared/4379648714e711629fc374bd700539f0/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act35side",
+      "bundle": "audio/custom_se/act35side.ab",
+      "md5": "83c6e0ca626d1a77b4f9f9ab025342dc",
+      "status": "recovered",
+      "asset": "shared/83c6e0ca626d1a77b4f9f9ab025342dc/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "24376077f83972a9c1f6f2794c8e93be",
+      "status": "recovered",
+      "asset": "shared/24376077f83972a9c1f6f2794c8e93be/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "45c2d7d49afe47fea4982279aa437012",
+      "status": "recovered",
+      "asset": "shared/45c2d7d49afe47fea4982279aa437012/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act35side",
+      "bundle": "audio/custom_se/act35side.ab",
+      "md5": "12c437ba7848dda67f392e842f77c704",
+      "status": "recovered",
+      "asset": "shared/12c437ba7848dda67f392e842f77c704/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act36side",
+      "bundle": "audio/custom_se/act36side.ab",
+      "md5": "7158ebcfd5af73be4602b0abf2507ce5",
+      "status": "recovered",
+      "asset": "shared/7158ebcfd5af73be4602b0abf2507ce5/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act38side",
+      "bundle": "audio/custom_se/act38side.ab",
+      "md5": "e413d476111a822634d114aa93499bc5",
+      "status": "recovered",
+      "asset": "shared/e413d476111a822634d114aa93499bc5/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act38side",
+      "bundle": "audio/custom_se/act38side.ab",
+      "md5": "3960c5802e103cc7862fd85f7406cea1",
+      "status": "recovered",
+      "asset": "shared/3960c5802e103cc7862fd85f7406cea1/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "f8404322cce8e87791bb144a36c66218",
+      "status": "recovered",
+      "asset": "shared/f8404322cce8e87791bb144a36c66218/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "9b5b31a5f738ffb0f5ebb0831386ca38",
+      "status": "recovered",
+      "asset": "shared/9b5b31a5f738ffb0f5ebb0831386ca38/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "3cfbf32a6575fc0c5dd7d53204f2f30d",
+      "status": "recovered",
+      "asset": "shared/3cfbf32a6575fc0c5dd7d53204f2f30d/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "294295015d08ade8432d9bdfc06ff156",
+      "status": "recovered",
+      "asset": "shared/294295015d08ade8432d9bdfc06ff156/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act40side",
+      "bundle": "audio/custom_se/act40side.ab",
+      "md5": "7f7e809a07b69425c93bd33b1c04f615",
+      "status": "recovered",
+      "asset": "shared/7f7e809a07b69425c93bd33b1c04f615/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "627d1bba331e1c608bbe1b27b14fc3dc",
+      "status": "recovered",
+      "asset": "shared/627d1bba331e1c608bbe1b27b14fc3dc/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "80ae405325457f4a450f71fa5bb69a2b",
+      "status": "recovered",
+      "asset": "shared/80ae405325457f4a450f71fa5bb69a2b/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "ecaceba155c8fa817921f189296a3a98",
+      "status": "recovered",
+      "asset": "shared/ecaceba155c8fa817921f189296a3a98/asset.json",
+      "candidates": [
+        "multi_v3_prepare_squal_check_entry",
+        "tiny_in",
+        "multiv3_prepare_start_countdown_show",
+        "battle_finish_first_view_entry_normal_reward_tween",
+        "multi_v3_prepare_squal_skill_entry",
+        "act3vmulti_entry_main_to_match",
+        "multi_v3_prepare_top_view_entry",
+        "act3vmulti_view_arena_top_normal_in",
+        "battle_finish_first_view_entry_normal_progress_text",
+        "battle_finish_first_view_entry_fortress_final_record_new_effects",
+        "start_in_normal",
+        "battle_finish_first_view_entry_fortress",
+        "act3vmulti_view_arena_top_easy_in",
+        "multi_v3_prepare_squad_sel_entry",
+        "stage_choose_host_in_1",
+        "matching_banner_in",
+        "battle_finish_first_view_entry_normal",
+        "multi_v3_prepare_squad_entry",
+        "battle_finish_first_view_entry_fortress_final_record",
+        "act3vmulti_entry_room_joining_bar",
+        "quick_match_state_in",
+        "battle_finish_first_view_entry_fortress_progress_text",
+        "battle_settle_part_2_view_entry",
+        "stage_choose_guest_in_2",
+        "start_in_invert",
+        "act3vmulti_view_arena_top_hard_in",
+        "stage_certain_in",
+        "act_multi_v3_banner_in",
+        "battle_finish_first_view_entry_com_quit",
+        "act_multi_v3_state_loading_in",
+        "stage_choose_guest_in_1",
+        "act3vmulti_entry_main_to_room",
+        "battle_finish_first_view_entry_succer",
+        "full_in",
+        "battle_finish_first_view_entry_normal_progress_text1",
+        "act_fade_in",
+        "quick_match_state_inversion_in",
+        "battle_finish_first_view_entry_com",
+        "multi_v3_prepare_sys_alloc_entry",
+        "battle_finish_first_view_entry_fortress_progress_text2",
+        "in",
+        "act3vmulti_entry_stage_entry",
+        "battle_finish_first_view_entry_fortress_final_record_clear",
+        "multi_v3_char_pick_entry",
+        "battle_finish_first_view_entry_normal_progress_text2",
+        "act3vmulti_entry_room_to_main",
+        "battle_finish_first_view_entry_fortress_progress_text1",
+        "battle_settle_camera_enter"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "d78f68dbf03a241585dd0a241df39f38",
+      "status": "recovered",
+      "asset": "shared/d78f68dbf03a241585dd0a241df39f38/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act41side",
+      "bundle": "audio/custom_se/act41side.ab",
+      "md5": "54b72d349cf1dbb5c02ac59fc95451e9",
+      "status": "recovered",
+      "asset": "shared/54b72d349cf1dbb5c02ac59fc95451e9/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act42d0",
+      "bundle": "audio/custom_se/act42d0.ab",
+      "md5": "e7b96287dca1b025d5d9afef9ad1805b",
+      "status": "recovered",
+      "asset": "shared/e7b96287dca1b025d5d9afef9ad1805b/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act42side",
+      "bundle": "audio/custom_se/act42side.ab",
+      "md5": "854800183018ade63bb3e1abd6ab85a4",
+      "status": "recovered",
+      "asset": "shared/854800183018ade63bb3e1abd6ab85a4/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "0e3842fede67317726565f94f07320db",
+      "status": "recovered",
+      "asset": "shared/0e3842fede67317726565f94f07320db/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "fedf319b4ab828eb4692d707b389a0db",
+      "status": "recovered",
+      "asset": "shared/fedf319b4ab828eb4692d707b389a0db/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act44side",
+      "bundle": "audio/custom_se/act44side.ab",
+      "md5": "e6d0b0f61f323979c32cd1293f76e677",
+      "status": "recovered",
+      "asset": "shared/e6d0b0f61f323979c32cd1293f76e677/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act45side",
+      "bundle": "audio/custom_se/act45side.ab",
+      "md5": "ef5ad5a0e606ff61e443005d75b4fdc2",
+      "status": "recovered",
+      "asset": "shared/ef5ad5a0e606ff61e443005d75b4fdc2/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act46side",
+      "bundle": "audio/custom_se/act46side.ab",
+      "md5": "8c64aef4ea67ab09690c1bc2531cb960",
+      "status": "recovered",
+      "asset": "shared/8c64aef4ea67ab09690c1bc2531cb960/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act47side",
+      "bundle": "audio/custom_se/act47side.ab",
+      "md5": "505b39ee63cc944b4975133e18307f72",
+      "status": "recovered",
+      "asset": "shared/505b39ee63cc944b4975133e18307f72/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "26ef8e2be974c7a4249232d030bf1da9",
+      "status": "recovered",
+      "asset": "shared/26ef8e2be974c7a4249232d030bf1da9/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act49side",
+      "bundle": "audio/custom_se/act49side.ab",
+      "md5": "08ac459c421cc74c0a5d26da79ad63a2",
+      "status": "recovered",
+      "asset": "shared/08ac459c421cc74c0a5d26da79ad63a2/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "b846be3e0a9dd652eb9ff45057536a16",
+      "status": "recovered",
+      "asset": "shared/b846be3e0a9dd652eb9ff45057536a16/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "aa39fbb4ac1a5eef4bd484bb128bad39",
+      "status": "recovered",
+      "asset": "shared/aa39fbb4ac1a5eef4bd484bb128bad39/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "a6148930c175cefd2ca79e004995d3f5",
+      "status": "recovered",
+      "asset": "shared/a6148930c175cefd2ca79e004995d3f5/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act50side",
+      "bundle": "audio/custom_se/act50side.ab",
+      "md5": "33ccb4ecc7aca8198e1080e9d0a3599d",
+      "status": "recovered",
+      "asset": "shared/33ccb4ecc7aca8198e1080e9d0a3599d/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "328f03864f7bb875771577d2a8df1ce9",
+      "status": "recovered",
+      "asset": "shared/328f03864f7bb875771577d2a8df1ce9/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "d4a6910393bc78d1f73be449101d35c1",
+      "status": "recovered",
+      "asset": "shared/d4a6910393bc78d1f73be449101d35c1/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act52side",
+      "bundle": "audio/custom_se/act52side.ab",
+      "md5": "e00e11812faaee00e511aa5b3bed089b",
+      "status": "recovered",
+      "asset": "shared/e00e11812faaee00e511aa5b3bed089b/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act53side",
+      "bundle": "audio/custom_se/act53side.ab",
+      "md5": "c549dea2aee1fe681468a6918adcc70b",
+      "status": "recovered",
+      "asset": "shared/c549dea2aee1fe681468a6918adcc70b/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act54side",
+      "bundle": "audio/custom_se/act54side.ab",
+      "md5": "d73df4b1286e27864099780ad79ec792",
+      "status": "recovered",
+      "asset": "shared/d73df4b1286e27864099780ad79ec792/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act55side",
+      "bundle": "audio/custom_se/act55side.ab",
+      "md5": "27d038c8c27f672ced403eb0eee8f870",
+      "status": "recovered",
+      "asset": "shared/27d038c8c27f672ced403eb0eee8f870/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act6fun",
+      "bundle": "audio/custom_se/act6fun.ab",
+      "md5": "38bbaaedff9b7867b15bf2ae89d848bd",
+      "status": "recovered",
+      "asset": "shared/38bbaaedff9b7867b15bf2ae89d848bd/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "591b28ebdd98d73e440ea64851f78e75",
+      "status": "recovered",
+      "asset": "shared/591b28ebdd98d73e440ea64851f78e75/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "a1cd671323f8e80549c6d98a5755f217",
+      "status": "recovered",
+      "asset": "shared/a1cd671323f8e80549c6d98a5755f217/asset.json",
+      "candidates": [
+        "multi_v3_prepare_squal_check_entry",
+        "tiny_in",
+        "multiv3_prepare_start_countdown_show",
+        "battle_finish_first_view_entry_normal_reward_tween",
+        "multi_v3_prepare_squal_skill_entry",
+        "act3vmulti_entry_main_to_match",
+        "multi_v3_prepare_top_view_entry",
+        "act3vmulti_view_arena_top_normal_in",
+        "battle_finish_first_view_entry_normal_progress_text",
+        "battle_finish_first_view_entry_fortress_final_record_new_effects",
+        "start_in_normal",
+        "battle_finish_first_view_entry_fortress",
+        "act3vmulti_view_arena_top_easy_in",
+        "multi_v3_prepare_squad_sel_entry",
+        "stage_choose_host_in_1",
+        "matching_banner_in",
+        "battle_finish_first_view_entry_normal",
+        "multi_v3_prepare_squad_entry",
+        "battle_finish_first_view_entry_fortress_final_record",
+        "act3vmulti_entry_room_joining_bar",
+        "quick_match_state_in",
+        "battle_finish_first_view_entry_fortress_progress_text",
+        "battle_settle_part_2_view_entry",
+        "stage_choose_guest_in_2",
+        "start_in_invert",
+        "act3vmulti_view_arena_top_hard_in",
+        "stage_certain_in",
+        "act_multi_v3_banner_in",
+        "battle_finish_first_view_entry_com_quit",
+        "act_multi_v3_state_loading_in",
+        "stage_choose_guest_in_1",
+        "act3vmulti_entry_main_to_room",
+        "battle_finish_first_view_entry_succer",
+        "full_in",
+        "battle_finish_first_view_entry_normal_progress_text1",
+        "act_fade_in",
+        "quick_match_state_inversion_in",
+        "battle_finish_first_view_entry_com",
+        "multi_v3_prepare_sys_alloc_entry",
+        "battle_finish_first_view_entry_fortress_progress_text2",
+        "in",
+        "act3vmulti_entry_stage_entry",
+        "battle_finish_first_view_entry_fortress_final_record_clear",
+        "multi_v3_char_pick_entry",
+        "battle_finish_first_view_entry_normal_progress_text2",
+        "act3vmulti_entry_room_to_main",
+        "battle_finish_first_view_entry_fortress_progress_text1",
+        "battle_settle_camera_enter"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "edc3add55389b55645b7ff78847d26ad",
+      "status": "recovered",
+      "asset": "shared/edc3add55389b55645b7ff78847d26ad/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "7a360569122099e26b173de641994d2c",
+      "status": "recovered",
+      "asset": "shared/7a360569122099e26b173de641994d2c/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "441beb5b6228cdcf322df290b331ec27",
+      "status": "recovered",
+      "asset": "shared/441beb5b6228cdcf322df290b331ec27/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "e21674f7313d0a638be023d32e64731b",
+      "status": "recovered",
+      "asset": "shared/e21674f7313d0a638be023d32e64731b/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "61eec06df3314384ddbe138dee872b35",
+      "status": "recovered",
+      "asset": "shared/61eec06df3314384ddbe138dee872b35/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "ea3872907efafe95660c7c5861d36c33",
+      "status": "recovered",
+      "asset": "shared/ea3872907efafe95660c7c5861d36c33/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "7dde3f0cef1cc7f95d1983a3f2ac0747",
+      "status": "recovered",
+      "asset": "shared/7dde3f0cef1cc7f95d1983a3f2ac0747/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "33723e425e8650f7980c894cbada20ed",
+      "status": "recovered",
+      "asset": "shared/33723e425e8650f7980c894cbada20ed/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "16bca470c82644e54134c1743236af59",
+      "status": "recovered",
+      "asset": "shared/16bca470c82644e54134c1743236af59/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "uishaders",
+      "bundle": "[uc]uishaders.ab",
+      "md5": "dda0709ea92289aff2ebc36017a92cf0",
+      "status": "recovered",
+      "asset": "shared/dda0709ea92289aff2ebc36017a92cf0/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "6edd4d1499cd2c95704028a6540a7261",
+      "status": "recovered",
+      "asset": "shared/6edd4d1499cd2c95704028a6540a7261/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "commonassets",
+      "bundle": "activity/commonassets.ab",
+      "md5": "b07a09edd1e5de25e2e602329f4432eb",
+      "status": "recovered",
+      "asset": "shared/b07a09edd1e5de25e2e602329f4432eb/asset.json",
+      "candidates": [
+        "act_fade_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "shaders",
+      "bundle": "[uc]shaders.ab",
+      "md5": "b7af306cd715b226f51889da6def2bbe",
+      "status": "recovered",
+      "asset": "shared/b7af306cd715b226f51889da6def2bbe/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "act40side",
+      "bundle": "audio/custom_se/act40side.ab",
+      "md5": "36c31ef0639b6d97e9a395d55506da23",
+      "status": "recovered",
+      "asset": "shared/36c31ef0639b6d97e9a395d55506da23/asset.json",
+      "candidates": []
+    }
+  ]
+}

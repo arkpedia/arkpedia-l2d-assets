@@ -4,3 +4,5 @@
 *.webp binary
 *.png binary
 *.json -text
+*.dat binary
+*.gz binary

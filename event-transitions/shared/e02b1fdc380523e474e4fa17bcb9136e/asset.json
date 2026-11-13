@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act1vautochess",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "24-11-21-11-04-45-bae23b",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/98f8c7ff685925356990b221fc272670fc8fafde/bundles/hot_update_list.json",
+    "bundle": "audio/custom_se/act1vautochess.ab",
+    "bundleMd5": "e02b1fdc380523e474e4fa17bcb9136e",
+    "manifestEntry": {
+      "name": "audio/custom_se/act1vautochess.ab",
+      "hash": "60e94c101ba11567405461dbe41bdc37",
+      "md5": "e02b1fdc380523e474e4fa17bcb9136e",
+      "totalSize": 2143915,
+      "abSize": 2146767,
+      "cid": 2040
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/24-11-21-11-04-45-bae23b/audio_custom_se_act1vautochess.dat",
+    "archiveSha256": "af455c114b3edb53874c09dda5e3070920ec17f7c0cb17e4281711ec7cc657de",
+    "bundleSha256": "b9da52cba7a3c46f2cf7a08000a2b9d5b40aa33f72564deccf068d36e011c357"
+  },
+  "animations": [],
+  "textures": [],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "AudioClip": 26
+  },
+  "externalFiles": {
+    "CAB-59fae40adcd85e6fe9aa483a34e874b7": []
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "audio/-1543082470461076606-0.wav",
+      "bytes": 491192,
+      "sha256": "299e2109dae7bf8ce57d55e8b3ad174ab05b2aa7b15fe9ae4dd99177e3f290f3"
+    },
+    {
+      "file": "audio/-2231947950683746249-0.wav",
+      "bytes": 659832,
+      "sha256": "8a48d16a721b98ec8e0315f619df53e48fa38ec228c19994b5c3a0dff4901cc2"
+    },
+    {
+      "file": "audio/-2521972174989755039-0.wav",
+      "bytes": 285628,
+      "sha256": "aa30a59e39c4fc35b97ccb063603e406cb117ab0bef512a04d2b2a1ec10b9651"
+    },
+    {
+      "file": "audio/-261032817561245453-0.wav",
+      "bytes": 173048,
+      "sha256": "eeeb63ab04971b2d3e1bdcf0cf51257322a7cc0830a17ab901bc7b558010d082"
+    },
+    {
+      "file": "audio/-2944191372623249205-0.wav",
+      "bytes": 107832,
+      "sha256": "4d1dd566a486502558e5f9c40b8250945b318a4198d5e2eb4f4bc636123b9854"
+    },
+    {
+      "file": "audio/-4574037503636703063-0.wav",
+      "bytes": 614124,
+      "sha256": "127a7e5223ceb4abcb25f9bd565c094b55c83b57051a58fcce3d3ba098d492ab"
+    },
+    {
+      "file": "audio/-4968264626763934454-0.wav",
+      "bytes": 196596,
+      "sha256": "63de3b8ecc736b5780b4fb558e7f4a862d2e8d9c16e138f6186f4a27d2315599"
+    },
+    {
+      "file": "audio/-5222233181152542062-0.wav",
+      "bytes": 561212,
+      "sha256": "f71839ba0c0930e30d2fe6239df9eb5b172050fe743297c3b72e72ae6b88647a"
+    },
+    {
+      "file": "audio/-6202988296131967241-0.wav",
+      "bytes": 123656,
+      "sha256": "7af890f969db0467c192a43416e2060e7a8fbf806ae0c35b7e76827c9aaa2984"
+    },
+    {
+      "file": "audio/-7057261066949508926-0.wav",
+      "bytes": 114936,
+      "sha256": "ce8791c1be5503579637794dc0c1a545fa1db4051710154dd7344242a9cb4cf7"
+    },
+    {
+      "file": "audio/-8346713470042667325-0.wav",
+      "bytes": 347896,
+      "sha256": "87e8eb8296e6e5b99d698d32fdb41cb263365f861c4c13849472f459ad46635b"
+    },
+    {
+      "file": "audio/-8714422233685720406-0.wav",
+      "bytes": 146824,
+      "sha256": "040c368785c1ed0283ed5bb446e2a3b6a855b7b2fe315ce719536400ee525600"
+    },
+    {
+      "file": "audio/-91305913745130873-0.wav",
+      "bytes": 173292,
+      "sha256": "b491e33d5cabb71bfabcf2f520f288fa851eb4dfe99f6f5b2942f259489a04cf"
+    },
+    {
+      "file": "audio/1045459196113904642-0.wav",
+      "bytes": 64808,
+      "sha256": "def68d0cb06217775be9773dc7d866c5a748ad6697672db2a45450c87655aa7e"
+    },
+    {
+      "file": "audio/119114255902330098-0.wav",
+      "bytes": 491192,
+      "sha256": "4f8c7220077878910004632194accc2b47b80de874cacac56f566f238f416fc2"
+    },
+    {
+      "file": "audio/2556052686587614067-0.wav",
+      "bytes": 113396,
+      "sha256": "f27622f0df09c427a5bb33cf87bfa3e1228218eec440453fbc89384150d2cc47"
+    },
+    {
+      "file": "audio/3066292265447448129-0.wav",
+      "bytes": 108520,
+      "sha256": "8ed08845c4d0deea119993dd4a80fbd8f9f6aaf7c5e5ca8047b6be6c1c93e7db"
+    },
+    {
+      "file": "audio/3734846281008141827-0.wav",
+      "bytes": 491192,
+      "sha256": "31e6b4789a51466dc513891c4df6309f1b888985617af2ffb99aa38a7ef81513"
+    },
+    {
+      "file": "audio/4253897859562649211-0.wav",
+      "bytes": 569904,
+      "sha256": "793e9073d5e1b4b8a8752be01e68211a0f4852a4eb63711a2d7fc6fae32f5ca6"
+    },
+    {
+      "file": "audio/4961516856914631498-0.wav",
+      "bytes": 149528,
+      "sha256": "01c4d0ffdb8602fce5f22c7fcdb6e953d96a73347f31347634c4b50da107efa0"
+    },
+    {
+      "file": "audio/5317324578535660385-0.wav",
+      "bytes": 593948,
+      "sha256": "f8305dd6808bd4a67072ca5b64a8400381758e71372b153a11beebf4cb509cc7"
+    },
+    {
+      "file": "audio/5378631898642988891-0.wav",
+      "bytes": 196716,
+      "sha256": "8347d6cb650538be40c022146cd8475b01f7e18ed960719ba609ab569cef8240"
+    },
+    {
+      "file": "audio/5800568144307989288-0.wav",
+      "bytes": 108520,
+      "sha256": "9c976517ba23c6701dcf044d1608677abb7ae2c00fb587158c3499f9caf16a1b"
+    },
+    {
+      "file": "audio/6499946659359366184-0.wav",
+      "bytes": 191184,
+      "sha256": "0ad5ce021d637f20eead121268fca6f01585e819264342453487ff65591c2515"
+    },
+    {
+      "file": "audio/6918603502786252979-0.wav",
+      "bytes": 384044,
+      "sha256": "f2202d261f299dc2d8e663ca4828b3191a0624fe106e3a1a9756726286c200dc"
+    },
+    {
+      "file": "audio/8578038428248443298-0.wav",
+      "bytes": 418128,
+      "sha256": "74991e51df4dbfa8964b58418b1342c5349a73b1f131bf1a8be0d79d683c260e"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 2143915,
+      "sha256": "af455c114b3edb53874c09dda5e3070920ec17f7c0cb17e4281711ec7cc657de"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 2831,
+      "sha256": "716b2fff1241a3182a1a338e8820ad83b2478fd01ec1edcb0c09ab4ee2729a71"
+    }
+  ]
+}

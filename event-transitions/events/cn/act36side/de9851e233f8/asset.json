@@ -1,0 +1,1173 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act36side",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "24-09-23-11-27-19-c6564b",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/043cdb223653ca916bc6abc7c8beafd0a0fd5437/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act36side.ab",
+    "bundleMd5": "de9851e233f8dccc6bce323430614aed",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/24-09-23-11-27-19-c6564b/activity_%5Buc%5Dact36side.dat",
+    "archiveSha256": "6396dc8d1c7cb845a6272959a20bb4f2a1dfe01319b6126c40977f96416d45e5",
+    "bundleSha256": "5c6625f462818d4a03daedd4b343ab8cccf6d59a5ea79aa0faf5124e727220c3",
+    "manifestEntry": {
+      "name": "activity/[uc]act36side.ab",
+      "hash": "651610bb2e1b247835abced461ea9b44",
+      "md5": "de9851e233f8dccc6bce323430614aed",
+      "totalSize": 6878799,
+      "abSize": 7219883,
+      "thash": "/TIA7zrqF5mW",
+      "pid": "lpack_misc",
+      "cid": 10
+    }
+  },
+  "animations": [
+    {
+      "id": "-8542011291171153967",
+      "name": "act36side_card_emoji_laios",
+      "candidate": false,
+      "durationSeconds": 1.8333333730697632,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5966781466293395387",
+      "name": "act36side_stage_entry",
+      "candidate": true,
+      "durationSeconds": 2.8333332538604736,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.01666666753590107,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT36SIDE_LOADDD",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-4180011945170742123",
+      "name": "act36side_food_handbook_panel_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-3854981840257684614",
+      "name": "act36side_food_handbook_reward_btn_unfinished_loop",
+      "candidate": false,
+      "durationSeconds": 6.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-3551574965875901774",
+      "name": "act36side_focus_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act36side_focus_out",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4166666567325592,
+          "functionName": "_OnAnimEnd",
+          "data": "act36side_focus_out",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-2712698572604472028",
+      "name": "act36side_card_emoji_senshi",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1658686500663729301",
+      "name": "act36side_entry_handbook_anim_loop",
+      "candidate": false,
+      "durationSeconds": 5.666666507720947,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1639514022496495588",
+      "name": "act36side_trackpoint_anim_loop",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1263128912734557158",
+      "name": "act36side_card_focus_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-952105145858624279",
+      "name": "act36side_focus_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act36side_focus_in",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4166666567325592,
+          "functionName": "_OnAnimEnd",
+          "data": "act36side_focus_in",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-321875361812256452",
+      "name": "act36side_food_handbook_token_item_frame_loop",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "857327548089066609",
+      "name": "act36side_card_emoji_marcil",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3516786824510237831",
+      "name": "act36side_food_handbook_right_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3573362977710352804",
+      "name": "act36side_card_emoji_chilchuk",
+      "candidate": false,
+      "durationSeconds": 1.3333333730697632,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3836187040790372224",
+      "name": "act36side_food_handbook_left_btn_selected_anim",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4381840220228839810",
+      "name": "act36side_card_focus_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5499387805544062038",
+      "name": "act36side_card_scale_sample_anim",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "8231568000551043724",
+      "name": "act36side_card_loop_bird",
+      "candidate": false,
+      "durationSeconds": 10.016666412353516,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "8502748229443433877",
+      "name": "act36side_food_handbook_right_token_list_dec_loop",
+      "candidate": false,
+      "durationSeconds": 6.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "8753662612882465844",
+      "name": "act36side_food_handbook_reward_btn_finished_loop",
+      "candidate": false,
+      "durationSeconds": 3.5,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-8848564502595331463",
+      "file": "textures/0.webp",
+      "name": "pot_bg",
+      "width": 920,
+      "height": 447,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7972829347095850452",
+      "file": "textures/1.webp",
+      "name": "up_left",
+      "width": 402,
+      "height": 141,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7936166337546631047",
+      "file": "textures/2.webp",
+      "name": "food_handbook_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7931694085248600230",
+      "file": "textures/3.webp",
+      "name": "food_handbook_atlas#1",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7921604414641573955",
+      "file": "textures/4.webp",
+      "name": "token_bg",
+      "width": 994,
+      "height": 533,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7905868079164839339",
+      "file": "textures/5.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_HANDBOOK_NAMEPIC_H2_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7745360689736012028",
+      "file": "textures/6.webp",
+      "name": "bridge",
+      "width": 1240,
+      "height": 318,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6209346663244605536",
+      "file": "textures/7.webp",
+      "name": "atlas#1",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5761315900083944496",
+      "file": "textures/8.webp",
+      "name": "act_36side_card_3",
+      "width": 829,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5439755047011973881",
+      "file": "textures/9.webp",
+      "name": "act_36side_card_8",
+      "width": 829,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5124081558631490218",
+      "file": "textures/10.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_HANDBOOK_SMALLICON_H2_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4610451651924247179",
+      "file": "textures/11.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_FOODHANDBOOK_DESCPIC_H1_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4213329855560251074",
+      "file": "textures/12.webp",
+      "name": "act_36side_card_2",
+      "width": 829,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4052944578279522810",
+      "file": "textures/13.webp",
+      "name": "atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4010326861438904906",
+      "file": "textures/14.webp",
+      "name": "zone_2_line_down",
+      "width": 27,
+      "height": 573,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3894559800243816486",
+      "file": "textures/15.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_HANDBOOK_SMALLICON_H2_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3886215295301691294",
+      "file": "textures/16.webp",
+      "name": "token_panel_left_decor_1",
+      "width": 180,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3264609309785314074",
+      "file": "textures/17.webp",
+      "name": "act_36side_card_4",
+      "width": 829,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2994871895835149330",
+      "file": "textures/18.webp",
+      "name": "zone2_bg",
+      "width": 1024,
+      "height": 900,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2508774688908360773",
+      "file": "textures/19.webp",
+      "name": "act36side_zone_card_dissolve_invert",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2497793836009893312",
+      "file": "textures/20.webp",
+      "name": "atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2461778722224512601",
+      "file": "textures/21.webp",
+      "name": "pot_flower_sheet",
+      "width": 80,
+      "height": 80,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1922607690534162103",
+      "file": "textures/22.webp",
+      "name": "act36side_zone_1_frame",
+      "width": 200,
+      "height": 200,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1348358755195709569",
+      "file": "textures/23.webp",
+      "name": "page_bg",
+      "width": 1098,
+      "height": 616,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1131491717518328420",
+      "file": "textures/24.webp",
+      "name": "atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1020267649738605296",
+      "file": "textures/25.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_FOODHANDBOOK_DESCPIC_H1_0-1024x1024-fmt55",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-934626942338962730",
+      "file": "textures/26.webp",
+      "name": "enemy_panel_mask",
+      "width": 947,
+      "height": 496,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-909424924024905323",
+      "file": "textures/27.webp",
+      "name": "act36side_zone_1_bg",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-874695363454274455",
+      "file": "textures/28.webp",
+      "name": "act_36side_card_1",
+      "width": 829,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-759332208732902913",
+      "file": "textures/29.webp",
+      "name": "act36side_zone_card_dissolve",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-751888788982914426",
+      "file": "textures/30.webp",
+      "name": "img_fx_dust_glow_01",
+      "width": 128,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-526558718926835360",
+      "file": "textures/31.webp",
+      "name": "act36side_zone_1_line",
+      "width": 10,
+      "height": 7,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-236350544739058396",
+      "file": "textures/32.webp",
+      "name": "act_36side_card_6",
+      "width": 829,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "427804508477186085",
+      "file": "textures/33.webp",
+      "name": "zone_2_line_mid",
+      "width": 27,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "536228635931292238",
+      "file": "textures/34.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_STAGERES-512x512-fmt34_alpha",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "545298908772463262",
+      "file": "textures/35.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_SHOP_HUB-1024x512-fmt55",
+      "width": 1024,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "775263099147611722",
+      "file": "textures/36.webp",
+      "name": "atlas#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1134706044222512005",
+      "file": "textures/37.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_FOODHANDBOOK_BIGICON_H2_0-256x256-fmt55",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1261179223555586557",
+      "file": "textures/38.webp",
+      "name": "img_mask",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1438003405779142384",
+      "file": "textures/39.webp",
+      "name": "token_panel_left_decor_3",
+      "width": 368,
+      "height": 368,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1627280402367627415",
+      "file": "textures/40.webp",
+      "name": "pot_star_01",
+      "width": 40,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2048052018822048055",
+      "file": "textures/41.webp",
+      "name": "img_fx_ray_soft_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2911151497386417934",
+      "file": "textures/42.webp",
+      "name": "bkg",
+      "width": 1240,
+      "height": 718,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2958438926856665256",
+      "file": "textures/43.webp",
+      "name": "SpriteAtlasTexture-ACT36SIDE_MISSION-1024x1024-fmt55",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3071194155862226858",
+      "file": "textures/44.webp",
+      "name": "act_36side_card_7",
+      "width": 829,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3156787449076608550",
+      "file": "textures/45.webp",
+      "name": "food_handbook_atlas#1a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3612842699322728211",
+      "file": "textures/46.webp",
+      "name": "token_bg_frame",
+      "width": 722,
+      "height": 268,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4456346391492790568",
+      "file": "textures/47.webp",
+      "name": "mask",
+      "width": 120,
+      "height": 120,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4473729996078210282",
+      "file": "textures/48.webp",
+      "name": "food_handbook_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4559928137734781146",
+      "file": "textures/49.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_STAGERES-512x512-fmt34",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4633494906541925436",
+      "file": "textures/50.webp",
+      "name": "SpriteAtlasTexture-UI_ACT36SIDE_FOODHANDBOOK_BIGICON_H2_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4956582429567484362",
+      "file": "textures/51.webp",
+      "name": "act_36side_card_5",
+      "width": 829,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5129758895828622273",
+      "file": "textures/52.webp",
+      "name": "atlas#1a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5528871206135752316",
+      "file": "textures/53.webp",
+      "name": "party",
+      "width": 633,
+      "height": 420,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5958147732778112550",
+      "file": "textures/54.webp",
+      "name": "zone_2_corner",
+      "width": 69,
+      "height": 69,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7290181312809011002",
+      "file": "textures/55.webp",
+      "name": "entry_element_sheet",
+      "width": 192,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7381006728567173923",
+      "file": "textures/56.webp",
+      "name": "zone_2_front",
+      "width": 1024,
+      "height": 741,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8099064004955989212",
+      "file": "textures/57.webp",
+      "name": "atlas#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8841748576314530240",
+      "file": "textures/58.webp",
+      "name": "entry_plate_quart",
+      "width": 247,
+      "height": 247,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8899916586534001477",
+      "file": "textures/59.webp",
+      "name": "token_list_bg_dec",
+      "width": 297,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8901601292167319226",
+      "file": "textures/60.webp",
+      "name": "img_fx_rainbow_ray_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8922070004115177087",
+      "file": "textures/61.webp",
+      "name": "down",
+      "width": 1240,
+      "height": 182,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8977822699970184288",
+      "file": "textures/62.webp",
+      "name": "token_panel_left_decor_4",
+      "width": 104,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9009497025031914933",
+      "file": "textures/63.webp",
+      "name": "zone_2_line_up",
+      "width": 60,
+      "height": 26,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9030017407467541705",
+      "file": "textures/64.webp",
+      "name": "act36side_zone_1_deco",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9201875728329339716",
+      "file": "textures/65.webp",
+      "name": "atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9217082655526833274",
+      "file": "textures/66.webp",
+      "name": "pot_and_enemy_bg",
+      "width": 994,
+      "height": 533,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 35,
+    "AnimationClip": 20,
+    "AssetBundle": 1,
+    "Canvas": 3,
+    "CanvasGroup": 43,
+    "CanvasRenderer": 301,
+    "CircleCollider2D": 1,
+    "GameObject": 509,
+    "Material": 12,
+    "MonoBehaviour": 577,
+    "MonoScript": 95,
+    "ParticleSystem": 14,
+    "ParticleSystemRenderer": 14,
+    "RectTransform": 494,
+    "Shader": 1,
+    "Sprite": 164,
+    "Texture2D": 67,
+    "Transform": 15
+  },
+  "externalFiles": {
+    "CAB-eef49bfd4b5879586c5789674e2a06c0": [
+      "archive:/cab-47c9a9ff6538bcd3e786ee841e2ec484/cab-47c9a9ff6538bcd3e786ee841e2ec484",
+      "archive:/cab-ac006900471089b3ed4825840754e3be/cab-ac006900471089b3ed4825840754e3be",
+      "archive:/cab-580061e156ea5e60815bbe6b768da65c/cab-580061e156ea5e60815bbe6b768da65c",
+      "archive:/cab-baade24d97ec2efc1350b433bb5e277a/cab-baade24d97ec2efc1350b433bb5e277a",
+      "archive:/cab-6ac369b085ebcca0735e4da7f7da64f9/cab-6ac369b085ebcca0735e4da7f7da64f9"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 76574,
+      "sha256": "c5d322952eaed400ee896890e50bca931903bcaef79ddbb6d3d0c345b8ef5734"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 6878799,
+      "sha256": "6396dc8d1c7cb845a6272959a20bb4f2a1dfe01319b6126c40977f96416d45e5"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 564981,
+      "sha256": "be31b8c5d6389c04abb762bf8e8de59d33e53f06ebee86e373215a09dc57faf9"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 358544,
+      "sha256": "629d097f919fa6705e3c5f193f403f5c453366da9bc3177dde221f90adc6df0f"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 40276,
+      "sha256": "82f49adc1bd12be45609ef3004670bd097df3d55a8aa93f203536d0cc430eed1"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 171862,
+      "sha256": "1e075c222b553b5e5c8d20c9daefc9fac35ecd7c082ee3bcd52ee2439bafcaf7"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 44870,
+      "sha256": "9bf39769b63a6c5ad3dafc56833ac819b54f218fa008580c6ec79b8d16cc324f"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 492978,
+      "sha256": "60447cb37d6b55dcc2cf2b7a53ea0e8a19c91dbfe42b460001c122f79946499a"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 37162,
+      "sha256": "5ed7cd3393839d3e16a20773d20b0dcc2b1f76d39ef8fc3df7870c883242ab61"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 14898,
+      "sha256": "092e364481841ae54bbe86214ea0bea84a2f7c196b6673b4c4d3d359720643f3"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 95860,
+      "sha256": "b31e45b91b05bfdc3ad1cf094b03a1e48cad7cc6ba9f08b14c8be20c001948ef"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 13404,
+      "sha256": "726ce649499d649111144478c989f43a260757e67461b87cadc4ff4ef97b2916"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 501562,
+      "sha256": "7f3b59de881ca1097f9b1e2ecbaf53be81f78863a2c5e0d7566bd646c0f73bd6"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 625604,
+      "sha256": "1352497a9a825ab7956ca000dc5f7ca2a757d4a63813a818d737c33be910ef82"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 27764,
+      "sha256": "ec2d8d66cdd474ae33f709cb27d9d5d3ca96f526a5f240e218c54f71ce7a5479"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 419718,
+      "sha256": "ca9bce26fe82b2a8fb611c28150bf3f749bc4f151ad511c83b30f4d4c9e7af2e"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 276536,
+      "sha256": "49d971830955e19a6e340861b7073e6dca4a92bc70e8b71f2d5bb531f15d0abe"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 4678,
+      "sha256": "39fa9a19b7bea6f61416636a1d93f1dcf629c328e249f1d741a0eb17f46e7279"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 2432,
+      "sha256": "7f4c9dfa6882fdb0459958ad6f694219f4695613f701cf4c60cc3bd6bddf7455"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 663352,
+      "sha256": "888860619ae39b77846d5a5db5d3b9dc4150dacea48790512f3e0b15b4cd212a"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 241744,
+      "sha256": "a70bbaa1a8c0d51ede699ef1a2355ccaff6a7a0550f6b9c2b8fab82678601ea5"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 342932,
+      "sha256": "7dbedcfba1a5a002f257e30699e02a095d47db15875f0aec6c771a7f0d05ef6a"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 308170,
+      "sha256": "9566171455a460bacae3c2c5653cea766613e24ae008982e34b089bd0ebb96b1"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 2916,
+      "sha256": "ab4a67be08dca23280f2100c10400017f2565820a91d66a6159b2010f2fbfc52"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 456784,
+      "sha256": "89207fb0aadffb20735bc041fd28720e7c81c4a4c2d87ce19588046deaa7e493"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 27698,
+      "sha256": "9de4bb523af29fb6e3c40edc3aa454555b093a872a8346006df9f0ce29092610"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 205086,
+      "sha256": "d22c124169a47832bd193fa715de1c08f8c09459e07fc748790999544111b445"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 2808,
+      "sha256": "9dd23b8681506b25052203920a3107557fabfc39608ab628ce1d4dd9b55cf865"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 106,
+      "sha256": "ed3b0ec810d6700ce3c4a9b1bb958986beaadb8913c4aa3f333bb977a573e268"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 393010,
+      "sha256": "83e78350c1ea0e613514e831dd7da3435129e86b91a3a6042014801875957d0a"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 734,
+      "sha256": "7cb81d21a4d7eae2bc469a98c4b348d1b08b17e15ed25a98f33ab6553deed472"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 2070,
+      "sha256": "1f05a24844479b4ea9f36a5c2b4819a388f78bf13ecd5f4ceeab4ce8909bfe7f"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 458884,
+      "sha256": "99766c2842b4a99d97716ee2a4a9e54129a5b7b35432810e0ce1be24db005244"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 64972,
+      "sha256": "60fe78ddb69b2e183195665224669ad3deeacbe92af04e08d311175ae5125ce4"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 10544,
+      "sha256": "45db70f07e34efb97f7c711f6e7ff83de7fee80737546986c06cc0d4b5d6d4ee"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 28166,
+      "sha256": "811b4da0ea776756bdf507ffffa49e8cf567012fa53ac3b5b877d514a97e24a1"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 71910,
+      "sha256": "7c40133fbb2c6196ed07690f6dd185ef156c2d7de8140ab48f84dd44ed485513"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 505648,
+      "sha256": "e36402c3cb24e88bf3e2d1ad149159b2bc009fc79ce81c247f8fd10fc8d55c1e"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 1194,
+      "sha256": "f6e7dba619e7483630fc57aa59840208cf7a77cffc97d58074050813dbd743f1"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 7042,
+      "sha256": "35563fdb04015dc1fc6d0509be33fcc5f1908f3b2afb255d0432c2abd54f309c"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 942642,
+      "sha256": "bb93530d3eed55cbed567618d35d39b05fd50b52eb2b7e4010655027b6f565b1"
+    },
+    {
+      "file": "textures/43.webp",
+      "bytes": 448908,
+      "sha256": "5bd2b1ca9a01669eb042b90fa452288de2d770fc38e0c6e24d585160fc315bcb"
+    },
+    {
+      "file": "textures/44.webp",
+      "bytes": 383622,
+      "sha256": "6e96cab82076075af53373adb2ead649fa7fec863f7e8087e404be212cf62645"
+    },
+    {
+      "file": "textures/45.webp",
+      "bytes": 77086,
+      "sha256": "f687b74036e7691087148a88fe324a7d1cc74ef250efc8d8db6f055fa2bff974"
+    },
+    {
+      "file": "textures/46.webp",
+      "bytes": 163524,
+      "sha256": "6a44b298936835080bc5d363a9f032ff3f5d78bbc7536836fe8a80d52db747f4"
+    },
+    {
+      "file": "textures/47.webp",
+      "bytes": 474,
+      "sha256": "5ce6fc10a9f53c5dde9d292251fbb2ec416e04ba65797bdbd2bb68bf381c0818"
+    },
+    {
+      "file": "textures/48.webp",
+      "bytes": 116404,
+      "sha256": "6b99c7d5711765b983c16c21cdfc00c52a5ae5fbe03f708cda932e8e4d432f5b"
+    },
+    {
+      "file": "textures/49.webp",
+      "bytes": 108952,
+      "sha256": "7d815ce8f2b5d92526f64bf308acc6f7418832e21ff42f84d423a4e42ce9160e"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 60994,
+      "sha256": "17988b96fabb8c7460da4fa7e62bec6eff946bafb1066374226de6ef1470973e"
+    },
+    {
+      "file": "textures/50.webp",
+      "bytes": 75222,
+      "sha256": "e7344784c0be32eca28d5c9c2d83e2f10693caa98e4462a410131cb83c2a7550"
+    },
+    {
+      "file": "textures/51.webp",
+      "bytes": 437820,
+      "sha256": "405ed095e6a85fd4464932db44b6d2c68982c289ed20bdf57dd67d0d78e139f1"
+    },
+    {
+      "file": "textures/52.webp",
+      "bytes": 16642,
+      "sha256": "afd8b82a9bf1115c8fb041a87f8a8c658245976cdf3514d4d9ed82ff44c25632"
+    },
+    {
+      "file": "textures/53.webp",
+      "bytes": 218558,
+      "sha256": "69e0f4d910c83e1be0d5ff5311cfa60b528607065361e188567d1aa57e8489ec"
+    },
+    {
+      "file": "textures/54.webp",
+      "bytes": 5316,
+      "sha256": "e12dd8b5930e24c95e3ec4bccf43e2252c5ec95fc1d548c986befbf4d80775c5"
+    },
+    {
+      "file": "textures/55.webp",
+      "bytes": 3058,
+      "sha256": "111de0998adc8e67fb7faab2b5a6e690f0ea81c96b689d6c4abd69182d104917"
+    },
+    {
+      "file": "textures/56.webp",
+      "bytes": 694370,
+      "sha256": "a423ab7dc2825216c652e4013c5720b0d5afce016c182283211b52eea9b96420"
+    },
+    {
+      "file": "textures/57.webp",
+      "bytes": 10922,
+      "sha256": "f431038e3834b5ec82ddc6816dbceeba576e43ac83568644da3411c96259dd12"
+    },
+    {
+      "file": "textures/58.webp",
+      "bytes": 4882,
+      "sha256": "9279f3956512cdcafbed1f3144f8249eb50a3894a46d70b715c38d506858e8c8"
+    },
+    {
+      "file": "textures/59.webp",
+      "bytes": 5760,
+      "sha256": "bf282181f3c3aeca4bde0ed0c9b9d49594905b882599a60d50e319282e354f0e"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 443786,
+      "sha256": "3cf2df9e8a146ea62b667a81ee2498b0655760bd01b1995fffb8d9103924ac1a"
+    },
+    {
+      "file": "textures/60.webp",
+      "bytes": 69248,
+      "sha256": "0040bb4fbf7b3d818d587b804e3af6bfe43f5c24035b063b64bb373ea9978fd1"
+    },
+    {
+      "file": "textures/61.webp",
+      "bytes": 174028,
+      "sha256": "12617cace38bf236fcc2944dabab8c318cd3b0061dd6240ca5329fae62d92277"
+    },
+    {
+      "file": "textures/62.webp",
+      "bytes": 7228,
+      "sha256": "7707ed7aab25716bcad7f0f950e9ad590091d5552f9cefa2dfdc09e1192554d0"
+    },
+    {
+      "file": "textures/63.webp",
+      "bytes": 1950,
+      "sha256": "07d0887d5c670bb6b36511e7fff7258a6564e57240646bdf0e8be61171c26a11"
+    },
+    {
+      "file": "textures/64.webp",
+      "bytes": 7762,
+      "sha256": "b368d068bc51908373a8e2f1fa9013e96b518e40ad859dd45afde16a6764d754"
+    },
+    {
+      "file": "textures/65.webp",
+      "bytes": 39966,
+      "sha256": "75bba771970486048337918f3986ddf2ba9a21104caae4077e734d504fe5ee04"
+    },
+    {
+      "file": "textures/66.webp",
+      "bytes": 414738,
+      "sha256": "b5f791ac740746f4656bec85b1d713ed86c4bdc9e563687e4768b11edb8d5b35"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 75678,
+      "sha256": "206dd6911b5d381ae5a490c13b25859e1e18ba28d010f759f966892d1867f30d"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 480872,
+      "sha256": "fa48c085741434a167eddee92f7a4d19e6c1413b549f29e02ef8e01c7dab3903"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 412090,
+      "sha256": "baf72dfc7d776dc0f558e166a43609a44dfc77220b95e6675d946ca538903651"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act41side",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "25-04-25-08-42-16_acb2f8",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/c9e87c15d06b0f6587a2e89cf494030ddb510296/bundles/hot_update_list.json",
+    "bundle": "audio/custom_se/act41side.ab",
+    "bundleMd5": "54b72d349cf1dbb5c02ac59fc95451e9",
+    "manifestEntry": {
+      "name": "audio/custom_se/act41side.ab",
+      "hash": "1e868c894633fd0d45ae1a690b41f198",
+      "md5": "54b72d349cf1dbb5c02ac59fc95451e9",
+      "totalSize": 286451,
+      "abSize": 286952,
+      "cid": 5112
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/25-04-25-08-42-16_acb2f8/audio_custom_se_act41side.dat",
+    "archiveSha256": "081e693dcdb86eeb5cb429170e0e4bd7498620e1ebb04c53692c32a2238fe8a1",
+    "bundleSha256": "ba53d8834f5a4240366229f2d1e0bc9cb7b0c1999965501cc13b37b95496968b"
+  },
+  "animations": [],
+  "textures": [],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "AudioClip": 1
+  },
+  "externalFiles": {
+    "CAB-86442215f63c67fce7d4fc44c47fedf3": []
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "audio/-551383749061400002-0.wav",
+      "bytes": 1048776,
+      "sha256": "a2142d39ae072e7455ff19d841d814c100d3f45bc068281381aff19e21677878"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 286451,
+      "sha256": "081e693dcdb86eeb5cb429170e0e4bd7498620e1ebb04c53692c32a2238fe8a1"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 634,
+      "sha256": "814042877882c1aa3b6d77d82b52d5348cf6f9578fc108a93a668af74aff13f0"
+    }
+  ]
+}

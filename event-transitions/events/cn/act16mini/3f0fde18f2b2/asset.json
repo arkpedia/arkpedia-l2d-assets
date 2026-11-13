@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act16mini",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "24-03-29-14-33-44-5002d2",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/aa84183556333c22861bdfd0430d507a98ec951d/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act16mini.ab",
+    "bundleMd5": "3f0fde18f2b2dab3bc06f37b199a851d",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/24-03-29-14-33-44-5002d2/activity_%5Buc%5Dact16mini.dat",
+    "archiveSha256": "10bfcac793e30158efc370e5b338378a5269cc5fa9d1bbea4570604f7d20729e",
+    "bundleSha256": "0d54e8d9e9ddd75471d854fbcbe9dd02607065887cd14b0b5941da15cc552bdc",
+    "manifestEntry": {
+      "name": "activity/[uc]act16mini.ab",
+      "hash": "fc6da9d88a3c90fe85deff7169254424",
+      "md5": "3f0fde18f2b2dab3bc06f37b199a851d",
+      "totalSize": 1043152,
+      "abSize": 1112764,
+      "thash": "mWgrPAzvC+XR",
+      "pid": "lpack_misc",
+      "cid": 5
+    }
+  },
+  "animations": [
+    {
+      "id": "-6464501158083083090",
+      "name": "act16mini_entry",
+      "candidate": true,
+      "durationSeconds": 2.5,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-7651344978253531053",
+      "file": "textures/0.webp",
+      "name": "title_warning_line",
+      "width": 256,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6500112700656099329",
+      "file": "textures/1.webp",
+      "name": "title_icon",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6248215502396000595",
+      "file": "textures/2.webp",
+      "name": "act16mini_stage_deco#0a",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5405993546646641391",
+      "file": "textures/3.webp",
+      "name": "bg",
+      "width": 1660,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4461771300335467345",
+      "file": "textures/4.webp",
+      "name": "SpriteAtlasTexture-UI_ACT16MINI_SHOP-1024x256-fmt34_alpha",
+      "width": 1024,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3898050393622987179",
+      "file": "textures/5.webp",
+      "name": "SpriteAtlasTexture-UI_ZONE_MAP_ACT16MINI_ZONE_1-1024x1024-fmt51",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3418391316638370822",
+      "file": "textures/6.webp",
+      "name": "act16mini_stage_deco#0",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2881188923885742406",
+      "file": "textures/7.webp",
+      "name": "act16mini_activity_stage_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2420095036162838505",
+      "file": "textures/8.webp",
+      "name": "img_title_dissolve_map",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-310263828821390322",
+      "file": "textures/9.webp",
+      "name": "act16mini_activity_stage_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2491390184779902024",
+      "file": "textures/10.webp",
+      "name": "SpriteAtlasTexture-UI_ACT16MINI_STAGERES-512x512-fmt34_alpha",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4965190016319194832",
+      "file": "textures/11.webp",
+      "name": "sprite_act16mini_timely_drop#0a",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6058377024677803594",
+      "file": "textures/12.webp",
+      "name": "SpriteAtlasTexture-UI_ACT16MINI_SHOP-1024x256-fmt34",
+      "width": 1024,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8379963795086481454",
+      "file": "textures/13.webp",
+      "name": "sprite_act16mini_timely_drop#0",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8945694248934442719",
+      "file": "textures/14.webp",
+      "name": "SpriteAtlasTexture-UI_ACT16MINI_STAGERES-512x512-fmt34",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "AnimationClip": 1,
+    "Animator": 1,
+    "AnimatorController": 1,
+    "AnimatorOverrideController": 1,
+    "AssetBundle": 1,
+    "Canvas": 2,
+    "CanvasGroup": 9,
+    "CanvasRenderer": 62,
+    "GameObject": 113,
+    "Material": 1,
+    "MonoBehaviour": 122,
+    "MonoScript": 34,
+    "RectTransform": 111,
+    "Sprite": 14,
+    "Texture2D": 15,
+    "Transform": 2
+  },
+  "externalFiles": {
+    "CAB-4915e1c550a1f6d92efaeb7a32c17eb8": [
+      "archive:/cab-47c9a9ff6538bcd3e786ee841e2ec484/cab-47c9a9ff6538bcd3e786ee841e2ec484",
+      "archive:/cab-ac006900471089b3ed4825840754e3be/cab-ac006900471089b3ed4825840754e3be",
+      "archive:/cab-580061e156ea5e60815bbe6b768da65c/cab-580061e156ea5e60815bbe6b768da65c",
+      "archive:/cab-6ac369b085ebcca0735e4da7f7da64f9/cab-6ac369b085ebcca0735e4da7f7da64f9"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 3786,
+      "sha256": "a761833da81d049c4d1442aad6a4a0f6661ecdecd0622b6ed7b0dce2f16bfb76"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 1043152,
+      "sha256": "10bfcac793e30158efc370e5b338378a5269cc5fa9d1bbea4570604f7d20729e"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 56864,
+      "sha256": "9b7cfc61799240673fb6de8d2d4f050acf39b222de9ca5a02c2245bc0e269895"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 16320,
+      "sha256": "f6e2157463e98ac60748c42649d6332f84fe702b7524a3c9d3786b45e634da54"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 52080,
+      "sha256": "d3dffa442fbe202b845740ccb1a0c15d92db3c988c7417d5dd61fe4454a89d2b"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 1868,
+      "sha256": "22f294b655ce9992c8a7eea8dcc9f6201a4ee3a869c2f95b806b4d8e16104d3e"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 798,
+      "sha256": "9f28def55c936c0e28885d8a75ca72905e9cd2dd319a6fdeadb1003069b628c7"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 69116,
+      "sha256": "0a36729ab5b05e933c06bb717f67512c52e222fea371e81d159c8acc4b9b8fcc"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 9900,
+      "sha256": "681d741d204ef9940d79fd55521ecbd095b1f22ffa500a26aa78ff1e24d71e2b"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 109532,
+      "sha256": "02f5e6d982697ca2c4d848c49838298c653c29c0c174a8a60405ea27da590121"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 4240,
+      "sha256": "c51f77490555e6c56cf47e886f184e7793015b45179f12dd13ff651c69a444e9"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 1468048,
+      "sha256": "bc30b9df495643afaaea268bd59e4dd6d93b69e6333bd4aff0e5ebd11d6eadfd"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 11922,
+      "sha256": "d84a9351aa807aa230f849bd8e6c00c3e3aadb4626f9524a05368754d71e6cb7"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 432914,
+      "sha256": "c4a88d88cdda904aeb65d9814c30393c2c42371ffce3043ec3a9aa5bcf8fcb00"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 10474,
+      "sha256": "7e3d446cd0886a10cfbed7855093f5714f80d0433273e88c438c74d6c96e498d"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 124326,
+      "sha256": "c8e0210df0622a03883cb1a47b8a21ec2c54d38f03ec206f9775bac5c6bad85b"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 28196,
+      "sha256": "c23736a7d27c5e82dcdbe02b901341d3b437ba1b2a6ee65c7368a8385291ad69"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 267596,
+      "sha256": "ad017da1b21b884d69b5ec9612916ea9ad2e747f2ece2cd42ff400165b1a11bd"
+    }
+  ]
+}

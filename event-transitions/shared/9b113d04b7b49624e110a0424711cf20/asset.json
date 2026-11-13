@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "uishaders",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "26-03-31-05-42-28_7d7f67",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/2e88324ba98e51d1cad653f09bd0883afc9eaaf7/bundles/hot_update_list.json",
+    "bundle": "[uc]uishaders.ab",
+    "bundleMd5": "9b113d04b7b49624e110a0424711cf20",
+    "manifestEntry": {
+      "name": "[uc]uishaders.ab",
+      "hash": "b6832f040083f5fc4745f1076eae927d",
+      "md5": "9b113d04b7b49624e110a0424711cf20",
+      "totalSize": 2687839,
+      "abSize": 3221258,
+      "cid": 44
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/26-03-31-05-42-28_7d7f67/%5Buc%5Duishaders.dat",
+    "archiveSha256": "b96b372e41da9cd13030956dcc4ddfd75fb8421af602309ee6dd0765fd324d8c",
+    "bundleSha256": "96cd1630298a1c50238562b30583f799c5d935a95565bfe742e3100922aa39c0"
+  },
+  "animations": [],
+  "textures": [],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "Shader": 4,
+    "ShaderVariantCollection": 1
+  },
+  "externalFiles": {
+    "CAB-86b4d6de723dc8e66275ab5fa8a60b3a": [
+      "archive:/CAB-967586173c51ac60f86de17c3e4b1a32/CAB-967586173c51ac60f86de17c3e4b1a32"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 2687839,
+      "sha256": "b96b372e41da9cd13030956dcc4ddfd75fb8421af602309ee6dd0765fd324d8c"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 3329027,
+      "sha256": "8506d8126603a956949100f37f652160310751fb053c472081075407d7d10cbd"
+    }
+  ]
+}

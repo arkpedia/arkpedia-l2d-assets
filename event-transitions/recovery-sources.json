@@ -1,0 +1,1259 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "server": "cn",
+      "resVersion": "23-11-13-06-40-13-1003c0",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/90179ed85c488940c17301fde4cffa48ad9249e2/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "23-11-17-08-48-31-26d599",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/7bae4ba5226d69168aac13f5c94eb32217cdb6b9/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "23-12-02-09-28-50-918524",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/2a47f844e5f1018178757106c8053ec0535c6bfd/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "23-12-07-12-04-19-1dcae9",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/cd8646a314f1830f369df2f7b190903a2ef3e3d6/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "23-12-19-01-36-42-a8909d",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/06ad48ac2a46a3942ed5736242fc9c75fe48ae11/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "23-12-25-13-27-36-ad9fbc",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/06cded9f2449491542f72e4e62b57df84cda80a7/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-01-05-09-28-20-bd7062",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/012046286dd0857be4d52a96cf51057fbbd1f69b/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-01-12-07-52-32-80033a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/cad24ae5d7bde5d42f553a092b86ec2461396f57/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-01-29-16-06-39-df4e2d",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/555me/ArknightsAppData/fca40fcabd3f93d5a64427c657894735815818df/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-02-20-11-33-44-564efb",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/4261366e630b2218aa7c3b043fd0141e9efc871f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-02-20-11-33-44-564efb",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/f4f0026029d411284a27686cefb7fe8fa118c9fe/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-02-26-08-28-19-0f351f",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/d3c9273d152ecfdfdac2bb854ec5d09122d18b42/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-03-06-07-46-40-d13e0f",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/f15a9f9405d4989c8b1de0395d23f940d60f47c7/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-03-12-10-00-54-565c2b",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/4ccf87899db120d1325bcb4c23efbe3d824ed8df/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-03-18-14-54-31-f08f85",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/62f74d284c751186cb5620bae0dce3624119e391/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-03-29-14-33-44-5002d2",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/aa84183556333c22861bdfd0430d507a98ec951d/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-04-09-18-51-30-130d51",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/7374a2a65dee79fb85a36e8aa959db323da53058/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-04-11-15-55-07-dc20eb",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/6297e3885e8c2ed1a13dfbf1ad10a6afda12820b/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-04-16-12-07-38-7be553",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/11db375aca59207c44cb50900e845bb8d99e7c41/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-04-23-17-11-16-67ab0e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/3bb11b666664cd09f9b18e1ffad70ff32b5b7db8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-04-26-09-22-08-413e02",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/a2b41156ca54e1d3c5aa9303515cd4fb465321cd/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-04-30-14-20-51-275ddf",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/cde74788d9f054f44c31d94ec31bda19b770357c/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-05-01-15-39-54-90349b",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/345016311765dd245ef76993e98c8f2c356eaa47/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-05-07-14-59-47-e84938",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/420ce7712323761d5f63f6c3d9203143f13e1658/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-05-08-17-17-47-f6390e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/d635b4298e78c67fc1a1a26465ab12b908de56e2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-05-08-17-17-47-f6390e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/12320b2dd5ae86b6dec8779ce2aeab27cc2f8ac7/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-05-13-13-28-58-962413",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/246cee840304cbb5dc6eb094122562ee3076396b/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-05-22-06-44-01-4a3244",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/554663103104a142d333c9d5d8a6b1bd27a3f3b1/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-05-28-13-45-33-2fd577",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/4e2f48088d19acd450cd8726d35b8fad6a0985af/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-06-07-15-11-07-8681f1",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/5ea4065690699d0537226e4e2aeca35d478a4c6c/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-06-17-14-03-22-a1d97a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/c3dd2e9f2f90d2b7f07bbf857e45fa443c70aed5/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-06-17-14-03-22-a1d97a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/ac163fd279dfe6450c277c23217bd7920f93f7ad/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-06-21-09-33-59-503529",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/ea1c196f01e116347f79544cc58d74e87987b817/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-06-21-09-33-59-503529",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/1c97e8e8912e80b2b0592588bf3feb9435092678/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-07-05-08-26-26-cc8da6",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/335115f8c7b35d98a836fbcd0729ef82a124c4ea/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-07-09-15-29-50-f0a675",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/6d994c0bad56feea64b1eb367be123265a09bf3c/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-07-15-10-57-16-e6a8d4",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/ff42233862b033751aa7bc1eaaa330578bc62aa9/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-07-23-15-16-02-a53606",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/39d605f9f602f13c52b755fa3130c1cf40a615db/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-07-31-04-23-55-e2099f",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/675888295afe92b06f42e502be78b97fd5d37f05/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-08-01-19-38-25-0f631d",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/2326bfee9dc6d8e207f6a69a9a0f78ee4c0f89c5/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-08-06-12-03-44-c219d2",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/7b0622e5b35985b7aed2bb453d98f384f0bbefac/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-08-13-15-06-47-45c4b4",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/10edd3c6389ebbbc9627eefc2d188e3097e9f977/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-08-16-07-54-29-65dc0e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/dd1f46536332fa691967c28bc33ac26a62b309f1/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-08-20-17-10-23-6de62c",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/13ae56726ff06853d6796ecc681aad52de1db5bb/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-08-26-16-10-17-fd946e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/f8eb3dfc10d99895a7d46d68b605403d8e4616c5/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-08-30-10-37-03-474f83",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/be49945188ae70299ff83bf2b352da2783a3d2e2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-09-05-09-46-01-db17aa",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/73fd1a047e7a21a71a93ff0c6151249907322d21/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-09-05-09-46-01-db17aa",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/f6ad8eca84b53ea42d5bacf0365388b3232e7ecf/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-09-12-10-45-00-b73864",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/dd62b0c04e4b77f439165c9209d2e4f821c30eab/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-09-12-10-45-00-b73864",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/3c4209877b520cab4ec0ca66d3394f1a66c241d9/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-09-23-11-27-19-c6564b",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/043cdb223653ca916bc6abc7c8beafd0a0fd5437/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-09-29-11-04-03-7156d6",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/acf3a702ee2f3cf8b39ed16ffd1512e43ac8128f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-10-11-06-39-29-8248aa",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/f029ca1a50d01aa83ccf3b0c4d7c103a227ac778/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-10-14-21-35-03-2ad088",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/966cb3a7f6a9b818d25e8e43a3e6853d1f8152b8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-10-17-14-09-00-3afaf6",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/a6e7822110dc0b5e4866258d7e21adeb9a35633a/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-10-24-14-30-30-b63a02",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/b93fee79833143893ca07d616246e40d5559dae0/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-10-24-14-30-30-b63a02",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/f579c7a1d502670e2a5dc418647ec2b2211d79c8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-10-24-14-30-30-b63a02",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/a8e558423fc297d3ae3c2f9f7375f6ea2f8b7887/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-10-30-15-08-36-72419d",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/fa496be0f268d98fe3feade28f120593feaeefb8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-11-01-18-18-57-490182",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/8ede36e23244f5be75830214733bfc7916a28ac3/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-11-01-18-18-57-490182",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/6f560fe646b86c938169f238de3e2329e1e1a181/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-11-01-18-18-57-490182",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/00e1e463a46e602841ee98a4803338627b659e16/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-11-06-06-00-35-a898d4",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/9962ea01360669bf47b6c92f406de8ae24215bd5/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-11-13-15-14-05-6864ab",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/1ff5ea91b3adc77efad065346f8168d1655f5084/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-11-21-11-04-45-bae23b",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/98f8c7ff685925356990b221fc272670fc8fafde/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-12-04-14-14-07-f01d68",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/b856dbe9fd6a93ea83e94c9220b30b514562ce8b/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-12-09-16-51-40-0560bc",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/a5fd85a6b82385eef555ddd4ea13683df863487d/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-12-19-11-14-25-66fbf4",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/1da7e6ec5444fe4f4b890c1fcf96f3c3390bfea7/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-12-28-16-17-06-54bd34",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/e9b327f837c8003466a6f6d962d7ca0befa80d23/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "24-12-28-16-17-06-54bd34",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/5a07cf99bba4f7dbf4e5687a00f73b5f9544c146/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-01-08-07-44-44-3d8742",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/4ee624f6a1f0108a36de11c84aa8c2824c237ed1/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-01-08-07-44-44-3d8742",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/08f0469e962d5b4749d3ea3922485f6b50e029e2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-01-21-15-29-57-98ea04",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/cdab9d56a07c9e9c5e0cb93c5658176462923fc6/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-01-23-12-42-24-1e19eb",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/02738ec1890e07ca7d4e2a40bb74bf470e292659/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-01-24-15-40-12-ea311c",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/4bb5a948505a70817e155a3e148b3d8fa173949c/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-02-07-05-28-44-c1ba2a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/ab413fbcb18cb75823d54b22fb559ee53c52e05b/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-02-12-10-23-22-1b0fcf",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/398897dde0df700d239dfc4abe6588a0baa17d58/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-02-14-16-11-02-89657b",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/4438360fec8aa3a93751ac5499de055eaf61ad8b/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-02-19-09-21-28-ba1f4e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/34c7fc91e3192187a8763ca98e9a782668ec23fe/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-03-06-16-27-08-c23c8c",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/7a95f3b78768f5c53fb8390fcee91d4ece6c43f8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-03-12-13-42-52-16223d",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/bfe8b6fec0fc84f39eaecb2eab50b4f1f5aae48d/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-03-18-13-18-46-22831e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/cd191bb285252254fa66e6a740f199c2a38dab43/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-03-27-16-19-10-4d4819",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/fc1a42268a71bf6e750c671b3e4eb3756bd4e2d3/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-03-27-16-19-10-4d4819",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/dcc0f8bca352f34d17e55da3159d716fe98d54b5/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-04-03-14-16-11_4f0a01",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/7d840b9c4850efef1e9dd013969b36d2721221b1/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-04-17-12-08-05_ffed69",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/ac6f33e9d27dd937f3e6cfeddecdd9b8b3c229b8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-04-25-08-42-16_acb2f8",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/c9e87c15d06b0f6587a2e89cf494030ddb510296/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-04-30-05-10-18_7ba4b2",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/10549d963d636087baadb39848251aa30b82fa62/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-05-01-05-22-15_988a76",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/94063cfe63bb036d4a9cc4f3421fa09630895e31/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-05-07-08-13-14_2c35c4",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/eaf957380873c1263aa4bbdc9023db73837f42dc/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-05-12-15-21-03_779171",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/e7f1c484880fd0ba5115d419b8c9e0aa72397cb2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-05-20-12-36-22_4803e1",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/165c1269485961dd8cdd761298ab9c5a12f1c80f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-06-03-16-31-44_719db4",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/5b711e99f9cf6ccaaa80da02335342aa2b855bf1/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-06-06-14-15-57_2e7016",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/ab1a97e10e7f372ea3e77d78891bae95b0d6abc8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-06-11-12-08-09_7c661a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/4952e855d9944f3a38a1f1be5a08fdf6c787a803/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-06-17-00-20-04_9d5004",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/a05c6023f0c223d02ba2b60e52ea060fd777d2c2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-06-23-09-10-33_9cdff2",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/74aba39fd1d46ac14b2d0a0fb06c8b0a0a376d9e/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-06-26-04-47-55_47709b",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/e8549b1c7f61962549b67f9e5eb4b633d80c7f0a/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-07-07-08-45-04_1256ac",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/99d6e854a76fa532990ebeddf1a010789c9d24cc/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-07-14-07-56-43_dc5c5d",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/61e2250572f197e3d0cb509d8e8172104aa436fe/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-07-16-15-07-47_b54a76",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/f8066f805201eaa39f27dc6db98cb3d01509f981/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-07-19-05-16-54_1e71a6",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/477beab02ff064bcf05923cdc3f9620cb89fcdaf/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-07-31-10-43-49_0755eb",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/b3ff6399f957da140b7d41e069b9d7f9f75df812/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-08-12-00-09-35_7c97d4",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/d7589c713a838ea5f75f86289729ab5043f8085f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-08-25-23-45-59_81c7ff",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/1f6f587f35c7ca8ef48bbdacfa00052d01149686/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-09-02-13-38-25_e2b043",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/1bb94ea7798f92319b4d66c8d15b9cc7cd0b7e52/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-09-09-12-07-28_54e22e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/537e6cf5b7a3b99d5cd1a7f69a46acf38701b3ac/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-09-17-05-25-13_d72007",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/5cf5e18a41f02d408ad5a8398a3fdfc9d786fed6/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-09-23-16-49-33_52e0bf",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/c6434df8995062209bbd6a57b8bc8a4db67cc977/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-09-28-12-13-16_6485b3",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/ab0697b2c75e5ed2b22eadd5cc255d5671944d62/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-09-29-16-32-32_00dc6f",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/d9502becf92fc78cdd97487050c7530071898a55/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-10-13-16-21-56_229ee9",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/f48986103c85f1a8ec806bf912996239c1a2229e/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-10-20-08-03-10_8f5563",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/f55c5fc8d65591afe292f3d8a6bcf2a183c5cecd/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-10-22-11-51-22_eda48a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/6c775e911f51dbc372b70ad59ae1728a2b4c199f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-10-23-13-35-37_3d4b91",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/bf4a456af606acde5a8554aae9f8d91ad8c240ef/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-10-31-07-22-32_9dde1a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/95ebaab245361e9146a7783ddb9ea2a0f4d6a72e/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-11-04-06-39-31_371c8a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/650d9b6fea5968a8e8d8816dd018876caf030d2e/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-11-06-11-20-46_949905",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/ba5c5f05dcd18c8b89558e867081e2b618ca1b42/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-11-12-14-06-12_20dda8",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/68a94539ede698182df3ab0bdd3e0839ef46109a/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-11-17-12-07-19_995ec6",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/5f4363168ceca408f000310231c0a6f557454b46/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-11-21-15-21-44_ee1197",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/0e0abda11e1239f52c15a6161b719e08ae8f7c84/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-12-04-02-54-57_e9dab3",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/2208d91b9f3621f850db2e0c305238b4af7612fe/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-12-05-13-55-22_6878ef",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/8d78c2517591df5d1fae61aee691f54118daaab3/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-12-09-11-06-25_6d7e1b",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/9810680b930d05cc85b3b507eafe1f9c089aa056/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-12-22-05-35-11_084af9",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/dbd422aeacffb11ef193f847f5ac356907c1ff68/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "25-12-30-07-42-27_86bc9a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/72dda2ab6dd0d3147139576180af25d83a522820/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-01-06-09-38-59_ea48d2",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/f83eda451e5843cd8165fdd86a34659e6ca2182e/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-01-14-09-16-21_82db26",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/5ed810bcde6d132f2ed79a3443d5c1b68decd7e6/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-01-23-10-05-06_762d08",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/8f0736e49d9f7914120686ca28c448cb60817bb9/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-02-02-04-52-41_58bd30",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/a5fc6d91d7820cdf9389d4334e15ecb486de7a2a/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-02-06-13-37-25_e45854",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/5c3436856bfd08f0234714e794fc04d2ef42afa5/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-02-12-13-45-20_d44b0c",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/9f74e2e91d4fce153caade8a97b00e8052f3af1d/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-02-22-09-11-16_f55583",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/732da03bc971f2e92430424bc1a3bb25d120b0f8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-02-28-10-42-20_2bc282",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/ec58eb1fb18ea1866c6ac22eb06aec62396ece06/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-03-09-09-52-10_05aa52",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/afc615e2e5e09b3c93dc8097e080420e43be8c66/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-03-13-06-11-47_14fb99",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/450292bff53f1581545e74ad75859653a3beaad2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-03-17-10-47-15_6ca6df",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/48ca12d05833425c14d2ab2062d4140b9c1a9a5f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-03-25-13-52-04_2d89eb",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/7351c8c569a6b9778557af051143c4bcffc36578/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-03-31-05-42-28_7d7f67",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/2e88324ba98e51d1cad653f09bd0883afc9eaaf7/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-04-03-04-44-31_c79db9",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/dc0fb07fe8d98792cff126546a57fd6425fb45f2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-04-13-12-31-42_e9b560",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/262b89cc416545eec8f98ea3809ecca0735afba4/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-04-14-11-12-01_cf554f",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/7ddea107cef9ab24d55052f36bf984fcd1bff9ed/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-04-22-10-22-20_1d417a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/67ffa56e0522cb8334131ca40291939ef228af75/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-04-28-16-18-19_ca4c26",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/cef1675aa1a3bcffa94c4e9ba32e66109e4b1421/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-05-01-11-20-05_2f5b74",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/dbc0f0ff8e1cc12c97570aa7875563dafee57444/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-05-06-13-49-26_836197",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/530de56e7a32cdbe37ffb8bb6def269c5d1ba348/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-05-14-04-58-05_a1cf52",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/83449bd36dbb195f7e658accc233cfc94d5fad4f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-05-20-12-59-09_e8f456",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/2634be50d395b7fab4e872c01cfc281484ae69bc/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-05-27-13-32-37_d44f28",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/4b7621138ead636e0bf6a94dbe62211f4ced8ce6/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-06-05-05-53-18_611274",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/37d401be0610d1aefd904ef9b981e72a1c47604b/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-06-11-05-42-03_cac56e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/e570855fc59eed877bd024f44b84d2194892d710/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-06-12-11-25-22_fc6f3b",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/c46874298d80e5c5cdb31317eb3b0850fb50e9ab/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-06-23-12-12-11_556baa",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/fb24aab4a81c4be1ca50e72c7a8ab72f07860d99/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-07-01-15-26-52_d3376d",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/669375a3432375d866ddc8acab7fc5f805232e31/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-07-08-12-06-40_24a544",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/60472017e7f6d87d8cec9b19288e79eb624b3615/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-07-10-13-49-06_a14b4a",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/bd157050948b50d147606a2a4071358e4dbb3752/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-07-16-07-20-24_daf69e",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/dcc39a736eb2542f24092597b480c581cdcaaf33/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-07-20-09-52-12_5d4a43",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/8ca0e12cd9215cc6eb4d6717abc5a3356f88b5a1/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-07-30-09-02-37_bf3049",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/e2ce1d352037dd6305b3d72064c3e785d2c8a859/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-08-03-23-34-20_a745fc",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/8af57ea15d8e99d8d4021ce49e36afa1381ae841/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-08-07-14-53-29_30b8f0",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/a451ce0a6a92f9ab65663530da9c6a45eb45173f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-08-17-11-25-42_dbc172",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/a2d87c86fe4b4dd8b818ffe05b6c1ae2ad65e8ff/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-09-03-04-06-00_ed95a2",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/aa67475e130a484436ee4f1fc2135eb57bb32887/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-09-09-07-16-57_d4e461",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/41244df3be898a4263ded6367b1b74253f7a2c45/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-09-18-14-18-57_b6fbbc",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/b6baa8f81f473a9c27b12e1ebe6a0546c3258ee7/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-09-22-07-47-20_6c71fa",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/21e113da889dbfa98e47210d820b9d11d00ea291/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-10-08-04-51-28-56071834",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/44b3d7b3fad6f50ca505bc41414a2fea8eaa0c48/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-10-14-13-45-10-99469376",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/59da436d17c732cc8efe13d8f9265920ad2df140/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-10-22-14-02-11-51447808",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/3524c85611e82890367c9e65453b2495e3c39074/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-10-29-15-36-11-33649006",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/aa5cb25df844ee2b0680428b13cb65d5d4b515a5/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-11-06-12-56-09-07186384",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/774d93398fc56df29b4f55e406edda1a9df451e9/bundles/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "26-11-06-12-56-09-07186384",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/26-11-06-12-56-09-07186384/hot_update_list.json"
+    },
+    {
+      "server": "cn",
+      "resVersion": "TEST-24-02-20-11-33-44-564efb",
+      "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/cc0ccca14dc9e0b236a6c3f8e988563e85ae686d/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-08-26-06-07-36_be7305",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/c60ec0dfc0e76500d17c2e3797ae05767d85a541/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-09-02-09-10-49_7f4092",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/79132e863bbc9d0215fd0a9c29c8b5c3e9750a6c/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-09-15-04-46-25_59e90b",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/b54684d3aedd9d235591f4e8c9486a1d2ce4dd4c/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-10-10-06-26-15_131900",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/9b3cce2d4857b7e818946e3c7c6a970c3af3a8e0/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-10-17-08-33-51_57f30f",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/8ce3c10a3e93b7abce49001833ed2a1623d22d3c/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-10-21-16-06-53_3b9825",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/865bafc3b7e992cb37dbb34657e7627d045659a2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-10-28-07-04-59_bb83f3",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/5f9da4065f9e3ca5dd6398eb427e3b4525eb11f1/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-11-11-08-15-40_78dbfa",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/ff65ab0134ea9128cb72c72ad4f3f16b670d1981/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-12-09-11-07-04_e4288f",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/9142ea32e8193b859fa1b3e6d45c555ce2a3ec96/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-12-15-14-31-30_ae2e55",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/56a078b46426faa2ce8b1b3a5b0b930ff0ac33ed/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "25-12-22-12-58-23_0ca902",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/95b24f70618676f1901125f47184a77fe6fa67c1/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-01-13-09-42-53_63eee8",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/923feb23e98e1b924d9577b6e88d24f2e5a270d8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-01-20-14-32-07_df7a6a",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/154776174742046b820352b9dafd3fe3f624c8f2/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-01-26-08-51-06_ca9da9",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/318daa153f16b93fdce52726a1c94df2edc0ca8e/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-02-09-09-58-37_495217",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/6300435ac7e01be7c6100e16d9238ea2fa17b08f/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-03-05-06-16-43_c1f10f",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/75740219b84108bddd55c2cb296a575b27650176/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-03-16-03-59-34_497011",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/352e234bad47872cee0e426734c0516eb56f3e05/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-03-30-07-07-55_64a807",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/56adc603ef4a062eae7bdf2c6f825ed1e51c68bb/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-04-08-12-25-18_af2974",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/cdc2c45e686d53a50ef25b1c2308ea36f3697bef/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-04-21-16-52-00_103f2a",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/78c1663d09164968dcaa01a5f19f5a63de61eba7/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-04-29-07-26-21_78c26b",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/31d321241d7084ed57069314529f1daef57ef8fd/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-05-15-14-24-20_296935",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/4d1d825bb12d57cf0e3e0016cc5381e89dd4b554/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-06-16-14-02-30_417a55",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/d2bf81a584af83dd68925013ba0f4cfb8d6dc6af/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-07-02-09-44-34_427c52",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/6ea5c0f36005987a076ba9b15ae5c7be1ed6b8e8/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-07-13-10-31-38_cf4ca6",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/40e0636fef35f0a849d87fbb5ff20031414303ed/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-07-24-09-41-40_8f90af",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/2b7c7fa91fa8a9bc57b9bc4ba39f1adc22178f2b/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-08-11-11-20-00_747e4d",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/874e9e840124a163f484ae9d38b85d1f7d4ab5dc/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-08-17-16-42-26_e34be5",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/41c49d9ce469dd89b6b37f56e2555f960778bf34/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-08-28-10-20-08_ea3678",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/6a93fc188d5eb10406a964bd95a54bfcd53648b7/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-09-11-09-47-43_ff6d32",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/90efad12fa912ca8220f37fddfcb43555e31312b/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-09-18-15-44-33_adcee5",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/28c394e547f2f70c1ee4edfb9d4c4bddde20104c/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-09-23-17-49-43_b9cc4a",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/a35da5eef942e49263177a79b8983652f7ee507d/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-10-03-16-06-39_0a6acf",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/6df8f6877a03e16f6a1499172a8de10f0f6f773a/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-10-26-10-03-17_824ce7",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/21881e1c05b16ef092ed9e811214662d61a96e67/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-11-02-05-12-02_1cd3b6",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/0d8267abb64083ee0bd940a638a759b3db59fbde/bundles/hot_update_list.json"
+    },
+    {
+      "server": "en",
+      "resVersion": "26-11-02-05-12-02_1cd3b6",
+      "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+      "manifestUrl": "https://ark-us-static-online.yo-star.com/assetbundle/official/Android/assets/26-11-02-05-12-02_1cd3b6/hot_update_list.json"
+    }
+  ]
+}

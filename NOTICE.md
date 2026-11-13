@@ -1,6 +1,6 @@
 # Artwork and software
 
-Arknights names, characters, artwork, music and the Spine models in `models/` belong to Hypergryph, Yostar and their respective rights holders. This unofficial fan repository holds them so Arkpedia can show each outfit's animated art, for reference. It does not grant any rights to that material.
+Arknights names, characters, artwork, music, the Spine models in `models/` and the original game assets in `event-transitions/` belong to Hypergryph, Yostar and their respective rights holders. This unofficial fan repository holds them so Arkpedia can show animated game art, for reference. It does not grant any rights to that material.
 
 ## Where each file comes from
 
@@ -20,6 +20,19 @@ Every model folder comes from an Arknights Android client: the Global (EN) one, 
 - `test/fixtures/pages/` holds three 64x64 crops of the same kind of page textures, used by the tests. Its README names the source of each.
 
 No model files come from fan sites or mirrors.
+
+## Event entrance sources
+
+`event-transitions/` preserves original activity UI bundles fetched from the Global
+and CN Android asset CDNs. Archived `hot_update_list.json` snapshots from
+ArknightsAssets/ArknightsAssets, ArknightsAssets/ArknightsAssets2 and
+555me/ArknightsAppData identify past resource versions and their bundle hashes;
+`recovery-sources.json` records their exact commit-pinned URLs. The source bundles
+themselves are fetched from the official game CDNs, not the datamine repositories.
+Each pack records the source URL, resource version, MD5 and SHA-256, and keeps the
+unchanged downloaded ZIP. JSON records are the readable Unity object type trees;
+WebP textures are lossless encodings of the decoded Android texture channels.
+See `event-transitions/README.md` for format details, coverage and limitations.
 
 ## Software
 
