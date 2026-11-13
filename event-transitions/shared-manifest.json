@@ -173,6 +173,15 @@
       ]
     },
     {
+      "server": "en",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/30a0b789f8d3e3daa9e5e03b6e439372/asset.json",
+      "externalFiles": [
+        "CAB-4b090287f6a2bcb0a26cdcb38e4b63b1"
+      ]
+    },
+    {
       "server": "cn",
       "activityId": "shaders",
       "bundle": "[uc]shaders.ab",
@@ -341,6 +350,15 @@
       "asset": "shared/50e2dd6060d613fc7ba41897ed1a7ccb/asset.json",
       "externalFiles": [
         "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/526d5aa8cc94d209cfbc222acf0a7f0f/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
       ]
     },
     {
@@ -740,6 +758,15 @@
       ]
     },
     {
+      "server": "en",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/ac90f52418ebc486fb6d5f90d27b716b/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
+      ]
+    },
+    {
       "server": "cn",
       "activityId": "uishaders",
       "bundle": "[uc]uishaders.ab",
@@ -785,6 +812,24 @@
       ]
     },
     {
+      "server": "en",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/b8b6ebf60ee4a22b38d810bf0f26de2f/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/b929b588131ffcc10a92424b5402a118/asset.json",
+      "externalFiles": [
+        "CAB-4b090287f6a2bcb0a26cdcb38e4b63b1"
+      ]
+    },
+    {
       "server": "cn",
       "activityId": "act1multi",
       "bundle": "audio/custom_se/act1multi.ab",
@@ -809,6 +854,15 @@
       "asset": "shared/bb6ef923f727530acbce13830f54500a/asset.json",
       "externalFiles": [
         "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/bfbdbc24f7ad74799be6b8a48420bff9/asset.json",
+      "externalFiles": [
+        "CAB-4b090287f6a2bcb0a26cdcb38e4b63b1"
       ]
     },
     {
@@ -2486,6 +2540,60 @@
       "md5": "36c31ef0639b6d97e9a395d55506da23",
       "status": "recovered",
       "asset": "shared/36c31ef0639b6d97e9a395d55506da23/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "526d5aa8cc94d209cfbc222acf0a7f0f",
+      "status": "recovered",
+      "asset": "shared/526d5aa8cc94d209cfbc222acf0a7f0f/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "30a0b789f8d3e3daa9e5e03b6e439372",
+      "status": "recovered",
+      "asset": "shared/30a0b789f8d3e3daa9e5e03b6e439372/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "b8b6ebf60ee4a22b38d810bf0f26de2f",
+      "status": "recovered",
+      "asset": "shared/b8b6ebf60ee4a22b38d810bf0f26de2f/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "bfbdbc24f7ad74799be6b8a48420bff9",
+      "status": "recovered",
+      "asset": "shared/bfbdbc24f7ad74799be6b8a48420bff9/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "ac90f52418ebc486fb6d5f90d27b716b",
+      "status": "recovered",
+      "asset": "shared/ac90f52418ebc486fb6d5f90d27b716b/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "en",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "b929b588131ffcc10a92424b5402a118",
+      "status": "recovered",
+      "asset": "shared/b929b588131ffcc10a92424b5402a118/asset.json",
       "candidates": []
     }
   ]

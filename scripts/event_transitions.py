@@ -349,6 +349,9 @@ def validate():
     expected = {str(p.resolve()) for family in ('events', 'shared') for p in (OUT / family).rglob('asset.json')}
     assert seen == expected, 'Unindexed asset folders'
     print(f'Validated {len(seen)} source recoveries, archives, scene/curve records, and all texture hashes')
+    if (OUT / 'players/manifest.json').exists():
+        from event_player_manifest import validate as validate_players
+        validate_players(OUT / 'players')
 
 
 def recover_shared(args):

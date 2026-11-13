@@ -1,0 +1,400 @@
+{
+  "schemaVersion": 1,
+  "packs": [
+    {
+      "folder": "en/act42side/d5558b1bd102",
+      "reviewed": true,
+      "source": "events/en/act42side/d5558b1bd102/asset.json",
+      "clip": "act42side_entry_stage_anim_entry",
+      "rendererSchemaVersion": 1,
+      "rendererSourceSha256": "6162c08068878c4b9d3449249507c190b7e81d7d688f533ce6dfb724b0d25b50",
+      "poster": {
+        "file": "menu.webp",
+        "time": 4.0,
+        "width": 1280,
+        "height": 720
+      },
+      "notRendered": [
+        "Game-only interaction/text controls",
+        "ParticleSystem emitters"
+      ],
+      "files": [
+        {
+          "file": "entrance.mp3",
+          "bytes": 146348,
+          "sha256": "989b6c72393c4b51cb9173d358117f3d1f0d910698ff70522441a03882a666ed"
+        },
+        {
+          "file": "menu.webp",
+          "bytes": 206466,
+          "sha256": "a7f83e8ddf600c6e1d73473a01bbe5c15eca42ca6f60415540af29ab1ac51176"
+        },
+        {
+          "file": "scene.json",
+          "bytes": 563318,
+          "sha256": "07d08905fdb0c3c225b161145b50df159838c38a013922744cd6940ad1cdffa1"
+        },
+        {
+          "file": "texture-0.webp",
+          "bytes": 286608,
+          "sha256": "d5948cf935b8d1ac46800737822fb19f55a0a262252cebf4da3011bbf436ad19"
+        },
+        {
+          "file": "texture-1.webp",
+          "bytes": 7340,
+          "sha256": "fea5ead8239892c8de61b3b0d96951a41a39ceccf955bae8518fbe203107a178"
+        },
+        {
+          "file": "texture-10.webp",
+          "bytes": 644,
+          "sha256": "c326c445f936b15dfab0dabcaf28ee3fdae4e04884fbcb19f64349ac5bb13147"
+        },
+        {
+          "file": "texture-11.webp",
+          "bytes": 13428,
+          "sha256": "435bf09bef2e5e871dcc64827708ec6d9e9c6df83856230616d9220ec664dc5c"
+        },
+        {
+          "file": "texture-12.webp",
+          "bytes": 1366,
+          "sha256": "f5d2cc225498774bb6edf9a28bc0d16a034fcc2380d0dd26304ca30a901720f9"
+        },
+        {
+          "file": "texture-13.webp",
+          "bytes": 13746,
+          "sha256": "fb204795bfb9e800ad2488c0a2cfd3d79bcbc8359d8f36d155155d1c6a8ee74e"
+        },
+        {
+          "file": "texture-14.webp",
+          "bytes": 78872,
+          "sha256": "1da4968c76c37ac5a0efd73ccbb87c2e5d442af50c95632e1e64ad3c65f6c8c2"
+        },
+        {
+          "file": "texture-15.webp",
+          "bytes": 11932,
+          "sha256": "b7cbea035ad1f260cac08f07c74e28f85a5b719751a20c8917381495b0b6a0d3"
+        },
+        {
+          "file": "texture-16.webp",
+          "bytes": 4528,
+          "sha256": "719ba001476fb644131dd3e9c6ce90b16d6c8909fc8676a1344feaae6cd6df21"
+        },
+        {
+          "file": "texture-17.webp",
+          "bytes": 26440,
+          "sha256": "8783a629099b277850c3e42f421424adcbc3fc997a185868fd449f69d8199cc9"
+        },
+        {
+          "file": "texture-18.webp",
+          "bytes": 1372,
+          "sha256": "55db5900385fba7358d1a43431792fb0ee5279daedd0c54fb41f4d1e15d2ec43"
+        },
+        {
+          "file": "texture-19.webp",
+          "bytes": 277398,
+          "sha256": "1d65afa78f8da8d3cc8f89c5213ba51f4744bd0befeb5a45936fe273f67d9328"
+        },
+        {
+          "file": "texture-2.webp",
+          "bytes": 63108,
+          "sha256": "d067061c04bdfb25ee4c07c3f68593a0112b5eec7303e3126831086a13a77f0e"
+        },
+        {
+          "file": "texture-20.webp",
+          "bytes": 72772,
+          "sha256": "82e6f34e659e1ec93551e0d16040fd3a25bc230fc7cb56e1495869b428a1f58c"
+        },
+        {
+          "file": "texture-21.webp",
+          "bytes": 51564,
+          "sha256": "b2f87d9f99b14d9655af6711f2e7d46b752d1adaabf2b8d3c84a049a9280eb08"
+        },
+        {
+          "file": "texture-22.webp",
+          "bytes": 10186,
+          "sha256": "bdbb28b2c10f86240a4d289d61a979601dd9901c6bb23b2ae1ae6a609df28980"
+        },
+        {
+          "file": "texture-23.webp",
+          "bytes": 92,
+          "sha256": "482a1939ed81bb0c99bfa1cc33399aa869c04cedafbe7c5ab60a123f2acb0631"
+        },
+        {
+          "file": "texture-24.webp",
+          "bytes": 10266,
+          "sha256": "514d69c5a4b590cbc7081a7b626928caf45d97963e1ef0167345214fe958652d"
+        },
+        {
+          "file": "texture-25.webp",
+          "bytes": 44680,
+          "sha256": "1987d83343b82274518f3cfb231b48814ee5be25fb8ef13a237ee41ed615d1e8"
+        },
+        {
+          "file": "texture-26.webp",
+          "bytes": 39270,
+          "sha256": "370d0f0e1cf22ef62bbd772a007e8c81fc0f4c9562cfdcba696d62427c644246"
+        },
+        {
+          "file": "texture-27.webp",
+          "bytes": 10466,
+          "sha256": "b0efb98b1d22e1ce1da63433912aff778a1a726a5ad619c7c8ce86b945995624"
+        },
+        {
+          "file": "texture-28.webp",
+          "bytes": 31094,
+          "sha256": "3f90ec871d77da25420538cf5f92aba1303df0ab332b9b2acdbe6677ef5da1ed"
+        },
+        {
+          "file": "texture-29.webp",
+          "bytes": 22944,
+          "sha256": "108aec20c5af51ed52c8aca3e6acaa47ade8aa1ab2bece19831f45f874049570"
+        },
+        {
+          "file": "texture-3.webp",
+          "bytes": 197012,
+          "sha256": "0a6ec350c1fbc09f91b29c3d31e79df6b5d128bce0c1815b916bd0d74a463fed"
+        },
+        {
+          "file": "texture-30.webp",
+          "bytes": 22258,
+          "sha256": "298a06f9ddeae5d07ac29d4f446ed9db2dd86a4df43e20ea8f7bbd0cf55cd1d9"
+        },
+        {
+          "file": "texture-31.webp",
+          "bytes": 95346,
+          "sha256": "1f2014cd311e264a64894cd2a4975ed4393017274a5639dc4e29189bca2bd6dd"
+        },
+        {
+          "file": "texture-4.webp",
+          "bytes": 14360,
+          "sha256": "fa07b48e070e9b73903ea5851ac78cefc03751485cfcb2da6fbfe0b554ef04d4"
+        },
+        {
+          "file": "texture-5.webp",
+          "bytes": 33692,
+          "sha256": "ed5264ad3e5fad5a17f616117fbf13c0b4db5700db93cf5b1deeda43b8ce652c"
+        },
+        {
+          "file": "texture-6.webp",
+          "bytes": 229138,
+          "sha256": "d8082c9221d85759f5d4f26ccff82268bb41e9297de18df6ad062d8ab7be4855"
+        },
+        {
+          "file": "texture-7.webp",
+          "bytes": 46,
+          "sha256": "4f83043c229dab6b8a64520eb52fb807e444cc8649761ce0dfb0b62e7f146ec4"
+        },
+        {
+          "file": "texture-8.webp",
+          "bytes": 5882,
+          "sha256": "cbc72afcbb6b6fb07885cbc71e87caab7d8c9984d6fc8e7bd58f03d46367c311"
+        },
+        {
+          "file": "texture-9.webp",
+          "bytes": 76,
+          "sha256": "acfa05dd8b3a846b953c00dde59badbe619dc8d9508716d8a94d8607151a0a08"
+        }
+      ]
+    },
+    {
+      "folder": "en/act42sre/37ff509bbdff",
+      "reviewed": true,
+      "source": "events/en/act42sre/37ff509bbdff/asset.json",
+      "clip": "act42side_entry_stage_anim_entry",
+      "rendererSchemaVersion": 1,
+      "rendererSourceSha256": "6162c08068878c4b9d3449249507c190b7e81d7d688f533ce6dfb724b0d25b50",
+      "poster": {
+        "file": "menu.webp",
+        "time": 4.0,
+        "width": 1280,
+        "height": 720
+      },
+      "notRendered": [
+        "Game-only interaction/text controls",
+        "ParticleSystem emitters"
+      ],
+      "files": [
+        {
+          "file": "entrance.mp3",
+          "bytes": 146348,
+          "sha256": "989b6c72393c4b51cb9173d358117f3d1f0d910698ff70522441a03882a666ed"
+        },
+        {
+          "file": "menu.webp",
+          "bytes": 207300,
+          "sha256": "6035ba07e1f8070937162e46af942f9cccf1f7235b5b4a3f3ccc411185a2ba25"
+        },
+        {
+          "file": "scene.json",
+          "bytes": 563931,
+          "sha256": "e910f3ad247d9c421ef42daba3afdd5fffbeeed2e751ee46e074db4a4127c80b"
+        },
+        {
+          "file": "texture-0.webp",
+          "bytes": 284476,
+          "sha256": "27150ea7b8a9b3fd93f9ef1ad1983f38404d70f62dd35f66b121b1fe068e99b9"
+        },
+        {
+          "file": "texture-1.webp",
+          "bytes": 7340,
+          "sha256": "fea5ead8239892c8de61b3b0d96951a41a39ceccf955bae8518fbe203107a178"
+        },
+        {
+          "file": "texture-10.webp",
+          "bytes": 644,
+          "sha256": "c326c445f936b15dfab0dabcaf28ee3fdae4e04884fbcb19f64349ac5bb13147"
+        },
+        {
+          "file": "texture-11.webp",
+          "bytes": 13428,
+          "sha256": "435bf09bef2e5e871dcc64827708ec6d9e9c6df83856230616d9220ec664dc5c"
+        },
+        {
+          "file": "texture-12.webp",
+          "bytes": 1366,
+          "sha256": "f5d2cc225498774bb6edf9a28bc0d16a034fcc2380d0dd26304ca30a901720f9"
+        },
+        {
+          "file": "texture-13.webp",
+          "bytes": 13746,
+          "sha256": "fb204795bfb9e800ad2488c0a2cfd3d79bcbc8359d8f36d155155d1c6a8ee74e"
+        },
+        {
+          "file": "texture-14.webp",
+          "bytes": 78872,
+          "sha256": "1da4968c76c37ac5a0efd73ccbb87c2e5d442af50c95632e1e64ad3c65f6c8c2"
+        },
+        {
+          "file": "texture-15.webp",
+          "bytes": 11932,
+          "sha256": "b7cbea035ad1f260cac08f07c74e28f85a5b719751a20c8917381495b0b6a0d3"
+        },
+        {
+          "file": "texture-16.webp",
+          "bytes": 4528,
+          "sha256": "719ba001476fb644131dd3e9c6ce90b16d6c8909fc8676a1344feaae6cd6df21"
+        },
+        {
+          "file": "texture-17.webp",
+          "bytes": 26440,
+          "sha256": "8783a629099b277850c3e42f421424adcbc3fc997a185868fd449f69d8199cc9"
+        },
+        {
+          "file": "texture-18.webp",
+          "bytes": 1372,
+          "sha256": "55db5900385fba7358d1a43431792fb0ee5279daedd0c54fb41f4d1e15d2ec43"
+        },
+        {
+          "file": "texture-19.webp",
+          "bytes": 277398,
+          "sha256": "1d65afa78f8da8d3cc8f89c5213ba51f4744bd0befeb5a45936fe273f67d9328"
+        },
+        {
+          "file": "texture-2.webp",
+          "bytes": 63108,
+          "sha256": "d067061c04bdfb25ee4c07c3f68593a0112b5eec7303e3126831086a13a77f0e"
+        },
+        {
+          "file": "texture-20.webp",
+          "bytes": 72772,
+          "sha256": "82e6f34e659e1ec93551e0d16040fd3a25bc230fc7cb56e1495869b428a1f58c"
+        },
+        {
+          "file": "texture-21.webp",
+          "bytes": 51564,
+          "sha256": "b2f87d9f99b14d9655af6711f2e7d46b752d1adaabf2b8d3c84a049a9280eb08"
+        },
+        {
+          "file": "texture-22.webp",
+          "bytes": 10186,
+          "sha256": "bdbb28b2c10f86240a4d289d61a979601dd9901c6bb23b2ae1ae6a609df28980"
+        },
+        {
+          "file": "texture-23.webp",
+          "bytes": 92,
+          "sha256": "482a1939ed81bb0c99bfa1cc33399aa869c04cedafbe7c5ab60a123f2acb0631"
+        },
+        {
+          "file": "texture-24.webp",
+          "bytes": 10266,
+          "sha256": "514d69c5a4b590cbc7081a7b626928caf45d97963e1ef0167345214fe958652d"
+        },
+        {
+          "file": "texture-25.webp",
+          "bytes": 44680,
+          "sha256": "1987d83343b82274518f3cfb231b48814ee5be25fb8ef13a237ee41ed615d1e8"
+        },
+        {
+          "file": "texture-26.webp",
+          "bytes": 39270,
+          "sha256": "370d0f0e1cf22ef62bbd772a007e8c81fc0f4c9562cfdcba696d62427c644246"
+        },
+        {
+          "file": "texture-27.webp",
+          "bytes": 10466,
+          "sha256": "b0efb98b1d22e1ce1da63433912aff778a1a726a5ad619c7c8ce86b945995624"
+        },
+        {
+          "file": "texture-28.webp",
+          "bytes": 31094,
+          "sha256": "3f90ec871d77da25420538cf5f92aba1303df0ab332b9b2acdbe6677ef5da1ed"
+        },
+        {
+          "file": "texture-29.webp",
+          "bytes": 22944,
+          "sha256": "108aec20c5af51ed52c8aca3e6acaa47ade8aa1ab2bece19831f45f874049570"
+        },
+        {
+          "file": "texture-3.webp",
+          "bytes": 197012,
+          "sha256": "0a6ec350c1fbc09f91b29c3d31e79df6b5d128bce0c1815b916bd0d74a463fed"
+        },
+        {
+          "file": "texture-30.webp",
+          "bytes": 22258,
+          "sha256": "298a06f9ddeae5d07ac29d4f446ed9db2dd86a4df43e20ea8f7bbd0cf55cd1d9"
+        },
+        {
+          "file": "texture-31.webp",
+          "bytes": 95346,
+          "sha256": "1f2014cd311e264a64894cd2a4975ed4393017274a5639dc4e29189bca2bd6dd"
+        },
+        {
+          "file": "texture-32.webp",
+          "bytes": 3442,
+          "sha256": "00d8989f2702af6ca1cbc36280f662ab5635459461a90abe281765cc763187eb"
+        },
+        {
+          "file": "texture-4.webp",
+          "bytes": 14360,
+          "sha256": "fa07b48e070e9b73903ea5851ac78cefc03751485cfcb2da6fbfe0b554ef04d4"
+        },
+        {
+          "file": "texture-5.webp",
+          "bytes": 33692,
+          "sha256": "ed5264ad3e5fad5a17f616117fbf13c0b4db5700db93cf5b1deeda43b8ce652c"
+        },
+        {
+          "file": "texture-6.webp",
+          "bytes": 229138,
+          "sha256": "d8082c9221d85759f5d4f26ccff82268bb41e9297de18df6ad062d8ab7be4855"
+        },
+        {
+          "file": "texture-7.webp",
+          "bytes": 46,
+          "sha256": "4f83043c229dab6b8a64520eb52fb807e444cc8649761ce0dfb0b62e7f146ec4"
+        },
+        {
+          "file": "texture-8.webp",
+          "bytes": 5882,
+          "sha256": "cbc72afcbb6b6fb07885cbc71e87caab7d8c9984d6fc8e7bd58f03d46367c311"
+        },
+        {
+          "file": "texture-9.webp",
+          "bytes": 76,
+          "sha256": "acfa05dd8b3a846b953c00dde59badbe619dc8d9508716d8a94d8607151a0a08"
+        }
+      ]
+    }
+  ]
+}
