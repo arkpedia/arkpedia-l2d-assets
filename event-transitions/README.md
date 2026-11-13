@@ -1,5 +1,28 @@
 # Original event entrance sources
 
+Reviewed browser packs live separately under [`players/`](players/manifest.json).
+Their `scene.json` contains a focused UI-art scene, native GLES3 programs adapted
+only for WebGL uniform-location compatibility, and original curves/sound cue data.
+`menu.webp` is the final rendered artwork used for the site's matching hero. They
+omit game-only interaction/text controls and particle-system emitters; they are not
+a Unity game runtime. The first reviewed packs cover the Global original and rerun
+of The Masses' Travels. Other recovered events remain source-only until converted
+and visually checked. The player manifest hashes every file and records the renderer
+source hash, poster frame, source archive and known omissions.
+
+Focused packs keep shader data/masks lossless; display-only RGB uses WebP quality 92
+with lossless alpha. Original lossless textures remain in the source archive above.
+Entrance SFX use 192 kbit/s MP3 with gapless metadata (FFmpeg's libmp3lame encoder),
+retaining the decoded source's SHA-256 and native cue time. Building these focused
+packs therefore also requires FFmpeg. Original decoded WAVs remain archived.
+
+`scripts/build_event_player.py` builds a focused pack from a reviewed legacy UI
+clip, and recovers its exact version-matched common UI sprite/sound bundles as needed.
+It never executes the recovered game callbacks. After checking its rendered frames
+and final menu artwork, explicitly seal its files with
+`scripts/event_player_manifest.py seal --renderer <app>/lib/events/gameUiPlayer.ts
+--reviewed en/<activity>/<source-hash>`. `validate:events` also verifies these packs.
+
 This archive preserves the game's event UI animations for future Arkpedia event-page
 entrances. These are **source recoveries, not browser-playable transitions**. The
 game's scene layout, shader behaviour, animation bindings and script-driven changes
