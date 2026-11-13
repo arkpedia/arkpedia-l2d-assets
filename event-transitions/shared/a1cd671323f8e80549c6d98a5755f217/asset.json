@@ -1,0 +1,6450 @@
+{
+  "schemaVersion": 1,
+  "server": "en",
+  "activityId": "commonassets",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "en",
+    "resVersion": "25-09-15-04-46-25_59e90b",
+    "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/b54684d3aedd9d235591f4e8c9486a1d2ce4dd4c/bundles/hot_update_list.json",
+    "bundle": "activity/commonassets.ab",
+    "bundleMd5": "a1cd671323f8e80549c6d98a5755f217",
+    "manifestEntry": {
+      "name": "activity/commonassets.ab",
+      "hash": "92925923acd6dd2e85888305880960ba",
+      "md5": "a1cd671323f8e80549c6d98a5755f217",
+      "totalSize": 14790647,
+      "abSize": 16513364,
+      "pid": "lpack_misc1",
+      "cid": 45
+    },
+    "archiveUrl": "https://ark-us-static-online.yo-star.com/assetbundle/official/Android/assets/25-09-15-04-46-25_59e90b/activity_commonassets.dat",
+    "archiveSha256": "a908d9d34126fd9378a38cd6de9fcc5667c791d1c220116c0c7cf1cc32af153d",
+    "bundleSha256": "4280b1676c9ae943cb56dca06d18d5ce1e010dac941eb5f5f5a3778b6afa27d3"
+  },
+  "animations": [
+    {
+      "id": "-9199958259916294327",
+      "name": "loop_pattern_countdown_1",
+      "candidate": false,
+      "durationSeconds": 10.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-9063235439190669167",
+      "name": "battle_settle_give_like_self",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "battle_settle_give_like_self",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-8984499537748217701",
+      "name": "multi_v3_prepare_squal_check_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-8872370487362753667",
+      "name": "tiny_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-8581760104591389184",
+      "name": "chat_bubble_show",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-8523666012552648697",
+      "name": "multi_v3_prepare_squad_sel_choose_tips_loop",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-8209354169280064614",
+      "name": "multiv3_prepare_start_countdown_show",
+      "candidate": true,
+      "durationSeconds": 6.199999809265137,
+      "sampleRate": 30.0,
+      "events": [
+        {
+          "time": 0.1666666716337204,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT1MULTI_COUNTDOWNSTART",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.1666666269302368,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT1MULTI_COUNTDOWNSTART",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 2.1666667461395264,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT1MULTI_COUNTDOWNSTART",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 2.5333333015441895,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT1MULTI_TRANSITION",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-8035505106317124056",
+      "name": "start_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-7970806081528717693",
+      "name": "emoji_chat_panel_dot",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "emoji_chat_panel_dot",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.0,
+          "functionName": "_OnAnimEnd",
+          "data": "emoji_chat_panel_dot",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-7780046561249920556",
+      "name": "battle_finish_first_view_entry_normal_reward_tween",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act2vmulti_battle_finish_first_view_entry",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-7466986462198253382",
+      "name": "multi_v3_char_pick_switch_teammate",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-7319088100859671952",
+      "name": "battle_settle_btn_together_partner",
+      "candidate": false,
+      "durationSeconds": 1.1333333253860474,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-7317891048140420284",
+      "name": "tab_view_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-7058057674317020746",
+      "name": "multi_v3_prepare_squal_skill_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-6954983184874496477",
+      "name": "panel_trainingroom_buttom_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-6847504936655292494",
+      "name": "quick_match_state_modeout",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-6646081667574827915",
+      "name": "matching_banner_fail",
+      "candidate": false,
+      "durationSeconds": 1.2000000476837158,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5983321030233535106",
+      "name": "battle_finish_first_view_com_btn_next",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act2vmulti_battle_finish_first_view_quit_entry",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-5892587500346242944",
+      "name": "squad_effect_cost_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5849858587458710612",
+      "name": "btn_select_pos_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5813298630390614251",
+      "name": "act3vmulti_entry_main_to_match",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5744419667243369521",
+      "name": "multi_v3_prepare_top_view_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5645417209330289513",
+      "name": "battle_settle_btn_together_dot_loop",
+      "candidate": false,
+      "durationSeconds": 2.3333332538604736,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5331845940275878755",
+      "name": "matching_banner_cancel",
+      "candidate": false,
+      "durationSeconds": 1.0833333730697632,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5318355165652887821",
+      "name": "act3vmulti_view_arena_top_normal_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5222917467956975542",
+      "name": "act3vmulti_entry_exit",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5116649696831830913",
+      "name": "battle_finish_first_view_entry_normal_progress_text",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act2vmulti_battle_finish_first_view_entry_normal_progress_text",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4166666567325592,
+          "functionName": "_OnAnimEnd",
+          "data": "act2vmulti_battle_finish_first_view_entry_normal_progress_text",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-5074758727987969530",
+      "name": "title_scroll_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "title_scroll_switch",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.10000000149011612,
+          "functionName": "_OnAnimEnd",
+          "data": "title_scroll_switch",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-4459779908695676675",
+      "name": "act3vmulti_entry_3d_cubes_right_loop",
+      "candidate": false,
+      "durationSeconds": 4.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-4388977692302679880",
+      "name": "act_multi_v3_loop_pattern",
+      "candidate": false,
+      "durationSeconds": 10.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-4334933512037321695",
+      "name": "multi_v3_prepare_squad_reserve_char_card_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-4192239324839782924",
+      "name": "multi_v3_prepare_step_cd_emergency",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.03333333507180214,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT1MULTI_PREPARECOUNTDOWN",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-3933308029130515130",
+      "name": "battle_finish_first_view_entry_fortress_final_record_new_effects",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmulti_battle_finish_first_view_entry_fortress",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-3672815814225672755",
+      "name": "start_in_normal",
+      "candidate": true,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-3251990093061296797",
+      "name": "act_multi_v3_left_team_display_self_confirm",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act2vmulti_left_team_display_self_confirm",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-3205946481341589305",
+      "name": "squad_effect_item_unlockable_loop",
+      "candidate": false,
+      "durationSeconds": 2.5,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2890162671491755002",
+      "name": "multi_v3_char_pick_switch_player",
+      "candidate": false,
+      "durationSeconds": 1.8333333730697632,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2792153300740322553",
+      "name": "battle_finish_first_view_entry_fortress",
+      "candidate": true,
+      "durationSeconds": 1.6833332777023315,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmulti_battle_finish_first_view_entry_fortress",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-2762225619163511916",
+      "name": "multi_v3_char_card_reserve_hint",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2644106388989451746",
+      "name": "act3vmulti_view_arena_top_easy_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2608683321229395116",
+      "name": "mission_shining",
+      "candidate": false,
+      "durationSeconds": 5.9666666984558105,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2507088633177035754",
+      "name": "multi_v3_prepare_squad_sel_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2139337760470627014",
+      "name": "act_multi_v3_left_team_display_partner_confirm",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act2vmulti_left_team_display_partner_confirm",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-2085061992348776859",
+      "name": "doc_down_common_info_loop",
+      "candidate": false,
+      "durationSeconds": 500.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2034165379926232373",
+      "name": "act3vmulti_entry_3d_cubes_left_loop",
+      "candidate": false,
+      "durationSeconds": 4.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1777848104820166186",
+      "name": "stage_choose_host_in_1",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 30.0,
+      "events": []
+    },
+    {
+      "id": "-1721427712766059235",
+      "name": "squad_effect_item_unlock",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1278909999638901968",
+      "name": "matching_banner_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1160378293737981854",
+      "name": "battle_finish_first_view_entry_normal",
+      "candidate": true,
+      "durationSeconds": 1.6833332777023315,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmulti_battle_finish_first_view_entry_normal",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-1132664954163039097",
+      "name": "multi_v3_prepare_squad_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-405544883770320118",
+      "name": "battle_finish_first_view_entry_fortress_final_record",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmulti_battle_finish_first_view_entry_fortress",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-376059891216791550",
+      "name": "exit",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-342833252163236242",
+      "name": "act3vmulti_entry_room_joining_bar",
+      "candidate": true,
+      "durationSeconds": 3.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-297545722957013519",
+      "name": "quick_match_state_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-250501725942200495",
+      "name": "stage_list_mode_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-182342116075649340",
+      "name": "act3vmulti_entry_ground_loop",
+      "candidate": false,
+      "durationSeconds": 4.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-33117195739266274",
+      "name": "battle_finish_first_view_entry_fortress_progress_text",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "battle_finish_first_view_entry_fortress_progress_text",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4166666567325592,
+          "functionName": "_OnAnimEnd",
+          "data": "battle_finish_first_view_entry_fortress_progress_text",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "346760169650586395",
+      "name": "battle_settle_btn_together_self",
+      "candidate": false,
+      "durationSeconds": 1.1333333253860474,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "704713017299766627",
+      "name": "battle_settle_part_2_view_entry",
+      "candidate": true,
+      "durationSeconds": 1.3166667222976685,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmulti_battle_settle_part_2_view_entry",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "1028309125006846369",
+      "name": "mode_toggle_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "1387636605822558278",
+      "name": "stage_choose_guest_in_2",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 30.0,
+      "events": []
+    },
+    {
+      "id": "1401668664352566229",
+      "name": "start_in_invert",
+      "candidate": true,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "1827398998508463541",
+      "name": "act3vmulti_view_arena_top_hard_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "1872545398900471063",
+      "name": "stage_certain_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "2390538418481557315",
+      "name": "act_multi_v3_banner_in",
+      "candidate": true,
+      "durationSeconds": 1.5666667222976685,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "2507034595992249764",
+      "name": "battle_finish_first_view_entry_com_quit",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmulti_battle_finish_first_view_entry_com_quit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "2885390369590154447",
+      "name": "multi_v3_prepare_skill_tab_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "2924608345847002130",
+      "name": "act_multi_v3_state_loading_in",
+      "candidate": true,
+      "durationSeconds": 2.6666667461395264,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3172341734896366693",
+      "name": "stage_choose_guest_in_1",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 30.0,
+      "events": []
+    },
+    {
+      "id": "3252314729674960552",
+      "name": "act_multi_v3_state_loading_loop",
+      "candidate": false,
+      "durationSeconds": 2.25,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3541111052427483721",
+      "name": "act3vmulti_entry_main_to_room",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3578093670050747953",
+      "name": "battle_finish_first_view_entry_succer",
+      "candidate": true,
+      "durationSeconds": 1.6833332777023315,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmulti_battle_finish_first_view_entry_succer",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "4022631560160237856",
+      "name": "full_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4121917043526418860",
+      "name": "act_multi_v3_banner_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4307702075595759069",
+      "name": "mode_group_item_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4458983440678303145",
+      "name": "battle_finish_first_view_entry_normal_progress_text1",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act2vmulti_battle_finish_first_view_entry_normal_progress_text1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4166666567325592,
+          "functionName": "_OnAnimEnd",
+          "data": "act2vmulti_battle_finish_first_view_entry_normal_progress_text1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "4590398454085715904",
+      "name": "act_fade_in",
+      "candidate": true,
+      "durationSeconds": 0.699999988079071,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4626657650411295227",
+      "name": "tab_photo_week_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4687590957713630638",
+      "name": "quick_match_state_inversion_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4915056914936554753",
+      "name": "mode_switch_normal",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5008854313231940954",
+      "name": "battle_finish_first_view_entry_com",
+      "candidate": true,
+      "durationSeconds": 1.9333332777023315,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmulti_battle_finish_first_view_entry_com",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "5042966208050957517",
+      "name": "multi_v3_prepare_sys_alloc_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5176969797747162445",
+      "name": "squad_effect_tips_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5227665510375093754",
+      "name": "battle_settle_btn_continue_loop",
+      "candidate": false,
+      "durationSeconds": 3.6666667461395264,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5291509093441225856",
+      "name": "battle_finish_first_view_exit",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act2vmulti_battle_finish_first_view_entry_01_backup",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "5303364558195963820",
+      "name": "matching_banner_matching_group_left_loop",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5396289041101909847",
+      "name": "matching_banner_success",
+      "candidate": false,
+      "durationSeconds": 1.7833333015441895,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5424829051448395381",
+      "name": "battle_finish_first_view_entry_fortress_progress_text2",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "battle_finish_first_view_entry_fortress_progress_text2",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4833333194255829,
+          "functionName": "_OnAnimEnd",
+          "data": "battle_finish_first_view_entry_fortress_progress_text2",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "5740931920404846867",
+      "name": "in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5846463035635022843",
+      "name": "squad_effect_btn_unlock",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5895444739926261639",
+      "name": "loop_pattern_countdown_2",
+      "candidate": false,
+      "durationSeconds": 10.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "6186823184195060970",
+      "name": "act_multi_v3_banner_switch",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "6187275506161521259",
+      "name": "battle_settle_give_like_partner",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "battle_settle_give_like_partner",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "6330334728085131396",
+      "name": "battle_finish_first_view_lv_up",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "6500393605771837918",
+      "name": "stage_certain_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "6501887401274731153",
+      "name": "multi_v3_char_pick_show_player",
+      "candidate": false,
+      "durationSeconds": 5.5,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7085466869322335214",
+      "name": "act3vmulti_entry_stage_entry",
+      "candidate": true,
+      "durationSeconds": 3.0833332538604736,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7086062717284024893",
+      "name": "battle_finish_first_view_entry_fortress_final_record_clear",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7113763571709299233",
+      "name": "multi_v3_prepare_squad_sel_bottom",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7667060890738161177",
+      "name": "multi_v3_char_pick_loop_sand_clock",
+      "candidate": false,
+      "durationSeconds": 1.8333333730697632,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7854019757675779248",
+      "name": "multi_v3_char_pick_entry",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7874927578186334794",
+      "name": "mode_switch_invert",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7920935781868495501",
+      "name": "emoticon_panel_switch_anim",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "emoticon_panel_switch_anim",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.3333333432674408,
+          "functionName": "_OnAnimEnd",
+          "data": "emoticon_panel_switch_anim",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "7973867462267662120",
+      "name": "act_multi_v3_point_loop",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "8108066730430985781",
+      "name": "battle_finish_first_view_entry_normal_progress_text2",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4166666567325592,
+          "functionName": "_OnAnimEnd",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "8874666242180194832",
+      "name": "act3vmulti_entry_room_to_main",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "8882605782008673277",
+      "name": "battle_finish_first_view_entry_fortress_progress_text1",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "battle_finish_first_view_entry_fortress_progress_text1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.44999998807907104,
+          "functionName": "_OnAnimEnd",
+          "data": "battle_finish_first_view_entry_fortress_progress_text1",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "9015714031084697356",
+      "name": "battle_settle_camera_enter",
+      "candidate": true,
+      "durationSeconds": 1.5499999523162842,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 1.0499999523162842,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT1MULTI_NEWPHOTO",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "id": "-9174959747710019155",
+      "file": "textures/0.webp",
+      "name": "white_sprite",
+      "width": 4,
+      "height": 4,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9140533300537695765",
+      "file": "textures/1.webp",
+      "name": "ground_base_tile",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9104728737887543443",
+      "file": "textures/2.webp",
+      "name": "btn_cancel_bkg",
+      "width": 656,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9074573745727386801",
+      "file": "textures/3.webp",
+      "name": "stage_choose#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9048656024763162259",
+      "file": "textures/4.webp",
+      "name": "multi_v3_banner_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9030691812001016844",
+      "file": "textures/5.webp",
+      "name": "act29side_frag_1",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8979652092150311421",
+      "file": "textures/6.webp",
+      "name": "multi_v3_01-rm01_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8893448119373725469",
+      "file": "textures/7.webp",
+      "name": "mask_part4",
+      "width": 273,
+      "height": 155,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8868501541444309821",
+      "file": "textures/8.webp",
+      "name": "bg_invert_mode",
+      "width": 1144,
+      "height": 301,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8852909829168738408",
+      "file": "textures/9.webp",
+      "name": "act3vmulti_entry_main_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8851552128319342759",
+      "file": "textures/10.webp",
+      "name": "img_shadow",
+      "width": 68,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8830317655029204895",
+      "file": "textures/11.webp",
+      "name": "multi_v3_01-01_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8823321541757552819",
+      "file": "textures/12.webp",
+      "name": "act_multi_v3_state_loading#0a",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8720881629369562275",
+      "file": "textures/13.webp",
+      "name": "quick_match_state_inversion_mode_up_bg",
+      "width": 364,
+      "height": 361,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8648761820256927364",
+      "file": "textures/14.webp",
+      "name": "act15d0_token_ironSheet",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8637508306056132789",
+      "file": "textures/15.webp",
+      "name": "multi_v3_countdown_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8569831458056201998",
+      "file": "textures/16.webp",
+      "name": "act18mini_token_petals",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8539412977628529488",
+      "file": "textures/17.webp",
+      "name": "clue_EDM_4",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8439789386883555293",
+      "file": "textures/18.webp",
+      "name": "quick_match_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8432723345805022030",
+      "file": "textures/19.webp",
+      "name": "multi_v3_01-rm02_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8367010128572830932",
+      "file": "textures/20.webp",
+      "name": "transferarrow",
+      "width": 52,
+      "height": 76,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8366020461508296289",
+      "file": "textures/21.webp",
+      "name": "img_dec_texture",
+      "width": 198,
+      "height": 121,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8342899099681279790",
+      "file": "textures/22.webp",
+      "name": "entry_part3",
+      "width": 273,
+      "height": 155,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8148116316697053621",
+      "file": "textures/23.webp",
+      "name": "main_building_Normal",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8139416587437596029",
+      "file": "textures/24.webp",
+      "name": "clue_Heavymetal_3",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8050837496811608949",
+      "file": "textures/25.webp",
+      "name": "multi_v3_01-rm06_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8031036779179319156",
+      "file": "textures/26.webp",
+      "name": "clue_Rap_3",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7919733000215394366",
+      "file": "textures/27.webp",
+      "name": "vecb_battle_finish_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7915357810309071947",
+      "file": "textures/28.webp",
+      "name": "main_building_Albedo",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7859986619788398516",
+      "file": "textures/29.webp",
+      "name": "entry_circle_mask",
+      "width": 512,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7797904013253779295",
+      "file": "textures/30.webp",
+      "name": "clue_Rap_2",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7763181547717422475",
+      "file": "textures/31.webp",
+      "name": "star_light",
+      "width": 65,
+      "height": 73,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7740546626683889217",
+      "file": "textures/32.webp",
+      "name": "chat_emoji_hub#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7737980994963305796",
+      "file": "textures/33.webp",
+      "name": "act38side_token_ticket",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7601561319031766626",
+      "file": "textures/34.webp",
+      "name": "round_corner_stencil",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7486725885729507784",
+      "file": "textures/35.webp",
+      "name": "clue_EDM_3",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7405616884784627327",
+      "file": "textures/36.webp",
+      "name": "doc_down_common_tile",
+      "width": 519,
+      "height": 21,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7318463019178806183",
+      "file": "textures/37.webp",
+      "name": "multi_v3_01-rm01_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7314653989524178016",
+      "file": "textures/38.webp",
+      "name": "drop_img",
+      "width": 228,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7246432244561746297",
+      "file": "textures/39.webp",
+      "name": "panel_trainingroom#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7223410268301017505",
+      "file": "textures/40.webp",
+      "name": "quick_match_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7214553184861444029",
+      "file": "textures/41.webp",
+      "name": "land_poly_albedo",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7085740531684295292",
+      "file": "textures/42.webp",
+      "name": "act17d0_token_form",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7025961791633000227",
+      "file": "textures/43.webp",
+      "name": "act12d0_token_components",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6897156100945736769",
+      "file": "textures/44.webp",
+      "name": "bg_repeat_line",
+      "width": 50,
+      "height": 50,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6875199401007519978",
+      "file": "textures/45.webp",
+      "name": "clue_Heavymetal_4",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6858752592352924537",
+      "file": "textures/46.webp",
+      "name": "stage_choose#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6848748680546617349",
+      "file": "textures/47.webp",
+      "name": "mission_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6785186625465547321",
+      "file": "textures/48.webp",
+      "name": "act41side_token_light",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6770272759789336977",
+      "file": "textures/49.webp",
+      "name": "doc_down_common_tile",
+      "width": 519,
+      "height": 21,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6758750960507153595",
+      "file": "textures/50.webp",
+      "name": "multi_v3_banner_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6732066373254391061",
+      "file": "textures/51.webp",
+      "name": "img_dec_texture",
+      "width": 198,
+      "height": 121,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6714487454049534226",
+      "file": "textures/52.webp",
+      "name": "act12side_point_cmemomedal",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6698704401510622574",
+      "file": "textures/53.webp",
+      "name": "multi_v3_01-rm04_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6678506978624150479",
+      "file": "textures/54.webp",
+      "name": "act25side_token_fdrchips",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6671986410166062099",
+      "file": "textures/55.webp",
+      "name": "multi_v3_01-rm05_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6607443207217470175",
+      "file": "textures/56.webp",
+      "name": "transfer",
+      "width": 128,
+      "height": 88,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6600005418289084175",
+      "file": "textures/57.webp",
+      "name": "img_reward_dot",
+      "width": 172,
+      "height": 152,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6586700927657312203",
+      "file": "textures/58.webp",
+      "name": "multi_v3_01-02_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6441916682419908601",
+      "file": "textures/59.webp",
+      "name": "act14side_token_stone",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6226601795291634843",
+      "file": "textures/60.webp",
+      "name": "atlas_detail_view#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6224271920069978280",
+      "file": "textures/61.webp",
+      "name": "manual_bg",
+      "width": 1559,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6203927429405154144",
+      "file": "textures/62.webp",
+      "name": "act1vautochess_token_chess",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6151279421725007682",
+      "file": "textures/63.webp",
+      "name": "clue_Rap_5",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6151138335803239658",
+      "file": "textures/64.webp",
+      "name": "multi_v3_01-fortress-hard-01_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6119377534084194922",
+      "file": "textures/65.webp",
+      "name": "multi_v3_countdown_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6106533228488272530",
+      "file": "textures/66.webp",
+      "name": "act26side_token_fragmenta",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6063886503630399647",
+      "file": "textures/67.webp",
+      "name": "scroll_vertical_line",
+      "width": 10,
+      "height": 18,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5970343245331514583",
+      "file": "textures/68.webp",
+      "name": "act6d8_point_token",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5880326165643185332",
+      "file": "textures/69.webp",
+      "name": "arrow_2",
+      "width": 90,
+      "height": 152,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5857982735218001374",
+      "file": "textures/70.webp",
+      "name": "unlock_icon",
+      "width": 140,
+      "height": 136,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5755686657131889727",
+      "file": "textures/71.webp",
+      "name": "bg",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5721825379971697613",
+      "file": "textures/72.webp",
+      "name": "diff_icon_train",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5663909302741462141",
+      "file": "textures/73.webp",
+      "name": "title_bg",
+      "width": 324,
+      "height": 368,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5658580979681390912",
+      "file": "textures/74.webp",
+      "name": "multi_v3_01-03_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5619739075148983170",
+      "file": "textures/75.webp",
+      "name": "act42d0_token_evaluation",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5564123244632245214",
+      "file": "textures/76.webp",
+      "name": "act5d1_point_opagrt",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5530492538686963408",
+      "file": "textures/77.webp",
+      "name": "act6d5_point_firecracker",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5482384479962985403",
+      "file": "textures/78.webp",
+      "name": "act8mini_token_vigilo",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5462887900311563078",
+      "file": "textures/79.webp",
+      "name": "multi_v3_01-06_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5410163100696333295",
+      "file": "textures/80.webp",
+      "name": "img_bg",
+      "width": 48,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5244432348014811375",
+      "file": "textures/81.webp",
+      "name": "img_dec_texture_2",
+      "width": 54,
+      "height": 33,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5049892530812003896",
+      "file": "textures/82.webp",
+      "name": "act16mini_token_sap",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5022762344173587643",
+      "file": "textures/83.webp",
+      "name": "act18d0_token_page",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5005192179786424861",
+      "file": "textures/84.webp",
+      "name": "vecb_milestone#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5004626984709643421",
+      "file": "textures/85.webp",
+      "name": "multi_v3_01-fortress-02_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4987681794138490865",
+      "file": "textures/86.webp",
+      "name": "act17d0_token_form_rep_1",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4974704902493294038",
+      "file": "textures/87.webp",
+      "name": "char_pick_bottom_bar",
+      "width": 524,
+      "height": 21,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4968556675830883200",
+      "file": "textures/88.webp",
+      "name": "multi_v3_01-07_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4833671536647243828",
+      "file": "textures/89.webp",
+      "name": "clue_Rap_4",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4750871504361315763",
+      "file": "textures/90.webp",
+      "name": "soft_mask",
+      "width": 610,
+      "height": 720,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4701526816947864732",
+      "file": "textures/91.webp",
+      "name": "squad_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4610412575537002392",
+      "file": "textures/92.webp",
+      "name": "bkg_name",
+      "width": 188,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4511924829752526483",
+      "file": "textures/93.webp",
+      "name": "entry_part3",
+      "width": 193,
+      "height": 83,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4474806617021130381",
+      "file": "textures/94.webp",
+      "name": "image_blue_round",
+      "width": 72,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4471454799702530753",
+      "file": "textures/95.webp",
+      "name": "img_got",
+      "width": 124,
+      "height": 136,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4367888329877566160",
+      "file": "textures/96.webp",
+      "name": "image_stage_preview_text_2",
+      "width": 208,
+      "height": 16,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4359699577795080169",
+      "file": "textures/97.webp",
+      "name": "btn_select_map",
+      "width": 576,
+      "height": 108,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4358576673696160178",
+      "file": "textures/98.webp",
+      "name": "black_back",
+      "width": 260,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4183472610248728297",
+      "file": "textures/99.webp",
+      "name": "act17side_token_compass",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4153597423593134447",
+      "file": "textures/100.webp",
+      "name": "img_char_bkg_5",
+      "width": 192,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4147157141554022854",
+      "file": "textures/101.webp",
+      "name": "act33side_token_sugar",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4120939595881683861",
+      "file": "textures/102.webp",
+      "name": "outlit_back",
+      "width": 196,
+      "height": 164,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4081358579031545059",
+      "file": "textures/103.webp",
+      "name": "panel_trainingroom#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4056417124903930886",
+      "file": "textures/104.webp",
+      "name": "act29side_frag_2",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4048874262564971209",
+      "file": "textures/105.webp",
+      "name": "act19side_token_reagents",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3963145961540477486",
+      "file": "textures/106.webp",
+      "name": "act1lock_point_reward",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3897582881507535577",
+      "file": "textures/107.webp",
+      "name": "multi_v3_01-rm05_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3843655147298269428",
+      "file": "textures/108.webp",
+      "name": "btn_confirm_bkg",
+      "width": 644,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3818580220569325273",
+      "file": "textures/109.webp",
+      "name": "img_new_light",
+      "width": 148,
+      "height": 80,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3681670431707994776",
+      "file": "textures/110.webp",
+      "name": "panel_matching_banner_dialog#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3629601989260944272",
+      "file": "textures/111.webp",
+      "name": "act5d0_point_medal",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3613487748577038515",
+      "file": "textures/112.webp",
+      "name": "act1bossrush_milestone_point",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3515834705475656005",
+      "file": "textures/113.webp",
+      "name": "act13d0_token_dial",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3510988567642269385",
+      "file": "textures/114.webp",
+      "name": "img_mentor",
+      "width": 56,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3472309555818350580",
+      "file": "textures/115.webp",
+      "name": "locked_mask",
+      "width": 228,
+      "height": 228,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3426594197660020558",
+      "file": "textures/116.webp",
+      "name": "act12mini_token_component",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3379056240767112990",
+      "file": "textures/117.webp",
+      "name": "multi_v3_01-tr03_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3344010910633232350",
+      "file": "textures/118.webp",
+      "name": "map_frame",
+      "width": 188,
+      "height": 188,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3261554282126103961",
+      "file": "textures/119.webp",
+      "name": "bossrush_milestone#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3258861977297769931",
+      "file": "textures/120.webp",
+      "name": "act22side_token_manuscript",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3242890815054631786",
+      "file": "textures/121.webp",
+      "name": "act1multi_token_cap",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3233826403054463477",
+      "file": "textures/122.webp",
+      "name": "sprite_white_border",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3217964083810704091",
+      "file": "textures/123.webp",
+      "name": "act2collection_point_token",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3172105025677554639",
+      "file": "textures/124.webp",
+      "name": "chat_emoji_hub#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3147411504949513661",
+      "file": "textures/125.webp",
+      "name": "act11d0_token_currency",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3100688714178703086",
+      "file": "textures/126.webp",
+      "name": "mask_part2",
+      "width": 349,
+      "height": 230,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3098177207258021111",
+      "file": "textures/127.webp",
+      "name": "multi_v3_01-fortress-01_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3041551710171808691",
+      "file": "textures/128.webp",
+      "name": "image_stage_preview_back",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2913677402798824884",
+      "file": "textures/129.webp",
+      "name": "multi_v3_01-fortress-rm01_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2894165764626367480",
+      "file": "textures/130.webp",
+      "name": "multi_v3_01-07_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2883998137173046150",
+      "file": "textures/131.webp",
+      "name": "BG",
+      "width": 1559,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2830274367043171559",
+      "file": "textures/132.webp",
+      "name": "lit_back",
+      "width": 108,
+      "height": 96,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2743452755955653274",
+      "file": "textures/133.webp",
+      "name": "multi_v3_prepare#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2654712288915093141",
+      "file": "textures/134.webp",
+      "name": "trackpoint_outer",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2651692177205812738",
+      "file": "textures/135.webp",
+      "name": "squad_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2634993619039364437",
+      "file": "textures/136.webp",
+      "name": "atlas_start_game#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2612964271516626040",
+      "file": "textures/137.webp",
+      "name": "char_pick_bar_2",
+      "width": 386,
+      "height": 175,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2602378910368628126",
+      "file": "textures/138.webp",
+      "name": "char_pick_bar_1",
+      "width": 372,
+      "height": 248,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2545342511940418129",
+      "file": "textures/139.webp",
+      "name": "bossrush_entry#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2529045951028942186",
+      "file": "textures/140.webp",
+      "name": "act27side_token_fur",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2503350574258848960",
+      "file": "textures/141.webp",
+      "name": "img_new",
+      "width": 116,
+      "height": 24,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2495923342782211875",
+      "file": "textures/142.webp",
+      "name": "atlas_common_char#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2456921006487469103",
+      "file": "textures/143.webp",
+      "name": "act3vmulti_battle_finish_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2425668607165021002",
+      "file": "textures/144.webp",
+      "name": "act12side_token_key03",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2401506554818865737",
+      "file": "textures/145.webp",
+      "name": "multi_v3_01-rm07_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2374766758933236591",
+      "file": "textures/146.webp",
+      "name": "level_bg",
+      "width": 104,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2336860258449442396",
+      "file": "textures/147.webp",
+      "name": "diff_bkg",
+      "width": 144,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2219507586041977265",
+      "file": "textures/148.webp",
+      "name": "act13side_token_model",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1955409883690297734",
+      "file": "textures/149.webp",
+      "name": "diff_bkg_none",
+      "width": 144,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1812703837285034441",
+      "file": "textures/150.webp",
+      "name": "btn_icon_confirm",
+      "width": 44,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1806726072585243020",
+      "file": "textures/151.webp",
+      "name": "act5d1_point_conbounty",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1756092133318863905",
+      "file": "textures/152.webp",
+      "name": "fx_grad_1",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1730135184808581610",
+      "file": "textures/153.webp",
+      "name": "img_got_label",
+      "width": 116,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1695028723242031324",
+      "file": "textures/154.webp",
+      "name": "act15mini_token_figurine",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1677402007099413916",
+      "file": "textures/155.webp",
+      "name": "specialized_tiny_1",
+      "width": 24,
+      "height": 24,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1633874303364352037",
+      "file": "textures/156.webp",
+      "name": "act3collection_point_token",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1630710566897730082",
+      "file": "textures/157.webp",
+      "name": "reward_yellow",
+      "width": 164,
+      "height": 136,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1556693696037733325",
+      "file": "textures/158.webp",
+      "name": "act13mini_token_can",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1502335190918706121",
+      "file": "textures/159.webp",
+      "name": "act34side_token_chip",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1382130331864722142",
+      "file": "textures/160.webp",
+      "name": "act14mini_token_fu",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1333437923003865015",
+      "file": "textures/161.webp",
+      "name": "vecb_entry#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1211387738719351130",
+      "file": "textures/162.webp",
+      "name": "bossrush_entry#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1190828329088833904",
+      "file": "textures/163.webp",
+      "name": "multi_v3_01-rm04_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1167902939359620923",
+      "file": "textures/164.webp",
+      "name": "act3vmulti_battle_settle_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1166852105587066648",
+      "file": "textures/165.webp",
+      "name": "act3vmulti_entry_room_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1124766977687792391",
+      "file": "textures/166.webp",
+      "name": "img_arrow",
+      "width": 44,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1081252306676054046",
+      "file": "textures/167.webp",
+      "name": "circle_thin",
+      "width": 348,
+      "height": 348,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-944399292806274754",
+      "file": "textures/168.webp",
+      "name": "act3vmulti_entry_ground_atlas#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-900029332267736488",
+      "file": "textures/169.webp",
+      "name": "entry_part2",
+      "width": 349,
+      "height": 230,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-853707051830952004",
+      "file": "textures/170.webp",
+      "name": "btn_icon_cancel",
+      "width": 40,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-850984711079243115",
+      "file": "textures/171.webp",
+      "name": "atlas_detail_view#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-819072476605645704",
+      "file": "textures/172.webp",
+      "name": "act31side_token_box",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-747429263153142791",
+      "file": "textures/173.webp",
+      "name": "act3vmulti_view_arena_top_bar#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-705351681416541726",
+      "file": "textures/174.webp",
+      "name": "btn_icon_cancel",
+      "width": 40,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-655950032720894918",
+      "file": "textures/175.webp",
+      "name": "img_dec_texture_1",
+      "width": 87,
+      "height": 53,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-610123047802912472",
+      "file": "textures/176.webp",
+      "name": "act12d6_token_mushroom",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-526335685623517458",
+      "file": "textures/177.webp",
+      "name": "multi_v3_01-03_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-477242778581728899",
+      "file": "textures/178.webp",
+      "name": "multi_v3_01-hard-03_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-475614376037547549",
+      "file": "textures/179.webp",
+      "name": "multi_v3_prepare#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-412683128052598357",
+      "file": "textures/180.webp",
+      "name": "clue_EDM_5",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-408128315340769421",
+      "file": "textures/181.webp",
+      "name": "panel_matching_dialog_glow",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-372689072751452393",
+      "file": "textures/182.webp",
+      "name": "act36side_token_recipe",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-294405666257411005",
+      "file": "textures/183.webp",
+      "name": "act15side_token_tea",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-282720467074763015",
+      "file": "textures/184.webp",
+      "name": "entry_part4",
+      "width": 193,
+      "height": 83,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-273695888860552446",
+      "file": "textures/185.webp",
+      "name": "act3vmulti_view_arena_top_bar#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-189967034940512836",
+      "file": "textures/186.webp",
+      "name": "drop_tag",
+      "width": 48,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-44664482311235202",
+      "file": "textures/187.webp",
+      "name": "img_decor",
+      "width": 172,
+      "height": 264,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "19827578529202317",
+      "file": "textures/188.webp",
+      "name": "act18d3_token_record",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "30393338683749780",
+      "file": "textures/189.webp",
+      "name": "vecb_battle_finish_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "68483158201015114",
+      "file": "textures/190.webp",
+      "name": "diff_icon_challenge",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "118547353066168141",
+      "file": "textures/191.webp",
+      "name": "auto_battle_locked",
+      "width": 204,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "164666430180395311",
+      "file": "textures/192.webp",
+      "name": "circle_heavy",
+      "width": 315,
+      "height": 315,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "197157265668934431",
+      "file": "textures/193.webp",
+      "name": "auto_battle_on",
+      "width": 204,
+      "height": 52,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "202018753459212992",
+      "file": "textures/194.webp",
+      "name": "multi_v3_01-hard-03_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "244410409620116438",
+      "file": "textures/195.webp",
+      "name": "act_multi_v3_state_loading_tile",
+      "width": 5,
+      "height": 5,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "306733640869919748",
+      "file": "textures/196.webp",
+      "name": "char_bg",
+      "width": 324,
+      "height": 596,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "395172708102836785",
+      "file": "textures/197.webp",
+      "name": "multi_v3_01-rm03_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "407658285943648970",
+      "file": "textures/198.webp",
+      "name": "back_img",
+      "width": 952,
+      "height": 540,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "446727097316097546",
+      "file": "textures/199.webp",
+      "name": "act13side_token_key",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "593262193409707681",
+      "file": "textures/200.webp",
+      "name": "mask_part2",
+      "width": 349,
+      "height": 230,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "596121573737231920",
+      "file": "textures/201.webp",
+      "name": "multi_v3_01-04_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "616655529272385193",
+      "file": "textures/202.webp",
+      "name": "multi_v3_01-fortress-hard-01_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "683269365530062247",
+      "file": "textures/203.webp",
+      "name": "act2mainss_token_courage",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "705426390248859638",
+      "file": "textures/204.webp",
+      "name": "act21side_token_permesso",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "741469474927839450",
+      "file": "textures/205.webp",
+      "name": "multi_v3_01-04_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "770597422648241062",
+      "file": "textures/206.webp",
+      "name": "elite_2",
+      "width": 44,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "785554178476727813",
+      "file": "textures/207.webp",
+      "name": "img_fx_02",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "818121896424764332",
+      "file": "textures/208.webp",
+      "name": "multi_v3_01-hard-02_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "870935224096739079",
+      "file": "textures/209.webp",
+      "name": "image_judge_dialog_bkg",
+      "width": 1024,
+      "height": 248,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "880214921684079287",
+      "file": "textures/210.webp",
+      "name": "vecb_milestone#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "926835522723495019",
+      "file": "textures/211.webp",
+      "name": "act9d4_point_token",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "965452431226647332",
+      "file": "textures/212.webp",
+      "name": "get_mark_1",
+      "width": 108,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1054763606660392792",
+      "file": "textures/213.webp",
+      "name": "act1sandbox_milestone_point",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1089393636288150189",
+      "file": "textures/214.webp",
+      "name": "et_ObsidianPass",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1103983891274557519",
+      "file": "textures/215.webp",
+      "name": "act12side_token_key01",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1141343243215993449",
+      "file": "textures/216.webp",
+      "name": "multiv3_manual_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1179937682789469056",
+      "file": "textures/217.webp",
+      "name": "act3vmulti_entry_ground_atlas#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1203637804905671733",
+      "file": "textures/218.webp",
+      "name": "fx_grad_2",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1239263632660185652",
+      "file": "textures/219.webp",
+      "name": "img_reward_mask",
+      "width": 40,
+      "height": 152,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1247567151346321325",
+      "file": "textures/220.webp",
+      "name": "act1mainss_token_medi",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1282347559513421911",
+      "file": "textures/221.webp",
+      "name": "img_progress",
+      "width": 117,
+      "height": 118,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1291912740056206580",
+      "file": "textures/222.webp",
+      "name": "outframe",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1347223568767324918",
+      "file": "textures/223.webp",
+      "name": "img_wave_back",
+      "width": 96,
+      "height": 59,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1347480613346642708",
+      "file": "textures/224.webp",
+      "name": "multi_v3_01-tr01_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1446792390370976711",
+      "file": "textures/225.webp",
+      "name": "multi_v3_01-05_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1696194282848334845",
+      "file": "textures/226.webp",
+      "name": "act28side_token_box",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1767995736271466581",
+      "file": "textures/227.webp",
+      "name": "act2vmulti_token_cap",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1821028916926735871",
+      "file": "textures/228.webp",
+      "name": "multi_v3_01-tr03_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1870097305590448695",
+      "file": "textures/229.webp",
+      "name": "unlock_btn",
+      "width": 276,
+      "height": 96,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1873620947179673368",
+      "file": "textures/230.webp",
+      "name": "act10d5_token_biscuit",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1895213563330867449",
+      "file": "textures/231.webp",
+      "name": "top_line",
+      "width": 57,
+      "height": 63,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2042071919654761388",
+      "file": "textures/232.webp",
+      "name": "act30side_token_box",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2048314351978682701",
+      "file": "textures/233.webp",
+      "name": "gradient_hori_64",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2102103356839014905",
+      "file": "textures/234.webp",
+      "name": "acceptable_bg",
+      "width": 60,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2133518905855943771",
+      "file": "textures/235.webp",
+      "name": "mask_part3",
+      "width": 193,
+      "height": 83,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2200521743571169320",
+      "file": "textures/236.webp",
+      "name": "token_ObsidianCoin",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2240385343885812589",
+      "file": "textures/237.webp",
+      "name": "mission_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2345864482212587817",
+      "file": "textures/238.webp",
+      "name": "clue_EDM_2",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2359114487571956754",
+      "file": "textures/239.webp",
+      "name": "act7d5_point_coupon",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2368011654884028101",
+      "file": "textures/240.webp",
+      "name": "complete_btn",
+      "width": 172,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2420937483165026377",
+      "file": "textures/241.webp",
+      "name": "img_logo",
+      "width": 164,
+      "height": 204,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2425943006405754555",
+      "file": "textures/242.webp",
+      "name": "act16d5_token_inker",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2440647672741652072",
+      "file": "textures/243.webp",
+      "name": "mask_part3",
+      "width": 273,
+      "height": 155,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2443684305133234298",
+      "file": "textures/244.webp",
+      "name": "btn_backbutton",
+      "width": 168,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2452808269833614110",
+      "file": "textures/245.webp",
+      "name": "deco_icon",
+      "width": 144,
+      "height": 596,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2478558565645717266",
+      "file": "textures/246.webp",
+      "name": "panel_matching_banner_dialog#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2498510329508381185",
+      "file": "textures/247.webp",
+      "name": "human",
+      "width": 23,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2631808612323246890",
+      "file": "textures/248.webp",
+      "name": "act1arcade_milestone_point",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2843940542968357306",
+      "file": "textures/249.webp",
+      "name": "multi_v3_01-football_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2849335293419490614",
+      "file": "textures/250.webp",
+      "name": "bossrush_milestone#1",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2978351316855177727",
+      "file": "textures/251.webp",
+      "name": "act12side_token_coupon",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3028356470085966153",
+      "file": "textures/252.webp",
+      "name": "act13d5_token_securities",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3046597202259975437",
+      "file": "textures/253.webp",
+      "name": "act12d6_token_pancake",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3176467357774012031",
+      "file": "textures/254.webp",
+      "name": "btn_back",
+      "width": 98,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3198221355353941884",
+      "file": "textures/255.webp",
+      "name": "clue_EDM_1",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3284816572789574941",
+      "file": "textures/256.webp",
+      "name": "img_char_bkg_4",
+      "width": 192,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3316822838872312127",
+      "file": "textures/257.webp",
+      "name": "multi_v3_01-rm07_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3339491440194019102",
+      "file": "textures/258.webp",
+      "name": "play_btn",
+      "width": 292,
+      "height": 160,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3417580022172435714",
+      "file": "textures/259.webp",
+      "name": "act9d0_token_dogTag",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3472167767664504178",
+      "file": "textures/260.webp",
+      "name": "act11d0_token_warrant",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3508844452207630421",
+      "file": "textures/261.webp",
+      "name": "get_sprite",
+      "width": 108,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3552313367709759006",
+      "file": "textures/262.webp",
+      "name": "mask_part4",
+      "width": 193,
+      "height": 83,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3622731823086714469",
+      "file": "textures/263.webp",
+      "name": "bg",
+      "width": 1559,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3685081781711813336",
+      "file": "textures/264.webp",
+      "name": "slant_wave_disturb_map",
+      "width": 8,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3700907063254428313",
+      "file": "textures/265.webp",
+      "name": "img_char_bkg_6",
+      "width": 192,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3712418665389211292",
+      "file": "textures/266.webp",
+      "name": "act10mini_token_ticket",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3724546303702987402",
+      "file": "textures/267.webp",
+      "name": "player_info#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3756821154787179339",
+      "file": "textures/268.webp",
+      "name": "flag_poster_all",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3813776261253401106",
+      "file": "textures/269.webp",
+      "name": "cubes_around_albedo",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3829525940342924337",
+      "file": "textures/270.webp",
+      "name": "process_bar",
+      "width": 101,
+      "height": 7,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3832616801960523789",
+      "file": "textures/271.webp",
+      "name": "panel_playingstyle_confirm_circle",
+      "width": 39,
+      "height": 41,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3868770768251340235",
+      "file": "textures/272.webp",
+      "name": "multi_v3_01-football_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3913609257249020591",
+      "file": "textures/273.webp",
+      "name": "img_bar_dec_tex",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3916504004756371242",
+      "file": "textures/274.webp",
+      "name": "avata_exit_bg",
+      "width": 92,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3938682295931583145",
+      "file": "textures/275.webp",
+      "name": "act29side_frag_4",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3953112356705706159",
+      "file": "textures/276.webp",
+      "name": "top_cd_circle_line",
+      "width": 94,
+      "height": 94,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3986088101937139054",
+      "file": "textures/277.webp",
+      "name": "new",
+      "width": 146,
+      "height": 75,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3992815168750619471",
+      "file": "textures/278.webp",
+      "name": "diff_icon_hard",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3997798989894277061",
+      "file": "textures/279.webp",
+      "name": "multiv3_milestone_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4021685928272063138",
+      "file": "textures/280.webp",
+      "name": "act11mini_token_card",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4064635475079038234",
+      "file": "textures/281.webp",
+      "name": "act3vmulti_battle_finish_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4103358540128968051",
+      "file": "textures/282.webp",
+      "name": "multi_v3_01-hard-01_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4327229662433472447",
+      "file": "textures/283.webp",
+      "name": "switch_icon_round",
+      "width": 44,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4502080917015358560",
+      "file": "textures/284.webp",
+      "name": "act12side_token_key02",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4530535519866497582",
+      "file": "textures/285.webp",
+      "name": "img_fx_01",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4547434191868976169",
+      "file": "textures/286.webp",
+      "name": "char_pick_sand_clock_fill",
+      "width": 26,
+      "height": 17,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4556282630670947104",
+      "file": "textures/287.webp",
+      "name": "multi_v3_01-01_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4591364917820385238",
+      "file": "textures/288.webp",
+      "name": "bossrush_milestone#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4630387595096994452",
+      "file": "textures/289.webp",
+      "name": "outlit_acceptable",
+      "width": 104,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4700401825403561768",
+      "file": "textures/290.webp",
+      "name": "act4d0_intelligencepoint",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4750224143309816062",
+      "file": "textures/291.webp",
+      "name": "confidential_mini",
+      "width": 328,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4751031067349395247",
+      "file": "textures/292.webp",
+      "name": "token_Wristband",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4822162497634263144",
+      "file": "textures/293.webp",
+      "name": "entry_part2",
+      "width": 349,
+      "height": 230,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4835004576213525481",
+      "file": "textures/294.webp",
+      "name": "act1vecb_milestone_point",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4839522220835185255",
+      "file": "textures/295.webp",
+      "name": "btn_reward_fill",
+      "width": 68,
+      "height": 68,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4907923281200117261",
+      "file": "textures/296.webp",
+      "name": "deco_bg",
+      "width": 272,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4942823862058356184",
+      "file": "textures/297.webp",
+      "name": "act1collection_point_token",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5015397846220885144",
+      "file": "textures/298.webp",
+      "name": "multi_v3_01-02_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5019988896474882641",
+      "file": "textures/299.webp",
+      "name": "act9mini_token_ticket",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5233152763594093144",
+      "file": "textures/300.webp",
+      "name": "multi_v3_01-rm06_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5253082520948198518",
+      "file": "textures/301.webp",
+      "name": "multi_v3_01-rm03_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5389821002754374092",
+      "file": "textures/302.webp",
+      "name": "act3vmulti_entry_main_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5438744232326467339",
+      "file": "textures/303.webp",
+      "name": "act20side_token_book",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5533073112913998910",
+      "file": "textures/304.webp",
+      "name": "vecb_entry#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5573416222213564222",
+      "file": "textures/305.webp",
+      "name": "map_random",
+      "width": 688,
+      "height": 388,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5588663867746574822",
+      "file": "textures/306.webp",
+      "name": "atlas_start_game#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5716957966807957287",
+      "file": "textures/307.webp",
+      "name": "clue_Heavymetal_1",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5778867278746931177",
+      "file": "textures/308.webp",
+      "name": "act_multi_v3_point",
+      "width": 24,
+      "height": 24,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5845315810425235675",
+      "file": "textures/309.webp",
+      "name": "sprite_white",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5862518863867992829",
+      "file": "textures/310.webp",
+      "name": "multi_v3_01-hard-01_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5928189901175088942",
+      "file": "textures/311.webp",
+      "name": "multi_v3_01-tr02_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5930478544151711158",
+      "file": "textures/312.webp",
+      "name": "clue_Heavymetal_5",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5942137946787553705",
+      "file": "textures/313.webp",
+      "name": "multi_v3_01-fortress-rm01_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6030634011140767327",
+      "file": "textures/314.webp",
+      "name": "get_mark",
+      "width": 116,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6059665883292087488",
+      "file": "textures/315.webp",
+      "name": "act17mini_token_ash",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6083310243415279560",
+      "file": "textures/316.webp",
+      "name": "atlas_common_char#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6118645381498168831",
+      "file": "textures/317.webp",
+      "name": "white_sprite",
+      "width": 36,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6129244490721396089",
+      "file": "textures/318.webp",
+      "name": "act32side_token_stamp",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6171749117481434530",
+      "file": "textures/319.webp",
+      "name": "multi_v3_01-fortress-01_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6230441086205682729",
+      "file": "textures/320.webp",
+      "name": "act1bossrush_token_relic",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6350118313711043465",
+      "file": "textures/321.webp",
+      "name": "white_sprite",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6358142748673225892",
+      "file": "textures/322.webp",
+      "name": "sprite_white",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6574739284644093430",
+      "file": "textures/323.webp",
+      "name": "BG",
+      "width": 1559,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6605807249217412229",
+      "file": "textures/324.webp",
+      "name": "act7mini_token_permit",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6661868277173834603",
+      "file": "textures/325.webp",
+      "name": "common_atlas#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6700180939834409726",
+      "file": "textures/326.webp",
+      "name": "multi_v3_01-rm02_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6750544900391112599",
+      "file": "textures/327.webp",
+      "name": "symbol",
+      "width": 24,
+      "height": 24,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6816287699237435391",
+      "file": "textures/328.webp",
+      "name": "act40side_token_yumyum",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6825259921144785287",
+      "file": "textures/329.webp",
+      "name": "fx_invert",
+      "width": 1403,
+      "height": 191,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6825373263633509836",
+      "file": "textures/330.webp",
+      "name": "img_btn_outline",
+      "width": 309,
+      "height": 158,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6869294620376542414",
+      "file": "textures/331.webp",
+      "name": "player_info#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6924556362572304058",
+      "file": "textures/332.webp",
+      "name": "bossrush_milestone#1a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6925234195936701720",
+      "file": "textures/333.webp",
+      "name": "auto_battle_off",
+      "width": 204,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6975146522407414134",
+      "file": "textures/334.webp",
+      "name": "img_new",
+      "width": 128,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6976069173778418875",
+      "file": "textures/335.webp",
+      "name": "locked_mask",
+      "width": 232,
+      "height": 232,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7081705959013364355",
+      "file": "textures/336.webp",
+      "name": "multi_v3_01-fortress-02_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7183001076207118190",
+      "file": "textures/337.webp",
+      "name": "common_atlas#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7188850127773524314",
+      "file": "textures/338.webp",
+      "name": "clue_Rap_1",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7198897373981471784",
+      "file": "textures/339.webp",
+      "name": "act35side_token_dust",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7245082539557728799",
+      "file": "textures/340.webp",
+      "name": "act37side_token_nay",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7276356574226786368",
+      "file": "textures/341.webp",
+      "name": "entry_part4",
+      "width": 273,
+      "height": 155,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7344144974431980826",
+      "file": "textures/342.webp",
+      "name": "multi_logo_color",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7416477242221068046",
+      "file": "textures/343.webp",
+      "name": "act29side_token_erin",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7475533945955357799",
+      "file": "textures/344.webp",
+      "name": "act39side_token_garum",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7603066105055971951",
+      "file": "textures/345.webp",
+      "name": "multi_v3_01-tr01_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7605476372014936798",
+      "file": "textures/346.webp",
+      "name": "multiv3_manual_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7613558686804963161",
+      "file": "textures/347.webp",
+      "name": "bg",
+      "width": 1020,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7615621025826451191",
+      "file": "textures/348.webp",
+      "name": "replicate_warning",
+      "width": 40,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7652377782867532054",
+      "file": "textures/349.webp",
+      "name": "white_sprite",
+      "width": 36,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7692486634130199796",
+      "file": "textures/350.webp",
+      "name": "token_Obsidian",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7717485989609226203",
+      "file": "textures/351.webp",
+      "name": "multiv3_milestone_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7742154114599615256",
+      "file": "textures/352.webp",
+      "name": "act15d5_token_postcard",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7742540589415303281",
+      "file": "textures/353.webp",
+      "name": "reward_blue",
+      "width": 164,
+      "height": 136,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7773488729045134446",
+      "file": "textures/354.webp",
+      "name": "potential_3_small",
+      "width": 28,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7813341999862762098",
+      "file": "textures/355.webp",
+      "name": "multi_v3_01-hard-02_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7814035788591617394",
+      "file": "textures/356.webp",
+      "name": "img_reward_acceptable_dot",
+      "width": 172,
+      "height": 100,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8013143286638152153",
+      "file": "textures/357.webp",
+      "name": "act12side_token_key04",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8054505394870820924",
+      "file": "textures/358.webp",
+      "name": "act1mainlinebp_token_star",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8079292024886281593",
+      "file": "textures/359.webp",
+      "name": "advertise_content",
+      "width": 1024,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8094031112228749342",
+      "file": "textures/360.webp",
+      "name": "fx_invert",
+      "width": 1024,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8111846696046038257",
+      "file": "textures/361.webp",
+      "name": "act3vmulti_battle_settle_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8157441013010086803",
+      "file": "textures/362.webp",
+      "name": "act16side_token_bolt",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8190833692965853568",
+      "file": "textures/363.webp",
+      "name": "glow_1",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8202106667032687404",
+      "file": "textures/364.webp",
+      "name": "act3vmulti_entry_room_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8235328284655982985",
+      "file": "textures/365.webp",
+      "name": "new_bg",
+      "width": 148,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8299845980867047782",
+      "file": "textures/366.webp",
+      "name": "name_card_title_bg",
+      "width": 312,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8349800609084942129",
+      "file": "textures/367.webp",
+      "name": "fx_bar_invert",
+      "width": 224,
+      "height": 46,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8357527248980396012",
+      "file": "textures/368.webp",
+      "name": "act13side_token_card",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8363138221933803984",
+      "file": "textures/369.webp",
+      "name": "clue_Heavymetal_2",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8376853874831085119",
+      "file": "textures/370.webp",
+      "name": "act18side_token_pieces",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8398187691244332789",
+      "file": "textures/371.webp",
+      "name": "panel_matching_dialog_tile",
+      "width": 94,
+      "height": 236,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8419844893395172767",
+      "file": "textures/372.webp",
+      "name": "multi_v3_01-06_preview",
+      "width": 684,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8433133067292365492",
+      "file": "textures/373.webp",
+      "name": "uid_bg",
+      "width": 160,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8466261013527848334",
+      "file": "textures/374.webp",
+      "name": "img_slant_wave",
+      "width": 21,
+      "height": 59,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8573740578766739187",
+      "file": "textures/375.webp",
+      "name": "multi_v3_01-05_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8617281133313395901",
+      "file": "textures/376.webp",
+      "name": "act_multi_v3_state_loading#0",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8716958154740083913",
+      "file": "textures/377.webp",
+      "name": "act29side_frag_3",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8778243659496527479",
+      "file": "textures/378.webp",
+      "name": "entry_circle_color",
+      "width": 512,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8791885731804293112",
+      "file": "textures/379.webp",
+      "name": "btn_icon_confirm",
+      "width": 44,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8853516540861687112",
+      "file": "textures/380.webp",
+      "name": "multi_v3_01-tr02_preview_small",
+      "width": 240,
+      "height": 148,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8980912490741851178",
+      "file": "textures/381.webp",
+      "name": "item_back",
+      "width": 72,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9024354679958978979",
+      "file": "textures/382.webp",
+      "name": "act23side_token_spirit",
+      "width": 184,
+      "height": 184,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9142922230113983965",
+      "file": "textures/383.webp",
+      "name": "image_stage_preview_text_1",
+      "width": 556,
+      "height": 24,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9200110346827152275",
+      "file": "textures/384.webp",
+      "name": "dec_filleted_corner",
+      "width": 148,
+      "height": 148,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 97,
+    "AnimationClip": 108,
+    "Animator": 2,
+    "AnimatorController": 1,
+    "AssetBundle": 1,
+    "Camera": 6,
+    "Canvas": 9,
+    "CanvasGroup": 375,
+    "CanvasRenderer": 2252,
+    "GameObject": 3518,
+    "Light": 1,
+    "Material": 72,
+    "Mesh": 12,
+    "MeshFilter": 21,
+    "MeshRenderer": 21,
+    "MonoBehaviour": 4176,
+    "ParticleSystem": 56,
+    "ParticleSystemRenderer": 56,
+    "RectTransform": 3425,
+    "Shader": 5,
+    "Sprite": 301,
+    "Texture2D": 385,
+    "Transform": 93
+  },
+  "externalFiles": {
+    "CAB-73af6f522fece51508a91fccd60c68f6": [
+      "archive:/CAB-658d74aab777086fc32b93f385be999a/CAB-658d74aab777086fc32b93f385be999a",
+      "Library/unity default resources",
+      "archive:/CAB-1b70e77fd118dea4a32415ac87839ac6/CAB-1b70e77fd118dea4a32415ac87839ac6",
+      "archive:/CAB-4069f2380ca9d60b5fb743b320c66956/CAB-4069f2380ca9d60b5fb743b320c66956",
+      "archive:/CAB-4b090287f6a2bcb0a26cdcb38e4b63b1/CAB-4b090287f6a2bcb0a26cdcb38e4b63b1",
+      "archive:/CAB-8690dd50296169b2e88fe64ba992bc8b/CAB-8690dd50296169b2e88fe64ba992bc8b",
+      "archive:/CAB-967586173c51ac60f86de17c3e4b1a32/CAB-967586173c51ac60f86de17c3e4b1a32"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 252079,
+      "sha256": "bdb0ed3276ee3285fd47fa9b8cf87a7f5fa6afceb924b43556f1c98608d1bc52"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 14790647,
+      "sha256": "a908d9d34126fd9378a38cd6de9fcc5667c791d1c220116c0c7cf1cc32af153d"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 2245172,
+      "sha256": "024759c1288be6ceac52757b8bcdd1b4acbd0fed6473f579167e094b40c08117"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 38,
+      "sha256": "c58b6a6570f385c8ca45895b3ecd530a14d2fd77a5c8f54b579ff79f9204419a"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 156,
+      "sha256": "575e159b85c798656de5b181f2e78079ca28e10573f6dc170bb2617f6bca09b7"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 810,
+      "sha256": "1094f1da3f09671a881fcaecbf31880bc5b0fbcb883b362770ef7ea78eff06e4"
+    },
+    {
+      "file": "textures/100.webp",
+      "bytes": 1066,
+      "sha256": "226246717195db48936a070240a208611396ecb72299b13ddd8dba03aa6efed9"
+    },
+    {
+      "file": "textures/101.webp",
+      "bytes": 36870,
+      "sha256": "cd3a2b07b9557a19b3c36bab238e32ded766e537891345fc6c046f6bd09f08e9"
+    },
+    {
+      "file": "textures/102.webp",
+      "bytes": 2902,
+      "sha256": "bb8bacf2ec013748093c7558ac35188756c67a1ed57220f09fc5edd4d4cee8cf"
+    },
+    {
+      "file": "textures/103.webp",
+      "bytes": 1154,
+      "sha256": "93a34ad39a5de4b321ee14b55cb0a2e838dee5505b07a4da643f0326b8f6c8ae"
+    },
+    {
+      "file": "textures/104.webp",
+      "bytes": 30278,
+      "sha256": "d5ebea2b24ac34b70db89ccad507d3b7a4438632207311b2dff7b97036314092"
+    },
+    {
+      "file": "textures/105.webp",
+      "bytes": 25024,
+      "sha256": "c489d71cde6e93f85dba3d5c18df1da814f775c61e6c344246d8ef4b8ad1bd9b"
+    },
+    {
+      "file": "textures/106.webp",
+      "bytes": 26290,
+      "sha256": "44e16f271711e8b96e58eff13af69236230d892b3a6383ef557e5edf886a036d"
+    },
+    {
+      "file": "textures/107.webp",
+      "bytes": 319876,
+      "sha256": "afdcf6aec3acb3f6f25e5fed098bc98e3f9bb716c1ccb2a15bc6d80c165d04c0"
+    },
+    {
+      "file": "textures/108.webp",
+      "bytes": 46792,
+      "sha256": "b89a93e9637362ca2ab796169f64acb4c1b0ebc8034f167dda5e8fbf525d730f"
+    },
+    {
+      "file": "textures/109.webp",
+      "bytes": 4200,
+      "sha256": "4faba4227788b83a1bf5c7b801c8256015d54257204c964d72a814d6f12be3fb"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 346044,
+      "sha256": "343cdff58210573c6ec7d8f85ca1c5f8c22d12fe6019f25131ed4d133078960c"
+    },
+    {
+      "file": "textures/110.webp",
+      "bytes": 27454,
+      "sha256": "e61a79b25dbe6972b0ec92904c0a0743f94ad20847582cd44896caf08bbbb21c"
+    },
+    {
+      "file": "textures/111.webp",
+      "bytes": 42844,
+      "sha256": "ed319abe6f1f97018bd0615d4d0b0002612daa6323f35d6a322cc7cd5910ea26"
+    },
+    {
+      "file": "textures/112.webp",
+      "bytes": 34524,
+      "sha256": "8f8a84fc88944f2efc472e9358a109ba1e39ac0edf0ed5ce118a8c62187b3290"
+    },
+    {
+      "file": "textures/113.webp",
+      "bytes": 31450,
+      "sha256": "fa74ab65b2592d0f77eedc783e69a40fbcc0185ebbeb5518712d0c6b95a81a17"
+    },
+    {
+      "file": "textures/114.webp",
+      "bytes": 2554,
+      "sha256": "4509cf91f2b9a3713269640d0978c817916ea3a2d7d486d1e6514335da62339f"
+    },
+    {
+      "file": "textures/115.webp",
+      "bytes": 2918,
+      "sha256": "79b84086a4645132414ac1c1f4a435468bf0a03d9095bdf8b5e50d8ece011df8"
+    },
+    {
+      "file": "textures/116.webp",
+      "bytes": 32360,
+      "sha256": "21a489474569eb23ea7f23b1c4023acb6188d5b3351962b2e5c2ff66725a893a"
+    },
+    {
+      "file": "textures/117.webp",
+      "bytes": 39630,
+      "sha256": "464f875f958e82177175585f69e8dc78436d5861871b118e8f88596f8ddb85b6"
+    },
+    {
+      "file": "textures/118.webp",
+      "bytes": 2474,
+      "sha256": "8a978efbeefd1d399bf0105c4f2b8b12043597e019cfb990e9e73521456730aa"
+    },
+    {
+      "file": "textures/119.webp",
+      "bytes": 33806,
+      "sha256": "71d495ffc4652dbb9bed04e9cbe2abb5854029cda2067c7af99eaa1b45d52609"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 3454,
+      "sha256": "56c2e1eeb096f638e657889395946922e8ccbc5383ff6dbcbcc4995c8674724d"
+    },
+    {
+      "file": "textures/120.webp",
+      "bytes": 29872,
+      "sha256": "d82a6189e600f3259b7f76a8af68447f548101d6ee13dfe0ae4657d95558a0d5"
+    },
+    {
+      "file": "textures/121.webp",
+      "bytes": 26040,
+      "sha256": "eed217f7146b549f1eb682b0e9a780d86ab936fa03fb982739cb62f2e13d965b"
+    },
+    {
+      "file": "textures/122.webp",
+      "bytes": 62,
+      "sha256": "bdbdd32443e27dd209bf6781b24e1045ed2d1bd4fad374c2af6d300336b0c7f9"
+    },
+    {
+      "file": "textures/123.webp",
+      "bytes": 30806,
+      "sha256": "4da0b5365d487495c6af0dc46af3c0ff40817bfa03c786d75f5d06eeaa47c57f"
+    },
+    {
+      "file": "textures/124.webp",
+      "bytes": 1530,
+      "sha256": "07a28e4dafb80bb4f1a013e410c4e82e74d79189b09d8b6f796214a787bc68d2"
+    },
+    {
+      "file": "textures/125.webp",
+      "bytes": 41418,
+      "sha256": "936aa746497da018182d139af0ec72b7fd924e056661f82ffe85ea09ee03e2a0"
+    },
+    {
+      "file": "textures/126.webp",
+      "bytes": 7892,
+      "sha256": "c439ac58e230b8cdddf3c66c1ef82eabc3d0a850031227a3df69db60303cecc9"
+    },
+    {
+      "file": "textures/127.webp",
+      "bytes": 38908,
+      "sha256": "f1dcf8347df2783ca6f1bc7da6573d4995fcafd6a50d106898630c9c426992b0"
+    },
+    {
+      "file": "textures/128.webp",
+      "bytes": 360,
+      "sha256": "7984da3a3111606e3cc955172d1d261fff36933f8128af3edc373b6a4084e29a"
+    },
+    {
+      "file": "textures/129.webp",
+      "bytes": 380846,
+      "sha256": "4d0d8b983606639cd116257799a7af0d98270b1d60f5e3bcaa092bf74fb9fea1"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 77032,
+      "sha256": "5daf9de255565e9147320b786e9f8e3d6a2ab2b2c36167d725968a3d042e6425"
+    },
+    {
+      "file": "textures/130.webp",
+      "bytes": 308956,
+      "sha256": "0c201683a2079802c34d776ab5e1f126f55cb47717b3d1c55484b45bfd60146f"
+    },
+    {
+      "file": "textures/131.webp",
+      "bytes": 469636,
+      "sha256": "44091cf76ad30daa758707f47508550eb57a486ccccf9a099701fbd3746ad046"
+    },
+    {
+      "file": "textures/132.webp",
+      "bytes": 1720,
+      "sha256": "74ba3a1335a6a3d15605a86453452ab78bf6e1ba2ef35f3de987f6f545864a4f"
+    },
+    {
+      "file": "textures/133.webp",
+      "bytes": 75140,
+      "sha256": "452ff6fd45c09c3bcbadfc0eebcab4ec1a86d84d7d835ceb2e9ce3bb87dacc06"
+    },
+    {
+      "file": "textures/134.webp",
+      "bytes": 632,
+      "sha256": "81a44e16b06a058e7c100a9d3d82e7223f2507e4a1d6a3f15ceffa1b6a8525bf"
+    },
+    {
+      "file": "textures/135.webp",
+      "bytes": 16848,
+      "sha256": "bbf8791902f34742db9cee724512191eb28eec861e5f0d1c48c5885740b84f92"
+    },
+    {
+      "file": "textures/136.webp",
+      "bytes": 32298,
+      "sha256": "be80d9ee971640db4859f584676a0aabf844820ba0af1ac4720e440330d5ff25"
+    },
+    {
+      "file": "textures/137.webp",
+      "bytes": 5956,
+      "sha256": "ffef629b9f151b7c3fe5f928949f44007287f4f6ec89478a780094715827b963"
+    },
+    {
+      "file": "textures/138.webp",
+      "bytes": 6370,
+      "sha256": "b24430fd730bbd2315ffa5c0258c5dc55678080f82f646dc868d2d20ec738822"
+    },
+    {
+      "file": "textures/139.webp",
+      "bytes": 42428,
+      "sha256": "8722329cd76c533d3dbcbfd4be822cee7fbc28b0e7d5d52d437e78d65a4cd69b"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 30674,
+      "sha256": "2f0183b7bce4633bcc32bc8aa8b2ead51ca02e6f56cbf5318f2d653bfc21b784"
+    },
+    {
+      "file": "textures/140.webp",
+      "bytes": 41054,
+      "sha256": "097c2ddae421f69c23909b52d3acdd13b63cb02c3f8915cbb43e43b52a797450"
+    },
+    {
+      "file": "textures/141.webp",
+      "bytes": 1452,
+      "sha256": "f3fd95ab454a2048b6b43bd16996112547dc831fc9709b6cccfc91292ae47d11"
+    },
+    {
+      "file": "textures/142.webp",
+      "bytes": 8276,
+      "sha256": "05d01f6f043f30c95e7d6b4a556f53f78286f246ac2076c1ec9e3b5c841e50b3"
+    },
+    {
+      "file": "textures/143.webp",
+      "bytes": 6860,
+      "sha256": "19f52b3c1fad44d49a74ab8beca2239dc920ca3cb4fe6b072f6e0a25ccc919c3"
+    },
+    {
+      "file": "textures/144.webp",
+      "bytes": 29334,
+      "sha256": "0cf41013ee7a61368c47afd0f373bc4b00f709a728f6cd7deb5132f335f60ad5"
+    },
+    {
+      "file": "textures/145.webp",
+      "bytes": 38686,
+      "sha256": "85e46ba032ee351bb9526891be4bcd0a673f72e0ea9aeaaa3f8b546abae83249"
+    },
+    {
+      "file": "textures/146.webp",
+      "bytes": 3970,
+      "sha256": "aaf94d2f32cb1d39c830c21565ac80fe059eb4a7d6df9d5669425072dbac39bc"
+    },
+    {
+      "file": "textures/147.webp",
+      "bytes": 250,
+      "sha256": "c9f1868066f25894a29552244f845e1fd86d5af528643dfa5f59a899fba1f0ee"
+    },
+    {
+      "file": "textures/148.webp",
+      "bytes": 16918,
+      "sha256": "a9a108b500d616b2fe5786b6fe525c3b9aece441e47ac7f17219f4d4ce4ff661"
+    },
+    {
+      "file": "textures/149.webp",
+      "bytes": 554,
+      "sha256": "e0b40eaf16f43745d081688aa3f9ea5378bdddaa11ba57ce427f365e2f2c2441"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 408,
+      "sha256": "67e262cbd7ecdb12f165df976eff628fbc599db63c9c79fd91c2137349167512"
+    },
+    {
+      "file": "textures/150.webp",
+      "bytes": 454,
+      "sha256": "4d6bbf312a936cf7e704086d888a6f7ebb263223806f15d212825941534e0b87"
+    },
+    {
+      "file": "textures/151.webp",
+      "bytes": 33872,
+      "sha256": "bbb48808960511b578e62a959efe1daced3aa5335525915a31e97aba19b5ba9f"
+    },
+    {
+      "file": "textures/152.webp",
+      "bytes": 364,
+      "sha256": "13855a6b46713ef00f1b02d9c817a95b33b6b02074b72443d6436f7a2f9a5953"
+    },
+    {
+      "file": "textures/153.webp",
+      "bytes": 3810,
+      "sha256": "936cf2135a1f90658b2aa02f03f17aeaae3a86daa39abda0286f5bad206bc795"
+    },
+    {
+      "file": "textures/154.webp",
+      "bytes": 18466,
+      "sha256": "7437731ff0ed4c56ad11d2f63e856e13f9b4cb024564f1f0896b4b329b5657bb"
+    },
+    {
+      "file": "textures/155.webp",
+      "bytes": 228,
+      "sha256": "e842182330c53645a8ff8d5310767cc907a29b0a16e1854bf621657be8b143dd"
+    },
+    {
+      "file": "textures/156.webp",
+      "bytes": 27838,
+      "sha256": "175dc9b01998999f09fb0b36003577c0756aeff09b228b131e9181c633b39305"
+    },
+    {
+      "file": "textures/157.webp",
+      "bytes": 4924,
+      "sha256": "0977e6f63a8e31278f3c44c38e43c5dcfa78a0c880eab28f1780d4302aa46df5"
+    },
+    {
+      "file": "textures/158.webp",
+      "bytes": 30564,
+      "sha256": "6bc633ae2e109d7cef1ee561933011e294c49e7986a7e024edb7071f3b044160"
+    },
+    {
+      "file": "textures/159.webp",
+      "bytes": 35960,
+      "sha256": "92fe4544a95d9c918c6d430d1e810a09577307de8959c16154f0d5595fc0055d"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 27602,
+      "sha256": "b175f2daef7822c0f56100a5aec2fe866b4c3224ea1d6507f94ae90445754794"
+    },
+    {
+      "file": "textures/160.webp",
+      "bytes": 28784,
+      "sha256": "d2fc3d83755763c3c8101cf25e9c20031a6eccd3189dd4882202bc348ffc8c97"
+    },
+    {
+      "file": "textures/161.webp",
+      "bytes": 32534,
+      "sha256": "1f8e5dd9b13e4b5d62fff00e97035a6a0eceb48c6def27c99bbcb32741c4ea43"
+    },
+    {
+      "file": "textures/162.webp",
+      "bytes": 228630,
+      "sha256": "29724a81be422846d6088146621c57b619eae82c281cad5b581c01cada6dcdee"
+    },
+    {
+      "file": "textures/163.webp",
+      "bytes": 34282,
+      "sha256": "08e8ab873e276b2e17ad8d24b692231f481aec6c10c489d9bfdd53360bf2a410"
+    },
+    {
+      "file": "textures/164.webp",
+      "bytes": 38870,
+      "sha256": "3e1697390252aab61000e968eea0a03b3cf63b587da6a6591797738dc17dbabc"
+    },
+    {
+      "file": "textures/165.webp",
+      "bytes": 6738,
+      "sha256": "ed59178284ca21eb11247876083f1617e2a97e7d4764f8e5f1989d2ea7f585e9"
+    },
+    {
+      "file": "textures/166.webp",
+      "bytes": 480,
+      "sha256": "9ac7d9f1626bdfab83cd1b4c80e2db86602dc9bbe4964478c6d26d9cef6fbfa8"
+    },
+    {
+      "file": "textures/167.webp",
+      "bytes": 2688,
+      "sha256": "6dc3be8fb962beef4597262667dff8a4321f4728827cdb2023e95de13e9d99df"
+    },
+    {
+      "file": "textures/168.webp",
+      "bytes": 536,
+      "sha256": "23ca74fabc8e46b73c94968f139426087e430c6a9bc471daa9934aea0ce2e41d"
+    },
+    {
+      "file": "textures/169.webp",
+      "bytes": 1630,
+      "sha256": "a47d2c223fb34591e4b12a1917a9c4affaac1ed4f8591934b609895b1417f226"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 25910,
+      "sha256": "6851036b7f30a243286d86cb86be2c5383326b83feefbfe4920e567480eb562d"
+    },
+    {
+      "file": "textures/170.webp",
+      "bytes": 442,
+      "sha256": "e345386b3a0d5caf72b8733a6241e0ca2ab2d0679ea0474f093a7cddae2ee0db"
+    },
+    {
+      "file": "textures/171.webp",
+      "bytes": 7192,
+      "sha256": "7608165488283b621af2ba2646964aab78d36a400b7273fb49ca1c5a7f4b55ba"
+    },
+    {
+      "file": "textures/172.webp",
+      "bytes": 19272,
+      "sha256": "ca1fdd77a07e7019ad1622d92751d8deb10efc9e78cb7449b744148610d06861"
+    },
+    {
+      "file": "textures/173.webp",
+      "bytes": 36070,
+      "sha256": "ac68b5180215fc46b44ba4a07978f19dbc5d172a3dfe9f5e4e0435f01bc3a6c2"
+    },
+    {
+      "file": "textures/174.webp",
+      "bytes": 442,
+      "sha256": "e345386b3a0d5caf72b8733a6241e0ca2ab2d0679ea0474f093a7cddae2ee0db"
+    },
+    {
+      "file": "textures/175.webp",
+      "bytes": 1344,
+      "sha256": "9f3d0c33e1f0a8a996601af4642215ea23803adec43bcb8c5b5d930ca8cf14eb"
+    },
+    {
+      "file": "textures/176.webp",
+      "bytes": 21930,
+      "sha256": "ce186bacc9e1e09f361014120b77083549db3c604eaf5b6909d69010707c11dd"
+    },
+    {
+      "file": "textures/177.webp",
+      "bytes": 338868,
+      "sha256": "8e61a87d98c4fd1c3b21cc02e28322f7097da1e2c45d5ceaecf30cdaef9d55a1"
+    },
+    {
+      "file": "textures/178.webp",
+      "bytes": 40052,
+      "sha256": "375d08685627ece98d485ef53012720de967876ecb25e2f3d5a0bf6ab654d1c1"
+    },
+    {
+      "file": "textures/179.webp",
+      "bytes": 77828,
+      "sha256": "7418df9430c529fb861df0fca89241ff663d5425512b96aef418a57c99955ae0"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 17038,
+      "sha256": "c4463562cb9dd3c8f20723ed232e906307d835741a77f0516dc684a8293055ce"
+    },
+    {
+      "file": "textures/180.webp",
+      "bytes": 26298,
+      "sha256": "0b67c662c046e9352290ca3536591716fa93f5134bfabb12f06586cee5675115"
+    },
+    {
+      "file": "textures/181.webp",
+      "bytes": 3748,
+      "sha256": "d58cea76ccce1a6a6d0a9444e84be872211fea3abb00454964628889ba4cc827"
+    },
+    {
+      "file": "textures/182.webp",
+      "bytes": 28270,
+      "sha256": "24eecdb35f6ad78a3fb14c1959301df4a72a24f920be52e36163a6ffef974b44"
+    },
+    {
+      "file": "textures/183.webp",
+      "bytes": 21314,
+      "sha256": "31fb7ca440b32463e8d95087526059dc5edca558023c102b873369e36e10143e"
+    },
+    {
+      "file": "textures/184.webp",
+      "bytes": 992,
+      "sha256": "e31731af9759c71dcd231dfc60d5a75a473901499fcd6bbd3a9ce93e28eeff39"
+    },
+    {
+      "file": "textures/185.webp",
+      "bytes": 14562,
+      "sha256": "81a91f62e5f0786040770d5bfad3f268dfde0912be35a3285b0dd7550c22565d"
+    },
+    {
+      "file": "textures/186.webp",
+      "bytes": 124,
+      "sha256": "87f8a0fafd599e3bb54f500c023f86291bc593f6cd712c2f5475558c874edb10"
+    },
+    {
+      "file": "textures/187.webp",
+      "bytes": 11298,
+      "sha256": "d7bd290b40eb8d3909539704eb082091a3ee1d005b6e2dbf7431959a10329471"
+    },
+    {
+      "file": "textures/188.webp",
+      "bytes": 25756,
+      "sha256": "03de664ed8ddcfea2cc836344cfb459455e2296b817c788e5a28e2bd11b16655"
+    },
+    {
+      "file": "textures/189.webp",
+      "bytes": 29976,
+      "sha256": "dc023812bdc0bf054e7de07ebfe5d30cbcce270f37ae01865b6461baa5aee178"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 46198,
+      "sha256": "5bcc29e89890302e3b82eb17fce4b3f16d3f583035bea4140fbb47187f1b7005"
+    },
+    {
+      "file": "textures/190.webp",
+      "bytes": 384,
+      "sha256": "2c71e5ce89864b2e54ffc2704626ea197fd473488e33bff310381cbe03a381cf"
+    },
+    {
+      "file": "textures/191.webp",
+      "bytes": 550,
+      "sha256": "301853a4284b4b22be0cba4e5c8f97ec820b4bdeb7f97cf64de401834f8ab98c"
+    },
+    {
+      "file": "textures/192.webp",
+      "bytes": 2266,
+      "sha256": "e7bfd7fd48b19c4625a584a844066dcb8e1dd0b6ab9df61160149135bd43891b"
+    },
+    {
+      "file": "textures/193.webp",
+      "bytes": 1068,
+      "sha256": "a2d5571b9adceff2cafcca85b7d819da8b684a989056ebd10c081f981976f225"
+    },
+    {
+      "file": "textures/194.webp",
+      "bytes": 307348,
+      "sha256": "c2a9b1961d823fe8ad3ca9117f75f1c9ee86ba10e65045315690bd662596790a"
+    },
+    {
+      "file": "textures/195.webp",
+      "bytes": 58,
+      "sha256": "ee024965a96e5b959678507537d1e74bc8df73f9fa45d598028dbeb2b2bbee78"
+    },
+    {
+      "file": "textures/196.webp",
+      "bytes": 63482,
+      "sha256": "ecb3c44daf2a2e5ea2327ca678d2a2bd126e852e80311dace42b646018cfd0f0"
+    },
+    {
+      "file": "textures/197.webp",
+      "bytes": 366146,
+      "sha256": "a3d84e9a62882aff068851233f37f71ae494a7d32d4aa963396ac3511e6c9fe3"
+    },
+    {
+      "file": "textures/198.webp",
+      "bytes": 121332,
+      "sha256": "ffea487b054a47710c0686885026f6b165ec021eb2ef5868a10c01d5fd68c725"
+    },
+    {
+      "file": "textures/199.webp",
+      "bytes": 14164,
+      "sha256": "cb09c2eabd5a6edfbcdfb7f19b764b6efecd82ff37cda43cc87c15c382f3da05"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 62684,
+      "sha256": "a0fc24f5e7a2f1582f382d5f5ff5db5417a91b84499319c47c732e582a0ff14d"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 948,
+      "sha256": "86cafbf8b1961d1e95521e6ce1e6c74e719c8d585b6371851721fed1cff2d975"
+    },
+    {
+      "file": "textures/200.webp",
+      "bytes": 8128,
+      "sha256": "46bbe0d1b4f453c3bdf89c1d3f95cb3fe2767475e389957b06f3c147e743db76"
+    },
+    {
+      "file": "textures/201.webp",
+      "bytes": 36412,
+      "sha256": "5140e69c38a87b88354e3a3236f0e4a095531f0b1b91bbaf0f5d599a7aec24e4"
+    },
+    {
+      "file": "textures/202.webp",
+      "bytes": 330228,
+      "sha256": "3b18c89d62c2dc8dfe8bc58f796d68ffdb336f1309e75a257418a3b256a9168c"
+    },
+    {
+      "file": "textures/203.webp",
+      "bytes": 29232,
+      "sha256": "347f29c32cecfc9e594b2019cbbe5fe496cdeeb6652fef33f62d6c2467d27d1b"
+    },
+    {
+      "file": "textures/204.webp",
+      "bytes": 28586,
+      "sha256": "6abca3ceec48dc38e914a87da84b30bcf76e465506513af4e9bf763791bc90fb"
+    },
+    {
+      "file": "textures/205.webp",
+      "bytes": 321920,
+      "sha256": "ceb8416b5c8632c044bda6fdb96ed07b11a044bd044ee3ca289dad7fb130748c"
+    },
+    {
+      "file": "textures/206.webp",
+      "bytes": 1534,
+      "sha256": "877009bb3552494bf363816d7fe5bdd7a6cb4ba00cdb454a4e8bea535533e172"
+    },
+    {
+      "file": "textures/207.webp",
+      "bytes": 160,
+      "sha256": "a24e0aa717882c290f9bbbffb6d5bcdf08ead403be579ef6ccb2a6718a7931ba"
+    },
+    {
+      "file": "textures/208.webp",
+      "bytes": 323024,
+      "sha256": "2b4afd35b1089c54ea2393399859e5431afed9f5ecfe127b8e9ddedf9b598a6f"
+    },
+    {
+      "file": "textures/209.webp",
+      "bytes": 115632,
+      "sha256": "0f3e6a9fe318d6e69785fad8ddddacbf4097f4780dd948021230fa352a30c6e1"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 3688,
+      "sha256": "23b15a040a0ad018dff2a7cdbae2c466c6555df690a848e8b2fa75549782f5c4"
+    },
+    {
+      "file": "textures/210.webp",
+      "bytes": 25594,
+      "sha256": "ddc35b96fa41d6e96432d36c246e46f429234929871280fad50cbe601fa23dd6"
+    },
+    {
+      "file": "textures/211.webp",
+      "bytes": 36114,
+      "sha256": "d7318516924b4f187651dc03524a04a81d16b8cfb8a3315835e5e26eee3baa57"
+    },
+    {
+      "file": "textures/212.webp",
+      "bytes": 5878,
+      "sha256": "8b93aac47f2152fa459111653e586519f8f0797dac7f380b6b9f7fff875575fd"
+    },
+    {
+      "file": "textures/213.webp",
+      "bytes": 25698,
+      "sha256": "9982685600e7a1176e215be0f8fcb692abe49e599c209f3694672ce6c1143e59"
+    },
+    {
+      "file": "textures/214.webp",
+      "bytes": 28600,
+      "sha256": "5aa7760dc683b745ec7ef17d39afe2633fa369e746570d837a922ad7d1aec9a0"
+    },
+    {
+      "file": "textures/215.webp",
+      "bytes": 28880,
+      "sha256": "f9f6883b44bfb5340fc4f16424fad304dc81da2bdcc2218b87618ee1b558e0cc"
+    },
+    {
+      "file": "textures/216.webp",
+      "bytes": 33532,
+      "sha256": "730105f5564ac769bced10f79daf89d8ce9764c6ba516fafd49b076648f1f0e7"
+    },
+    {
+      "file": "textures/217.webp",
+      "bytes": 14730,
+      "sha256": "4b1fb0d4beddf06371e4ae3419b85960dc33fb1eb316fce580d3f5d496575c10"
+    },
+    {
+      "file": "textures/218.webp",
+      "bytes": 338,
+      "sha256": "21fac60d2ab4d7083271381f92a9c8a908300b1a7ad4707e47cfc62c9d5c0381"
+    },
+    {
+      "file": "textures/219.webp",
+      "bytes": 1334,
+      "sha256": "88843146ceff0ddcedb3381e3c624554b51e69635c3177e396b52bc3dbd296be"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 1102,
+      "sha256": "cc724ae553c1ce498d437dd8550c80e0335dccc12774c2080af512a223a4d1d6"
+    },
+    {
+      "file": "textures/220.webp",
+      "bytes": 27164,
+      "sha256": "2fec2054824d9fb171e0ec5972ca30f532846c3c2c48cb9acc4985819af9250e"
+    },
+    {
+      "file": "textures/221.webp",
+      "bytes": 1440,
+      "sha256": "f28798555f0cca88a4040fe0ee42ee2d5db5e9ccd137a576190f12da8525b8b4"
+    },
+    {
+      "file": "textures/222.webp",
+      "bytes": 222238,
+      "sha256": "a9d5d0dc4129bda0422f8d6fb7282c71521ff5adad0887d4eebdda24465ebea3"
+    },
+    {
+      "file": "textures/223.webp",
+      "bytes": 798,
+      "sha256": "2bb9f7fb4cd81713f22bd61f7f3a96c8147da40014c9674281336f09ba456eb6"
+    },
+    {
+      "file": "textures/224.webp",
+      "bytes": 328714,
+      "sha256": "3d53982d02f916eafd848a7ae6a9e154793d6b01766d9c7b3fdec78830036246"
+    },
+    {
+      "file": "textures/225.webp",
+      "bytes": 327064,
+      "sha256": "14e3c596f673333f7c1657d2956024a6e322f250cbcb724ed94c2a303f9da4f6"
+    },
+    {
+      "file": "textures/226.webp",
+      "bytes": 35148,
+      "sha256": "3b18aa88bdb77431292c205f9c87d762374caa5e7ad07e6923ad87891c93f78f"
+    },
+    {
+      "file": "textures/227.webp",
+      "bytes": 26416,
+      "sha256": "fd26735aeb538097fb5d026586385e7af40d3b1a2a901c5345901313b753b390"
+    },
+    {
+      "file": "textures/228.webp",
+      "bytes": 317160,
+      "sha256": "d57d9c9d84193d8911469ba121d32ddc9312764cbddef92371cb09e0d457fa96"
+    },
+    {
+      "file": "textures/229.webp",
+      "bytes": 2292,
+      "sha256": "15f147c1c02960dbff2ea81dc8bd729400dafd0e83ac1d6758baeda187be47aa"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 546866,
+      "sha256": "e1840bc5fca19445df41a6f7d04210b05d86f90e16724bb2b1f3f1b5a96dcee9"
+    },
+    {
+      "file": "textures/230.webp",
+      "bytes": 32174,
+      "sha256": "72ab1829400d01d0097b987949aaccf876bed49586a245fe2828c8355f230777"
+    },
+    {
+      "file": "textures/231.webp",
+      "bytes": 56,
+      "sha256": "fa0dab042102fdb53c3b8885e804edaa44e023960cf6035f12971d172b926a70"
+    },
+    {
+      "file": "textures/232.webp",
+      "bytes": 32196,
+      "sha256": "ea00145ca7dfeb1c6c2bf195be0e0933c0ba008e8ce10eb683e62ff979657f07"
+    },
+    {
+      "file": "textures/233.webp",
+      "bytes": 156,
+      "sha256": "a8e36372ea790a50b23440b81887525584ae3bd69b7bc94985f890c7d782fe98"
+    },
+    {
+      "file": "textures/234.webp",
+      "bytes": 514,
+      "sha256": "e7c1509d911c8bd80b8fc6a7dffb0a6c0813067dd30611d7a7f09a2dd402a5d8"
+    },
+    {
+      "file": "textures/235.webp",
+      "bytes": 4604,
+      "sha256": "c013e86eb39201f25226ac716fa0b6a871af5a400bde9e1964d2a43b67a278ed"
+    },
+    {
+      "file": "textures/236.webp",
+      "bytes": 27512,
+      "sha256": "af967704e4701ae41e0e3b8cc313d9c7f7ddd3c66b3a713ea7a73285c23070db"
+    },
+    {
+      "file": "textures/237.webp",
+      "bytes": 71210,
+      "sha256": "e9262999fa8412b365eb5a9dada52a28e498d7806d521cc515c413e5f490a48a"
+    },
+    {
+      "file": "textures/238.webp",
+      "bytes": 25848,
+      "sha256": "69b99c8b8806525b198831eb26b9535380fb98a2c8afd7be006a4a69c089b435"
+    },
+    {
+      "file": "textures/239.webp",
+      "bytes": 28790,
+      "sha256": "2cd90f7785ad6fd4fbfc915bfb0ab8c8d4bce3a5a0c58582fb2a948ec0669ad8"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 29096,
+      "sha256": "a5a4646beb164f93f9bd6d0bc24ca5d7e743880e33b30313f2e5c914eceec47e"
+    },
+    {
+      "file": "textures/240.webp",
+      "bytes": 1106,
+      "sha256": "c0c04462df2ac0127f010b54973345f30d417daa969305ae7cfca3484e2f1056"
+    },
+    {
+      "file": "textures/241.webp",
+      "bytes": 4446,
+      "sha256": "a91c69ceae8015a6d0a2b095988f07cb5ac927b1b1533d31ee1a3170da7f77f5"
+    },
+    {
+      "file": "textures/242.webp",
+      "bytes": 21502,
+      "sha256": "f9512f261f698dd12ba60fdd7b42b2ac4856daaf5e8dba62ba7cfe25b117f318"
+    },
+    {
+      "file": "textures/243.webp",
+      "bytes": 5644,
+      "sha256": "8c1901a9bb56c41cd0229291299b8051def090f15ef1f6fa2f009734b2e81647"
+    },
+    {
+      "file": "textures/244.webp",
+      "bytes": 1008,
+      "sha256": "7cd19595956f093faf369ec8a570282f885a9c20721e389de69e902bef2c8097"
+    },
+    {
+      "file": "textures/245.webp",
+      "bytes": 4754,
+      "sha256": "3aae54d4a8b84ecd8a110e0878573add65e731d054b433c552ee31ffc671e8ac"
+    },
+    {
+      "file": "textures/246.webp",
+      "bytes": 111276,
+      "sha256": "1825431b5dd391dffdaee2ab3b6b6d0c0b7250295771e8d15489acbdbec03940"
+    },
+    {
+      "file": "textures/247.webp",
+      "bytes": 994,
+      "sha256": "42e80a4d63b971a374f755917f042be8cd4ba128bd806089cd5f0aa56742c7d6"
+    },
+    {
+      "file": "textures/248.webp",
+      "bytes": 29650,
+      "sha256": "8e6e08d9b96b15f0b72fd044eb1c3b81a969c8e0a563e14f4292c542533a48d7"
+    },
+    {
+      "file": "textures/249.webp",
+      "bytes": 332008,
+      "sha256": "58fa97d3e83cc7c97805df5c700e7a248ec2957029ba24d228f386ee5cc4739c"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 301606,
+      "sha256": "2d2285527fb31677cb0c247cfb9d865a1269040d8a8ee02c40c367654a10b297"
+    },
+    {
+      "file": "textures/250.webp",
+      "bytes": 17132,
+      "sha256": "57c34bd0c19680759ad20ff6ebf54a6f60efc42c8da4c4417d296e860985fad2"
+    },
+    {
+      "file": "textures/251.webp",
+      "bytes": 28530,
+      "sha256": "a87ecb6616545b2d3ae7d1e3365833ad7bf0bba01da2dfcd1b662899a4e29c14"
+    },
+    {
+      "file": "textures/252.webp",
+      "bytes": 30944,
+      "sha256": "109a6db7ede0cfedf0312fc2208dc323829907124373f117f5b3375a10998213"
+    },
+    {
+      "file": "textures/253.webp",
+      "bytes": 28392,
+      "sha256": "f3a1d53e989aeb5286c1f3c9d8ff62e4ec640e5f4c8041e3c9034417b6e2473d"
+    },
+    {
+      "file": "textures/254.webp",
+      "bytes": 242,
+      "sha256": "41f1d5b3ab2f00b11ab2a8b2a93a6968afd41101df648f402665c6ff6c896c67"
+    },
+    {
+      "file": "textures/255.webp",
+      "bytes": 25984,
+      "sha256": "cb6313225ade9bb496b22195a0471c4f55eb62b0e3f95b1574e659a910796d90"
+    },
+    {
+      "file": "textures/256.webp",
+      "bytes": 980,
+      "sha256": "308be09496c50ed04951009f1f9f22132fd059311a5cc30a0d9cdd5d120621e8"
+    },
+    {
+      "file": "textures/257.webp",
+      "bytes": 323870,
+      "sha256": "be1a507b3032b458a6903daf4045d786a5ff06ab1cf82b44702693523ae54e14"
+    },
+    {
+      "file": "textures/258.webp",
+      "bytes": 13746,
+      "sha256": "b064897ff802e91bd1271fc921f4b623f11b6aed6305cde3dd461b0ecf81f6c1"
+    },
+    {
+      "file": "textures/259.webp",
+      "bytes": 29164,
+      "sha256": "e0f8196fc7482e54813ec7fb76e1bd02374243e4b33cb99e99e7749499662db1"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 27238,
+      "sha256": "7c1c2c5c4ecb8c5f1610c63996209f5006f1f8f2b584b54b4ba2bec22819ded4"
+    },
+    {
+      "file": "textures/260.webp",
+      "bytes": 34308,
+      "sha256": "caf724eda3f27670db5aac1f16a4c3decbfb6de33eca61d29391ba147de079da"
+    },
+    {
+      "file": "textures/261.webp",
+      "bytes": 6030,
+      "sha256": "f681ea720196a91581c5900cfddcd6d8198754fd91b3a97f5194a707cc8af947"
+    },
+    {
+      "file": "textures/262.webp",
+      "bytes": 4552,
+      "sha256": "90b0735b4ce1837e87ef5f4722f83342b6fb25bad472c52e32c258a7021b26fc"
+    },
+    {
+      "file": "textures/263.webp",
+      "bytes": 518484,
+      "sha256": "ce7d071404d9a2a25b0c7591049e3a787833f48b27f85aa5c4268490ef889c0c"
+    },
+    {
+      "file": "textures/264.webp",
+      "bytes": 90,
+      "sha256": "ac69369f72215f3091beb563a43c630a4500ff789e4cb30c69fe87b720e8e080"
+    },
+    {
+      "file": "textures/265.webp",
+      "bytes": 18694,
+      "sha256": "b68423b753e874d067328a7ae6759d56dc5cd3159cda9f280862a073f011d138"
+    },
+    {
+      "file": "textures/266.webp",
+      "bytes": 23910,
+      "sha256": "7378c7e16dd6caf7ef48be8566f3d6ce78f60009840bb2d14c7a250d3cf9316f"
+    },
+    {
+      "file": "textures/267.webp",
+      "bytes": 11222,
+      "sha256": "eb1ddf474730f50c8f300265553786c87c4282a3656c42b12e77c0c81968c6d8"
+    },
+    {
+      "file": "textures/268.webp",
+      "bytes": 18546,
+      "sha256": "a6b62c8930df001578f10d91a44cacf029d1b4448be030051787c0c0fa2e23a7"
+    },
+    {
+      "file": "textures/269.webp",
+      "bytes": 17226,
+      "sha256": "18ecc9d50b8ac35e58ef085ea890d9c3e1c5786fd662898792a4258b36efc120"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 93156,
+      "sha256": "06a445c8f9720b48b08fc2de556acae196f4539a025d45db5df20f2daf32102c"
+    },
+    {
+      "file": "textures/270.webp",
+      "bytes": 100,
+      "sha256": "4fbfdf6ecc7b8c47104b57fff908dd1dad82d8fb566df5e93b1cb696acbdf38b"
+    },
+    {
+      "file": "textures/271.webp",
+      "bytes": 498,
+      "sha256": "01b030ff5bd04972a52e8930bb997e4677e28f855e74d2091956c1e1552d46c9"
+    },
+    {
+      "file": "textures/272.webp",
+      "bytes": 38032,
+      "sha256": "7ba9787a820dcf2a46921cc6055dd29e4f981998a27ea53d6838b3dec43fa9ed"
+    },
+    {
+      "file": "textures/273.webp",
+      "bytes": 546,
+      "sha256": "815febe7333b62c4e6a18cd141fa44f1fbadfe90f0aaf6aa7c629e6356e08a8a"
+    },
+    {
+      "file": "textures/274.webp",
+      "bytes": 2348,
+      "sha256": "839656b16f817e92945977f1f14b61fa519cbb4378e5d3e81bfef5727173ab95"
+    },
+    {
+      "file": "textures/275.webp",
+      "bytes": 30812,
+      "sha256": "e8cb193c044ea7ff72a8718d324db5ecde9f8ceaafa7bc1ebc2df00bc71fdbaa"
+    },
+    {
+      "file": "textures/276.webp",
+      "bytes": 1204,
+      "sha256": "7b87e462761c05b93712c6a592058e9bc9dad3fdf6519620f277361615134bca"
+    },
+    {
+      "file": "textures/277.webp",
+      "bytes": 6880,
+      "sha256": "332912d459cd603ecca52a095395de4fc3a57d498dda7bffba571b91197015c0"
+    },
+    {
+      "file": "textures/278.webp",
+      "bytes": 592,
+      "sha256": "d616ea1b4082a6117eebf77961656ea6c66b267720ae6b540d216a2e6c3b140a"
+    },
+    {
+      "file": "textures/279.webp",
+      "bytes": 29856,
+      "sha256": "77980864536c278b53eba4fd1431249e406d086e3684a5b8888da38153b30845"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 105166,
+      "sha256": "0324aa0086d548b3d5d40e043dec3e90db8c827e6f1fa208e08ed49d5383676a"
+    },
+    {
+      "file": "textures/280.webp",
+      "bytes": 38178,
+      "sha256": "9f1a8d445d858229a3fc63d767a3865225cd0e8ed7502c6093254087c695fef9"
+    },
+    {
+      "file": "textures/281.webp",
+      "bytes": 72420,
+      "sha256": "3fed852b6589fc59a6231ac500b7b61299e4eb03c5b8c061570b69603ed91642"
+    },
+    {
+      "file": "textures/282.webp",
+      "bytes": 40074,
+      "sha256": "9fbafe5b5ff7a5f39ebd89595bb432270a2ab8e60cd52a4024047b1ebae08421"
+    },
+    {
+      "file": "textures/283.webp",
+      "bytes": 516,
+      "sha256": "0f346d72c1944ed5f0661c9f5c3cbb61b49100c9a4c4e96628f0d66e19386509"
+    },
+    {
+      "file": "textures/284.webp",
+      "bytes": 29718,
+      "sha256": "2a042401af9f4fad8e18c876d17bba56db8b42421c534561f8c093add5a70a89"
+    },
+    {
+      "file": "textures/285.webp",
+      "bytes": 2950,
+      "sha256": "ac61b30c4f454d9a2489005d68aff132d89077bcb7ba9c0d8cde470e2587259b"
+    },
+    {
+      "file": "textures/286.webp",
+      "bytes": 154,
+      "sha256": "bae1786f9140522b96605a816025afb427d34f6fcf3235dc3fe4dbe17e76b9c7"
+    },
+    {
+      "file": "textures/287.webp",
+      "bytes": 43914,
+      "sha256": "f7d2c5b872fed4e24f788b3ea42b154790672cbda45633072be3315da86d5bb2"
+    },
+    {
+      "file": "textures/288.webp",
+      "bytes": 8218,
+      "sha256": "b90f8d077b94c2b6b7b9324a38e680cccd71301e32fdd9c03873fb945b9d1cd8"
+    },
+    {
+      "file": "textures/289.webp",
+      "bytes": 2578,
+      "sha256": "850bfbeeb0e4f09abf1bb481c8414f5449354a889dcaccff227f37c7b92f2f35"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 70,
+      "sha256": "cf62a80c44622c14e9443e9b48c97903a4deb3c39f02e4def6e5fa967b69e768"
+    },
+    {
+      "file": "textures/290.webp",
+      "bytes": 22060,
+      "sha256": "a22aa87487118da0efc80b37fc365ccb6375adf4470db690420670e19ae669f1"
+    },
+    {
+      "file": "textures/291.webp",
+      "bytes": 12796,
+      "sha256": "6c6b290ef39428cf59af2905a60a2ec061018781b9a0381556e3a3622dab7fa1"
+    },
+    {
+      "file": "textures/292.webp",
+      "bytes": 31972,
+      "sha256": "b2f7dea79eb40650f5139d618cc44dfe2d7b7215ceeeb2b8edc865a2bacc4e3d"
+    },
+    {
+      "file": "textures/293.webp",
+      "bytes": 1638,
+      "sha256": "33c103df603f292a958f531108341cc520b4c762e23ce48c48d57265ad4a6e5d"
+    },
+    {
+      "file": "textures/294.webp",
+      "bytes": 21952,
+      "sha256": "9682025798230c4bc1acfe181784b7f6d0d00b786168e7904a80c696f155ba73"
+    },
+    {
+      "file": "textures/295.webp",
+      "bytes": 1040,
+      "sha256": "2434238868031167cd56b5511266bcd3a49b7f365c04cb6b151a745a9e54a796"
+    },
+    {
+      "file": "textures/296.webp",
+      "bytes": 89000,
+      "sha256": "2d392526be66f418f14b48b9af0dece47e37c4b2dd2606cc396fa10adf5ad96d"
+    },
+    {
+      "file": "textures/297.webp",
+      "bytes": 25152,
+      "sha256": "6894c93c1815d04ef9ae037543995c67646822b20bf3ee09ab5e425006e2c5d2"
+    },
+    {
+      "file": "textures/298.webp",
+      "bytes": 272762,
+      "sha256": "7f73896713c168de91bb8c376c1f016f02101b1ac0b570dc8a06ebc48e13065e"
+    },
+    {
+      "file": "textures/299.webp",
+      "bytes": 22920,
+      "sha256": "04f70827e042470f7393384bbb21c2cca456afd301ee020bf4ac7d1e8edf1f80"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 13780,
+      "sha256": "73fe108e5f82e0e5944f84d8b28c197d3f35875124a276fff1b76ddcb1de2524"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 27082,
+      "sha256": "9ebcd90b00caabbba6e5bfb665976781707d734fd4135446154aebfef096fafe"
+    },
+    {
+      "file": "textures/300.webp",
+      "bytes": 35392,
+      "sha256": "9036f623c832c7de4a7a87f169b06f71fc2463ba831b999eb473fdb4dbf19eb3"
+    },
+    {
+      "file": "textures/301.webp",
+      "bytes": 47564,
+      "sha256": "ec40ec48f2928121a2358491f6243dd2eaa06c8acabb948f41da35dd6d72f05b"
+    },
+    {
+      "file": "textures/302.webp",
+      "bytes": 8226,
+      "sha256": "c5a4d9a65fc2c6b4ae15cb78aa6b68c1c846124eb890906487be29ef5a6449cf"
+    },
+    {
+      "file": "textures/303.webp",
+      "bytes": 38178,
+      "sha256": "27f98ad952db0ca961b312992c7b1851ad6351f3aa576fb3291e46602ac64e6d"
+    },
+    {
+      "file": "textures/304.webp",
+      "bytes": 42968,
+      "sha256": "26a7a1508f4c2d92ee48b0ac4aa45b3490c32260327cf9c47cc1838e95850172"
+    },
+    {
+      "file": "textures/305.webp",
+      "bytes": 200728,
+      "sha256": "d58106995aa954a8234071d2e708ee903a30c114bb3b4bf0603a5a79a4b46af2"
+    },
+    {
+      "file": "textures/306.webp",
+      "bytes": 19970,
+      "sha256": "ec2ac398f83327aebe0f31963c95b5d2f58f7a052988afb88f8401574a5b0663"
+    },
+    {
+      "file": "textures/307.webp",
+      "bytes": 28860,
+      "sha256": "644b622cf06309db24a9ae939bcfe6e24211b5011cde2982c946cfaee6f98978"
+    },
+    {
+      "file": "textures/308.webp",
+      "bytes": 260,
+      "sha256": "8abfaa610351c547bb1c597c0c3c6a8a7cdeb3f641956ba61fd662b673ac500c"
+    },
+    {
+      "file": "textures/309.webp",
+      "bytes": 54,
+      "sha256": "edf3bc981169c244843ad5173b25520246cddd1940e8e96f3f25ba1f7802ad5c"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 1896,
+      "sha256": "6929613a4302e1c4d61c82bcdcbae79594f7fc9a18ec26106b5df2df9bc24ade"
+    },
+    {
+      "file": "textures/310.webp",
+      "bytes": 326568,
+      "sha256": "b4e5943113aa12acd6b8d21d58c089d3af69e46cc5f44b3be61f26e7b2fcbafd"
+    },
+    {
+      "file": "textures/311.webp",
+      "bytes": 321554,
+      "sha256": "926663704218ccad31d135e22ca853b865983dea77e871cb9a4dc52b71ee27b1"
+    },
+    {
+      "file": "textures/312.webp",
+      "bytes": 29328,
+      "sha256": "8af3c4d9891cac9dadfb3b6518328fd4054ecfda34d38cc57f67818a4451fb41"
+    },
+    {
+      "file": "textures/313.webp",
+      "bytes": 38362,
+      "sha256": "e5522e93015c32718cb2abe7f3750d931b30d6173dd4a1762b45417dbb937ef8"
+    },
+    {
+      "file": "textures/314.webp",
+      "bytes": 5038,
+      "sha256": "7af170350911277cc8de2f196ab86bb804b071dca49efb515e6f02324fe7372b"
+    },
+    {
+      "file": "textures/315.webp",
+      "bytes": 23750,
+      "sha256": "78da5e2c5014627f133e2ee8440b7d76920b8609ed6093c7ce426be502c35f80"
+    },
+    {
+      "file": "textures/316.webp",
+      "bytes": 9834,
+      "sha256": "c243c35608c767b1f2ab63c53bf40a8d17284dbe82942c13d56b4f3c41874cc1"
+    },
+    {
+      "file": "textures/317.webp",
+      "bytes": 38,
+      "sha256": "a5423cc9326267a74a4359bfd65691ff1f99d4498b9482ef0ae29b2be87a381f"
+    },
+    {
+      "file": "textures/318.webp",
+      "bytes": 35058,
+      "sha256": "b4177e75bc8a226e47900fcf57b7b3fc5847535dd1aaea6775bb9cfe23913169"
+    },
+    {
+      "file": "textures/319.webp",
+      "bytes": 332918,
+      "sha256": "c376ace2d0f6bf16c5fe003e1c2f36360b784f8b95b1b1feae0b0fef9d341304"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 10390,
+      "sha256": "9cb11e3b4c83687dd555e61f75970f5628530a316642f133ec288bfc1b3481fb"
+    },
+    {
+      "file": "textures/320.webp",
+      "bytes": 30122,
+      "sha256": "40f009fce8e3f7cb7e9ede8292f9d51523a0b076c07f1f81bc37b0ec29492aa7"
+    },
+    {
+      "file": "textures/321.webp",
+      "bytes": 38,
+      "sha256": "42d578990f9fa0532cd3e5bca57da41475ccb3643a64c91f2957e4a56d992a1a"
+    },
+    {
+      "file": "textures/322.webp",
+      "bytes": 44,
+      "sha256": "2c2d187c91dd3059bc6b0de5e443037f1c3b44aee2d5880be034286d56ce2d54"
+    },
+    {
+      "file": "textures/323.webp",
+      "bytes": 181740,
+      "sha256": "66acaff877c40ffce0f2d1ce45f8fa06b7c3cb8ed15f13b797175c86b3a4fa71"
+    },
+    {
+      "file": "textures/324.webp",
+      "bytes": 33060,
+      "sha256": "b562991961506bb78c1220fa06170aa236fc21736d2b7e89931a2041b7d1b0ec"
+    },
+    {
+      "file": "textures/325.webp",
+      "bytes": 3362,
+      "sha256": "0622486050db47a96a6ed2309f8b4fd5d6dda4fabfbfdb1618e6f98b8e6f8161"
+    },
+    {
+      "file": "textures/326.webp",
+      "bytes": 375678,
+      "sha256": "5c89d8f35deb5db1e5db5fc1ded509bc92c645859664b20c5a0c1cb930d5276f"
+    },
+    {
+      "file": "textures/327.webp",
+      "bytes": 252,
+      "sha256": "fac01dddd96589bfa32df5ae40c4ea20d1a77b1f17660e0b92e9c022f4271663"
+    },
+    {
+      "file": "textures/328.webp",
+      "bytes": 22822,
+      "sha256": "265786a68b980279702b87704a32939a770255889a642a07557474c3581698f2"
+    },
+    {
+      "file": "textures/329.webp",
+      "bytes": 291316,
+      "sha256": "8ff7f41c5080e4292aa9434d92bda0f50c768919ea5cb3832230653406296414"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 24738,
+      "sha256": "690e1a238fe09266dc36df2c272a6a27b62152f6560da4ca5b9d755b41ec9570"
+    },
+    {
+      "file": "textures/330.webp",
+      "bytes": 7934,
+      "sha256": "d6c2963bbedc558f1cc4e1f82effb406cdf33e0a26271f2e72d61da59f7cdb06"
+    },
+    {
+      "file": "textures/331.webp",
+      "bytes": 7076,
+      "sha256": "bef2872db6f8307ec3d35c232e119cd24df281787f2d48088e66ab551c40b635"
+    },
+    {
+      "file": "textures/332.webp",
+      "bytes": 5272,
+      "sha256": "01b952b0c30d5999b75eaa6ced1dbe9b645529a6f66f03b949a68689fee4a391"
+    },
+    {
+      "file": "textures/333.webp",
+      "bytes": 276,
+      "sha256": "c478ce51bd10e2b06aca1117ff632c21757c055a06c4db28d96dd898687f4096"
+    },
+    {
+      "file": "textures/334.webp",
+      "bytes": 2156,
+      "sha256": "22981422fe7fb2be8748c35ace2e943201af602f90052abdda3020fac87ed45a"
+    },
+    {
+      "file": "textures/335.webp",
+      "bytes": 5134,
+      "sha256": "fc7663b5ac0a42f237d2c2fc883c651ac36006dce4b7dd678365c401eb67dd92"
+    },
+    {
+      "file": "textures/336.webp",
+      "bytes": 309012,
+      "sha256": "7e8c2ff0fd537bf7adb270e8fa43a0aa99a4fbcef162b177e2087c907d488a67"
+    },
+    {
+      "file": "textures/337.webp",
+      "bytes": 7284,
+      "sha256": "3f8c4af653f2aad049af66339375d0954177e1102ab4031c19a436c035b4925a"
+    },
+    {
+      "file": "textures/338.webp",
+      "bytes": 27900,
+      "sha256": "2d0ba7713522d3659d80f5fba93c5e3715de375ecc2bd8d8c0a29936273f2fc8"
+    },
+    {
+      "file": "textures/339.webp",
+      "bytes": 21516,
+      "sha256": "ea7928b244bc785770d09faa3944c22c3c19ad99f4fe89be9ddee17d7e690a33"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 158,
+      "sha256": "62cce612e298bc9d584ac2e48c84588c7f311cca2703ab04401a6e9f9572278b"
+    },
+    {
+      "file": "textures/340.webp",
+      "bytes": 29958,
+      "sha256": "818f401bdc9227d7ed522ac476c745f7da1d14c6bd1b0d7e3b44d064c3b8a449"
+    },
+    {
+      "file": "textures/341.webp",
+      "bytes": 1114,
+      "sha256": "22ec3412fe3d9749237aaf73f1c17119c02301370810264f8358b844c45d3022"
+    },
+    {
+      "file": "textures/342.webp",
+      "bytes": 14330,
+      "sha256": "f1d7837a9d6d0d59dbc5b6e96a83718a131b8d76628dcb002dca814b7e31b951"
+    },
+    {
+      "file": "textures/343.webp",
+      "bytes": 31222,
+      "sha256": "4b8dd56c9c8b4425431f7f8f7ef892ccd5cab4d38cc70de55ab70af96336fe33"
+    },
+    {
+      "file": "textures/344.webp",
+      "bytes": 36188,
+      "sha256": "6ade38d8c372070def8abed3a978ed65cdcb6a505fce0dd7b707a7fe688b88b6"
+    },
+    {
+      "file": "textures/345.webp",
+      "bytes": 42482,
+      "sha256": "f2687917a60d1b120c97c6a8afe252e000660d5de450cb334a6af79ad19626f4"
+    },
+    {
+      "file": "textures/346.webp",
+      "bytes": 60362,
+      "sha256": "22656b8dfc9b88b52f2a6759daa28b03021450d3fb73213a42071269d72815c4"
+    },
+    {
+      "file": "textures/347.webp",
+      "bytes": 289440,
+      "sha256": "fc50357be54fe1dd1e9071e8b71023851833136ff65eeaf5aa86b9504443483d"
+    },
+    {
+      "file": "textures/348.webp",
+      "bytes": 602,
+      "sha256": "825ce4de06cd5bf3c74c1435c0d4147747cdba44730ecb1cfdcdafb511723153"
+    },
+    {
+      "file": "textures/349.webp",
+      "bytes": 38,
+      "sha256": "a5423cc9326267a74a4359bfd65691ff1f99d4498b9482ef0ae29b2be87a381f"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 26348,
+      "sha256": "3cededfbd4e265f631ffc2f03f6b5815588dac0b69cf4c3d3e5ca7b79a754e45"
+    },
+    {
+      "file": "textures/350.webp",
+      "bytes": 24422,
+      "sha256": "1cc08100a62d616436601ba653195ffa8ff6911e0b28f055a0da6927f66121f2"
+    },
+    {
+      "file": "textures/351.webp",
+      "bytes": 20634,
+      "sha256": "7fd276a7fd42452afa411b3d4d4fc8c760682e7536513334bd29a12fecd56310"
+    },
+    {
+      "file": "textures/352.webp",
+      "bytes": 31562,
+      "sha256": "aa5bae3945cafde5c254667556cc2fa63276e4b57b307ca00698dae11f7e4620"
+    },
+    {
+      "file": "textures/353.webp",
+      "bytes": 4902,
+      "sha256": "d99b7d6dad29ea11699ce5de54a0ed0fbfb59df0aa49baaa9778164e34404d2d"
+    },
+    {
+      "file": "textures/354.webp",
+      "bytes": 690,
+      "sha256": "8f907c4763acca6ed2893485575470a800912f6323b70a2928036492554c12ef"
+    },
+    {
+      "file": "textures/355.webp",
+      "bytes": 37498,
+      "sha256": "18e512412fd774d2f1513d3d5f6bba008efc390653bd0260d22f2dee91bd47fc"
+    },
+    {
+      "file": "textures/356.webp",
+      "bytes": 5902,
+      "sha256": "6802a220aeb3e7feefc93859b9e47da040cf966dbc85bf9b5f55ce524accb6e5"
+    },
+    {
+      "file": "textures/357.webp",
+      "bytes": 29046,
+      "sha256": "d724bc4d8348fed43185521d4ab13684e42e885c88862d573d4bbbcb6518c635"
+    },
+    {
+      "file": "textures/358.webp",
+      "bytes": 30620,
+      "sha256": "2549a738770fb05c299e3748095c22616db33dd38981cda92c1457355709776a"
+    },
+    {
+      "file": "textures/359.webp",
+      "bytes": 47460,
+      "sha256": "2ffe71a9d43e458ab2a537a553f1f419eeca0a96eda20f2aa7a7ff5d5226b158"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 1342,
+      "sha256": "17fcc10bd3be24000ed7b8451fe058469ca3618e086a816f491d027f3448bff3"
+    },
+    {
+      "file": "textures/360.webp",
+      "bytes": 166756,
+      "sha256": "056b014ac608387a693a6d317b0fff7a3ab1df6f7759e12b3b0a8a3ba4fdb3ac"
+    },
+    {
+      "file": "textures/361.webp",
+      "bytes": 111768,
+      "sha256": "047b6be03cd87245088f84d453c7ae1fe2e303f0c487064ae3fa5e9e0b1cede3"
+    },
+    {
+      "file": "textures/362.webp",
+      "bytes": 22190,
+      "sha256": "0f7099f64f47518c8871222202b3071c2e5c63b950c376166428d359650efdac"
+    },
+    {
+      "file": "textures/363.webp",
+      "bytes": 108420,
+      "sha256": "1807917625d6624ece067745a7928240c2460dc46ec3611721d66f07e1d20376"
+    },
+    {
+      "file": "textures/364.webp",
+      "bytes": 51402,
+      "sha256": "c640e2757d252a073c32819ea535cad83e166fa520a597347034418b0e01e5c2"
+    },
+    {
+      "file": "textures/365.webp",
+      "bytes": 2714,
+      "sha256": "2e86f4c4c0f739ecdc918107ea4ea19ab1b4e710bae3c342fbfbfa940d538324"
+    },
+    {
+      "file": "textures/366.webp",
+      "bytes": 16468,
+      "sha256": "60c949b0f56bc0ba30dbae6cd71fc1534a0699f12b0156e115f0fbb59c9ced55"
+    },
+    {
+      "file": "textures/367.webp",
+      "bytes": 12752,
+      "sha256": "2f15d07d4bccc7f12bc3c44a0d9873789f2cb290b8e1cef4b4e328a779d9191b"
+    },
+    {
+      "file": "textures/368.webp",
+      "bytes": 11002,
+      "sha256": "bcfa2932e52b81dfefd2d75baf87c5d6cae6205bb9b100ca7f7e4de9d6030a35"
+    },
+    {
+      "file": "textures/369.webp",
+      "bytes": 28428,
+      "sha256": "7f89b3c1b66910570b3bc557a4777ea7e8968df3aec81e79d982f6b1420b0e21"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 41842,
+      "sha256": "42a2807757ff0ac9b434f1cec6d0ff5c9c925bcb3f3daad36c06a358c57a19bc"
+    },
+    {
+      "file": "textures/370.webp",
+      "bytes": 26494,
+      "sha256": "b230eb773303778c7d89356ad3960b6d9860521048b8513d7372e2ac16620f09"
+    },
+    {
+      "file": "textures/371.webp",
+      "bytes": 3278,
+      "sha256": "52799f5160de18779ba391dcc1d1e74e90689bd42f46ed6a3ec0737509f4d6eb"
+    },
+    {
+      "file": "textures/372.webp",
+      "bytes": 312288,
+      "sha256": "5c16d32a2a82dfbcb600d12c0be7e4c3c65031c784594d1135b53a8d20ea79ce"
+    },
+    {
+      "file": "textures/373.webp",
+      "bytes": 146,
+      "sha256": "577fc2bbafe77995b0649088a698fb951e5ca5850f6a99a16d78b438ad3d9d6e"
+    },
+    {
+      "file": "textures/374.webp",
+      "bytes": 592,
+      "sha256": "6be8ca43dc12af4b3d0a5e2e6f4db2507a2bd66b35c1cc1c1b6fce6a1036ebe9"
+    },
+    {
+      "file": "textures/375.webp",
+      "bytes": 40790,
+      "sha256": "80c91f096691ef0e5dd2673b51878b4886b02ba05b415dc8552a2145e8b90199"
+    },
+    {
+      "file": "textures/376.webp",
+      "bytes": 1102,
+      "sha256": "9e5ce34d2e255c9351ff4839777b1c8cf49cea10fcd095eeebde9d507426800a"
+    },
+    {
+      "file": "textures/377.webp",
+      "bytes": 26906,
+      "sha256": "4d2bb873d69bab6c6b30b8ecfcb1601f6ad2c74e2076c35833041cd0d1906971"
+    },
+    {
+      "file": "textures/378.webp",
+      "bytes": 240,
+      "sha256": "68769641f60ec40895275ba6828ada05f1d524a069a3da07e1e6db0b0454952d"
+    },
+    {
+      "file": "textures/379.webp",
+      "bytes": 454,
+      "sha256": "4d6bbf312a936cf7e704086d888a6f7ebb263223806f15d212825941534e0b87"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 10476,
+      "sha256": "6c7720fcf2cc9a300225a0e203d983a5d4ad93b2dfe89d932540ad8a6a3eaa70"
+    },
+    {
+      "file": "textures/380.webp",
+      "bytes": 37274,
+      "sha256": "18d66fdae20e8677873a471e5cf896e021e65446e45705e80b8a10df4753e732"
+    },
+    {
+      "file": "textures/381.webp",
+      "bytes": 166,
+      "sha256": "e55b03b931f0575b22810151a86e8a94f8b80bccb51960caf2af3347f3cb3db7"
+    },
+    {
+      "file": "textures/382.webp",
+      "bytes": 27260,
+      "sha256": "8e5fa288957ab6d93d9eda57fdf3c19197a5bd4c0bc7ee877901926cae748c15"
+    },
+    {
+      "file": "textures/383.webp",
+      "bytes": 9354,
+      "sha256": "bb7ae01c668a1a1479737ca9d1e7c8839248d4289512958af8f21449a92db0dd"
+    },
+    {
+      "file": "textures/384.webp",
+      "bytes": 970,
+      "sha256": "6c222379d9e3f85614628c5e464c62fb6fdd758a693adaf28dde8935c99b7e8d"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 20464,
+      "sha256": "47e43ee6205664705081879a203cd8226cfe0eb3ff385d150071ab9d9d4c4480"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 880,
+      "sha256": "fc8bf495376333e89787907fa3f46cf55939f69a30afc98b5a0cb4511c8c7471"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 45332,
+      "sha256": "b4868b017b01a16b94937be46f0af3a2f005f64c53669efae9acab593a6ae566"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 41092,
+      "sha256": "05acf6cb8dd3c69782e72c391c854fe4585580980a4558dc3f0a8bd8fa743a13"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 30872,
+      "sha256": "5bc343c813bd28d6aaaa97e64cf47a58e68e0493b67eb2c99c3b447e734310ce"
+    },
+    {
+      "file": "textures/43.webp",
+      "bytes": 42412,
+      "sha256": "7ee0deef44be5e17934dc6d0beb8c9879bf173277c33b4181c34633990c3ae6d"
+    },
+    {
+      "file": "textures/44.webp",
+      "bytes": 152,
+      "sha256": "10d6f9639bf4825536ef6c1de1945b748f475dd0ec6fc5cc5da11d1beb79d5a9"
+    },
+    {
+      "file": "textures/45.webp",
+      "bytes": 29054,
+      "sha256": "fe8a6bccc0fc9348d3a084bc1c9e66cbd3d64b6c7e21eb001b78db9591189d72"
+    },
+    {
+      "file": "textures/46.webp",
+      "bytes": 14536,
+      "sha256": "a2f89d7458c45ce703bbb21daa4218d32940fc81047d3fe60c15258203a15102"
+    },
+    {
+      "file": "textures/47.webp",
+      "bytes": 22422,
+      "sha256": "d46b93e4b87f48bb2062ccc35ada2c7c01a4e34ab6cee7773dac080dd4d8dcb8"
+    },
+    {
+      "file": "textures/48.webp",
+      "bytes": 27852,
+      "sha256": "dac32088f64b6bbe0d42d3689d91d98adca494aab5fb3570c36f7044fe0357a3"
+    },
+    {
+      "file": "textures/49.webp",
+      "bytes": 1342,
+      "sha256": "17fcc10bd3be24000ed7b8451fe058469ca3618e086a816f491d027f3448bff3"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 28164,
+      "sha256": "f172564e68991650b4c6f2b0755915a122ea6fe19157a8ee53d148a75c2cb05c"
+    },
+    {
+      "file": "textures/50.webp",
+      "bytes": 17764,
+      "sha256": "0e08abd7b70ae95261d418ee579b32dce3d97a21f9559be5d1cb09c256ee6aef"
+    },
+    {
+      "file": "textures/51.webp",
+      "bytes": 3688,
+      "sha256": "23b15a040a0ad018dff2a7cdbae2c466c6555df690a848e8b2fa75549782f5c4"
+    },
+    {
+      "file": "textures/52.webp",
+      "bytes": 29378,
+      "sha256": "895278d338f943f82d206a8d446128e85fc1663adff319a6f189f8ba2690b56f"
+    },
+    {
+      "file": "textures/53.webp",
+      "bytes": 292350,
+      "sha256": "c8275b97e24029b1f1ba22959de45b69076288b730145b8c6386bb0f7582e19d"
+    },
+    {
+      "file": "textures/54.webp",
+      "bytes": 23602,
+      "sha256": "ce437f5557b15cce6ba7c75ddcb8034f63ae9f2cec0ab84a7b6f878bcafe5cbc"
+    },
+    {
+      "file": "textures/55.webp",
+      "bytes": 37412,
+      "sha256": "5a1b3fe1aa1fa07ce68a98d69a1771b8dad96dbf680fa4a2cdd5eb4538878c1c"
+    },
+    {
+      "file": "textures/56.webp",
+      "bytes": 1516,
+      "sha256": "7d49cf2d34ceabe3420c71131cea68ad099f871eeec57574ed5309f5e57b6a79"
+    },
+    {
+      "file": "textures/57.webp",
+      "bytes": 10946,
+      "sha256": "3af900a8e8a861acaa20f6b6db4436444294ee7dc9610d69dcf87a4b3c9f3c28"
+    },
+    {
+      "file": "textures/58.webp",
+      "bytes": 33236,
+      "sha256": "2708e359552451fb41676a3a31d3b5b1df5350f6508ac6780ab712c9f937b4a1"
+    },
+    {
+      "file": "textures/59.webp",
+      "bytes": 28004,
+      "sha256": "c9780a3c4625d4413ce55024e774a3e6ae8eca6e26f1199b24e3f09f214063c5"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 338338,
+      "sha256": "e3f47ca9312d1c87b273e264d3bac033b5ab86d1bf76aaa85030b0c2003d7991"
+    },
+    {
+      "file": "textures/60.webp",
+      "bytes": 3906,
+      "sha256": "9db40fe574f42d231043673e3e92aa1d47a561f9a0ca0c00482d4ad0b0710669"
+    },
+    {
+      "file": "textures/61.webp",
+      "bytes": 598444,
+      "sha256": "6aa8850fa0febd94f1d1c720f169b956d53c0402251a2d0d9dfd284c43b526a2"
+    },
+    {
+      "file": "textures/62.webp",
+      "bytes": 24962,
+      "sha256": "bb7947232f12d3fe69485080ebcadb4271f580aa1e39c4c1bd6d58a323695947"
+    },
+    {
+      "file": "textures/63.webp",
+      "bytes": 27182,
+      "sha256": "1777ab971734b812f7d686a11002f1be82cb02eab130fe001700141356edd19a"
+    },
+    {
+      "file": "textures/64.webp",
+      "bytes": 44894,
+      "sha256": "a22166a3dafbec3c194d4c23960bacf64d42cdb8ac0fb475d61a06d78682ae4d"
+    },
+    {
+      "file": "textures/65.webp",
+      "bytes": 16116,
+      "sha256": "1541d00f430b9d2e35015659cdfe291eb5263c5771f61e952da3b7923225c6ab"
+    },
+    {
+      "file": "textures/66.webp",
+      "bytes": 31576,
+      "sha256": "dd85bc6d4d0fd17d839728aef3b90a5cc43e1f2aa7f5c5ef7cc3b87ec6f03d1a"
+    },
+    {
+      "file": "textures/67.webp",
+      "bytes": 92,
+      "sha256": "25434f3492d535d53bb31e05c7d93d991ff18b9238d0048acfc397b26f00ab69"
+    },
+    {
+      "file": "textures/68.webp",
+      "bytes": 28024,
+      "sha256": "187fb2437989a2fc3112ee104f0b8af110815c24e5d40bf5a22b4802472241a5"
+    },
+    {
+      "file": "textures/69.webp",
+      "bytes": 574,
+      "sha256": "d7e3a234fa0a45aa4ce44b8d6af6e6063462df4a77f69fcc2b55475fee6e8538"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 6172,
+      "sha256": "871dbe4b10f09a19de3552be81338a70c7827463a204ce159109de5816a80b28"
+    },
+    {
+      "file": "textures/70.webp",
+      "bytes": 3534,
+      "sha256": "14782cb7d88cb48383c503af92597ae58ae352e0348f6d1728c44355efe85a5c"
+    },
+    {
+      "file": "textures/71.webp",
+      "bytes": 9708,
+      "sha256": "0198d6a12af4c2a25277dc5323a4991b6ffb013c47e8ee29ca25d69776666f0b"
+    },
+    {
+      "file": "textures/72.webp",
+      "bytes": 316,
+      "sha256": "d16fa852d11c79fa4adc788e05f4898df625588615959308151fa7fc48536bf3"
+    },
+    {
+      "file": "textures/73.webp",
+      "bytes": 78424,
+      "sha256": "29723e4081da630f59ddd867b322c5c521e2d0cfa3454d3bd14448abb5c76667"
+    },
+    {
+      "file": "textures/74.webp",
+      "bytes": 41666,
+      "sha256": "e2234402e91743184b83a666dfc5945bc2af9e1deee13e627ec3575222f1b10e"
+    },
+    {
+      "file": "textures/75.webp",
+      "bytes": 19416,
+      "sha256": "52b6c0d00c5a0e930abf21b8f0f025ca35b546c060bb4ede5ddfdbb8aa2f17cb"
+    },
+    {
+      "file": "textures/76.webp",
+      "bytes": 34452,
+      "sha256": "52fd0e2258f148620f252cf6e3a22445b0200ce79ce88476b5a72c196f3e7944"
+    },
+    {
+      "file": "textures/77.webp",
+      "bytes": 20704,
+      "sha256": "e68381c28095ba428a87d0355e512e04ada1c8bdeef4bdedd9ed519c68ea577f"
+    },
+    {
+      "file": "textures/78.webp",
+      "bytes": 23926,
+      "sha256": "68d561a2d81ef6a28fa3b838adb9ca265a101cfb88ebf222168108d626f88ea8"
+    },
+    {
+      "file": "textures/79.webp",
+      "bytes": 38012,
+      "sha256": "38427fc745643bed70a298a192ea04e3f906c4a8cedc502305a74e98dfe957cc"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 125886,
+      "sha256": "c1c8197e82fb33bab06606cadb15ac94a9737fc3a32f539d1731d881dd8950f5"
+    },
+    {
+      "file": "textures/80.webp",
+      "bytes": 258,
+      "sha256": "767640997ab1557664d0b150fe45cc9d6a4e8555d5a1dd24e91d7271d0330550"
+    },
+    {
+      "file": "textures/81.webp",
+      "bytes": 794,
+      "sha256": "bef5ff69a0d8380aceaea0ed85f89c84b72abbadf2195d8156ae821a6f83672d"
+    },
+    {
+      "file": "textures/82.webp",
+      "bytes": 18208,
+      "sha256": "57340f17bdad7eae20ec7d01d351306d4d5ae01dda56139f88eabfe561ae5df9"
+    },
+    {
+      "file": "textures/83.webp",
+      "bytes": 38054,
+      "sha256": "c3f7b7926b8d2525d2b30a37e425b467a1f624bef22a6cf7872b610dcc7433ff"
+    },
+    {
+      "file": "textures/84.webp",
+      "bytes": 34632,
+      "sha256": "e871811388c3fa81d66199a1aa2770fdb54a5dc4d3ddc23f70df2265a3f77cfa"
+    },
+    {
+      "file": "textures/85.webp",
+      "bytes": 41958,
+      "sha256": "94a7495173e7b6fbdbf7cd33ab29164850a7384dc04d74de82d61bb6086644f0"
+    },
+    {
+      "file": "textures/86.webp",
+      "bytes": 30872,
+      "sha256": "5bc343c813bd28d6aaaa97e64cf47a58e68e0493b67eb2c99c3b447e734310ce"
+    },
+    {
+      "file": "textures/87.webp",
+      "bytes": 1308,
+      "sha256": "ecbc41572e81210102c969bc0fa79aa2da73d935b502f4212d3e501a73ccc1e3"
+    },
+    {
+      "file": "textures/88.webp",
+      "bytes": 37508,
+      "sha256": "0cfc0a5b6fd45e6526226a1b8033ed014c3a3baec35c3ff0a11b68a5e5cd2bc0"
+    },
+    {
+      "file": "textures/89.webp",
+      "bytes": 26716,
+      "sha256": "0309306a47ab1f143767408147db2d49adf22006eb938a9818b98b61b96710c9"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 41010,
+      "sha256": "7bc8998e80235ddd5fb7a7975bf2cc8ba470dea5d69690630de9f1acb67f24ff"
+    },
+    {
+      "file": "textures/90.webp",
+      "bytes": 69414,
+      "sha256": "d80a301773b6e1b30f8a2714ff82d9712737bfd63f6679ef95aa11154468ce0f"
+    },
+    {
+      "file": "textures/91.webp",
+      "bytes": 38740,
+      "sha256": "c6e548012acfc9b6e3ea4aa65fb1e927aed606c3ef5ca32ecf5dc908fd5504a5"
+    },
+    {
+      "file": "textures/92.webp",
+      "bytes": 1154,
+      "sha256": "759671c45fe254207e2f98146434d956f6bc9c45cb9cd6295027806b07fb6737"
+    },
+    {
+      "file": "textures/93.webp",
+      "bytes": 968,
+      "sha256": "aa56c86bfc53066db5671faf454b48922a584d121b7eb87f7100c2bfc258d818"
+    },
+    {
+      "file": "textures/94.webp",
+      "bytes": 108,
+      "sha256": "c9194b9c1c7c70671835924bd671c06768287df3f4c08c7b68771a63ad06bbc5"
+    },
+    {
+      "file": "textures/95.webp",
+      "bytes": 2052,
+      "sha256": "512024a0c49c026aaa9328ce9e3548d2a170e59c447fcb959ea5fc113bcfcfa0"
+    },
+    {
+      "file": "textures/96.webp",
+      "bytes": 4482,
+      "sha256": "539d05f8481c8b7d8752aceb462474ab38d0f7e5a9fda787687848ec29d682b0"
+    },
+    {
+      "file": "textures/97.webp",
+      "bytes": 5608,
+      "sha256": "9d612924acd253fe564df5ec4043287db6f4c7bcb5c82327be5889a8e7a85edc"
+    },
+    {
+      "file": "textures/98.webp",
+      "bytes": 104,
+      "sha256": "0dd5ce4a5e38aa80e6dc70fed0acbec0af27b1979a61c7b7bcd8ac9a02c48cbb"
+    },
+    {
+      "file": "textures/99.webp",
+      "bytes": 33708,
+      "sha256": "7f6731a6c29a24634125ebc1853d653765bdb682ca4ca339e1971f8d6cdf6dce"
+    }
+  ]
+}

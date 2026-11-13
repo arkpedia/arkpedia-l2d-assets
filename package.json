@@ -8,6 +8,8 @@
     "test:py": "python3 -m unittest discover -s test -p 'test_*.py'",
     "validate": "node scripts/validate.mjs",
     "inspect": "node scripts/inspect-skeleton.mjs",
-    "sync": "python3 scripts/sync.py"
+    "sync": "python3 scripts/sync.py",
+    "recover:events": "python3 scripts/event_transitions.py recover",
+    "validate:events": "python3 scripts/event_transitions.py validate"
   }
 }

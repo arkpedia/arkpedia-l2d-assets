@@ -1,0 +1,561 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act1multi",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "25-05-20-12-36-22_4803e1",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/165c1269485961dd8cdd761298ab9c5a12f1c80f/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act1multi.ab",
+    "bundleMd5": "37662d37ef951a85d743d7696f4431fc",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/25-05-20-12-36-22_4803e1/activity_%5Buc%5Dact1multi.dat",
+    "archiveSha256": "3598a049dc984a02c22b1afa7c38fbe99830a578d69f561d1c111c8429877b4c",
+    "bundleSha256": "7c69814dfeaa48217454913c5aee5413cf094e2722dc36c1f0c5013edd4c5f3f",
+    "manifestEntry": {
+      "name": "activity/[uc]act1multi.ab",
+      "hash": "8aa22647a1950bb80f1a999e02463e96",
+      "md5": "37662d37ef951a85d743d7696f4431fc",
+      "totalSize": 1657296,
+      "abSize": 1954592,
+      "pid": "lpack_misc3",
+      "cid": 2048
+    }
+  },
+  "animations": [
+    {
+      "id": "-7149459794487606874",
+      "name": "act3vmulti_train_billboard_enter_fortress",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmuli_billboard_wide_enter_fortress",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-1650511193067323598",
+      "name": "act3vmulti_train_billboard_enter_soccer_loop",
+      "candidate": false,
+      "durationSeconds": 7.4666666984558105,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "1552591274895864532",
+      "name": "act3vmulti_billboard_wide_loop",
+      "candidate": false,
+      "durationSeconds": 45.233333587646484,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 6.016666889190674,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT1MULTI_PROJECTIONCLIP",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "2401321379721427064",
+      "name": "act3vmulti_train_billboard_enter_normal",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmuli_billboard_wide_enter_normal",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "2920946414276785192",
+      "name": "act3vmulti_billboard_room_loop",
+      "candidate": false,
+      "durationSeconds": 14.416666984558105,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 5.099999904632568,
+          "functionName": "EventPlayUI",
+          "data": "ON_ACT1MULTI_PROJECTIONCLIP",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "4713025107679010421",
+      "name": "act3vmulti_train_billboard_enter_soccer",
+      "candidate": true,
+      "durationSeconds": 1.2166666984558105,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "act3vmuli_billboard_wide_enter_soccer",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "id": "-8746046664943950398",
+      "file": "textures/0.webp",
+      "name": "season_entrance_show",
+      "width": 117,
+      "height": 131,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8659094112217369745",
+      "file": "textures/1.webp",
+      "name": "img_season_title",
+      "width": 468,
+      "height": 139,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7917008763976461201",
+      "file": "textures/2.webp",
+      "name": "btn_season_book",
+      "width": 344,
+      "height": 141,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4918951361442780770",
+      "file": "textures/3.webp",
+      "name": "img_screen_texture",
+      "width": 126,
+      "height": 125,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4874999900330156370",
+      "file": "textures/4.webp",
+      "name": "bg",
+      "width": 1559,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3941217245486236396",
+      "file": "textures/5.webp",
+      "name": "act3vmulti_billboard_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3357168979738222997",
+      "file": "textures/6.webp",
+      "name": "photoBg_season1_postcardB",
+      "width": 596,
+      "height": 336,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2049333314825988155",
+      "file": "textures/7.webp",
+      "name": "cover_bg_1",
+      "width": 800,
+      "height": 460,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1935402596064374885",
+      "file": "textures/8.webp",
+      "name": "img_season_logo",
+      "width": 240,
+      "height": 240,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1486311214686413417",
+      "file": "textures/9.webp",
+      "name": "photoBg_season1_outside",
+      "width": 596,
+      "height": 336,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1320872347567198060",
+      "file": "textures/10.webp",
+      "name": "photoBg_season1_podium",
+      "width": 596,
+      "height": 336,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1006518741238011491",
+      "file": "textures/11.webp",
+      "name": "img_emoticon_theme",
+      "width": 451,
+      "height": 110,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1184785999959822156",
+      "file": "textures/12.webp",
+      "name": "img_soccer_bg_dec",
+      "width": 456,
+      "height": 110,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1416228114690340154",
+      "file": "textures/13.webp",
+      "name": "act3vmulti_billboard_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1462494796887781449",
+      "file": "textures/14.webp",
+      "name": "img_fortress_stripe_dec",
+      "width": 138,
+      "height": 138,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2033843265152553812",
+      "file": "textures/15.webp",
+      "name": "season_stage_detail",
+      "width": 246,
+      "height": 95,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2447540905912515073",
+      "file": "textures/16.webp",
+      "name": "img_normal_bg_dec",
+      "width": 804,
+      "height": 208,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2520178477083427604",
+      "file": "textures/17.webp",
+      "name": "img_season_logo_bottom",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2712618567833208405",
+      "file": "textures/18.webp",
+      "name": "logo_season_1",
+      "width": 465,
+      "height": 238,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3104848231895725220",
+      "file": "textures/19.webp",
+      "name": "act1multi_entry_small",
+      "width": 468,
+      "height": 124,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3586280783201505617",
+      "file": "textures/20.webp",
+      "name": "img_icon",
+      "width": 56,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3997798989894277061",
+      "file": "textures/21.webp",
+      "name": "multiv3_milestone_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4412396560272172167",
+      "file": "textures/22.webp",
+      "name": "photoBg_season1_track",
+      "width": 596,
+      "height": 336,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5774793252102262505",
+      "file": "textures/23.webp",
+      "name": "act1multi_entry_large",
+      "width": 468,
+      "height": 232,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5880025488289761308",
+      "file": "textures/24.webp",
+      "name": "photoBg_season1_postcardA",
+      "width": 596,
+      "height": 336,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5942311180490193556",
+      "file": "textures/25.webp",
+      "name": "img_char_skin",
+      "width": 917,
+      "height": 678,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7717485989609226203",
+      "file": "textures/26.webp",
+      "name": "multiv3_milestone_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8912020811396594370",
+      "file": "textures/27.webp",
+      "name": "cover_bg_2",
+      "width": 800,
+      "height": 460,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8935559622533567689",
+      "file": "textures/28.webp",
+      "name": "img_brand_epoque",
+      "width": 265,
+      "height": 124,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 6,
+    "AnimationClip": 6,
+    "AssetBundle": 1,
+    "CanvasGroup": 58,
+    "CanvasRenderer": 518,
+    "GameObject": 612,
+    "Material": 7,
+    "MonoBehaviour": 683,
+    "RectTransform": 610,
+    "Shader": 1,
+    "Sprite": 25,
+    "Texture2D": 29,
+    "Transform": 2
+  },
+  "externalFiles": {
+    "CAB-9b436d143b492375694e388dd7840dc6": [
+      "archive:/CAB-658d74aab777086fc32b93f385be999a/CAB-658d74aab777086fc32b93f385be999a",
+      "archive:/CAB-1b70e77fd118dea4a32415ac87839ac6/CAB-1b70e77fd118dea4a32415ac87839ac6",
+      "archive:/CAB-4069f2380ca9d60b5fb743b320c66956/CAB-4069f2380ca9d60b5fb743b320c66956"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 271875,
+      "sha256": "69b287805f22e4b3252b0fcba92984099c9816d1edfbda768029ba291c977e41"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 1657296,
+      "sha256": "3598a049dc984a02c22b1afa7c38fbe99830a578d69f561d1c111c8429877b4c"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 463907,
+      "sha256": "fdad1e3d92f190d71e87024072a2f1b8cf5427fd5371f1127b976c8531ec78db"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 3170,
+      "sha256": "7fa83dcf859a8433ad77c2bc3cceb5096429c55cb3f983d099ddc0b825b32890"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 9314,
+      "sha256": "b456369bd74213418c56cb3dccca53837fc09dc418c26c92f7f8bd615ab9fc4b"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 73978,
+      "sha256": "808a164e512320157a84648475d3b0c81933b68adcf7454f0739069ad4e91466"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 21474,
+      "sha256": "20f97a90bbc1538fd026911853406c78e1dead59145a458268dd656f670f04d6"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 10206,
+      "sha256": "fca452a3795a9f9f330b5b6db5260337e978f6a1a79c800bf53f498707928219"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 95512,
+      "sha256": "a0b5d24f886448a573c569675fba6cdfffc1690fba9ac37d052d0c53d52e4213"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 288,
+      "sha256": "3e6b11de35b32fd67b9e1dba59be01a727dba3a794189a0ec9718613442f91f8"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 2942,
+      "sha256": "6c05a02b646d110b468ccf5f2d2f0a0be54ba9c74fdbc4314694b7fb420e8a7f"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 22988,
+      "sha256": "3abd14346b41249b94d4fe3ad2ae88d2598fd1f87fec17377fbdfa9a258f8647"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 6684,
+      "sha256": "2d15886c1e80e866629fb4a207c5ded38fbd9c51b49ea922d0681ed90abcc934"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 18622,
+      "sha256": "bd7ca11bd19ac88e5e3d1b0d34b06e48744f246be128e00155e42f57fde8b2b9"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 30124,
+      "sha256": "9afba7c0041b2155c00ac5b4d229ff22ce203687a4fb0c8aff1c840627cf0033"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 8816,
+      "sha256": "77dd37f4aa5135415548bc2859e96768cb1981c25abba7e392f58016dfd8d0bf"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 838,
+      "sha256": "a2aba6335a2d761ccde7c8695718ce9e45974b38f9f4c16f1d7a306b0379284f"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 29856,
+      "sha256": "77980864536c278b53eba4fd1431249e406d086e3684a5b8888da38153b30845"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 77074,
+      "sha256": "33eb6776a2c2a7f2525f719cde13c1fcc769e5dfd3ec4be809c18c0922ab89b9"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 55480,
+      "sha256": "b65ee68c4a854c651437b1f13382c0cae05b58f2c6771ab9c5c224cb45376002"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 32616,
+      "sha256": "2abd6e9b83cd5d4ae72d534f27e775b35871e28f3de9fef872bf281220bf858f"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 496598,
+      "sha256": "252c208a2f47d4655e8ad325007c73dde677d7285f3fb358d654ef19c89faf74"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 20590,
+      "sha256": "14b2d1368a183316ad50d9ce6972746985d8cc5bf6ebc74b827f89cb8cfd561c"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 148722,
+      "sha256": "7b75122f0658876caa585d18350a24977035aec4469cefa39e266a8711bcbc49"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 7360,
+      "sha256": "8d1123081ec880f8422f6e8085e021b2a2b11b589143ff032ddf78100a47f228"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 8540,
+      "sha256": "7f706081980fcc46ce1bc3373e592c0a76a2bebf06559e46a8d9cce6259f507f"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 219492,
+      "sha256": "c5ca67dc1e718907acf5b952493d71a7120294a65c6aa2bd4b1afaef389b3ad2"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 40510,
+      "sha256": "5b0d93c36f0d2f69a3db9c3b9e86370fe64afb2c31933c10f699c13f67250178"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 75944,
+      "sha256": "e8edb01de723bc9f26555500b333c96db4852aebc84caf96ea139bdd9d1114c7"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 142378,
+      "sha256": "7b50c0905562a031c1f5c364ae96f52c9c66ed0347d9c0d028ebb11966d6324b"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 3714,
+      "sha256": "1a4d35cf16707766f506b781d34749a63ecc41f19cc6dcd77f0eee11de3bf7eb"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 88706,
+      "sha256": "d681cd204501b324e9a41d8569fea0b935f4374e4542ccefd42410032814565b"
+    }
+  ]
+}

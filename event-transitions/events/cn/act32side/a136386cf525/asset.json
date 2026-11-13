@@ -1,0 +1,783 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act32side",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "24-03-29-14-33-44-5002d2",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/aa84183556333c22861bdfd0430d507a98ec951d/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act32side.ab",
+    "bundleMd5": "a136386cf52527b1414c53ecb6eb0f3c",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/24-03-29-14-33-44-5002d2/activity_%5Buc%5Dact32side.dat",
+    "archiveSha256": "8c8b22d430da929d461c89aa35411dcf4c30284c081e9f4190bb85a1d1e1f2b0",
+    "bundleSha256": "dc0e5a315078b81dacff51ba4df7c43e626aa9947ab1b709a2b9b80016f7eeec",
+    "manifestEntry": {
+      "name": "activity/[uc]act32side.ab",
+      "hash": "dd13ce267f6f78687cbe159fd5992c8c",
+      "md5": "a136386cf52527b1414c53ecb6eb0f3c",
+      "totalSize": 5128451,
+      "abSize": 5392616,
+      "thash": "6MinfdB8dqhM",
+      "pid": "lpack_misc",
+      "cid": 12
+    }
+  },
+  "animations": [
+    {
+      "id": "-7699757154469428793",
+      "name": "act32side_entry_anim",
+      "candidate": true,
+      "durationSeconds": 2.4833333492279053,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-7630458259736693450",
+      "name": "act32side_tactical_entry",
+      "candidate": true,
+      "durationSeconds": 1.1666666269302368,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5029956859163496995",
+      "name": "act32side_trackpoint_loop",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-315753236870805554",
+      "name": "act32side_tactical_trap_select",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "139740252352462150",
+      "name": "zone1_alpha",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "zone1_alpha",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 2.0,
+          "functionName": "_OnAnimEnd",
+          "data": "zone1_alpha",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "994663055883748053",
+      "name": "act32side_tactical_trap_equip",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-9119720419069640819",
+      "file": "textures/0.webp",
+      "name": "SpriteAtlasTexture-ACT32SIDE_ZONE2-2048x1024-fmt55",
+      "width": 2048,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8108417316348865671",
+      "file": "textures/1.webp",
+      "name": "act32side_entry_stage_atlas#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7803104286253643727",
+      "file": "textures/2.webp",
+      "name": "Background",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7643412754852641286",
+      "file": "textures/3.webp",
+      "name": "SpriteAtlasTexture-UI_ACT32SIDE_STAGE-1024x1024-fmt55",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7630447139307179723",
+      "file": "textures/4.webp",
+      "name": "trap_edd_icon",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7584220718611063884",
+      "file": "textures/5.webp",
+      "name": "mask_18",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7213122252578815497",
+      "file": "textures/6.webp",
+      "name": "ray_94",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4723724740292820563",
+      "file": "textures/7.webp",
+      "name": "flow_71_3",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4418389020656654923",
+      "file": "textures/8.webp",
+      "name": "img_glass_disturb",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3760830275178833228",
+      "file": "textures/9.webp",
+      "name": "smoke_38",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3514001136036683029",
+      "file": "textures/10.webp",
+      "name": "act32side_trap#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3477101375198081237",
+      "file": "textures/11.webp",
+      "name": "img_scroll_bar",
+      "width": 5,
+      "height": 239,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3417255711809010926",
+      "file": "textures/12.webp",
+      "name": "flow_104",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3084903633283411522",
+      "file": "textures/13.webp",
+      "name": "smoke_38",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3034451556966056696",
+      "file": "textures/14.webp",
+      "name": "trap_ads",
+      "width": 180,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2304636892962872408",
+      "file": "textures/15.webp",
+      "name": "BG",
+      "width": 1560,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2196341765600456792",
+      "file": "textures/16.webp",
+      "name": "act32side_entry_stage_atlas#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2174663228972589895",
+      "file": "textures/17.webp",
+      "name": "bg",
+      "width": 1559,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2102751509365640484",
+      "file": "textures/18.webp",
+      "name": "trap_ads_icon",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1921856615950721517",
+      "file": "textures/19.webp",
+      "name": "Default-Particle",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1894064722944085950",
+      "file": "textures/20.webp",
+      "name": "trap_edd",
+      "width": 180,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1894047714241059715",
+      "file": "textures/21.webp",
+      "name": "SpriteAtlasTexture-ACT32SIDE_ZONE1_1-1024x1024-fmt55",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1588240865297652710",
+      "file": "textures/22.webp",
+      "name": "trap_edd_small",
+      "width": 29,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1492548631720547492",
+      "file": "textures/23.webp",
+      "name": "act32side_map_deco#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1174846835918738592",
+      "file": "textures/24.webp",
+      "name": "SpriteAtlasTexture-ACT32SIDE_ZONE1_2-1024x1024-fmt55",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-925249232713641889",
+      "file": "textures/25.webp",
+      "name": "act32side_entry_stage_atlas#1",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-880093740455527434",
+      "file": "textures/26.webp",
+      "name": "SpriteAtlasTexture-ACT32SIDE_UI_TRAP_IMG-256x256-fmt34_alpha",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-798509406941779382",
+      "file": "textures/27.webp",
+      "name": "act32side_mission#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-338544797573586838",
+      "file": "textures/28.webp",
+      "name": "trap_rnfcar_small",
+      "width": 29,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-303895229518469664",
+      "file": "textures/29.webp",
+      "name": "SpriteAtlasTexture-ACT32SIDE_UI_TRAP_IMG-256x256-fmt34",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-53177151187528457",
+      "file": "textures/30.webp",
+      "name": "trap_rnfcar",
+      "width": 180,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "694893740548160907",
+      "file": "textures/31.webp",
+      "name": "act32side_tactical_atlas#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1012255782750390521",
+      "file": "textures/32.webp",
+      "name": "act32side_entry_stage_atlas#1a",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1328200976794496912",
+      "file": "textures/33.webp",
+      "name": "star_209",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1341325096437151960",
+      "file": "textures/34.webp",
+      "name": "BG",
+      "width": 1559,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1964314410048351806",
+      "file": "textures/35.webp",
+      "name": "circle",
+      "width": 62,
+      "height": 61,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2212092484851618986",
+      "file": "textures/36.webp",
+      "name": "star_176",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3890920561947314032",
+      "file": "textures/37.webp",
+      "name": "SpriteAtlasTexture-UI_ACT32SIDE_ENTRY-1024x1024-fmt55",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4964127029569674197",
+      "file": "textures/38.webp",
+      "name": "act32side_trap#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5160572497554132795",
+      "file": "textures/39.webp",
+      "name": "img_entry_bg_mask",
+      "width": 256,
+      "height": 8,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5535927832693440229",
+      "file": "textures/40.webp",
+      "name": "act32side_map_deco#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6394144997414433243",
+      "file": "textures/41.webp",
+      "name": "trap_ads_small",
+      "width": 29,
+      "height": 63,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7796353231999231675",
+      "file": "textures/42.webp",
+      "name": "flow_34",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8060648453638586502",
+      "file": "textures/43.webp",
+      "name": "act32side_mission#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8191511180642367766",
+      "file": "textures/44.webp",
+      "name": "SpriteAtlasTexture-UI_ACT32SIDE_STAGERES-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8200416027313383638",
+      "file": "textures/45.webp",
+      "name": "SpriteAtlasTexture-UI_ACT32SIDE_SHOP_HUB-1024x512-fmt55",
+      "width": 1024,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8348133920612139194",
+      "file": "textures/46.webp",
+      "name": "trap_rnfcar_icon",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9053368193256067120",
+      "file": "textures/47.webp",
+      "name": "act32side_tactical_atlas#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 7,
+    "AnimationClip": 6,
+    "Animator": 1,
+    "AnimatorController": 1,
+    "AssetBundle": 1,
+    "Canvas": 9,
+    "CanvasGroup": 21,
+    "CanvasRenderer": 218,
+    "GameObject": 360,
+    "Material": 13,
+    "Mesh": 1,
+    "MeshFilter": 4,
+    "MeshRenderer": 4,
+    "MonoBehaviour": 414,
+    "MonoScript": 65,
+    "ParticleSystem": 7,
+    "ParticleSystemRenderer": 7,
+    "RectTransform": 346,
+    "Sprite": 41,
+    "Texture2D": 48,
+    "Transform": 14
+  },
+  "externalFiles": {
+    "CAB-da065194edb646a0fb1b355b65c75090": [
+      "archive:/cab-47c9a9ff6538bcd3e786ee841e2ec484/cab-47c9a9ff6538bcd3e786ee841e2ec484",
+      "archive:/cab-058c3b5c9d3d99c9d505aac0ea2c8198/cab-058c3b5c9d3d99c9d505aac0ea2c8198",
+      "archive:/cab-ac006900471089b3ed4825840754e3be/cab-ac006900471089b3ed4825840754e3be",
+      "archive:/cab-6ac369b085ebcca0735e4da7f7da64f9/cab-6ac369b085ebcca0735e4da7f7da64f9",
+      "archive:/cab-d9996c711e58c3180cd24bf7f14591f5/cab-d9996c711e58c3180cd24bf7f14591f5",
+      "archive:/cab-96dce2c762ef451814115a52f557f5af/cab-96dce2c762ef451814115a52f557f5af",
+      "resources/unity_builtin_extra",
+      "archive:/cab-580061e156ea5e60815bbe6b768da65c/cab-580061e156ea5e60815bbe6b768da65c",
+      "archive:/cab-fcf7e3e901ae4e97c37e3cafbf8c6189/cab-fcf7e3e901ae4e97c37e3cafbf8c6189"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 10022,
+      "sha256": "b874ad1f69997f9ed04625f71662ba12f4459a1a4fbab8d3478b1223360a97aa"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 5128451,
+      "sha256": "8c8b22d430da929d461c89aa35411dcf4c30284c081e9f4190bb85a1d1e1f2b0"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 213401,
+      "sha256": "2ad854e6947b2cd479fc367fce89b1fd21d736be75b35a7d1f629eae7a3db994"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 798192,
+      "sha256": "2f78dd24d5133b498c44f8c6c5f1c548bc99c9ad0338dac213560db2d4dd6941"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 80112,
+      "sha256": "75f0fac89b6e65d0f359354d9caa234c1aa389081a5136533dc784f2bf5b8303"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 10342,
+      "sha256": "178bdf82bac1f69c328ff8ac56daf061073e5ac0ceffd2a83562801dd09ff234"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 58,
+      "sha256": "a00ec3a1fa84597ff9c82349e0718ba642620a31d3e729bc2da6d8c0f9bbffd0"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 19450,
+      "sha256": "801363b279539d5212e4e6f29e597f8e97249b42c2c52f2f556c32b74d5b8b9e"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 39772,
+      "sha256": "77f537330ead887da64d242eb4a0d8c88450a461c07b42f14cbf7d4d7304cda5"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 3442,
+      "sha256": "59508d3d367d8376c6d7360263b5e84d342b8697ab35ef21d49a3d6f043c7c02"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 1075706,
+      "sha256": "6fa5d2d3e93497a08de1b3f38b9b3ac4dde0f9d75ac274f46a4051e1d847dd80"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 93060,
+      "sha256": "fa8166a6ce65cde0dec82473b697c240c8433858606894e3fae8cf50b3b802a4"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 1745174,
+      "sha256": "3e77f904988f8a2dafc2c482b81cda963657a07b61464d961913009bceb7cfb9"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 10322,
+      "sha256": "9971090427a3434808419c0f89e3373476bd1a326615deb2ae2eb42561573b3b"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 2968,
+      "sha256": "22af5cfb3e4f1372f8fdda252ea3064f9143e177564bf84d1d3ee327798c96bd"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 252,
+      "sha256": "4c2f7b5ceb3efa2c7e2b658594b7b914b37e423d311c000dbce2809fa0836be3"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 2496,
+      "sha256": "ad1957dc6d48756b1029d36451ddefca203faaccd85389d0b651c678e9648be4"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 764826,
+      "sha256": "549cbe414e16df3a2967ecd768936558eb1d8fa9c074809bc17458ec9741478c"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 638,
+      "sha256": "778b51cfe825c9ceb744482218bd46e2d214ac4c21973f2e6b6850fcebe498f2"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 86080,
+      "sha256": "0dfb978e91e80147da7661520cbdf9b074c7c4f37c1247bbe3629e012d310f24"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 663834,
+      "sha256": "9ad6b45db7bf328fb5bf80f0bbd47d4605b40cfb0e72b852b7949fbd9408d55e"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 5810,
+      "sha256": "81c897c2565042ef6d792c72027934ff4898d8964752e68a446a97ab3cf7ae68"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 3394,
+      "sha256": "72bf1e976d0bf3935b099d7a8a4fe4f4947fea1281c73d749697d4ecce3fc230"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 14032,
+      "sha256": "e4bcc060c35637214fcd8fd5202acc0c877719efc3497ecb5df7bac22a37955d"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 306,
+      "sha256": "d765a9cddc28961a1e1f43da1166d72d940ef7a91d00ed15d553355ce9df58a6"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 5116,
+      "sha256": "2d61890258e3db4ddfee25c0af62f6ec662288b9bd3b96e09954a133b6a6c892"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 239562,
+      "sha256": "524daa8d75040d5ffbe86aa15f1b2cb35752feebb94f133a6cb349b54373fd34"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 4224,
+      "sha256": "8fa2d21e2db0c68191223b73e34fcdc3cced94f125ca2bd561f6323b2b0b4ff3"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 5384,
+      "sha256": "4494d68cec3a95c183299ce034090ff6e8f0cf632c99ec84004d9fac7f102808"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 1500,
+      "sha256": "69d2bb30a9af123e3c6e07129dfa7cf539787a0c1264ebc859d3db68bc06063b"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 15898,
+      "sha256": "b88306d99dcbe99a142c82dc083e31faab69a3186c54d7348b57d49c15a6f66a"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 1189196,
+      "sha256": "ab4fa1e8bd348ed616e752eb91045d2e59b2c199f81efa2adff2f3249a4e1b81"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 1132,
+      "sha256": "08c0e4f059022ff31c9f06e0e0897e34f1b66f5c3d80f78a4a317fe6b5caf53f"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 3560,
+      "sha256": "110004e434de288769b798bd866eef0a03400d7d14c5a9c7898d428bc1628ab8"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 553982,
+      "sha256": "da947f44e26ef8e26cba1baac4043d4e18e8044044b6b8b16c801744e4f8f337"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 20328,
+      "sha256": "adabf5e11ad36b0e60cfddc59be1feb3a93d9f8f02ed470e9b249f2c8a90d4e6"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 84,
+      "sha256": "ecc2d57fd7f9bc7457b571551b552a04d4d2a3cd2ea95b7f29906cd1a9ce7d8f"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 11284,
+      "sha256": "7091815852a6aa9f4896adecdd48dc9ebdb8f045288a02f9b726deaec1d83e1f"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 31892,
+      "sha256": "fc6b0dfb3b4c5f2abe9966183c84cd6011f6cda65caaa0d3e13c4f0719625d97"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 420,
+      "sha256": "a6e266e5b9fc4e12db66ede6171b18060c0030000eec3aaba00874906171a15c"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 7822,
+      "sha256": "c7cd85268f2a26f1927d93bd53ec39ed490a8b52cc3ca06a98a9f5b5bc95a46c"
+    },
+    {
+      "file": "textures/43.webp",
+      "bytes": 16678,
+      "sha256": "3ad33927bb4a085b85c38913a742f8d1d37ae7c6940d3d1b502dd3c373ba05cc"
+    },
+    {
+      "file": "textures/44.webp",
+      "bytes": 210112,
+      "sha256": "a44798222c94e7fd969ce776f1ed9299a1de731a44e1b8ccb8b27c56af54ebaa"
+    },
+    {
+      "file": "textures/45.webp",
+      "bytes": 240938,
+      "sha256": "3c0d269938e6844038cc50a207642c7cddd0c227d2d1d4278e34c2b174c9ad6a"
+    },
+    {
+      "file": "textures/46.webp",
+      "bytes": 13946,
+      "sha256": "900ef79bf24c4d48977ebb6f75b68071e72f03f869a808043a62c2f1ae0c63ea"
+    },
+    {
+      "file": "textures/47.webp",
+      "bytes": 9842,
+      "sha256": "6361949ad9006094ac8fb87bceaf1f82433eddb11c97d7ae6575f86bbb1d3b99"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 4332,
+      "sha256": "78229eb1120a99a6d5b6c6fdca8ed56adb33de2582051e6639926f69646239d7"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 49180,
+      "sha256": "169021da2ffe4925ad5422cb1e27d6e7352808c0b40d4f381f660273ed4f2a23"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 13228,
+      "sha256": "1018aae75c5d7be886169026647409013e77f8a921c4baf5cf90f2b619aa2074"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 3716,
+      "sha256": "996a31aac6311df8b50f6bd952f610086671e7b7b4d55d9f580cef1cc549eb1c"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 39772,
+      "sha256": "77f537330ead887da64d242eb4a0d8c88450a461c07b42f14cbf7d4d7304cda5"
+    }
+  ]
+}

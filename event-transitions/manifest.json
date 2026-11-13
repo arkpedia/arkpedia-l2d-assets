@@ -1,0 +1,1747 @@
+{
+  "schemaVersion": 1,
+  "browserPlayable": false,
+  "assets": [
+    {
+      "server": "cn",
+      "activityId": "act16mini",
+      "name": "去咧嘴谷",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/cn/act16mini/3f0fde18f2b2/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act16mini_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act17mini",
+      "name": "熔炉“还魂”记",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/cn/act17mini/24399bf48e52/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act17mini_activity_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act18mini",
+      "name": "我们明日见",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/cn/act18mini/f295dcb242db/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act18mini_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act19mini",
+      "name": "镜中集",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/cn/act19mini/3c88dbe7d0e1/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act19mini_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1arcade",
+      "name": "视相博物馆",
+      "activityType": "ARCADE",
+      "isReplicate": false,
+      "asset": "events/cn/act1arcade/1ccd82875036/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "entry_view_entry_anim",
+        "act1arcade_battle_wave_start",
+        "unlockpanel_in",
+        "entry_in",
+        "act1arcade_stamp_in",
+        "act1arcade_gamestart_in",
+        "act1arcade_game_choice_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1arkhub",
+      "name": "奇象巡展",
+      "activityType": "ARK_HUB",
+      "isReplicate": false,
+      "asset": "events/cn/act1arkhub/b45b778ee490/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "panel_actarkhub_entry_anim",
+        "panel_actarkhub_right_panel_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1autochess",
+      "name": "卫戍协议:盟约",
+      "activityType": "DEFAULT",
+      "isReplicate": false,
+      "asset": "events/cn/act1autochess/cf8b2f5188e4/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act1autochess_entry_show"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1dp",
+      "name": "逐影集趣",
+      "activityType": "ACT_DP",
+      "isReplicate": false,
+      "asset": "events/cn/act1dp/e131e7f52289/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "vasebreaker_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1football",
+      "name": "阵地足球锦标",
+      "activityType": "ACT_FOOTBALL",
+      "isReplicate": false,
+      "asset": "events/cn/act1football/782f2b808718/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act1football_entry_anim",
+        "act1football_zone_map_fade_in_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1mainss",
+      "name": "慈悲灯塔",
+      "activityType": "YEAR_5_GENERAL",
+      "isReplicate": false,
+      "asset": "events/cn/act1mainss/bfefa9abcbc7/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "mainline14_act_entry_stamina_highlight",
+        "mainline14_act_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1multi",
+      "name": "促融共竞#1",
+      "activityType": "MULTIPLAY_V3",
+      "isReplicate": false,
+      "asset": "events/cn/act1multi/37662d37ef95/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act3vmulti_train_billboard_enter_fortress",
+        "act3vmulti_train_billboard_enter_normal",
+        "act3vmulti_train_billboard_enter_soccer"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1r6sre",
+      "name": "源石尘行动·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act1r6sre/94fece85b8ae/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vautochess",
+      "name": "卫戍协议",
+      "activityType": "AUTOCHESS_VERIFY1",
+      "isReplicate": false,
+      "asset": "events/cn/act1vautochess/9256ddbbb12d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "start_game_tv_select",
+        "auto_chess_mode_choice_back_enter_init",
+        "start_game_tv_unfold",
+        "entry_main_front_view_enter",
+        "auto_chess_mode_choice_back_enter_guide",
+        "auto_chess_mode_choice_front_enter",
+        "auto_chess_mode_choice_back_enter_standard",
+        "start_game_bottom_in",
+        "start_game_btnshow",
+        "team_info_tv_in_enemy",
+        "team_info_tv_in_char",
+        "start_game_tv_in",
+        "entry_main_back_view_enter",
+        "start_game_tv_fold",
+        "team_info_bottom_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vecb",
+      "name": "矢量突破",
+      "activityType": "VEC_BREAK",
+      "isReplicate": false,
+      "asset": "events/cn/act1vecb/e944e67b4d22/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act1vecb_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vhalfidle",
+      "name": "次生预案",
+      "activityType": "HALFIDLE_VERIFY1",
+      "isReplicate": false,
+      "asset": "events/cn/act1vhalfidle/f39235298123/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "recruit_entry_state_show_quick",
+        "hanging_income_stage_in",
+        "recruit_entry_state_show_special",
+        "recruit_entry_state_show_random",
+        "recruit_entry_state_show_select",
+        "tip_in",
+        "entry",
+        "hanging_income_daily_in",
+        "recruit_complete_entry",
+        "recruit_entry",
+        "recruit_front_ui_entry",
+        "hanging_income_battlefinish_in",
+        "equip_item_special_in",
+        "tech_tree_detail_in",
+        "tech_tree_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act20mini",
+      "name": "十字路口",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/cn/act20mini/d1b4fd73f439/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act20mini_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act21mini",
+      "name": "丛林症结",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/cn/act21mini/18d6d4b0a14c/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act21mini_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act21sre",
+      "name": "叙拉古人·复刻",
+      "activityType": "TYPE_ACT21SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act21sre/f94cfec540d1/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act21sre_activity_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act22sre",
+      "name": "照我以火·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act22sre/d5c3107eb77b/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "enter_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act23sre",
+      "name": "登临意·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act23sre/d1fce17c7b51/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "enter_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act24sre",
+      "name": "落叶逐火·复刻",
+      "activityType": "TYPE_ACT24SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act24sre/125ea0347c1e/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act24side_eat_entry",
+        "act24side_melding_entry",
+        "act24side_mission_detail_entry",
+        "act24side_quest_entry",
+        "act24side_mission_entry",
+        "act24side_battle_trap_entry",
+        "act24side_activity_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act25sre",
+      "name": "孤星·复刻",
+      "activityType": "TYPE_ACT25SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act25sre/6898bb67cef1/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act25sre_entry_01",
+        "act25sre_entry_02"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act26sre",
+      "name": "空想花庭·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act26sre/e919af1658ed/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "enter_anim",
+        "act26sre_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act27sre",
+      "name": "火山旅梦·复刻",
+      "activityType": "TYPE_ACT27SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act27sre/727c25642cfa/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act27sre_entry_grocery_night_open_intro",
+        "act27sre_entry_grocery_day_open_intro",
+        "act27sre_entry_anim",
+        "act27side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act28sre",
+      "name": "不义之财 复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act28sre/ddf89c5e0fe0/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act28sre_enter_intro"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act29side",
+      "name": "崔林特尔梅之金",
+      "activityType": "TYPE_ACT29SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act29side/7b0306c2ebb3/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act29side_stage_entry_intro"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act29sre",
+      "name": "崔林特尔梅之金·复刻",
+      "activityType": "TYPE_ACT29SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act29sre/92480fb06a9d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act29sre_stage_entry_intro"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2autochess",
+      "name": "卫戍协议:盟约",
+      "activityType": "DEFAULT",
+      "isReplicate": false,
+      "asset": "events/cn/act2autochess/3d5bce8a59f2/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act2autochess_entry_show"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2mainss",
+      "name": "离解复合",
+      "activityType": "TYPE_MAINSS",
+      "isReplicate": false,
+      "asset": "events/cn/act2mainss/76154683fea4/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act2mainss_entry_3",
+        "act2mainss_entry_2",
+        "act2mainss_entry_1",
+        "act2mainss_entry_2_bg_change",
+        "act2mainss_entry_3_bg_change"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2multi",
+      "name": "促融共竞#2",
+      "activityType": "MULTIPLAY_V3",
+      "isReplicate": false,
+      "asset": "events/cn/act2multi/f59bdd59bc15/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act2multi_train_billboard_enter_raft",
+        "act2multi_train_billboard_enter_fortress",
+        "act2multi_train_billboard_enter_normal"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2vmulti",
+      "name": "罗德岛促融共竞",
+      "activityType": "MULTIPLAY_VERIFY2",
+      "isReplicate": false,
+      "asset": "events/cn/act2vmulti/fcb1eb8faf95/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act2vmulti_battle_finish_first_view_entry_fortress",
+        "act2vmulti_battle_finish_first_view_entry_normal_progress_text2",
+        "act2vmulti_room_entrance_partner_confirm_btn",
+        "act2vmulti_stage_detail_move_right_entry",
+        "act2vmulti_room_stage_choose_entry",
+        "act2vmulti_battle_finish_first_view_entry_com_quit",
+        "act2vmulti_room_lost_connection_entry",
+        "act2vmulti_entry_main_entry",
+        "act2vmulti_battle_settle_part_2_view_entry",
+        "act2vmulti_battle_finish_first_view_entry_normal_progress_text1",
+        "act2vmulti_battle_football_goal_entry",
+        "act2vmulti_entry_3d_adver_fast",
+        "act2vmulti_entry_3d_adver_invert_fast",
+        "act2vmulti_battle_finish_first_view_entry_quit_self",
+        "act2vmulti_entry_main_to_match",
+        "act2vmulti_in_room_stage_detail_switch_tab",
+        "act2vmulti_room_page_left_botton_entry",
+        "act2vmulti_room_entrance_comfirm_btn",
+        "act2vmulti_battle_finish_first_view_entry_normal_progress_text",
+        "act2vmulti_room_stage_choose_pos_entry",
+        "act2vmulti_room_entrance_show_entry",
+        "act2vmulti_entry_3d_adver_slow",
+        "anim_act2vmulti_battle_wave_start",
+        "act2vmulti_stage_detail_move_left_entry",
+        "act2vmulti_entry_main_to_room",
+        "act2vmulti_room_page_top_view_entry",
+        "act2vmulti_room_char_assign_entry",
+        "act2vmulti_room_page_banner_entry",
+        "act2vmulti_room_stage_choose_left_entry",
+        "act2vmulti_battle_finish_first_view_entry_normal",
+        "act2vmulti_battle_finish_first_view_entry_succer",
+        "act2vmulti_room_squad_sel_entry",
+        "act2vmulti_room_sys_alloc_entry",
+        "anim_act2vmulti_start",
+        "act2vmulti_battle_finish_first_view_entry_com",
+        "act2vmulti_entry_3d_adver_invert_slow",
+        "act2vmulti_battle_finish_first_view_entry_quit_other",
+        "act2vmulti_room_squad_entry",
+        "act2vmulti_battle_finish_first_view_entry_normal_reward_tween"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act30side",
+      "name": "银心湖列车",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act30side/71be48dc4eea/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act30side_entry_trackpoint",
+        "act30side_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act30sre",
+      "name": "银心湖列车·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act30sre/5b3ed699f027/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act30sre_entry_trackpoint",
+        "act30side_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act31side",
+      "name": "怀黍离",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act31side/58b8f590831d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act31side_stage_entry",
+        "act31side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act31sre",
+      "name": "怀黍离·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act31sre/4f30a0cc7894/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act31sre_stage_entry",
+        "act31sre_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act32side",
+      "name": "水晶箭行动",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act32side/a136386cf525/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act32side_entry_anim",
+        "act32side_tactical_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act33side",
+      "name": "巴别塔",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act33side/bd1241191e6e/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act33side_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act33sre",
+      "name": "巴别塔·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act33sre/a4fddc84f109/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act33sre_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act34side",
+      "name": "生路",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act34side/ec122068111b/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "panel_act34side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act34sre",
+      "name": "生路·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act34sre/bd8c755237bb/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "panel_act34sre_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act35side",
+      "name": "太阳甩在身后",
+      "activityType": "TYPE_ACT35SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act35side/6a7f4f5170c6/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act35side_entry_carving_new",
+        "act35side_stage_entry",
+        "act35side_entry_zone_pyramid_cat_rotation"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act35sre",
+      "name": "太阳甩在身后·复刻",
+      "activityType": "TYPE_ACT35SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act35sre/33225b61f3f1/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act35sre_entry_carving_new",
+        "act35sre_stage_entry",
+        "act35sre_entry_zone_pyramid_cat_rotation"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act36side",
+      "name": "泰拉饭",
+      "activityType": "TYPE_ACT36SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act36side/de9851e233f8/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act36side_stage_entry",
+        "act36side_food_handbook_panel_entry",
+        "act36side_focus_in",
+        "act36side_food_handbook_right_entry",
+        "act36side_card_focus_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act37side",
+      "name": "追迹日落以西",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act37side/cee7049f9ebb/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act37side_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act37sre",
+      "name": "追迹日落以西·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act37sre/ceec47461331/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act37sre_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act38side",
+      "name": "揭幕者们",
+      "activityType": "TYPE_ACT38SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act38side/735627373ad3/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act38side_fireworks_battle_ui_in",
+        "act38side_entry_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act38sre",
+      "name": "揭幕者们·复刻",
+      "activityType": "TYPE_ACT38SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act38sre/c4a8c0dce298/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act38side_entry_stage_entry",
+        "act38side_fireworks_battle_ui_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act39side",
+      "name": "出苍白海",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act39side/585249d333db/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act39side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act39sre",
+      "name": "出苍白海·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act39sre/2f067dda843d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act39side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act3autochess",
+      "name": "卫戍协议:规程",
+      "activityType": "AUTOCHESS",
+      "isReplicate": false,
+      "asset": "events/cn/act3autochess/e914a4ee8c7e/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "autochess_shop_title_entry",
+        "autochess_entry_season_on",
+        "autochess_entry_season_off"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act3mainss",
+      "name": "反常光谱",
+      "activityType": "TYPE_MAINSS",
+      "isReplicate": false,
+      "asset": "events/cn/act3mainss/badc03e1e8ab/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act3mainss_entry_3",
+        "act3mainss_entry_3_bg_entry",
+        "act3mainss_entry_1",
+        "act3mainss_entry_2"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act40side",
+      "name": "相见欢",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act40side/08d1c177e0c3/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "panel_act40side_entry_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act40sre",
+      "name": "相见欢·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act40sre/f56b6151f4dc/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "panel_act40side_entry_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act41side",
+      "name": "挽歌燃烧殆尽",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act41side/a81054859b60/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act41side_stage_entry_anim",
+        "act41side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act41sre",
+      "name": "挽歌燃烧殆尽·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act41sre/8063cbfa5d1b/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act41side_stage_entry_anim",
+        "act41side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act42d0",
+      "name": "纷争演绎",
+      "activityType": "TYPE_ACT42D0",
+      "isReplicate": false,
+      "asset": "events/cn/act42d0/d33cc21d44ff/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act42d0_stage_entry",
+        "act42d0_zone_map_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act42side",
+      "name": "众生行记",
+      "activityType": "TYPE_ACT42SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act42side/2d861858844d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act42side_entry_stage_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act42sre",
+      "name": "众生行记·复刻",
+      "activityType": "TYPE_ACT42SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act42sre/43925f5de922/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act42side_entry_stage_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act43side",
+      "name": "红丝绒",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act43side/a46ff7ffb35f/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act43side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act43sre",
+      "name": "红丝绒·复刻",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/cn/act43sre/2e0aacd4fc75/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act43sre_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act44side",
+      "name": "墟",
+      "activityType": "TYPE_ACT44SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act44side/1b3b2a5eb38d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "anim_act44side_entry_01",
+        "anim_act44side_entry_02"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act44sre",
+      "name": "墟·复刻",
+      "activityType": "TYPE_ACT44SIDE",
+      "isReplicate": true,
+      "asset": "events/cn/act44sre/5d586ac8377c/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "anim_act44sre_entry_01",
+        "anim_act44sre_entry_02"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act45side",
+      "name": "无忧梦呓",
+      "activityType": "TYPE_ACT45SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act45side/3de67ef700f0/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "stage_card_ui_entry",
+        "act45side_entry",
+        "right_in",
+        "act45side_live_stage_entry_sleep",
+        "act45side_live_stage_entry_live",
+        "left_in",
+        "stage_card_item_entry",
+        "act45side_stage_transition_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act46side",
+      "name": "雪山降临1101",
+      "activityType": "TYPE_ACT46SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act46side/0ae3278bd456/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "entry_token",
+        "act46side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act47side",
+      "name": "未许之地",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act47side/3e7919746fe5/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act47side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act48side",
+      "name": "雅赛努斯复仇记",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act48side/097f62f3771a/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act48side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act49side",
+      "name": "辞岁行",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act49side/c6e2a2e38f24/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act49side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act4bossrush",
+      "name": "引航者试炼",
+      "activityType": "BOSS_RUSH",
+      "isReplicate": false,
+      "asset": "events/cn/act4bossrush/e8a786c01bcb/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act4mainss",
+      "name": "相变临界",
+      "activityType": "TYPE_MAINSS",
+      "isReplicate": false,
+      "asset": "events/cn/act4mainss/374725856d51/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act4mainss_entry_02",
+        "act4mainss_entry_01",
+        "act4mainss_entry_kv_04",
+        "act4mainss_entry_04",
+        "act4mainss_entry_03"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act50side",
+      "name": "泡影苍霆",
+      "activityType": "TYPE_ACT24SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act50side/2b3fa1948340/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "mh2_mission_entry",
+        "mh2_mission_detail_entry",
+        "act50side_melding_entry",
+        "zone_map_mh2_zone2_in",
+        "wirebugskill_setting_stage_in",
+        "stage_preview_state_in",
+        "act50side_entry",
+        "hunter_note_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act51side",
+      "name": "人们，我们",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act51side/dee124918727/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act51side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act52side",
+      "name": "昨日海",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/cn/act52side/e5358147ec6c/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act52side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act53side",
+      "name": "直到大地变成一颗酸橙",
+      "activityType": "TYPE_ACT53SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act53side/e8a3fa756b86/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act53side_entry_kv1",
+        "act53side_trans_kv2tokv1",
+        "act53side_trans_kv1tokv2",
+        "act53side_entry_kv2_short",
+        "act53side_entry_kv2_long"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act54side",
+      "name": "月行水上",
+      "activityType": "TYPE_ACT54SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act54side/d668e73ff648/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "preview_part_switch_in",
+        "act54side_quest_stage_item_in",
+        "act54side_quest_page_right_in_first",
+        "act54side_quest_stage_item_select_in",
+        "act54side_card_normal_bg_char_entry",
+        "act54side_gallery_entry",
+        "act54side_divination_start_tips_in",
+        "act54side_tarot_achieve_in",
+        "act54side_quest_page_in",
+        "act54side_tarot_gacha_in",
+        "act54side_ divination_info_dialog_in",
+        "act54side_card_special_bg_char_entry",
+        "act54side_entry_anim",
+        "act54side_quest_page_right_in_noinfo"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act55side",
+      "name": "时间啊，向前！",
+      "activityType": "TYPE_ACT55SIDE",
+      "isReplicate": false,
+      "asset": "events/cn/act55side/247e46c2cbd0/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act55side_entry_kv2",
+        "act55side_trans_kv1tokv2",
+        "act55side_entry_kv1",
+        "act55side_trans_kv2tokv1"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act5bossrush",
+      "name": "引航者试炼",
+      "activityType": "BOSS_RUSH",
+      "isReplicate": false,
+      "asset": "events/cn/act5bossrush/f51331f91df6/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act6bossrush",
+      "name": "引航者试炼",
+      "activityType": "BOSS_RUSH",
+      "isReplicate": false,
+      "asset": "events/cn/act6bossrush/dd757dda8c2c/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act6fun",
+      "name": "愚人节活动",
+      "activityType": "APRIL_FOOL",
+      "isReplicate": false,
+      "asset": "events/cn/act6fun/00bfa794eb77/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act6fun_home_entry_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "actarcadev2",
+      "name": "actarcadev2",
+      "activityType": null,
+      "isReplicate": null,
+      "asset": "events/cn/actarcadev2/6531247dc47a/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "arcade_gamestart_in",
+        "arcade_battle_wave_start",
+        "entry_in",
+        "unlockpanel_in",
+        "entry_view_entry_anim",
+        "arcade_stamp_in",
+        "game_choice_entry",
+        "arcade_gamestart_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "multiv3",
+      "name": "multiv3",
+      "activityType": null,
+      "isReplicate": null,
+      "asset": "events/cn/multiv3/0ce7ba9e7c88/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "multi_v3_prepare_squal_check_entry",
+        "tiny_in",
+        "multiv3_prepare_start_countdown_show",
+        "battle_finish_first_view_entry_normal_reward_tween",
+        "multi_v3_prepare_squal_skill_entry",
+        "act3vmulti_entry_main_to_match",
+        "multi_v3_prepare_top_view_entry",
+        "act3vmulti_view_arena_top_normal_in",
+        "battle_finish_first_view_entry_normal_progress_text",
+        "battle_finish_first_view_entry_fortress_final_record_new_effects",
+        "battle_finish_first_view_entry_raft_score",
+        "start_in_normal",
+        "battle_finish_first_view_entry_fortress",
+        "act3vmulti_view_arena_top_easy_in",
+        "multi_v3_prepare_squad_sel_entry",
+        "stage_choose_host_in_1",
+        "matching_banner_in",
+        "battle_finish_first_view_entry_normal",
+        "multi_v3_prepare_squad_entry",
+        "battle_finish_first_view_entry_fortress_final_record",
+        "act3vmulti_entry_room_joining_bar",
+        "quick_match_state_in",
+        "battle_finish_first_view_entry_fortress_progress_text",
+        "battle_settle_part_2_view_entry",
+        "stage_choose_guest_in_2",
+        "start_in_invert",
+        "act3vmulti_view_arena_top_hard_in",
+        "stage_certain_in",
+        "act_multi_v3_banner_in",
+        "battle_finish_first_view_entry_com_quit",
+        "act_multi_v3_state_loading_in",
+        "stage_choose_guest_in_1",
+        "act3vmulti_entry_main_to_room",
+        "battle_finish_first_view_entry_succer",
+        "full_in",
+        "battle_finish_first_view_entry_normal_progress_text1",
+        "quick_match_state_inversion_in",
+        "battle_finish_first_view_entry_com",
+        "multi_v3_prepare_sys_alloc_entry",
+        "battle_finish_first_view_entry_fortress_progress_text2",
+        "in",
+        "battle_finish_first_view_entry_raft_new_effects",
+        "act3vmulti_entry_stage_entry",
+        "battle_finish_first_view_entry_fortress_final_record_clear",
+        "multi_v3_char_pick_entry",
+        "battle_finish_first_view_entry_normal_progress_text2",
+        "battle_finish_first_view_entry_raft",
+        "act3vmulti_entry_room_to_main",
+        "battle_finish_first_view_entry_fortress_progress_text1",
+        "battle_settle_camera_enter"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "vecbreakv2",
+      "name": "vecbreakv2",
+      "activityType": null,
+      "isReplicate": null,
+      "asset": "events/cn/vecbreakv2/bbd1adc1eb7d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "vec_break_v2_defense_info_in",
+        "vec_break_v2_defense_info_right_select_in",
+        "vec_break_v2_achievement_switch_next_in",
+        "vec_break_v2_achievement_switch_before_in",
+        "popup_in",
+        "vec_v2_stage_selected_entry",
+        "vec_break_v2_stage_raid_in",
+        "entry_in",
+        "vec_break_v2_stage_raid_boss_select_in",
+        "vec_break_v2_defense_stage_select_state_select_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act18mini",
+      "name": "See You Soon",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/en/act18mini/c527667f83b4/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act18mini_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act19mini",
+      "name": "Fantasy in the Mirage",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/en/act19mini/f470c24f1ea6/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act19mini_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act1autochess",
+      "name": "Stronghold Protocol: Alliance",
+      "activityType": "AUTOCHESS_SEASON",
+      "isReplicate": false,
+      "asset": "events/en/act1autochess/77273c6e2938/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act1autochess_entry_show"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act1multi",
+      "name": "Icebreaker Games #1",
+      "activityType": "MULTIPLAY_V3",
+      "isReplicate": false,
+      "asset": "events/en/act1multi/ede82b044493/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act3vmulti_train_billboard_enter_fortress",
+        "act3vmulti_train_billboard_enter_normal",
+        "act3vmulti_train_billboard_enter_soccer"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act1vhalfidle",
+      "name": "Rebuilding Mandate",
+      "activityType": "HALFIDLE_VERIFY1",
+      "isReplicate": false,
+      "asset": "events/en/act1vhalfidle/29f0d8509997/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "recruit_entry_state_show_quick",
+        "hanging_income_stage_in",
+        "recruit_entry_state_show_special",
+        "recruit_entry_state_show_random",
+        "recruit_entry_state_show_select",
+        "tip_in",
+        "entry",
+        "hanging_income_daily_in",
+        "recruit_complete_entry",
+        "recruit_entry",
+        "recruit_front_ui_entry",
+        "hanging_income_battlefinish_in",
+        "equip_item_special_in",
+        "tech_tree_detail_in",
+        "tech_tree_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act20mini",
+      "name": "Crossing",
+      "activityType": "MINISTORY",
+      "isReplicate": false,
+      "asset": "events/en/act20mini/17edffab492e/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act20mini_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act2autochess",
+      "name": "Stronghold Protocol: Alliance",
+      "activityType": "AUTOCHESS_SEASON",
+      "isReplicate": false,
+      "asset": "events/en/act2autochess/f880921e343e/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act2autochess_entry_show"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act2mainss",
+      "name": "Dissociative Recombination",
+      "activityType": "TYPE_MAINSS",
+      "isReplicate": false,
+      "asset": "events/en/act2mainss/9b246f9a171f/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act2mainss_entry_3",
+        "act2mainss_entry_2",
+        "act2mainss_entry_1",
+        "act2mainss_entry_2_bg_change",
+        "act2mainss_entry_3_bg_change"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act2multi",
+      "name": "Icebreaker Games #2",
+      "activityType": "MULTIPLAY_V3",
+      "isReplicate": false,
+      "asset": "events/en/act2multi/56caa922d47e/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act2multi_train_billboard_enter_raft",
+        "act2multi_train_billboard_enter_fortress",
+        "act2multi_train_billboard_enter_normal"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act31sre",
+      "name": "Here A People Sows - Rerun",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/en/act31sre/fe56774089f1/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act31sre_stage_entry",
+        "act31sre_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act33sre",
+      "name": "Babel - Rerun",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/en/act33sre/167ffcd04f3d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act33sre_stage_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act34sre",
+      "name": "Path of Life - Rerun",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/en/act34sre/39c44448daab/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "panel_act34sre_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act35sre",
+      "name": "Adventure That Cannot Wait for the Sun - Rerun",
+      "activityType": "TYPE_ACT35SIDE",
+      "isReplicate": true,
+      "asset": "events/en/act35sre/6a31de2e1c15/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act35sre_entry_carving_new",
+        "act35sre_stage_entry",
+        "act35sre_entry_zone_pyramid_cat_rotation"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act37sre",
+      "name": "Ending a Grand Overture - Rerun",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/en/act37sre/a30888486b5e/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act37sre_stage_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act38sre",
+      "name": "I Portatori dei Velluti - Rerun",
+      "activityType": "TYPE_ACT38SIDE",
+      "isReplicate": true,
+      "asset": "events/en/act38sre/c12b80399d84/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act38side_entry_stage_entry",
+        "act38side_fireworks_battle_ui_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act39sre",
+      "name": "Exodus from the Pale Sea - Rerun",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/en/act39sre/0f3ad433ab2c/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act39side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act3mainss",
+      "name": "Abnormal Spectrum",
+      "activityType": "TYPE_MAINSS",
+      "isReplicate": false,
+      "asset": "events/en/act3mainss/3a8a20333988/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act3mainss_entry_3",
+        "act3mainss_entry_3_bg_entry",
+        "act3mainss_entry_1",
+        "act3mainss_entry_2"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act40side",
+      "name": "Such is the Joy of Our Reunion",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/en/act40side/e8ca4689643d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "panel_act40side_entry_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act40sre",
+      "name": "Such is the Joy of Our Reunion - Rerun",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/en/act40sre/af6c11622b8d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "panel_act40side_entry_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act41side",
+      "name": "When Elegies Are Ashes",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/en/act41side/2956db0dc606/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act41side_stage_entry_anim",
+        "act41side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act41sre",
+      "name": "When Elegies Are Ashes - Rerun",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": true,
+      "asset": "events/en/act41sre/a50a05f23d3b/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act41side_stage_entry_anim",
+        "act41side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act42side",
+      "name": "The Masses' Travels",
+      "activityType": "TYPE_ACT42SIDE",
+      "isReplicate": false,
+      "asset": "events/en/act42side/d5558b1bd102/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act42side_entry_stage_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act42sre",
+      "name": "The Masses' Travels - Rerun",
+      "activityType": "TYPE_ACT42SIDE",
+      "isReplicate": true,
+      "asset": "events/en/act42sre/37ff509bbdff/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act42side_entry_stage_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act43side",
+      "name": "Act or Die",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/en/act43side/a23d4f221875/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act43side_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act44side",
+      "name": "Ato",
+      "activityType": "TYPE_ACT44SIDE",
+      "isReplicate": false,
+      "asset": "events/en/act44side/df2da37ed111/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "anim_act44side_entry_01",
+        "anim_act44side_entry_02"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act45side",
+      "name": "Somniloquium Serenum",
+      "activityType": "TYPE_ACT45SIDE",
+      "isReplicate": false,
+      "asset": "events/en/act45side/43fdc081b14a/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "stage_card_ui_entry",
+        "act45side_entry",
+        "right_in",
+        "act45side_live_stage_entry_sleep",
+        "act45side_live_stage_entry_live",
+        "left_in",
+        "stage_card_item_entry",
+        "act45side_stage_transition_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act46side",
+      "name": "Retracing Our Steps",
+      "activityType": "TYPE_ACT46SIDE",
+      "isReplicate": false,
+      "asset": "events/en/act46side/6c54a0fb96a5/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "entry_token",
+        "act46side_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act47side",
+      "name": "Unrealized Realities",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/en/act47side/b265ff87b214/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act47side_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act48side",
+      "name": "Medjehtiqedti Bound",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/en/act48side/2f1e75b69d3c/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act48side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act49side",
+      "name": "First of A Thousand Autumns",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/en/act49side/27a3dd1f062d/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act49side_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act4mainss",
+      "name": "Critical Phase Transition",
+      "activityType": "TYPE_MAINSS",
+      "isReplicate": false,
+      "asset": "events/en/act4mainss/ca4e7d5efc43/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act4mainss_entry_02",
+        "act4mainss_entry_01",
+        "act4mainss_entry_kv_04",
+        "act4mainss_entry_04",
+        "act4mainss_entry_03"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act51side",
+      "name": "People, A People",
+      "activityType": "TYPE_ACT9D0",
+      "isReplicate": false,
+      "asset": "events/en/act51side/c7732dfe8ecb/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act51side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act5bossrush",
+      "name": "Trials for Navigator",
+      "activityType": "BOSS_RUSH",
+      "isReplicate": false,
+      "asset": "events/en/act5bossrush/d47e4b601e06/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act6bossrush",
+      "name": "Trials for Navigator",
+      "activityType": "BOSS_RUSH",
+      "isReplicate": false,
+      "asset": "events/en/act6bossrush/c4901a63f7c4/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act6fun",
+      "name": "April Fools' Day Event",
+      "activityType": "APRIL_FOOL",
+      "isReplicate": false,
+      "asset": "events/en/act6fun/51a474843b42/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "act6fun_home_entry_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "multiv3",
+      "name": "multiv3",
+      "activityType": null,
+      "isReplicate": null,
+      "asset": "events/en/multiv3/1c3a3a85363c/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "multi_v3_prepare_squal_check_entry",
+        "tiny_in",
+        "multiv3_prepare_start_countdown_show",
+        "battle_finish_first_view_entry_normal_reward_tween",
+        "multi_v3_prepare_squal_skill_entry",
+        "act3vmulti_entry_main_to_match",
+        "multi_v3_prepare_top_view_entry",
+        "act3vmulti_view_arena_top_normal_in",
+        "battle_finish_first_view_entry_normal_progress_text",
+        "battle_finish_first_view_entry_fortress_final_record_new_effects",
+        "battle_finish_first_view_entry_raft_score",
+        "start_in_normal",
+        "battle_finish_first_view_entry_fortress",
+        "act3vmulti_view_arena_top_easy_in",
+        "multi_v3_prepare_squad_sel_entry",
+        "stage_choose_host_in_1",
+        "matching_banner_in",
+        "battle_finish_first_view_entry_normal",
+        "multi_v3_prepare_squad_entry",
+        "battle_finish_first_view_entry_fortress_final_record",
+        "act3vmulti_entry_room_joining_bar",
+        "quick_match_state_in",
+        "battle_finish_first_view_entry_fortress_progress_text",
+        "battle_settle_part_2_view_entry",
+        "stage_choose_guest_in_2",
+        "start_in_invert",
+        "act3vmulti_view_arena_top_hard_in",
+        "stage_certain_in",
+        "act_multi_v3_banner_in",
+        "battle_finish_first_view_entry_com_quit",
+        "act_multi_v3_state_loading_in",
+        "stage_choose_guest_in_1",
+        "act3vmulti_entry_main_to_room",
+        "battle_finish_first_view_entry_succer",
+        "full_in",
+        "battle_finish_first_view_entry_normal_progress_text1",
+        "quick_match_state_inversion_in",
+        "battle_finish_first_view_entry_com",
+        "multi_v3_prepare_sys_alloc_entry",
+        "battle_finish_first_view_entry_fortress_progress_text2",
+        "in",
+        "battle_finish_first_view_entry_raft_new_effects",
+        "act3vmulti_entry_stage_entry",
+        "battle_finish_first_view_entry_fortress_final_record_clear",
+        "multi_v3_char_pick_entry",
+        "battle_finish_first_view_entry_normal_progress_text2",
+        "battle_finish_first_view_entry_raft",
+        "act3vmulti_entry_room_to_main",
+        "battle_finish_first_view_entry_fortress_progress_text1",
+        "battle_settle_camera_enter"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "vecbreakv2",
+      "name": "vecbreakv2",
+      "activityType": null,
+      "isReplicate": null,
+      "asset": "events/en/vecbreakv2/11810a43b086/asset.json",
+      "status": "source-recovered",
+      "candidates": [
+        "vec_break_v2_defense_info_in",
+        "vec_break_v2_defense_info_right_select_in",
+        "vec_break_v2_achievement_switch_next_in",
+        "vec_break_v2_achievement_switch_before_in",
+        "popup_in",
+        "vec_v2_stage_selected_entry",
+        "vec_break_v2_stage_raid_in",
+        "entry_in",
+        "vec_break_v2_stage_raid_boss_select_in",
+        "vec_break_v2_defense_stage_select_state_select_in"
+      ]
+    }
+  ]
+}

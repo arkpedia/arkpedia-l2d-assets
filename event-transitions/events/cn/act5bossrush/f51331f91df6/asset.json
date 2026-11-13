@@ -1,0 +1,648 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act5bossrush",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "25-07-19-05-16-54_1e71a6",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/477beab02ff064bcf05923cdc3f9620cb89fcdaf/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act5bossrush.ab",
+    "bundleMd5": "f51331f91df66662a73647840d58bc7a",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/25-07-19-05-16-54_1e71a6/activity_%5Buc%5Dact5bossrush.dat",
+    "archiveSha256": "03a80d114b1182c3f0d7a61844aff54fba7d3617afe4e3e367edb1a4394f220a",
+    "bundleSha256": "874d7a3d2c1df2c11d1bcd7a40268a9a6a02c0628d507a384570d49ca5b6ccc7",
+    "manifestEntry": {
+      "name": "activity/[uc]act5bossrush.ab",
+      "hash": "4dae9248cd1ece40a6b84cbe9201d0f6",
+      "md5": "f51331f91df66662a73647840d58bc7a",
+      "totalSize": 2313726,
+      "abSize": 2443951,
+      "pid": "lpack_misc4",
+      "cid": 2085
+    }
+  },
+  "animations": [
+    {
+      "id": "5345618427537101114",
+      "name": "bossrush_entry_anim",
+      "candidate": true,
+      "durationSeconds": 1.3333333730697632,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-8625567840526461711",
+      "file": "textures/0.webp",
+      "name": "stage_act5bossrush_group04_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7979393518429701742",
+      "file": "textures/1.webp",
+      "name": "act5bossrush_relic_01",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7924815650005846731",
+      "file": "textures/2.webp",
+      "name": "img_bg",
+      "width": 1020,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7628557929597661138",
+      "file": "textures/3.webp",
+      "name": "stage_act5bossrush_group02_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7597157646669124240",
+      "file": "textures/4.webp",
+      "name": "stage_act5bossrush_group04_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6633982978492537618",
+      "file": "textures/5.webp",
+      "name": "map_act5bossrush_group03_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6538450133341016086",
+      "file": "textures/6.webp",
+      "name": "stage_act5bossrush_group03_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6188863694746109199",
+      "file": "textures/7.webp",
+      "name": "act5bossrush_team01",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6131706249396169359",
+      "file": "textures/8.webp",
+      "name": "img_home_entry",
+      "width": 463,
+      "height": 227,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4953484542481139119",
+      "file": "textures/9.webp",
+      "name": "act5bossrush_relic_03",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4700834405355496934",
+      "file": "textures/10.webp",
+      "name": "stage_act5bossrush_group02_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4668648575806156832",
+      "file": "textures/11.webp",
+      "name": "squad_plugin_atlas#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4584617285647006260",
+      "file": "textures/12.webp",
+      "name": "map_act5bossrush_group01_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4333706899878849648",
+      "file": "textures/13.webp",
+      "name": "act5bossrush_relic_04",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4273867774982273900",
+      "file": "textures/14.webp",
+      "name": "reward",
+      "width": 1020,
+      "height": 557,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4250531928021352769",
+      "file": "textures/15.webp",
+      "name": "stage_act5bossrush_group01_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3989399557716377053",
+      "file": "textures/16.webp",
+      "name": "scroll_vertical_line",
+      "width": 18,
+      "height": 10,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3162509451081573523",
+      "file": "textures/17.webp",
+      "name": "map_act5bossrush_group02_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2080882065490844125",
+      "file": "textures/18.webp",
+      "name": "act5bossrush_team03",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1805773535553332695",
+      "file": "textures/19.webp",
+      "name": "img_team_icon_02",
+      "width": 60,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1750481152605206350",
+      "file": "textures/20.webp",
+      "name": "stage_act5bossrush_group03_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1598313142039557524",
+      "file": "textures/21.webp",
+      "name": "stage_act5bossrush_group01_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1481722523116831527",
+      "file": "textures/22.webp",
+      "name": "img_bg",
+      "width": 1020,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1132820873993495757",
+      "file": "textures/23.webp",
+      "name": "act5bossrush_relic_02",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1119273637394574624",
+      "file": "textures/24.webp",
+      "name": "squad_plugin_atlas#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "216147383702751308",
+      "file": "textures/25.webp",
+      "name": "map_act5bossrush_group03_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "263148001557255213",
+      "file": "textures/26.webp",
+      "name": "act5bossrush_milestone#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "586193581194613601",
+      "file": "textures/27.webp",
+      "name": "map_act5bossrush_group03_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1050302219612883510",
+      "file": "textures/28.webp",
+      "name": "stage_act5bossrush_group03_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1314466253459919075",
+      "file": "textures/29.webp",
+      "name": "stage_act5bossrush_group04_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2151591442847887772",
+      "file": "textures/30.webp",
+      "name": "act5bossrush_entry#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2716645203238694906",
+      "file": "textures/31.webp",
+      "name": "map_act5bossrush_group04_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3096003783714640663",
+      "file": "textures/32.webp",
+      "name": "img_team_icon_03",
+      "width": 60,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3224308956750597734",
+      "file": "textures/33.webp",
+      "name": "act5bossrush_team02",
+      "width": 132,
+      "height": 132,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3236916081530383035",
+      "file": "textures/34.webp",
+      "name": "stage_act5bossrush_group02_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4825878838362889423",
+      "file": "textures/35.webp",
+      "name": "img_team_icon_01",
+      "width": 60,
+      "height": 72,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5415276031013052224",
+      "file": "textures/36.webp",
+      "name": "map_act5bossrush_group04_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5753084966305366998",
+      "file": "textures/37.webp",
+      "name": "map_act5bossrush_group01_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6088664908868791684",
+      "file": "textures/38.webp",
+      "name": "map_act5bossrush_group02_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7043546388232896278",
+      "file": "textures/39.webp",
+      "name": "img_home_entry_mini",
+      "width": 463,
+      "height": 121,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7125251987835217421",
+      "file": "textures/40.webp",
+      "name": "act5bossrush_milestone#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7163120790893322773",
+      "file": "textures/41.webp",
+      "name": "act5bossrush_entry#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8243590603358067010",
+      "file": "textures/42.webp",
+      "name": "map_act5bossrush_group04_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "9198973946144670789",
+      "file": "textures/43.webp",
+      "name": "map_act5bossrush_group02_01",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 1,
+    "AnimationClip": 1,
+    "AssetBundle": 1,
+    "CanvasGroup": 10,
+    "CanvasRenderer": 86,
+    "GameObject": 131,
+    "MonoBehaviour": 190,
+    "RectTransform": 130,
+    "Sprite": 38,
+    "Texture2D": 44,
+    "Transform": 1
+  },
+  "externalFiles": {
+    "CAB-47ed023fe5b76bec49724091c6ef85b9": [
+      "archive:/CAB-658d74aab777086fc32b93f385be999a/CAB-658d74aab777086fc32b93f385be999a",
+      "archive:/CAB-73af6f522fece51508a91fccd60c68f6/CAB-73af6f522fece51508a91fccd60c68f6"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 2605,
+      "sha256": "f18c66fdd35fb55b1f0e0d821d9d59365fda71d5ef3d5682baa988a432d68c90"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 2313726,
+      "sha256": "03a80d114b1182c3f0d7a61844aff54fba7d3617afe4e3e367edb1a4394f220a"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 78977,
+      "sha256": "194fe5bbcd994fcd29995ae8b560732fe45161e83cb0f371bec29cd2aa30096f"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 215928,
+      "sha256": "7efcb3a19b816ef946020981a2f338a1a5591e0cdbbbc7f49f53c92c3fda5373"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 1988,
+      "sha256": "97fae05dee9158145338937ca470abe5ccdf558f1a38026870bc33117a53e358"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 232590,
+      "sha256": "0e8af1ed693312167af57693a3600d133ff5290f4bf9a23b213d1270495fa224"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 4450,
+      "sha256": "02e0a9083fe854050f1693d9c1494cf7f2caba25f72dc2bfccdbbb399365bf36"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 180402,
+      "sha256": "8ffdb5301b1c60296286e6df10bbd07c41a7a10ebad1315ffc6776fb628841a3"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 1850,
+      "sha256": "5c1d2bb1456d475265a9774dd85ff012364996ef84259bcf9736f56b681496ba"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 182270,
+      "sha256": "8c963ca14be99b79668c4188d225bb1be61c18ea1be0d8c26f68e79e39a7d939"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 181660,
+      "sha256": "86fd5503f4e053ac77231df0713b199db39ef36fe76e58cf58f0db94069da5b4"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 96,
+      "sha256": "229161a9d612a3986dd1984319318627ff3224718053afaee6dc618a924b045d"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 216820,
+      "sha256": "b44468ac63ba26b7dd765bd498a242916badc34c621f861a82a5fbe6f064121a"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 14036,
+      "sha256": "4e4b985bb673ed6ba0f1bcb05e5e0d3c91d0ad6541563db255751ab88d43ec08"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 2126,
+      "sha256": "67492241186146eb3828dea1b183191de88182e4fb13022fa4a68d73d2ed7c43"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 454224,
+      "sha256": "f2b9a80f6f52ef1b1b49d410e5b0f34a0300ecccd4848e2606a583f31d7eaf54"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 192550,
+      "sha256": "87d438bfeb1c186cf28bb04424d09016b58c2cc78423885af8fe34b925f37108"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 184116,
+      "sha256": "5272bf8080187a7bf5de0c3256bc64668293eb2e177ac8c07dadbb479d0dedad"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 520848,
+      "sha256": "63890a3e3ffa8e15e8c479c7ca205d8114b2ee27d91b76d738472c4d8e9245f8"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 2082,
+      "sha256": "5e5ba39c9d167063fb48c1a479b0efd083474c56fe65d1b6d28b6415d85d1de9"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 8876,
+      "sha256": "04caa774a567f76b216ca2753a8d06e3150569ee1205c9c4d7519545dfdea165"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 202150,
+      "sha256": "464ca73fb941510ca171c567e92437a22f11e7b5a00fc09f439dce6414546ff2"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 73914,
+      "sha256": "92a9203da4456c187eed1a0ebeb5714c2c147f13f10c878fefa64a09df8e9455"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 186554,
+      "sha256": "2a1989cedb287063781cc3883fcb731084afc0810a075f393355e09fa05359e7"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 185762,
+      "sha256": "4106da6abc95243bb0463664780bc5f270a751ec08d1bab12a6185e5b10b074d"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 213172,
+      "sha256": "3cd4ab016b2df7c579ffc748e46148bd4801fc6c90cc47c3e11ab719977fe935"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 235200,
+      "sha256": "d66f513c0430039756067bc0d044a269ca713978492ba7ac98c2952fc37fbc10"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 17262,
+      "sha256": "78f4f7b3b423c528638a6d73496cf793314bc15748f1c7ae7a96403e0cdb8dbf"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 196010,
+      "sha256": "24158c21bbfc5a5a219fe0c566c4d99c5baf9fe6f208049f617f8b9aee562142"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 2092,
+      "sha256": "00f1eed7b3dffee758b812624599143cb08afacf9ff8ba9ec1854868b121ce9b"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 16850,
+      "sha256": "9cc374746d3725526e220f4d6b71c01ff5f97a352d873c3e56735402c1e15318"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 231648,
+      "sha256": "d4e063ca4c281b8489014b4f1b9d410e65bd64854bbe9065453af111b48505a6"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 1864,
+      "sha256": "1351e3181e33e64bba680860655f320e1a8165b33942a4572af8666534aa7d94"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 207334,
+      "sha256": "b2e8d825702ced26f89354b0daa07417b43bd551bf54bc93d7d9ddefc64d56f3"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 194050,
+      "sha256": "6db30e44df33b5d16377de5fab8d9e27163be25c4bf3450fe42eda8332443ae2"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 224378,
+      "sha256": "6f7f6bd64953074e9a26577b2f6bc4aa8e3856ac9579333f6c87383cc979c973"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 45268,
+      "sha256": "a330c8b58ba1976cef4c107926772f1561cccb7b3c4aab75b888ab204e9b2b74"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 205616,
+      "sha256": "30ab7cbdccfb22918d69c5bde2f8cf6878212e665de7bfff562a59c0e35b3675"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 636664,
+      "sha256": "3e105d16c61f3153e071687cf051d67e38a29f6769de1484c439ff4f00d4983a"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 12188,
+      "sha256": "d0f9d280e03dbfe7e554b6cd123fce39382d9b12efad5e2bf21a9c3bd69205e3"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 215012,
+      "sha256": "d098b7b94cfa313cf524f4893ea0fc2230a183f0c61527fbfbde7b0078155c4d"
+    },
+    {
+      "file": "textures/43.webp",
+      "bytes": 226752,
+      "sha256": "5346abed4dbea2c8c1e64e76768a50c7f7a26a86dd3a880bf832ab5ace1ff44c"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 181436,
+      "sha256": "b5ae270db73b27983c867f3809aec0853ac76a8906eb11daf29b09735ce6888e"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 184502,
+      "sha256": "353c52fd8905beb5f56104c7b15042a00cffde9238de72b39802251f38727c4a"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 15692,
+      "sha256": "8872f180e0517e0318ae89cf747dcf71063163ded3d56dadb8796b0bdbcf80ec"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 89632,
+      "sha256": "725eb9afa8feb6811cf34b395a2bd53709d1d4b582de4955c497932691aa57aa"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 2146,
+      "sha256": "502c68c5997f08950b70610fa026a023716185397c155070bb488fd35781e0b5"
+    }
+  ]
+}

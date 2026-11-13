@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "server": "en",
+  "activityId": "act42side",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "en",
+    "resVersion": "26-11-02-05-12-02_1cd3b6",
+    "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+    "manifestUrl": "https://ark-us-static-online.yo-star.com/assetbundle/official/Android/assets/26-11-02-05-12-02_1cd3b6/hot_update_list.json",
+    "bundle": "audio/custom_se/act42side.ab",
+    "bundleMd5": "854800183018ade63bb3e1abd6ab85a4",
+    "manifestEntry": {
+      "name": "audio/custom_se/act42side.ab",
+      "hash": "2437ad9e6cd0d3ed8382902914491c55",
+      "md5": "854800183018ade63bb3e1abd6ab85a4",
+      "totalSize": 489427,
+      "abSize": 491487,
+      "cid": 5252
+    },
+    "archiveUrl": "https://ark-us-static-online.yo-star.com/assetbundle/official/Android/assets/26-11-02-05-12-02_1cd3b6/audio_custom_se_act42side.dat",
+    "archiveSha256": "c033dd12016daba024e986f7c758cec83691bc05f0cbe69391ca11de1ab607b3",
+    "bundleSha256": "4589a55ee9b405c97f1605f1238afa123bbc89829cb78efe9eae55a4b937fa96"
+  },
+  "animations": [],
+  "textures": [],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "AudioClip": 3
+  },
+  "externalFiles": {
+    "CAB-7e8f8db7517890afcdead0a0e9b0a01a": []
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "audio/-480009960399014439-0.wav",
+      "bytes": 1157536,
+      "sha256": "c73b959928eba17f8a095cb6410de89ef1230217a9f3c15f81a4ee31e874db54"
+    },
+    {
+      "file": "audio/-5316298315604605977-0.wav",
+      "bytes": 355268,
+      "sha256": "b63704f54e286debec0be7ad7c23378867473f42e086930d2da01124f25230e5"
+    },
+    {
+      "file": "audio/2646140646671843782-0.wav",
+      "bytes": 159384,
+      "sha256": "2d55eee8e87036811b4a091f5d74833cab8b852394d08fd17701bead1ed40156"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 489427,
+      "sha256": "c033dd12016daba024e986f7c758cec83691bc05f0cbe69391ca11de1ab607b3"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 834,
+      "sha256": "22c160ea8a74c66dc556c96007a445c6f26f6621f29d70e3fefd388e8e6f2a36"
+    }
+  ]
+}

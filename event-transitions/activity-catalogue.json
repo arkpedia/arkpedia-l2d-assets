@@ -1,0 +1,4320 @@
+{
+  "schemaVersion": 1,
+  "regions": {
+    "en": {
+      "source": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsGamedata/b1031d1035e8df3042f601e33d5c1dfab8345d59/en/gamedata/excel/activity_table.json",
+      "activities": {
+        "act42sre": {
+          "name": "The Masses' Travels - Rerun",
+          "type": "TYPE_ACT42SIDE",
+          "startTime": 1793890800,
+          "endTime": 1794740399,
+          "isReplicate": true
+        },
+        "act59sign": {
+          "name": "Celebration Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1791979200,
+          "endTime": 1793185199,
+          "isReplicate": false
+        },
+        "act15pray": {
+          "name": "Lucky Strips Login Event",
+          "type": "PRAY_ONLY",
+          "startTime": 1791979200,
+          "endTime": 1793185199,
+          "isReplicate": false
+        },
+        "act4mainss": {
+          "name": "Critical Phase Transition",
+          "type": "TYPE_MAINSS",
+          "startTime": 1791979200,
+          "endTime": 1793185199,
+          "isReplicate": false
+        },
+        "act3video": {
+          "name": "To Look Back on Terra Limited Login Event",
+          "type": "CHECKIN_VIDEO",
+          "startTime": 1791457200,
+          "endTime": 1794826799,
+          "isReplicate": false
+        },
+        "act3enemyduel": {
+          "name": "Duel Channel: Ivy Vine",
+          "type": "ENEMY_DUEL",
+          "startTime": 1790175600,
+          "endTime": 1791370799,
+          "isReplicate": false
+        },
+        "act3access": {
+          "name": "Exclusive Event",
+          "type": "CHECKIN_ACCESS",
+          "startTime": 1791457200,
+          "endTime": 1794826799,
+          "isReplicate": false
+        },
+        "act51side": {
+          "name": "People, A People",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1789570800,
+          "endTime": 1790765999,
+          "isReplicate": false
+        },
+        "act41sre": {
+          "name": "When Elegies Are Ashes - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1787828400,
+          "endTime": 1788692399,
+          "isReplicate": true
+        },
+        "act2autochess": {
+          "name": "Stronghold Protocol: Alliance",
+          "type": "AUTOCHESS_SEASON",
+          "startTime": 1787238000,
+          "endTime": 1790852399,
+          "isReplicate": false
+        },
+        "act20mini": {
+          "name": "Crossing",
+          "type": "MINISTORY",
+          "startTime": 1786622400,
+          "endTime": 1787223599,
+          "isReplicate": false
+        },
+        "act3blessing": {
+          "name": "2026 Festival Sign-In",
+          "type": "BLESS_ONLY",
+          "startTime": 1784214000,
+          "endTime": 1785409199,
+          "isReplicate": false
+        },
+        "act2break": {
+          "name": "Vector Breakthrough #2: Trial from Misery",
+          "type": "VEC_BREAK_V2",
+          "startTime": 1785423600,
+          "endTime": 1787223599,
+          "isReplicate": false
+        },
+        "act49side": {
+          "name": "First of A Thousand Autumns",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1784214000,
+          "endTime": 1786013999,
+          "isReplicate": false
+        },
+        "act27login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1784214000,
+          "endTime": 1785409199,
+          "isReplicate": false
+        },
+        "act14pray": {
+          "name": "Lungmen Lucky Strips",
+          "type": "PRAY_ONLY",
+          "startTime": 1784214000,
+          "endTime": 1785409199,
+          "isReplicate": false
+        },
+        "act3unique": {
+          "name": "Hymn to A New Beginning Sign-In Event",
+          "type": "UNIQUE_ONLY",
+          "startTime": 1785423600,
+          "endTime": 1788173999,
+          "isReplicate": false
+        },
+        "act40sre": {
+          "name": "Such is the Joy of Our Reunion - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1783350000,
+          "endTime": 1784199599,
+          "isReplicate": true
+        },
+        "act7collection": {
+          "name": "[Garden of Grotesqueries] Limited-Time Mission",
+          "type": "COLLECTION",
+          "startTime": 1783350000,
+          "endTime": 1784545199,
+          "isReplicate": false
+        },
+        "act8switch": {
+          "name": "Languid Sentiment",
+          "type": "SWITCH_ONLY",
+          "startTime": 1783350000,
+          "endTime": 1785149999,
+          "isReplicate": false
+        },
+        "act48side": {
+          "name": "Medjehtiqedti Bound",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1782129600,
+          "endTime": 1783335599,
+          "isReplicate": false
+        },
+        "act57sign": {
+          "name": "Commemorative Sign-In Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1782817200,
+          "endTime": 1783681199,
+          "isReplicate": false
+        },
+        "act6bossrush": {
+          "name": "Trials for Navigator",
+          "type": "BOSS_RUSH",
+          "startTime": 1781175600,
+          "endTime": 1782385199,
+          "isReplicate": false
+        },
+        "act39sre": {
+          "name": "Exodus from the Pale Sea - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1780657200,
+          "endTime": 1781521199,
+          "isReplicate": true
+        },
+        "act47side": {
+          "name": "Unrealized Realities",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1779375600,
+          "endTime": 1780570799,
+          "isReplicate": false
+        },
+        "act1autochess": {
+          "name": "Stronghold Protocol: Alliance",
+          "type": "AUTOCHESS_SEASON",
+          "startTime": 1777388400,
+          "endTime": 1779793199,
+          "isReplicate": false
+        },
+        "act38sre": {
+          "name": "I Portatori dei Velluti - Rerun",
+          "type": "TYPE_ACT38SIDE",
+          "startTime": 1778151600,
+          "endTime": 1779015599,
+          "isReplicate": true
+        },
+        "act56sign": {
+          "name": "Thank-You Celebration Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1777374000,
+          "endTime": 1778237999,
+          "isReplicate": false
+        },
+        "act46side": {
+          "name": "Retracing Our Steps",
+          "type": "TYPE_ACT46SIDE",
+          "startTime": 1776168000,
+          "endTime": 1777978799,
+          "isReplicate": false
+        },
+        "act2recruit": {
+          "name": "Special Recruitment - Top Operator",
+          "type": "RECRUIT_ONLY",
+          "startTime": 1776168000,
+          "endTime": 1779101999,
+          "isReplicate": false
+        },
+        "act26login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1776168000,
+          "endTime": 1777373999,
+          "isReplicate": false
+        },
+        "act55sign": {
+          "name": "Thank-You Celebration Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1776168000,
+          "endTime": 1777373999,
+          "isReplicate": false
+        },
+        "act13pray": {
+          "name": "Lucky Strips Login Event",
+          "type": "PRAY_ONLY",
+          "startTime": 1776168000,
+          "endTime": 1777373999,
+          "isReplicate": false
+        },
+        "act1recruit": {
+          "name": "Special Recruitment - Senior Operator",
+          "type": "RECRUIT_ONLY",
+          "startTime": 1775055600,
+          "endTime": 1775645999,
+          "isReplicate": false
+        },
+        "act3mainss": {
+          "name": "Abnormal Spectrum",
+          "type": "TYPE_MAINSS",
+          "startTime": 1773932400,
+          "endTime": 1775127599,
+          "isReplicate": false
+        },
+        "act5switch": {
+          "name": "Tender Moments Collaboration Event",
+          "type": "SWITCH_ONLY",
+          "startTime": 1772809200,
+          "endTime": 1774609199,
+          "isReplicate": false
+        },
+        "act1teamquest": {
+          "name": "Icebreaker Goals",
+          "type": "TEAM_QUEST",
+          "startTime": 1775055600,
+          "endTime": 1777114799,
+          "isReplicate": false
+        },
+        "act2multi": {
+          "name": "Icebreaker Games #2",
+          "type": "MULTIPLAY_V3",
+          "startTime": 1775055600,
+          "endTime": 1776855599,
+          "isReplicate": false
+        },
+        "act54sign": {
+          "name": "Thank-You Celebration Prospective Login",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1775732400,
+          "endTime": 1776596399,
+          "isReplicate": false
+        },
+        "act6collection": {
+          "name": "Castle of Dreams Training Drill",
+          "type": "COLLECTION",
+          "startTime": 1770724800,
+          "endTime": 1772535599,
+          "isReplicate": false
+        },
+        "act53sign": {
+          "name": "Autumn Moon on Golden Osmanthus Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1773658800,
+          "endTime": 1774263599,
+          "isReplicate": false
+        },
+        "act52sign": {
+          "name": "Newborn Pivot Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1772809200,
+          "endTime": 1773658799,
+          "isReplicate": false
+        },
+        "act1vhalfidle": {
+          "name": "Rebuilding Mandate",
+          "type": "HALFIDLE_VERIFY1",
+          "startTime": 1772809200,
+          "endTime": 1774609199,
+          "isReplicate": false
+        },
+        "act37sre": {
+          "name": "Ending a Grand Overture - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1771930800,
+          "endTime": 1772794799,
+          "isReplicate": true
+        },
+        "act51sign": {
+          "name": "Greeting Ceremony of the Marionettes Sign-In Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1770724800,
+          "endTime": 1771930799,
+          "isReplicate": false
+        },
+        "act45side": {
+          "name": "Somniloquium Serenum",
+          "type": "TYPE_ACT45SIDE",
+          "startTime": 1770724800,
+          "endTime": 1771930799,
+          "isReplicate": false
+        },
+        "act2enemyduel": {
+          "name": "Duel Channel: Honeydew",
+          "type": "ENEMY_DUEL",
+          "startTime": 1770130800,
+          "endTime": 1771325999,
+          "isReplicate": false
+        },
+        "act35sre": {
+          "name": "Adventure That Cannot Wait for the Sun - Rerun",
+          "type": "TYPE_ACT35SIDE",
+          "startTime": 1767697200,
+          "endTime": 1768561199,
+          "isReplicate": true
+        },
+        "act50sign": {
+          "name": "Traces of Time Sign-in Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1768575600,
+          "endTime": 1769770799,
+          "isReplicate": false
+        },
+        "act2unique": {
+          "name": "Anniversary Celebration Special Event",
+          "type": "UNIQUE_ONLY",
+          "startTime": 1768575600,
+          "endTime": 1772449199,
+          "isReplicate": false
+        },
+        "act24login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1768575600,
+          "endTime": 1769770799,
+          "isReplicate": false
+        },
+        "act12pray": {
+          "name": "Lucky Strips Login Event",
+          "type": "PRAY_ONLY",
+          "startTime": 1768575600,
+          "endTime": 1769770799,
+          "isReplicate": false
+        },
+        "act44side": {
+          "name": "Ato",
+          "type": "TYPE_ACT44SIDE",
+          "startTime": 1768575600,
+          "endTime": 1770375599,
+          "isReplicate": false
+        },
+        "act19mini": {
+          "name": "Fantasy in the Mirage",
+          "type": "MINISTORY",
+          "startTime": 1765454400,
+          "endTime": 1766055599,
+          "isReplicate": false
+        },
+        "act5collection": {
+          "name": "Gyoko Kichion Limited-Time Mission",
+          "type": "COLLECTION",
+          "startTime": 1766070000,
+          "endTime": 1767265199,
+          "isReplicate": false
+        },
+        "act5bossrush": {
+          "name": "Trials for Navigator",
+          "type": "BOSS_RUSH",
+          "startTime": 1763650800,
+          "endTime": 1764845999,
+          "isReplicate": false
+        },
+        "act4collection": {
+          "name": "Back to Castle",
+          "type": "COLLECTION",
+          "startTime": 1760443200,
+          "endTime": 1761649199,
+          "isReplicate": false
+        },
+        "act43side": {
+          "name": "Act or Die",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1763046000,
+          "endTime": 1764241199,
+          "isReplicate": false
+        },
+        "act34sre": {
+          "name": "Path of Life - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1764255600,
+          "endTime": 1765105199,
+          "isReplicate": true
+        },
+        "act3signvs": {
+          "name": "May the Sunshine Still Sign-In Event",
+          "type": "CHECKIN_VS",
+          "startTime": 1762426800,
+          "endTime": 1763290799,
+          "isReplicate": false
+        },
+        "act49sign": {
+          "name": "Celebration Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1760443200,
+          "endTime": 1761649199,
+          "isReplicate": false
+        },
+        "act11pray": {
+          "name": "Lucky Strips Login Event",
+          "type": "PRAY_ONLY",
+          "startTime": 1760443200,
+          "endTime": 1761649199,
+          "isReplicate": false
+        },
+        "act1break": {
+          "name": "Vector Breakthrough - Inorganic Matters",
+          "type": "VEC_BREAK_V2",
+          "startTime": 1761836400,
+          "endTime": 1763636399,
+          "isReplicate": false
+        },
+        "act42side": {
+          "name": "The Masses' Travels",
+          "type": "TYPE_ACT42SIDE",
+          "startTime": 1760443200,
+          "endTime": 1762253999,
+          "isReplicate": false
+        },
+        "act2access": {
+          "name": "Recommended Monthly Card",
+          "type": "CHECKIN_ACCESS",
+          "startTime": 1759921200,
+          "endTime": 1763031599,
+          "isReplicate": false
+        },
+        "act1enemyduel": {
+          "name": "Duel Channel: Green Grassville",
+          "type": "ENEMY_DUEL",
+          "startTime": 1760443200,
+          "endTime": 1761821999,
+          "isReplicate": false
+        },
+        "act33sre": {
+          "name": "Babel - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1759251600,
+          "endTime": 1760093999,
+          "isReplicate": true
+        },
+        "act2mainss": {
+          "name": "Dissociative Recombination",
+          "type": "TYPE_MAINSS",
+          "startTime": 1758042000,
+          "endTime": 1759229999,
+          "isReplicate": false
+        },
+        "act6fun": {
+          "name": "April Fools' Day Event",
+          "type": "APRIL_FOOL",
+          "startTime": 1775055600,
+          "endTime": 1775645999,
+          "isReplicate": false
+        },
+        "act1multi": {
+          "name": "Icebreaker Games #1",
+          "type": "MULTIPLAY_V3",
+          "startTime": 1756994400,
+          "endTime": 1758797999,
+          "isReplicate": false
+        },
+        "act41side": {
+          "name": "When Elegies Are Ashes",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1756382400,
+          "endTime": 1757588399,
+          "isReplicate": false
+        },
+        "act3collection": {
+          "name": "Another Tides",
+          "type": "COLLECTION",
+          "startTime": 1754586000,
+          "endTime": 1755773999,
+          "isReplicate": false
+        },
+        "act2blessing": {
+          "name": "2025 Festival Sign-In",
+          "type": "BLESS_ONLY",
+          "startTime": 1752771600,
+          "endTime": 1753959599,
+          "isReplicate": false
+        },
+        "act23login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1752771600,
+          "endTime": 1753959599,
+          "isReplicate": false
+        },
+        "act10pray": {
+          "name": "Lucky Strips Login Event",
+          "type": "PRAY_ONLY",
+          "startTime": 1752771600,
+          "endTime": 1753959599,
+          "isReplicate": false
+        },
+        "act40side": {
+          "name": "Such is the Joy of Our Reunion",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1752771600,
+          "endTime": 1754564399,
+          "isReplicate": false
+        },
+        "act18mini": {
+          "name": "See You Soon",
+          "type": "MINISTORY",
+          "startTime": 1754586000,
+          "endTime": 1755169199,
+          "isReplicate": false
+        },
+        "act31sre": {
+          "name": "Here A People Sows - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1751562000,
+          "endTime": 1752404399,
+          "isReplicate": true
+        },
+        "act2collection": {
+          "name": "Limited-time Score Mission",
+          "type": "COLLECTION",
+          "startTime": 1750438800,
+          "endTime": 1751626799,
+          "isReplicate": false
+        },
+        "act1arcade": {
+          "name": "Poly Vision Museum",
+          "type": "ARCADE",
+          "startTime": 1749747600,
+          "endTime": 1750935599,
+          "isReplicate": false
+        },
+        "act48sign": {
+          "name": "2025 Commemorative Limited-Time Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1751194800,
+          "endTime": 1751972399,
+          "isReplicate": false
+        },
+        "act30sre": {
+          "name": "The Rides to Lake Silberneherze - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1750438800,
+          "endTime": 1751281199,
+          "isReplicate": true
+        },
+        "act39side": {
+          "name": "Exodus from the Pale Sea",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1749124800,
+          "endTime": 1750330799,
+          "isReplicate": false
+        },
+        "act1vautochess": {
+          "name": "Stronghold Protocol",
+          "type": "AUTOCHESS_VERIFY1",
+          "startTime": 1746723600,
+          "endTime": 1747911599,
+          "isReplicate": false
+        },
+        "act29sre": {
+          "name": "Zwillingstürme im Herbst - Rerun",
+          "type": "TYPE_ACT29SIDE",
+          "startTime": 1747933200,
+          "endTime": 1748775599,
+          "isReplicate": true
+        },
+        "act47sign": {
+          "name": "Thank-You Celebration Sign-In Resupplies",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1746529200,
+          "endTime": 1747393199,
+          "isReplicate": false
+        },
+        "act46sign": {
+          "name": "Thank-You Celebration Limited-Time Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1745514000,
+          "endTime": 1746701999,
+          "isReplicate": false
+        },
+        "act38side": {
+          "name": "I Portatori dei Velluti",
+          "type": "TYPE_ACT38SIDE",
+          "startTime": 1745514000,
+          "endTime": 1747306799,
+          "isReplicate": false
+        },
+        "act22login": {
+          "name": "Free 10-roll limited pull",
+          "type": "LOGIN_ONLY",
+          "startTime": 1745514000,
+          "endTime": 1746701999,
+          "isReplicate": false
+        },
+        "act9pray": {
+          "name": "Lucky Strips Login Event",
+          "type": "PRAY_ONLY",
+          "startTime": 1745514000,
+          "endTime": 1746701999,
+          "isReplicate": false
+        },
+        "act45sign": {
+          "name": "Thank-You Celebration Prospective Login",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1744974000,
+          "endTime": 1745837999,
+          "isReplicate": false
+        },
+        "act37side": {
+          "name": "Ending a Grand Overture",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1744113600,
+          "endTime": 1745319599,
+          "isReplicate": false
+        },
+        "act44sign": {
+          "name": "Conceptual Crucible Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1742986800,
+          "endTime": 1743850799,
+          "isReplicate": false
+        },
+        "act1vecb": {
+          "name": "Vector Breakthrough",
+          "type": "VEC_BREAK",
+          "startTime": 1742922000,
+          "endTime": 1744109999,
+          "isReplicate": false
+        },
+        "act28sre": {
+          "name": "Come Catastrophes or Wakes of Vultures - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1740762000,
+          "endTime": 1741604399,
+          "isReplicate": true
+        },
+        "act43sign": {
+          "name": "A Good Moony Time Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1739876400,
+          "endTime": 1740481199,
+          "isReplicate": false
+        },
+        "act36side": {
+          "name": "Delicious On Terra",
+          "type": "TYPE_ACT36SIDE",
+          "startTime": 1741626000,
+          "endTime": 1742813999,
+          "isReplicate": false
+        },
+        "act42sign": {
+          "name": "Have A Taste Of Terran Monsters",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1741626000,
+          "endTime": 1742813999,
+          "isReplicate": false
+        },
+        "act17mini": {
+          "name": "A Kazdelian Rescue",
+          "type": "MINISTORY",
+          "startTime": 1738929600,
+          "endTime": 1739530799,
+          "isReplicate": false
+        },
+        "act40sign": {
+          "name": "Furnaceside Fables Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1738929600,
+          "endTime": 1739789999,
+          "isReplicate": false
+        },
+        "act5fun": {
+          "name": "April Fools' Day Event",
+          "type": "APRIL_FOOL",
+          "startTime": 1743526800,
+          "endTime": 1744109999,
+          "isReplicate": false
+        },
+        "act1collection": {
+          "name": "Limited-time Score Mission",
+          "type": "COLLECTION",
+          "startTime": 1734714000,
+          "endTime": 1735556399,
+          "isReplicate": false
+        },
+        "act27sre": {
+          "name": "So Long, Adele: Home Away From Home - Retrospection",
+          "type": "TYPE_ACT27SIDE",
+          "startTime": 1735923600,
+          "endTime": 1736765999,
+          "isReplicate": true
+        },
+        "act35side": {
+          "name": "Adventure That Cannot Wait for the Sun",
+          "type": "TYPE_ACT35SIDE",
+          "startTime": 1737046800,
+          "endTime": 1738839599,
+          "isReplicate": false
+        },
+        "act21login": {
+          "name": "Free 10-roll limited pull",
+          "type": "LOGIN_ONLY",
+          "startTime": 1737046800,
+          "endTime": 1738234799,
+          "isReplicate": false
+        },
+        "act41sign": {
+          "name": "Brilliant Sun Rippling Sand Sign-In Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1737046800,
+          "endTime": 1738234799,
+          "isReplicate": false
+        },
+        "act8pray": {
+          "name": "Lucky Strips Login Event",
+          "type": "PRAY_ONLY",
+          "startTime": 1737046800,
+          "endTime": 1738234799,
+          "isReplicate": false
+        },
+        "act26sre": {
+          "name": "Hortus de Escapismo - Retrospection",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1735059600,
+          "endTime": 1735901999,
+          "isReplicate": true
+        },
+        "act3switch": {
+          "name": "Sweetness\nOverload\nCollaboration\nEvent",
+          "type": "SWITCH_ONLY",
+          "startTime": 1734714000,
+          "endTime": 1735901999,
+          "isReplicate": false
+        },
+        "act2signvs": {
+          "name": "May the Sunshine Still Sign-In Event",
+          "type": "CHECKIN_VS",
+          "startTime": 1733227200,
+          "endTime": 1734087599,
+          "isReplicate": false
+        },
+        "act34side": {
+          "name": "Path of Life",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1733227200,
+          "endTime": 1734433199,
+          "isReplicate": false
+        },
+        "act25sre": {
+          "name": "Lone Trail - Rerun",
+          "type": "TYPE_ACT25SIDE",
+          "startTime": 1732208400,
+          "endTime": 1733050799,
+          "isReplicate": true
+        },
+        "act2vmulti": {
+          "name": "Rhodes Island Icebreaker Games",
+          "type": "MULTIPLAY_VERIFY2",
+          "startTime": 1731603600,
+          "endTime": 1732791599,
+          "isReplicate": false
+        },
+        "act39sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1730394000,
+          "endTime": 1731581999,
+          "isReplicate": false
+        },
+        "act5mine": {
+          "name": "Callipers Valley Mining Area Provisional Mining Permit",
+          "type": "GRID_GACHA_V2",
+          "startTime": 1730394000,
+          "endTime": 1731581999,
+          "isReplicate": false
+        },
+        "act1mainss": {
+          "name": "Absolved Will Be the Seekers",
+          "type": "YEAR_5_GENERAL",
+          "startTime": 1730394000,
+          "endTime": 1731581999,
+          "isReplicate": false
+        },
+        "act1access": {
+          "name": "Exclusive Event",
+          "type": "CHECKIN_ACCESS",
+          "startTime": 1730113200,
+          "endTime": 1733137199,
+          "isReplicate": false
+        },
+        "act33side": {
+          "name": "Babel",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1728561600,
+          "endTime": 1730458799,
+          "isReplicate": false
+        },
+        "act32side": {
+          "name": "Operation Lucent Arrowhead",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1725555600,
+          "endTime": 1726743599,
+          "isReplicate": false
+        },
+        "act38sign": {
+          "name": "Arknights x Rainbow Six Siege Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1725555600,
+          "endTime": 1726743599,
+          "isReplicate": false
+        },
+        "act1r6sre": {
+          "name": "Operation Originium Dust - Retrospection",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1726765200,
+          "endTime": 1727607599,
+          "isReplicate": true
+        },
+        "act20login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1725555600,
+          "endTime": 1726743599,
+          "isReplicate": false
+        },
+        "act4bossrush": {
+          "name": "Trials for Navigator",
+          "type": "BOSS_RUSH",
+          "startTime": 1723654800,
+          "endTime": 1724842799,
+          "isReplicate": false
+        },
+        "act1blessing": {
+          "name": "2024 Festival Sign-In",
+          "type": "BLESS_ONLY",
+          "startTime": 1722427200,
+          "endTime": 1723633199,
+          "isReplicate": false
+        },
+        "act31side": {
+          "name": "Here A People Sows",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1722427200,
+          "endTime": 1724237999,
+          "isReplicate": false
+        },
+        "act7pray": {
+          "name": "Lungmen Lucky Strips",
+          "type": "PRAY_ONLY",
+          "startTime": 1722427200,
+          "endTime": 1723633199,
+          "isReplicate": false
+        },
+        "act19login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1722427200,
+          "endTime": 1723633199,
+          "isReplicate": false
+        },
+        "act22sre": {
+          "name": "What the Firelight Casts - Retrospection",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1724259600,
+          "endTime": 1725101999,
+          "isReplicate": true
+        },
+        "act23sre": {
+          "name": "Where Vernal Winds Will Never Blow - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1721322000,
+          "endTime": 1722164399,
+          "isReplicate": true
+        },
+        "act16mini": {
+          "name": "To the Grinning Valley",
+          "type": "MINISTORY",
+          "startTime": 1720544400,
+          "endTime": 1721127599,
+          "isReplicate": false
+        },
+        "act37sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1719918000,
+          "endTime": 1721127599,
+          "isReplicate": false
+        },
+        "act30side": {
+          "name": "The Rides to Lake Silberneherze",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1718971200,
+          "endTime": 1720177199,
+          "isReplicate": false
+        },
+        "act29side": {
+          "name": "Zwillingstürme im Herbst",
+          "type": "TYPE_ACT29SIDE",
+          "startTime": 1714496400,
+          "endTime": 1716289199,
+          "isReplicate": false
+        },
+        "act2float": {
+          "name": "Iron Fist City Industry Cooperation Forum",
+          "type": "FLOAT_PARADE",
+          "startTime": 1714496400,
+          "endTime": 1715684399,
+          "isReplicate": false
+        },
+        "act36sign": {
+          "name": "Climbing the Twin Spires Sign-In Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1714496400,
+          "endTime": 1715684399,
+          "isReplicate": false
+        },
+        "act18login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1714496400,
+          "endTime": 1715684399,
+          "isReplicate": false
+        },
+        "act21sre": {
+          "name": "Il Siracusano - Retrospection",
+          "type": "TYPE_ACT21SIDE",
+          "startTime": 1716483600,
+          "endTime": 1717325999,
+          "isReplicate": true
+        },
+        "act42d0": {
+          "name": "Design of Strife",
+          "type": "TYPE_ACT42D0",
+          "startTime": 1712077200,
+          "endTime": 1713265199,
+          "isReplicate": false
+        },
+        "act35sign": {
+          "name": "Moonlight Invite - Mooncake-Making Tutorial",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1709636400,
+          "endTime": 1710845999,
+          "isReplicate": false
+        },
+        "act1mainlinebp": {
+          "name": "Tactical Support",
+          "type": "MAINLINE_BP",
+          "startTime": 1712055600,
+          "endTime": 1714474799,
+          "isReplicate": false
+        },
+        "act1unique": {
+          "name": "Nine-Colored Deer Onboarding Event Retrospective",
+          "type": "UNIQUE_ONLY",
+          "startTime": 1710759600,
+          "endTime": 1711969199,
+          "isReplicate": false
+        },
+        "act2switch": {
+          "name": "View From Above Collaboration Event",
+          "type": "SWITCH_ONLY",
+          "startTime": 1710867600,
+          "endTime": 1711450799,
+          "isReplicate": false
+        },
+        "act28side": {
+          "name": "Come Catastrophes or Wakes of Vultures",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1710867600,
+          "endTime": 1712055599,
+          "isReplicate": false
+        },
+        "act19sre": {
+          "name": "Dorothy's Vision - Retrospection",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1709658000,
+          "endTime": 1710500399,
+          "isReplicate": true
+        },
+        "act15mini": {
+          "name": "The Black Forest Wills A Dream",
+          "type": "MINISTORY",
+          "startTime": 1709035200,
+          "endTime": 1709636399,
+          "isReplicate": false
+        },
+        "act4fun": {
+          "name": "April Fools' Day Event",
+          "type": "APRIL_FOOL",
+          "startTime": 1711990800,
+          "endTime": 1712573999,
+          "isReplicate": false
+        },
+        "act20sre": {
+          "name": "Ideal City: Endless Carnival - Rerun",
+          "type": "TYPE_ACT20SIDE",
+          "startTime": 1707238800,
+          "endTime": 1708081199,
+          "isReplicate": true
+        },
+        "act3bossrush": {
+          "name": "Trials for Navigator",
+          "type": "BOSS_RUSH",
+          "startTime": 1707757200,
+          "endTime": 1708945199,
+          "isReplicate": false
+        },
+        "act27side": {
+          "name": "So Long, Adele: Home Away From Home",
+          "type": "TYPE_ACT27SIDE",
+          "startTime": 1705424400,
+          "endTime": 1707217199,
+          "isReplicate": false
+        },
+        "act16login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1705424400,
+          "endTime": 1706612399,
+          "isReplicate": false
+        },
+        "act34sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1705424400,
+          "endTime": 1706612399,
+          "isReplicate": false
+        },
+        "act6pray": {
+          "name": "Lungmen Lucky Strips",
+          "type": "PRAY_ONLY",
+          "startTime": 1705424400,
+          "endTime": 1706612399,
+          "isReplicate": false
+        },
+        "act26side": {
+          "name": "Hortus de Escapismo",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1703160000,
+          "endTime": 1704365999,
+          "isReplicate": false
+        },
+        "act1signvs": {
+          "name": "May the Sunshine Still Sign-In Event",
+          "type": "CHECKIN_VS",
+          "startTime": 1704452400,
+          "endTime": 1705316399,
+          "isReplicate": false
+        },
+        "act18sre": {
+          "name": "Lingering Echoes - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1704474000,
+          "endTime": 1705316399,
+          "isReplicate": true
+        },
+        "act38d1": {
+          "name": "Pinch-Out Experimental Operation",
+          "type": "DEFAULT",
+          "startTime": 1701795600,
+          "endTime": 1702983599,
+          "isReplicate": false
+        },
+        "act25side": {
+          "name": "Lone Trail",
+          "type": "TYPE_ACT25SIDE",
+          "startTime": 1699376400,
+          "endTime": 1701169199,
+          "isReplicate": false
+        },
+        "act1checkin": {
+          "name": "Preludes to the Future Sign-in Event",
+          "type": "CHECKIN_ALL_PLAYER",
+          "startTime": 1699376400,
+          "endTime": 1700564399,
+          "isReplicate": false
+        },
+        "act15login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1699376400,
+          "endTime": 1700564399,
+          "isReplicate": false
+        },
+        "act4mine": {
+          "name": "Pony Valley Mining Area Login Event",
+          "type": "GRID_GACHA_V2",
+          "startTime": 1699376400,
+          "endTime": 1700564399,
+          "isReplicate": false
+        },
+        "act17sre": {
+          "name": "Stultifera Navis - Rerun",
+          "type": "TYPE_ACT17SIDE",
+          "startTime": 1701190800,
+          "endTime": 1702033199,
+          "isReplicate": true
+        },
+        "act24side": {
+          "name": "A Flurry to the Flame",
+          "type": "TYPE_ACT24SIDE",
+          "startTime": 1694088000,
+          "endTime": 1695293999,
+          "isReplicate": false
+        },
+        "act1flip": {
+          "name": "Surpriseful Supplications",
+          "type": "FLIP_ONLY",
+          "startTime": 1694088000,
+          "endTime": 1695293999,
+          "isReplicate": false
+        },
+        "act1mainbuff": {
+          "name": "Tactical Support",
+          "type": "MAIN_BUFF",
+          "startTime": 1696935600,
+          "endTime": 1699354799,
+          "isReplicate": false
+        },
+        "act14login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1694088000,
+          "endTime": 1695293999,
+          "isReplicate": false
+        },
+        "act1sandbox": {
+          "name": "Reclamation Algorithm - Fire Within the Sand",
+          "type": "DEFAULT",
+          "startTime": 1694088000,
+          "endTime": 1697108399,
+          "isReplicate": false
+        },
+        "act16sre": {
+          "name": "Guide Ahead - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1695315600,
+          "endTime": 1696157999,
+          "isReplicate": true
+        },
+        "act14mini": {
+          "name": "A Death in Chunfen",
+          "type": "MINISTORY",
+          "startTime": 1692723600,
+          "endTime": 1693306799,
+          "isReplicate": false
+        },
+        "act33sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1690628400,
+          "endTime": 1692442799,
+          "isReplicate": false
+        },
+        "act5pray": {
+          "name": "Lungmen Lucky Strips",
+          "type": "PRAY_ONLY",
+          "startTime": 1690563600,
+          "endTime": 1691751599,
+          "isReplicate": false
+        },
+        "act13login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1690563600,
+          "endTime": 1691751599,
+          "isReplicate": false
+        },
+        "act23side": {
+          "name": "Where Vernal Winds Will Never Blow",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1690563600,
+          "endTime": 1691751599,
+          "isReplicate": false
+        },
+        "act15sre": {
+          "name": "Invitation to Wine - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1691773200,
+          "endTime": 1692615599,
+          "isReplicate": true
+        },
+        "act32sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1689332400,
+          "endTime": 1690541999,
+          "isReplicate": false
+        },
+        "act22side": {
+          "name": "What the Firelight Casts",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1689249600,
+          "endTime": 1690455599,
+          "isReplicate": false
+        },
+        "act2bossrush": {
+          "name": "Trials for Navigator",
+          "type": "BOSS_RUSH",
+          "startTime": 1693501200,
+          "endTime": 1694084399,
+          "isReplicate": false
+        },
+        "act21side": {
+          "name": "IL Siracusano",
+          "type": "TYPE_ACT21SIDE",
+          "startTime": 1684843200,
+          "endTime": 1686653999,
+          "isReplicate": false
+        },
+        "act1float": {
+          "name": "Nulaiteburgh Industry Cooperation Forum",
+          "type": "FLOAT_PARADE",
+          "startTime": 1684843200,
+          "endTime": 1686049199,
+          "isReplicate": false
+        },
+        "act12login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1684843200,
+          "endTime": 1686049199,
+          "isReplicate": false
+        },
+        "act14sre": {
+          "name": "Break the Ice - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1686675600,
+          "endTime": 1687517999,
+          "isReplicate": true
+        },
+        "act31sign": {
+          "name": "Rain Season Limited Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1684843200,
+          "endTime": 1686049199,
+          "isReplicate": false
+        },
+        "act30sign": {
+          "name": "Snow Upon Autumnal Winds Limited Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1683802800,
+          "endTime": 1684666799,
+          "isReplicate": false
+        },
+        "act29sign": {
+          "name": "Encounter At The Osmanthus Blossom - Mooncake-Making Tutorial",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1680282000,
+          "endTime": 1681124399,
+          "isReplicate": false
+        },
+        "act13sre": {
+          "name": "Near Light - Rerun",
+          "type": "TYPE_ACT13SIDE",
+          "startTime": 1681491600,
+          "endTime": 1682333999,
+          "isReplicate": true
+        },
+        "act13mini": {
+          "name": "It's Been a While",
+          "type": "MINISTORY",
+          "startTime": 1680886800,
+          "endTime": 1681469999,
+          "isReplicate": false
+        },
+        "act12mini": {
+          "name": "An Obscure Wanderer",
+          "type": "MINISTORY",
+          "startTime": 1680282000,
+          "endTime": 1680865199,
+          "isReplicate": false
+        },
+        "act19side": {
+          "name": "Dorothy's Vision",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1678795200,
+          "endTime": 1680001199,
+          "isReplicate": false
+        },
+        "act3fun": {
+          "name": "April Fools' Day Event",
+          "type": "APRIL_FOOL",
+          "startTime": 1680368400,
+          "endTime": 1680951599,
+          "isReplicate": false
+        },
+        "act20side": {
+          "name": "Ideal City: Endless Carnival",
+          "type": "TYPE_ACT20SIDE",
+          "startTime": 1673611200,
+          "endTime": 1675421999,
+          "isReplicate": false
+        },
+        "act1bossrush": {
+          "name": "Trials for Navigator",
+          "type": "BOSS_RUSH",
+          "startTime": 1674234000,
+          "endTime": 1674817199,
+          "isReplicate": false
+        },
+        "act10login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1673611200,
+          "endTime": 1674817199,
+          "isReplicate": false
+        },
+        "act28sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1673611200,
+          "endTime": 1674817199,
+          "isReplicate": false
+        },
+        "act4pray": {
+          "name": "Zeruertza Amazing Wall Login Event",
+          "type": "PRAY_ONLY",
+          "startTime": 1673611200,
+          "endTime": 1674817199,
+          "isReplicate": false
+        },
+        "act12sre": {
+          "name": "Dossoles Holiday",
+          "type": "TYPE_ACT12SIDE",
+          "startTime": 1677603600,
+          "endTime": 1678445999,
+          "isReplicate": true
+        },
+        "act11mini": {
+          "name": "To Be Continued",
+          "type": "MINISTORY",
+          "startTime": 1676653200,
+          "endTime": 1677236399,
+          "isReplicate": false
+        },
+        "act18side": {
+          "name": "Lingering Echoes",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1672142400,
+          "endTime": 1673348399,
+          "isReplicate": false
+        },
+        "act27sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1669633200,
+          "endTime": 1670497199,
+          "isReplicate": false
+        },
+        "act11sre": {
+          "name": "Under Tides - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1669395600,
+          "endTime": 1670237999,
+          "isReplicate": true
+        },
+        "act9login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1667487600,
+          "endTime": 1668682799,
+          "isReplicate": false
+        },
+        "act17side": {
+          "name": "Stultifera Navis",
+          "type": "TYPE_ACT17SIDE",
+          "startTime": 1667487600,
+          "endTime": 1669287599,
+          "isReplicate": false
+        },
+        "act26sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1667487600,
+          "endTime": 1668682799,
+          "isReplicate": false
+        },
+        "act3mine": {
+          "name": "Gourd Valley Mining Area Login Event",
+          "type": "GRID_GACHA_V2",
+          "startTime": 1667487600,
+          "endTime": 1668682799,
+          "isReplicate": false
+        },
+        "act10sre": {
+          "name": "A Walk in the Dust - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1664902800,
+          "endTime": 1665745199,
+          "isReplicate": true
+        },
+        "act16side": {
+          "name": "Guide Ahead",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1663340400,
+          "endTime": 1664535599,
+          "isReplicate": false
+        },
+        "act10mini": {
+          "name": "A Light Spark in Darkness",
+          "type": "MINISTORY",
+          "startTime": 1660824000,
+          "endTime": 1661425199,
+          "isReplicate": false
+        },
+        "act25sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1659697200,
+          "endTime": 1661511599,
+          "isReplicate": false
+        },
+        "act15side": {
+          "name": "Invitation to Wine",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1659106800,
+          "endTime": 1660301999,
+          "isReplicate": false
+        },
+        "act8login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1659106800,
+          "endTime": 1660301999,
+          "isReplicate": false
+        },
+        "act3pray": {
+          "name": "Lungmen Lucky Strips",
+          "type": "PRAY_ONLY",
+          "startTime": 1659106800,
+          "endTime": 1660301999,
+          "isReplicate": false
+        },
+        "act24sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1657818000,
+          "endTime": 1658660399,
+          "isReplicate": false
+        },
+        "act9sre": {
+          "name": "Who Is Real - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1657818000,
+          "endTime": 1658660399,
+          "isReplicate": true
+        },
+        "act23sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1656590400,
+          "endTime": 1657796399,
+          "isReplicate": false
+        },
+        "act14side": {
+          "name": "Break the Ice",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1656590400,
+          "endTime": 1657796399,
+          "isReplicate": false
+        },
+        "act8sre": {
+          "name": "Mansfield Break - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1653577200,
+          "endTime": 1654426799,
+          "isReplicate": true
+        },
+        "act22sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1651147200,
+          "endTime": 1652353199,
+          "isReplicate": false
+        },
+        "act7login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1651147200,
+          "endTime": 1652353199,
+          "isReplicate": false
+        },
+        "act2mine": {
+          "name": "Popping Valley Mining Area Login Event",
+          "type": "GRID_GACHA_V2",
+          "startTime": 1651147200,
+          "endTime": 1652353199,
+          "isReplicate": false
+        },
+        "act13side": {
+          "name": "Near Light",
+          "type": "TYPE_ACT13SIDE",
+          "startTime": 1651147200,
+          "endTime": 1652957999,
+          "isReplicate": false
+        },
+        "act18sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1650020400,
+          "endTime": 1650884399,
+          "isReplicate": false
+        },
+        "act9mini": {
+          "name": "Pinus Sylvestris",
+          "type": "MINISTORY",
+          "startTime": 1649948400,
+          "endTime": 1650538799,
+          "isReplicate": false
+        },
+        "act17d7": {
+          "name": "April Fools' Day Event",
+          "type": "TYPE_ACT17D7",
+          "startTime": 1648810800,
+          "endTime": 1649415599,
+          "isReplicate": false
+        },
+        "act7sre": {
+          "name": "Maria Nearl - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1648738800,
+          "endTime": 1649588399,
+          "isReplicate": true
+        },
+        "act21sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1648810800,
+          "endTime": 1649674799,
+          "isReplicate": false
+        },
+        "act20sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1647518400,
+          "endTime": 1648292399,
+          "isReplicate": false
+        },
+        "act8mini": {
+          "name": "Vigilo",
+          "type": "MINISTORY",
+          "startTime": 1645110000,
+          "endTime": 1645700399,
+          "isReplicate": false
+        },
+        "act6sre": {
+          "name": "The Great Chief Returns - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1643994000,
+          "endTime": 1644836399,
+          "isReplicate": true
+        },
+        "act12side": {
+          "name": "Dossoles Holiday",
+          "type": "TYPE_ACT12SIDE",
+          "startTime": 1642161600,
+          "endTime": 1643972399,
+          "isReplicate": false
+        },
+        "act19sign": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1642161600,
+          "endTime": 1643367599,
+          "isReplicate": false
+        },
+        "act2pray": {
+          "name": "Dossoles Amazing Wall",
+          "type": "PRAY_ONLY",
+          "startTime": 1642161600,
+          "endTime": 1643367599,
+          "isReplicate": false
+        },
+        "act6login": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1642161600,
+          "endTime": 1643367599,
+          "isReplicate": false
+        },
+        "act1lock": {
+          "name": "Hymnoi Wisdom",
+          "type": "INTERLOCK",
+          "startTime": 1640790000,
+          "endTime": 1641380399,
+          "isReplicate": false
+        },
+        "act5sre": {
+          "name": "Twilight of Wolumonde - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1639753200,
+          "endTime": 1640602799,
+          "isReplicate": true
+        },
+        "act7mini": {
+          "name": "Preluding Lights",
+          "type": "MINISTORY",
+          "startTime": 1639051200,
+          "endTime": 1639652399,
+          "isReplicate": false
+        },
+        "act15d1": {
+          "name": "Limited-time Login Event",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1637838000,
+          "endTime": 1639047599,
+          "isReplicate": false
+        },
+        "act18d3d3": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1634828400,
+          "endTime": 1636023599,
+          "isReplicate": false
+        },
+        "act18d3d2": {
+          "name": "'Cautus Valley Mining Area' Login Event",
+          "type": "GRID_GACHA",
+          "startTime": 1634828400,
+          "endTime": 1636023599,
+          "isReplicate": false
+        },
+        "act18d3d1": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1634828400,
+          "endTime": 1636023599,
+          "isReplicate": false
+        },
+        "act18d3": {
+          "name": "Under Tides",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1634828400,
+          "endTime": 1636023599,
+          "isReplicate": false
+        },
+        "act18d0": {
+          "name": "A Walk in the Dust",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1633003200,
+          "endTime": 1634209199,
+          "isReplicate": false
+        },
+        "act17d5": {
+          "name": "Darknights Memoir - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1631026800,
+          "endTime": 1631876399,
+          "isReplicate": true
+        },
+        "act17d1": {
+          "name": "Defense Protocols",
+          "type": "MULTIPLAY",
+          "startTime": 1629298800,
+          "endTime": 1630493999,
+          "isReplicate": false
+        },
+        "act17d0d2": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1629298800,
+          "endTime": 1630493999,
+          "isReplicate": false
+        },
+        "act17d0d1": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1629298800,
+          "endTime": 1630493999,
+          "isReplicate": false
+        },
+        "act17d0": {
+          "name": "Operation Originium Dust",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1629298800,
+          "endTime": 1630493999,
+          "isReplicate": false
+        },
+        "act16d6": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1628247600,
+          "endTime": 1630061999,
+          "isReplicate": false
+        },
+        "act16d5d2": {
+          "name": "Lungmen Lucky Strips",
+          "type": "PRAY_ONLY",
+          "startTime": 1627646400,
+          "endTime": 1628852399,
+          "isReplicate": false
+        },
+        "act16d5d1": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1627646400,
+          "endTime": 1628852399,
+          "isReplicate": false
+        },
+        "act16d5": {
+          "name": "Who Is Real",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1627646400,
+          "endTime": 1628852399,
+          "isReplicate": false
+        },
+        "act15d5": {
+          "name": "Beyond Here",
+          "type": "MINISTORY",
+          "startTime": 1625583600,
+          "endTime": 1626173999,
+          "isReplicate": false
+        },
+        "act15d0": {
+          "name": "Mansfield Break",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1624363200,
+          "endTime": 1625569199,
+          "isReplicate": false
+        },
+        "act7d1": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1621422000,
+          "endTime": 1622631599,
+          "isReplicate": false
+        },
+        "act14d7": {
+          "name": "Code of Brawl - Rerun",
+          "type": "TYPE_ACT5D0",
+          "startTime": 1621004400,
+          "endTime": 1621853999,
+          "isReplicate": true
+        },
+        "act14d0d1": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1619784000,
+          "endTime": 1620989999,
+          "isReplicate": false
+        },
+        "act14d0d2": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1619784000,
+          "endTime": 1620989999,
+          "isReplicate": false
+        },
+        "act13d5": {
+          "name": "Maria Nearl",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1617894000,
+          "endTime": 1619089199,
+          "isReplicate": false
+        },
+        "act13d0": {
+          "name": "Rewinding Breeze",
+          "type": "MINISTORY",
+          "startTime": 1616673600,
+          "endTime": 1617274799,
+          "isReplicate": false
+        },
+        "act12d6": {
+          "name": "Ceobe's Fungimist",
+          "type": "ROGUELIKE",
+          "startTime": 1614265200,
+          "endTime": 1616065199,
+          "isReplicate": false
+        },
+        "act12d0": {
+          "name": "The Great Chief Returns",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1614265200,
+          "endTime": 1615460399,
+          "isReplicate": false
+        },
+        "act13d2d1": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1613214000,
+          "endTime": 1614077999,
+          "isReplicate": false
+        },
+        "act11d7": {
+          "name": "Heart of Surging Flame - Rerun",
+          "type": "TYPE_ACT3D0",
+          "startTime": 1611154800,
+          "endTime": 1612004399,
+          "isReplicate": true
+        },
+        "act9d4": {
+          "name": "Limited-time Score Mission",
+          "type": "COLLECTION",
+          "startTime": 1609585200,
+          "endTime": 1610794799,
+          "isReplicate": false
+        },
+        "act9d1d2": {
+          "name": "Sign-In Campaign",
+          "type": "LOGIN_ONLY",
+          "startTime": 1609340400,
+          "endTime": 1610535599,
+          "isReplicate": false
+        },
+        "act9d1d1": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1609585200,
+          "endTime": 1612004399,
+          "isReplicate": false
+        },
+        "act9d0": {
+          "name": "Darknights Memoir",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1607612400,
+          "endTime": 1609412399,
+          "isReplicate": false
+        },
+        "act13d2": {
+          "name": "Grani and the Knights' Treasure - Rerun",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1606402800,
+          "endTime": 1607252399,
+          "isReplicate": true
+        },
+        "act13d2d2": {
+          "name": "Grani and the Knights' Treasure Rerun Sign-in",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1606474800,
+          "endTime": 1607252399,
+          "isReplicate": false
+        },
+        "act10d6": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1604055600,
+          "endTime": 1604919599,
+          "isReplicate": false
+        },
+        "act11d0": {
+          "name": "Twilight of Wolumonde",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1603897200,
+          "endTime": 1605092399,
+          "isReplicate": false
+        },
+        "act10d5": {
+          "name": "Children of Ursus",
+          "type": "MINISTORY",
+          "startTime": 1601380800,
+          "endTime": 1602241199,
+          "isReplicate": false
+        },
+        "act7d5": {
+          "name": "Stories of Afternoon",
+          "type": "TYPE_ACT4D0",
+          "startTime": 1598452200,
+          "endTime": 1599649199,
+          "isReplicate": false
+        },
+        "act6d8": {
+          "name": "Limited-time Score Mission",
+          "type": "COLLECTION",
+          "startTime": 1597230000,
+          "endTime": 1598439599,
+          "isReplicate": false
+        },
+        "act6d7": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1596020400,
+          "endTime": 1597229999,
+          "isReplicate": false
+        },
+        "act6d5": {
+          "name": "Ancient Forge",
+          "type": "TYPE_ACT4D0",
+          "startTime": 1596056400,
+          "endTime": 1597229999,
+          "isReplicate": false
+        },
+        "act6d0": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1593601200,
+          "endTime": 1594810799,
+          "isReplicate": false
+        },
+        "act5d1": {
+          "name": "Contingency Contract",
+          "type": "TYPE_ACT5D1",
+          "startTime": 1592002800,
+          "endTime": 1593169199,
+          "isReplicate": false
+        },
+        "act5d0": {
+          "name": "Code of Brawl",
+          "type": "TYPE_ACT5D0",
+          "startTime": 1590602400,
+          "endTime": 1591786799,
+          "isReplicate": false
+        },
+        "act3d7": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1589367600,
+          "endTime": 1590577199,
+          "isReplicate": false
+        },
+        "act3d5": {
+          "name": "Limited-time Score Mission",
+          "type": "COLLECTION",
+          "startTime": 1586948400,
+          "endTime": 1588157999,
+          "isReplicate": false
+        },
+        "act3d0": {
+          "name": "Heart of Surging Flame",
+          "type": "TYPE_ACT3D0",
+          "startTime": 1588194000,
+          "endTime": 1589367599,
+          "isReplicate": false
+        },
+        "act4d2": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1585738800,
+          "endTime": 1586948399,
+          "isReplicate": false
+        },
+        "act4d0": {
+          "name": "Operational Intelligence",
+          "type": "TYPE_ACT4D0",
+          "startTime": 1585177200,
+          "endTime": 1586343599,
+          "isReplicate": false
+        },
+        "act2d8": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1584615600,
+          "endTime": 1585738799,
+          "isReplicate": false
+        },
+        "act2d5": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1583406000,
+          "endTime": 1584615599,
+          "isReplicate": false
+        },
+        "act1d5": {
+          "name": "Limited-time Cumulative Sign-In",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1582196400,
+          "endTime": 1583405999,
+          "isReplicate": false
+        },
+        "1stact": {
+          "name": "Grani and the Knights' Treasure",
+          "type": "DEFAULT",
+          "startTime": 1580943600,
+          "endTime": 1582109999,
+          "isReplicate": false
+        },
+        "0D5act": {
+          "name": "Limited-time Mission",
+          "type": "MISSION_ONLY",
+          "startTime": 1579690800,
+          "endTime": 1580900399,
+          "isReplicate": false
+        }
+      }
+    },
+    "cn": {
+      "source": "https://raw.githubusercontent.com/Kengxxiao/ArknightsGameData/6f63c14e27b847ef74b53b00fe51fc322b3cd7ff/zh_CN/gamedata/excel/activity_table.json",
+      "activities": {
+        "act65sign": {
+          "name": "感谢庆典限时签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1793487600,
+          "endTime": 1794686399,
+          "isReplicate": false
+        },
+        "act66sign": {
+          "name": "感谢庆典补给签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1794427200,
+          "endTime": 1795291199,
+          "isReplicate": false
+        },
+        "act55side": {
+          "name": "时间啊，向前！",
+          "type": "TYPE_ACT55SIDE",
+          "startTime": 1793487600,
+          "endTime": 1795291199,
+          "isReplicate": false
+        },
+        "act29login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1793487600,
+          "endTime": 1794686399,
+          "isReplicate": false
+        },
+        "act17pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1793487600,
+          "endTime": 1794686399,
+          "isReplicate": false
+        },
+        "act3autochess": {
+          "name": "卫戍协议:规程",
+          "type": "AUTOCHESS",
+          "startTime": 1794124800,
+          "endTime": 4092580799,
+          "isReplicate": false
+        },
+        "act1museum": {
+          "name": "视相博物馆：演化",
+          "type": "ARCADE",
+          "startTime": 1792848600,
+          "endTime": 1793995199,
+          "isReplicate": false
+        },
+        "act1reward": {
+          "name": "感谢庆典特别招募",
+          "type": "REWARD_ONLY",
+          "startTime": 1792848600,
+          "endTime": 1796155199,
+          "isReplicate": false
+        },
+        "act64sign": {
+          "name": "感谢庆典前瞻签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1792848600,
+          "endTime": 1793649599,
+          "isReplicate": false
+        },
+        "act4video": {
+          "name": "恒远津梁限时登录",
+          "type": "CHECKIN_VIDEO",
+          "startTime": 1792137600,
+          "endTime": 1793303999,
+          "isReplicate": false
+        },
+        "act52side": {
+          "name": "昨日海",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1791500400,
+          "endTime": 1792699199,
+          "isReplicate": false
+        },
+        "act3break": {
+          "name": "矢量突破#3 拟生态",
+          "type": "VEC_BREAK_V2",
+          "startTime": 1790668800,
+          "endTime": 1792439999,
+          "isReplicate": false
+        },
+        "act63sign": {
+          "name": "稳态测定签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1790539200,
+          "endTime": 1791403199,
+          "isReplicate": false
+        },
+        "act62sign": {
+          "name": "锦枫映月签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1790107200,
+          "endTime": 1790711999,
+          "isReplicate": false
+        },
+        "act1dp": {
+          "name": "逐影集趣",
+          "type": "ACT_DP",
+          "startTime": 1789891200,
+          "endTime": 1790711999,
+          "isReplicate": false
+        },
+        "act54side": {
+          "name": "月行水上",
+          "type": "TYPE_ACT54SIDE",
+          "startTime": 1788476400,
+          "endTime": 1789675199,
+          "isReplicate": false
+        },
+        "act61sign": {
+          "name": "此夜同行签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1788476400,
+          "endTime": 1789675199,
+          "isReplicate": false
+        },
+        "act44sre": {
+          "name": "墟·复刻",
+          "type": "TYPE_ACT44SIDE",
+          "startTime": 1787342400,
+          "endTime": 1788206399,
+          "isReplicate": true
+        },
+        "act53side": {
+          "name": "直到大地变成一颗酸橙",
+          "type": "TYPE_ACT53SIDE",
+          "startTime": 1785538800,
+          "endTime": 1787342399,
+          "isReplicate": false
+        },
+        "act1arkhub": {
+          "name": "奇象巡展",
+          "type": "ARK_HUB",
+          "startTime": 1786176000,
+          "endTime": 1788465599,
+          "isReplicate": false
+        },
+        "act60sign": {
+          "name": "透明信笺签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1785538800,
+          "endTime": 1786737599,
+          "isReplicate": false
+        },
+        "act5unique": {
+          "name": "夏日嘉年华特别活动",
+          "type": "UNIQUE_ONLY",
+          "startTime": 1785538800,
+          "endTime": 1788983999,
+          "isReplicate": false
+        },
+        "act28login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1785538800,
+          "endTime": 1786737599,
+          "isReplicate": false
+        },
+        "act16pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1785538800,
+          "endTime": 1786737599,
+          "isReplicate": false
+        },
+        "act43sre": {
+          "name": "红丝绒·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1784491200,
+          "endTime": 1785355199,
+          "isReplicate": true
+        },
+        "act21mini": {
+          "name": "丛林症结",
+          "type": "MINISTORY",
+          "startTime": 1783638000,
+          "endTime": 1784231999,
+          "isReplicate": false
+        },
+        "act9switch": {
+          "name": "魔法与友谊合作活动",
+          "type": "SWITCH_ONLY",
+          "startTime": 1783065600,
+          "endTime": 1783886399,
+          "isReplicate": false
+        },
+        "act4signvs": {
+          "name": "端阳正午签到活动",
+          "type": "CHECKIN_VS",
+          "startTime": 1781640000,
+          "endTime": 1782503999,
+          "isReplicate": false
+        },
+        "act24sre": {
+          "name": "落叶逐火·复刻",
+          "type": "TYPE_ACT24SIDE",
+          "startTime": 1781510400,
+          "endTime": 1782331199,
+          "isReplicate": true
+        },
+        "act1football": {
+          "name": "阵地足球锦标",
+          "type": "ACT_FOOTBALL",
+          "startTime": 1780905600,
+          "endTime": 1782071999,
+          "isReplicate": false
+        },
+        "act58sign": {
+          "name": "狩猎时光",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1780268400,
+          "endTime": 1781467199,
+          "isReplicate": false
+        },
+        "act50side": {
+          "name": "泡影苍霆",
+          "type": "TYPE_ACT24SIDE",
+          "startTime": 1780268400,
+          "endTime": 1781467199,
+          "isReplicate": false
+        },
+        "act42sre": {
+          "name": "众生行记·复刻",
+          "type": "TYPE_ACT42SIDE",
+          "startTime": 1779436800,
+          "endTime": 1780257599,
+          "isReplicate": true
+        },
+        "act59sign": {
+          "name": "七周年庆典签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1777590000,
+          "endTime": 1778788799,
+          "isReplicate": false
+        },
+        "act15pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1777590000,
+          "endTime": 1778788799,
+          "isReplicate": false
+        },
+        "act4mainss": {
+          "name": "相变临界",
+          "type": "TYPE_MAINSS",
+          "startTime": 1777590000,
+          "endTime": 1778788799,
+          "isReplicate": false
+        },
+        "act3video": {
+          "name": "回望泰拉限时登录活动",
+          "type": "CHECKIN_VIDEO",
+          "startTime": 1777123800,
+          "endTime": 1780257599,
+          "isReplicate": false
+        },
+        "act3enemyduel": {
+          "name": "争锋频道：绿藤城",
+          "type": "ENEMY_DUEL",
+          "startTime": 1777123800,
+          "endTime": 1778270399,
+          "isReplicate": false
+        },
+        "act3access": {
+          "name": "七周年专享活动",
+          "type": "CHECKIN_ACCESS",
+          "startTime": 1777123800,
+          "endTime": 1780257599,
+          "isReplicate": false
+        },
+        "act51side": {
+          "name": "人们，我们",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1775516400,
+          "endTime": 1776715199,
+          "isReplicate": false
+        },
+        "act7fun": {
+          "name": "Rhodes Island Epic 黑色博士坠落",
+          "type": "APRIL_FOOL",
+          "startTime": 1775016000,
+          "endTime": 1775591999,
+          "isReplicate": false
+        },
+        "act41sre": {
+          "name": "挽歌燃烧殆尽·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1774598400,
+          "endTime": 1775419199,
+          "isReplicate": true
+        },
+        "act2autochess": {
+          "name": "卫戍协议:盟约",
+          "type": "DEFAULT",
+          "startTime": 1773475200,
+          "endTime": 1777060799,
+          "isReplicate": false
+        },
+        "act20mini": {
+          "name": "十字路口",
+          "type": "MINISTORY",
+          "startTime": 1773097200,
+          "endTime": 1773691199,
+          "isReplicate": false
+        },
+        "act2break": {
+          "name": "矢量突破#2 巫术之夜",
+          "type": "VEC_BREAK_V2",
+          "startTime": 1771920000,
+          "endTime": 1773691199,
+          "isReplicate": false
+        },
+        "act3blessing": {
+          "name": "2026罗德岛新春签到",
+          "type": "BLESS_ONLY",
+          "startTime": 1771185600,
+          "endTime": 1772395199,
+          "isReplicate": false
+        },
+        "act49side": {
+          "name": "辞岁行",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1770678000,
+          "endTime": 1772481599,
+          "isReplicate": false
+        },
+        "act27login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1770678000,
+          "endTime": 1771876799,
+          "isReplicate": false
+        },
+        "act14pray": {
+          "name": "龙门幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1770678000,
+          "endTime": 1771876799,
+          "isReplicate": false
+        },
+        "act3unique": {
+          "name": "鸣羽颂新签到活动",
+          "type": "UNIQUE_ONLY",
+          "startTime": 1770382800,
+          "endTime": 1773086399,
+          "isReplicate": false
+        },
+        "act40sre": {
+          "name": "相见欢·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1769457600,
+          "endTime": 1770321599,
+          "isReplicate": true
+        },
+        "act7collection": {
+          "name": "界园志异限时任务",
+          "type": "COLLECTION",
+          "startTime": 1769241600,
+          "endTime": 1770407999,
+          "isReplicate": false
+        },
+        "act8switch": {
+          "name": "慵懒心意合作活动",
+          "type": "SWITCH_ONLY",
+          "startTime": 1768550400,
+          "endTime": 1770321599,
+          "isReplicate": false
+        },
+        "act48side": {
+          "name": "雅赛努斯复仇记",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1767913200,
+          "endTime": 1769111999,
+          "isReplicate": false
+        },
+        "act57sign": {
+          "name": "跨年纪念签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1766865600,
+          "endTime": 1767729599,
+          "isReplicate": false
+        },
+        "act6bossrush": {
+          "name": "引航者试炼",
+          "type": "BOSS_RUSH",
+          "startTime": 1766692800,
+          "endTime": 1767902399,
+          "isReplicate": false
+        },
+        "act7switch": {
+          "name": "星语共愿",
+          "type": "SWITCH_ONLY",
+          "startTime": 1766493000,
+          "endTime": 1767297599,
+          "isReplicate": false
+        },
+        "act39sre": {
+          "name": "出苍白海·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1766088000,
+          "endTime": 1766951999,
+          "isReplicate": true
+        },
+        "act47side": {
+          "name": "未许之地",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1764889200,
+          "endTime": 1766087999,
+          "isReplicate": false
+        },
+        "act1autochess": {
+          "name": "卫戍协议:盟约",
+          "type": "DEFAULT",
+          "startTime": 1763107200,
+          "endTime": 1765483199,
+          "isReplicate": false
+        },
+        "act38sre": {
+          "name": "揭幕者们·复刻",
+          "type": "TYPE_ACT38SIDE",
+          "startTime": 1764057600,
+          "endTime": 1764878399,
+          "isReplicate": true
+        },
+        "act2video": {
+          "name": "留影烁今登录活动",
+          "type": "CHECKIN_VIDEO",
+          "startTime": 1764057600,
+          "endTime": 1764878399,
+          "isReplicate": false
+        },
+        "act56sign": {
+          "name": "感谢庆典累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1762977600,
+          "endTime": 1763841599,
+          "isReplicate": false
+        },
+        "act46side": {
+          "name": "雪山降临1101",
+          "type": "TYPE_ACT46SIDE",
+          "startTime": 1761951600,
+          "endTime": 1763755199,
+          "isReplicate": false
+        },
+        "act2recruit": {
+          "name": "特别公开招募 - 高级资深干员",
+          "type": "RECRUIT_ONLY",
+          "startTime": 1761951600,
+          "endTime": 1764878399,
+          "isReplicate": false
+        },
+        "act26login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1761951600,
+          "endTime": 1763150399,
+          "isReplicate": false
+        },
+        "act55sign": {
+          "name": "感谢庆典累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1761951600,
+          "endTime": 1763150399,
+          "isReplicate": false
+        },
+        "act13pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1761951600,
+          "endTime": 1763150399,
+          "isReplicate": false
+        },
+        "act1recruit": {
+          "name": "特别公开招募 - 资深干员",
+          "type": "RECRUIT_ONLY",
+          "startTime": 1761399000,
+          "endTime": 1761940799,
+          "isReplicate": false
+        },
+        "act3mainss": {
+          "name": "反常光谱",
+          "type": "TYPE_MAINSS",
+          "startTime": 1759964400,
+          "endTime": 1761163199,
+          "isReplicate": false
+        },
+        "act5switch": {
+          "name": "温情时光合作活动",
+          "type": "SWITCH_ONLY",
+          "startTime": 1761033600,
+          "endTime": 1762804799,
+          "isReplicate": false
+        },
+        "act1teamquest": {
+          "name": "共竞目标",
+          "type": "TEAM_QUEST",
+          "startTime": 1761033600,
+          "endTime": 1763063999,
+          "isReplicate": false
+        },
+        "act2multi": {
+          "name": "促融共竞#2",
+          "type": "MULTIPLAY_V3",
+          "startTime": 1761033600,
+          "endTime": 1762804799,
+          "isReplicate": false
+        },
+        "act54sign": {
+          "name": "感谢庆典前瞻签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1761399000,
+          "endTime": 1762199999,
+          "isReplicate": false
+        },
+        "act6collection": {
+          "name": "梦城堡模拟训练",
+          "type": "COLLECTION",
+          "startTime": 1756958400,
+          "endTime": 1758743999,
+          "isReplicate": false
+        },
+        "act53sign": {
+          "name": "金樨迎月签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1759521600,
+          "endTime": 1760126399,
+          "isReplicate": false
+        },
+        "act52sign": {
+          "name": "新生支点签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1759003200,
+          "endTime": 1759867199,
+          "isReplicate": false
+        },
+        "act1vhalfidle": {
+          "name": "次生预案",
+          "type": "HALFIDLE_VERIFY1",
+          "startTime": 1758787200,
+          "endTime": 1760558399,
+          "isReplicate": false
+        },
+        "act37sre": {
+          "name": "追迹日落以西·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1758268800,
+          "endTime": 1759089599,
+          "isReplicate": true
+        },
+        "act25login": {
+          "name": "焰烬曙明完结庆祝",
+          "type": "LOGIN_ONLY",
+          "startTime": 1757102400,
+          "endTime": 1759953599,
+          "isReplicate": false
+        },
+        "act51sign": {
+          "name": "提线人偶的迎宾礼签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1756958400,
+          "endTime": 1758139199,
+          "isReplicate": false
+        },
+        "act45side": {
+          "name": "无忧梦呓",
+          "type": "TYPE_ACT45SIDE",
+          "startTime": 1756958400,
+          "endTime": 1758139199,
+          "isReplicate": false
+        },
+        "act2enemyduel": {
+          "name": "争锋频道：蜜果城",
+          "type": "ENEMY_DUEL",
+          "startTime": 1756368000,
+          "endTime": 1757534399,
+          "isReplicate": false
+        },
+        "act35sre": {
+          "name": "太阳甩在身后·复刻",
+          "type": "TYPE_ACT35SIDE",
+          "startTime": 1756065600,
+          "endTime": 1756929599,
+          "isReplicate": true
+        },
+        "act50sign": {
+          "name": "风物留痕签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1754107200,
+          "endTime": 1755287999,
+          "isReplicate": false
+        },
+        "act2unique": {
+          "name": "夏日嘉年华特别活动",
+          "type": "UNIQUE_ONLY",
+          "startTime": 1754107200,
+          "endTime": 1758139199,
+          "isReplicate": false
+        },
+        "act24login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1754107200,
+          "endTime": 1755287999,
+          "isReplicate": false
+        },
+        "act12pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1754107200,
+          "endTime": 1755287999,
+          "isReplicate": false
+        },
+        "act44side": {
+          "name": "墟",
+          "type": "TYPE_ACT44SIDE",
+          "startTime": 1754107200,
+          "endTime": 1755892799,
+          "isReplicate": false
+        },
+        "act19mini": {
+          "name": "镜中集",
+          "type": "MINISTORY",
+          "startTime": 1751947200,
+          "endTime": 1752523199,
+          "isReplicate": false
+        },
+        "act5collection": {
+          "name": "御鼓吉音限时任务",
+          "type": "COLLECTION",
+          "startTime": 1753171200,
+          "endTime": 1754337599,
+          "isReplicate": false
+        },
+        "act5bossrush": {
+          "name": "引航者试炼",
+          "type": "BOSS_RUSH",
+          "startTime": 1750752000,
+          "endTime": 1751918399,
+          "isReplicate": false
+        },
+        "act4collection": {
+          "name": "重返古堡",
+          "type": "COLLECTION",
+          "startTime": 1749096000,
+          "endTime": 1750276799,
+          "isReplicate": false
+        },
+        "act43side": {
+          "name": "红丝绒",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1749096000,
+          "endTime": 1750276799,
+          "isReplicate": false
+        },
+        "act34sre": {
+          "name": "生路·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1750320000,
+          "endTime": 1751140799,
+          "isReplicate": true
+        },
+        "act3signvs": {
+          "name": "端阳正午签到活动",
+          "type": "CHECKIN_VS",
+          "startTime": 1748462400,
+          "endTime": 1749326399,
+          "isReplicate": false
+        },
+        "act49sign": {
+          "name": "六周年庆典签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1746072000,
+          "endTime": 1747252799,
+          "isReplicate": false
+        },
+        "act11pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1746072000,
+          "endTime": 1747252799,
+          "isReplicate": false
+        },
+        "act1break": {
+          "name": "矢量突破：无机物",
+          "type": "VEC_BREAK_V2",
+          "startTime": 1747296000,
+          "endTime": 1749067199,
+          "isReplicate": false
+        },
+        "act42side": {
+          "name": "众生行记",
+          "type": "TYPE_ACT42SIDE",
+          "startTime": 1746072000,
+          "endTime": 1747857599,
+          "isReplicate": false
+        },
+        "act2access": {
+          "name": "活动推荐月卡",
+          "type": "CHECKIN_ACCESS",
+          "startTime": 1745674200,
+          "endTime": 1748721599,
+          "isReplicate": false
+        },
+        "act1enemyduel": {
+          "name": "争锋频道：青草城",
+          "type": "ENEMY_DUEL",
+          "startTime": 1745674200,
+          "endTime": 1746993599,
+          "isReplicate": false
+        },
+        "act33sre": {
+          "name": "巴别塔·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1745222400,
+          "endTime": 1746043199,
+          "isReplicate": true
+        },
+        "act2mainss": {
+          "name": "离解复合",
+          "type": "TYPE_MAINSS",
+          "startTime": 1743998400,
+          "endTime": 1745179199,
+          "isReplicate": false
+        },
+        "act6fun": {
+          "name": "愚人节活动",
+          "type": "APRIL_FOOL",
+          "startTime": 1743494400,
+          "endTime": 1744055999,
+          "isReplicate": false
+        },
+        "act1multi": {
+          "name": "促融共竞#1",
+          "type": "MULTIPLAY_V3",
+          "startTime": 1742457600,
+          "endTime": 1744228799,
+          "isReplicate": false
+        },
+        "act41side": {
+          "name": "挽歌燃烧殆尽",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1741320000,
+          "endTime": 1742500799,
+          "isReplicate": false
+        },
+        "act3collection": {
+          "name": "潮起潮又起",
+          "type": "COLLECTION",
+          "startTime": 1740038400,
+          "endTime": 1741204799,
+          "isReplicate": false
+        },
+        "act2blessing": {
+          "name": "2025罗德岛新春签到",
+          "type": "BLESS_ONLY",
+          "startTime": 1738008000,
+          "endTime": 1739217599,
+          "isReplicate": false
+        },
+        "act23login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1737518400,
+          "endTime": 1738699199,
+          "isReplicate": false
+        },
+        "act10pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1737518400,
+          "endTime": 1738699199,
+          "isReplicate": false
+        },
+        "act40side": {
+          "name": "相见欢",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1737518400,
+          "endTime": 1739303999,
+          "isReplicate": false
+        },
+        "act18mini": {
+          "name": "我们明日见",
+          "type": "MINISTORY",
+          "startTime": 1739520000,
+          "endTime": 1740081599,
+          "isReplicate": false
+        },
+        "act31sre": {
+          "name": "怀黍离·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1740384000,
+          "endTime": 1741204799,
+          "isReplicate": true
+        },
+        "act2collection": {
+          "name": "限时积分任务",
+          "type": "COLLECTION",
+          "startTime": 1736409600,
+          "endTime": 1737575999,
+          "isReplicate": false
+        },
+        "act1arcade": {
+          "name": "视相博物馆",
+          "type": "ARCADE",
+          "startTime": 1735459200,
+          "endTime": 1736625599,
+          "isReplicate": false
+        },
+        "act48sign": {
+          "name": "2025跨年纪念限时活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1735459200,
+          "endTime": 1736279999,
+          "isReplicate": false
+        },
+        "act4switch": {
+          "name": "时光的赠礼 ",
+          "type": "SWITCH_ONLY",
+          "startTime": 1734957000,
+          "endTime": 1735761599,
+          "isReplicate": false
+        },
+        "act30sre": {
+          "name": "银心湖列车·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1734595200,
+          "endTime": 1735415999,
+          "isReplicate": true
+        },
+        "act1video": {
+          "name": "留影烁今登录活动",
+          "type": "CHECKIN_VIDEO",
+          "startTime": 1733990400,
+          "endTime": 1734811199,
+          "isReplicate": false
+        },
+        "act39side": {
+          "name": "出苍白海",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1733371200,
+          "endTime": 1734551999,
+          "isReplicate": false
+        },
+        "act1vautochess": {
+          "name": "卫戍协议",
+          "type": "AUTOCHESS_VERIFY1",
+          "startTime": 1731657600,
+          "endTime": 1732823999,
+          "isReplicate": false
+        },
+        "act29sre": {
+          "name": "崔林特尔梅之金·复刻",
+          "type": "TYPE_ACT29SIDE",
+          "startTime": 1732521600,
+          "endTime": 1733342399,
+          "isReplicate": true
+        },
+        "act47sign": {
+          "name": "感谢庆典补给签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1731528000,
+          "endTime": 1732391999,
+          "isReplicate": false
+        },
+        "act46sign": {
+          "name": "感谢庆典限时签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1730433600,
+          "endTime": 1731614399,
+          "isReplicate": false
+        },
+        "act38side": {
+          "name": "揭幕者们",
+          "type": "TYPE_ACT38SIDE",
+          "startTime": 1730433600,
+          "endTime": 1732219199,
+          "isReplicate": false
+        },
+        "act22login": {
+          "name": "限定池送10连",
+          "type": "LOGIN_ONLY",
+          "startTime": 1730433600,
+          "endTime": 1731614399,
+          "isReplicate": false
+        },
+        "act9pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1730433600,
+          "endTime": 1731614399,
+          "isReplicate": false
+        },
+        "act45sign": {
+          "name": "感谢庆典前瞻签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1729951200,
+          "endTime": 1730750399,
+          "isReplicate": false
+        },
+        "act37side": {
+          "name": "追迹日落以西",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1728446400,
+          "endTime": 1729627199,
+          "isReplicate": false
+        },
+        "act44sign": {
+          "name": "构想试炼签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1727467200,
+          "endTime": 1728331199,
+          "isReplicate": false
+        },
+        "act1vecb": {
+          "name": "矢量突破",
+          "type": "VEC_BREAK",
+          "startTime": 1727424000,
+          "endTime": 1728590399,
+          "isReplicate": false
+        },
+        "act28sre": {
+          "name": "不义之财 复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1726732800,
+          "endTime": 1727553599,
+          "isReplicate": true
+        },
+        "act43sign": {
+          "name": "良辰迎月签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1726344000,
+          "endTime": 1726948799,
+          "isReplicate": false
+        },
+        "act36side": {
+          "name": "泰拉饭",
+          "type": "TYPE_ACT36SIDE",
+          "startTime": 1725249600,
+          "endTime": 1726430399,
+          "isReplicate": false
+        },
+        "act42sign": {
+          "name": "品鉴泰拉魔物",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1725249600,
+          "endTime": 1726430399,
+          "isReplicate": false
+        },
+        "act1collection": {
+          "name": "限时积分任务",
+          "type": "COLLECTION",
+          "startTime": 1724313600,
+          "endTime": 1725134399,
+          "isReplicate": false
+        },
+        "act27sre": {
+          "name": "火山旅梦·复刻",
+          "type": "TYPE_ACT27SIDE",
+          "startTime": 1724313600,
+          "endTime": 1725134399,
+          "isReplicate": true
+        },
+        "act35side": {
+          "name": "太阳甩在身后",
+          "type": "TYPE_ACT35SIDE",
+          "startTime": 1722484800,
+          "endTime": 1724270399,
+          "isReplicate": false
+        },
+        "act21login": {
+          "name": "限定池送10连",
+          "type": "LOGIN_ONLY",
+          "startTime": 1722484800,
+          "endTime": 1723665599,
+          "isReplicate": false
+        },
+        "act41sign": {
+          "name": "沉沙赫日签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1722484800,
+          "endTime": 1723665599,
+          "isReplicate": false
+        },
+        "act8pray": {
+          "name": "幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1722484800,
+          "endTime": 1723665599,
+          "isReplicate": false
+        },
+        "act17mini": {
+          "name": "熔炉“还魂”记",
+          "type": "MINISTORY",
+          "startTime": 1720497600,
+          "endTime": 1721073599,
+          "isReplicate": false
+        },
+        "act40sign": {
+          "name": "无终奇语签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1720497600,
+          "endTime": 1721332799,
+          "isReplicate": false
+        },
+        "act26sre": {
+          "name": "空想花庭·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1719302400,
+          "endTime": 1720123199,
+          "isReplicate": true
+        },
+        "act3switch": {
+          "name": "虹彩茶会合作活动",
+          "type": "SWITCH_ONLY",
+          "startTime": 1718870400,
+          "endTime": 1720036799,
+          "isReplicate": false
+        },
+        "act2signvs": {
+          "name": "端阳正午签到活动",
+          "type": "CHECKIN_VS",
+          "startTime": 1717704000,
+          "endTime": 1718567999,
+          "isReplicate": false
+        },
+        "act34side": {
+          "name": "生路",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1717560000,
+          "endTime": 1718740799,
+          "isReplicate": false
+        },
+        "act25sre": {
+          "name": "孤星·复刻",
+          "type": "TYPE_ACT25SIDE",
+          "startTime": 1716537600,
+          "endTime": 1717358399,
+          "isReplicate": true
+        },
+        "act2vmulti": {
+          "name": "罗德岛促融共竞",
+          "type": "MULTIPLAY_VERIFY2",
+          "startTime": 1715760000,
+          "endTime": 1716926399,
+          "isReplicate": false
+        },
+        "act39sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1714536000,
+          "endTime": 1715716799,
+          "isReplicate": false
+        },
+        "act5mine": {
+          "name": "卡钳谷矿区限时开采许可",
+          "type": "GRID_GACHA_V2",
+          "startTime": 1714536000,
+          "endTime": 1715716799,
+          "isReplicate": false
+        },
+        "act1mainss": {
+          "name": "慈悲灯塔",
+          "type": "YEAR_5_GENERAL",
+          "startTime": 1714536000,
+          "endTime": 1715716799,
+          "isReplicate": false
+        },
+        "act1access": {
+          "name": "五周年专享活动",
+          "type": "CHECKIN_ACCESS",
+          "startTime": 1714224600,
+          "endTime": 1717185599,
+          "isReplicate": false
+        },
+        "act33side": {
+          "name": "巴别塔",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1712808000,
+          "endTime": 1714679999,
+          "isReplicate": false
+        },
+        "act5fun": {
+          "name": "愚人节活动",
+          "type": "APRIL_FOOL",
+          "startTime": 1711958400,
+          "endTime": 1712519999,
+          "isReplicate": false
+        },
+        "act32side": {
+          "name": "水晶箭行动",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1709784000,
+          "endTime": 1710964799,
+          "isReplicate": false
+        },
+        "act38sign": {
+          "name": "明日方舟X彩虹六号：围攻签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1709784000,
+          "endTime": 1710964799,
+          "isReplicate": false
+        },
+        "act1r6sre": {
+          "name": "源石尘行动·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1711008000,
+          "endTime": 1711828799,
+          "isReplicate": true
+        },
+        "act20login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1709784000,
+          "endTime": 1710964799,
+          "isReplicate": false
+        },
+        "act4bossrush": {
+          "name": "引航者试炼",
+          "type": "BOSS_RUSH",
+          "startTime": 1708588800,
+          "endTime": 1709755199,
+          "isReplicate": false
+        },
+        "act1blessing": {
+          "name": "2024罗德岛新春签到",
+          "type": "BLESS_ONLY",
+          "startTime": 1707422400,
+          "endTime": 1708631999,
+          "isReplicate": false
+        },
+        "act31side": {
+          "name": "怀黍离",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1706760000,
+          "endTime": 1708545599,
+          "isReplicate": false
+        },
+        "act7pray": {
+          "name": "龙门幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1706760000,
+          "endTime": 1707940799,
+          "isReplicate": false
+        },
+        "act19login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1706760000,
+          "endTime": 1707940799,
+          "isReplicate": false
+        },
+        "act23sre": {
+          "name": "登临意·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1705564800,
+          "endTime": 1706385599,
+          "isReplicate": true
+        },
+        "act16mini": {
+          "name": "去咧嘴谷",
+          "type": "MINISTORY",
+          "startTime": 1704787200,
+          "endTime": 1705348799,
+          "isReplicate": false
+        },
+        "act22sre": {
+          "name": "照我以火·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1703232000,
+          "endTime": 1704052799,
+          "isReplicate": true
+        },
+        "act37sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1703361600,
+          "endTime": 1704571199,
+          "isReplicate": false
+        },
+        "act30side": {
+          "name": "银心湖列车",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1701748800,
+          "endTime": 1702929599,
+          "isReplicate": false
+        },
+        "act29side": {
+          "name": "崔林特尔梅之金",
+          "type": "TYPE_ACT29SIDE",
+          "startTime": 1698811200,
+          "endTime": 1700596799,
+          "isReplicate": false
+        },
+        "act2float": {
+          "name": "铁腕城产业合作洽谈会",
+          "type": "FLOAT_PARADE",
+          "startTime": 1698811200,
+          "endTime": 1699991999,
+          "isReplicate": false
+        },
+        "act36sign": {
+          "name": "步上双塔之时签到活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1698811200,
+          "endTime": 1699991999,
+          "isReplicate": false
+        },
+        "act18login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1698811200,
+          "endTime": 1699991999,
+          "isReplicate": false
+        },
+        "act21sre": {
+          "name": "叙拉古人·复刻",
+          "type": "TYPE_ACT21SIDE",
+          "startTime": 1697961600,
+          "endTime": 1698782399,
+          "isReplicate": true
+        },
+        "act17login": {
+          "name": "《明日方舟：冬隐归路》开播庆祝活动",
+          "type": "LOGIN_ONLY",
+          "startTime": 1696536000,
+          "endTime": 1699127999,
+          "isReplicate": false
+        },
+        "act42d0": {
+          "name": "纷争演绎",
+          "type": "TYPE_ACT42D0",
+          "startTime": 1695801600,
+          "endTime": 1696967999,
+          "isReplicate": false
+        },
+        "act35sign": {
+          "name": "清光邀月——月饼烘焙小教程",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1695801600,
+          "endTime": 1696967999,
+          "isReplicate": false
+        },
+        "act1mainlinebp": {
+          "name": "战备支援",
+          "type": "MAINLINE_BP",
+          "startTime": 1695499200,
+          "endTime": 1697918399,
+          "isReplicate": false
+        },
+        "act1unique": {
+          "name": "九色鹿签到复刻活动",
+          "type": "UNIQUE_ONLY",
+          "startTime": 1695110400,
+          "endTime": 1696276799,
+          "isReplicate": false
+        },
+        "act2switch": {
+          "name": "登览锦绣合作活动",
+          "type": "SWITCH_ONLY",
+          "startTime": 1693886400,
+          "endTime": 1694462399,
+          "isReplicate": false
+        },
+        "act28side": {
+          "name": "不义之财",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1693886400,
+          "endTime": 1695067199,
+          "isReplicate": false
+        },
+        "act20sre": {
+          "name": "理想城：长夏狂欢季·复刻",
+          "type": "TYPE_ACT20SIDE",
+          "startTime": 1693468800,
+          "endTime": 1694289599,
+          "isReplicate": true
+        },
+        "act3bossrush": {
+          "name": "引航者试炼",
+          "type": "BOSS_RUSH",
+          "startTime": 1692345600,
+          "endTime": 1693511999,
+          "isReplicate": false
+        },
+        "act27side": {
+          "name": "火山旅梦",
+          "type": "TYPE_ACT27SIDE",
+          "startTime": 1690862400,
+          "endTime": 1692647999,
+          "isReplicate": false
+        },
+        "act16login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1690862400,
+          "endTime": 1692043199,
+          "isReplicate": false
+        },
+        "act34sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1690862400,
+          "endTime": 1692043199,
+          "isReplicate": false
+        },
+        "act6pray": {
+          "name": "龙门幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1690862400,
+          "endTime": 1692043199,
+          "isReplicate": false
+        },
+        "act19sre": {
+          "name": "绿野幻梦·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1689667200,
+          "endTime": 1690487999,
+          "isReplicate": true
+        },
+        "act15mini": {
+          "name": "眠于树影之中",
+          "type": "MINISTORY",
+          "startTime": 1688616000,
+          "endTime": 1689191999,
+          "isReplicate": false
+        },
+        "act26side": {
+          "name": "空想花庭",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1686196800,
+          "endTime": 1687377599,
+          "isReplicate": false
+        },
+        "act1signvs": {
+          "name": "端阳正午签到活动",
+          "type": "CHECKIN_VS",
+          "startTime": 1687291200,
+          "endTime": 1688155199,
+          "isReplicate": false
+        },
+        "act1switch": {
+          "name": "宿于繁星合作活动",
+          "type": "SWITCH_ONLY",
+          "startTime": 1688025600,
+          "endTime": 1689191999,
+          "isReplicate": false
+        },
+        "act18sre": {
+          "name": "尘影余音·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1687248000,
+          "endTime": 1688068799,
+          "isReplicate": true
+        },
+        "act38d1": {
+          "name": "尖灭测试作战",
+          "type": "DEFAULT",
+          "startTime": 1684742400,
+          "endTime": 1685908799,
+          "isReplicate": false
+        },
+        "act25side": {
+          "name": "孤星",
+          "type": "TYPE_ACT25SIDE",
+          "startTime": 1682913600,
+          "endTime": 1684699199,
+          "isReplicate": false
+        },
+        "act1checkin": {
+          "name": "未来序曲签到活动",
+          "type": "CHECKIN_ALL_PLAYER",
+          "startTime": 1682913600,
+          "endTime": 1684094399,
+          "isReplicate": false
+        },
+        "act15login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1682913600,
+          "endTime": 1684094399,
+          "isReplicate": false
+        },
+        "act4mine": {
+          "name": "潘尼谷矿区登录活动",
+          "type": "GRID_GACHA_V2",
+          "startTime": 1682913600,
+          "endTime": 1684094399,
+          "isReplicate": false
+        },
+        "act17sre": {
+          "name": "愚人号·复刻",
+          "type": "TYPE_ACT17SIDE",
+          "startTime": 1681977600,
+          "endTime": 1682798399,
+          "isReplicate": true
+        },
+        "act4fun": {
+          "name": "愚人节活动",
+          "type": "APRIL_FOOL",
+          "startTime": 1680336000,
+          "endTime": 1680897599,
+          "isReplicate": false
+        },
+        "act24side": {
+          "name": "落叶逐火",
+          "type": "TYPE_ACT24SIDE",
+          "startTime": 1678161600,
+          "endTime": 1679342399,
+          "isReplicate": false
+        },
+        "act1flip": {
+          "name": "哗啦啦祈愿牌",
+          "type": "FLIP_ONLY",
+          "startTime": 1678161600,
+          "endTime": 1679342399,
+          "isReplicate": false
+        },
+        "act1mainbuff": {
+          "name": "战备支援",
+          "type": "MAIN_BUFF",
+          "startTime": 1679515200,
+          "endTime": 1681934399,
+          "isReplicate": false
+        },
+        "act14login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1678161600,
+          "endTime": 1679342399,
+          "isReplicate": false
+        },
+        "act1sandbox": {
+          "name": "生息演算：沙中之火",
+          "type": "DEFAULT",
+          "startTime": 1674979200,
+          "endTime": 1677959999,
+          "isReplicate": false
+        },
+        "act16sre": {
+          "name": "吾导先路·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1676966400,
+          "endTime": 1677787199,
+          "isReplicate": true
+        },
+        "act14mini": {
+          "name": "春分",
+          "type": "MINISTORY",
+          "startTime": 1676361600,
+          "endTime": 1676923199,
+          "isReplicate": false
+        },
+        "act33sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1674331200,
+          "endTime": 1676145599,
+          "isReplicate": false
+        },
+        "act5pray": {
+          "name": "龙门幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1673928000,
+          "endTime": 1675108799,
+          "isReplicate": false
+        },
+        "act13login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1673928000,
+          "endTime": 1675108799,
+          "isReplicate": false
+        },
+        "act23side": {
+          "name": "登临意",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1673928000,
+          "endTime": 1675108799,
+          "isReplicate": false
+        },
+        "act15sre": {
+          "name": "将进酒·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1672560000,
+          "endTime": 1673380799,
+          "isReplicate": true
+        },
+        "act32sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1671825600,
+          "endTime": 1673035199,
+          "isReplicate": false
+        },
+        "act22side": {
+          "name": "照我以火",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1671076800,
+          "endTime": 1672257599,
+          "isReplicate": false
+        },
+        "act2bossrush": {
+          "name": "引航者试炼",
+          "type": "BOSS_RUSH",
+          "startTime": 1673337600,
+          "endTime": 1673899199,
+          "isReplicate": false
+        },
+        "act21side": {
+          "name": "叙拉古人",
+          "type": "TYPE_ACT21SIDE",
+          "startTime": 1667275200,
+          "endTime": 1669060799,
+          "isReplicate": false
+        },
+        "act1float": {
+          "name": "纽莱堡市产业合作洽谈会",
+          "type": "FLOAT_PARADE",
+          "startTime": 1667275200,
+          "endTime": 1668455999,
+          "isReplicate": false
+        },
+        "act12login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1667275200,
+          "endTime": 1668455999,
+          "isReplicate": false
+        },
+        "act14sre": {
+          "name": "风雪过境·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1669881600,
+          "endTime": 1670702399,
+          "isReplicate": true
+        },
+        "act31sign": {
+          "name": "正逢雨季限时登录活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1667275200,
+          "endTime": 1668455999,
+          "isReplicate": false
+        },
+        "act30sign": {
+          "name": "秋风送爽限时登录活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1664568000,
+          "endTime": 1665431999,
+          "isReplicate": false
+        },
+        "act11login": {
+          "name": "《明日方舟：黎明前奏》开播纪念活动",
+          "type": "LOGIN_ONLY",
+          "startTime": 1666900800,
+          "endTime": 1668628799,
+          "isReplicate": false
+        },
+        "act29sign": {
+          "name": "桂时逢月——月饼烘焙小教程",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1662609600,
+          "endTime": 1663444799,
+          "isReplicate": false
+        },
+        "act13sre": {
+          "name": "长夜临光·复刻",
+          "type": "TYPE_ACT13SIDE",
+          "startTime": 1663833600,
+          "endTime": 1664654399,
+          "isReplicate": true
+        },
+        "act13mini": {
+          "name": "好久不见",
+          "type": "MINISTORY",
+          "startTime": 1663228800,
+          "endTime": 1663790399,
+          "isReplicate": false
+        },
+        "act12mini": {
+          "name": "日暮寻路",
+          "type": "MINISTORY",
+          "startTime": 1662609600,
+          "endTime": 1663185599,
+          "isReplicate": false
+        },
+        "act20side": {
+          "name": "理想城：长夏狂欢季",
+          "type": "TYPE_ACT20SIDE",
+          "startTime": 1660190400,
+          "endTime": 1661975999,
+          "isReplicate": false
+        },
+        "act1bossrush": {
+          "name": "引航者试炼",
+          "type": "BOSS_RUSH",
+          "startTime": 1660809600,
+          "endTime": 1661371199,
+          "isReplicate": false
+        },
+        "act10login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1660190400,
+          "endTime": 1661371199,
+          "isReplicate": false
+        },
+        "act28sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1660190400,
+          "endTime": 1661371199,
+          "isReplicate": false
+        },
+        "act4pray": {
+          "name": "际崖城惊奇墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1660190400,
+          "endTime": 1661371199,
+          "isReplicate": false
+        },
+        "act12sre": {
+          "name": "多索雷斯假日·复刻",
+          "type": "TYPE_ACT12SIDE",
+          "startTime": 1658822400,
+          "endTime": 1659643199,
+          "isReplicate": true
+        },
+        "act11mini": {
+          "name": "未尽篇章",
+          "type": "MINISTORY",
+          "startTime": 1658217600,
+          "endTime": 1658779199,
+          "isReplicate": false
+        },
+        "act19side": {
+          "name": "绿野幻梦",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1656993600,
+          "endTime": 1658174399,
+          "isReplicate": false
+        },
+        "act18side": {
+          "name": "尘影余音",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1654747200,
+          "endTime": 1655927999,
+          "isReplicate": false
+        },
+        "act27sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1654200000,
+          "endTime": 1655063999,
+          "isReplicate": false
+        },
+        "act11sre": {
+          "name": "覆潮之下·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1653897600,
+          "endTime": 1654718399,
+          "isReplicate": true
+        },
+        "act9login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1651388400,
+          "endTime": 1652558399,
+          "isReplicate": false
+        },
+        "act17side": {
+          "name": "愚人号",
+          "type": "TYPE_ACT17SIDE",
+          "startTime": 1651388400,
+          "endTime": 1653163199,
+          "isReplicate": false
+        },
+        "act26sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1651388400,
+          "endTime": 1652558399,
+          "isReplicate": false
+        },
+        "act3mine": {
+          "name": "葫芦谷矿区登录活动",
+          "type": "GRID_GACHA_V2",
+          "startTime": 1651388400,
+          "endTime": 1652558399,
+          "isReplicate": false
+        },
+        "act3fun": {
+          "name": "愚人节活动",
+          "type": "APRIL_FOOL",
+          "startTime": 1648800000,
+          "endTime": 1649361599,
+          "isReplicate": false
+        },
+        "act10sre": {
+          "name": "遗尘漫步·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1648540800,
+          "endTime": 1649361599,
+          "isReplicate": true
+        },
+        "act16side": {
+          "name": "吾导先路",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1647316800,
+          "endTime": 1648497599,
+          "isReplicate": false
+        },
+        "act10mini": {
+          "name": "阴云火花",
+          "type": "MINISTORY",
+          "startTime": 1644912000,
+          "endTime": 1645473599,
+          "isReplicate": false
+        },
+        "act25sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1643659200,
+          "endTime": 1645473599,
+          "isReplicate": false
+        },
+        "act15side": {
+          "name": "将进酒",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1643083200,
+          "endTime": 1644263999,
+          "isReplicate": false
+        },
+        "act8login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1643083200,
+          "endTime": 1644263999,
+          "isReplicate": false
+        },
+        "act3pray": {
+          "name": "龙门幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1643083200,
+          "endTime": 1644263999,
+          "isReplicate": false
+        },
+        "act24sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1641801600,
+          "endTime": 1642622399,
+          "isReplicate": false
+        },
+        "act9sre": {
+          "name": "画中人·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1641801600,
+          "endTime": 1642622399,
+          "isReplicate": true
+        },
+        "act23sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1640289600,
+          "endTime": 1641499199,
+          "isReplicate": false
+        },
+        "act14side": {
+          "name": "风雪过境",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1640059200,
+          "endTime": 1641239999,
+          "isReplicate": false
+        },
+        "act8sre": {
+          "name": "孤岛风云·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1638864000,
+          "endTime": 1639684799,
+          "isReplicate": true
+        },
+        "act22sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1635739200,
+          "endTime": 1636919999,
+          "isReplicate": false
+        },
+        "act7login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1635739200,
+          "endTime": 1636919999,
+          "isReplicate": false
+        },
+        "act2mine": {
+          "name": "波平谷矿区登录活动",
+          "type": "GRID_GACHA_V2",
+          "startTime": 1635739200,
+          "endTime": 1636919999,
+          "isReplicate": false
+        },
+        "act13side": {
+          "name": "长夜临光",
+          "type": "TYPE_ACT13SIDE",
+          "startTime": 1635739200,
+          "endTime": 1637524799,
+          "isReplicate": false
+        },
+        "act9mini": {
+          "name": "红松林",
+          "type": "MINISTORY",
+          "startTime": 1634284800,
+          "endTime": 1634846399,
+          "isReplicate": false
+        },
+        "act7sre": {
+          "name": "玛莉娅·临光·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1633075200,
+          "endTime": 1633895999,
+          "isReplicate": true
+        },
+        "act21sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1633032000,
+          "endTime": 1633895999,
+          "isReplicate": false
+        },
+        "act20sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1631851200,
+          "endTime": 1632599999,
+          "isReplicate": false
+        },
+        "act12side": {
+          "name": "多索雷斯假日",
+          "type": "TYPE_ACT12SIDE",
+          "startTime": 1627963200,
+          "endTime": 1629748799,
+          "isReplicate": false
+        },
+        "act19sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1627963200,
+          "endTime": 1629143999,
+          "isReplicate": false
+        },
+        "act2pray": {
+          "name": "双日城惊奇墙",
+          "type": "PRAY_ONLY",
+          "startTime": 1627963200,
+          "endTime": 1629143999,
+          "isReplicate": false
+        },
+        "act6login": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1627963200,
+          "endTime": 1629143999,
+          "isReplicate": false
+        },
+        "act6sre": {
+          "name": "密林悍将归来·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1626768000,
+          "endTime": 1627588799,
+          "isReplicate": true
+        },
+        "act8mini": {
+          "name": "如我所见",
+          "type": "MINISTORY",
+          "startTime": 1626163200,
+          "endTime": 1626724799,
+          "isReplicate": false
+        },
+        "act1lock": {
+          "name": "荷谟伊智境",
+          "type": "INTERLOCK",
+          "startTime": 1625198400,
+          "endTime": 1625774399,
+          "isReplicate": false
+        },
+        "act5sre": {
+          "name": "沃伦姆德的薄暮·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1623916800,
+          "endTime": 1624737599,
+          "isReplicate": true
+        },
+        "act18sign": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1623268800,
+          "endTime": 1624132799,
+          "isReplicate": false
+        },
+        "act7mini": {
+          "name": "灯火序曲",
+          "type": "MINISTORY",
+          "startTime": 1622520000,
+          "endTime": 1623095999,
+          "isReplicate": false
+        },
+        "act18d3d3": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1619852400,
+          "endTime": 1621022399,
+          "isReplicate": false
+        },
+        "act18d3d2": {
+          "name": "兔子谷矿区登录活动",
+          "type": "GRID_GACHA",
+          "startTime": 1619852400,
+          "endTime": 1621022399,
+          "isReplicate": false
+        },
+        "act18d3d1": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1619852400,
+          "endTime": 1621022399,
+          "isReplicate": false
+        },
+        "act18d3": {
+          "name": "覆潮之下",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1619852400,
+          "endTime": 1621022399,
+          "isReplicate": false
+        },
+        "act18d0": {
+          "name": "遗尘漫步",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1618459200,
+          "endTime": 1619639999,
+          "isReplicate": false
+        },
+        "act17d7": {
+          "name": "愚人节活动",
+          "type": "TYPE_ACT17D7",
+          "startTime": 1617264000,
+          "endTime": 1617825599,
+          "isReplicate": false
+        },
+        "act17d5": {
+          "name": "生于黑夜·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1617091200,
+          "endTime": 1617911999,
+          "isReplicate": true
+        },
+        "act17d1": {
+          "name": "罗德岛防御协议",
+          "type": "MULTIPLAY",
+          "startTime": 1612324800,
+          "endTime": 1616443199,
+          "isReplicate": false
+        },
+        "act17d0d2": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1615262400,
+          "endTime": 1616443199,
+          "isReplicate": false
+        },
+        "act17d0d1": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1615262400,
+          "endTime": 1616443199,
+          "isReplicate": false
+        },
+        "act17d0": {
+          "name": "源石尘行动",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1612324800,
+          "endTime": 1616443199,
+          "isReplicate": false
+        },
+        "act16d6": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1613073600,
+          "endTime": 1614887999,
+          "isReplicate": false
+        },
+        "act16d5d2": {
+          "name": "龙门幸运墙登录活动",
+          "type": "PRAY_ONLY",
+          "startTime": 1612512000,
+          "endTime": 1613678399,
+          "isReplicate": false
+        },
+        "act16d5d1": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1612512000,
+          "endTime": 1613678399,
+          "isReplicate": false
+        },
+        "act16d5": {
+          "name": "画中人",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1612512000,
+          "endTime": 1613678399,
+          "isReplicate": false
+        },
+        "act15d5": {
+          "name": "此地之外",
+          "type": "MINISTORY",
+          "startTime": 1609833600,
+          "endTime": 1610395199,
+          "isReplicate": false
+        },
+        "act15d1": {
+          "name": "跨年限时登录活动",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1608753600,
+          "endTime": 1609963199,
+          "isReplicate": false
+        },
+        "act15d0": {
+          "name": "孤岛风云",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1608177600,
+          "endTime": 1609358399,
+          "isReplicate": false
+        },
+        "act14d7": {
+          "name": "喧闹法则·复刻",
+          "type": "TYPE_ACT5D0",
+          "startTime": 1606809600,
+          "endTime": 1607630399,
+          "isReplicate": true
+        },
+        "act14d0d2": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1604203200,
+          "endTime": 1605383999,
+          "isReplicate": false
+        },
+        "act14d0d1": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1604203200,
+          "endTime": 1605383999,
+          "isReplicate": false
+        },
+        "act13d5": {
+          "name": "玛莉娅·临光",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1602748800,
+          "endTime": 1603915199,
+          "isReplicate": false
+        },
+        "act13d2": {
+          "name": "骑兵与猎人·复刻",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1601539200,
+          "endTime": 1602359999,
+          "isReplicate": true
+        },
+        "act13d2d2": {
+          "name": "骑兵与猎人复刻签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1601582400,
+          "endTime": 1602359999,
+          "isReplicate": false
+        },
+        "act13d2d1": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1601496000,
+          "endTime": 1602359999,
+          "isReplicate": false
+        },
+        "act13d0": {
+          "name": "踏寻往昔之风",
+          "type": "MINISTORY",
+          "startTime": 1600920000,
+          "endTime": 1601495999,
+          "isReplicate": false
+        },
+        "act12d6": {
+          "name": "刻俄柏的灰蕈迷境",
+          "type": "ROGUELIKE",
+          "startTime": 1598328000,
+          "endTime": 1600113599,
+          "isReplicate": false
+        },
+        "act12d0": {
+          "name": "密林悍将归来",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1598328000,
+          "endTime": 1599508799,
+          "isReplicate": false
+        },
+        "act11d7": {
+          "name": "火蓝之心·复刻",
+          "type": "TYPE_ACT3D0",
+          "startTime": 1597132800,
+          "endTime": 1597953599,
+          "isReplicate": true
+        },
+        "act11d0": {
+          "name": "沃伦姆德的薄暮",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1594267200,
+          "endTime": 1595447999,
+          "isReplicate": false
+        },
+        "act10d6": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1593028800,
+          "endTime": 1593892799,
+          "isReplicate": false
+        },
+        "act10d5": {
+          "name": "乌萨斯的孩子们",
+          "type": "MINISTORY",
+          "startTime": 1592467200,
+          "endTime": 1593028799,
+          "isReplicate": false
+        },
+        "act9d4": {
+          "name": "限时积分任务",
+          "type": "COLLECTION",
+          "startTime": 1589486400,
+          "endTime": 1590695999,
+          "isReplicate": false
+        },
+        "act9d1d2": {
+          "name": "登录领取奖励",
+          "type": "LOGIN_ONLY",
+          "startTime": 1588316400,
+          "endTime": 1589486399,
+          "isReplicate": false
+        },
+        "act9d1d1": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1588276800,
+          "endTime": 1590695999,
+          "isReplicate": false
+        },
+        "act9d0": {
+          "name": "生于黑夜",
+          "type": "TYPE_ACT9D0",
+          "startTime": 1587441600,
+          "endTime": 1589486399,
+          "isReplicate": false
+        },
+        "act8d2": {
+          "name": "愚人节活动",
+          "type": "AVG_ONLY",
+          "startTime": 1585728000,
+          "endTime": 1588276799,
+          "isReplicate": false
+        },
+        "act7d1": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1583179200,
+          "endTime": 1584388799,
+          "isReplicate": false
+        },
+        "act7d5": {
+          "name": "午间逸话",
+          "type": "TYPE_ACT4D0",
+          "startTime": 1582617600,
+          "endTime": 1583179199,
+          "isReplicate": false
+        },
+        "act6d8": {
+          "name": "限时积分任务",
+          "type": "COLLECTION",
+          "startTime": 1581105600,
+          "endTime": 1582315199,
+          "isReplicate": false
+        },
+        "act6d7": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1579896000,
+          "endTime": 1581105599,
+          "isReplicate": false
+        },
+        "act6d5": {
+          "name": "洪炉示岁",
+          "type": "TYPE_ACT4D0",
+          "startTime": 1578513600,
+          "endTime": 1579118399,
+          "isReplicate": false
+        },
+        "act6d0": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1577217600,
+          "endTime": 1578427199,
+          "isReplicate": false
+        },
+        "act5d1": {
+          "name": "危机合约",
+          "type": "TYPE_ACT5D1",
+          "startTime": 1574150400,
+          "endTime": 1575316799,
+          "isReplicate": false
+        },
+        "act5d0": {
+          "name": "喧闹法则",
+          "type": "TYPE_ACT5D0",
+          "startTime": 1574150400,
+          "endTime": 1575316799,
+          "isReplicate": false
+        },
+        "act4d5": {
+          "name": "限时积分任务",
+          "type": "COLLECTION",
+          "startTime": 1573416000,
+          "endTime": 1574625599,
+          "isReplicate": false
+        },
+        "act4d2": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1572552000,
+          "endTime": 1573329599,
+          "isReplicate": false
+        },
+        "act4d0": {
+          "name": "战地秘闻",
+          "type": "TYPE_ACT4D0",
+          "startTime": 1571126400,
+          "endTime": 1571687999,
+          "isReplicate": false
+        },
+        "act3d7": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1569873600,
+          "endTime": 1570737599,
+          "isReplicate": false
+        },
+        "act3d5": {
+          "name": "限时积分任务",
+          "type": "COLLECTION",
+          "startTime": 1568059200,
+          "endTime": 1569268799,
+          "isReplicate": false
+        },
+        "act3d0": {
+          "name": "火蓝之心",
+          "type": "TYPE_ACT3D0",
+          "startTime": 1566892800,
+          "endTime": 1568059199,
+          "isReplicate": false
+        },
+        "act2d8": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1565812800,
+          "endTime": 1566763199,
+          "isReplicate": false
+        },
+        "act2d5": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1563739200,
+          "endTime": 1564948799,
+          "isReplicate": false
+        },
+        "act1d5": {
+          "name": "限时累计签到",
+          "type": "CHECKIN_ONLY",
+          "startTime": 1562659200,
+          "endTime": 1563739199,
+          "isReplicate": false
+        },
+        "1stact": {
+          "name": "骑兵与猎人",
+          "type": "DEFAULT",
+          "startTime": 1559181600,
+          "endTime": 1560369599,
+          "isReplicate": false
+        },
+        "0D5act": {
+          "name": "限时任务",
+          "type": "MISSION_ONLY",
+          "startTime": 1558576800,
+          "endTime": 1559159999,
+          "isReplicate": false
+        }
+      }
+    }
+  }
+}

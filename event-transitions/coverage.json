@@ -1,0 +1,2969 @@
+{
+  "schemaVersion": 1,
+  "manifestErrors": [],
+  "bundles": [
+    {
+      "server": "cn",
+      "activityId": "act10pray",
+      "bundle": "activity/[uc]act10pray.ab",
+      "md5": "836ed67e951311c624904cac950611cc",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act11pray",
+      "bundle": "activity/[uc]act11pray.ab",
+      "md5": "9898766ab4a8a095a16eb65204bcb97f",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act12pray",
+      "bundle": "activity/[uc]act12pray.ab",
+      "md5": "129e6e5758112c23ca732a4f7c39ed5c",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act13pray",
+      "bundle": "activity/[uc]act13pray.ab",
+      "md5": "d2a8ba14458e5a71503ae898d1e79c8d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act14pray",
+      "bundle": "activity/[uc]act14pray.ab",
+      "md5": "105067a787a858fce29f136e07e2ed9c",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act15pray",
+      "bundle": "activity/[uc]act15pray.ab",
+      "md5": "e58fd6bbe895e21e8f93e2a217295eaa",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act16mini",
+      "bundle": "activity/[uc]act16mini.ab",
+      "md5": "3f0fde18f2b2dab3bc06f37b199a851d",
+      "status": "recovered",
+      "asset": "events/cn/act16mini/3f0fde18f2b2/asset.json",
+      "candidates": [
+        "act16mini_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act16pray",
+      "bundle": "activity/[uc]act16pray.ab",
+      "md5": "b8d7c9a6665935f1b9fb0eae9166ac89",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act17login",
+      "bundle": "activity/[uc]act17login.ab",
+      "md5": "cceadbe0a63921843cbcc51bcb147cdf",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act17mini",
+      "bundle": "activity/[uc]act17mini.ab",
+      "md5": "24399bf48e527f77a65c01769a849c92",
+      "status": "recovered",
+      "asset": "events/cn/act17mini/24399bf48e52/asset.json",
+      "candidates": [
+        "act17mini_activity_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act17pray",
+      "bundle": "activity/[uc]act17pray.ab",
+      "md5": "82f9ddac23304ed97687b795d7d1ad22",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act18login",
+      "bundle": "activity/[uc]act18login.ab",
+      "md5": "72d2587b8e225092953cb4f0354d1021",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act18mini",
+      "bundle": "activity/[uc]act18mini.ab",
+      "md5": "f295dcb242dbdcd6ca33edc58d9f8047",
+      "status": "recovered",
+      "asset": "events/cn/act18mini/f295dcb242db/asset.json",
+      "candidates": [
+        "act18mini_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act19login",
+      "bundle": "activity/[uc]act19login.ab",
+      "md5": "8ef1bd306df6d2346c51b68f74ed3384",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act19mini",
+      "bundle": "activity/[uc]act19mini.ab",
+      "md5": "3c88dbe7d0e1361e625ce86765bb88ec",
+      "status": "recovered",
+      "asset": "events/cn/act19mini/3c88dbe7d0e1/asset.json",
+      "candidates": [
+        "act19mini_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1access",
+      "bundle": "activity/[uc]act1access.ab",
+      "md5": "e198c0a0cb013b6a995b92cb9ef3eade",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1arcade",
+      "bundle": "activity/[uc]act1arcade.ab",
+      "md5": "1ccd82875036d7b79d9e834660f984c5",
+      "status": "recovered",
+      "asset": "events/cn/act1arcade/1ccd82875036/asset.json",
+      "candidates": [
+        "entry_view_entry_anim",
+        "act1arcade_battle_wave_start",
+        "unlockpanel_in",
+        "entry_in",
+        "act1arcade_stamp_in",
+        "act1arcade_gamestart_in",
+        "act1arcade_game_choice_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1arkhub",
+      "bundle": "activity/[uc]act1arkhub.ab",
+      "md5": "b45b778ee49066b6a8a7e242d7664474",
+      "status": "recovered",
+      "asset": "events/cn/act1arkhub/b45b778ee490/asset.json",
+      "candidates": [
+        "panel_actarkhub_entry_anim",
+        "panel_actarkhub_right_panel_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1autochess",
+      "bundle": "activity/[uc]act1autochess.ab",
+      "md5": "cf8b2f5188e4cb994cf6fcb38b9d1482",
+      "status": "recovered",
+      "asset": "events/cn/act1autochess/cf8b2f5188e4/asset.json",
+      "candidates": [
+        "act1autochess_entry_show"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1blessing",
+      "bundle": "activity/[uc]act1blessing.ab",
+      "md5": "abad64e78aabe60e7896e23e8eb426e7",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1break",
+      "bundle": "activity/[uc]act1break.ab",
+      "md5": "c5bbd9db37b4691d7d380bf3c8d7bb19",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1collection",
+      "bundle": "activity/[uc]act1collection.ab",
+      "md5": "5c9ed2b1b4ede87be6424308f18767d1",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1dp",
+      "bundle": "activity/[uc]act1dp.ab",
+      "md5": "e131e7f52289103173247cbb788b8594",
+      "status": "recovered",
+      "asset": "events/cn/act1dp/e131e7f52289/asset.json",
+      "candidates": [
+        "vasebreaker_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1enemyduel",
+      "bundle": "activity/[uc]act1enemyduel.ab",
+      "md5": "bdae3dd5d1526e97425a7c1b17351b83",
+      "status": "no-candidate-clip",
+      "animations": [
+        "video_loop",
+        "act1enemyduel_entry_bg_rotation_loop"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1football",
+      "bundle": "activity/[uc]act1football.ab",
+      "md5": "782f2b8087189ceff60331ae0d97b493",
+      "status": "recovered",
+      "asset": "events/cn/act1football/782f2b808718/asset.json",
+      "candidates": [
+        "act1football_entry_anim",
+        "act1football_zone_map_fade_in_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1mainlinebp",
+      "bundle": "activity/[uc]act1mainlinebp.ab",
+      "md5": "d8f47c8358212afaf499f4ba7400af03",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1mainss",
+      "bundle": "activity/[uc]act1mainss.ab",
+      "md5": "bfefa9abcbc72156751e9dfa2cb1d7fe",
+      "status": "recovered",
+      "asset": "events/cn/act1mainss/bfefa9abcbc7/asset.json",
+      "candidates": [
+        "mainline14_act_entry_stamina_highlight",
+        "mainline14_act_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1multi",
+      "bundle": "activity/[uc]act1multi.ab",
+      "md5": "37662d37ef951a85d743d7696f4431fc",
+      "status": "recovered",
+      "asset": "events/cn/act1multi/37662d37ef95/asset.json",
+      "candidates": [
+        "act3vmulti_train_billboard_enter_fortress",
+        "act3vmulti_train_billboard_enter_normal",
+        "act3vmulti_train_billboard_enter_soccer"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1museum",
+      "bundle": "activity/[uc]act1museum.ab",
+      "md5": "24828fd6662d9f2ed7896da491174df2",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1r6sre",
+      "bundle": "activity/[uc]act1r6sre.ab",
+      "md5": "94fece85b8ae0681b58985d3a9ceef46",
+      "status": "recovered",
+      "asset": "events/cn/act1r6sre/94fece85b8ae/asset.json",
+      "candidates": [
+        "entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1recruit",
+      "bundle": "activity/[uc]act1recruit.ab",
+      "md5": "dff5293e29197e3e612e7a1b3adba858",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1reward",
+      "bundle": "activity/[uc]act1reward.ab",
+      "md5": "378de50108931ae2a524b6e9b2f0a108",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1teamquest",
+      "bundle": "activity/[uc]act1teamquest.ab",
+      "md5": "86cbb6367e4d4d58c5175a608f7bbf58",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vautochess",
+      "bundle": "activity/[uc]act1vautochess.ab",
+      "md5": "9256ddbbb12dfc5255cd91a2ad367b8d",
+      "status": "recovered",
+      "asset": "events/cn/act1vautochess/9256ddbbb12d/asset.json",
+      "candidates": [
+        "start_game_tv_select",
+        "auto_chess_mode_choice_back_enter_init",
+        "start_game_tv_unfold",
+        "entry_main_front_view_enter",
+        "auto_chess_mode_choice_back_enter_guide",
+        "auto_chess_mode_choice_front_enter",
+        "auto_chess_mode_choice_back_enter_standard",
+        "start_game_bottom_in",
+        "start_game_btnshow",
+        "team_info_tv_in_enemy",
+        "team_info_tv_in_char",
+        "start_game_tv_in",
+        "entry_main_back_view_enter",
+        "start_game_tv_fold",
+        "team_info_bottom_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vecb",
+      "bundle": "activity/[uc]act1vecb.ab",
+      "md5": "e944e67b4d2219424f887758534f92fd",
+      "status": "recovered",
+      "asset": "events/cn/act1vecb/e944e67b4d22/asset.json",
+      "candidates": [
+        "act1vecb_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1vhalfidle",
+      "bundle": "activity/[uc]act1vhalfidle.ab",
+      "md5": "f392352981233a37ff3103dd610a9b50",
+      "status": "recovered",
+      "asset": "events/cn/act1vhalfidle/f39235298123/asset.json",
+      "candidates": [
+        "recruit_entry_state_show_quick",
+        "hanging_income_stage_in",
+        "recruit_entry_state_show_special",
+        "recruit_entry_state_show_random",
+        "recruit_entry_state_show_select",
+        "tip_in",
+        "entry",
+        "hanging_income_daily_in",
+        "recruit_complete_entry",
+        "recruit_entry",
+        "recruit_front_ui_entry",
+        "hanging_income_battlefinish_in",
+        "equip_item_special_in",
+        "tech_tree_detail_in",
+        "tech_tree_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act1video",
+      "bundle": "activity/[uc]act1video.ab",
+      "md5": "2ca3f0d8b2eb2d6f187335d068e35455",
+      "status": "no-candidate-clip",
+      "animations": [
+        "anim_checkin_remake_prefab"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act20login",
+      "bundle": "activity/[uc]act20login.ab",
+      "md5": "882c7cbb767cde4d98ef6cfcfe7bb2a8",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act20mini",
+      "bundle": "activity/[uc]act20mini.ab",
+      "md5": "d1b4fd73f4393566d469e2eaec220560",
+      "status": "recovered",
+      "asset": "events/cn/act20mini/d1b4fd73f439/asset.json",
+      "candidates": [
+        "act20mini_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act21login",
+      "bundle": "activity/[uc]act21login.ab",
+      "md5": "1e1a67cee894356bec05b471fb7cbf62",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act21mini",
+      "bundle": "activity/[uc]act21mini.ab",
+      "md5": "18d6d4b0a14cdbddb39a14ee68477867",
+      "status": "recovered",
+      "asset": "events/cn/act21mini/18d6d4b0a14c/asset.json",
+      "candidates": [
+        "act21mini_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act21sre",
+      "bundle": "activity/[uc]act21sre.ab",
+      "md5": "f94cfec540d1ec3333f39929190cac73",
+      "status": "recovered",
+      "asset": "events/cn/act21sre/f94cfec540d1/asset.json",
+      "candidates": [
+        "act21sre_activity_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act22login",
+      "bundle": "activity/[uc]act22login.ab",
+      "md5": "a38e1ae1d83536b7bc3b29fd0938711e",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act22sre",
+      "bundle": "activity/[uc]act22sre.ab",
+      "md5": "d5c3107eb77bf484f718ac1c39339778",
+      "status": "recovered",
+      "asset": "events/cn/act22sre/d5c3107eb77b/asset.json",
+      "candidates": [
+        "enter_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act23login",
+      "bundle": "activity/[uc]act23login.ab",
+      "md5": "40e3f2bc3fc7305cd51d195847f1eff0",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act23sre",
+      "bundle": "activity/[uc]act23sre.ab",
+      "md5": "d1fce17c7b518a72a03a829f555e5e6e",
+      "status": "recovered",
+      "asset": "events/cn/act23sre/d1fce17c7b51/asset.json",
+      "candidates": [
+        "enter_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act24login",
+      "bundle": "activity/[uc]act24login.ab",
+      "md5": "f110b87542407342371476f0b4c2dcea",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act24sre",
+      "bundle": "activity/[uc]act24sre.ab",
+      "md5": "125ea0347c1ea7a058900abe41cdad20",
+      "status": "recovered",
+      "asset": "events/cn/act24sre/125ea0347c1e/asset.json",
+      "candidates": [
+        "act24side_eat_entry",
+        "act24side_melding_entry",
+        "act24side_mission_detail_entry",
+        "act24side_quest_entry",
+        "act24side_mission_entry",
+        "act24side_battle_trap_entry",
+        "act24side_activity_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act25login",
+      "bundle": "activity/[uc]act25login.ab",
+      "md5": "c6668ba4c11bdf2a9229568d2ceddcf0",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act25sre",
+      "bundle": "activity/[uc]act25sre.ab",
+      "md5": "6898bb67cef14a47ac217f40da51b59c",
+      "status": "recovered",
+      "asset": "events/cn/act25sre/6898bb67cef1/asset.json",
+      "candidates": [
+        "act25sre_entry_01",
+        "act25sre_entry_02"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act26login",
+      "bundle": "activity/[uc]act26login.ab",
+      "md5": "a3f19962a5555ecb9da99d8d0f4ff485",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act26sre",
+      "bundle": "activity/[uc]act26sre.ab",
+      "md5": "e919af1658ed6d0af9e8b1e325717feb",
+      "status": "recovered",
+      "asset": "events/cn/act26sre/e919af1658ed/asset.json",
+      "candidates": [
+        "enter_anim",
+        "act26sre_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act27login",
+      "bundle": "activity/[uc]act27login.ab",
+      "md5": "5463424a18306a5bd096bc985b094915",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act27sre",
+      "bundle": "activity/[uc]act27sre.ab",
+      "md5": "727c25642cfa649542d3fcfa0739e3f1",
+      "status": "recovered",
+      "asset": "events/cn/act27sre/727c25642cfa/asset.json",
+      "candidates": [
+        "act27sre_entry_grocery_night_open_intro",
+        "act27sre_entry_grocery_day_open_intro",
+        "act27sre_entry_anim",
+        "act27side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act28login",
+      "bundle": "activity/[uc]act28login.ab",
+      "md5": "113951828d21879f5a59686a51430f6a",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act28sre",
+      "bundle": "activity/[uc]act28sre.ab",
+      "md5": "ddf89c5e0fe032844b6011e14b6079df",
+      "status": "recovered",
+      "asset": "events/cn/act28sre/ddf89c5e0fe0/asset.json",
+      "candidates": [
+        "act28sre_enter_intro"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act29login",
+      "bundle": "activity/[uc]act29login.ab",
+      "md5": "d650df9a90b0f68bd2546a99114e129f",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act29side",
+      "bundle": "activity/[uc]act29side.ab",
+      "md5": "7b0306c2ebb3ce7243dcfc676145a495",
+      "status": "recovered",
+      "asset": "events/cn/act29side/7b0306c2ebb3/asset.json",
+      "candidates": [
+        "act29side_stage_entry_intro"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act29sre",
+      "bundle": "activity/[uc]act29sre.ab",
+      "md5": "92480fb06a9dfbd8e77cf4ef9fc7ef07",
+      "status": "recovered",
+      "asset": "events/cn/act29sre/92480fb06a9d/asset.json",
+      "candidates": [
+        "act29sre_stage_entry_intro"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2access",
+      "bundle": "activity/[uc]act2access.ab",
+      "md5": "f080543994c589089a4a958b5762150c",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2autochess",
+      "bundle": "activity/[uc]act2autochess.ab",
+      "md5": "3d5bce8a59f28bb35f5bd2fe508c986e",
+      "status": "recovered",
+      "asset": "events/cn/act2autochess/3d5bce8a59f2/asset.json",
+      "candidates": [
+        "act2autochess_entry_show"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2blessing",
+      "bundle": "activity/[uc]act2blessing.ab",
+      "md5": "99b51612cf22e7ff3aa093dc3c00c243",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2break",
+      "bundle": "activity/[uc]act2break.ab",
+      "md5": "dbfe8ca7026bbff0c3037e5ab247678d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2collection",
+      "bundle": "activity/[uc]act2collection.ab",
+      "md5": "058a7178afbac3c6e782fa9a5b514f09",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2enemyduel",
+      "bundle": "activity/[uc]act2enemyduel.ab",
+      "md5": "175bacc8864bea92af5e69ec9d244005",
+      "status": "no-candidate-clip",
+      "animations": [
+        "act2enemyduel_entry_bg_rotation_loop",
+        "video_loop"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2float",
+      "bundle": "activity/[uc]act2float.ab",
+      "md5": "98683fb78b4a51142c09a9fce058d112",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2mainss",
+      "bundle": "activity/[uc]act2mainss.ab",
+      "md5": "76154683fea43dc6f94f1662a5317351",
+      "status": "recovered",
+      "asset": "events/cn/act2mainss/76154683fea4/asset.json",
+      "candidates": [
+        "act2mainss_entry_3",
+        "act2mainss_entry_2",
+        "act2mainss_entry_1",
+        "act2mainss_entry_2_bg_change",
+        "act2mainss_entry_3_bg_change"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2multi",
+      "bundle": "activity/[uc]act2multi.ab",
+      "md5": "f59bdd59bc1568f422aa296d88440d47",
+      "status": "recovered",
+      "asset": "events/cn/act2multi/f59bdd59bc15/asset.json",
+      "candidates": [
+        "act2multi_train_billboard_enter_raft",
+        "act2multi_train_billboard_enter_fortress",
+        "act2multi_train_billboard_enter_normal"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act2recruit",
+      "bundle": "activity/[uc]act2recruit.ab",
+      "md5": "361fd0c949256b3cb36a425f5a1c30f2",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2signvs",
+      "bundle": "activity/[uc]act2signvs.ab",
+      "md5": "6a41c54d6725062ced12a26cdbc0e431",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2unique",
+      "bundle": "activity/[uc]act2unique.ab",
+      "md5": "3a58041924222c2886afd4d9e9fc54ba",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2video",
+      "bundle": "activity/[uc]act2video.ab",
+      "md5": "94d9c1c42691ba9dc251b109a2ec2045",
+      "status": "no-candidate-clip",
+      "animations": [
+        "anim_checkin_remake_prefab"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act2vmulti",
+      "bundle": "activity/[uc]act2vmulti.ab",
+      "md5": "fcb1eb8faf95b1fa12ccc06662cb86b6",
+      "status": "recovered",
+      "asset": "events/cn/act2vmulti/fcb1eb8faf95/asset.json",
+      "candidates": [
+        "act2vmulti_battle_finish_first_view_entry_fortress",
+        "act2vmulti_battle_finish_first_view_entry_normal_progress_text2",
+        "act2vmulti_room_entrance_partner_confirm_btn",
+        "act2vmulti_stage_detail_move_right_entry",
+        "act2vmulti_room_stage_choose_entry",
+        "act2vmulti_battle_finish_first_view_entry_com_quit",
+        "act2vmulti_room_lost_connection_entry",
+        "act2vmulti_entry_main_entry",
+        "act2vmulti_battle_settle_part_2_view_entry",
+        "act2vmulti_battle_finish_first_view_entry_normal_progress_text1",
+        "act2vmulti_battle_football_goal_entry",
+        "act2vmulti_entry_3d_adver_fast",
+        "act2vmulti_entry_3d_adver_invert_fast",
+        "act2vmulti_battle_finish_first_view_entry_quit_self",
+        "act2vmulti_entry_main_to_match",
+        "act2vmulti_in_room_stage_detail_switch_tab",
+        "act2vmulti_room_page_left_botton_entry",
+        "act2vmulti_room_entrance_comfirm_btn",
+        "act2vmulti_battle_finish_first_view_entry_normal_progress_text",
+        "act2vmulti_room_stage_choose_pos_entry",
+        "act2vmulti_room_entrance_show_entry",
+        "act2vmulti_entry_3d_adver_slow",
+        "anim_act2vmulti_battle_wave_start",
+        "act2vmulti_stage_detail_move_left_entry",
+        "act2vmulti_entry_main_to_room",
+        "act2vmulti_room_page_top_view_entry",
+        "act2vmulti_room_char_assign_entry",
+        "act2vmulti_room_page_banner_entry",
+        "act2vmulti_room_stage_choose_left_entry",
+        "act2vmulti_battle_finish_first_view_entry_normal",
+        "act2vmulti_battle_finish_first_view_entry_succer",
+        "act2vmulti_room_squad_sel_entry",
+        "act2vmulti_room_sys_alloc_entry",
+        "anim_act2vmulti_start",
+        "act2vmulti_battle_finish_first_view_entry_com",
+        "act2vmulti_entry_3d_adver_invert_slow",
+        "act2vmulti_battle_finish_first_view_entry_quit_other",
+        "act2vmulti_room_squad_entry",
+        "act2vmulti_battle_finish_first_view_entry_normal_reward_tween"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act30side",
+      "bundle": "activity/[uc]act30side.ab",
+      "md5": "71be48dc4eeab7a596a43e3a9f966b16",
+      "status": "recovered",
+      "asset": "events/cn/act30side/71be48dc4eea/asset.json",
+      "candidates": [
+        "act30side_entry_trackpoint",
+        "act30side_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act30sre",
+      "bundle": "activity/[uc]act30sre.ab",
+      "md5": "5b3ed699f027fb99d15ea85045b8f61a",
+      "status": "recovered",
+      "asset": "events/cn/act30sre/5b3ed699f027/asset.json",
+      "candidates": [
+        "act30sre_entry_trackpoint",
+        "act30side_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act31side",
+      "bundle": "activity/[uc]act31side.ab",
+      "md5": "58b8f590831d9437199118ca362d4a90",
+      "status": "recovered",
+      "asset": "events/cn/act31side/58b8f590831d/asset.json",
+      "candidates": [
+        "act31side_stage_entry",
+        "act31side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act31sre",
+      "bundle": "activity/[uc]act31sre.ab",
+      "md5": "4f30a0cc7894e44aef4c27ba7e1ea4f3",
+      "status": "recovered",
+      "asset": "events/cn/act31sre/4f30a0cc7894/asset.json",
+      "candidates": [
+        "act31sre_stage_entry",
+        "act31sre_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act32side",
+      "bundle": "activity/[uc]act32side.ab",
+      "md5": "a136386cf52527b1414c53ecb6eb0f3c",
+      "status": "recovered",
+      "asset": "events/cn/act32side/a136386cf525/asset.json",
+      "candidates": [
+        "act32side_entry_anim",
+        "act32side_tactical_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act33side",
+      "bundle": "activity/[uc]act33side.ab",
+      "md5": "bd1241191e6ecacad7254a361a53b72e",
+      "status": "recovered",
+      "asset": "events/cn/act33side/bd1241191e6e/asset.json",
+      "candidates": [
+        "act33side_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act33sre",
+      "bundle": "activity/[uc]act33sre.ab",
+      "md5": "a4fddc84f10957a264381931b9864fa1",
+      "status": "recovered",
+      "asset": "events/cn/act33sre/a4fddc84f109/asset.json",
+      "candidates": [
+        "act33sre_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act34side",
+      "bundle": "activity/[uc]act34side.ab",
+      "md5": "ec122068111b6c9f56601e9a2165ab83",
+      "status": "recovered",
+      "asset": "events/cn/act34side/ec122068111b/asset.json",
+      "candidates": [
+        "panel_act34side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act34sre",
+      "bundle": "activity/[uc]act34sre.ab",
+      "md5": "bd8c755237bba69d000deaf40454257c",
+      "status": "recovered",
+      "asset": "events/cn/act34sre/bd8c755237bb/asset.json",
+      "candidates": [
+        "panel_act34sre_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act35side",
+      "bundle": "activity/[uc]act35side.ab",
+      "md5": "6a7f4f5170c66bae4a3b3c4d8deeeebb",
+      "status": "recovered",
+      "asset": "events/cn/act35side/6a7f4f5170c6/asset.json",
+      "candidates": [
+        "act35side_entry_carving_new",
+        "act35side_stage_entry",
+        "act35side_entry_zone_pyramid_cat_rotation"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act35sign",
+      "bundle": "activity/[uc]act35sign.ab",
+      "md5": "4d45d13d7959d34355645d2ac9872539",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act35sre",
+      "bundle": "activity/[uc]act35sre.ab",
+      "md5": "33225b61f3f1c4b86aa418f5d873cfa7",
+      "status": "recovered",
+      "asset": "events/cn/act35sre/33225b61f3f1/asset.json",
+      "candidates": [
+        "act35sre_entry_carving_new",
+        "act35sre_stage_entry",
+        "act35sre_entry_zone_pyramid_cat_rotation"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act36side",
+      "bundle": "activity/[uc]act36side.ab",
+      "md5": "de9851e233f8dccc6bce323430614aed",
+      "status": "recovered",
+      "asset": "events/cn/act36side/de9851e233f8/asset.json",
+      "candidates": [
+        "act36side_stage_entry",
+        "act36side_food_handbook_panel_entry",
+        "act36side_focus_in",
+        "act36side_food_handbook_right_entry",
+        "act36side_card_focus_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act36sign",
+      "bundle": "activity/[uc]act36sign.ab",
+      "md5": "eb3261553b387f552f9e26a2f5239f33",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act37side",
+      "bundle": "activity/[uc]act37side.ab",
+      "md5": "cee7049f9ebbae578be5fb9804bdd120",
+      "status": "recovered",
+      "asset": "events/cn/act37side/cee7049f9ebb/asset.json",
+      "candidates": [
+        "act37side_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act37sign",
+      "bundle": "activity/[uc]act37sign.ab",
+      "md5": "3cc1e9445b40457af7697b8ebcb67251",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act37sre",
+      "bundle": "activity/[uc]act37sre.ab",
+      "md5": "ceec47461331d17050b4e0199f36e778",
+      "status": "recovered",
+      "asset": "events/cn/act37sre/ceec47461331/asset.json",
+      "candidates": [
+        "act37sre_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act38side",
+      "bundle": "activity/[uc]act38side.ab",
+      "md5": "735627373ad377f8a03287b4d3d6509b",
+      "status": "recovered",
+      "asset": "events/cn/act38side/735627373ad3/asset.json",
+      "candidates": [
+        "act38side_fireworks_battle_ui_in",
+        "act38side_entry_stage_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act38sign",
+      "bundle": "activity/[uc]act38sign.ab",
+      "md5": "130ecf3f4b19f41f8d1f31fb051dd10f",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act38sre",
+      "bundle": "activity/[uc]act38sre.ab",
+      "md5": "c4a8c0dce29830dbb3afa4e1e13c2f70",
+      "status": "recovered",
+      "asset": "events/cn/act38sre/c4a8c0dce298/asset.json",
+      "candidates": [
+        "act38side_entry_stage_entry",
+        "act38side_fireworks_battle_ui_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act39side",
+      "bundle": "activity/[uc]act39side.ab",
+      "md5": "585249d333db21be4e3bc513b486ee49",
+      "status": "recovered",
+      "asset": "events/cn/act39side/585249d333db/asset.json",
+      "candidates": [
+        "act39side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act39sign",
+      "bundle": "activity/[uc]act39sign.ab",
+      "md5": "2fab729de9fbb023d6271aa74afd1fe5",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act39sre",
+      "bundle": "activity/[uc]act39sre.ab",
+      "md5": "2f067dda843dc86088e7a922d08b369b",
+      "status": "recovered",
+      "asset": "events/cn/act39sre/2f067dda843d/asset.json",
+      "candidates": [
+        "act39side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act3access",
+      "bundle": "activity/[uc]act3access.ab",
+      "md5": "74dab4d84914193fee4ede703672fb0a",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act3autochess",
+      "bundle": "activity/[uc]act3autochess.ab",
+      "md5": "e914a4ee8c7e484af782448f2ec39000",
+      "status": "recovered",
+      "asset": "events/cn/act3autochess/e914a4ee8c7e/asset.json",
+      "candidates": [
+        "autochess_shop_title_entry",
+        "autochess_entry_season_on",
+        "autochess_entry_season_off"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act3blessing",
+      "bundle": "activity/[uc]act3blessing.ab",
+      "md5": "6aa10119f0f9bf76f858e938a82868b1",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act3break",
+      "bundle": "activity/[uc]act3break.ab",
+      "md5": "fddf2d07ab7085b13a102df00fb24639",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act3collection",
+      "bundle": "activity/[uc]act3collection.ab",
+      "md5": "a505373ec8add044a3d9ae5632a5bf97",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act3enemyduel",
+      "bundle": "activity/[uc]act3enemyduel.ab",
+      "md5": "21ebf53d80f5c5b780a17eecb20edc8b",
+      "status": "no-candidate-clip",
+      "animations": [
+        "video_loop",
+        "act3enemyduel_entry_bg_rotation_loop"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act3mainss",
+      "bundle": "activity/[uc]act3mainss.ab",
+      "md5": "badc03e1e8ab84a6af745b0fba121d76",
+      "status": "recovered",
+      "asset": "events/cn/act3mainss/badc03e1e8ab/asset.json",
+      "candidates": [
+        "act3mainss_entry_3",
+        "act3mainss_entry_3_bg_entry",
+        "act3mainss_entry_1",
+        "act3mainss_entry_2"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act3signvs",
+      "bundle": "activity/[uc]act3signvs.ab",
+      "md5": "43f91f298f9529207450fdd473e6ee66",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act3switch",
+      "bundle": "activity/[uc]act3switch.ab",
+      "md5": "a025be2a1821b8065856ab117ded468d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act3unique",
+      "bundle": "activity/[uc]act3unique.ab",
+      "md5": "cdcb533e4d19b76817a6340fa265d456",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act3video",
+      "bundle": "activity/[uc]act3video.ab",
+      "md5": "577fc46a1b90ead196b4f9acd69655fc",
+      "status": "no-candidate-clip",
+      "animations": [
+        "anim_checkin_remake_prefab"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act40side",
+      "bundle": "activity/[uc]act40side.ab",
+      "md5": "08d1c177e0c37adaf8335032492dc041",
+      "status": "recovered",
+      "asset": "events/cn/act40side/08d1c177e0c3/asset.json",
+      "candidates": [
+        "panel_act40side_entry_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act40sign",
+      "bundle": "activity/[uc]act40sign.ab",
+      "md5": "f60508e219ea79a757fb148cfe8797dd",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act40sre",
+      "bundle": "activity/[uc]act40sre.ab",
+      "md5": "f56b6151f4dc44a95b41f134cca061c7",
+      "status": "recovered",
+      "asset": "events/cn/act40sre/f56b6151f4dc/asset.json",
+      "candidates": [
+        "panel_act40side_entry_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act41side",
+      "bundle": "activity/[uc]act41side.ab",
+      "md5": "a81054859b60b29849b614fe03b93dc1",
+      "status": "recovered",
+      "asset": "events/cn/act41side/a81054859b60/asset.json",
+      "candidates": [
+        "act41side_stage_entry_anim",
+        "act41side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act41sign",
+      "bundle": "activity/[uc]act41sign.ab",
+      "md5": "858b1eb48f67ad41ecb898403b77e03d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act41sre",
+      "bundle": "activity/[uc]act41sre.ab",
+      "md5": "8063cbfa5d1bd93056a0e1c4510f38c2",
+      "status": "recovered",
+      "asset": "events/cn/act41sre/8063cbfa5d1b/asset.json",
+      "candidates": [
+        "act41side_stage_entry_anim",
+        "act41side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act42d0",
+      "bundle": "activity/[uc]act42d0.ab",
+      "md5": "d33cc21d44ff429a89864206b380fda5",
+      "status": "recovered",
+      "asset": "events/cn/act42d0/d33cc21d44ff/asset.json",
+      "candidates": [
+        "act42d0_stage_entry",
+        "act42d0_zone_map_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act42side",
+      "bundle": "activity/[uc]act42side.ab",
+      "md5": "2d861858844d148a351703079012c58c",
+      "status": "recovered",
+      "asset": "events/cn/act42side/2d861858844d/asset.json",
+      "candidates": [
+        "act42side_entry_stage_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act42sign",
+      "bundle": "activity/[uc]act42sign.ab",
+      "md5": "e5ed67c523b21937e73866aa4a99c6e2",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act42sre",
+      "bundle": "activity/[uc]act42sre.ab",
+      "md5": "43925f5de92284148ff9c8d2696f3325",
+      "status": "recovered",
+      "asset": "events/cn/act42sre/43925f5de922/asset.json",
+      "candidates": [
+        "act42side_entry_stage_anim_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act43side",
+      "bundle": "activity/[uc]act43side.ab",
+      "md5": "a46ff7ffb35f5f2be97d92d540c832ac",
+      "status": "recovered",
+      "asset": "events/cn/act43side/a46ff7ffb35f/asset.json",
+      "candidates": [
+        "act43side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act43sign",
+      "bundle": "activity/[uc]act43sign.ab",
+      "md5": "b03807d18bf49e9e828dbc9314e345f5",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act43sre",
+      "bundle": "activity/[uc]act43sre.ab",
+      "md5": "2e0aacd4fc7511fb31689dfb265ee6eb",
+      "status": "recovered",
+      "asset": "events/cn/act43sre/2e0aacd4fc75/asset.json",
+      "candidates": [
+        "act43sre_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act44side",
+      "bundle": "activity/[uc]act44side.ab",
+      "md5": "1b3b2a5eb38dfbcbb09add20e371ffd0",
+      "status": "recovered",
+      "asset": "events/cn/act44side/1b3b2a5eb38d/asset.json",
+      "candidates": [
+        "anim_act44side_entry_01",
+        "anim_act44side_entry_02"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act44sign",
+      "bundle": "activity/[uc]act44sign.ab",
+      "md5": "dde5dbcd305d99ba15ec08518e12b6eb",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act44sre",
+      "bundle": "activity/[uc]act44sre.ab",
+      "md5": "5d586ac8377cc96ab6b895c5a88a7388",
+      "status": "recovered",
+      "asset": "events/cn/act44sre/5d586ac8377c/asset.json",
+      "candidates": [
+        "anim_act44sre_entry_01",
+        "anim_act44sre_entry_02"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act45side",
+      "bundle": "activity/[uc]act45side.ab",
+      "md5": "3de67ef700f0ef41bb960e989b367722",
+      "status": "recovered",
+      "asset": "events/cn/act45side/3de67ef700f0/asset.json",
+      "candidates": [
+        "stage_card_ui_entry",
+        "act45side_entry",
+        "right_in",
+        "act45side_live_stage_entry_sleep",
+        "act45side_live_stage_entry_live",
+        "left_in",
+        "stage_card_item_entry",
+        "act45side_stage_transition_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act45sign",
+      "bundle": "activity/[uc]act45sign.ab",
+      "md5": "9873adf0787979cd1a3c475839edc25c",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act46side",
+      "bundle": "activity/[uc]act46side.ab",
+      "md5": "0ae3278bd456cd79704624ca686047d2",
+      "status": "recovered",
+      "asset": "events/cn/act46side/0ae3278bd456/asset.json",
+      "candidates": [
+        "entry_token",
+        "act46side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act46sign",
+      "bundle": "activity/[uc]act46sign.ab",
+      "md5": "21389b079c59605a53fbb81df344b19d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act47side",
+      "bundle": "activity/[uc]act47side.ab",
+      "md5": "3e7919746fe5a4c0cee79360e9984755",
+      "status": "recovered",
+      "asset": "events/cn/act47side/3e7919746fe5/asset.json",
+      "candidates": [
+        "act47side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act47sign",
+      "bundle": "activity/[uc]act47sign.ab",
+      "md5": "0e60fc572176a731bf8aa53ecb314740",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act48side",
+      "bundle": "activity/[uc]act48side.ab",
+      "md5": "097f62f3771afe92375c00e59e50eee7",
+      "status": "recovered",
+      "asset": "events/cn/act48side/097f62f3771a/asset.json",
+      "candidates": [
+        "act48side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act48sign",
+      "bundle": "activity/[uc]act48sign.ab",
+      "md5": "dd30813f7e2e05813ac5115b9954c773",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act49side",
+      "bundle": "activity/[uc]act49side.ab",
+      "md5": "c6e2a2e38f245401fef47406b1bc3c41",
+      "status": "recovered",
+      "asset": "events/cn/act49side/c6e2a2e38f24/asset.json",
+      "candidates": [
+        "act49side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act49sign",
+      "bundle": "activity/[uc]act49sign.ab",
+      "md5": "9ad3cf8fbc95a4f0ec7899cae7377783",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act4bossrush",
+      "bundle": "activity/[uc]act4bossrush.ab",
+      "md5": "e8a786c01bcbad953f258a318c23a43b",
+      "status": "recovered",
+      "asset": "events/cn/act4bossrush/e8a786c01bcb/asset.json",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act4collection",
+      "bundle": "activity/[uc]act4collection.ab",
+      "md5": "b5740d6f8f10a8d0f73a08b29a0c259a",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act4mainss",
+      "bundle": "activity/[uc]act4mainss.ab",
+      "md5": "374725856d5191617e127213e567117d",
+      "status": "recovered",
+      "asset": "events/cn/act4mainss/374725856d51/asset.json",
+      "candidates": [
+        "act4mainss_entry_02",
+        "act4mainss_entry_01",
+        "act4mainss_entry_kv_04",
+        "act4mainss_entry_04",
+        "act4mainss_entry_03"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act4signvs",
+      "bundle": "activity/[uc]act4signvs.ab",
+      "md5": "efedf1faab0f0c6fb8910146b72bc7f3",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act4switch",
+      "bundle": "activity/[uc]act4switch.ab",
+      "md5": "a6f591c97af76e53def6c407448b81f4",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act4video",
+      "bundle": "activity/[uc]act4video.ab",
+      "md5": "69a3e217387b0f7ca648a6b2afbb7d0b",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act50side",
+      "bundle": "activity/[uc]act50side.ab",
+      "md5": "2b3fa194834051b1f327904f608fa9ed",
+      "status": "recovered",
+      "asset": "events/cn/act50side/2b3fa1948340/asset.json",
+      "candidates": [
+        "mh2_mission_entry",
+        "mh2_mission_detail_entry",
+        "act50side_melding_entry",
+        "zone_map_mh2_zone2_in",
+        "wirebugskill_setting_stage_in",
+        "stage_preview_state_in",
+        "act50side_entry",
+        "hunter_note_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act50sign",
+      "bundle": "activity/[uc]act50sign.ab",
+      "md5": "869a949b79f2466fd4d67477fd88e77b",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act51side",
+      "bundle": "activity/[uc]act51side.ab",
+      "md5": "dee124918727a5a4ba67d5f4b4c9fdf5",
+      "status": "recovered",
+      "asset": "events/cn/act51side/dee124918727/asset.json",
+      "candidates": [
+        "act51side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act51sign",
+      "bundle": "activity/[uc]act51sign.ab",
+      "md5": "c61c9fec9b7b94f0841f3a71ea59028f",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act52side",
+      "bundle": "activity/[uc]act52side.ab",
+      "md5": "e5358147ec6ca928f4287cc7514f8a17",
+      "status": "recovered",
+      "asset": "events/cn/act52side/e5358147ec6c/asset.json",
+      "candidates": [
+        "act52side_entry"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act52sign",
+      "bundle": "activity/[uc]act52sign.ab",
+      "md5": "7ef622a87030eb2fca514c42e73b0941",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act53side",
+      "bundle": "activity/[uc]act53side.ab",
+      "md5": "e8a3fa756b867eedf1092e94e82e4bda",
+      "status": "recovered",
+      "asset": "events/cn/act53side/e8a3fa756b86/asset.json",
+      "candidates": [
+        "act53side_entry_kv1",
+        "act53side_trans_kv2tokv1",
+        "act53side_trans_kv1tokv2",
+        "act53side_entry_kv2_short",
+        "act53side_entry_kv2_long"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act53sign",
+      "bundle": "activity/[uc]act53sign.ab",
+      "md5": "59b34c28481d1be33cddcb3473d40524",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act54side",
+      "bundle": "activity/[uc]act54side.ab",
+      "md5": "d668e73ff648245a45bd9acecc195a47",
+      "status": "recovered",
+      "asset": "events/cn/act54side/d668e73ff648/asset.json",
+      "candidates": [
+        "preview_part_switch_in",
+        "act54side_quest_stage_item_in",
+        "act54side_quest_page_right_in_first",
+        "act54side_quest_stage_item_select_in",
+        "act54side_card_normal_bg_char_entry",
+        "act54side_gallery_entry",
+        "act54side_divination_start_tips_in",
+        "act54side_tarot_achieve_in",
+        "act54side_quest_page_in",
+        "act54side_tarot_gacha_in",
+        "act54side_ divination_info_dialog_in",
+        "act54side_card_special_bg_char_entry",
+        "act54side_entry_anim",
+        "act54side_quest_page_right_in_noinfo"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act54sign",
+      "bundle": "activity/[uc]act54sign.ab",
+      "md5": "fd8a4c036865f27ceb38d88985cc00b6",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act55side",
+      "bundle": "activity/[uc]act55side.ab",
+      "md5": "247e46c2cbd08f28a377be0e4b5eefe8",
+      "status": "recovered",
+      "asset": "events/cn/act55side/247e46c2cbd0/asset.json",
+      "candidates": [
+        "act55side_entry_kv2",
+        "act55side_trans_kv1tokv2",
+        "act55side_entry_kv1",
+        "act55side_trans_kv2tokv1"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act55sign",
+      "bundle": "activity/[uc]act55sign.ab",
+      "md5": "3a56cf3fe2c5d0ed1d2e01b9115c753b",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act56sign",
+      "bundle": "activity/[uc]act56sign.ab",
+      "md5": "63cf4ccb039bed00f2a51c5251622c88",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act57sign",
+      "bundle": "activity/[uc]act57sign.ab",
+      "md5": "51ae9a408a266b409275de4f5b2d9b91",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act58sign",
+      "bundle": "activity/[uc]act58sign.ab",
+      "md5": "6d0ca22cc47363e8b12dc3b1a8851fde",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act59sign",
+      "bundle": "activity/[uc]act59sign.ab",
+      "md5": "2abd566f12ac917a93ab25398d90fc94",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act5bossrush",
+      "bundle": "activity/[uc]act5bossrush.ab",
+      "md5": "f51331f91df66662a73647840d58bc7a",
+      "status": "recovered",
+      "asset": "events/cn/act5bossrush/f51331f91df6/asset.json",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act5collection",
+      "bundle": "activity/[uc]act5collection.ab",
+      "md5": "8a4e1519a237224b567649db0caa0484",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act5fun",
+      "bundle": "activity/[uc]act5fun.ab",
+      "md5": "c1947fae9f1579e3bf730d7303e2cefc",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act5mine",
+      "bundle": "activity/[uc]act5mine.ab",
+      "md5": "db2a6b26700b29b6c836e194442f2574",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act5switch",
+      "bundle": "activity/[uc]act5switch.ab",
+      "md5": "12450140a6e3b393e0a1b84156d0be90",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act5unique",
+      "bundle": "activity/[uc]act5unique.ab",
+      "md5": "744b5496e0989945b1387d4e0e33207d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act60sign",
+      "bundle": "activity/[uc]act60sign.ab",
+      "md5": "8424ea4b0dce841114db1c51ae80de96",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act61sign",
+      "bundle": "activity/[uc]act61sign.ab",
+      "md5": "664ded9a2478ba758eff59a844880b0d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act62sign",
+      "bundle": "activity/[uc]act62sign.ab",
+      "md5": "35e548d78faeb8639428cf2c3142d503",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act63sign",
+      "bundle": "activity/[uc]act63sign.ab",
+      "md5": "530c96153311f103266d2d88a5f3fb84",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act64sign",
+      "bundle": "activity/[uc]act64sign.ab",
+      "md5": "c8c13b592d0956f94b08b7b8d9dc5d21",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act65sign",
+      "bundle": "activity/[uc]act65sign.ab",
+      "md5": "15014ef43612880d01219fef64dd5da3",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act66sign",
+      "bundle": "activity/[uc]act66sign.ab",
+      "md5": "e06b4335df75dd8e39b1dc39ece44a9f",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act6bossrush",
+      "bundle": "activity/[uc]act6bossrush.ab",
+      "md5": "dd757dda8c2c6f948db44d461039da0c",
+      "status": "recovered",
+      "asset": "events/cn/act6bossrush/dd757dda8c2c/asset.json",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act6collection",
+      "bundle": "activity/[uc]act6collection.ab",
+      "md5": "95605caf5ffa1b3e0834b204cd3370f5",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act6fun",
+      "bundle": "activity/[uc]act6fun.ab",
+      "md5": "00bfa794eb771794e9993a41ac3de276",
+      "status": "recovered",
+      "asset": "events/cn/act6fun/00bfa794eb77/asset.json",
+      "candidates": [
+        "act6fun_home_entry_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "act7collection",
+      "bundle": "activity/[uc]act7collection.ab",
+      "md5": "6fa6a878982f1e8c17ec735f327d7a63",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act7fun",
+      "bundle": "activity/[uc]act7fun.ab",
+      "md5": "edac89bb2dbcfdb63fe39fc2b6ce29bd",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act7pray",
+      "bundle": "activity/[uc]act7pray.ab",
+      "md5": "654ab1e7908e148125f7601b355e5be6",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act7switch",
+      "bundle": "activity/[uc]act7switch.ab",
+      "md5": "b218e4998f3ce37aec65335498fbb88a",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act8pray",
+      "bundle": "activity/[uc]act8pray.ab",
+      "md5": "d2d02cb3a906d458fdb32227d5ddad31",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act8switch",
+      "bundle": "activity/[uc]act8switch.ab",
+      "md5": "e4a2ba55d75a324f132a07686a491608",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act9pray",
+      "bundle": "activity/[uc]act9pray.ab",
+      "md5": "7da1b0438b7a1995bd010b553eb1b189",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "act9switch",
+      "bundle": "activity/[uc]act9switch.ab",
+      "md5": "eceb283221eb96d049b06812fcf012ac",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "actarcadev2",
+      "bundle": "activity/[uc]actarcadev2.ab",
+      "md5": "6531247dc47a81654ac791d7e140ffe5",
+      "status": "recovered",
+      "asset": "events/cn/actarcadev2/6531247dc47a/asset.json",
+      "candidates": [
+        "arcade_gamestart_in",
+        "arcade_battle_wave_start",
+        "entry_in",
+        "unlockpanel_in",
+        "entry_view_entry_anim",
+        "arcade_stamp_in",
+        "game_choice_entry",
+        "arcade_gamestart_in"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "actfun",
+      "bundle": "activity/[uc]actfun.ab",
+      "md5": "7c194f1fb03921fbb43e76ba4b604c1e",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "cn",
+      "activityId": "multiv3",
+      "bundle": "activity/[uc]multiv3.ab",
+      "md5": "0ce7ba9e7c8825dcf4959fe480584e3a",
+      "status": "recovered",
+      "asset": "events/cn/multiv3/0ce7ba9e7c88/asset.json",
+      "candidates": [
+        "multi_v3_prepare_squal_check_entry",
+        "tiny_in",
+        "multiv3_prepare_start_countdown_show",
+        "battle_finish_first_view_entry_normal_reward_tween",
+        "multi_v3_prepare_squal_skill_entry",
+        "act3vmulti_entry_main_to_match",
+        "multi_v3_prepare_top_view_entry",
+        "act3vmulti_view_arena_top_normal_in",
+        "battle_finish_first_view_entry_normal_progress_text",
+        "battle_finish_first_view_entry_fortress_final_record_new_effects",
+        "battle_finish_first_view_entry_raft_score",
+        "start_in_normal",
+        "battle_finish_first_view_entry_fortress",
+        "act3vmulti_view_arena_top_easy_in",
+        "multi_v3_prepare_squad_sel_entry",
+        "stage_choose_host_in_1",
+        "matching_banner_in",
+        "battle_finish_first_view_entry_normal",
+        "multi_v3_prepare_squad_entry",
+        "battle_finish_first_view_entry_fortress_final_record",
+        "act3vmulti_entry_room_joining_bar",
+        "quick_match_state_in",
+        "battle_finish_first_view_entry_fortress_progress_text",
+        "battle_settle_part_2_view_entry",
+        "stage_choose_guest_in_2",
+        "start_in_invert",
+        "act3vmulti_view_arena_top_hard_in",
+        "stage_certain_in",
+        "act_multi_v3_banner_in",
+        "battle_finish_first_view_entry_com_quit",
+        "act_multi_v3_state_loading_in",
+        "stage_choose_guest_in_1",
+        "act3vmulti_entry_main_to_room",
+        "battle_finish_first_view_entry_succer",
+        "full_in",
+        "battle_finish_first_view_entry_normal_progress_text1",
+        "quick_match_state_inversion_in",
+        "battle_finish_first_view_entry_com",
+        "multi_v3_prepare_sys_alloc_entry",
+        "battle_finish_first_view_entry_fortress_progress_text2",
+        "in",
+        "battle_finish_first_view_entry_raft_new_effects",
+        "act3vmulti_entry_stage_entry",
+        "battle_finish_first_view_entry_fortress_final_record_clear",
+        "multi_v3_char_pick_entry",
+        "battle_finish_first_view_entry_normal_progress_text2",
+        "battle_finish_first_view_entry_raft",
+        "act3vmulti_entry_room_to_main",
+        "battle_finish_first_view_entry_fortress_progress_text1",
+        "battle_settle_camera_enter"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "vecbreakv2",
+      "bundle": "activity/[uc]vecbreakv2.ab",
+      "md5": "bbd1adc1eb7d8fd3939820ec0cac63fe",
+      "status": "recovered",
+      "asset": "events/cn/vecbreakv2/bbd1adc1eb7d/asset.json",
+      "candidates": [
+        "vec_break_v2_defense_info_in",
+        "vec_break_v2_defense_info_right_select_in",
+        "vec_break_v2_achievement_switch_next_in",
+        "vec_break_v2_achievement_switch_before_in",
+        "popup_in",
+        "vec_v2_stage_selected_entry",
+        "vec_break_v2_stage_raid_in",
+        "entry_in",
+        "vec_break_v2_stage_raid_boss_select_in",
+        "vec_break_v2_defense_stage_select_state_select_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act10pray",
+      "bundle": "activity/[uc]act10pray.ab",
+      "md5": "803ef10ccbfedd575006ab1c3e832ff2",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act11pray",
+      "bundle": "activity/[uc]act11pray.ab",
+      "md5": "bf439ff2961701d79e7a4c2148fa1d7a",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act12pray",
+      "bundle": "activity/[uc]act12pray.ab",
+      "md5": "129e6e5758112c23ca732a4f7c39ed5c",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act13pray",
+      "bundle": "activity/[uc]act13pray.ab",
+      "md5": "d2a8ba14458e5a71503ae898d1e79c8d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act14pray",
+      "bundle": "activity/[uc]act14pray.ab",
+      "md5": "9f50c3ea50fcf19312928028d5096da7",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act15pray",
+      "bundle": "activity/[uc]act15pray.ab",
+      "md5": "e58fd6bbe895e21e8f93e2a217295eaa",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act18mini",
+      "bundle": "activity/[uc]act18mini.ab",
+      "md5": "c527667f83b489731974f77c267e599c",
+      "status": "recovered",
+      "asset": "events/en/act18mini/c527667f83b4/asset.json",
+      "candidates": [
+        "act18mini_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act19mini",
+      "bundle": "activity/[uc]act19mini.ab",
+      "md5": "f470c24f1ea612847d4a43dceafa358f",
+      "status": "recovered",
+      "asset": "events/en/act19mini/f470c24f1ea6/asset.json",
+      "candidates": [
+        "act19mini_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act1autochess",
+      "bundle": "activity/[uc]act1autochess.ab",
+      "md5": "77273c6e2938c033e3fb44646810c460",
+      "status": "recovered",
+      "asset": "events/en/act1autochess/77273c6e2938/asset.json",
+      "candidates": [
+        "act1autochess_entry_show"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act1break",
+      "bundle": "activity/[uc]act1break.ab",
+      "md5": "a09c1b9f1a70335ae9c3984c3f086b0d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act1enemyduel",
+      "bundle": "activity/[uc]act1enemyduel.ab",
+      "md5": "6918c1ea12e575b01bfa79af1f656cbe",
+      "status": "no-candidate-clip",
+      "animations": [
+        "video_loop",
+        "act1enemyduel_entry_bg_rotation_loop"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act1multi",
+      "bundle": "activity/[uc]act1multi.ab",
+      "md5": "ede82b044493d4f5ea270f51b473d8b6",
+      "status": "recovered",
+      "asset": "events/en/act1multi/ede82b044493/asset.json",
+      "candidates": [
+        "act3vmulti_train_billboard_enter_fortress",
+        "act3vmulti_train_billboard_enter_normal",
+        "act3vmulti_train_billboard_enter_soccer"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act1recruit",
+      "bundle": "activity/[uc]act1recruit.ab",
+      "md5": "dff5293e29197e3e612e7a1b3adba858",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act1teamquest",
+      "bundle": "activity/[uc]act1teamquest.ab",
+      "md5": "92a2c9ef5c444ae92953b0a7fcb558d9",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act1vhalfidle",
+      "bundle": "activity/[uc]act1vhalfidle.ab",
+      "md5": "29f0d8509997e0fd3d71387484ae4397",
+      "status": "recovered",
+      "asset": "events/en/act1vhalfidle/29f0d8509997/asset.json",
+      "candidates": [
+        "recruit_entry_state_show_quick",
+        "hanging_income_stage_in",
+        "recruit_entry_state_show_special",
+        "recruit_entry_state_show_random",
+        "recruit_entry_state_show_select",
+        "tip_in",
+        "entry",
+        "hanging_income_daily_in",
+        "recruit_complete_entry",
+        "recruit_entry",
+        "recruit_front_ui_entry",
+        "hanging_income_battlefinish_in",
+        "equip_item_special_in",
+        "tech_tree_detail_in",
+        "tech_tree_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act20mini",
+      "bundle": "activity/[uc]act20mini.ab",
+      "md5": "17edffab492eedd71d4ab65ad487196f",
+      "status": "recovered",
+      "asset": "events/en/act20mini/17edffab492e/asset.json",
+      "candidates": [
+        "act20mini_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act23login",
+      "bundle": "activity/[uc]act23login.ab",
+      "md5": "bf2ddc89a56c5bf19b89ff362497abf7",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act24login",
+      "bundle": "activity/[uc]act24login.ab",
+      "md5": "f110b87542407342371476f0b4c2dcea",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act26login",
+      "bundle": "activity/[uc]act26login.ab",
+      "md5": "a3f19962a5555ecb9da99d8d0f4ff485",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act27login",
+      "bundle": "activity/[uc]act27login.ab",
+      "md5": "5463424a18306a5bd096bc985b094915",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act2access",
+      "bundle": "activity/[uc]act2access.ab",
+      "md5": "0b5908af75ed5e7bebc24015c53fe91a",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act2autochess",
+      "bundle": "activity/[uc]act2autochess.ab",
+      "md5": "f880921e343e7e9715016e5b5f6ed84a",
+      "status": "recovered",
+      "asset": "events/en/act2autochess/f880921e343e/asset.json",
+      "candidates": [
+        "act2autochess_entry_show"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act2blessing",
+      "bundle": "activity/[uc]act2blessing.ab",
+      "md5": "17a122d4f2295f0eb7873b98d899b2d0",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act2break",
+      "bundle": "activity/[uc]act2break.ab",
+      "md5": "6d6cebb96960d1d50921b11a6d615cae",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act2enemyduel",
+      "bundle": "activity/[uc]act2enemyduel.ab",
+      "md5": "b58d5f72539f22aa7c14d13df728e51d",
+      "status": "no-candidate-clip",
+      "animations": [
+        "act2enemyduel_entry_bg_rotation_loop",
+        "video_loop"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act2mainss",
+      "bundle": "activity/[uc]act2mainss.ab",
+      "md5": "9b246f9a171f0d1f666df8fee47f2427",
+      "status": "recovered",
+      "asset": "events/en/act2mainss/9b246f9a171f/asset.json",
+      "candidates": [
+        "act2mainss_entry_3",
+        "act2mainss_entry_2",
+        "act2mainss_entry_1",
+        "act2mainss_entry_2_bg_change",
+        "act2mainss_entry_3_bg_change"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act2multi",
+      "bundle": "activity/[uc]act2multi.ab",
+      "md5": "56caa922d47ec6cf7342c598845dd057",
+      "status": "recovered",
+      "asset": "events/en/act2multi/56caa922d47e/asset.json",
+      "candidates": [
+        "act2multi_train_billboard_enter_raft",
+        "act2multi_train_billboard_enter_fortress",
+        "act2multi_train_billboard_enter_normal"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act2recruit",
+      "bundle": "activity/[uc]act2recruit.ab",
+      "md5": "361fd0c949256b3cb36a425f5a1c30f2",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act2unique",
+      "bundle": "activity/[uc]act2unique.ab",
+      "md5": "3a58041924222c2886afd4d9e9fc54ba",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act31sre",
+      "bundle": "activity/[uc]act31sre.ab",
+      "md5": "fe56774089f1f4b6384385ba12a8eeaf",
+      "status": "recovered",
+      "asset": "events/en/act31sre/fe56774089f1/asset.json",
+      "candidates": [
+        "act31sre_stage_entry",
+        "act31sre_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act33sre",
+      "bundle": "activity/[uc]act33sre.ab",
+      "md5": "167ffcd04f3d380dc0d55795b99c5072",
+      "status": "recovered",
+      "asset": "events/en/act33sre/167ffcd04f3d/asset.json",
+      "candidates": [
+        "act33sre_stage_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act34sre",
+      "bundle": "activity/[uc]act34sre.ab",
+      "md5": "39c44448daab76f1df97e6fb6abd0403",
+      "status": "recovered",
+      "asset": "events/en/act34sre/39c44448daab/asset.json",
+      "candidates": [
+        "panel_act34sre_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act35sre",
+      "bundle": "activity/[uc]act35sre.ab",
+      "md5": "6a31de2e1c154265054a785bdf253585",
+      "status": "recovered",
+      "asset": "events/en/act35sre/6a31de2e1c15/asset.json",
+      "candidates": [
+        "act35sre_entry_carving_new",
+        "act35sre_stage_entry",
+        "act35sre_entry_zone_pyramid_cat_rotation"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act37sre",
+      "bundle": "activity/[uc]act37sre.ab",
+      "md5": "a30888486b5e422fedccc2a2e59617cb",
+      "status": "recovered",
+      "asset": "events/en/act37sre/a30888486b5e/asset.json",
+      "candidates": [
+        "act37sre_stage_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act38sre",
+      "bundle": "activity/[uc]act38sre.ab",
+      "md5": "c12b80399d840f1ecb33c33aa1da272a",
+      "status": "recovered",
+      "asset": "events/en/act38sre/c12b80399d84/asset.json",
+      "candidates": [
+        "act38side_entry_stage_entry",
+        "act38side_fireworks_battle_ui_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act39sre",
+      "bundle": "activity/[uc]act39sre.ab",
+      "md5": "0f3ad433ab2c75f3837862453b4debdf",
+      "status": "recovered",
+      "asset": "events/en/act39sre/0f3ad433ab2c/asset.json",
+      "candidates": [
+        "act39side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act3access",
+      "bundle": "activity/[uc]act3access.ab",
+      "md5": "715f32540e485363a6393578fc643cac",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act3blessing",
+      "bundle": "activity/[uc]act3blessing.ab",
+      "md5": "6aa10119f0f9bf76f858e938a82868b1",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act3collection",
+      "bundle": "activity/[uc]act3collection.ab",
+      "md5": "c136c834396f05a737fdf59a35d3ed10",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act3enemyduel",
+      "bundle": "activity/[uc]act3enemyduel.ab",
+      "md5": "8fdedc394fb52996bcc0ae68aa46099b",
+      "status": "no-candidate-clip",
+      "animations": [
+        "video_loop",
+        "act3enemyduel_entry_bg_rotation_loop"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act3mainss",
+      "bundle": "activity/[uc]act3mainss.ab",
+      "md5": "3a8a20333988e272123716a21ad26443",
+      "status": "recovered",
+      "asset": "events/en/act3mainss/3a8a20333988/asset.json",
+      "candidates": [
+        "act3mainss_entry_3",
+        "act3mainss_entry_3_bg_entry",
+        "act3mainss_entry_1",
+        "act3mainss_entry_2"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act3signvs",
+      "bundle": "activity/[uc]act3signvs.ab",
+      "md5": "825a8c37a0240707041a4bdb0e77cc34",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act3unique",
+      "bundle": "activity/[uc]act3unique.ab",
+      "md5": "cdcb533e4d19b76817a6340fa265d456",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act3video",
+      "bundle": "activity/[uc]act3video.ab",
+      "md5": "d42e83ea70c4794a0a5c41aef4cfba35",
+      "status": "no-candidate-clip",
+      "animations": [
+        "anim_checkin_remake_prefab"
+      ],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act40side",
+      "bundle": "activity/[uc]act40side.ab",
+      "md5": "e8ca4689643d86950c5c5b521f71bc4b",
+      "status": "recovered",
+      "asset": "events/en/act40side/e8ca4689643d/asset.json",
+      "candidates": [
+        "panel_act40side_entry_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act40sre",
+      "bundle": "activity/[uc]act40sre.ab",
+      "md5": "af6c11622b8d52b35cae687f6beccbbd",
+      "status": "recovered",
+      "asset": "events/en/act40sre/af6c11622b8d/asset.json",
+      "candidates": [
+        "panel_act40side_entry_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act41side",
+      "bundle": "activity/[uc]act41side.ab",
+      "md5": "2956db0dc606e285c359ed93c2c7a7f8",
+      "status": "recovered",
+      "asset": "events/en/act41side/2956db0dc606/asset.json",
+      "candidates": [
+        "act41side_stage_entry_anim",
+        "act41side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act41sre",
+      "bundle": "activity/[uc]act41sre.ab",
+      "md5": "a50a05f23d3bb62b2b9d98927be19431",
+      "status": "recovered",
+      "asset": "events/en/act41sre/a50a05f23d3b/asset.json",
+      "candidates": [
+        "act41side_stage_entry_anim",
+        "act41side_entry_trackpoint"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act42side",
+      "bundle": "activity/[uc]act42side.ab",
+      "md5": "d5558b1bd102d80d339f0676e423c45d",
+      "status": "recovered",
+      "asset": "events/en/act42side/d5558b1bd102/asset.json",
+      "candidates": [
+        "act42side_entry_stage_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act42sre",
+      "bundle": "activity/[uc]act42sre.ab",
+      "md5": "37ff509bbdff334248ec6a114422b717",
+      "status": "recovered",
+      "asset": "events/en/act42sre/37ff509bbdff/asset.json",
+      "candidates": [
+        "act42side_entry_stage_anim_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act43side",
+      "bundle": "activity/[uc]act43side.ab",
+      "md5": "a23d4f2218750a4c07fa129f08afba80",
+      "status": "recovered",
+      "asset": "events/en/act43side/a23d4f221875/asset.json",
+      "candidates": [
+        "act43side_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act44side",
+      "bundle": "activity/[uc]act44side.ab",
+      "md5": "df2da37ed11189b4149f6d9af7c0b37d",
+      "status": "recovered",
+      "asset": "events/en/act44side/df2da37ed111/asset.json",
+      "candidates": [
+        "anim_act44side_entry_01",
+        "anim_act44side_entry_02"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act45side",
+      "bundle": "activity/[uc]act45side.ab",
+      "md5": "43fdc081b14abc05eec025c3a38cd0f0",
+      "status": "recovered",
+      "asset": "events/en/act45side/43fdc081b14a/asset.json",
+      "candidates": [
+        "stage_card_ui_entry",
+        "act45side_entry",
+        "right_in",
+        "act45side_live_stage_entry_sleep",
+        "act45side_live_stage_entry_live",
+        "left_in",
+        "stage_card_item_entry",
+        "act45side_stage_transition_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act46side",
+      "bundle": "activity/[uc]act46side.ab",
+      "md5": "6c54a0fb96a554cbbf9e692b9a7b21a2",
+      "status": "recovered",
+      "asset": "events/en/act46side/6c54a0fb96a5/asset.json",
+      "candidates": [
+        "entry_token",
+        "act46side_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act47side",
+      "bundle": "activity/[uc]act47side.ab",
+      "md5": "b265ff87b214ae39ca198929877cd0a5",
+      "status": "recovered",
+      "asset": "events/en/act47side/b265ff87b214/asset.json",
+      "candidates": [
+        "act47side_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act48side",
+      "bundle": "activity/[uc]act48side.ab",
+      "md5": "2f1e75b69d3c23d0a939815830443228",
+      "status": "recovered",
+      "asset": "events/en/act48side/2f1e75b69d3c/asset.json",
+      "candidates": [
+        "act48side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act49side",
+      "bundle": "activity/[uc]act49side.ab",
+      "md5": "27a3dd1f062d75da8517ecb40f50beab",
+      "status": "recovered",
+      "asset": "events/en/act49side/27a3dd1f062d/asset.json",
+      "candidates": [
+        "act49side_entry"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act49sign",
+      "bundle": "activity/[uc]act49sign.ab",
+      "md5": "1367e4ed11b4c63a7a94010562704ed3",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act4collection",
+      "bundle": "activity/[uc]act4collection.ab",
+      "md5": "b5740d6f8f10a8d0f73a08b29a0c259a",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act4mainss",
+      "bundle": "activity/[uc]act4mainss.ab",
+      "md5": "ca4e7d5efc43d594baeccbef4f3d011b",
+      "status": "recovered",
+      "asset": "events/en/act4mainss/ca4e7d5efc43/asset.json",
+      "candidates": [
+        "act4mainss_entry_02",
+        "act4mainss_entry_01",
+        "act4mainss_entry_kv_04",
+        "act4mainss_entry_04",
+        "act4mainss_entry_03"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act50sign",
+      "bundle": "activity/[uc]act50sign.ab",
+      "md5": "a93346e98c492c4729a69bffbffe77bb",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act51side",
+      "bundle": "activity/[uc]act51side.ab",
+      "md5": "c7732dfe8ecb8f9168fb464f3caf59d1",
+      "status": "recovered",
+      "asset": "events/en/act51side/c7732dfe8ecb/asset.json",
+      "candidates": [
+        "act51side_stage_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act51sign",
+      "bundle": "activity/[uc]act51sign.ab",
+      "md5": "c05b0607e59ed16ea778717a479301f1",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act52sign",
+      "bundle": "activity/[uc]act52sign.ab",
+      "md5": "f7873d3aacd9304a98328a96e9bbf8fd",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act53sign",
+      "bundle": "activity/[uc]act53sign.ab",
+      "md5": "a00c93b92abcc7d619839d457d468773",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act54sign",
+      "bundle": "activity/[uc]act54sign.ab",
+      "md5": "55ba1a51c29aaf503f66922e5d736b52",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act55sign",
+      "bundle": "activity/[uc]act55sign.ab",
+      "md5": "b277fb2252f217098f245228352439d9",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act56sign",
+      "bundle": "activity/[uc]act56sign.ab",
+      "md5": "f1abbabd8e8d85cd6da0d5f07e9a08be",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act57sign",
+      "bundle": "activity/[uc]act57sign.ab",
+      "md5": "fcdd3f72bae5d6c311db46df17ad307d",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act59sign",
+      "bundle": "activity/[uc]act59sign.ab",
+      "md5": "bc0ac3af1aa5a8109b6033831f1428bb",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act5bossrush",
+      "bundle": "activity/[uc]act5bossrush.ab",
+      "md5": "d47e4b601e06387675349b3aef0396d6",
+      "status": "recovered",
+      "asset": "events/en/act5bossrush/d47e4b601e06/asset.json",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act5collection",
+      "bundle": "activity/[uc]act5collection.ab",
+      "md5": "8a4e1519a237224b567649db0caa0484",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act5switch",
+      "bundle": "activity/[uc]act5switch.ab",
+      "md5": "12450140a6e3b393e0a1b84156d0be90",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act6bossrush",
+      "bundle": "activity/[uc]act6bossrush.ab",
+      "md5": "c4901a63f7c4599e62d328831ff8799e",
+      "status": "recovered",
+      "asset": "events/en/act6bossrush/c4901a63f7c4/asset.json",
+      "candidates": [
+        "bossrush_entry_anim"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act6collection",
+      "bundle": "activity/[uc]act6collection.ab",
+      "md5": "95605caf5ffa1b3e0834b204cd3370f5",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act6fun",
+      "bundle": "activity/[uc]act6fun.ab",
+      "md5": "51a474843b4266f28a375c065b2705b2",
+      "status": "recovered",
+      "asset": "events/en/act6fun/51a474843b42/asset.json",
+      "candidates": [
+        "act6fun_home_entry_in"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "act7collection",
+      "bundle": "activity/[uc]act7collection.ab",
+      "md5": "6fa6a878982f1e8c17ec735f327d7a63",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "act8switch",
+      "bundle": "activity/[uc]act8switch.ab",
+      "md5": "e4a2ba55d75a324f132a07686a491608",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "actfun",
+      "bundle": "activity/[uc]actfun.ab",
+      "md5": "f77588b02de92a2275f04d16ddfe33ea",
+      "status": "no-candidate-clip",
+      "animations": [],
+      "decodeErrors": []
+    },
+    {
+      "server": "en",
+      "activityId": "multiv3",
+      "bundle": "activity/[uc]multiv3.ab",
+      "md5": "1c3a3a85363caf948d44fe14f5fd3a0b",
+      "status": "recovered",
+      "asset": "events/en/multiv3/1c3a3a85363c/asset.json",
+      "candidates": [
+        "multi_v3_prepare_squal_check_entry",
+        "tiny_in",
+        "multiv3_prepare_start_countdown_show",
+        "battle_finish_first_view_entry_normal_reward_tween",
+        "multi_v3_prepare_squal_skill_entry",
+        "act3vmulti_entry_main_to_match",
+        "multi_v3_prepare_top_view_entry",
+        "act3vmulti_view_arena_top_normal_in",
+        "battle_finish_first_view_entry_normal_progress_text",
+        "battle_finish_first_view_entry_fortress_final_record_new_effects",
+        "battle_finish_first_view_entry_raft_score",
+        "start_in_normal",
+        "battle_finish_first_view_entry_fortress",
+        "act3vmulti_view_arena_top_easy_in",
+        "multi_v3_prepare_squad_sel_entry",
+        "stage_choose_host_in_1",
+        "matching_banner_in",
+        "battle_finish_first_view_entry_normal",
+        "multi_v3_prepare_squad_entry",
+        "battle_finish_first_view_entry_fortress_final_record",
+        "act3vmulti_entry_room_joining_bar",
+        "quick_match_state_in",
+        "battle_finish_first_view_entry_fortress_progress_text",
+        "battle_settle_part_2_view_entry",
+        "stage_choose_guest_in_2",
+        "start_in_invert",
+        "act3vmulti_view_arena_top_hard_in",
+        "stage_certain_in",
+        "act_multi_v3_banner_in",
+        "battle_finish_first_view_entry_com_quit",
+        "act_multi_v3_state_loading_in",
+        "stage_choose_guest_in_1",
+        "act3vmulti_entry_main_to_room",
+        "battle_finish_first_view_entry_succer",
+        "full_in",
+        "battle_finish_first_view_entry_normal_progress_text1",
+        "quick_match_state_inversion_in",
+        "battle_finish_first_view_entry_com",
+        "multi_v3_prepare_sys_alloc_entry",
+        "battle_finish_first_view_entry_fortress_progress_text2",
+        "in",
+        "battle_finish_first_view_entry_raft_new_effects",
+        "act3vmulti_entry_stage_entry",
+        "battle_finish_first_view_entry_fortress_final_record_clear",
+        "multi_v3_char_pick_entry",
+        "battle_finish_first_view_entry_normal_progress_text2",
+        "battle_finish_first_view_entry_raft",
+        "act3vmulti_entry_room_to_main",
+        "battle_finish_first_view_entry_fortress_progress_text1",
+        "battle_settle_camera_enter"
+      ]
+    },
+    {
+      "server": "en",
+      "activityId": "vecbreakv2",
+      "bundle": "activity/[uc]vecbreakv2.ab",
+      "md5": "11810a43b086aa5fcf3e39a3ddc9e5d5",
+      "status": "recovered",
+      "asset": "events/en/vecbreakv2/11810a43b086/asset.json",
+      "candidates": [
+        "vec_break_v2_defense_info_in",
+        "vec_break_v2_defense_info_right_select_in",
+        "vec_break_v2_achievement_switch_next_in",
+        "vec_break_v2_achievement_switch_before_in",
+        "popup_in",
+        "vec_v2_stage_selected_entry",
+        "vec_break_v2_stage_raid_in",
+        "entry_in",
+        "vec_break_v2_stage_raid_boss_select_in",
+        "vec_break_v2_defense_stage_select_state_select_in"
+      ]
+    }
+  ]
+}

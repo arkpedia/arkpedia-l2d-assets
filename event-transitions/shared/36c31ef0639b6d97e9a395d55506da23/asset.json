@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "server": "en",
+  "activityId": "act40side",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "en",
+    "resVersion": "25-09-15-04-46-25_59e90b",
+    "assetBase": "https://ark-us-static-online.yo-star.com/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/b54684d3aedd9d235591f4e8c9486a1d2ce4dd4c/bundles/hot_update_list.json",
+    "bundle": "audio/custom_se/act40side.ab",
+    "bundleMd5": "36c31ef0639b6d97e9a395d55506da23",
+    "manifestEntry": {
+      "name": "audio/custom_se/act40side.ab",
+      "hash": "a5f22e19f596db98ddb56236a2d7a39e",
+      "md5": "36c31ef0639b6d97e9a395d55506da23",
+      "totalSize": 111306,
+      "abSize": 111876,
+      "cid": 5218
+    },
+    "archiveUrl": "https://ark-us-static-online.yo-star.com/assetbundle/official/Android/assets/25-09-15-04-46-25_59e90b/audio_custom_se_act40side.dat",
+    "archiveSha256": "7524d1b7ca358e5b9532189ccd132709ddf5abc77d4f16d4480b33cdd5d159e5",
+    "bundleSha256": "7bfcc5214b9b8da0f70b82838d3ff7f36519f0194b3bc7c7df0c880225461f82"
+  },
+  "animations": [],
+  "textures": [],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "AudioClip": 1
+  },
+  "externalFiles": {
+    "CAB-51169484fb1f3d773bd0d9902f2cc4ed": []
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "audio/-3538163942476792979-0.wav",
+      "bytes": 498868,
+      "sha256": "b5e61bc7e190b049ed8d44b41737df9a1b482bd86d6495d65306b390207add84"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 111306,
+      "sha256": "7524d1b7ca358e5b9532189ccd132709ddf5abc77d4f16d4480b33cdd5d159e5"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 642,
+      "sha256": "ba97c207e4f1e928456945e2fa43e2c6c325d0d10360c14357432950247009db"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act6fun",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "25-05-20-12-36-22_4803e1",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/165c1269485961dd8cdd761298ab9c5a12f1c80f/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act6fun.ab",
+    "bundleMd5": "00bfa794eb771794e9993a41ac3de276",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/25-05-20-12-36-22_4803e1/activity_%5Buc%5Dact6fun.dat",
+    "archiveSha256": "8c4c4e3e44d830b1ed4833fdb3d5d8db7a0338d211a320da3ddfca84774abf1b",
+    "bundleSha256": "31de7313ed0079c0533c6b81f03b183c8445a199994c3831de2d75e3ffcf2086",
+    "manifestEntry": {
+      "name": "activity/[uc]act6fun.ab",
+      "hash": "1cf703880024f94db193b7fd669654c6",
+      "md5": "00bfa794eb771794e9993a41ac3de276",
+      "totalSize": 37574,
+      "abSize": 43008,
+      "pid": "lpack_misc1",
+      "cid": 50
+    }
+  },
+  "animations": [
+    {
+      "id": "260441311796877936",
+      "name": "act6fun_home_entry_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "2851540115129834629",
+      "name": "act6fun_home_entry_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-8980357530516835697",
+      "file": "textures/0.webp",
+      "name": "home_entry_big",
+      "width": 254,
+      "height": 112,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4546026383153221330",
+      "file": "textures/1.webp",
+      "name": "home_entry_small",
+      "width": 208,
+      "height": 75,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 1,
+    "AnimationClip": 2,
+    "AssetBundle": 1,
+    "CanvasGroup": 1,
+    "CanvasRenderer": 2,
+    "GameObject": 6,
+    "MonoBehaviour": 14,
+    "RectTransform": 6,
+    "Sprite": 2,
+    "Texture2D": 2
+  },
+  "externalFiles": {
+    "CAB-aac90a28361260adf7924b0360556ab4": [
+      "archive:/CAB-658d74aab777086fc32b93f385be999a/CAB-658d74aab777086fc32b93f385be999a"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 1287,
+      "sha256": "11ef2bf3d8077f4d3b5bc9ff9ce0075dcbd2939e9ea2f55320194adbbdba3268"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 37574,
+      "sha256": "8c4c4e3e44d830b1ed4833fdb3d5d8db7a0338d211a320da3ddfca84774abf1b"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 5158,
+      "sha256": "2e2776030b80bcbc8b5b31aeca7ce3a575025b35e6d3b76d9c652119eec990c8"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 27242,
+      "sha256": "77039615de6c7afe8b25f01d4c392d9dc99030f7f6a6a4610678efdba1e0a4a6"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 17356,
+      "sha256": "d1cb2b8a07a8bc9f0bf13df07fc0da7f56946b542ea0d92fd5ddb3c25950aaf1"
+    }
+  ]
+}

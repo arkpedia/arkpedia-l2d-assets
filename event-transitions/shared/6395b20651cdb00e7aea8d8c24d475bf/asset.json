@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act1dp",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "26-09-22-07-47-20_6c71fa",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/21e113da889dbfa98e47210d820b9d11d00ea291/bundles/hot_update_list.json",
+    "bundle": "audio/custom_se/act1dp.ab",
+    "bundleMd5": "6395b20651cdb00e7aea8d8c24d475bf",
+    "manifestEntry": {
+      "name": "audio/custom_se/act1dp.ab",
+      "hash": "59b2608e22e72c80fa59ec4671622152",
+      "md5": "6395b20651cdb00e7aea8d8c24d475bf",
+      "totalSize": 841743,
+      "abSize": 843706,
+      "cid": 6703
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/26-09-22-07-47-20_6c71fa/audio_custom_se_act1dp.dat",
+    "archiveSha256": "d3a51b3f85ee4026726e47d225251fa8df5a6facaaab6a2c773e077f7dc613bd",
+    "bundleSha256": "55cb0ba9437161c7df3ac6509acc4dfc130851ce9ca4adb7eeb3b19396456d71"
+  },
+  "animations": [],
+  "textures": [],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "AudioClip": 10
+  },
+  "externalFiles": {
+    "CAB-045a1cf4738658f218340e1eb97a235e": []
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "audio/-1654868829651198358-0.wav",
+      "bytes": 568460,
+      "sha256": "4109e0d79eba9b70d49674761e45ccea422c8faa776b4402554175341ee40415"
+    },
+    {
+      "file": "audio/-2928868652363204079-0.wav",
+      "bytes": 188404,
+      "sha256": "64d8a3598e10c9db12681de39be76406017f278aa24647f83f3ebf63e91b958b"
+    },
+    {
+      "file": "audio/-5077191826288311673-0.wav",
+      "bytes": 239680,
+      "sha256": "3dbbf791baee06f5619ce160f6fbf42651a24962b308afdbea04de1e094f8008"
+    },
+    {
+      "file": "audio/-5575777904998277866-0.wav",
+      "bytes": 391412,
+      "sha256": "a3d31c7f75a1ae25f456e29398965ba18764b8a0b99e02eedd9536d5658682ab"
+    },
+    {
+      "file": "audio/131156175977719909-0.wav",
+      "bytes": 290760,
+      "sha256": "d8edc477b011bfc5ea9b69455ea98cdc85e43e97698da173e50ff6e30a82be05"
+    },
+    {
+      "file": "audio/2675388563241403757-0.wav",
+      "bytes": 401152,
+      "sha256": "e5e7c865ff15759bfcf2d2ddcfcd7e8e2ac71cef859cdee404bea740e7215a7e"
+    },
+    {
+      "file": "audio/3675693246122240566-0.wav",
+      "bytes": 161464,
+      "sha256": "73eb37a683549ba3589dea0a47064dd843d0d75e8a08c3b74a2c23ad8fada6ba"
+    },
+    {
+      "file": "audio/4688830482745407407-0.wav",
+      "bytes": 32848,
+      "sha256": "cca64d4af019d2f59250cbfe59d5ef5bfb098f459724fd942c6dffe8eaea245f"
+    },
+    {
+      "file": "audio/6944644755077987721-0.wav",
+      "bytes": 834028,
+      "sha256": "94eb0780b7f236dc1bda06351fd02e9e219f30cbeb4e5540c4eb6e2d5aca44a4"
+    },
+    {
+      "file": "audio/7544115150566172445-0.wav",
+      "bytes": 375212,
+      "sha256": "3962b1cd0af2e3a2abdc8f85b82abddd5b0f79e559d977198c34495000ab58ff"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 841743,
+      "sha256": "d3a51b3f85ee4026726e47d225251fa8df5a6facaaab6a2c773e077f7dc613bd"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 1436,
+      "sha256": "f5e6dac458f1115737ba5d0d326a193971b0968c5ec3073f12bdf88dac0cc593"
+    }
+  ]
+}

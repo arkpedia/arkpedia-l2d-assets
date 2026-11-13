@@ -1,0 +1,2181 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act1vautochess",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "24-11-21-11-04-45-bae23b",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/98f8c7ff685925356990b221fc272670fc8fafde/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act1vautochess.ab",
+    "bundleMd5": "9256ddbbb12dfc5255cd91a2ad367b8d",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/24-11-21-11-04-45-bae23b/activity_%5Buc%5Dact1vautochess.dat",
+    "archiveSha256": "628aebf210714a2db290a7e0e1bc041cf303f87a3309e8942113d9375ba1c9c5",
+    "bundleSha256": "3738ff3be9459f8b83afe5ddf7c0969642cd7eecafb9a46352bd1c72f01b56ba",
+    "manifestEntry": {
+      "name": "activity/[uc]act1vautochess.ab",
+      "hash": "ecab1f35b60bee645818bfde2afb4d85",
+      "md5": "9256ddbbb12dfc5255cd91a2ad367b8d",
+      "totalSize": 6847518,
+      "abSize": 7536138,
+      "pid": "lpack_misc1",
+      "cid": 3
+    }
+  },
+  "animations": [
+    {
+      "id": "-9144752094070809305",
+      "name": "start_game_tv_select",
+      "candidate": true,
+      "durationSeconds": 1.1666666269302368,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 1.1666666269302368,
+          "functionName": "OnReleaseBlockingEvent",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-8629125054152101779",
+      "name": "auto_chess_mode_choice_back_enter_init",
+      "candidate": true,
+      "durationSeconds": 2.2166666984558105,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-8588155726924137978",
+      "name": "start_game_tv_unfold",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.75,
+          "functionName": "OnReleaseBlockingEvent",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-7973395744115118319",
+      "name": "entry_main_front_view_enter",
+      "candidate": true,
+      "durationSeconds": 2.799999952316284,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-7958154944869872598",
+      "name": "team_info_lock",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-7562738527640435193",
+      "name": "auto_chess_mode_choice_back_enter_guide",
+      "candidate": true,
+      "durationSeconds": 2.2166666984558105,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-7298385454052653263",
+      "name": "team_info_bottom_refresh",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 30.0,
+      "events": []
+    },
+    {
+      "id": "-7203947597268573414",
+      "name": "auto_chess_mode_choice_front_enter",
+      "candidate": true,
+      "durationSeconds": 1.5833333730697632,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-6981642481103021009",
+      "name": "entry_main_back_view_exit",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-6664155720036182159",
+      "name": "auto_chess_mode_choice_selected",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-6459514106950551328",
+      "name": "entry_main_front_view_exit",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-6358902997698305916",
+      "name": "team_info_tv_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-5288214080918879665",
+      "name": "act1autochess_battle_end_win_from_battle_fisheye",
+      "candidate": false,
+      "durationSeconds": 3.4666666984558105,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-4823027011672553217",
+      "name": "act1autochess_battle_end_front_exit",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-4573512100689508710",
+      "name": "auto_chess_mode_choice_back_circle_loop",
+      "candidate": false,
+      "durationSeconds": 3.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-4282760870023633413",
+      "name": "auto_chess_mode_choice_back_enter_standard",
+      "candidate": true,
+      "durationSeconds": 2.2166666984558105,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-4210340012391644385",
+      "name": "item_chess_detail_dialog_next_show",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-3908588612177755097",
+      "name": "quick_assist_item_state_change",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-3841020788812009607",
+      "name": "entry_main_front_view_btn_loop_anim",
+      "candidate": false,
+      "durationSeconds": 2.5,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-3415676730276027681",
+      "name": "act1autochess_battle_end_fail_front",
+      "candidate": false,
+      "durationSeconds": 2.4166667461395264,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 2.4166667461395264,
+          "functionName": "OnEntryAnimComplete",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-2618406707233348086",
+      "name": "start_game_tv_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2591976661775161736",
+      "name": "team_info_tab_defense",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2452123156857394945",
+      "name": "act1autochess_battle_end_levelmax",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-2267975643599603716",
+      "name": "shop_menu_switch_shop_type",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1777706699344109142",
+      "name": "start_game_bottom_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1436211110724603364",
+      "name": "start_game_bottom_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-1421642687518964689",
+      "name": "act1autochess_battle_end_win_front",
+      "candidate": false,
+      "durationSeconds": 2.133333444595337,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 2.133333444595337,
+          "functionName": "OnEntryAnimComplete",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-1321949803914717286",
+      "name": "shop_menu_level_item_click",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-840033009731556173",
+      "name": "item_chess_detail_dialog_prev_show",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "item_chess_detail_dialog_prev_show",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.4166666567325592,
+          "functionName": "_OnAnimEnd",
+          "data": "item_chess_detail_dialog_prev_show",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "-738785457537857648",
+      "name": "team_info_loop_circle",
+      "candidate": false,
+      "durationSeconds": 6.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-443642520661915879",
+      "name": "auto_chess_mode_choice_back_selected_init",
+      "candidate": false,
+      "durationSeconds": 1.5499999523162842,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-378758012021956723",
+      "name": "detail_gold_swtich",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "-165543256941492833",
+      "name": "auto_chess_mode_choice_selected_again",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "122905468122560525",
+      "name": "act1autochess_battle_end_loop_anim",
+      "candidate": false,
+      "durationSeconds": 2.3333332538604736,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "314223374204894263",
+      "name": "auto_chess_mode_choice_back_exit_standard",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "auto_chess_mode_choice_back_exit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.38333332538604736,
+          "functionName": "_OnAnimEnd",
+          "data": "auto_chess_mode_choice_back_exit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "546655606539083484",
+      "name": "item_chess_detail_dialog_next_hide",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "1073027998323954822",
+      "name": "start_game_btnshow",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "1318510611435954610",
+      "name": "act1autochess_battle_end_win_from_main_fisheye",
+      "candidate": false,
+      "durationSeconds": 3.299999952316284,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "1525147536307633550",
+      "name": "item_chess_detail_dialog_prev_hide",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "item_chess_detail_dialog_prev_hide",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.25,
+          "functionName": "_OnAnimEnd",
+          "data": "item_chess_detail_dialog_prev_hide",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "1753290575292331618",
+      "name": "start_game_loop_circle",
+      "candidate": false,
+      "durationSeconds": 6.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "2065006109792789111",
+      "name": "auto_chess_mode_choice_back_exit_init",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "auto_chess_mode_choice_back_exit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.38333332538604736,
+          "functionName": "_OnAnimEnd",
+          "data": "auto_chess_mode_choice_back_exit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "2214307232493093328",
+      "name": "team_info_tv_defense",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3031726754879517414",
+      "name": "act1autochess_battle_end_daily_reward_claim",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3420364923273642436",
+      "name": "team_info_tv_attack",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "3816976533613952025",
+      "name": "auto_chess_mode_choice_back_exit_guide",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "auto_chess_mode_choice_back_exit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.38333332538604736,
+          "functionName": "_OnAnimEnd",
+          "data": "auto_chess_mode_choice_back_exit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "4535995848359937985",
+      "name": "team_info_tab_attack",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4543561820844508752",
+      "name": "auto_chess_mode_choice_back_selected_guide",
+      "candidate": false,
+      "durationSeconds": 1.5499999523162842,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "4706892146109010248",
+      "name": "team_info_tv_in_enemy",
+      "candidate": true,
+      "durationSeconds": 1.6333333253860474,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5100671296407623987",
+      "name": "team_info_bottom_out",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5300049124723650803",
+      "name": "act1autochess_battle_end_fail_from_battle_fisheye",
+      "candidate": false,
+      "durationSeconds": 3.4666666984558105,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5886195061505403494",
+      "name": "act1autochess_battle_end_fisheye_exit",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "5972189973420219094",
+      "name": "entry_main_back_view_circle_loop_anim",
+      "candidate": false,
+      "durationSeconds": 8.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "6408629730801460553",
+      "name": "act1vautochess_trackpoint_spot",
+      "candidate": false,
+      "durationSeconds": 3.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "6456227967870714165",
+      "name": "auto_chess_mode_choice_back_selected_standard",
+      "candidate": false,
+      "durationSeconds": 1.5499999523162842,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "6608763423554765043",
+      "name": "act1autochess_battle_end_levelup",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "6663877514573150880",
+      "name": "shop_top_quick_edit_switch_edit_type",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7022280806797764988",
+      "name": "team_info_tv_in_char",
+      "candidate": true,
+      "durationSeconds": 1.7000000476837158,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7195744836316224710",
+      "name": "act1autochess_battle_end_fail_from_main_fisheye",
+      "candidate": false,
+      "durationSeconds": 3.299999952316284,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7253983689957933587",
+      "name": "auto_chess_mode_choice_front_exit",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "_OnAnimStart",
+          "data": "auto_chess_mode_choice_front_exit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.38333332538604736,
+          "functionName": "_OnAnimEnd",
+          "data": "auto_chess_mode_choice_front_exit",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "7420685432888346491",
+      "name": "start_game_tv_in",
+      "candidate": true,
+      "durationSeconds": 1.2666666507720947,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7473731367889691534",
+      "name": "entry_main_back_view_enter",
+      "candidate": true,
+      "durationSeconds": 2.5,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "7496434090715815126",
+      "name": "start_game_tv_fold",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": [
+        {
+          "time": 0.75,
+          "functionName": "OnReleaseBlockingEvent",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": "0"
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": "7660086185107352643",
+      "name": "auto_chess_mode_choice_back_arrow_loop",
+      "candidate": false,
+      "durationSeconds": 2.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "8321662944952724104",
+      "name": "auto_chess_mode_choice_unselected",
+      "candidate": false,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "8796248954396468576",
+      "name": "act1vautochess_trackpoint_info",
+      "candidate": false,
+      "durationSeconds": 3.0,
+      "sampleRate": 60.0,
+      "events": []
+    },
+    {
+      "id": "9198147079014564312",
+      "name": "team_info_bottom_in",
+      "candidate": true,
+      "durationSeconds": 1.0,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-9008309368837796372",
+      "file": "textures/0.webp",
+      "name": "SpriteAtlasTexture-FILTER_ICON_PROFESSION-256x128-fmt34",
+      "width": 256,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8846377088943440725",
+      "file": "textures/1.webp",
+      "name": "img_rhodes_island_dec",
+      "width": 168,
+      "height": 353,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8819284303662981205",
+      "file": "textures/2.webp",
+      "name": "potential_bg",
+      "width": 25,
+      "height": 25,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8654056353614172400",
+      "file": "textures/3.webp",
+      "name": "sprite_white",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8459154511976456205",
+      "file": "textures/4.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_TEAM_INFO-512x1024-fmt34",
+      "width": 512,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8413290714109131722",
+      "file": "textures/5.webp",
+      "name": "completed",
+      "width": 340,
+      "height": 118,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8072111907188854894",
+      "file": "textures/6.webp",
+      "name": "img_uifx_basicmask_02",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8020105942476476749",
+      "file": "textures/7.webp",
+      "name": "image_bkg_bottom",
+      "width": 8,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7954241250308037993",
+      "file": "textures/8.webp",
+      "name": "bg_anim_main_attack_range_win",
+      "width": 134,
+      "height": 363,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7898048485586423277",
+      "file": "textures/9.webp",
+      "name": "deco_red_crew",
+      "width": 349,
+      "height": 153,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7664050656045114719",
+      "file": "textures/10.webp",
+      "name": "deco_island",
+      "width": 644,
+      "height": 355,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7605328343155597457",
+      "file": "textures/11.webp",
+      "name": "img_start_game_enemy_card",
+      "width": 477,
+      "height": 169,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7588784387674706289",
+      "file": "textures/12.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_LEVEL_PIC_H1_0-1024x1024-fmt55",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7385841235994448410",
+      "file": "textures/13.webp",
+      "name": "img_mask_01",
+      "width": 336,
+      "height": 196,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7247330103291934813",
+      "file": "textures/14.webp",
+      "name": "act1vautochess_trackpoint_atlas#0",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7222581951271431389",
+      "file": "textures/15.webp",
+      "name": "bg",
+      "width": 999,
+      "height": 593,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6796290457286566264",
+      "file": "textures/16.webp",
+      "name": "act1vautochess_milestone#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6731007307510782349",
+      "file": "textures/17.webp",
+      "name": "img_rhodes_island_mask_01",
+      "width": 168,
+      "height": 353,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6727036405365114718",
+      "file": "textures/18.webp",
+      "name": "img_start_game_cardsweep",
+      "width": 477,
+      "height": 169,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6501744023046302065",
+      "file": "textures/19.webp",
+      "name": "SpriteAtlasTexture-UI_CHAR_SELECT_STATE-256x512-fmt34",
+      "width": 256,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6324055837761800878",
+      "file": "textures/20.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_ELITE_ICON_H2_0-128x128-fmt55",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6129647987849400542",
+      "file": "textures/21.webp",
+      "name": "img_fx_smoke_common_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5969429440062994891",
+      "file": "textures/22.webp",
+      "name": "act1vautochess_chess_shop#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5249146429897075929",
+      "file": "textures/23.webp",
+      "name": "img_right_bg",
+      "width": 735,
+      "height": 992,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4520077609656395440",
+      "file": "textures/24.webp",
+      "name": "mode_choice_front_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3921147265820500831",
+      "file": "textures/25.webp",
+      "name": "SpriteAtlasTexture-UI_ACT1VAUTOCHESS_ENTRY (Group 1)-1024x512-fmt34_alpha",
+      "width": 1024,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3832774609036094955",
+      "file": "textures/26.webp",
+      "name": "s_line",
+      "width": 4,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3661124388124078861",
+      "file": "textures/27.webp",
+      "name": "act_entry_act1vautochess",
+      "width": 463,
+      "height": 227,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3635995493172210096",
+      "file": "textures/28.webp",
+      "name": "img_start_game_noise",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3090904266942990959",
+      "file": "textures/29.webp",
+      "name": "bkg",
+      "width": 1559,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2915402920073782331",
+      "file": "textures/30.webp",
+      "name": "SpriteAtlasTexture-UI_ACT1VAUTOCHESS_ENTRY (Group 1)-1024x512-fmt34",
+      "width": 1024,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2880855661919373513",
+      "file": "textures/31.webp",
+      "name": "SpriteAtlasTexture-UI_CHAR_SELECT_STATE_OPAQUE-512x512-fmt34",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2815507104166098598",
+      "file": "textures/32.webp",
+      "name": "SpriteAtlasTexture-UI_ACT1VAUTOCHESS_SETTLE_GAME_SPRITES-64x32-fmt55",
+      "width": 64,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2673609010359141968",
+      "file": "textures/33.webp",
+      "name": "reward_rule_dialog#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2543878234143210768",
+      "file": "textures/34.webp",
+      "name": "SpriteAtlasTexture-UI_ACT1VAUTOCHESS_REWARD_RULE-2048x256-fmt55",
+      "width": 2048,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2496272749923647496",
+      "file": "textures/35.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHAR_CHESS_LEVEL_ICON_H2_0-256x256-fmt55",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2456560955186589250",
+      "file": "textures/36.webp",
+      "name": "SpriteAtlasTexture-UI_CHAR_SELECT_STATE-256x512-fmt34_alpha",
+      "width": 256,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2362621707546143246",
+      "file": "textures/37.webp",
+      "name": "img_assist_list_has_replace_mask",
+      "width": 148,
+      "height": 200,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2238951963498614987",
+      "file": "textures/38.webp",
+      "name": "scroll_bar_bg",
+      "width": 77,
+      "height": 7,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2218498543992108868",
+      "file": "textures/39.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_SHOP_ITEM_ICON_H2_ITEMS_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2200996304883093617",
+      "file": "textures/40.webp",
+      "name": "mode_choice_front_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2127611141928483496",
+      "file": "textures/41.webp",
+      "name": "img_uifx_basicmask_03",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2006024243527155435",
+      "file": "textures/42.webp",
+      "name": "SpriteAtlasTexture-UI_COMMON_GUIDEBOOK-256x256-fmt4",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1822228437913581445",
+      "file": "textures/43.webp",
+      "name": "img_char_card_bg_mask",
+      "width": 82,
+      "height": 98,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1558987289009550712",
+      "file": "textures/44.webp",
+      "name": "bg_anim_win_mask",
+      "width": 134,
+      "height": 363,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1530067191922758816",
+      "file": "textures/45.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_RARITY_ICON_H2_0-64x128-fmt55",
+      "width": 64,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1332002946171035468",
+      "file": "textures/46.webp",
+      "name": "img_chess_level_tag_bg",
+      "width": 245,
+      "height": 531,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1126855797610355735",
+      "file": "textures/47.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_SHOP_ITEM_ICON_H2_ITEMS_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-978851179946322072",
+      "file": "textures/48.webp",
+      "name": "SpriteAtlasTexture-UI_COMMON_TOP_MENU_RGBA-256x512-fmt34",
+      "width": 256,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-751888788982914426",
+      "file": "textures/49.webp",
+      "name": "img_fx_dust_glow_01",
+      "width": 128,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-114009795023469817",
+      "file": "textures/50.webp",
+      "name": "act1vautochess_trackpoint_atlas#0a",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-25861138891544996",
+      "file": "textures/51.webp",
+      "name": "SpriteAtlasTexture-UI_ACT1VAUTOCHESS_START_GAME_SPRITES-1024x512-fmt55",
+      "width": 1024,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "84518941989223347",
+      "file": "textures/52.webp",
+      "name": "img_activate_back_mini_circle",
+      "width": 336,
+      "height": 196,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "324020901611052923",
+      "file": "textures/53.webp",
+      "name": "reward_rule_dialog#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "365194655678798669",
+      "file": "textures/54.webp",
+      "name": "act1vautochess_chess_shop#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "398459874009374587",
+      "file": "textures/55.webp",
+      "name": "img_rhodes_island_mask_03",
+      "width": 168,
+      "height": 353,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "485261544106732841",
+      "file": "textures/56.webp",
+      "name": "deco_chess",
+      "width": 122,
+      "height": 174,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "684301120562733289",
+      "file": "textures/57.webp",
+      "name": "deco_yellow_crew",
+      "width": 455,
+      "height": 199,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "839269425261092196",
+      "file": "textures/58.webp",
+      "name": "act1vautochess_entry_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "872695533198207949",
+      "file": "textures/59.webp",
+      "name": "SpriteAtlasTexture-UI_ACT1VAUTOCHESS_ENTRY (Group 0)-2048x2048-fmt55",
+      "width": 2048,
+      "height": 2048,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1049935380614177844",
+      "file": "textures/60.webp",
+      "name": "image_char_select_icon",
+      "width": 38,
+      "height": 4,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1573358066306119082",
+      "file": "textures/61.webp",
+      "name": "bg_anim_main_attack_range_fail",
+      "width": 274,
+      "height": 565,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1703641814568398625",
+      "file": "textures/62.webp",
+      "name": "common_bg",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1907934565544135635",
+      "file": "textures/63.webp",
+      "name": "item_chess_detail#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1990737821995242831",
+      "file": "textures/64.webp",
+      "name": "SpriteAtlasTexture-UI_ACT1VAUTOCHESS_MISSION-1024x2048-fmt55",
+      "width": 1024,
+      "height": 2048,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2275044183785070281",
+      "file": "textures/65.webp",
+      "name": "auto_chess_battle_end_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2433625738230330867",
+      "file": "textures/66.webp",
+      "name": "img_fast_edit_bg",
+      "width": 206,
+      "height": 25,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2607315196570518939",
+      "file": "textures/67.webp",
+      "name": "img_rhodes_island",
+      "width": 168,
+      "height": 353,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2994205742737096486",
+      "file": "textures/68.webp",
+      "name": "team_info_hub#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3084679985434101116",
+      "file": "textures/69.webp",
+      "name": "team_card_hub#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3567556048330831508",
+      "file": "textures/70.webp",
+      "name": "img_start_game_line1",
+      "width": 256,
+      "height": 2,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3663327900723095081",
+      "file": "textures/71.webp",
+      "name": "item_chess_detail#0",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3724050007360448108",
+      "file": "textures/72.webp",
+      "name": "big_reward",
+      "width": 959,
+      "height": 660,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3802080992658027835",
+      "file": "textures/73.webp",
+      "name": "common_screen_line",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5200090128617073548",
+      "file": "textures/74.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_SHOP_ITEM_ICON_H2_ITEMS_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5475952824928726951",
+      "file": "textures/75.webp",
+      "name": "bg_anim_fail_mask",
+      "width": 274,
+      "height": 565,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5682024629179095179",
+      "file": "textures/76.webp",
+      "name": "act_entry_act1vautochess_multi",
+      "width": 463,
+      "height": 121,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5716547958357645506",
+      "file": "textures/77.webp",
+      "name": "start_game_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5739398133970204031",
+      "file": "textures/78.webp",
+      "name": "team_info_hub#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5961766049751351950",
+      "file": "textures/79.webp",
+      "name": "start_game_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6016914523261573503",
+      "file": "textures/80.webp",
+      "name": "auto_chess_battle_end_atlas#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6137434370540710197",
+      "file": "textures/81.webp",
+      "name": "blur_bg",
+      "width": 300,
+      "height": 300,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6259495628911911543",
+      "file": "textures/82.webp",
+      "name": "SpriteAtlasTexture-UI_COMMON_TOP_MENU_RGBA-256x512-fmt34_alpha",
+      "width": 256,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6275223549420846789",
+      "file": "textures/83.webp",
+      "name": "img_start_game_player_card",
+      "width": 477,
+      "height": 169,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6318118249775857048",
+      "file": "textures/84.webp",
+      "name": "img_start_game_tvglow",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6341495828521072592",
+      "file": "textures/85.webp",
+      "name": "SpriteAtlasTexture-FILTER_ICON_PROFESSION-256x128-fmt34_alpha",
+      "width": 256,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6506642428830370404",
+      "file": "textures/86.webp",
+      "name": "img_rhodes_island_mask_02",
+      "width": 168,
+      "height": 353,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6672908494931218303",
+      "file": "textures/87.webp",
+      "name": "team_info_noise",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6811814889567137005",
+      "file": "textures/88.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_SHOP_ITEM_ICON_H2_ITEMS_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6822591624965141463",
+      "file": "textures/89.webp",
+      "name": "img_start_game_line2",
+      "width": 256,
+      "height": 2,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7148955674458961975",
+      "file": "textures/90.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_SHOP_ITEM_ICON_H2_ITEMS_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7352848953782449989",
+      "file": "textures/91.webp",
+      "name": "team_card_hub#0a",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7392196536871086191",
+      "file": "textures/92.webp",
+      "name": "act1vautochess_milestone#0",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7499592301491949504",
+      "file": "textures/93.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_MODE_CHOICE-1024x512-fmt55",
+      "width": 1024,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7851859451637995562",
+      "file": "textures/94.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_SHOP_ITEM_ICON_H2_ITEMS_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7974905700370837512",
+      "file": "textures/95.webp",
+      "name": "img_assist_list_backup_mask",
+      "width": 22,
+      "height": 161,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8024851206807793319",
+      "file": "textures/96.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_TEAM_INFO-512x1024-fmt34_alpha",
+      "width": 512,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8089757888348694133",
+      "file": "textures/97.webp",
+      "name": "img_uifx_sweep_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8151470565998062054",
+      "file": "textures/98.webp",
+      "name": "act1vautochess_entry_atlas#0a",
+      "width": 1024,
+      "height": 1024,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8169132573546077820",
+      "file": "textures/99.webp",
+      "name": "deco_yellow_chess",
+      "width": 411,
+      "height": 176,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8267953476216356511",
+      "file": "textures/100.webp",
+      "name": "img_shadow",
+      "width": 66,
+      "height": 67,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8288717823331001885",
+      "file": "textures/101.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_SHOP_ITEM_ICON_H2_ITEMS_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8729425521454207253",
+      "file": "textures/102.webp",
+      "name": "little_mask_both_v",
+      "width": 7,
+      "height": 60,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8780904580469714118",
+      "file": "textures/103.webp",
+      "name": "SpriteAtlasTexture-ACT1VAUTOCHESS_CHESS_SHOP_ITEM_ICON_H2_ITEMS_0-512x512-fmt55",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "Animation": 46,
+    "AnimationClip": 66,
+    "AssetBundle": 1,
+    "Camera": 2,
+    "Canvas": 3,
+    "CanvasGroup": 228,
+    "CanvasRenderer": 1532,
+    "GameObject": 2190,
+    "Material": 25,
+    "MonoBehaviour": 2687,
+    "MonoScript": 167,
+    "ParticleSystem": 4,
+    "ParticleSystemRenderer": 4,
+    "RectTransform": 2182,
+    "Shader": 1,
+    "Sprite": 208,
+    "Texture2D": 104,
+    "Transform": 8
+  },
+  "externalFiles": {
+    "CAB-c7dcea946707d8b24ee9dff6158f1bd5": [
+      "archive:/cab-d4cd63b7303500f61351061ff93d7a73/cab-d4cd63b7303500f61351061ff93d7a73",
+      "archive:/cab-baade24d97ec2efc1350b433bb5e277a/cab-baade24d97ec2efc1350b433bb5e277a",
+      "archive:/cab-ac0a33b41c35af42f8bd12f753f6226a/cab-ac0a33b41c35af42f8bd12f753f6226a",
+      "archive:/cab-47c9a9ff6538bcd3e786ee841e2ec484/cab-47c9a9ff6538bcd3e786ee841e2ec484",
+      "archive:/cab-294654857b1679eecfb3d7d77c6c95e6/cab-294654857b1679eecfb3d7d77c6c95e6",
+      "archive:/cab-1d2ed6bc9fa5918fe0736cf14c65437f/cab-1d2ed6bc9fa5918fe0736cf14c65437f",
+      "archive:/cab-6ac369b085ebcca0735e4da7f7da64f9/cab-6ac369b085ebcca0735e4da7f7da64f9",
+      "archive:/cab-39a4135e002cc57941dec2e0fac16873/cab-39a4135e002cc57941dec2e0fac16873",
+      "archive:/cab-a82c9ca0efe448bde6620373c20c9d0c/cab-a82c9ca0efe448bde6620373c20c9d0c",
+      "archive:/cab-580061e156ea5e60815bbe6b768da65c/cab-580061e156ea5e60815bbe6b768da65c",
+      "archive:/cab-3c11af780425a53d5d25741e2c719ed8/cab-3c11af780425a53d5d25741e2c719ed8",
+      "archive:/cab-72b0533f9487c1c7dbb75a515aab5f16/cab-72b0533f9487c1c7dbb75a515aab5f16",
+      "archive:/cab-7c3dc6859817c6c87135caec7c815058/cab-7c3dc6859817c6c87135caec7c815058"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 154033,
+      "sha256": "7ccbd256fa64fee507e1b09a8486f7c13d40a99d93d716420582290f9f8c2103"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 6847518,
+      "sha256": "628aebf210714a2db290a7e0e1bc041cf303f87a3309e8942113d9375ba1c9c5"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 1460281,
+      "sha256": "2d112e8c5d9bc8d5b0c5529c566e1e0d65c822f3801824b45490af71beb91363"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 102,
+      "sha256": "d522e8e58113952bc954833de445ebf36b15f9bafe8111b9368ca71b86f3e423"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 6516,
+      "sha256": "4c32b324806fbd22234268dca6d3a2c8c205b46cac2e9a63032d1a18202ca175"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 178574,
+      "sha256": "df186efc9d47425208ffd62a1e37746ad746e815a9fbf84c126dc60ac14416e8"
+    },
+    {
+      "file": "textures/100.webp",
+      "bytes": 660,
+      "sha256": "0a8379833f8a2bfb980481e4699a4a502df01c682638b6626be8fc544f93b4fc"
+    },
+    {
+      "file": "textures/101.webp",
+      "bytes": 128820,
+      "sha256": "8cdb5ba8bd73d97d9057308c9cf617c10a2048b77eef2dbbec16c0f50b645de4"
+    },
+    {
+      "file": "textures/102.webp",
+      "bytes": 204,
+      "sha256": "ab1434fb2c382ddb565351377b67c62a8ece2e31a2bfff1c52de0e6fb1fb2990"
+    },
+    {
+      "file": "textures/103.webp",
+      "bytes": 52296,
+      "sha256": "c6218e57dc037cdfdeb2b50888f5eb475e7040b7051e0a8fc4ed48ec0364298a"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 129118,
+      "sha256": "972dfcf9187860d27d0f2f2e4f2d02062e5b30aca2ba4cf1c3c788f906c16fd4"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 484006,
+      "sha256": "4a4ef840afc4a78c44c64ea9b984c4e0a59d3694ef4cabdeffb56e3e6b03755c"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 8112,
+      "sha256": "bd0ec278913c07fde43d906cb9ad7af21ddeb9912d4cdbe05e228a5a07c12ac7"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 1386,
+      "sha256": "9a8ddf6ab404f71b4c2291ef65b3a6ed70214f6afee7d50c64377161bd628c31"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 435304,
+      "sha256": "b792897c31d9e6972cfc1e6689b2865fde6f5be010aed3ba898a1bc15ab74da0"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 62712,
+      "sha256": "b82c25f3542638436b435fd7c44524305f089740abe6f496d3f6957fd8085557"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 14552,
+      "sha256": "0292b836bbe64005a8c6be8600397c531e20e3fc660fd8c8badf7c127192d7f4"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 54180,
+      "sha256": "91ce79cfbb9e6c2e86345ffa80f724be778ad11721803c03bd6c8370101368d6"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 3646,
+      "sha256": "cc00f40d7c14d82f42f4db4ebbc34783ce756a291283252968013783e6eb3a4a"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 318,
+      "sha256": "5326e5db79f74e9d4df8ea30fd8098d86d1ba7a0818eebfbb60a565e0b3d237d"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 8000,
+      "sha256": "74dbac8858bbb8dcc9d7bbba0b5431f03037bfc846f5005ef31649d95c644442"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 18486,
+      "sha256": "f80b2ef17e81dd89833951004013c7e0b9328757bd3a21af84bc719631e74076"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 92088,
+      "sha256": "a3ee0ff70575ea9f12a2487c8ecfd0aac1ae168f7cba9c3f15a26628a1ed10df"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 240066,
+      "sha256": "aa5f595329b9ffbfba9dd7cc3990d343cef1ef6d3ed9d7711e5f7017e596aa96"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 191966,
+      "sha256": "2939576b4246eea515a461d31ad03a70b423b208b658582bf86c77c80b1b3cf0"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 1616,
+      "sha256": "e484866afb4a8494637f2b5662bb4570debb9f844a8aec3b5355c591388522f4"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 74,
+      "sha256": "2b5f41b25968d2bce8aa8d503a574f6e100edd4f71df1c5fb4b5e3935b9daee6"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 68790,
+      "sha256": "e69aff9cba4203ffc4511f6a8f3bbd27be12a0ede3cdb1dd123d853d0fb7eb3d"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 48540,
+      "sha256": "c10bc7e1c626a54f77236b7e712868f8b96f7634298db3cad2172fa9ee3b4cf3"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 508862,
+      "sha256": "b2929f17ce022c5f124d507084474970517a1674e7eac3cc4325649ad6c7e14a"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 66,
+      "sha256": "a0ccb2fa50a0f9680e2aa9085b4f6490e333a845b5767e4866a0a829b7984881"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 74494,
+      "sha256": "1eefd323fefc3bc1d287543d0356e0628bfb90d4aea3ea742d055ad5f2a54719"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 23132,
+      "sha256": "d9941ae50033cf8dd7377636c0ea44176aa6d42b998f9a2374478cd016f99a50"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 516,
+      "sha256": "cc5feda1b76343aa356001aa76d2808e3a2bf09ea77d72af3d67955d3eb6e807"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 20738,
+      "sha256": "6d300b35bcb4952684ba3a1dd77f4bc2b7203eb0f8a88eda0348ab44b865ae07"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 69210,
+      "sha256": "1e7138ce1d38da6df743df8dd7f52176eef3fc41219fd5c7e91ee6f39c115356"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 12274,
+      "sha256": "706a84d7291a0847245640558844f4c430fb813f98f6c9e312b92bd8ec9d9481"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 10686,
+      "sha256": "10a1345bb1402642ef1d5a517f10a2231490afc5ad7d5242461e90b7f479d1eb"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 1100,
+      "sha256": "5abbbc99c344bebd187eef4ff498d0676a58b233f03f9f4eabc29f2ae8478ba3"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 86,
+      "sha256": "a895c92e9084cf390699653949f05ab3c97f20a00ecc6a531146428671312ca2"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 46614,
+      "sha256": "e141d9c9a7d1b1565a09a2e375fdbaa848fcf182574e5d947ac6d12115152f53"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 196372,
+      "sha256": "2dfb46d8acce9567555205a768ba4f864bb751d983c55333f48404263afaa2da"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 170378,
+      "sha256": "66232f7945373608ffb9c7f13e0451a0fbb8eae92a606d27bcee93f05fe33c53"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 178,
+      "sha256": "ce953ab115fe270f3cf0d5a5963401f17054cabdc4e220ae32cc5fa2df0fae9c"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 5684,
+      "sha256": "ae90505e43f5609068586d0700cff9cbccade5cfcd94ba1e112782185b7b52de"
+    },
+    {
+      "file": "textures/43.webp",
+      "bytes": 412,
+      "sha256": "07154195e1872c1de132f59141bfd66b452dd892c329af9ca67e28f12068ec97"
+    },
+    {
+      "file": "textures/44.webp",
+      "bytes": 8092,
+      "sha256": "99ff8d7f71fd487fe5e754f5ad0540ff4b01561a9d9b2f6e34c51d1bf8510683"
+    },
+    {
+      "file": "textures/45.webp",
+      "bytes": 988,
+      "sha256": "7280a6d8a27e0b34472d0e355bb7328ae1538547ad3dfc7fb03b1709b7c23cc5"
+    },
+    {
+      "file": "textures/46.webp",
+      "bytes": 11870,
+      "sha256": "65390cd67b8ea39dc597a035aec118e9eba3569c2275f8635691dbeb072ef085"
+    },
+    {
+      "file": "textures/47.webp",
+      "bytes": 47318,
+      "sha256": "4cb3ab968bd4ac65695cc77c39de1d528236c39fd65ec4c36963dd84e5f287bb"
+    },
+    {
+      "file": "textures/48.webp",
+      "bytes": 3924,
+      "sha256": "df0943c4d2f2ba66f5ac2d56ccb0b634018ddc7ddce8b458b3ac5bd862ea246f"
+    },
+    {
+      "file": "textures/49.webp",
+      "bytes": 2808,
+      "sha256": "9dd23b8681506b25052203920a3107557fabfc39608ab628ce1d4dd9b55cf865"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 7048,
+      "sha256": "506cea933d2aca4198da544f319ea0170fa579534a225426689384576ff305f0"
+    },
+    {
+      "file": "textures/50.webp",
+      "bytes": 5190,
+      "sha256": "3a4bc9c6bdb578d8104818ed7ecdfd2ffe0fdc40d2daa8352dd97eb275abea51"
+    },
+    {
+      "file": "textures/51.webp",
+      "bytes": 7134,
+      "sha256": "49a351d9be78ab1aabcb3a187a00d2a958dda45377fac4b7f61a5194dcfdd79e"
+    },
+    {
+      "file": "textures/52.webp",
+      "bytes": 18744,
+      "sha256": "d7d6cf1566f66d9589e62ec09d00408fe4670f4be424bc221cbef2102d79bd25"
+    },
+    {
+      "file": "textures/53.webp",
+      "bytes": 8694,
+      "sha256": "2c113bfaeee1a3b492a2ed74607eadad4c157225dfd6fcac0a8eeebea233f89d"
+    },
+    {
+      "file": "textures/54.webp",
+      "bytes": 112218,
+      "sha256": "c84fcc2468ea62f0249e2260364aafbc020e3edb42283316f6f378d151cda763"
+    },
+    {
+      "file": "textures/55.webp",
+      "bytes": 14386,
+      "sha256": "a51f1a199001db71318181bf89188f0b309962118e915489bc3c8e7293731aff"
+    },
+    {
+      "file": "textures/56.webp",
+      "bytes": 6674,
+      "sha256": "a16369e36eb917e5b4da280a57e0d94025c70c05aee76629fb9816cc733ce9fc"
+    },
+    {
+      "file": "textures/57.webp",
+      "bytes": 29244,
+      "sha256": "7bfd88d39d903133c0f7b6a237d7581597392e437d44604ed5ac44cf4c7098b7"
+    },
+    {
+      "file": "textures/58.webp",
+      "bytes": 195080,
+      "sha256": "6cc32b798a6dc8f13774fd1112d2790dbef0ef5afca085490869c19852ffd4ee"
+    },
+    {
+      "file": "textures/59.webp",
+      "bytes": 1306036,
+      "sha256": "4a394174b475f146235be10c4b50cb522e5206c38270f6296817306685a7216f"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 130,
+      "sha256": "086c0eecdfe1523f764c35d126bcad407e6c3b06f782b78dd9e883e11810702b"
+    },
+    {
+      "file": "textures/60.webp",
+      "bytes": 86,
+      "sha256": "c3f93cdeada3fd7746dcf6e96ee6a72fa753643016f6fc78bdfe4ad23c1b7d1a"
+    },
+    {
+      "file": "textures/61.webp",
+      "bytes": 129696,
+      "sha256": "bdb4c2946ba0ebf290ef4c8c73ec373fb81a76ef5a6a85d4b057c7e8d9cb4208"
+    },
+    {
+      "file": "textures/62.webp",
+      "bytes": 115590,
+      "sha256": "5931a493e2f26f9cb20406bb33597d2d0f42283b76265117ad01a2101b678d4a"
+    },
+    {
+      "file": "textures/63.webp",
+      "bytes": 13006,
+      "sha256": "0406683be836bc877719f69b9f4bd66fa348ed70da198a7e58308375c80277f2"
+    },
+    {
+      "file": "textures/64.webp",
+      "bytes": 376660,
+      "sha256": "df6b88f9dd9edb53477de41a1ac1c42f65c739e29eb111775d365813ecb92c6e"
+    },
+    {
+      "file": "textures/65.webp",
+      "bytes": 107484,
+      "sha256": "685030a3e128d5236456e46b4a7e5ea56d699d6f4260ebff6edfee01e115203d"
+    },
+    {
+      "file": "textures/66.webp",
+      "bytes": 206,
+      "sha256": "72f79859b45ec98a96be68a64d502f134575b252c152419d95fe141f5be773c6"
+    },
+    {
+      "file": "textures/67.webp",
+      "bytes": 19824,
+      "sha256": "0265d9e2558a689582f27499566dc46a5283f6e20349209b03891f756d88d448"
+    },
+    {
+      "file": "textures/68.webp",
+      "bytes": 66046,
+      "sha256": "8ba12fd76e1a3aa588c2340b11142e023bcefb71e336bb2de901dcbafb5a36d7"
+    },
+    {
+      "file": "textures/69.webp",
+      "bytes": 25238,
+      "sha256": "d83f42aeee7190bc63194dc4665bca8cad90eefb19e4b83a2c99a0c3eb597dd7"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 70,
+      "sha256": "456aba8410f6111040d6167d09cc316b19a498455e7eddef341675ecb245b377"
+    },
+    {
+      "file": "textures/70.webp",
+      "bytes": 496,
+      "sha256": "9e35eb33d9daaa5082b8bc7d26890a3a8aaedd5aa60098ceec489514e5fcdd6b"
+    },
+    {
+      "file": "textures/71.webp",
+      "bytes": 3540,
+      "sha256": "0d7bc6871cc24a8d5b9879b09428a5118450895131159fe54008f0ccc339b29b"
+    },
+    {
+      "file": "textures/72.webp",
+      "bytes": 542408,
+      "sha256": "dc23493eb75799fc6a63d8beceb40f77ed50a35ecfee6847983c4ba1e376e0ea"
+    },
+    {
+      "file": "textures/73.webp",
+      "bytes": 20044,
+      "sha256": "b11697f0aeed18a0fb1d5b5d112347d470a08bcda45b6d41c6b779a639c77569"
+    },
+    {
+      "file": "textures/74.webp",
+      "bytes": 86928,
+      "sha256": "df1501e687ee985b9fb87ba5f7af6f1885561caa0157ab97a04d4b0eecb18e02"
+    },
+    {
+      "file": "textures/75.webp",
+      "bytes": 31832,
+      "sha256": "df216f8683fa61a122173e36945f83fe818c56585f87067b12666d9e29aa5556"
+    },
+    {
+      "file": "textures/76.webp",
+      "bytes": 32486,
+      "sha256": "88fe31916710d3b1a1e3db0c8214c137315fbe1db36f3b362cae3b43eaa15484"
+    },
+    {
+      "file": "textures/77.webp",
+      "bytes": 50990,
+      "sha256": "f31ed16f5b4ab244f2532366a5b6b06e55da1b708141b4393b4b2864f68710d0"
+    },
+    {
+      "file": "textures/78.webp",
+      "bytes": 42296,
+      "sha256": "8c1cf59301a4368bff14b31d13f4ae244c8df84141fa7e2cbe772080e88ffa48"
+    },
+    {
+      "file": "textures/79.webp",
+      "bytes": 36976,
+      "sha256": "b746735c535843d34df5ed7af88163c0505d09e882b4f072d00e8b727d2c36e4"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 25066,
+      "sha256": "9d4d8e0d30d053aa0aabc0cd71be22bc50829c9961fca2b1f27bd91b2227b4f7"
+    },
+    {
+      "file": "textures/80.webp",
+      "bytes": 48446,
+      "sha256": "caa488396c728a0748758f088019c704b21a2f1104fd1a6afdf94dc827abe039"
+    },
+    {
+      "file": "textures/81.webp",
+      "bytes": 36808,
+      "sha256": "68d8211167c57e41617ae902cf3dfe3b97cc0fbcd40ca11d6e8565e45b31b9c5"
+    },
+    {
+      "file": "textures/82.webp",
+      "bytes": 1616,
+      "sha256": "aa3438cc05fc62095b50e981037eefeba90e480606541016805451dc16e1e740"
+    },
+    {
+      "file": "textures/83.webp",
+      "bytes": 39572,
+      "sha256": "1c20a848f7b7b92ff07b8f0f89d487995945b30f6fae43f59ef7a259a4d67aee"
+    },
+    {
+      "file": "textures/84.webp",
+      "bytes": 2982,
+      "sha256": "3dcac8f640c82070100a79384616b67cd1f112a0f49cd559d6ffd92645b04013"
+    },
+    {
+      "file": "textures/85.webp",
+      "bytes": 3398,
+      "sha256": "10a37f2411f0505f5f54787c249dfbf7688df29445ee1bb3f175d36449481249"
+    },
+    {
+      "file": "textures/86.webp",
+      "bytes": 14602,
+      "sha256": "b75e2525cd18d99fb87eb7bc10ee2087bcde714f41876566f7bb72e3a7672cbc"
+    },
+    {
+      "file": "textures/87.webp",
+      "bytes": 48540,
+      "sha256": "c10bc7e1c626a54f77236b7e712868f8b96f7634298db3cad2172fa9ee3b4cf3"
+    },
+    {
+      "file": "textures/88.webp",
+      "bytes": 58274,
+      "sha256": "00f0d0e032c11fcb21aa7c84465549e9fa1cb5d418ab859c67812f88c54348ea"
+    },
+    {
+      "file": "textures/89.webp",
+      "bytes": 520,
+      "sha256": "f6c9440b722d9cd43b6181f738f3a7d2e5449523bf55198ca942dfaff26600ff"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 26962,
+      "sha256": "59a24d309b4a33789202933fe7d0fda9edfaae71197dd29f1e55e7712a0d5274"
+    },
+    {
+      "file": "textures/90.webp",
+      "bytes": 133906,
+      "sha256": "6fff2a76697f8281a56b526c300143fd331cd42bf6ab76328043ba95cd76db30"
+    },
+    {
+      "file": "textures/91.webp",
+      "bytes": 14452,
+      "sha256": "da295166e0d0f4c41e3777bb65206004d03419c05eda4decc8a3690a85b43d06"
+    },
+    {
+      "file": "textures/92.webp",
+      "bytes": 230146,
+      "sha256": "c1aba8cfa4f00c8a599dde85c9ff6e6395dbf8d816af465898d662a3064ade38"
+    },
+    {
+      "file": "textures/93.webp",
+      "bytes": 44160,
+      "sha256": "73d2ae77defc8f6b19fa3a6b93cbcc9db1df8b8be7e9deb8aee87b26cdacadc2"
+    },
+    {
+      "file": "textures/94.webp",
+      "bytes": 130842,
+      "sha256": "f3351c4a2618c399fa49b2e808ac7419e3a3a7302e7b889b497dd98cc7acf23d"
+    },
+    {
+      "file": "textures/95.webp",
+      "bytes": 234,
+      "sha256": "df597ddff169081eab4bc6dae144900493c6270fcf1260a0977e1c7f2b394c31"
+    },
+    {
+      "file": "textures/96.webp",
+      "bytes": 3852,
+      "sha256": "7582a833ca2e851e1ee635d9548eff0ac8da759d0ee009765eb07d84d4ec819c"
+    },
+    {
+      "file": "textures/97.webp",
+      "bytes": 130,
+      "sha256": "7480dd02c96babf89d2a01276145a887237d7098d603a71ad79a658eb13fe397"
+    },
+    {
+      "file": "textures/98.webp",
+      "bytes": 181782,
+      "sha256": "cccc46730d6111c902da84c415b09a53f7040db8fd656cd2e3737097fe108384"
+    },
+    {
+      "file": "textures/99.webp",
+      "bytes": 24376,
+      "sha256": "7bf5e9e1f03e762f0de8d27f5628f8cfb09d7851425194d8c25fc0a1b5c41835"
+    }
+  ]
+}

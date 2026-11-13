@@ -26,3 +26,5 @@ jobs:
         run: python -I scripts/tests/test_particle_oracle.py
       - name: Validate the manifest and every model folder
         run: npm run validate
+      - name: Validate recovered event entrance sources
+        run: npm run validate:events

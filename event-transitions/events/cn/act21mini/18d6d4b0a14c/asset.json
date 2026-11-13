@@ -1,0 +1,1021 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "act21mini",
+  "status": "source-recovered",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "26-07-20-09-52-12_5d4a43",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/8ca0e12cd9215cc6eb4d6717abc5a3356f88b5a1/bundles/hot_update_list.json",
+    "bundle": "activity/[uc]act21mini.ab",
+    "bundleMd5": "18d6d4b0a14cdbddb39a14ee68477867",
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/26-07-20-09-52-12_5d4a43/activity_%5Buc%5Dact21mini.dat",
+    "archiveSha256": "6df04485744e0063e4f71726405ed4c62fcd906acf06b5552229ece6919cb844",
+    "bundleSha256": "48c8f6a3acc9ae7592ab7e0ae36788cde11eb35b31604fc54611af00d650f1ab",
+    "manifestEntry": {
+      "name": "activity/[uc]act21mini.ab",
+      "hash": "769742b5b73eeadbf7a1a24fd220ae35",
+      "md5": "18d6d4b0a14cdbddb39a14ee68477867",
+      "totalSize": 2300157,
+      "abSize": 2518931,
+      "pid": "lpack_misc5",
+      "cid": 2539
+    }
+  },
+  "animations": [
+    {
+      "id": "-6041990140407962709",
+      "name": "act21mini_anim_entry",
+      "candidate": true,
+      "durationSeconds": 3.866666555404663,
+      "sampleRate": 60.0,
+      "events": []
+    }
+  ],
+  "textures": [
+    {
+      "id": "-9151613849891572487",
+      "file": "textures/0.webp",
+      "name": "title_heart",
+      "width": 96,
+      "height": 136,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9089788691682148197",
+      "file": "textures/1.webp",
+      "name": "line_desc_2",
+      "width": 44,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9064545600741068595",
+      "file": "textures/2.webp",
+      "name": "btn_medal_full",
+      "width": 48,
+      "height": 52,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-9029620251985259518",
+      "file": "textures/3.webp",
+      "name": "medal_empty",
+      "width": 76,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8533374869977982682",
+      "file": "textures/4.webp",
+      "name": "sprite_white",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8483751243284026293",
+      "file": "textures/5.webp",
+      "name": "img_icon_white",
+      "width": 48,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8144224135603877595",
+      "file": "textures/6.webp",
+      "name": "icon_stage_rank_4",
+      "width": 44,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8142511668922863020",
+      "file": "textures/7.webp",
+      "name": "btn_zone_cross",
+      "width": 20,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7723656624925496377",
+      "file": "textures/8.webp",
+      "name": "btn_story_icon",
+      "width": 100,
+      "height": 152,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7662172119891074997",
+      "file": "textures/9.webp",
+      "name": "token_count_bg",
+      "width": 88,
+      "height": 24,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7648843453578057560",
+      "file": "textures/10.webp",
+      "name": "btn_story_bg",
+      "width": 400,
+      "height": 260,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7264824408520014620",
+      "file": "textures/11.webp",
+      "name": "img_title_bg_dissolve",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6587007046460547807",
+      "file": "textures/12.webp",
+      "name": "title_shadow",
+      "width": 400,
+      "height": 152,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6525760180740546392",
+      "file": "textures/13.webp",
+      "name": "img_entry_large",
+      "width": 468,
+      "height": 232,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6219766871024509506",
+      "file": "textures/14.webp",
+      "name": "btn_shop_cross",
+      "width": 20,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6129904366988067807",
+      "file": "textures/15.webp",
+      "name": "medal_bg",
+      "width": 220,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6071815414099412365",
+      "file": "textures/16.webp",
+      "name": "sprite_white",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5860940986296236771",
+      "file": "textures/17.webp",
+      "name": "btn_review",
+      "width": 48,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4735759604962711058",
+      "file": "textures/18.webp",
+      "name": "img_tab",
+      "width": 316,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3497000546804859723",
+      "file": "textures/19.webp",
+      "name": "btn_zone_icon",
+      "width": 116,
+      "height": 120,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3280281078979857688",
+      "file": "textures/20.webp",
+      "name": "token_name",
+      "width": 204,
+      "height": 96,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2752539773822043803",
+      "file": "textures/21.webp",
+      "name": "line_desc",
+      "width": 316,
+      "height": 8,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2433579107925805673",
+      "file": "textures/22.webp",
+      "name": "img_btn_stage_drop",
+      "width": 132,
+      "height": 68,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2411651379150178997",
+      "file": "textures/23.webp",
+      "name": "plants_right",
+      "width": 468,
+      "height": 520,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2348168276896399185",
+      "file": "textures/24.webp",
+      "name": "img_icon_black",
+      "width": 48,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1987533568104216809",
+      "file": "textures/25.webp",
+      "name": "img_icon_color",
+      "width": 40,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1974871005398046958",
+      "file": "textures/26.webp",
+      "name": "title",
+      "width": 400,
+      "height": 252,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1631142779721423560",
+      "file": "textures/27.webp",
+      "name": "img_zone_bg",
+      "width": 1020,
+      "height": 680,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1500457291352065012",
+      "file": "textures/28.webp",
+      "name": "btn_shop_icon",
+      "width": 132,
+      "height": 164,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1376151515151694363",
+      "file": "textures/29.webp",
+      "name": "fav_new",
+      "width": 64,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-736011927295043788",
+      "file": "textures/30.webp",
+      "name": "story_new",
+      "width": 84,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-441677957265905911",
+      "file": "textures/31.webp",
+      "name": "token",
+      "width": 124,
+      "height": 124,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-67278248016491061",
+      "file": "textures/32.webp",
+      "name": "btn_story_title",
+      "width": 196,
+      "height": 100,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "32719422732221444",
+      "file": "textures/33.webp",
+      "name": "title_main_text",
+      "width": 380,
+      "height": 200,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "36745937912426840",
+      "file": "textures/34.webp",
+      "name": "btn_story_cross",
+      "width": 20,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "118358823415032653",
+      "file": "textures/35.webp",
+      "name": "btn_zone_bg",
+      "width": 420,
+      "height": 280,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "178773215110055667",
+      "file": "textures/36.webp",
+      "name": "img_shop_title_BG",
+      "width": 1412,
+      "height": 240,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "383986575892438821",
+      "file": "textures/37.webp",
+      "name": "bkg",
+      "width": 1560,
+      "height": 960,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "413711425076028134",
+      "file": "textures/38.webp",
+      "name": "img_btn_reward_drop",
+      "width": 84,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "419834545955993952",
+      "file": "textures/39.webp",
+      "name": "sprite_white",
+      "width": 36,
+      "height": 36,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "470508790280730675",
+      "file": "textures/40.webp",
+      "name": "title_back",
+      "width": 600,
+      "height": 360,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "703318749984195308",
+      "file": "textures/41.webp",
+      "name": "title_ray",
+      "width": 180,
+      "height": 180,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1105366936862158014",
+      "file": "textures/42.webp",
+      "name": "img_stage_tab_drop",
+      "width": 76,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1628029296516398293",
+      "file": "textures/43.webp",
+      "name": "bkg_char",
+      "width": 108,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1888266931261466923",
+      "file": "textures/44.webp",
+      "name": "title_desc",
+      "width": 136,
+      "height": 100,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2081693515954410231",
+      "file": "textures/45.webp",
+      "name": "bkg_story_only_mark",
+      "width": 64,
+      "height": 68,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2226858703261742794",
+      "file": "textures/46.webp",
+      "name": "line_desc_1",
+      "width": 44,
+      "height": 28,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2560804567396987633",
+      "file": "textures/47.webp",
+      "name": "title_embryo",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2595996507751355846",
+      "file": "textures/48.webp",
+      "name": "plants_left",
+      "width": 604,
+      "height": 572,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2813649280911715825",
+      "file": "textures/49.webp",
+      "name": "title_desc_2",
+      "width": 28,
+      "height": 24,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3293537862435735009",
+      "file": "textures/50.webp",
+      "name": "token_tip_bg",
+      "width": 56,
+      "height": 44,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3355488800553994730",
+      "file": "textures/51.webp",
+      "name": "img_entry_tiny",
+      "width": 468,
+      "height": 124,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3362445127870318177",
+      "file": "textures/52.webp",
+      "name": "btn_zone_title",
+      "width": 168,
+      "height": 84,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3727983535723710558",
+      "file": "textures/53.webp",
+      "name": "token_bg",
+      "width": 164,
+      "height": 164,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3880655422763696426",
+      "file": "textures/54.webp",
+      "name": "btn_shop_title",
+      "width": 232,
+      "height": 104,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4494356406103312518",
+      "file": "textures/55.webp",
+      "name": "icon_stage_rank_3",
+      "width": 44,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5149721611028370854",
+      "file": "textures/56.webp",
+      "name": "bkg_cover",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5228834753120757004",
+      "file": "textures/57.webp",
+      "name": "img_fx_desc_sheet",
+      "width": 384,
+      "height": 384,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5339000666334860928",
+      "file": "textures/58.webp",
+      "name": "img_icon_color",
+      "width": 40,
+      "height": 40,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5604811294059930488",
+      "file": "textures/59.webp",
+      "name": "btn_zone_end",
+      "width": 420,
+      "height": 280,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5867262950293422075",
+      "file": "textures/60.webp",
+      "name": "img_map_plugin",
+      "width": 224,
+      "height": 56,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6216834656565981749",
+      "file": "textures/61.webp",
+      "name": "title_desc_3",
+      "width": 20,
+      "height": 20,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6292832249739828300",
+      "file": "textures/62.webp",
+      "name": "btn_fav",
+      "width": 48,
+      "height": 52,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6525878199653176750",
+      "file": "textures/63.webp",
+      "name": "icon_stage_rank_0",
+      "width": 44,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6828132759367794409",
+      "file": "textures/64.webp",
+      "name": "title_main_text_dissolve",
+      "width": 380,
+      "height": 200,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6913943703371638313",
+      "file": "textures/65.webp",
+      "name": "title_embryo_dissolve",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7271012494951994547",
+      "file": "textures/66.webp",
+      "name": "icon_stage_rank_2",
+      "width": 44,
+      "height": 48,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7505110906142670133",
+      "file": "textures/67.webp",
+      "name": "special_norm",
+      "width": 172,
+      "height": 88,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8321362348376802926",
+      "file": "textures/68.webp",
+      "name": "title_desc_1",
+      "width": 28,
+      "height": 68,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8419425130294417100",
+      "file": "textures/69.webp",
+      "name": "img_line_vert",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8579864963878511947",
+      "file": "textures/70.webp",
+      "name": "btn_shop_bg",
+      "width": 404,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8958780029532755164",
+      "file": "textures/71.webp",
+      "name": "title_desc_4",
+      "width": 20,
+      "height": 20,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "AnimationClip": 1,
+    "Animator": 1,
+    "AnimatorController": 1,
+    "AssetBundle": 1,
+    "Canvas": 2,
+    "CanvasGroup": 17,
+    "CanvasRenderer": 130,
+    "GameObject": 238,
+    "Material": 17,
+    "MonoBehaviour": 230,
+    "ParticleSystem": 36,
+    "ParticleSystemRenderer": 36,
+    "RectTransform": 200,
+    "Sprite": 64,
+    "Texture2D": 72,
+    "Transform": 38
+  },
+  "externalFiles": {
+    "CAB-28472d5b0c503ea41a94c62926afd329": [
+      "archive:/CAB-658d74aab777086fc32b93f385be999a/CAB-658d74aab777086fc32b93f385be999a",
+      "archive:/CAB-1b70e77fd118dea4a32415ac87839ac6/CAB-1b70e77fd118dea4a32415ac87839ac6",
+      "archive:/CAB-4069f2380ca9d60b5fb743b320c66956/CAB-4069f2380ca9d60b5fb743b320c66956",
+      "archive:/CAB-559a9830f896916d268cbc808860c0db/CAB-559a9830f896916d268cbc808860c0db",
+      "archive:/CAB-4b090287f6a2bcb0a26cdcb38e4b63b1/CAB-4b090287f6a2bcb0a26cdcb38e4b63b1",
+      "archive:/CAB-73af6f522fece51508a91fccd60c68f6/CAB-73af6f522fece51508a91fccd60c68f6"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 9715,
+      "sha256": "1e2d8c80c20e90e18a6676ce374c53a7c74a877e3dc39b0f012c07a782c897ca"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 2300157,
+      "sha256": "6df04485744e0063e4f71726405ed4c62fcd906acf06b5552229ece6919cb844"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 266886,
+      "sha256": "3d209ee7fc21ffa595273a0384c562d2789085a8c1d3cfe5f3b64184d12fe67a"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 11084,
+      "sha256": "bf2a7ab93c1be2e5a5321e996cbea44f255318c45b1a041b37425810b9eb7078"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 126,
+      "sha256": "b65b32123ca88087a53b7eb4a96bde2a90d5d4ae8b9f36285c5385cfce738284"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 46900,
+      "sha256": "9058befa70b44100663767306b460eebb1cb0cb6f4a3cf8db1a7dcd2d985afa7"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 13718,
+      "sha256": "cb81b88602fcffe0b13c3b6758b371b07869e126ef536dd1a91f3a57c4b260ac"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 8040,
+      "sha256": "e9bbe1c54358978affc3701e7faa3659f37bbf76f2ea2410f4cc44b256440d59"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 142146,
+      "sha256": "78066fabc5ed459cade190ce41962ae06ca9372637437c32411e05f6ee53aacc"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 458,
+      "sha256": "f1a23f87b9be0ee1cec9f640e38c977d5c6bff4a690542e68932fe166f92128e"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 84,
+      "sha256": "6b8a2d16b9c8ec8ff5ecbfcbfb4ec3a08352ab01a05ea0245c7201ee940f5f23"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 38,
+      "sha256": "42d578990f9fa0532cd3e5bca57da41475ccb3643a64c91f2957e4a56d992a1a"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 2756,
+      "sha256": "ff0af261e36bd04eeeef5818ed7ea0dfc9e3ff4aa161b0646ce46c83d293c7c4"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 204,
+      "sha256": "98c5bd4553776956de6c50516c67b4ed25170383ebe7dac12987ec1675e845b1"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 12650,
+      "sha256": "40ec36b36b42f35d8102403f077a31bfc4bce6da8e5c74686bd4879cdf14398a"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 2152,
+      "sha256": "9ae2b5b14e9176b853bd20c865bd03679f000810d02ba340bc49ba67b158ebaf"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 13392,
+      "sha256": "4b3fec662c6be6cf4d02831b8735a6d2115517bc935a99ef5c05faf062e79940"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 198,
+      "sha256": "c0577fb62669be396a74fa7e0fce5850ca56db02ba2e60f27712067edfe127ae"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 4856,
+      "sha256": "deecaad6661d4021147cf1b2869a02b54d8c6e4cd1bfcda5aa3f99b33c6a8d3d"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 28162,
+      "sha256": "65915cfd505908326689fc9b9368ca50acf04b9f6a128fd893a9d3eae77eeda0"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 572,
+      "sha256": "d315be12884cf0c9a28147aa32cc59a7e0f7c878ee79b94ebef03df13a05b0d6"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 512,
+      "sha256": "0078c4231fcaa752dc9e80ae3a23aec14a4800f4ee1c2e331c51398eaa3cd36e"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 75350,
+      "sha256": "e47f0d5e2683aaefe7ca368284cc261bccb350c98a66c369840bfba8d07853ae"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 363340,
+      "sha256": "dbeb3048a465b453a1e3825cd0d59f33732c127fb6737ee07bb8b953a842f563"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 20784,
+      "sha256": "b6c563ca84aae0111e7f84f8e26fdf719334cd2a8e2cd8e86f3762f3ce928ae5"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 1702,
+      "sha256": "7b787f71957a2d3a1b0029332cf6bb4c2cd7d0aee1bed2089e9b0b0e21cc474b"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 3340,
+      "sha256": "a58b3bbb8be69a1e17a0baccc4134bcb3a10a1c8051f96ee915c8488f3b2f20a"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 3984,
+      "sha256": "8e5f1016ed1fa0130ff2a50e83c3f5a491496da70ea55b76aac3ae0c961d46dd"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 10076,
+      "sha256": "758409d72b4021988c9c72613ee6d524bc001a90c6110ea31b06ca5f2aaf7dd8"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 20462,
+      "sha256": "d3401c707ce5706f08e31428beedc93ed0bc05fe5a4f38d92c34e22fa9cbc096"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 58778,
+      "sha256": "c07b7081c30bc1356cb116155849f4134d65990cba83e947e5e153d05bd881cd"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 444,
+      "sha256": "06589ac3d1d4069552c37e712849562f400fc44d5b6c500987b383410500a1f3"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 65334,
+      "sha256": "90c97014fb75bdb7b5e126fe934352129f4ed8c5accb77cf1fe10877744f7a38"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 212074,
+      "sha256": "21aabf7191426665facbc742db0fc48115b993a3acc9fc26e11c2708e39f4d63"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 963806,
+      "sha256": "4c11ef7994de1fc65be2dd32fc891ec867d60505993d14518c101648656e28c2"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 1900,
+      "sha256": "980e7511a60f675bbb4c02cb6aacd7f1cfc98e06805c9e7b4af5f542602afeca"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 60,
+      "sha256": "aac3dc6fc53769fe4ddf7a38030e1c06d11ce001769c615f314ea50dec3732ac"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 60,
+      "sha256": "aac3dc6fc53769fe4ddf7a38030e1c06d11ce001769c615f314ea50dec3732ac"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 94426,
+      "sha256": "83e6159fe714784a34f0753d2da2ed38605571466fd60ef2a1177c7497dc6bab"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 2996,
+      "sha256": "8270ddf8f14ae3e0c27a17d545c31db8f61a871dfbf99973f01e4c164abb5c89"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 2432,
+      "sha256": "005b3ae751fe70f4094ce9e7a8f8e6dbdc9ed0daeb1051e9fc98e35189a201fe"
+    },
+    {
+      "file": "textures/43.webp",
+      "bytes": 10900,
+      "sha256": "7556203634ef8af647d3f7354c374114a63d88339b3bfbb86c268cb31c8320cc"
+    },
+    {
+      "file": "textures/44.webp",
+      "bytes": 8566,
+      "sha256": "1ef08145007dd7417344e97fdd2499cf39ea3e077bf85ccf5c02dc5f1eb53249"
+    },
+    {
+      "file": "textures/45.webp",
+      "bytes": 3278,
+      "sha256": "d8d592d09738d2ff0c1786944ee143662729d33c87d7a45c5c6f9a0c38d61f13"
+    },
+    {
+      "file": "textures/46.webp",
+      "bytes": 122,
+      "sha256": "cfb16b5f1b09ac67e03395d409dcf802f0328550734214bdfd679412f13ddccf"
+    },
+    {
+      "file": "textures/47.webp",
+      "bytes": 13994,
+      "sha256": "366db97cd83c5a505492a72d50a0624b3ba73efc4984c8eb759cf1d516d34f09"
+    },
+    {
+      "file": "textures/48.webp",
+      "bytes": 40368,
+      "sha256": "88a9839a1c7591ac7c826d4550cbf453a15a08ecfcf2cc5cb7f8d685ebfb47f2"
+    },
+    {
+      "file": "textures/49.webp",
+      "bytes": 232,
+      "sha256": "62b2516caf03cd6d03c5a25169669fd6cda2ee455b4f8a6e1ed33020c2099098"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 644,
+      "sha256": "76da54eca05576dbfc03cd68accf7dbb63ba285c9b9677b288ce04dc6ce94e01"
+    },
+    {
+      "file": "textures/50.webp",
+      "bytes": 702,
+      "sha256": "de8f98f16f518090d843906bd5b3a56d8e6ee3f5f74d95e09b87bcdeb908989b"
+    },
+    {
+      "file": "textures/51.webp",
+      "bytes": 71334,
+      "sha256": "1c7ea6e8596063ca4efb5eda826da965d2d702408ff51e2cd3e9adb7bee9ee7e"
+    },
+    {
+      "file": "textures/52.webp",
+      "bytes": 10154,
+      "sha256": "25411ec7efe5dfc016e1a021ef9fc0f11d5b9cea74c80dd623c9e260b1233ed5"
+    },
+    {
+      "file": "textures/53.webp",
+      "bytes": 27822,
+      "sha256": "efbe5bbbf9eccfa4b99dc5ed02127e574dc647196ac6a20b9db578691731c0c2"
+    },
+    {
+      "file": "textures/54.webp",
+      "bytes": 21686,
+      "sha256": "3e8d16d6074ab8327f0523087947ae8b9e7664f5412a092de2d290db2e6cf87e"
+    },
+    {
+      "file": "textures/55.webp",
+      "bytes": 2094,
+      "sha256": "2f9fa6b489d3b9327756071b3f4891dc9ebbc09d4ca905725dd623f45ceb8212"
+    },
+    {
+      "file": "textures/56.webp",
+      "bytes": 134766,
+      "sha256": "aa7dc2348d302d17d8b54d42a0e94482fbba03c83bc74fc75b1c03d994a16dd5"
+    },
+    {
+      "file": "textures/57.webp",
+      "bytes": 14814,
+      "sha256": "edd8cdb99bc5ebd4d027b7b5642965d7dbf3303a32058ba68fabcae1fd912a7f"
+    },
+    {
+      "file": "textures/58.webp",
+      "bytes": 512,
+      "sha256": "0078c4231fcaa752dc9e80ae3a23aec14a4800f4ee1c2e331c51398eaa3cd36e"
+    },
+    {
+      "file": "textures/59.webp",
+      "bytes": 65304,
+      "sha256": "c15debcfdaf43fa1941c19931ab7d293627995ced8088ec355573a51f83abaec"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 1918,
+      "sha256": "382ba22c393351d27bbac5be3dcf6d7f1c9e78a57705d498bc3d629a657c004b"
+    },
+    {
+      "file": "textures/60.webp",
+      "bytes": 1102,
+      "sha256": "43519cac52a9e8645d38be4e1b9a177b27fdacda400f64e09aaf952651ed825d"
+    },
+    {
+      "file": "textures/61.webp",
+      "bytes": 102,
+      "sha256": "dc9dbdbec3a1448fdcadaeb53aa90ba5aca2fac021b215ab8590fed9e45783dd"
+    },
+    {
+      "file": "textures/62.webp",
+      "bytes": 2704,
+      "sha256": "94e65c22d7f43f49b71059c425dff31e9fac89899f2eb3c846ad8034a7540d3f"
+    },
+    {
+      "file": "textures/63.webp",
+      "bytes": 1452,
+      "sha256": "4ec810185246aae48e5d1b349d5660f26a02baf434f42c6e4b73517ee1ab8f83"
+    },
+    {
+      "file": "textures/64.webp",
+      "bytes": 18068,
+      "sha256": "1fb5cdfef2fb6136e4942b5f14efc4d600ecb089376fb5eabc69e94fad518c48"
+    },
+    {
+      "file": "textures/65.webp",
+      "bytes": 2036,
+      "sha256": "ebc9e16bdfdf471b2fe1cdf414424d35af124494fe83a7c3530c621df66a0bc8"
+    },
+    {
+      "file": "textures/66.webp",
+      "bytes": 2140,
+      "sha256": "99c12188419cc9db4c1fe2a0952c41e94b92ea57c4f844b52bf44267f51b8b3c"
+    },
+    {
+      "file": "textures/67.webp",
+      "bytes": 7662,
+      "sha256": "da5f554655eb91e35577c2be1f4da2dcc65adf17f485ead206a4bbd71597a43b"
+    },
+    {
+      "file": "textures/68.webp",
+      "bytes": 834,
+      "sha256": "c0472613c61f8e2c917e878d23e447fa1ea185cb9f7da2967e1cdcd11f6d22a2"
+    },
+    {
+      "file": "textures/69.webp",
+      "bytes": 124,
+      "sha256": "ec826806066cfb52841edff961e000a63abc8c8dcbf2d1054a3d5683a0ceb779"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 420,
+      "sha256": "ff9563d7213685259d7b26beb7e23cf17cda9f265749a0a4801c8417122f7378"
+    },
+    {
+      "file": "textures/70.webp",
+      "bytes": 58094,
+      "sha256": "34cb5d76d569766526317ce5a84c202d388bab70bc7be91d9f19e50c392dc2ad"
+    },
+    {
+      "file": "textures/71.webp",
+      "bytes": 104,
+      "sha256": "db6bcb216bbd703fbf573ebf9f8c229abffa37689e95ad480aa30d448279810a"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 16326,
+      "sha256": "e8535d4dca93052cd8fd0a10ad5964f8ca893cfdc3bd694ba47b6411119427ad"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 468,
+      "sha256": "1684dad2b90fd4a06b019652140138aa8d823577562a6071892de352bd557a57"
+    }
+  ]
+}

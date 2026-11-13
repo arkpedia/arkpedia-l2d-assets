@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "material",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "26-07-01-15-26-52_d3376d",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets2/669375a3432375d866ddc8acab7fc5f805232e31/bundles/hot_update_list.json",
+    "bundle": "refs/fx/material.ab",
+    "bundleMd5": "b730d64b72464b45586b58dd1bf9fcfc",
+    "manifestEntry": {
+      "name": "refs/fx/material.ab",
+      "hash": "8ce592989bf0c849d3040a8af7af1461",
+      "md5": "b730d64b72464b45586b58dd1bf9fcfc",
+      "totalSize": 41731,
+      "abSize": 58804,
+      "cid": 14517
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/26-07-01-15-26-52_d3376d/refs_fx_material.dat",
+    "archiveSha256": "d43d464e37417f14004da86fb270eb0604734d6bc4df6f147b4d60e41eb29a75",
+    "bundleSha256": "c760fd07ad390d5d1589790017fa018e7606344e189f659c61158ce1d47002fe"
+  },
+  "animations": [],
+  "textures": [],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "Material": 595
+  },
+  "externalFiles": {
+    "CAB-0d0c905b03658da84d810b34eba903e0": [
+      "archive:/CAB-1b70e77fd118dea4a32415ac87839ac6/CAB-1b70e77fd118dea4a32415ac87839ac6",
+      "archive:/CAB-b2739f24071ea30492cad3b1c540173a/CAB-b2739f24071ea30492cad3b1c540173a",
+      "archive:/CAB-3fcda8e432a735264d43b49ecbf8fbee/CAB-3fcda8e432a735264d43b49ecbf8fbee",
+      "archive:/CAB-1512fc0efbde6852b5d5a28ec9cec589/CAB-1512fc0efbde6852b5d5a28ec9cec589",
+      "archive:/CAB-fe644cd0cf84f312dc9d6de3bfc17d34/CAB-fe644cd0cf84f312dc9d6de3bfc17d34",
+      "archive:/CAB-44d0abb60db2170b734217b0b04fcf36/CAB-44d0abb60db2170b734217b0b04fcf36",
+      "archive:/CAB-d78082c54cca29d82a1f4895c6b873e6/CAB-d78082c54cca29d82a1f4895c6b873e6",
+      "archive:/CAB-a1620becb3839aebe0c9da8f7cca77f8/CAB-a1620becb3839aebe0c9da8f7cca77f8",
+      "archive:/CAB-38dfd52763d3e93a929240c854b1fb51/CAB-38dfd52763d3e93a929240c854b1fb51",
+      "archive:/CAB-895a9c6afcb47c5c7f43c8589b1fe2fc/CAB-895a9c6afcb47c5c7f43c8589b1fe2fc",
+      "archive:/CAB-24585c6bdc5a7af80bd929dc17f77f2b/CAB-24585c6bdc5a7af80bd929dc17f77f2b",
+      "archive:/CAB-9e18acd2831f8cef6fdd0163df5a3104/CAB-9e18acd2831f8cef6fdd0163df5a3104",
+      "archive:/CAB-c2c688f710a565b7cce0cc93f7bd219f/CAB-c2c688f710a565b7cce0cc93f7bd219f",
+      "archive:/CAB-92fdf60cd1676328e17f73f0bf852e97/CAB-92fdf60cd1676328e17f73f0bf852e97"
+    ]
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 41731,
+      "sha256": "d43d464e37417f14004da86fb270eb0604734d6bc4df6f147b4d60e41eb29a75"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 62681,
+      "sha256": "be3133691d56548a889c93c561b35826ba93c36554fce3df25fb44faefac69ed"
+    }
+  ]
+}
