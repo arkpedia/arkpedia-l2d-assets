@@ -1326,6 +1326,15 @@
     },
     {
       "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/fdc762264f56984a4c89e39094908b96/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
+      ]
+    },
+    {
+      "server": "cn",
       "activityId": "uishaders",
       "bundle": "[uc]uishaders.ab",
       "asset": "shared/fea8907836990290fc4e8ad136cf7f93/asset.json",
@@ -2918,6 +2927,15 @@
       "md5": "9ff71441ab0f507e8da29d01b6640b8d",
       "status": "recovered",
       "asset": "shared/9ff71441ab0f507e8da29d01b6640b8d/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "fdc762264f56984a4c89e39094908b96",
+      "status": "recovered",
+      "asset": "shared/fdc762264f56984a4c89e39094908b96/asset.json",
       "candidates": []
     }
   ]

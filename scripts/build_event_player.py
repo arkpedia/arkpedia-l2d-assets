@@ -260,6 +260,15 @@ class Builder:
                 if kind == 'CanvasGroup':
                     n['alpha'] = data['m_Alpha']
                     n['ignoreParentAlpha'] = bool(data['m_IgnoreParentGroups'])
+                if kind == 'MonoBehaviour' and data.get('m_Enabled') and '_readChannel' in data and '_writeChannel' in data:
+                    # Torappu's channel masks use Always/Equal/NotEqual, rather
+                    # than Unity's raw CompareFunction enum. Preserve the bits
+                    # and native ColorWriteMask (RGBA = 8/4/2/1).
+                    if data['_comp'] not in (0, 1, 2) or data['_opt'] not in (0, 1, 2):
+                        raise ValueError('Unsupported native stencil operation')
+                    n['stencil'] = {'compare': data['_comp'], 'operation': data['_opt'],
+                                    'readMask': data['_readChannel'], 'writeMask': data['_writeChannel'],
+                                    'colorMask': data['_colorMask']}
                 if kind == 'MonoBehaviour' and 'm_Softness' in data:
                     n['rectMask'] = True
                     n['maskSoftness'] = [data['m_Softness'][c] for c in 'xy']
@@ -329,7 +338,7 @@ class Builder:
             offset = 0
             for binding in clip['m_ClipBindingConstant']['genericBindings']:
                 kind, attribute = binding['typeID'], binding['attribute']
-                dimension = {1: 3, 2: 4, 3: 3}.get(attribute, 0) if kind == 4 else 1
+                dimension = {1: 3, 2: 4, 3: 3, 4: 3}.get(attribute, 0) if kind == 4 else 1
                 if not dimension:
                     raise ValueError('Unsupported Mecanim transform binding')
                 values = channels[offset:offset + dimension]
@@ -340,9 +349,11 @@ class Builder:
                     continue  # Game-only non-RectTransform objects are omitted.
                 path, node = hashed_paths[binding['path']]
                 if kind == 4:
-                    prop = {1: 'localPosition', 2: 'rotation', 3: 'scale'}[attribute]
+                    prop = {1: 'localPosition', 2: 'rotation', 3: 'scale', 4: 'euler'}[attribute]
                     if prop == 'localPosition':
                         nodes[node][prop] = local_positions[node]
+                    elif prop == 'euler':
+                        nodes[node][prop] = [0, 0, 0]
                     properties = [f'{prop}.{i}' for i in range(dimension)]
                 elif kind in (1, 114, 224, 225):
                     if attribute in {zlib.crc32(name.encode()) for name in ('m_BlocksRaycasts', 'm_Interactable', 'm_RaycastTarget')}:

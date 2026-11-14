@@ -130,23 +130,27 @@ this source archive.
 
 ## Reviewed browser players
 
-`players/manifest.json` now seals 18 browser packs: the two Global Masses' Travels
-versions and 16 reviewed CN menus. The new set prioritizes Thunder in the Azure
+`players/manifest.json` now seals 20 browser packs: the two Global Masses' Travels
+versions and 18 reviewed CN menus. The new set prioritizes Thunder in the Azure
 Dream, A Flurry to the Flame's rerun, Act or Die's rerun, Ato's rerun, Till the
 Lands Become an Orange, and Yet Another Wave. It also contains Here A People Sows'
 rerun, Such Is the Joy of Our Reunion's rerun, both When Elegies Are Ashes versions,
 the original Ato, Somniloquium Serenum, Retracing Our Steps, Unrealized Realities,
-First of A Thousand Autumns, and the CN 时间啊，向前！ menu prepared for future adoption.
+First of A Thousand Autumns, Bolívar Diagnosed, Sur le lac lune vivante, and 时间啊，向前！ (Время, в Путь! / Vremya, v Put'!).
 
-Fourteen of the new packs include original MP3 SFX at serialized animation cues.
-Flurry and Act or Die's entrance clips have no recovered serialized SFX cue; no
+Seventeen packs include original MP3 SFX at serialized animation cues.
+Flurry, Act or Die and Bolívar Diagnosed have no recovered serialized entrance SFX cue; no
 sound association or timing is invented for them. `player-review-plan.json` records
 source clips, explicit game-control exclusions, reviewed coverage and deferred
-conversions. Football's runtime-populated scene, Delicious on Terra's placeholders,
-and the Persona crossover's custom stencil masks are not approved for playback.
+conversions. Football's runtime-populated scene and Delicious on Terra's placeholders
+remain unapproved. Sur le lac's channel stencil masks are now reproduced; Till the
+Lands' stencil matte now reveals its native opening instead of four seconds of black.
 
 The exporter supports reviewed legacy curves and unambiguous Mecanim streamed/
-constant UI channels. Archived source polynomials are checked independently against
+constant UI channels, including authored ZXY Euler rotations. Reviewed native channel
+stencils preserve Always/Equal/NotEqual comparisons, Keep/Zero/Replace operations,
+write/read bit masks and RGBA color-write masks. Stencil contents clear each frame.
+Archived source polynomials are checked independently against
 Hermite interpolation. Unknown bindings, dense channels and ambiguous Animator
 owners fail conversion. Source GLSL uses the material's original keyword variant;
 the browser selects its loose-uniform compiler path and supplies the native UI
