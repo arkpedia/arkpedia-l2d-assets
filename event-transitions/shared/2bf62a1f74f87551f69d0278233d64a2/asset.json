@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "fxcommon",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "24-09-23-11-27-19-c6564b",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/043cdb223653ca916bc6abc7c8beafd0a0fd5437/bundles/hot_update_list.json",
+    "bundle": "arts/ui/[uc]fxcommon.ab",
+    "bundleMd5": "2bf62a1f74f87551f69d0278233d64a2",
+    "manifestEntry": {
+      "name": "arts/ui/[uc]fxcommon.ab",
+      "hash": "d9817048246e422509a9712e38e04d6b",
+      "md5": "2bf62a1f74f87551f69d0278233d64a2",
+      "totalSize": 319334,
+      "abSize": 350051,
+      "pid": "lpack_init",
+      "cid": 1005
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/24-09-23-11-27-19-c6564b/arts_ui_%5Buc%5Dfxcommon.dat",
+    "archiveSha256": "8a1d3e610c96c9b322195ae109133a109cea65ad7281cf61696541e06c39b956",
+    "bundleSha256": "75dae5608089b19ca58add83d160fe4b8ffd2bcec6a194e077681817f760236b"
+  },
+  "animations": [],
+  "textures": [
+    {
+      "id": "-7269371391298311272",
+      "file": "textures/0.webp",
+      "name": "img_fx_star_universe_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7228959992889126067",
+      "file": "textures/1.webp",
+      "name": "img_uifx_common_BasicGlow_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6129647987849400542",
+      "file": "textures/2.webp",
+      "name": "img_fx_smoke_common_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1221685824986741996",
+      "file": "textures/3.webp",
+      "name": "img_fx_rainbow_ray_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1211818779085441209",
+      "file": "textures/4.webp",
+      "name": "img_uifx_common_flow_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-751888788982914426",
+      "file": "textures/5.webp",
+      "name": "img_fx_dust_glow_01",
+      "width": 128,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2048052018822048055",
+      "file": "textures/6.webp",
+      "name": "img_fx_ray_soft_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2295878389967241877",
+      "file": "textures/7.webp",
+      "name": "img_ui_fx_flow_soft_01",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2781286567265737823",
+      "file": "textures/8.webp",
+      "name": "img_uifx_common_BasicMask_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5269372766988717732",
+      "file": "textures/9.webp",
+      "name": "img_fx_sparke_01",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5787091526859029797",
+      "file": "textures/10.webp",
+      "name": "img_uifx_common_flow_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7959977794891479404",
+      "file": "textures/11.webp",
+      "name": "img_fx_flow_02",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8901601292167319226",
+      "file": "textures/12.webp",
+      "name": "img_fx_rainbow_ray_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "Sprite": 13,
+    "Texture2D": 13
+  },
+  "externalFiles": {
+    "CAB-ac0a33b41c35af42f8bd12f753f6226a": []
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 319334,
+      "sha256": "8a1d3e610c96c9b322195ae109133a109cea65ad7281cf61696541e06c39b956"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 9230,
+      "sha256": "edaf0001718763690c39086181dc527ea616dba212a1c78d71f2ca851f5bb63d"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 45078,
+      "sha256": "c8f6c0c762917d98d1c25af8b48c7c96a94a3cce2ca9b466c476daed665d3339"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 12798,
+      "sha256": "888275e8ce6c00bb83576d4b7db9291a4d27412dcdbbe29450ff0cc5401bc76b"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 33728,
+      "sha256": "8073af651d047355a167f15d9e8d2488b2f11eeaf3613ee5401006e4859e6ce1"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 5974,
+      "sha256": "7a9ca5339e19beb7524f5acdcf192be950eba71309b900f355448781cbee557d"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 69248,
+      "sha256": "0040bb4fbf7b3d818d587b804e3af6bfe43f5c24035b063b64bb373ea9978fd1"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 18486,
+      "sha256": "f80b2ef17e81dd89833951004013c7e0b9328757bd3a21af84bc719631e74076"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 141788,
+      "sha256": "d3b9b88760046f227cb00909cbf43813ab19e9bd470517f6e1b66c775773be3e"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 17894,
+      "sha256": "e69be44cc315e518426e2e952e6c0ed9061390f9f238ec3d328dd138d085e84a"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 2808,
+      "sha256": "9dd23b8681506b25052203920a3107557fabfc39608ab628ce1d4dd9b55cf865"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 7042,
+      "sha256": "35563fdb04015dc1fc6d0509be33fcc5f1908f3b2afb255d0432c2abd54f309c"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 5974,
+      "sha256": "7a9ca5339e19beb7524f5acdcf192be950eba71309b900f355448781cbee557d"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 10476,
+      "sha256": "1f589c9ae7b0607a687d5b3a26db17f1409028d9c2a44e6d81ea633f53569024"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 612,
+      "sha256": "d2bb31cbcaf3abe3c8791b4eba4581c932fb2034c59bf2f964883c3a0f61049a"
+    }
+  ]
+}

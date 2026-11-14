@@ -1,0 +1,746 @@
+{
+  "schemaVersion": 1,
+  "server": "cn",
+  "activityId": "fxcommon",
+  "status": "source-recovered",
+  "role": "shared",
+  "browserPlayable": false,
+  "source": {
+    "server": "cn",
+    "resVersion": "25-03-27-16-19-10-4d4819",
+    "assetBase": "https://ak.hycdn.cn/assetbundle/official",
+    "manifestUrl": "https://raw.githubusercontent.com/ArknightsAssets/ArknightsAssets/fc1a42268a71bf6e750c671b3e4eb3756bd4e2d3/bundles/hot_update_list.json",
+    "bundle": "arts/ui/[uc]fxcommon.ab",
+    "bundleMd5": "885a40f9e8da832d0e9bb73b7f95b3f6",
+    "manifestEntry": {
+      "name": "arts/ui/[uc]fxcommon.ab",
+      "hash": "1fd49cba7e903932a58e348738c4c6a6",
+      "md5": "885a40f9e8da832d0e9bb73b7f95b3f6",
+      "totalSize": 1079017,
+      "abSize": 1181767,
+      "pid": "lpack_init2",
+      "cid": 2169
+    },
+    "archiveUrl": "https://ak.hycdn.cn/assetbundle/official/Android/assets/25-03-27-16-19-10-4d4819/arts_ui_%5Buc%5Dfxcommon.dat",
+    "archiveSha256": "0bb6f883fe04f39dbc37f7f713007823d0d05f3e743c147b8a36e6febe7f87f2",
+    "bundleSha256": "76e3a93e1d3f40cbd6ffef45632a558616b3a34e31cccaf96e969c2ecd6fcd93"
+  },
+  "animations": [],
+  "textures": [
+    {
+      "id": "-9061038910673014240",
+      "file": "textures/0.webp",
+      "name": "img_fx_particle_gold_01",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8477310386049761637",
+      "file": "textures/1.webp",
+      "name": "img_uifx_basicmask_06",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-8072111907188854894",
+      "file": "textures/2.webp",
+      "name": "img_uifx_basicmask_02",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7269371391298311272",
+      "file": "textures/3.webp",
+      "name": "img_fx_star_universe_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-7228959992889126067",
+      "file": "textures/4.webp",
+      "name": "img_uifx_common_BasicGlow_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6286161427891402721",
+      "file": "textures/5.webp",
+      "name": "img_uifx_circle_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6173960332236634090",
+      "file": "textures/6.webp",
+      "name": "img_uifx_common_comic_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-6129647987849400542",
+      "file": "textures/7.webp",
+      "name": "img_fx_smoke_common_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5935536278429880544",
+      "file": "textures/8.webp",
+      "name": "img_uifx_smoke_03",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5851444506099373479",
+      "file": "textures/9.webp",
+      "name": "img_uifx_basicmask_08",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5597944862928034951",
+      "file": "textures/10.webp",
+      "name": "img_uifx_star_3",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5528159959366875104",
+      "file": "textures/11.webp",
+      "name": "img_fx_rainbow_ray_04",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-5199964914887046714",
+      "file": "textures/12.webp",
+      "name": "img_uifx_basicglow_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-4717419807452366132",
+      "file": "textures/13.webp",
+      "name": "img_fx_flow_03",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-3920418376907098559",
+      "file": "textures/14.webp",
+      "name": "img_fx_glow_triangle",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-2127611141928483496",
+      "file": "textures/15.webp",
+      "name": "img_uifx_basicmask_03",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1221685824986741996",
+      "file": "textures/16.webp",
+      "name": "img_fx_rainbow_ray_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-1211818779085441209",
+      "file": "textures/17.webp",
+      "name": "img_uifx_common_flow_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-751888788982914426",
+      "file": "textures/18.webp",
+      "name": "img_fx_dust_glow_01",
+      "width": 128,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-581765424213833447",
+      "file": "textures/19.webp",
+      "name": "img_uifx_star_2",
+      "width": 64,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-143849321897402723",
+      "file": "textures/20.webp",
+      "name": "img_uifx_basicmask_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "-119797625596239845",
+      "file": "textures/21.webp",
+      "name": "uifx_particle_point_2",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "134218287737421539",
+      "file": "textures/22.webp",
+      "name": "img_uifx_outline_1px",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "278298563529331382",
+      "file": "textures/23.webp",
+      "name": "img_uifx_basicmask_05",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "345283183655259764",
+      "file": "textures/24.webp",
+      "name": "img_uifx_lightpoint_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "566186918097667782",
+      "file": "textures/25.webp",
+      "name": "img_uifx_flow_04",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1124657866411708739",
+      "file": "textures/26.webp",
+      "name": "img_uifx_common_white_square",
+      "width": 4,
+      "height": 4,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "1146788886722077847",
+      "file": "textures/27.webp",
+      "name": "img_uifx_basicmask_07",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2048052018822048055",
+      "file": "textures/28.webp",
+      "name": "img_fx_ray_soft_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2084118773088512990",
+      "file": "textures/29.webp",
+      "name": "uifx_particle_point_1",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2157998398973512649",
+      "file": "textures/30.webp",
+      "name": "img_fx_dust_glow_01_repeat",
+      "width": 128,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2295878389967241877",
+      "file": "textures/31.webp",
+      "name": "img_ui_fx_flow_soft_01",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "2781286567265737823",
+      "file": "textures/32.webp",
+      "name": "img_uifx_common_BasicMask_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3520054406365935547",
+      "file": "textures/33.webp",
+      "name": "img_uifx_flow_03",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "3550234441406523651",
+      "file": "textures/34.webp",
+      "name": "img_uifx_lightpoint_02",
+      "width": 512,
+      "height": 123,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "4654797490948233636",
+      "file": "textures/35.webp",
+      "name": "img_uifx_basicmask_04",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5269372766988717732",
+      "file": "textures/36.webp",
+      "name": "img_fx_sparke_01",
+      "width": 32,
+      "height": 32,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5708161375466259914",
+      "file": "textures/37.webp",
+      "name": "img_fx_light_sheet_soft",
+      "width": 256,
+      "height": 64,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5787091526859029797",
+      "file": "textures/38.webp",
+      "name": "img_uifx_common_flow_02",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5788538337452692722",
+      "file": "textures/39.webp",
+      "name": "img_uifx_smoke_01",
+      "width": 140,
+      "height": 140,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "5967071914354083990",
+      "file": "textures/40.webp",
+      "name": "img_fx_rainbow_ray_03",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6015958188638767276",
+      "file": "textures/41.webp",
+      "name": "img_uifx_circle",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6150383206268245518",
+      "file": "textures/42.webp",
+      "name": "img_uifx_alphamask_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6540368708191848627",
+      "file": "textures/43.webp",
+      "name": "img_uifx_star_1",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "6906585093312986700",
+      "file": "textures/44.webp",
+      "name": "uifx_dissolve_1",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7223324226264317707",
+      "file": "textures/45.webp",
+      "name": "img_uifx_smoke_02",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7336421531242182243",
+      "file": "textures/46.webp",
+      "name": "uifx_particle_flower_1",
+      "width": 512,
+      "height": 512,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7536717168934532824",
+      "file": "textures/47.webp",
+      "name": "img_uifx_basicglow_02",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "7959977794891479404",
+      "file": "textures/48.webp",
+      "name": "img_fx_flow_02",
+      "width": 128,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8089757888348694133",
+      "file": "textures/49.webp",
+      "name": "img_uifx_sweep_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8325216587014772245",
+      "file": "textures/50.webp",
+      "name": "img_fx_ray_soft_03",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8430004019544933023",
+      "file": "textures/51.webp",
+      "name": "img_fx_ray_soft_02",
+      "width": 256,
+      "height": 128,
+      "alpha": "as-decoded"
+    },
+    {
+      "id": "8901601292167319226",
+      "file": "textures/52.webp",
+      "name": "img_fx_rainbow_ray_01",
+      "width": 256,
+      "height": 256,
+      "alpha": "as-decoded"
+    }
+  ],
+  "objectTypes": {
+    "AssetBundle": 1,
+    "Sprite": 53,
+    "Texture2D": 53
+  },
+  "externalFiles": {
+    "CAB-ac0a33b41c35af42f8bd12f753f6226a": []
+  },
+  "decodeErrors": [],
+  "files": [
+    {
+      "file": "animations.json.gz",
+      "bytes": 56,
+      "sha256": "be8a5e99dbe5dc66d73af090f64ef37e02d7e5b5966bb02af95fbe8a0da77b01"
+    },
+    {
+      "file": "bundle.dat",
+      "bytes": 1079017,
+      "sha256": "0bb6f883fe04f39dbc37f7f713007823d0d05f3e743c147b8a36e6febe7f87f2"
+    },
+    {
+      "file": "scene.json.gz",
+      "bytes": 45432,
+      "sha256": "e804d0a64e5038275dc2faa2607da0ab4c85904b63352b6e3b86f32ec83d7976"
+    },
+    {
+      "file": "textures/0.webp",
+      "bytes": 2752,
+      "sha256": "ea7896f88ce60f46062c2063cdbe41049fb02efb742d2742b5b270a6a3a6adf7"
+    },
+    {
+      "file": "textures/1.webp",
+      "bytes": 13642,
+      "sha256": "79bd1982b5e1f4bc792380bce76c66801c42ac6ab1e9ed880ca4872d6fd4e2df"
+    },
+    {
+      "file": "textures/10.webp",
+      "bytes": 1796,
+      "sha256": "ee07ea66c17f553abc94da2fd8f47c0aad1fdaace441c75b074d4408dabf34e1"
+    },
+    {
+      "file": "textures/11.webp",
+      "bytes": 59794,
+      "sha256": "a251033470fedf92bda5a9f392e153b3f7e55bb35dda6fc61ee6f84027a56a96"
+    },
+    {
+      "file": "textures/12.webp",
+      "bytes": 12798,
+      "sha256": "888275e8ce6c00bb83576d4b7db9291a4d27412dcdbbe29450ff0cc5401bc76b"
+    },
+    {
+      "file": "textures/13.webp",
+      "bytes": 56056,
+      "sha256": "d4e65582cdec728ec765d0058a3b8df47eadb53f09fc80f0af323365784a96d8"
+    },
+    {
+      "file": "textures/14.webp",
+      "bytes": 1064,
+      "sha256": "9d255d5093b6b04e9408493f36df7413237b3665cd16f3676cd4896412090f97"
+    },
+    {
+      "file": "textures/15.webp",
+      "bytes": 96,
+      "sha256": "d12bf33024caf99c9868230e8d1dd55c7fd02a06b991ff0908b9cd2de0acb5f3"
+    },
+    {
+      "file": "textures/16.webp",
+      "bytes": 141788,
+      "sha256": "d3b9b88760046f227cb00909cbf43813ab19e9bd470517f6e1b66c775773be3e"
+    },
+    {
+      "file": "textures/17.webp",
+      "bytes": 17894,
+      "sha256": "e69be44cc315e518426e2e952e6c0ed9061390f9f238ec3d328dd138d085e84a"
+    },
+    {
+      "file": "textures/18.webp",
+      "bytes": 2808,
+      "sha256": "9dd23b8681506b25052203920a3107557fabfc39608ab628ce1d4dd9b55cf865"
+    },
+    {
+      "file": "textures/19.webp",
+      "bytes": 658,
+      "sha256": "42ebe8b74d3e7e9391740a66e9e91a63b7dfd8d20fe94e6a4e264f1853165af1"
+    },
+    {
+      "file": "textures/2.webp",
+      "bytes": 74,
+      "sha256": "b5851a6c3529ad44a576220a511e5f3500b5fe8fc26c6474340a72742c0a7ec6"
+    },
+    {
+      "file": "textures/20.webp",
+      "bytes": 98,
+      "sha256": "3b073b12bb2476200efc98dcea1058626cde2bac19022e03b9decd44430ddc1e"
+    },
+    {
+      "file": "textures/21.webp",
+      "bytes": 4502,
+      "sha256": "8515f634b494154aa05e8f42a1838b1541add30bbbc3af7fbd6eeaae3637f174"
+    },
+    {
+      "file": "textures/22.webp",
+      "bytes": 62,
+      "sha256": "22bb1724910c52721c9dd9a1692124a28934145e8a8a4019653df941926117f7"
+    },
+    {
+      "file": "textures/23.webp",
+      "bytes": 150,
+      "sha256": "660e28ec54e86b72bf4abd2957c72c4d43c6dbfe915bb323b47ea039253e9696"
+    },
+    {
+      "file": "textures/24.webp",
+      "bytes": 24778,
+      "sha256": "24a30fd8df693a778b35877977c05c37b2770b25d789d15990bdfe71c9304f4c"
+    },
+    {
+      "file": "textures/25.webp",
+      "bytes": 56928,
+      "sha256": "3f77a166cb5326a43c99d23c8db6b1a70fb7b195fd309ac07152c765f4221f22"
+    },
+    {
+      "file": "textures/26.webp",
+      "bytes": 38,
+      "sha256": "c58b6a6570f385c8ca45895b3ecd530a14d2fd77a5c8f54b579ff79f9204419a"
+    },
+    {
+      "file": "textures/27.webp",
+      "bytes": 13924,
+      "sha256": "b81f30fca79b8be945fbf56700f6e10528903aad413922aa5d1cde6c6043e018"
+    },
+    {
+      "file": "textures/28.webp",
+      "bytes": 7042,
+      "sha256": "35563fdb04015dc1fc6d0509be33fcc5f1908f3b2afb255d0432c2abd54f309c"
+    },
+    {
+      "file": "textures/29.webp",
+      "bytes": 11478,
+      "sha256": "69494a0c192540e79fa16c678d8d03daf4b7611032c83dc5f28b2f33b0cb1cb8"
+    },
+    {
+      "file": "textures/3.webp",
+      "bytes": 45078,
+      "sha256": "c8f6c0c762917d98d1c25af8b48c7c96a94a3cce2ca9b466c476daed665d3339"
+    },
+    {
+      "file": "textures/30.webp",
+      "bytes": 2808,
+      "sha256": "9dd23b8681506b25052203920a3107557fabfc39608ab628ce1d4dd9b55cf865"
+    },
+    {
+      "file": "textures/31.webp",
+      "bytes": 5974,
+      "sha256": "7a9ca5339e19beb7524f5acdcf192be950eba71309b900f355448781cbee557d"
+    },
+    {
+      "file": "textures/32.webp",
+      "bytes": 10476,
+      "sha256": "1f589c9ae7b0607a687d5b3a26db17f1409028d9c2a44e6d81ea633f53569024"
+    },
+    {
+      "file": "textures/33.webp",
+      "bytes": 29152,
+      "sha256": "0ebc4aa2e98fdc3953363a43b3572f744f509b20419bb75e17af5e63fa0b0005"
+    },
+    {
+      "file": "textures/34.webp",
+      "bytes": 5724,
+      "sha256": "28a17e6e1e6b38d7435c612a5bcba4fa59b8f3f00651dd4dac74476c3a582ddb"
+    },
+    {
+      "file": "textures/35.webp",
+      "bytes": 72,
+      "sha256": "8ad4a3df3583f4b89a037b8da50d2c632279ab49d27b689f28f670cf95625896"
+    },
+    {
+      "file": "textures/36.webp",
+      "bytes": 612,
+      "sha256": "d2bb31cbcaf3abe3c8791b4eba4581c932fb2034c59bf2f964883c3a0f61049a"
+    },
+    {
+      "file": "textures/37.webp",
+      "bytes": 3832,
+      "sha256": "590361c24a52aee66e49e3f9f69799a9f46f6439f22e6b1563b9dc135e060fce"
+    },
+    {
+      "file": "textures/38.webp",
+      "bytes": 33728,
+      "sha256": "8073af651d047355a167f15d9e8d2488b2f11eeaf3613ee5401006e4859e6ce1"
+    },
+    {
+      "file": "textures/39.webp",
+      "bytes": 26434,
+      "sha256": "e6a6cd520016b5a48fca57c280fd26966d03f3e7413fc8e9d847fb5a12105e68"
+    },
+    {
+      "file": "textures/4.webp",
+      "bytes": 12798,
+      "sha256": "888275e8ce6c00bb83576d4b7db9291a4d27412dcdbbe29450ff0cc5401bc76b"
+    },
+    {
+      "file": "textures/40.webp",
+      "bytes": 29854,
+      "sha256": "26649a34cc2d8c1389afa234768bc2700334736f89cef36c15e47a6110317885"
+    },
+    {
+      "file": "textures/41.webp",
+      "bytes": 1536,
+      "sha256": "edeb1d268aa313585a36aa6ac0cfd883c34f6a30f246eb5617438cb9ca62d734"
+    },
+    {
+      "file": "textures/42.webp",
+      "bytes": 670,
+      "sha256": "eeb9910b1199c6ab9314d028ea15cc0908680626329e608c953057a0c03407f1"
+    },
+    {
+      "file": "textures/43.webp",
+      "bytes": 11274,
+      "sha256": "12fad3229ddaa8836110fd38f7b6110dcae199ca7f6cd52e6a7295396a1d4c33"
+    },
+    {
+      "file": "textures/44.webp",
+      "bytes": 73910,
+      "sha256": "d12037fe3d48a922eef8d219918082388b9227933c8fde5c5cd8c6939182c167"
+    },
+    {
+      "file": "textures/45.webp",
+      "bytes": 35162,
+      "sha256": "afb7c46025823bff751e8e1168780f4ca5d7d3fca6f086b3b5177fb77a07ccd8"
+    },
+    {
+      "file": "textures/46.webp",
+      "bytes": 93754,
+      "sha256": "f13f9358370d6bd5d0eb94d0814002ee699c0500b430520dfb719f8f6098089f"
+    },
+    {
+      "file": "textures/47.webp",
+      "bytes": 5432,
+      "sha256": "0cabfa6c996155540729feb17d017a8c38affab701896524a385c7696e98b216"
+    },
+    {
+      "file": "textures/48.webp",
+      "bytes": 5974,
+      "sha256": "7a9ca5339e19beb7524f5acdcf192be950eba71309b900f355448781cbee557d"
+    },
+    {
+      "file": "textures/49.webp",
+      "bytes": 72,
+      "sha256": "dd304738d2bed4baa1a7010f5e3a8695006e2597c1fe03fdd20cae2399954e4c"
+    },
+    {
+      "file": "textures/5.webp",
+      "bytes": 14442,
+      "sha256": "754b3861cffd3faa365e14b00f10c66803c09e20c540b102ca9050af21c0f609"
+    },
+    {
+      "file": "textures/50.webp",
+      "bytes": 7032,
+      "sha256": "66881be88c6d4b4e092f4071b0c9c304267d266d0e9f6609763000054011d145"
+    },
+    {
+      "file": "textures/51.webp",
+      "bytes": 6280,
+      "sha256": "90f65432e2ad489c076cbd85283023155cd31936705298b5e09ac821a9cac377"
+    },
+    {
+      "file": "textures/52.webp",
+      "bytes": 69248,
+      "sha256": "0040bb4fbf7b3d818d587b804e3af6bfe43f5c24035b063b64bb373ea9978fd1"
+    },
+    {
+      "file": "textures/6.webp",
+      "bytes": 22014,
+      "sha256": "7d6ca4684643396a704db96cfdbb68a363fbac2ed644984bba7668b229dd000d"
+    },
+    {
+      "file": "textures/7.webp",
+      "bytes": 18486,
+      "sha256": "f80b2ef17e81dd89833951004013c7e0b9328757bd3a21af84bc719631e74076"
+    },
+    {
+      "file": "textures/8.webp",
+      "bytes": 66724,
+      "sha256": "53378fd635efdd56fe68013285c7481f4ebb84c5f0a311f1a50fe0c45e5d3cc3"
+    },
+    {
+      "file": "textures/9.webp",
+      "bytes": 22680,
+      "sha256": "f623d29e12f4d187192acebb076f5640daf7368de07768215408cb66882dd0c6"
+    }
+  ]
+}

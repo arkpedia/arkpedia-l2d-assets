@@ -11,10 +11,12 @@ import json
 import math
 import re
 import subprocess
+import zlib
 from pathlib import Path
 
 import l2d
 import event_transitions as recovery
+from event_curve_stream import stream_channels
 from UnityPy.export.ShaderConverter import ShaderProgram
 from UnityPy.streams import EndianBinaryReader
 from UnityPy.helpers import CompressionHelper
@@ -70,8 +72,10 @@ class Builder:
                 self.scenes[dep['external'].split('/')[-1].lower()] = Scene((ARCHIVE / pack).parent)
         # Known shared UI bundles: recover the exact bytes named by this event's
         # archived manifest, never a substitute from today's client.
+        available = {entry['name'] for entry in recovery.load_manifest(self.home.asset['source'])['abInfos']}
         for name in ('arts/ui/[uc]fxcommon.ab', 'arts/ui/[uc]common.ab'):
-            self.shared(name)
+            if name in available:
+                self.shared(name)
 
     def shared(self, name):
         source = self.home.asset['source']
@@ -131,9 +135,9 @@ class Builder:
             self.textures[self.texture_ids[cache_key]]['dataTexture'] = True
         return self.texture_ids[cache_key]
 
-    def shader(self, scene, ref):
+    def shader(self, scene, ref, keywords=()):
         scene, key = self.resolve(scene, ref)
-        cache_key = id(scene), key
+        cache_key = id(scene), key, tuple(sorted(keywords))
         if cache_key in self.shader_ids:
             return self.shader_ids[cache_key]
         shader = scene.readers[key].read()
@@ -147,7 +151,15 @@ class Builder:
         form = scene.objects[key][1]['m_ParsedForm']
         p = form['m_SubShaders'][0]['m_Passes'][0]
         entries = p['progVertex'].get('m_SubPrograms') or p['progVertex']['m_PlayerSubPrograms'][0]
-        variant = next(x for x in entries if x['m_GpuProgramType'] == 4 and not x['m_KeywordIndices'])
+        variants = [x for x in entries if x['m_GpuProgramType'] == 4]
+        def active(variant):
+            subprogram = program.m_SubPrograms[variant['m_BlobIndex']]
+            return set(subprogram.m_Keywords) | set(subprogram.m_LocalKeywords or [])
+        supported = set().union(*(active(v) for v in variants))
+        requested = set(keywords) & supported
+        variant = next((v for v in variants if active(v) == requested), None)
+        if variant is None:
+            raise ValueError(f'No original GLES3 shader variant for {form["m_Name"]}: {sorted(requested)}')
         glsl = program.m_SubPrograms[variant['m_BlobIndex']].m_ProgramCode.decode('utf8')
         def part(stage):
             text = glsl.split(f'#ifdef {stage}\n', 1)[1]
@@ -161,7 +173,7 @@ class Builder:
         defaults = {x['m_Name']: [x.get(f'm_DefValue[{i}]', 0) for i in range(4)] for x in props}
         samplers = {x['m_Name']: x['m_DefTexture']['m_DefaultName'] for x in props if x['m_Type'] == 4}
         index = len(self.shaders)
-        self.shaders.append({'name': form['m_Name'], 'vertex': part('VERTEX'), 'fragment': part('FRAGMENT'),
+        self.shaders.append({'name': form['m_Name'], 'keywords': sorted(requested), 'vertex': part('VERTEX'), 'fragment': part('FRAGMENT'),
                              'defaults': defaults, 'samplers': samplers, 'blend': [state['rtBlend0']['srcBlend'], state['rtBlend0']['destBlend']]})
         self.shader_ids[cache_key] = index
         return index
@@ -182,25 +194,33 @@ class Builder:
                 maps[k] = self.texture(scene, v['m_Texture'], data=k != '_MainTex')
                 values[k + '_ST'] = [v['m_Scale']['x'], v['m_Scale']['y'], v['m_Offset']['x'], v['m_Offset']['y']]
             index = len(self.materials)
-            self.materials.append({'name': m['m_Name'], 'shader': self.shader(scene, m['m_Shader']), 'values': values, 'textures': maps})
+            keywords = m.get('m_ValidKeywords', m.get('m_ShaderKeywords', '').split())
+            self.materials.append({'name': m['m_Name'], 'shader': self.shader(scene, m['m_Shader'], keywords), 'values': values, 'textures': maps})
             self.material_ids[cache_key] = index
         return self.material_ids[cache_key]
 
-    def build(self, clip_name, sound_event=None, sound_name=None, sound_bank=None):
+    def build(self, clip_name, sound_event=None, sound_name=None, sound_bank=None, omit_paths=()):
         home = self.home
         clip_id, clip = next((k, d) for k, (kind, d) in home.objects.items() if kind == 'AnimationClip' and d['m_Name'] == clip_name)
-        if not clip['m_Legacy']:
-            raise ValueError('Mecanim clip conversion has not been verified yet')
-        component = next(d for kind, d in home.objects.values() if kind == 'Animation' and any(str(r['m_PathID']) == clip_id for r in d['m_Animations']))
+        if clip['m_Legacy']:
+            component = next(d for kind, d in home.objects.values() if kind == 'Animation' and any(str(r['m_PathID']) == clip_id for r in d['m_Animations']))
+        else:
+            controllers = {key for key, (kind, d) in home.objects.items() if kind == 'AnimatorController' and any(str(r['m_PathID']) == clip_id for r in d['m_AnimationClips'])}
+            owners = [d for kind, d in home.objects.values() if kind == 'Animator' and str(d['m_Controller']['m_PathID']) in controllers]
+            if len(owners) != 1:
+                raise ValueError('Mecanim clip needs one unambiguous original Animator owner')
+            component = owners[0]
         root_id = str(component['m_GameObject']['m_PathID'])
         transforms = {str(d['m_GameObject']['m_PathID']): d for kind, d in home.objects.values() if kind == 'RectTransform'}
-        nodes, paths = [], {}
+        nodes, paths, bindings, local_positions = [], {}, {}, {}
         def visit(go_id, parent, path):
             go = home.objects[go_id][1]
             if path:
                 path += '/' + go['m_Name']
             elif parent is not None:
                 path = go['m_Name']
+            if any(path == omitted or path.startswith(omitted + '/') for omitted in omit_paths):
+                return
             if path.startswith('panel_main/group_ui') and not path.startswith('panel_main/group_ui/root_logo') and path != 'panel_main/group_ui':
                 return
             tr = transforms.get(go_id)
@@ -213,17 +233,38 @@ class Builder:
                  'scale': [tr['m_LocalScale'][c] for c in 'xyz'], 'rotation': [tr['m_LocalRotation'][c] for c in 'xyzw'], 'alpha': 1}
             index = len(nodes)
             nodes.append(n)
+            local_positions[index] = [tr['m_LocalPosition'][c] for c in 'xyz']
             paths[path] = index
             for c in go['m_Component']:
                 kind, data = home.objects[str(c['component']['m_PathID'])]
+                if kind == 'MonoBehaviour':
+                    for field, prop in data.items():
+                        if not field.startswith(('_textureProperty', '_floatProperty', '_colorProperty')) or not isinstance(prop, dict):
+                            continue
+                        if not prop.get('enable') or not prop.get('name'):
+                            continue
+                        uniforms = n.setdefault('uniforms', {})
+                        name = prop['name']
+                        if field.startswith('_textureProperty'):
+                            name += '_ST'
+                            uniforms[name] = [prop['tiling']['x'], prop['tiling']['y'], prop['offset']['x'], prop['offset']['y']]
+                            for attribute, channel in [('tiling.x', 0), ('tiling.y', 1), ('offset.x', 2), ('offset.y', 3)]:
+                                bindings[path, field + '.' + attribute] = f'uniforms.{name}.{channel}'
+                        elif field.startswith('_floatProperty'):
+                            uniforms[name] = prop['floatValue']
+                            bindings[path, field + '.floatValue'] = f'uniforms.{name}'
+                        else:
+                            uniforms[name] = [prop['color'][channel] for channel in 'rgba']
+                            for i, channel in enumerate('rgba'):
+                                bindings[path, field + '.color.' + channel] = f'uniforms.{name}.{i}'
                 if kind == 'CanvasGroup':
                     n['alpha'] = data['m_Alpha']
                     n['ignoreParentAlpha'] = bool(data['m_IgnoreParentGroups'])
                 if kind == 'MonoBehaviour' and 'm_Softness' in data:
-                    if data['m_Softness']['x'] or data['m_Softness']['y']:
-                        raise ValueError('Soft rectangular mask has not been verified')
                     n['rectMask'] = True
-                if kind == 'MonoBehaviour' and data.get('m_Enabled') and ('m_Sprite' in data or '_initAtlas' in data):
+                    n['maskSoftness'] = [data['m_Softness'][c] for c in 'xy']
+                    n['maskPadding'] = [data.get('m_Padding', {}).get(c, 0) for c in 'xyzw']
+                if kind == 'MonoBehaviour' and data.get('m_Enabled') and ('m_Sprite' in data or '_initAtlas' in data or 'm_UVRect' in data):
                     sprite = None
                     if '_initAtlas' in data:
                         atlas_scene, atlas_id = self.resolve(home, data['_initAtlas'])
@@ -234,6 +275,11 @@ class Builder:
                         tex = self.texture(atlas_scene, plane['texture'], plane['alpha'])
                         rect = {'x': r['x'], 'y': r['y'], 'width': r['w'], 'height': r['h']}
                         offset, sprite_size, border = {'x': 0, 'y': 0}, [r['w'], r['h']], [0, 0, 0, 0]
+                    elif 'm_UVRect' in data:
+                        tex = self.texture(home, data['m_Texture'])
+                        texture = self.textures[tex] if tex is not None else {'width': 1, 'height': 1}
+                        rect = {'x': 0, 'y': 0, 'width': texture['width'], 'height': texture['height']}
+                        offset, sprite_size, border = {'x': 0, 'y': 0}, [rect['width'], rect['height']], [0, 0, 0, 0]
                     else:
                         sprite_ref = self.resolve(home, data['m_Sprite'])
                         if sprite_ref:
@@ -255,6 +301,8 @@ class Builder:
                                   'type': data.get('m_Type', 0), 'preserveAspect': bool(data.get('m_PreserveAspect', False)),
                                   'fill': data.get('m_FillAmount', 1), 'fillMethod': data.get('m_FillMethod', 4), 'clockwise': bool(data.get('m_FillClockwise', False)), 'origin': data.get('m_FillOrigin', 0),
                                   'rotated': bool(sprite and sprite['rotate'])}
+                    if 'm_UVRect' in data:
+                        n['image']['uvRect'] = [data['m_UVRect'][key] for key in ('x', 'y', 'width', 'height')]
                     if '_angleSpan' in data:
                         n['image']['arc'] = [data['_startAngle'], data['_angleSpan']]
             for child in tr['m_Children']:
@@ -263,19 +311,86 @@ class Builder:
         visit(root_id, None, '')
         curves = []
         fields = {'m_AnchoredPosition.x': 'position.0', 'm_AnchoredPosition.y': 'position.1', 'm_SizeDelta.x': 'size.0', 'm_SizeDelta.y': 'size.1',
+                  **{f'm_Anchor{edge}.{c}': f'anchor{edge}.{i}' for edge in ('Min', 'Max') for i, c in enumerate('xy')},
+                  **{f'm_Pivot.{c}': f'pivot.{i}' for i, c in enumerate('xy')},
+                  **{f'm_UVRect.{c}': f'image.uvRect.{i}' for i, c in enumerate(('x', 'y', 'width', 'height'))},
+                  'm_FillAmount': 'image.fill',
+                  'm_FillOrigin': 'image.origin', 'm_FillMethod': 'image.fillMethod', 'm_FillClockwise': 'image.clockwise',
+                  **{f'm_Padding.{c}': f'maskPadding.{i}' for i, c in enumerate('xyzw')},
                   'm_Alpha': 'alpha', 'm_IsActive': 'active', '_angleSpan': 'image.arc.1', **{f'm_Color.{c}': f'image.color.{i}' for i, c in enumerate('rgba')}}
+        if not clip['m_Legacy']:
+            channels = stream_channels(clip['m_MuscleClip']['m_Clip']['data'], clip['m_MuscleClip']['m_StartTime'])
+            hashed_paths = {}
+            for path, node in paths.items():
+                hashed = zlib.crc32(path.encode())
+                if hashed in hashed_paths:
+                    raise ValueError('Ambiguous native animation path hash')
+                hashed_paths[hashed] = (path, node)
+            offset = 0
+            for binding in clip['m_ClipBindingConstant']['genericBindings']:
+                kind, attribute = binding['typeID'], binding['attribute']
+                dimension = {1: 3, 2: 4, 3: 3}.get(attribute, 0) if kind == 4 else 1
+                if not dimension:
+                    raise ValueError('Unsupported Mecanim transform binding')
+                values = channels[offset:offset + dimension]
+                offset += dimension
+                if len(values) != dimension:
+                    raise ValueError('Truncated Mecanim channel bindings')
+                if binding['path'] not in hashed_paths:
+                    continue  # Game-only non-RectTransform objects are omitted.
+                path, node = hashed_paths[binding['path']]
+                if kind == 4:
+                    prop = {1: 'localPosition', 2: 'rotation', 3: 'scale'}[attribute]
+                    if prop == 'localPosition':
+                        nodes[node][prop] = local_positions[node]
+                    properties = [f'{prop}.{i}' for i in range(dimension)]
+                elif kind in (1, 114, 224, 225):
+                    if attribute in {zlib.crc32(name.encode()) for name in ('m_BlocksRaycasts', 'm_Interactable', 'm_RaycastTarget')}:
+                        continue
+                    candidates = {**fields, **{attribute: prop for (bound_path, attribute), prop in bindings.items() if bound_path == path}}
+                    matches = [prop for name, prop in candidates.items() if zlib.crc32(name.encode()) == attribute]
+                    if len(matches) != 1:
+                        raise ValueError(f'Unresolved Mecanim UI property {kind}/{attribute} at {path}')
+                    properties = matches
+                else:
+                    continue  # Mesh/particle effects are outside the UI renderer.
+                for prop, keys in zip(properties, values):
+                    if prop.startswith('image.') and 'image' not in nodes[node]:
+                        continue
+                    if prop.startswith('maskPadding.') and not nodes[node].get('rectMask'):
+                        continue
+                    if prop == 'active':
+                        keys = [[k[0], k[1], None, None, *k[4:]] for k in keys]
+                    curves.append({'node': node, 'property': prop, 'keys': keys})
+            if offset != len(channels):
+                raise ValueError('Unbound Mecanim channels')
         for c in clip['m_FloatCurves']:
-            if c['path'] not in paths or c['attribute'] == 'm_BlocksRaycasts':
+            if c['path'] not in paths or c['attribute'] in ('m_BlocksRaycasts', 'm_Interactable', 'm_RaycastTarget'):
                 continue
-            if c['attribute'] not in fields:
+            prop = bindings.get((c['path'], c['attribute']), fields.get(c['attribute']))
+            if prop is None:
                 raise ValueError(f'Unknown curve property {c["attribute"]}')
-            curves.append({'node': paths[c['path']], 'property': fields[c['attribute']], 'keys': self.keys(c['curve']['m_Curve'])})
-        for field, prop, channels in [('m_ScaleCurves', 'scale', 'xyz'), ('m_RotationCurves', 'rotation', 'xyzw')]:
+            # Disabled Graphics and game-only text components have no rendered
+            # image. Their colour curves must not create a phantom drawable.
+            if prop.startswith('image.') and 'image' not in nodes[paths[c['path']]]:
+                continue
+            if prop.startswith('maskPadding.') and not nodes[paths[c['path']]].get('rectMask'):
+                continue
+            keys = self.keys(c['curve']['m_Curve'])
+            if prop in ('active', 'image.origin', 'image.fillMethod', 'image.clockwise'):
+                keys = [[k[0], k[1], None, None, *k[4:]] for k in keys]
+            curves.append({'node': paths[c['path']], 'property': prop, 'keys': keys})
+        if any(c['path'] in paths for c in clip.get('m_EulerCurves', [])):
+            raise ValueError('Legacy Euler rotation conversion needs separate verification')
+        for field, prop, channels in [('m_PositionCurves', 'localPosition', 'xyz'), ('m_ScaleCurves', 'scale', 'xyz'), ('m_RotationCurves', 'rotation', 'xyzw')]:
             for c in clip[field]:
                 if c['path'] in paths:
+                    if prop == 'localPosition':
+                        nodes[paths[c['path']]][prop] = local_positions[paths[c['path']]]
                     for i, channel in enumerate(channels):
                         curves.append({'node': paths[c['path']], 'property': f'{prop}.{i}', 'keys': self.keys(c['curve']['m_Curve'], channel)})
         result = {'schemaVersion': 1, 'source': str((home.folder / 'asset.json').relative_to(ARCHIVE)),
+                'omittedPaths': sorted(omit_paths),
                 'clip': clip_name, 'duration': home.asset['animations'][next(i for i, a in enumerate(home.asset['animations']) if a['id'] == clip_id)]['durationSeconds'],
                 'width': 1280, 'height': 720, 'nodes': nodes, 'curves': curves, 'textures': self.textures, 'materials': self.materials, 'shaders': self.shaders}
         # Original archives remain lossless. Display-only RGB can use ordinary
@@ -320,11 +435,12 @@ def main():
     p.add_argument('--sound-event')
     p.add_argument('--sound-name')
     p.add_argument('--sound-bank')
+    p.add_argument('--omit-path', action='append', default=[])
     args = p.parse_args()
     output = Path(args.out)
     output.mkdir(parents=True, exist_ok=True)
     b = Builder((ARCHIVE / args.asset).parent, output)
-    pack = b.build(args.clip, args.sound_event, args.sound_name, args.sound_bank)
+    pack = b.build(args.clip, args.sound_event, args.sound_name, args.sound_bank, args.omit_path)
     write(output / 'scene.json', pack)
     recovery.dependency_report()
     print(len(pack['nodes']), 'nodes;', len(pack['textures']), 'textures;', len(pack['shaders']), 'original shaders')
