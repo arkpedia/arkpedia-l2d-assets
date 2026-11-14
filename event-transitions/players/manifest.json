@@ -2,12 +2,203 @@
   "schemaVersion": 1,
   "packs": [
     {
+      "folder": "cn/act21mini/18d6d4b0a14c",
+      "reviewed": true,
+      "source": "events/cn/act21mini/18d6d4b0a14c/asset.json",
+      "clip": "act21mini_anim_entry",
+      "rendererSchemaVersion": 1,
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
+      "poster": {
+        "file": "menu.webp",
+        "time": 3.866666555404663,
+        "width": 1280,
+        "height": 720
+      },
+      "notRendered": [
+        "Game-only interaction/text controls",
+        "ParticleSystem emitters",
+        "Non-UI mesh effects"
+      ],
+      "files": [
+        {
+          "file": "menu.webp",
+          "bytes": 201006,
+          "sha256": "bcfac3c0c1d1f40d1416bdb4bffe583f7091f65adc6519c82011e9456dc3b904"
+        },
+        {
+          "file": "scene.json",
+          "bytes": 101396,
+          "sha256": "f13b83b429d19d28f302db3c4a37535fd068d5885285c55e25afad10d01408d6"
+        },
+        {
+          "file": "texture-0.webp",
+          "bytes": 210422,
+          "sha256": "782d9e8e3615a018fe59071776a68ef6ac91707d459eb33099837a5e8ca9202b"
+        },
+        {
+          "file": "texture-1.webp",
+          "bytes": 124,
+          "sha256": "ec826806066cfb52841edff961e000a63abc8c8dcbf2d1054a3d5683a0ceb779"
+        },
+        {
+          "file": "texture-10.webp",
+          "bytes": 94426,
+          "sha256": "83e6159fe714784a34f0753d2da2ed38605571466fd60ef2a1177c7497dc6bab"
+        },
+        {
+          "file": "texture-11.webp",
+          "bytes": 13718,
+          "sha256": "cb81b88602fcffe0b13c3b6758b371b07869e126ef536dd1a91f3a57c4b260ac"
+        },
+        {
+          "file": "texture-12.webp",
+          "bytes": 31094,
+          "sha256": "3f90ec871d77da25420538cf5f92aba1303df0ab332b9b2acdbe6677ef5da1ed"
+        },
+        {
+          "file": "texture-13.webp",
+          "bytes": 15232,
+          "sha256": "749295aff16a0376bfb83e9988fb646d19b0b29cd9aacaf367f42ac6103deab5"
+        },
+        {
+          "file": "texture-14.webp",
+          "bytes": 6970,
+          "sha256": "eaabe47aebd4434701079dc6f7f363e714e91e188442639ce651beec7ccb71fa"
+        },
+        {
+          "file": "texture-15.webp",
+          "bytes": 5060,
+          "sha256": "dd91db55ceb91d022fc7aa4c779bb9d8a77238da3659cd73ec93b137b505d2a5"
+        },
+        {
+          "file": "texture-16.webp",
+          "bytes": 880,
+          "sha256": "a8e3120285c07e8f7249c1c4b25f2373da50e3af6a6a8ffeb5c7110c70f2354b"
+        },
+        {
+          "file": "texture-17.webp",
+          "bytes": 4226,
+          "sha256": "0eab7d0fe2f99a957c6412155dbe95d0e70f8c3ff8fe156563e9334df99436aa"
+        },
+        {
+          "file": "texture-18.webp",
+          "bytes": 272,
+          "sha256": "04bc96fd178474b4dcc7026a50f9083b1d9ffb936f8c526fd232f24680a17378"
+        },
+        {
+          "file": "texture-19.webp",
+          "bytes": 140,
+          "sha256": "03b0e336f1e6d6ab7ba405b8efd22110a8eec29550ae94ba9298d2f7201d540a"
+        },
+        {
+          "file": "texture-2.webp",
+          "bytes": 108,
+          "sha256": "013d367c2d3e8f0383c70e90385277eb6a0ce30978549281260a796dc37bd1f5"
+        },
+        {
+          "file": "texture-20.webp",
+          "bytes": 136,
+          "sha256": "dafa836837c925e8d891531deec2c45fb1df94bd0cbc551c9832832e15d75413"
+        },
+        {
+          "file": "texture-21.webp",
+          "bytes": 3266,
+          "sha256": "24ba3e19060947b16034f158bf616c0496ac3430a22098f471c708b4ea6a451b"
+        },
+        {
+          "file": "texture-22.webp",
+          "bytes": 33692,
+          "sha256": "ed5264ad3e5fad5a17f616117fbf13c0b4db5700db93cf5b1deeda43b8ce652c"
+        },
+        {
+          "file": "texture-23.webp",
+          "bytes": 13850,
+          "sha256": "dbe5d9b9c422c502a6326b9d7c4db9ca85e3bcba46a92c3baa6929f3f20e54a9"
+        },
+        {
+          "file": "texture-24.webp",
+          "bytes": 13994,
+          "sha256": "366db97cd83c5a505492a72d50a0624b3ba73efc4984c8eb759cf1d516d34f09"
+        },
+        {
+          "file": "texture-25.webp",
+          "bytes": 2036,
+          "sha256": "ebc9e16bdfdf471b2fe1cdf414424d35af124494fe83a7c3530c621df66a0bc8"
+        },
+        {
+          "file": "texture-26.webp",
+          "bytes": 38300,
+          "sha256": "0561443746b987e4d82f8bc13ea28cda72320d706da2a4457c0ef5e409c5691c"
+        },
+        {
+          "file": "texture-27.webp",
+          "bytes": 58778,
+          "sha256": "c07b7081c30bc1356cb116155849f4134d65990cba83e947e5e153d05bd881cd"
+        },
+        {
+          "file": "texture-28.webp",
+          "bytes": 18068,
+          "sha256": "1fb5cdfef2fb6136e4942b5f14efc4d600ecb089376fb5eabc69e94fad518c48"
+        },
+        {
+          "file": "texture-29.webp",
+          "bytes": 256,
+          "sha256": "4f88a8bb46196cc4d4ecc92aa551d65396681815a24bb2477de7f1ffb8a57d90"
+        },
+        {
+          "file": "texture-3.webp",
+          "bytes": 134766,
+          "sha256": "aa7dc2348d302d17d8b54d42a0e94482fbba03c83bc74fc75b1c03d994a16dd5"
+        },
+        {
+          "file": "texture-30.webp",
+          "bytes": 166,
+          "sha256": "de14282a0b6768c1adebe3c12cf0713b4fa43532923c2aa39a04fc7c50b269d3"
+        },
+        {
+          "file": "texture-31.webp",
+          "bytes": 166,
+          "sha256": "68260d5e2594f477824244f9f859022dd8c5bef145e749a17d250f7bfaa469b5"
+        },
+        {
+          "file": "texture-4.webp",
+          "bytes": 52158,
+          "sha256": "592867274f854daf8a4f4603f901e00ca77cf6e8faa6603754f65db9cd4b9e8d"
+        },
+        {
+          "file": "texture-5.webp",
+          "bytes": 45914,
+          "sha256": "f67f7856163256389cd2222fc704061a5c23fb57d8113d056a695cb96f250852"
+        },
+        {
+          "file": "texture-6.webp",
+          "bytes": 33320,
+          "sha256": "ac646ca8244382ef17a78e2a4fbb00eece57815f27c2117eae02530a156b2412"
+        },
+        {
+          "file": "texture-7.webp",
+          "bytes": 23434,
+          "sha256": "8b2062d6d6f515031796dbf9d9acad1988b11d21531294cc3ab7630072748d9a"
+        },
+        {
+          "file": "texture-8.webp",
+          "bytes": 14020,
+          "sha256": "de97117da0525e77a13282adef48507237b4ac29237cf45292c9c1f6e5960f60"
+        },
+        {
+          "file": "texture-9.webp",
+          "bytes": 22258,
+          "sha256": "298a06f9ddeae5d07ac29d4f446ed9db2dd86a4df43e20ea8f7bbd0cf55cd1d9"
+        }
+      ]
+    },
+    {
       "folder": "cn/act24sre/125ea0347c1e",
       "reviewed": true,
       "source": "events/cn/act24sre/125ea0347c1e/asset.json",
       "clip": "act24side_activity_stage_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 2.25,
@@ -68,7 +259,7 @@
       "source": "events/cn/act31sre/4f30a0cc7894/asset.json",
       "clip": "act31sre_stage_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 2.616666555404663,
@@ -164,7 +355,7 @@
       "source": "events/cn/act40sre/f56b6151f4dc/asset.json",
       "clip": "panel_act40side_entry_in",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 2.3333332538604736,
@@ -360,7 +551,7 @@
       "source": "events/cn/act41side/a81054859b60/asset.json",
       "clip": "act41side_stage_entry_anim",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 2.5,
@@ -506,7 +697,7 @@
       "source": "events/cn/act41sre/8063cbfa5d1b/asset.json",
       "clip": "act41side_stage_entry_anim",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 2.5,
@@ -657,7 +848,7 @@
       "source": "events/cn/act43sre/2e0aacd4fc75/asset.json",
       "clip": "act43sre_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 4.900000095367432,
@@ -1158,7 +1349,7 @@
       "source": "events/cn/act44side/1b3b2a5eb38d/asset.json",
       "clip": "anim_act44side_entry_01",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 2.75,
@@ -1439,7 +1630,7 @@
       "source": "events/cn/act44sre/5d586ac8377c/asset.json",
       "clip": "anim_act44sre_entry_01",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 2.75,
@@ -1725,7 +1916,7 @@
       "source": "events/cn/act45side/3de67ef700f0/asset.json",
       "clip": "act45side_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 4.083333492279053,
@@ -1891,7 +2082,7 @@
       "source": "events/cn/act46side/0ae3278bd456/asset.json",
       "clip": "act46side_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 3.8333332538604736,
@@ -2187,7 +2378,7 @@
       "source": "events/cn/act47side/3e7919746fe5/asset.json",
       "clip": "act47side_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 5.266666889190674,
@@ -2643,7 +2834,7 @@
       "source": "events/cn/act49side/c6e2a2e38f24/asset.json",
       "clip": "act49side_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 7.333333492279053,
@@ -2909,7 +3100,7 @@
       "source": "events/cn/act50side/2b3fa1948340/asset.json",
       "clip": "act50side_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 4.0,
@@ -3215,7 +3406,7 @@
       "source": "events/cn/act52side/e5358147ec6c/asset.json",
       "clip": "act52side_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 4.833333492279053,
@@ -3556,7 +3747,7 @@
       "source": "events/cn/act53side/e8a3fa756b86/asset.json",
       "clip": "act53side_entry_kv1",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 5.166666507720947,
@@ -3576,13 +3767,13 @@
         },
         {
           "file": "menu.webp",
-          "bytes": 215112,
-          "sha256": "fcbb4ac3c6929cabd1dc45a1df4eefbbc0e1c5d4a851af9739f0166f5dba2b7d"
+          "bytes": 249566,
+          "sha256": "0be2ec4b2d1b10fbdd57815755c482bbcec7d83fdbb66e11dc21da1cc773f4f8"
         },
         {
           "file": "scene.json",
-          "bytes": 350028,
-          "sha256": "a5b01ed8f2f61cce9605462c47fb30b8c76575786d42aa6e7855129960a59b12"
+          "bytes": 350187,
+          "sha256": "664271af9bef918192b8b000773bd13628624cff51fb5be79c82c2d70abd47e7"
         },
         {
           "file": "texture-0.webp",
@@ -4467,12 +4658,433 @@
       ]
     },
     {
+      "folder": "cn/act54side/d668e73ff648",
+      "reviewed": true,
+      "source": "events/cn/act54side/d668e73ff648/asset.json",
+      "clip": "act54side_entry_anim",
+      "rendererSchemaVersion": 1,
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
+      "poster": {
+        "file": "menu.webp",
+        "time": 6.5,
+        "width": 1280,
+        "height": 720
+      },
+      "notRendered": [
+        "Game-only interaction/text controls",
+        "ParticleSystem emitters",
+        "Non-UI mesh effects"
+      ],
+      "files": [
+        {
+          "file": "entrance.mp3",
+          "bytes": 159020,
+          "sha256": "0f4c4ca76a4b5d5448fe691167ce9cec9e9636412f87335a06f107d47d86609c"
+        },
+        {
+          "file": "menu.webp",
+          "bytes": 252662,
+          "sha256": "fd30957a7d7695098ae7e99ca2de798eafc47d0dc259af3f96392e6ef721b3a2"
+        },
+        {
+          "file": "scene.json",
+          "bytes": 577189,
+          "sha256": "4883c6dd0ce629db9cf8e7ee0f725a869c9101b9b28eae7708029d784b3e8207"
+        },
+        {
+          "file": "texture-0.webp",
+          "bytes": 231312,
+          "sha256": "b67d81d05600d3b9f443f2f66f8bd8f590a53475fd2d884b3b1f4eee6d0629d4"
+        },
+        {
+          "file": "texture-1.webp",
+          "bytes": 1930,
+          "sha256": "b75be8390ed9cdd74b89b63e2349865170f8b742737902252dfd2de099e65313"
+        },
+        {
+          "file": "texture-10.webp",
+          "bytes": 74140,
+          "sha256": "f5bf5d504c31ad7444555c23804ff935ee398298e0168d21df9ba8356c749f15"
+        },
+        {
+          "file": "texture-11.webp",
+          "bytes": 34118,
+          "sha256": "535e07e20b82ed343fcc04bb0a24219f5aa0dcbce9bb9ea3c60cdaa02efbd9e2"
+        },
+        {
+          "file": "texture-12.webp",
+          "bytes": 38300,
+          "sha256": "0561443746b987e4d82f8bc13ea28cda72320d706da2a4457c0ef5e409c5691c"
+        },
+        {
+          "file": "texture-13.webp",
+          "bytes": 19266,
+          "sha256": "f7003e1ecf0d1f7532d0522570ce2559dcdeb4aa1f4858aca4d8278de60643b8"
+        },
+        {
+          "file": "texture-14.webp",
+          "bytes": 18712,
+          "sha256": "8f8007177ffb7af2482ed56d02602a5c7a138fba7ae08551ff8e4c3c73ee4b05"
+        },
+        {
+          "file": "texture-15.webp",
+          "bytes": 18400,
+          "sha256": "10048e98f8cd18ecf1bd000ddb6d65e7ae7af4e9119e5ad1a92125db7c7a84d3"
+        },
+        {
+          "file": "texture-16.webp",
+          "bytes": 16454,
+          "sha256": "bcaafd95250cd3be4e9871151910802634061279e04de43217ef41e7459ba2cf"
+        },
+        {
+          "file": "texture-17.webp",
+          "bytes": 21350,
+          "sha256": "c9e841b7e9ca6d51c11dbcde2928102c06536ea3f2afe1827cb4efa96b6763a0"
+        },
+        {
+          "file": "texture-18.webp",
+          "bytes": 100,
+          "sha256": "309bd3a608049e060d16d67f697a691c6f39578a3156d839c322d675cf99c3c3"
+        },
+        {
+          "file": "texture-19.webp",
+          "bytes": 5064,
+          "sha256": "8ded790cf64487258a5cb9549985035fa4687dd90f1f58016a8e4ea0b14c4056"
+        },
+        {
+          "file": "texture-2.webp",
+          "bytes": 752,
+          "sha256": "c9e5ade95ddd2c690a353bcdd76ce3a0caf348e466079584c1f7e5a29968704d"
+        },
+        {
+          "file": "texture-20.webp",
+          "bytes": 8856,
+          "sha256": "4646f415d816b886c8ff5e229d0ee20a294279a27c09db35b83bea3039f238f7"
+        },
+        {
+          "file": "texture-21.webp",
+          "bytes": 922,
+          "sha256": "e0ea0c7908a7a0de69bb53e4fead73730070f7dbf3b5644c9c43a1968adfcf81"
+        },
+        {
+          "file": "texture-22.webp",
+          "bytes": 1118,
+          "sha256": "3724456b2d7a3e5c31e9958e8a84b60f8cf189846d1ff6ab4abc77d6b7c50f09"
+        },
+        {
+          "file": "texture-23.webp",
+          "bytes": 2822,
+          "sha256": "f290d0010e10ffe7942294684c54c6189b6fe8f278a2828dbd2724c2b2757568"
+        },
+        {
+          "file": "texture-24.webp",
+          "bytes": 1578,
+          "sha256": "bc0602f2592ebb90a09c39e5e094d614d90413e19f9e66392ac80de62d6c03db"
+        },
+        {
+          "file": "texture-25.webp",
+          "bytes": 1212,
+          "sha256": "3267a3024308ed31a36882496eca4465c2e0f3e66ea618a049c1ef028a2c658f"
+        },
+        {
+          "file": "texture-26.webp",
+          "bytes": 1196,
+          "sha256": "543b4ee6d6d5ccd31cb3a82e2a959d1b5263bc3a9ba37c2dc6b42cfd64f3e721"
+        },
+        {
+          "file": "texture-27.webp",
+          "bytes": 1152,
+          "sha256": "576ffef2888a73292226cf35ac19a30efb42bb725b5c0d0dca4efdd26c620cbe"
+        },
+        {
+          "file": "texture-28.webp",
+          "bytes": 740,
+          "sha256": "9ee180a86e9c0ce71ddff00e264d949c5407a0b6496489df08fd6efe3c304053"
+        },
+        {
+          "file": "texture-29.webp",
+          "bytes": 690,
+          "sha256": "8bd25034ed5c80fb22109d9612a326d2d3d016c8cd566449e69c034e5e3380f2"
+        },
+        {
+          "file": "texture-3.webp",
+          "bytes": 4102,
+          "sha256": "83f6eb1ec6aca0ca7c5e5baa59f9b217ef37cfd6c18c0afa0d1224d4092b340e"
+        },
+        {
+          "file": "texture-30.webp",
+          "bytes": 884,
+          "sha256": "9aafe6f7481a4c8136924afe5719aeae4dbaf3b94cc68cbf66b2421be0f78513"
+        },
+        {
+          "file": "texture-31.webp",
+          "bytes": 704,
+          "sha256": "bce99e4975d36122abe691248fd99702a27e16b185b74c549476585c657af562"
+        },
+        {
+          "file": "texture-32.webp",
+          "bytes": 1042,
+          "sha256": "190e426fcd77416ade0af03157899fd1aa521d709d1f7a54db79a1f00ba1e3f6"
+        },
+        {
+          "file": "texture-33.webp",
+          "bytes": 7842,
+          "sha256": "4c60f203e2c6d4ac133532414e104a56852013e628bf1da1eaa6671c442a7bef"
+        },
+        {
+          "file": "texture-34.webp",
+          "bytes": 13882,
+          "sha256": "51feb57f52e536b53a607df24eef88bd6df46dab07c31b8208893e4678f01bb4"
+        },
+        {
+          "file": "texture-35.webp",
+          "bytes": 3070,
+          "sha256": "33d6a44c4cc9f24ce9d36e276fe40be6d9705f400653cf0942b5d32985de3ac9"
+        },
+        {
+          "file": "texture-36.webp",
+          "bytes": 3408,
+          "sha256": "f7be656e5a79a563a1f20f79ea9f13db709d9cc967335199f1c3fa47e074fa03"
+        },
+        {
+          "file": "texture-37.webp",
+          "bytes": 46460,
+          "sha256": "ba42f97a17388b21cb24049a2efacdb68f3617aa90f067d897091fa87735cf0a"
+        },
+        {
+          "file": "texture-38.webp",
+          "bytes": 40276,
+          "sha256": "65e61b183a83108895ff1d8971f89b6af11d398e2aad71255c133bacefb83db7"
+        },
+        {
+          "file": "texture-39.webp",
+          "bytes": 292990,
+          "sha256": "c63138a6bbd46163f56a6cef102bc12d18b989997ba337bf0dc0a8b54dc525fd"
+        },
+        {
+          "file": "texture-4.webp",
+          "bytes": 25398,
+          "sha256": "a8e3980759c5dfea78d8baadc892f5e896e4cad78809f67ef4538f6a9a7aebda"
+        },
+        {
+          "file": "texture-40.webp",
+          "bytes": 13656,
+          "sha256": "c2f04065123fb9ca9ada6a1cb4205b65c74b265f43f494e1332328628185584f"
+        },
+        {
+          "file": "texture-41.webp",
+          "bytes": 13428,
+          "sha256": "435bf09bef2e5e871dcc64827708ec6d9e9c6df83856230616d9220ec664dc5c"
+        },
+        {
+          "file": "texture-42.webp",
+          "bytes": 92,
+          "sha256": "482a1939ed81bb0c99bfa1cc33399aa869c04cedafbe7c5ab60a123f2acb0631"
+        },
+        {
+          "file": "texture-43.webp",
+          "bytes": 42386,
+          "sha256": "1dd76ad930c19ea35469d67ca745a9687a371e29cb507ec38612a25ba28b5dbb"
+        },
+        {
+          "file": "texture-44.webp",
+          "bytes": 12866,
+          "sha256": "7b255a9913cebbaccc7d04533fb8fdde68a87ef2c160e72102b6d6d3eaf29477"
+        },
+        {
+          "file": "texture-45.webp",
+          "bytes": 9626,
+          "sha256": "dcd0629afe2ebd3858334d4770d0736f91a373a184e93e98a529d959beaacd4e"
+        },
+        {
+          "file": "texture-46.webp",
+          "bytes": 7912,
+          "sha256": "e71e62aac76c4444754c83a02f20a04b1f94878817fa4f40bfc7000a580603b6"
+        },
+        {
+          "file": "texture-47.webp",
+          "bytes": 12142,
+          "sha256": "1af85cb8beb18c189ce28807c2300d02cacfbf7fb88baac194ddc4654dbae5d0"
+        },
+        {
+          "file": "texture-48.webp",
+          "bytes": 12488,
+          "sha256": "d0f74ef284dc1b78e6a8f236f44a515acc478fb3c6e443007ae7952ead09092c"
+        },
+        {
+          "file": "texture-49.webp",
+          "bytes": 3974,
+          "sha256": "767e8389563ef438371c5703bb8b6ba74cffcde3b187ae3a17b859574072f623"
+        },
+        {
+          "file": "texture-5.webp",
+          "bytes": 27152,
+          "sha256": "625a6488e3890447d4ec07df9ac3335c8bcffcf13abd4e6b4a526ec370217bf1"
+        },
+        {
+          "file": "texture-50.webp",
+          "bytes": 1976,
+          "sha256": "ad2ffdf103a338c96ee0284df32ceb21611e6629a8ea8866433f09e751f4bbb8"
+        },
+        {
+          "file": "texture-51.webp",
+          "bytes": 2448,
+          "sha256": "e0ef95eecdcfd2d255a85e80a64a63db6db2cc69d29fe529d6c04af3d16b6a2a"
+        },
+        {
+          "file": "texture-52.webp",
+          "bytes": 8418,
+          "sha256": "b2935531267a26116a3ced597f8206130cd671294367b2bf46b299376b42927a"
+        },
+        {
+          "file": "texture-53.webp",
+          "bytes": 13128,
+          "sha256": "8a28697fa0a7711514f0dc945f9cc167910fcf31df34199b753844e9e10f5292"
+        },
+        {
+          "file": "texture-54.webp",
+          "bytes": 19900,
+          "sha256": "9f1995d96da08c708704667b4a648c54588a1eeaa2ff0e73ec31c6b60bc418f5"
+        },
+        {
+          "file": "texture-55.webp",
+          "bytes": 22518,
+          "sha256": "ecb2579bbc4f16ab3271c76aa898ae2c6a2eb3941ea9dbdbbd41b6bfdc8318fd"
+        },
+        {
+          "file": "texture-56.webp",
+          "bytes": 6938,
+          "sha256": "d74e63482beff26a4a56833c929e7144888496adbbf2bed769fcc08a3e96641f"
+        },
+        {
+          "file": "texture-57.webp",
+          "bytes": 6890,
+          "sha256": "d8580096e53ba7ce4b77469008fd7aebf825bea6ab707d85720f67406f213d28"
+        },
+        {
+          "file": "texture-58.webp",
+          "bytes": 15038,
+          "sha256": "55a938de469d8938844be093ea9eb174d4800bf73f1eecc784a33c78b6b72812"
+        },
+        {
+          "file": "texture-59.webp",
+          "bytes": 12066,
+          "sha256": "f7cac64cd9b61256effc19d777cb794ab6816974dd1d9c2126f9440f77630599"
+        },
+        {
+          "file": "texture-6.webp",
+          "bytes": 33694,
+          "sha256": "b23c2a2b26811d6120732b04a24406e7640055cb403c3f8ff2bf969a69279537"
+        },
+        {
+          "file": "texture-60.webp",
+          "bytes": 23468,
+          "sha256": "47205db6909eaf8716a83565af7f2c373dbe2bd4ed5314c70c7dcc30293f5d98"
+        },
+        {
+          "file": "texture-61.webp",
+          "bytes": 986,
+          "sha256": "79e8a075b7fdb74b850100689531cb838918f9a55303173454e1cb0de1ba2416"
+        },
+        {
+          "file": "texture-62.webp",
+          "bytes": 3396,
+          "sha256": "a5da7b29651fa41e6b057eb56b0043872e948afda8b8bfa3c061d9d49768ff2d"
+        },
+        {
+          "file": "texture-63.webp",
+          "bytes": 1198,
+          "sha256": "43c6329eb468250c6dcaee44dd0b63bb3575989d87bed6466350abfb1c2b5135"
+        },
+        {
+          "file": "texture-64.webp",
+          "bytes": 5368,
+          "sha256": "d0a7bc25aa80106795d46467be320dbb1275417316b9294bd728d501d419da36"
+        },
+        {
+          "file": "texture-65.webp",
+          "bytes": 3770,
+          "sha256": "403677872e925dc1d6eca2798d417fe149869de5ca1a7a4421f50cd2d8d82c8a"
+        },
+        {
+          "file": "texture-66.webp",
+          "bytes": 2896,
+          "sha256": "24f9445288de2c58e47ca74a602959e23e3230f5db7e25ac222e028efcc3cdf5"
+        },
+        {
+          "file": "texture-67.webp",
+          "bytes": 1766,
+          "sha256": "370e529b624a88e7d7192dd2790295c3596453a98b28d766dd43fc5b29b7d57c"
+        },
+        {
+          "file": "texture-68.webp",
+          "bytes": 332,
+          "sha256": "2e013dee78b0a4e725d5ef7b129edf7730dbcd0c015ee1f6ebcddb7971cc29e3"
+        },
+        {
+          "file": "texture-69.webp",
+          "bytes": 458,
+          "sha256": "722f309e34f0ea913af6b62cd87fbdad75301cec13925d1b926dbb623ea143ae"
+        },
+        {
+          "file": "texture-7.webp",
+          "bytes": 17146,
+          "sha256": "52472994fef333aa0c490bdfc13f4dddd75f17c4d07b9d2df7ede7a95ef3d755"
+        },
+        {
+          "file": "texture-70.webp",
+          "bytes": 664,
+          "sha256": "5e069684c0736bc7230e8a3231ed4c10fce62d27895a25c45aa5032a727ac0c5"
+        },
+        {
+          "file": "texture-71.webp",
+          "bytes": 1226,
+          "sha256": "d7b287dd01a2811799bc6ce3e5437081865a4206a2bb80e74b3b71c4c8bc803c"
+        },
+        {
+          "file": "texture-72.webp",
+          "bytes": 838,
+          "sha256": "a204b13600e2bfc2df83e89e500e5d9bf515f669c709b2ef465eac91a2b1bff6"
+        },
+        {
+          "file": "texture-73.webp",
+          "bytes": 396,
+          "sha256": "a48cae5331551c6ba733cd0ecdef12be9ec5b80c2faac9a7df4a11d70777266e"
+        },
+        {
+          "file": "texture-74.webp",
+          "bytes": 588,
+          "sha256": "a2218bce35e44cff6e231f2237c39c917128cdb86d852315d2001506ece65b08"
+        },
+        {
+          "file": "texture-75.webp",
+          "bytes": 6220,
+          "sha256": "d1bab8f938097654ab373fca02201c7be3839703b5ba6a1ec71cecd189acc5bb"
+        },
+        {
+          "file": "texture-76.webp",
+          "bytes": 774,
+          "sha256": "8ee092eb08a3adcf0d1d66b7e236e68b50e1d867e5405ea6a27b9761bbbf8daa"
+        },
+        {
+          "file": "texture-8.webp",
+          "bytes": 56366,
+          "sha256": "199b6ab29b3152b9104999361044ffa08f1ac50273c75b221b96723b0f5f7ef1"
+        },
+        {
+          "file": "texture-9.webp",
+          "bytes": 94414,
+          "sha256": "25051dc6190cbcac90b065b94d0cf5e20151af503c48487a747152f6b7ab9f74"
+        }
+      ]
+    },
+    {
       "folder": "cn/act55side/247e46c2cbd0",
       "reviewed": true,
       "source": "events/cn/act55side/247e46c2cbd0/asset.json",
       "clip": "act55side_entry_kv1",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 3.5833332538604736,
@@ -4898,7 +5510,7 @@
       "source": "events/en/act42side/d5558b1bd102/asset.json",
       "clip": "act42side_entry_stage_anim_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 4.0,
@@ -5094,7 +5706,7 @@
       "source": "events/en/act42sre/37ff509bbdff/asset.json",
       "clip": "act42side_entry_stage_anim_entry",
       "rendererSchemaVersion": 1,
-      "rendererSourceSha256": "7729bb7912c874f3c074f0b3efeaf068ea2127c43908aa718fd5f476432d58d0",
+      "rendererSourceSha256": "577b1047543072467f19d6f46cd9a441cc61362835fc05a6fc4e527fe3476387",
       "poster": {
         "file": "menu.webp",
         "time": 4.0,

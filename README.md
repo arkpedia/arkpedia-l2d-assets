@@ -3,7 +3,7 @@
 Original event entrance sources are archived separately in
 [`event-transitions/`](event-transitions/README.md), with verified original bundles,
 animation curves, scene data, decoded textures and recovery coverage. Its
-`players/` directory contains 18 reviewed browser menu packs; the broader source
+`players/` directory contains 20 reviewed browser menu packs; the broader source
 archive still includes sequences awaiting conversion or renderer support. The
 existing outfit-art manifest and model paths are unchanged.
 

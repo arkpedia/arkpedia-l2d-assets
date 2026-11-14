@@ -795,7 +795,9 @@
           "fromFile": "CAB-28472d5b0c503ea41a94c62926afd329",
           "fileId": 3,
           "external": "archive:/CAB-4069f2380ca9d60b5fb743b320c66956/CAB-4069f2380ca9d60b5fb743b320c66956",
-          "recoveredSharedPacks": []
+          "recoveredSharedPacks": [
+            "shared/fdc762264f56984a4c89e39094908b96/asset.json"
+          ]
         },
         {
           "fromFile": "CAB-28472d5b0c503ea41a94c62926afd329",

@@ -190,8 +190,10 @@
         "originalCue": "ON_ACT54SIDE_LOAD",
         "source": "shared/d73df4b1286e27864099780ad79ec792/asset.json"
       },
-      "status": "unsupported",
-      "reason": "Native custom stencil masks not yet supported; circles obscure character faces"
+      "status": "reviewed",
+      "durationSeconds": 6.5,
+      "soundCueStatus": "verified-serialized-cue",
+      "reviewNote": "Original channel stencil masks preserve the character face and native montage; no mask geometry is painted as foreground artwork."
     },
     {
       "folder": "cn/act49side/c6e2a2e38f24",
@@ -394,7 +396,8 @@
       },
       "status": "reviewed",
       "soundCueStatus": "verified-serialized-cue",
-      "durationSeconds": 5.166666507720947
+      "durationSeconds": 5.166666507720947,
+      "reviewNote": "Native stencil matte reveals the opening road/landscape from about 0.4s; the previous export incorrectly painted four seconds black."
     },
     {
       "folder": "cn/act36side/de9851e233f8",
@@ -415,6 +418,23 @@
       },
       "status": "unsupported",
       "reason": "Runtime menu content is not present in the prefab; placeholder controls remain"
+    },
+    {
+      "folder": "cn/act21mini/18d6d4b0a14c",
+      "source": "events/cn/act21mini/18d6d4b0a14c/asset.json",
+      "clip": "act21mini_anim_entry",
+      "omitPaths": [
+        "btn_medal",
+        "group_right_upper",
+        "group_front_ui/panel_left",
+        "group_front_ui/panel_right",
+        "top_menu"
+      ],
+      "sound": null,
+      "status": "reviewed",
+      "soundCueStatus": "no-serialized-entrance-cue-recovered",
+      "durationSeconds": 3.866666555404663,
+      "reviewNote": "Native Euler transform channels use Unity ZXY order; game navigation controls are excluded."
     }
   ],
   "deferred": [

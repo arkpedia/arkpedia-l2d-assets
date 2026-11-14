@@ -73,6 +73,14 @@ def validate(root):
         assert any(a['name'] == scene['clip'] and a['candidate'] for a in source['animations'])
         for i, node in enumerate(scene['nodes']):
             assert node['parent'] is None or 0 <= node['parent'] < i
+            if 'stencil' in node:
+                stencil = node['stencil']
+                assert set(stencil) == {'compare', 'operation', 'readMask', 'writeMask', 'colorMask'}
+                assert stencil['compare'] in (0, 1, 2) and stencil['operation'] in (0, 1, 2)
+                assert all(type(stencil[key]) is int and 0 <= stencil[key] <= 255 for key in ('readMask', 'writeMask'))
+                assert type(stencil['colorMask']) is int and 0 <= stencil['colorMask'] <= 15
+            if 'euler' in node:
+                assert len(node['euler']) == 3
             if 'image' in node:
                 im = node['image']
                 assert im['texture'] is None or 0 <= im['texture'] < len(scene['textures'])
