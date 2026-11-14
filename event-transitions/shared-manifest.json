@@ -48,6 +48,15 @@
     },
     {
       "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/0ee9e1952c4af270d55c7c18b4321577/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
+      ]
+    },
+    {
+      "server": "cn",
       "activityId": "uishaders",
       "bundle": "[uc]uishaders.ab",
       "asset": "shared/1087b11c722036eb6438c4ab006fd783/asset.json",
@@ -75,11 +84,29 @@
     },
     {
       "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/11aec3b8290bcb438b7b3b901d48ae55/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
+      ]
+    },
+    {
+      "server": "cn",
       "activityId": "act35side",
       "bundle": "audio/custom_se/act35side.ab",
       "asset": "shared/12c437ba7848dda67f392e842f77c704/asset.json",
       "externalFiles": [
         "CAB-362d574b53eda47e850c01816f416c54"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/1483dd38837864dd45f438402c311559/asset.json",
+      "externalFiles": [
+        "CAB-4b090287f6a2bcb0a26cdcb38e4b63b1"
       ]
     },
     {
@@ -89,6 +116,15 @@
       "asset": "shared/16bca470c82644e54134c1743236af59/asset.json",
       "externalFiles": [
         "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/17b981a1916ef56b16402d4c78b635fd/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
       ]
     },
     {
@@ -107,6 +143,15 @@
       "asset": "shared/1b57de587474563a0a7c3e8cab7f682c/asset.json",
       "externalFiles": [
         "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/1e77fc36d8f36e74167c0efba024b019/asset.json",
+      "externalFiles": [
+        "CAB-4b090287f6a2bcb0a26cdcb38e4b63b1"
       ]
     },
     {
@@ -152,6 +197,15 @@
       "asset": "shared/294295015d08ade8432d9bdfc06ff156/asset.json",
       "externalFiles": [
         "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/2bf62a1f74f87551f69d0278233d64a2/asset.json",
+      "externalFiles": [
+        "CAB-ac0a33b41c35af42f8bd12f753f6226a"
       ]
     },
     {
@@ -380,6 +434,15 @@
       ]
     },
     {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/58c31091efe6eb2c4f17a152bdcb0055/asset.json",
+      "externalFiles": [
+        "CAB-4b090287f6a2bcb0a26cdcb38e4b63b1"
+      ]
+    },
+    {
       "server": "en",
       "activityId": "uishaders",
       "bundle": "[uc]uishaders.ab",
@@ -404,6 +467,15 @@
       "asset": "shared/594da49112d94c750b884fbeb179fc55/asset.json",
       "externalFiles": [
         "CAB-47c9a9ff6538bcd3e786ee841e2ec484"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/5b0d7a70dbcce1d9f16903bc253a1e27/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
       ]
     },
     {
@@ -587,6 +659,15 @@
       ]
     },
     {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/84e388fce1912464d8e41005ad5f169e/asset.json",
+      "externalFiles": [
+        "CAB-6ac369b085ebcca0735e4da7f7da64f9"
+      ]
+    },
+    {
       "server": "en",
       "activityId": "act42side",
       "bundle": "audio/custom_se/act42side.ab",
@@ -602,6 +683,15 @@
       "asset": "shared/86954bbe3e91e0b9f1c219ba09b0da57/asset.json",
       "externalFiles": [
         "CAB-5ad2bf34699fcb8e415b0891a833568d"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/885a40f9e8da832d0e9bb73b7f95b3f6/asset.json",
+      "externalFiles": [
+        "CAB-ac0a33b41c35af42f8bd12f753f6226a"
       ]
     },
     {
@@ -629,6 +719,15 @@
       "asset": "shared/8c64aef4ea67ab09690c1bc2531cb960/asset.json",
       "externalFiles": [
         "CAB-d78de05396bd98c68e695bc17c1addf1"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/8d3825900b9b96fb9178cc817d47b78a/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
       ]
     },
     {
@@ -665,6 +764,15 @@
       "asset": "shared/9994e4ab0013dda95bbffc0a63e4db98/asset.json",
       "externalFiles": [
         "CAB-27b5939111a8c190b41ed8dd397e4763"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/99d29c9ab9407025193591500ae16016/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
       ]
     },
     {
@@ -710,6 +818,24 @@
       "asset": "shared/9babc6741d8654cb7c963c15710d8656/asset.json",
       "externalFiles": [
         "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/9c03e609592728eb4870d43c5b052c6d/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/9ff71441ab0f507e8da29d01b6640b8d/asset.json",
+      "externalFiles": [
+        "CAB-6ac369b085ebcca0735e4da7f7da64f9"
       ]
     },
     {
@@ -782,6 +908,15 @@
       "asset": "shared/b07a09edd1e5de25e2e602329f4432eb/asset.json",
       "externalFiles": [
         "CAB-73af6f522fece51508a91fccd60c68f6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/b34a49a15e23a39ca8742341a3e89508/asset.json",
+      "externalFiles": [
+        "CAB-4b090287f6a2bcb0a26cdcb38e4b63b1"
       ]
     },
     {
@@ -948,6 +1083,15 @@
     },
     {
       "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "asset": "shared/d42c48d3c878c2fcddad0b07c31bfb07/asset.json",
+      "externalFiles": [
+        "CAB-6ac369b085ebcca0735e4da7f7da64f9"
+      ]
+    },
+    {
+      "server": "cn",
       "activityId": "shaders",
       "bundle": "[uc]shaders.ab",
       "asset": "shared/d4a6910393bc78d1f73be449101d35c1/asset.json",
@@ -998,6 +1142,15 @@
       "asset": "shared/d8e05b24e77e351e96d4483112ff6741/asset.json",
       "externalFiles": [
         "CAB-580061e156ea5e60815bbe6b768da65c"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/d96ccfa3d56795b4af612e76841c2407/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
       ]
     },
     {
@@ -1187,6 +1340,15 @@
       "asset": "shared/fedf319b4ab828eb4692d707b389a0db/asset.json",
       "externalFiles": [
         "CAB-1b70e77fd118dea4a32415ac87839ac6"
+      ]
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "asset": "shared/ff8ce82a9f3efa11c6e6b983988caa34/asset.json",
+      "externalFiles": [
+        "CAB-4069f2380ca9d60b5fb743b320c66956"
       ]
     }
   ],
@@ -2594,6 +2756,168 @@
       "md5": "b929b588131ffcc10a92424b5402a118",
       "status": "recovered",
       "asset": "shared/b929b588131ffcc10a92424b5402a118/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "5b0d7a70dbcce1d9f16903bc253a1e27",
+      "status": "recovered",
+      "asset": "shared/5b0d7a70dbcce1d9f16903bc253a1e27/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "1e77fc36d8f36e74167c0efba024b019",
+      "status": "recovered",
+      "asset": "shared/1e77fc36d8f36e74167c0efba024b019/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "99d29c9ab9407025193591500ae16016",
+      "status": "recovered",
+      "asset": "shared/99d29c9ab9407025193591500ae16016/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "1483dd38837864dd45f438402c311559",
+      "status": "recovered",
+      "asset": "shared/1483dd38837864dd45f438402c311559/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "17b981a1916ef56b16402d4c78b635fd",
+      "status": "recovered",
+      "asset": "shared/17b981a1916ef56b16402d4c78b635fd/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "ff8ce82a9f3efa11c6e6b983988caa34",
+      "status": "recovered",
+      "asset": "shared/ff8ce82a9f3efa11c6e6b983988caa34/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "0ee9e1952c4af270d55c7c18b4321577",
+      "status": "recovered",
+      "asset": "shared/0ee9e1952c4af270d55c7c18b4321577/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "11aec3b8290bcb438b7b3b901d48ae55",
+      "status": "recovered",
+      "asset": "shared/11aec3b8290bcb438b7b3b901d48ae55/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "b34a49a15e23a39ca8742341a3e89508",
+      "status": "recovered",
+      "asset": "shared/b34a49a15e23a39ca8742341a3e89508/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "8d3825900b9b96fb9178cc817d47b78a",
+      "status": "recovered",
+      "asset": "shared/8d3825900b9b96fb9178cc817d47b78a/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "d96ccfa3d56795b4af612e76841c2407",
+      "status": "recovered",
+      "asset": "shared/d96ccfa3d56795b4af612e76841c2407/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "2bf62a1f74f87551f69d0278233d64a2",
+      "status": "recovered",
+      "asset": "shared/2bf62a1f74f87551f69d0278233d64a2/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "885a40f9e8da832d0e9bb73b7f95b3f6",
+      "status": "recovered",
+      "asset": "shared/885a40f9e8da832d0e9bb73b7f95b3f6/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "d42c48d3c878c2fcddad0b07c31bfb07",
+      "status": "recovered",
+      "asset": "shared/d42c48d3c878c2fcddad0b07c31bfb07/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "84e388fce1912464d8e41005ad5f169e",
+      "status": "recovered",
+      "asset": "shared/84e388fce1912464d8e41005ad5f169e/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "fxcommon",
+      "bundle": "arts/ui/[uc]fxcommon.ab",
+      "md5": "9c03e609592728eb4870d43c5b052c6d",
+      "status": "recovered",
+      "asset": "shared/9c03e609592728eb4870d43c5b052c6d/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "58c31091efe6eb2c4f17a152bdcb0055",
+      "status": "recovered",
+      "asset": "shared/58c31091efe6eb2c4f17a152bdcb0055/asset.json",
+      "candidates": []
+    },
+    {
+      "server": "cn",
+      "activityId": "common",
+      "bundle": "arts/ui/[uc]common.ab",
+      "md5": "9ff71441ab0f507e8da29d01b6640b8d",
+      "status": "recovered",
+      "asset": "shared/9ff71441ab0f507e8da29d01b6640b8d/asset.json",
       "candidates": []
     }
   ]

@@ -1,0 +1,434 @@
+{
+  "schemaVersion": 1,
+  "note": "Explicit game-control exclusions for reviewed native event artwork; original archives remain intact.",
+  "packs": [
+    {
+      "folder": "cn/act44side/1b3b2a5eb38d",
+      "source": "events/cn/act44side/1b3b2a5eb38d/asset.json",
+      "clip": "anim_act44side_entry_01",
+      "omitPaths": [
+        "panel_front_ui/panel_left",
+        "panel_front_ui/panel_right",
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "6c974e38fe2edd59676e00e6b553ff51b6040dbdaee186cd3bf536fedf3cb67d",
+        "offset": 0.01666666753590107,
+        "duration": 3.903770923614502,
+        "originalName": "act44side_g_ui_loadblack",
+        "originalCue": "ON_ACT44SIDE_LOADBLACK",
+        "source": "shared/e6d0b0f61f323979c32cd1293f76e677/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 2.75
+    },
+    {
+      "folder": "cn/act47side/3e7919746fe5",
+      "source": "events/cn/act47side/3e7919746fe5/asset.json",
+      "clip": "act47side_entry",
+      "omitPaths": [
+        "top_menu_container"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "300fe2a8e575e9ed2deb05b6b0d8984803557d8e036afc286ac046553b3a9252",
+        "offset": 0.03333333507180214,
+        "duration": 5.061395645141602,
+        "originalName": "act47side_g_ui_load",
+        "originalCue": "ON_ACT47SIDE_LOAD",
+        "source": "shared/505b39ee63cc944b4975133e18307f72/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 5.266666889190674
+    },
+    {
+      "folder": "cn/act31sre/4f30a0cc7894",
+      "source": "events/cn/act31sre/4f30a0cc7894/asset.json",
+      "clip": "act31sre_stage_entry",
+      "omitPaths": [
+        "canvas_ui/btn_medal",
+        "canvas_ui/group_time",
+        "canvas_ui/panel_left",
+        "canvas_ui/panel_right",
+        "canvas_ui/panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "1a016c55246d382a82e73a48b259151f751383a5bc0b5bb23ddc3aa5a089a9eb",
+        "offset": 0.01666666753590107,
+        "duration": 2.3447084426879883,
+        "originalName": "act31side_g_ui_loadns",
+        "originalCue": "ON_ACT31SIDE_LOADNS",
+        "source": "shared/7e01a2fb6062597bc39f0e354eb72d8a/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 2.616666555404663
+    },
+    {
+      "folder": "cn/act43sre/2e0aacd4fc75",
+      "source": "events/cn/act43sre/2e0aacd4fc75/asset.json",
+      "clip": "act43sre_entry",
+      "omitPaths": [
+        "canvas_ui/panel_ui",
+        "canvas_ui/top_menu_container"
+      ],
+      "sound": null,
+      "status": "reviewed",
+      "soundCueStatus": "no-serialized-entrance-cue-recovered",
+      "durationSeconds": 4.900000095367432
+    },
+    {
+      "folder": "cn/act41side/a81054859b60",
+      "source": "events/cn/act41side/a81054859b60/asset.json",
+      "clip": "act41side_stage_entry_anim",
+      "omitPaths": [
+        "panel_front_ui",
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "a2142d39ae072e7455ff19d841d814c100d3f45bc068281381aff19e21677878",
+        "offset": 0.01666666753590107,
+        "duration": 5.462145805358887,
+        "originalName": "act41side_g_ui_loadweaa",
+        "originalCue": "ON_ACT41SIDE_LOADWEAA",
+        "source": "shared/54b72d349cf1dbb5c02ac59fc95451e9/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 2.5
+    },
+    {
+      "folder": "cn/act44sre/5d586ac8377c",
+      "source": "events/cn/act44sre/5d586ac8377c/asset.json",
+      "clip": "anim_act44sre_entry_01",
+      "omitPaths": [
+        "panel_front_ui/panel_left",
+        "panel_front_ui/panel_right",
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "6c974e38fe2edd59676e00e6b553ff51b6040dbdaee186cd3bf536fedf3cb67d",
+        "offset": 0.01666666753590107,
+        "duration": 3.903770923614502,
+        "originalName": "act44side_g_ui_loadblack",
+        "originalCue": "ON_ACT44SIDE_LOADBLACK",
+        "source": "shared/e6d0b0f61f323979c32cd1293f76e677/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 2.75
+    },
+    {
+      "folder": "cn/act46side/0ae3278bd456",
+      "source": "events/cn/act46side/0ae3278bd456/asset.json",
+      "clip": "act46side_entry",
+      "omitPaths": [
+        "panel_front_ui",
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "5fcf275c753d75a6ba0b196697e2ee23e9f65215472e1c2a6c923f79c29119a6",
+        "offset": 0.01666666753590107,
+        "duration": 3.6584792137145996,
+        "originalName": "act46side_g_ui_load",
+        "originalCue": "ON_ACT46SIDE_LOAD",
+        "source": "shared/8c64aef4ea67ab09690c1bc2531cb960/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 3.8333332538604736
+    },
+    {
+      "folder": "cn/act52side/e5358147ec6c",
+      "source": "events/cn/act52side/e5358147ec6c/asset.json",
+      "clip": "act52side_entry",
+      "omitPaths": [
+        "panel_ui/group_ui"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "c8a95a971088251869c9adc7512b4392cf58873d58f63a3fd3f7bb9b68ad8998",
+        "offset": 0.36666667461395264,
+        "duration": 6.706458568572998,
+        "originalName": "act52side_g_ui_load",
+        "originalCue": "ON_ACT52SIDE_LOAD",
+        "source": "shared/e00e11812faaee00e511aa5b3bed089b/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 4.833333492279053
+    },
+    {
+      "folder": "cn/act54side/d668e73ff648",
+      "source": "events/cn/act54side/d668e73ff648/asset.json",
+      "clip": "act54side_entry_anim",
+      "omitPaths": [
+        "panel_front_ui",
+        "panel_topmenu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "38765f3d20e0e4ee048269339d73448cc6a7d68b7e0242337b20a01859f3f07c",
+        "offset": 0.0,
+        "duration": 6.5685625076293945,
+        "originalName": "act54side_g_ui_load",
+        "originalCue": "ON_ACT54SIDE_LOAD",
+        "source": "shared/d73df4b1286e27864099780ad79ec792/asset.json"
+      },
+      "status": "unsupported",
+      "reason": "Native custom stencil masks not yet supported; circles obscure character faces"
+    },
+    {
+      "folder": "cn/act49side/c6e2a2e38f24",
+      "source": "events/cn/act49side/c6e2a2e38f24/asset.json",
+      "clip": "act49side_entry",
+      "omitPaths": [
+        "panel_ui",
+        "panel_ui/panel_topmenu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "270fc9a74aa364bc5ddf10dd698df8fb83ddeb1fdea45fd23282cfaaed65268b",
+        "offset": 0.03333333507180214,
+        "duration": 5.619999885559082,
+        "originalName": "act49side_g_ui_springfestivalload",
+        "originalCue": "ON_ACT49SIDE_SPRINGFESTIVALLOAD",
+        "source": "shared/08ac459c421cc74c0a5d26da79ad63a2/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 7.333333492279053
+    },
+    {
+      "folder": "cn/act45side/3de67ef700f0",
+      "source": "events/cn/act45side/3de67ef700f0/asset.json",
+      "clip": "act45side_entry",
+      "omitPaths": [
+        "panel_UI/btn_fav",
+        "panel_UI/btn_hall",
+        "panel_UI/btn_mission",
+        "panel_UI/btn_shop",
+        "panel_UI/btn_zone_ex",
+        "panel_UI/btn_zone_n",
+        "panel_UI/group_time",
+        "panel_topmenu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "dae6307666dab90bcbdc1756b0f9ce8945097bc440e152b8813b3f2bff9b8ef3",
+        "offset": 0.01666666753590107,
+        "duration": 3.7979373931884766,
+        "originalName": "act45side_g_ui_load",
+        "originalCue": "ON_ACT45SIDE_LOAD",
+        "source": "shared/ef5ad5a0e606ff61e443005d75b4fdc2/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 4.083333492279053
+    },
+    {
+      "folder": "cn/act55side/247e46c2cbd0",
+      "source": "events/cn/act55side/247e46c2cbd0/asset.json",
+      "clip": "act55side_entry_kv1",
+      "omitPaths": [
+        "inverse_viewport/group_ui",
+        "panel_topmenu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "84491cf429d07efc4202c5d0f86f0a59ded898fd6ebdbbcc6f3797303aa56b13",
+        "offset": 0.01666666753590107,
+        "duration": 4.701145648956299,
+        "originalName": "act55side_g_ui_load1",
+        "originalCue": "ON_ACT55SIDE_LOAD1",
+        "source": "shared/27d038c8c27f672ced403eb0eee8f870/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 3.5833332538604736
+    },
+    {
+      "folder": "cn/act24sre/125ea0347c1e",
+      "source": "events/cn/act24sre/125ea0347c1e/asset.json",
+      "clip": "act24side_activity_stage_entry",
+      "omitPaths": [
+        "group_time",
+        "top_menu",
+        "ui_panel",
+        "ui_panel/panel_top_menu"
+      ],
+      "sound": null,
+      "status": "reviewed",
+      "soundCueStatus": "no-serialized-entrance-cue-recovered",
+      "durationSeconds": 2.25
+    },
+    {
+      "folder": "cn/act1football/782f2b808718",
+      "source": "events/cn/act1football/782f2b808718/asset.json",
+      "clip": "act1football_entry_anim",
+      "omitPaths": [
+        "btn_milestone",
+        "panel_right",
+        "panel_time",
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "958fb46ae21b4e7e5930fd64fee8c921051242dc97440ec3ca3c0d584d38c24d",
+        "offset": 0.0,
+        "duration": 3.986354112625122,
+        "originalName": "act1football_g_ui_enter",
+        "originalCue": "ON_ACT1FOOTBALL_ENTER",
+        "source": "shared/5056073309659b0d5bdf4d9efeb57381/asset.json"
+      },
+      "status": "unsupported",
+      "reason": "Missing runtime-populated football scene; static menu largely blank"
+    },
+    {
+      "folder": "cn/act50side/2b3fa1948340",
+      "source": "events/cn/act50side/2b3fa1948340/asset.json",
+      "clip": "act50side_entry",
+      "omitPaths": [
+        "panel_front_ui",
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "7df7e6c663c8b63ff538e2cefa79fd55c252c85c2dda8ec0228844701e30dd5c",
+        "offset": 0.5,
+        "duration": 3.451291561126709,
+        "originalName": "act50side_g_ui_load",
+        "originalCue": "ON_ACT50SIDE_LOAD",
+        "source": "shared/33ccb4ecc7aca8198e1080e9d0a3599d/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 4.0
+    },
+    {
+      "folder": "cn/act40sre/f56b6151f4dc",
+      "source": "events/cn/act40sre/f56b6151f4dc/asset.json",
+      "clip": "panel_act40side_entry_in",
+      "omitPaths": [
+        "panel_front_ui",
+        "panel_front_ui/panel_topmenu",
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "b5e61bc7e190b049ed8d44b41737df9a1b482bd86d6495d65306b390207add84",
+        "offset": 0.01666666753590107,
+        "duration": 2.5980417728424072,
+        "originalName": "act40side_g_ui_springfestivalload",
+        "originalCue": "ON_ACT40SIDE_SPRINGFESTIVALLOAD",
+        "source": "shared/36c31ef0639b6d97e9a395d55506da23/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 2.3333332538604736
+    },
+    {
+      "folder": "cn/act41sre/8063cbfa5d1b",
+      "source": "events/cn/act41sre/8063cbfa5d1b/asset.json",
+      "clip": "act41side_stage_entry_anim",
+      "omitPaths": [
+        "panel_front_ui",
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "a2142d39ae072e7455ff19d841d814c100d3f45bc068281381aff19e21677878",
+        "offset": 0.01666666753590107,
+        "duration": 5.462145805358887,
+        "originalName": "act41side_g_ui_loadweaa",
+        "originalCue": "ON_ACT41SIDE_LOADWEAA",
+        "source": "shared/54b72d349cf1dbb5c02ac59fc95451e9/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 2.5
+    },
+    {
+      "folder": "cn/act53side/e8a3fa756b86",
+      "source": "events/cn/act53side/e8a3fa756b86/asset.json",
+      "clip": "act53side_entry_kv1",
+      "omitPaths": [
+        "panel_topmenu",
+        "panel_ui/btn_rpg",
+        "panel_ui/btn_switch",
+        "panel_ui/group_left",
+        "panel_ui/group_right",
+        "panel_ui/root_end_time"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "5cc12109a10d9e7376d6293e21920949df3c21fd0d7153d77cabe454d6052949",
+        "offset": 0.03333333507180214,
+        "duration": 6.159625053405762,
+        "originalName": "act53side_g_ui_load",
+        "originalCue": "ON_ACT53SIDE_LOAD",
+        "source": "shared/c549dea2aee1fe681468a6918adcc70b/asset.json"
+      },
+      "status": "reviewed",
+      "soundCueStatus": "verified-serialized-cue",
+      "durationSeconds": 5.166666507720947
+    },
+    {
+      "folder": "cn/act36side/de9851e233f8",
+      "source": "events/cn/act36side/de9851e233f8/asset.json",
+      "clip": "act36side_stage_entry",
+      "omitPaths": [
+        "panel_top_menu"
+      ],
+      "sound": {
+        "file": "entrance.mp3",
+        "encoding": "mp3-192k",
+        "sourceDecodedSha256": "1db6491ec3d111cb23ac501793d9445194f2071dbe84a0c08f497d27795f1e8f",
+        "offset": 0.01666666753590107,
+        "duration": 3.63964581489563,
+        "originalName": "act36side_g_ui_loaddd",
+        "originalCue": "ON_ACT36SIDE_LOADDD",
+        "source": "shared/7158ebcfd5af73be4602b0abf2507ce5/asset.json"
+      },
+      "status": "unsupported",
+      "reason": "Runtime menu content is not present in the prefab; placeholder controls remain"
+    }
+  ],
+  "deferred": [
+    {
+      "activityId": "act35sre",
+      "reason": "Non-UI character/background rendering is incomplete"
+    },
+    {
+      "activityId": "act31side",
+      "reason": "Multiple original Animator owners need prefab-specific selection"
+    },
+    {
+      "activityId": "act29side/act29sre",
+      "reason": "Entrance SFX association needs recovery/review"
+    }
+  ]
+}

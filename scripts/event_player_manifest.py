@@ -42,7 +42,7 @@ def seal(root, folders, renderer):
         old[relative] = {'folder': relative, 'reviewed': True, 'source': scene['source'], 'clip': scene['clip'],
                          'rendererSchemaVersion': 1, 'rendererSourceSha256': renderer_hash,
                          'poster': {'file': 'menu.webp', 'time': scene['duration'], 'width': 1280, 'height': 720},
-                         'notRendered': ['Game-only interaction/text controls', 'ParticleSystem emitters'], 'files': files}
+                         'notRendered': ['Game-only interaction/text controls', 'ParticleSystem emitters', 'Non-UI mesh effects'], 'files': files}
     manifest['packs'] = sorted(old.values(), key=lambda p: p['folder'])
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
 
@@ -80,6 +80,10 @@ def validate(root):
         for curve in scene['curves']:
             assert 0 <= curve['node'] < len(scene['nodes']) and curve['keys']
             assert [k[0] for k in curve['keys']] == sorted(k[0] for k in curve['keys'])
+            target = scene['nodes'][curve['node']]
+            for part in curve['property'].split('.'):
+                target = target[int(part)] if isinstance(target, list) else target[part]
+            assert isinstance(target, (int, float, bool)), 'Animated target must be a scalar'
         for texture in scene['textures']:
             with Image.open(folder / texture['file']) as image:
                 assert image.size == (texture['width'], texture['height'])

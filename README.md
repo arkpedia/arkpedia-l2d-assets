@@ -2,8 +2,10 @@
 
 Original event entrance sources are archived separately in
 [`event-transitions/`](event-transitions/README.md), with verified original bundles,
-animation curves, scene data, decoded textures and recovery coverage. They are not
-yet browser-playable. The existing outfit-art manifest and model paths are unchanged.
+animation curves, scene data, decoded textures and recovery coverage. Its
+`players/` directory contains 18 reviewed browser menu packs; the broader source
+archive still includes sequences awaiting conversion or renderer support. The
+existing outfit-art manifest and model paths are unchanged.
 
 Animated outfit art for Arkpedia: the dynamic illustrations ("dynamic art") of the Arknights Global client, and of the CN client for outfits Global does not have yet, as Spine 3.8 models the site's focused artwork view can play. Stats, skin records and everything else stay in `arkpedia-data`; this repository holds only the animation files and where each came from.
 
