@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
  "totals": {
-  "drawn": 26116,
-  "exported": 23865,
-  "v1": 23512
+  "drawn": 26252,
+  "exported": 23935,
+  "v1": 23582
  },
  "models": {
   "models/char_003_kalts_boc_6/a4834f5119b5": {
@@ -426,10 +426,20 @@
    "exported": 332,
    "v1": 332
   },
+  "models/char_1045_svash2_sale_20/1c031cf91ffd": {
+   "drawn": 76,
+   "exported": 50,
+   "v1": 50
+  },
   "models/char_1045_svash2_sale_20/26a9db1b4aa6": {
    "drawn": 76,
    "exported": 50,
    "v1": 50
+  },
+  "models/char_1045_svash2_sale_20_sp_dyn/1c031cf91ffd": {
+   "drawn": 60,
+   "exported": 20,
+   "v1": 20
   },
   "models/char_1045_svash2_sale_20_sp_dyn/26a9db1b4aa6": {
    "drawn": 60,
