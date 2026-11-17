@@ -1,9 +1,9 @@
 {
  "schemaVersion": 1,
  "totals": {
-  "drawn": 26252,
-  "exported": 23935,
-  "v1": 23582
+  "drawn": 27126,
+  "exported": 24775,
+  "v1": 24420
  },
  "models": {
   "models/char_003_kalts_boc_6/a4834f5119b5": {
@@ -26,12 +26,22 @@
    "exported": 63,
    "v1": 63
   },
+  "models/char_003_kalts_sale_14/efd889622010": {
+   "drawn": 66,
+   "exported": 63,
+   "v1": 63
+  },
   "models/char_003_kalts_sale_14_sp_dyn/5a131d36f7c5": {
    "drawn": 36,
    "exported": 36,
    "v1": 36
   },
   "models/char_003_kalts_sale_14_sp_dyn/ad673b10f4d4": {
+   "drawn": 36,
+   "exported": 36,
+   "v1": 36
+  },
+  "models/char_003_kalts_sale_14_sp_dyn/efd889622010": {
    "drawn": 36,
    "exported": 36,
    "v1": 36
@@ -351,6 +361,11 @@
    "exported": 218,
    "v1": 217
   },
+  "models/char_1039_thorn2_marthe_9/3eac1c871639": {
+   "drawn": 219,
+   "exported": 218,
+   "v1": 217
+  },
   "models/char_1039_thorn2_marthe_9/4ac7bd6a6bf8": {
    "drawn": 219,
    "exported": 218,
@@ -366,6 +381,11 @@
    "exported": 253,
    "v1": 241
   },
+  "models/char_1041_angel2_iteration_6/0b46ca97269a": {
+   "drawn": 74,
+   "exported": 69,
+   "v1": 69
+  },
   "models/char_1041_angel2_iteration_6/1ba83db98bc0": {
    "drawn": 74,
    "exported": 69,
@@ -380,6 +400,11 @@
    "drawn": 74,
    "exported": 69,
    "v1": 69
+  },
+  "models/char_1041_angel2_iteration_6_sp_dyn/0b46ca97269a": {
+   "drawn": 54,
+   "exported": 54,
+   "v1": 54
   },
   "models/char_1041_angel2_iteration_6_sp_dyn/1ba83db98bc0": {
    "drawn": 54,
@@ -651,6 +676,11 @@
    "exported": 152,
    "v1": 152
   },
+  "models/char_2024_chyue_cfa_1/a48f1f4eb1df": {
+   "drawn": 165,
+   "exported": 152,
+   "v1": 152
+  },
   "models/char_2024_chyue_nian_10/348a3a840cbe": {
    "drawn": 226,
    "exported": 191,
@@ -712,6 +742,11 @@
    "v1": 44
   },
   "models/char_2026_yu_nian_12/a50a90eca51b": {
+   "drawn": 46,
+   "exported": 44,
+   "v1": 44
+  },
+  "models/char_2026_yu_nian_12/abc5a377a15b": {
    "drawn": 46,
    "exported": 44,
    "v1": 44
@@ -1012,6 +1047,11 @@
    "v1": 207
   },
   "models/char_4134_cetsyr_epoque_50/13dbe9ca3034": {
+   "drawn": 214,
+   "exported": 204,
+   "v1": 203
+  },
+  "models/char_4134_cetsyr_epoque_50/a5a39b360277": {
    "drawn": 214,
    "exported": 204,
    "v1": 203
