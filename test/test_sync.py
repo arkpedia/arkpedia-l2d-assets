@@ -11,6 +11,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import urllib.error
 import zipfile
 from pathlib import Path
@@ -45,6 +46,20 @@ class CodeFingerprint(unittest.TestCase):
         # RunLoop stubs this function; exercise the actual paths before any network work.
         self.assertRegex(sync.code_version(), r'^[0-9a-f]{12}$')
         self.assertEqual(len(sync.CODE_FILES), len(set(sync.CODE_FILES)))
+
+
+    def test_inspector_particle_change_retries_failed_models(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            for name in set(sync.CODE_FILES) | {'scripts/particles.mjs'}:
+                destination = folder / name
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(sync.ROOT / name, destination)
+            with patch.object(sync, 'ROOT', folder):
+                version = sync.code_version()
+                with (folder / 'scripts/particles.mjs').open('a') as particles:
+                    particles.write('\n// Changed particle parser\n')
+                self.assertNotEqual(sync.code_version(), version)
 
 
 class RunLoop(unittest.TestCase):
